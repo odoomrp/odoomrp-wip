@@ -119,9 +119,6 @@ class SaleOrderLine(orm.Model):
     ]
 
     def onchange_item_id(self, cr, uid, ids, item_id, context=None):
-        if context is None:
-            context = {}
-
         if not item_id:
             return {}
 
