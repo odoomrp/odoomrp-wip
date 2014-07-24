@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+      <record id="open_risk_window_view" model="ir.ui.view">
+           <field name="name">open.risk.window.view</field>
+           <field name="model">open.risk.window</field>
+           <field name="arch" type="xml">
+                <form string="Partner Risk Information">
+                <group>
+                    <field name="unpayed_amount" colspan="4"/>
+                    <field name="pending_amount" colspan="4"/>
+                    <field name="draft_invoices_amount" colspan="4"/>
+                    <field name="circulating_amount" colspan="4"/>
+                    <field name="pending_orders_amount" colspan="4"/>
+                    <separator colspan="4"/>
+                    <field name="total_debt" colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <field name="credit_limit" colspan="4"/>
+                    <field name="available_risk" colspan="4"/>
+                    <field name="total_risk_percent" widget="progressbar" colspan="4"/>
+                </group>
+                </form>
+           </field>
+      </record>
+
+      <record id="action_open_risk_window" model="ir.actions.act_window">
+             <field name="name">Show Partner Risk Information</field>
+             <field name="res_model">open.risk.window</field>
+             <field name="type">ir.actions.act_window</field>
+             <field name="view_type">form</field>
+             <field name="view_mode">tree,form</field>
+             <field name="view_id" ref="open_risk_window_view"/>
+             <field name="target">new</field>
+       </record>
+
+    </data>
+</openerp>

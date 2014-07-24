@@ -1,0 +1,177 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* nan_partner_risk
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.2\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-04-19 14:12+0000\n"
+"PO-Revision-Date: 2011-04-19 16:17+0100\n"
+"Last-Translator: Alberto <alberto@pexego.es>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:241
+#: field:open.risk.window,draft_invoices_amount:0
+#: field:res.partner,draft_invoices_amount:0
+#, python-format
+msgid "Draft Invoices"
+msgstr ""
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:244
+#: field:open.risk.window,total_debt:0
+#: field:res.partner,total_debt:0
+#, python-format
+msgid "Total Debt"
+msgstr ""
+
+#. module: nan_partner_risk
+#: view:sale.order:0
+msgid "Approve Order"
+msgstr ""
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:240
+#: field:res.partner,pending_amount:0
+#, python-format
+msgid "Unexpired Pending Payments"
+msgstr ""
+
+#. module: nan_partner_risk
+#: model:ir.actions.wizard,name:nan_partner_risk.open_risk_wizard
+#: view:res.partner:0
+msgid "View Risk Information"
+msgstr ""
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:246
+#: field:open.risk.window,total_risk_percent:0
+#: field:res.partner,total_risk_percent:0
+#, python-format
+msgid "Credit Usage (%)"
+msgstr ""
+
+#. module: nan_partner_risk
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr ""
+
+#. module: nan_partner_risk
+#: model:ir.actions.act_window,name:nan_partner_risk.action_open_risk_window
+msgid "Show Partner Risk Information"
+msgstr ""
+
+#. module: nan_partner_risk
+#: view:sale.order:0
+msgid "Confirm Order"
+msgstr ""
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:245
+#: field:open.risk.window,available_risk:0
+#: field:res.partner,available_risk:0
+#, python-format
+msgid "Available Credit"
+msgstr ""
+
+#. module: nan_partner_risk
+#: field:open.risk.window,pending_amount:0
+msgid "Unexpired Unpaid Payments"
+msgstr ""
+
+#. module: nan_partner_risk
+#: view:sale.order:0
+msgid "Cancel Order"
+msgstr ""
+
+#. module: nan_partner_risk
+#: field:sale.order,amount_invoiced:0
+#: field:sale.order.line,amount_invoiced:0
+msgid "Invoiced Amount"
+msgstr ""
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:239
+#: field:open.risk.window,unpayed_amount:0
+#: field:res.partner,unpayed_amount:0
+#, python-format
+msgid "Expired Unpaid Payments"
+msgstr ""
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:97
+#, python-format
+msgid "Gives the state of the quotation or sale order. The exception state is automatically set when a cancel operation occurs in the invoice validation (Invoice Exception) or in the packing list process (Shipping Exception). The 'Waiting Schedule' state is set when the invoice is confirmed but waiting for the scheduler to run on the date 'Date Ordered'."
+msgstr ""
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:242
+#: field:open.risk.window,circulating_amount:0
+#: field:res.partner,circulating_amount:0
+#, python-format
+msgid "Payments Sent to Bank"
+msgstr ""
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:65
+#, python-format
+msgid "Credit Limit Exceeded"
+msgstr ""
+
+#. module: nan_partner_risk
+#: view:create.project.from.sale:0
+msgid "Partner Risk Information"
+msgstr ""
+
+#. module: nan_partner_risk
+#: view:sale.order:0
+msgid "Waiting Risk Approval"
+msgstr ""
+
+#. module: nan_partner_risk
+#: model:ir.model,name:nan_partner_risk.model_open_risk_window
+msgid "open.risk.window"
+msgstr ""
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:66
+#, python-format
+msgid ""
+"Warning: Credit Limit Exceeded.\n"
+"\n"
+"This partner has a credit limit of %(limit).2f and already has a debt of %(debt).2f."
+msgstr ""
+
+#. module: nan_partner_risk
+#: field:open.risk.window,credit_limit:0
+msgid "Credit Limit"
+msgstr ""
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:243
+#: field:open.risk.window,pending_orders_amount:0
+#: field:res.partner,pending_orders_amount:0
+#, python-format
+msgid "Uninvoiced Orders"
+msgstr ""
+
+#. module: nan_partner_risk
+#: model:ir.model,name:nan_partner_risk.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: nan_partner_risk
+#: model:ir.model,name:nan_partner_risk.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: nan_partner_risk
+#: model:ir.model,name:nan_partner_risk.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""

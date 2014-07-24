@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+<!-- 	<record model="ir.actions.wizard" id="open_risk_wizard"> -->
+<!-- 		<field name="name">View Risk Information</field> -->
+<!-- 		<field name="wiz_name">open_risk_window</field> -->
+<!-- 	</record> -->
+
+	<!--
+		Add risk button in partner form.
+	-->
+	<record model="ir.ui.view" id="view_partner_form">
+		<field name="name">res.partner.form.risk</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_form"/>
+		<field name="arch" type="xml">
+			<field name="credit_limit" position="after">
+				<footer>
+					<button string="View Risk Information" name="%(action_open_risk_window)d"
+					icon="gtk-ok" type="action" colspan="2"/>
+				</footer>
+			</field>
+		</field>
+	</record>
+</data>
+</openerp>
