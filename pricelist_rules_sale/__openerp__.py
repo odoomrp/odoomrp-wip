@@ -25,13 +25,16 @@
         "sale",
         "pricelist_rules",
     ],
-    "author": "AvanzOSC",
+    "author": "OdooMRP team",
+    "contributors": [
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+    ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
     "complexity": "normal",
     "summary": "",
     "description": """
-    This module provide :
+    Warning: This module requires pricelist rules that is incompatible with 'product_visible_discount'
     """,
     "data": [
         "views/sale_pricelist_view.xml",
@@ -39,6 +42,4 @@
     ],
     "installable": True,
     "auto_install": False,
-    "active": False,
-#    "certificate": 'certificate',
 }
