@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="sale_order_form_view_ext">
+            <field name="name">sale.order.form.ext</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <data>
+<!--                     <notebook position="inside"> -->
+<!--                         <page string="Subtotals per line by pricelist"> -->
+<!--                             <field name="subtotal_ids" nolabel="1" /> -->
+<!--                         </page> -->
+<!--                     </notebook> -->
+                    <xpath
+                        expr="//field[@name='order_line']/form//div[@name='discount']"
+                        position="after">
+                        <label for="discount2"
+                            groups="sale.group_discount_per_so_line" />
+                        <div name="discount2" groups="sale.group_discount_per_so_line">
+                            <field name="discount2" class="oe_inline" />
+                            %
+                        </div>
+                    </xpath>
+                    <xpath
+                        expr="//field[@name='order_line']/form//field[@name='address_allotment_id']"
+                        position="after">
+                        <field name="item_id" on_change="onchange_item_id(item_id)" />
+                        <field name="offer_id" groups="sale.group_discount_per_so_line"/>
+                    </xpath>
+<!--                     <xpath -->
+<!--                         expr="//field[@name='order_line']/form//field[@name='invoice_lines']/.." -->
+<!--                         position="after"> -->
+<!--                         <div> -->
+<!--                             <label for="subtotal_ids" /> -->
+<!--                             <field name="subtotal_ids" nolabel="1" /> -->
+<!--                         </div> -->
+<!--                     </xpath> -->
+                    <xpath
+                        expr="//field[@name='order_line']/tree//field[@name='discount']"
+                        position="after">
+                        <field name="discount2" groups="sale.group_discount_per_so_line"/>
+                        <field name="offer_id" groups="sale.group_discount_per_so_line"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_subtotal_tree">
+            <field name="name">sale.subtotal.tree</field>
+            <field name="model">sale.order.line.subtotal</field>
+            <field name="arch" type="xml">
+                <tree string="Subtotals per pricelist">
+                    <field name="item_id" />
+                    <field name="subtotal" />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
