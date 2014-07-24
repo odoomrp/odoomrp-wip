@@ -40,7 +40,7 @@ class PricelistItem(orm.Model):
         'discount': fields.float('Discount %',
                                  digits_compute=dp.get_precision(
                                      'Product Price')),
-        'discount2': fields.float('Second Discount %',
+        'discount2': fields.float('Discount 2 %',
                                   digits_compute=dp.get_precision(
                                       'Product Price')),
     }
