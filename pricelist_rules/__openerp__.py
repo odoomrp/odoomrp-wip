@@ -24,7 +24,7 @@
     "depends": [
         "product",
     ],
-    "author": "AvanzOSC",
+    "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
@@ -40,5 +40,4 @@
     ],
     "installable": True,
     "auto_install": False,
-    "active": False,
 }
