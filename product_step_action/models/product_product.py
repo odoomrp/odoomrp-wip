@@ -31,7 +31,7 @@ class ProductProduct(orm.Model):
         if context is None:
             context = {}
 
-        result = super(ProductTemplate,
+        result = super(ProductProduct,
                        self).fields_view_get(cr, uid, view_id=view_id,
                                              view_type=view_type,
                                              context=context,
