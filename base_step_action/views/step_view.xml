@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="step_config_tree">
+            <field name="name">step.config.tree</field>
+            <field name="model">step.config</field>
+            <field name="arch" type="xml">
+                <tree string="Step Config Tree">
+                    <field name="model_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="step_config_form">
+            <field name="name">step.config.form</field>
+            <field name="model">step.config</field>
+            <field name="arch" type="xml">
+                <form string="Step Config Form">
+                    <sheet>
+                        <group>
+                            <field name="model_id" />
+                        </group>
+                        <group string="Lines">
+                            <field name="line_ids" nolabel="1">
+                                <tree>
+                                    <field name="sequence" />
+                                    <field name="group_id" />
+                                    <field name="button" />
+                                </tree>
+                                <form>
+                                <group>
+                                    <field name="sequence" />
+                                    <field name="group_id" />
+                                    <field name="button" />
+                                </group>
+                                </form>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_step_config" model="ir.actions.act_window">
+            <field name="name">Configure Validation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">step.config</field>
+            <field name="view_id" ref="step_config_tree" />
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="menu_step_config" name="Step Config"
+            parent="base.menu_config" sequence="100" action="action_step_config" />
+
+    </data>
+</openerp>

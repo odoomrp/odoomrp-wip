@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="step.config" id="base_step_action.product_template_step">
+            <field name="model_id" model="ir.model" search="[('model','=','product.template')]"/>
+        </record>
+
+    </data>
+</openerp>
