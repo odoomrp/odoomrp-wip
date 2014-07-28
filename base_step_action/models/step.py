@@ -29,7 +29,7 @@ class StepConfigLine(orm.Model):
         'group_id': fields.many2one('res.groups', 'Security Group'),
         'step_id': fields.many2one('step.config', 'Config Step',
                                    required=True),
-        'button': fields.char('Button Text', size=64),
+        'button': fields.char('Button Text', size=64, translate=True),
     }
 
 
