@@ -25,7 +25,7 @@
         "base_step_action",
         "product",
     ],
-    "author": "AvanzOSC",
+    "author": "OdooMRP team",
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
     "complexity": "normal",
@@ -38,5 +38,4 @@
     ],
     "installable": True,
     "auto_install": False,
-    "active": False,
 }

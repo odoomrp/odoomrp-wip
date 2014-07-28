@@ -23,8 +23,8 @@ from lxml import etree
 from openerp.osv import orm
 
 
-class ProductTemplate(orm.Model):
-    _inherit = 'product.template'
+class ProductProduct(orm.Model):
+    _inherit = 'product.product'
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form',
                         context=None, toolbar=False, submenu=False):
