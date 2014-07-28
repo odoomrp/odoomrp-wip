@@ -1,8 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
-#    Copyright (C) 2011 - 2013 Avanzosc <http://www.avanzosc.com>
+#    OpenERP, Open Source Management Solution
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,3 +17,17 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+{
+    "name": "Sale order lines view",
+    "version": "1.0",
+    "depends": ["base", "sale"],
+    "author": "AvanzOSC",
+    "category": "Custom Modules",
+    "description": """
+           Avanzosc Custom Modules.
+           This module creates a new menu option for sales order lines.
+    """,
+    "init_xml": [],
+    'data': ['views/sale_order_line_ext_view.xml'],
+    'installable': True,
+}

@@ -1,13 +1,13 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
 #	* avanzosc_newmenu_saleorderline
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.1-20120523-233315\n"
+"Project-Id-Version: Odoo Server 8.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-11 09:36+0000\n"
-"PO-Revision-Date: 2013-10-11 09:36+0000\n"
+"POT-Creation-Date: 2014-07-28 08:59+0000\n"
+"PO-Revision-Date: 2014-07-28 08:59+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,18 +17,24 @@ msgstr ""
 
 #. module: avanzosc_newmenu_saleorderline
 #: view:sale.order.line:0
-msgid "States"
-msgstr "States"
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: avanzosc_newmenu_saleorderline
+#: view:sale.order.line:0
+msgid "Order"
+msgstr "Pedido"
 
 #. module: avanzosc_newmenu_saleorderline
 #: view:sale.order.line:0
 msgid "Product"
-msgstr "Product"
+msgstr "Producto"
 
 #. module: avanzosc_newmenu_saleorderline
-#: view:sale.order.line:0
-msgid "Sales Order Lines related to a Sales Order of mine"
-msgstr "Sales Order Lines related to a Sales Order of mine"
+#: model:ir.actions.act_window,name:avanzosc_newmenu_saleorderline.action_sale_order_line_newmenu
+#: model:ir.ui.menu,name:avanzosc_newmenu_saleorderline.sale_order_line_newmenu_menu_view
+msgid "Sale Order Lines"
+msgstr "Sale Order Lines"
 
 #. module: avanzosc_newmenu_saleorderline
 #: view:sale.order.line:0
@@ -37,45 +43,8 @@ msgstr "Sale Order Lines ready to be invoiced"
 
 #. module: avanzosc_newmenu_saleorderline
 #: view:sale.order.line:0
-msgid "To Invoice"
-msgstr "To Invoice"
-
-#. module: avanzosc_newmenu_saleorderline
-#: view:sale.order.line:0
-msgid "Notes"
-msgstr "Notes"
-
-#. module: avanzosc_newmenu_saleorderline
-#: view:sale.order.line:0
-msgid "Taxes"
-msgstr "Taxes"
-
-#. module: avanzosc_newmenu_saleorderline
-#: model:ir.actions.act_window,name:avanzosc_newmenu_saleorderline.action_sale_order_line_newmenu
-#: model:ir.ui.menu,name:avanzosc_newmenu_saleorderline.sale_order_line_newmenu_menu_view
-#: view:sale.order.line:0
-msgid "Sale Order Lines"
-msgstr "Sale Order Lines"
-
-#. module: avanzosc_newmenu_saleorderline
-#: view:sale.order.line:0
-msgid "Group By..."
-msgstr "Group By..."
-
-#. module: avanzosc_newmenu_saleorderline
-#: view:sale.order.line:0
-msgid "State"
-msgstr "State"
-
-#. module: avanzosc_newmenu_saleorderline
-#: view:sale.order.line:0
-msgid "Search Sales Order"
-msgstr "Search Sales Order"
-
-#. module: avanzosc_newmenu_saleorderline
-#: view:sale.order.line:0
-msgid "Make Invoices"
-msgstr "Make Invoices"
+msgid "Sales Order Lines related to a Sales Order of mine"
+msgstr "Líneas de pedidos de ventas relacionadas con un pedido de venta mío"
 
 #. module: avanzosc_newmenu_saleorderline
 #: view:sale.order.line:0
@@ -84,11 +53,16 @@ msgstr "Salesman"
 
 #. module: avanzosc_newmenu_saleorderline
 #: view:sale.order.line:0
-msgid "Order"
-msgstr "Order"
+msgid "Search Sales Order"
+msgstr "Buscar pedido de venta"
 
 #. module: avanzosc_newmenu_saleorderline
 #: view:sale.order.line:0
-msgid "Sales Order Line"
-msgstr "Sales Order Line"
+msgid "State"
+msgstr "State"
+
+#. module: avanzosc_newmenu_saleorderline
+#: view:sale.order.line:0
+msgid "To Invoice"
+msgstr "Para facturar"
 
