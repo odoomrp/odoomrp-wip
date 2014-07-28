@@ -24,7 +24,6 @@
     "author": "AvanzOSC",
     "category": "Custom Modules",
     "description": """
-           Avanzosc Custom Modules.
            This module creates a new menu option for sales order lines.
     """,
     "init_xml": [],
