@@ -21,10 +21,6 @@
 from openerp.osv import orm, fields
 
 
-"""
-Son, el número de cliente que soy yo para mi proveedor y el número de proveedor que soy yo para mi cliente.
-"""
-
 class ResPartner(orm.Model):
     _inherit = 'res.partner'
 
