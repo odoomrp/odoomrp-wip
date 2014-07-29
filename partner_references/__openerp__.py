@@ -31,9 +31,13 @@
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
     "complexity": "normal",
-    "summary": "",
+    "summary": "Supplier & Customer codes",
     "description": """
-    This module provide :
+    This module adds :
+    * A customer reference code when the partner is supplier
+    * A supplier reference code when the partner is customer
+    
+    All this data is from the partner
     """,
     "data": [
         "views/res_partner_view.xml",
