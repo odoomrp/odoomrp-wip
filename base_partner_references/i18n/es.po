@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-29 09:28+0000\n"
-"PO-Revision-Date: 2014-07-29 11:33+0100\n"
+"PO-Revision-Date: 2014-07-30 13:50+0100\n"
 "Last-Translator: Oihane <oihanecruce@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 #. module: partner_references
 #: field:res.partner,ref_customer:0
 msgid "Customer Reference"
-msgstr "Referencia Cliente"
+msgstr "Referencia cliente"
 
 #. module: partner_references
 #: model:ir.model,name:partner_references.model_res_partner
@@ -28,15 +28,15 @@ msgstr "Empresa"
 #. module: partner_references
 #: field:res.partner,ref_supplier:0
 msgid "Supplier Reference"
-msgstr "Referencia Proveedor"
+msgstr "Referencia proveedor"
 
 #. module: partner_references
 #: help:res.partner,ref_customer:0
 msgid "This is my customer reference for the supplier"
-msgstr "Esta es mi referencia de cliente para el proveedor"
+msgstr "Ésta es mi referencia de cliente para el proveedor"
 
 #. module: partner_references
 #: help:res.partner,ref_supplier:0
 msgid "This is my supplier reference for the customer"
-msgstr "Esta es mi referencia de proveedor para el cliente"
+msgstr "Ésta es mi referencia de proveedor para el cliente"
 

@@ -28,7 +28,6 @@
     ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
-    "complexity": "normal",
     "summary": "Supplier & Customer codes",
     "description": """
     This module adds :
