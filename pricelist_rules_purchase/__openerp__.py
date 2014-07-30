@@ -16,4 +16,27 @@
 #
 ##############################################################################
 
-from . import pricelist
+{
+    "name": "Pricelist Rules - Purchase extension",
+    "version": "1.0",
+    "depends": [
+        "purchase",
+        "pricelist_rules",
+    ],
+    "author": "OdooMRP team",
+    "contributors": [
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+    ],
+    "category": "Custom Module",
+    "website": "http://www.odoomrp.com",
+    "complexity": "normal",
+    "summary": "",
+    "description": """
+    This module provide :
+    """,
+    "data": [
+        "views/purchase_pricelist_view.xml",
+    ],
+    "installable": True,
+    "auto_install": False,
+}

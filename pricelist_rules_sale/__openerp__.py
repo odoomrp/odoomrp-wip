@@ -1,8 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -34,7 +32,8 @@
     "complexity": "normal",
     "summary": "",
     "description": """
-    Warning: This module requires pricelist rules that is incompatible with 'product_visible_discount'
+    Warning: This module requires pricelist rules that is incompatible with
+        'product_visible_discount'
     """,
     "data": [
         "views/sale_pricelist_view.xml",
