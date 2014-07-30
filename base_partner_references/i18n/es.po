@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_references
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-29 09:28+0000\n"
+"PO-Revision-Date: 2014-07-30 13:50+0100\n"
+"Last-Translator: Oihane <oihanecruce@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: partner_references
+#: field:res.partner,ref_customer:0
+msgid "Customer Reference"
+msgstr "Referencia cliente"
+
+#. module: partner_references
+#: model:ir.model,name:partner_references.model_res_partner
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: partner_references
+#: field:res.partner,ref_supplier:0
+msgid "Supplier Reference"
+msgstr "Referencia proveedor"
+
+#. module: partner_references
+#: help:res.partner,ref_customer:0
+msgid "This is my customer reference for the supplier"
+msgstr "Ésta es mi referencia de cliente para el proveedor"
+
+#. module: partner_references
+#: help:res.partner,ref_supplier:0
+msgid "This is my supplier reference for the customer"
+msgstr "Ésta es mi referencia de proveedor para el cliente"
+
