@@ -7,8 +7,6 @@
         <record model="ir.ui.view" id="product_expiry_tree_view">
 			<field name="name">product.expiry.tree.view</field>
 			<field name="model">stock.production.lot</field>
-			<field name="type">tree</field>
-			<!-- <field name="priority" eval="17"/> -->
 			<field name="inherit_id" ref="stock.view_production_lot_tree" />
 			<field name="arch" type="xml">
                 <xpath expr="//tree" position="attributes">
@@ -29,14 +27,13 @@
         <record model="ir.ui.view" id="product_expiry_search_view">
 			<field name="name">product_expiry_search_view</field>
 			<field name="model">stock.production.lot</field>
-			<field name="type">search</field>
 			<field name="inherit_id" ref="stock.search_product_lot_filter" />
 			<field name="arch" type="xml">
 				<xpath expr="//search/group/filter[@string='Product']" position="after">
-					<filter string="Life date" icon="terp-go-month" domain="[]" context="{'group_by':'life_date'}"/>
-                    <filter string="Use date" icon="terp-go-month" domain="[]" context="{'group_by':'use_date'}"/>
-                    <filter string="Removal date" icon="terp-go-month" domain="[]" context="{'group_by':'removal_date'}"/>
-                    <filter string="Alert date" icon="terp-go-month" domain="[]" context="{'group_by':'alert_date'}"/>
+					<filter string="Life date" domain="[]" context="{'group_by':'life_date'}"/>
+                    <filter string="Use date" domain="[]" context="{'group_by':'use_date'}"/>
+                    <filter string="Removal date" domain="[]" context="{'group_by':'removal_date'}"/>
+                    <filter string="Alert date" domain="[]" context="{'group_by':'alert_date'}"/>
 				</xpath>
 			</field>
 		</record>
