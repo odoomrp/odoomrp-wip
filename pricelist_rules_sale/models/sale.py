@@ -27,8 +27,6 @@ class SaleOrderLineSubtotal(orm.Model):
         res = {}
         cur_obj = self.pool['res.currency']
         tax_obj = self.pool['account.tax']
-        
-        
         for item in self.browse(cr, uid, ids, context=context):
             price = (item.line_id.price_unit * 
                      (1 - (item.item_id.discount or 0.0) / 100) *
@@ -44,7 +42,6 @@ class SaleOrderLineSubtotal(orm.Model):
                                         item.order_id.partner_id)
             cur = item.order_id.pricelist_id.currency_id
             res[item.id] = cur_obj.round(cr, uid, cur, taxes['total'])
-
         return res
 
     _columns = {

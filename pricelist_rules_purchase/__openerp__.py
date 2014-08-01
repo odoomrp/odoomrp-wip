@@ -32,10 +32,12 @@
     "complexity": "normal",
     "summary": "",
     "description": """
-    This module provide :
+    Warning: This module requires pricelist rules that is incompatible with
+        'product_visible_discount'
     """,
     "data": [
         "views/purchase_pricelist_view.xml",
+        "views/purchase_view.xml",
     ],
     "installable": True,
     "auto_install": False,

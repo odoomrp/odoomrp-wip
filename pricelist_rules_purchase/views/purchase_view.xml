@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- inherited view to make the order lines list in the form non-editable 
+            for the members of some usability groups -->
+        <record model="ir.ui.view" id="purchase_order_form_editable_list">
+            <field name="name">purchase.order.form.editable.list</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="groups_id"
+                eval="[(4, ref('product.group_uos')), (4, ref('product.group_stock_packaging')), (4, ref('sale.group_mrp_properties'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree"
+                    position="attributes">
+                    <attribute name="editable" />
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_order_form_view_ext">
+            <field name="name">purchase.order.form.ext</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <data>
+                    <field name="order_line" position="attributes">
+                        <attribute name="context">{'pricelist_id':pricelist_id}</attribute>
+                    </field>
+                    <xpath
+                        expr="//field[@name='order_line']/tree//field[@name='price_unit']"
+                        position="after">
+                        <field name="discount" />
+                        <field name="discount2" />
+                        <field name="offer_id" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_order_line_form_view_ext">
+            <field name="name">purchase.order.line.form.ext</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_order_line_form" />
+            <field name="arch" type="xml">
+                <field name="price_unit" position="after">
+                    <label for="discount" />
+                    <div name="discount">
+                        <field name="discount" class="oe_inline" />
+                        %
+                    </div>
+                    <label for="discount2" />
+                    <div name="discount2">
+                        <field name="discount2" class="oe_inline" />
+                        %
+                    </div>
+                </field>
+                <field name="company_id" position="after">
+                    <field name="item_id" on_change="onchange_item_id(item_id)" />
+                    <field name="offer_id" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_subtotal_tree">
+            <field name="name">purchase.subtotal.tree</field>
+            <field name="model">purchase.order.line.subtotal</field>
+            <field name="arch" type="xml">
+                <tree string="Subtotals per pricelist">
+                    <field name="item_id" />
+                    <field name="subtotal" />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
