@@ -52,37 +52,29 @@ class PricelistItem(orm.Model):
     ]
 
     def domain_by_pricelist(self, cr, uid, pricelist_id, context=None):
-
         vers_obj = self.pool['product.pricelist.version']
-
         today = time.strftime('%Y-%m-%d')
         vers_ids = vers_obj.search(cr, uid,
                                    [('pricelist_id', '=', pricelist_id),
-                                    '&', '|', ('date_start', '=', False),
+                                    '|', ('date_start', '=', False),
                                     ('date_start', '<=', today),
-                                    '&', '|', ('date_end', '=', False),
+                                    '|', ('date_end', '=', False),
                                     ('date_end', '>=', today)],
                                    context=context)
-
         item_ids = self.search(cr, uid, [('price_version_id', 'in', vers_ids)],
                                order='sequence', context=context)
-
         for item in self.browse(cr, uid, item_ids, context=context):
             if item.base == -1:
                 item_ids.remove(item.id)
                 new_item_ids = self.domain_by_pricelist(
                     cr, uid, item.base_pricelist_id.id, context=context)
                 item_ids += new_item_ids
-
         return item_ids
 
     def get_best_pricelist_item(self, cr, uid, pricelist_id, context=None):
         pricelist_item_id = False
-
         pricelist_item_ids = self.domain_by_pricelist(
             cr, uid, pricelist_id, context=context)
-
         if pricelist_item_ids:
             pricelist_item_id = pricelist_item_ids[0]
-
         return pricelist_item_id

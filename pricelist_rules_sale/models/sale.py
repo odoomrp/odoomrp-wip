@@ -27,18 +27,17 @@ class SaleOrderLineSubtotal(orm.Model):
         res = {}
         cur_obj = self.pool['res.currency']
         tax_obj = self.pool['account.tax']
-
+        
+        
         for item in self.browse(cr, uid, ids, context=context):
             price = (item.line_id.price_unit * 
                      (1 - (item.item_id.discount or 0.0) / 100) *
                      (1 - (item.item_id.discount2 or 0.0) / 100))
-
             qty = item.line_id.product_uom_qty
             if item.item_id.offer_id:
                 total = (item.item_id.offer_id.free_qty +
                          item.item_id.offer_id.paid_qty)
                 qty = round((qty / total) * item.item_id.offer_id.paid_qty)
-
             taxes = tax_obj.compute_all(cr, uid, item.line_id.tax_id,
                                         price, qty,
                                         item.line_id.product_id,
@@ -116,19 +115,26 @@ class SaleOrderLine(orm.Model):
          'Second discount must be lower than 100%.'),
     ]
 
+    def default_get(self, cr, uid, fields_list, context=None):
+        res = super(SaleOrderLine, self).default_get(cr, uid, fields_list,
+                                                     context=context)
+        item_obj = self.pool['product.pricelist.item']
+        item_id = item_obj.get_best_pricelist_item(cr, uid,
+                                                   context['pricelist_id'],
+                                                   context=context)
+        res.update({'item_id': item_id})
+        return res
+
     def onchange_item_id(self, cr, uid, ids, item_id, context=None):
         if not item_id:
             return {}
-
         item_obj = self.pool['product.pricelist.item']
         item = item_obj.browse(cr, uid, item_id, context=context)
-
         values = {
             'discount': item.discount,
             'discount2': item.discount2,
             'offer_id': item.offer_id.id,
         }
-
         return {'value': values}
 
 class SaleOrder(orm.Model):
@@ -138,10 +144,8 @@ class SaleOrder(orm.Model):
         val = 0.0
         tax_obj = self.pool['account.tax']
         line_obj = self.pool['sale.order.line']
-
         new_price_subtotal = line_obj._calc_price_subtotal(cr, uid, line)
         qty = line_obj._calc_qty(cr, uid, line)
-
         for c in tax_obj.compute_all(cr, uid, line.tax_id, new_price_subtotal,
                                      qty, line.product_id,
                                      line.order_id.partner_id)['taxes']:
