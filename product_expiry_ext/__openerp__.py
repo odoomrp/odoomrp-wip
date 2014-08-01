@@ -29,7 +29,11 @@
     "complexity": "normal",
     "summary": "",
     "description": """
-    This module provide :
+    This module color lines in list of production lots based on expiration dates:
+        In alert : Orange color,
+        To remove : Blue color,
+        Expired : Red color,
+        Normal : Black color
     """,
     "images": [],
     "data": ["views/production_lot_ext_view.xml"],

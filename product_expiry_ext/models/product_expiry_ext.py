@@ -26,27 +26,31 @@ class StockProductioLot(orm.Model):
 
     def _get_product_state(self, cr, uid, ids, field_name, args, context=None):
         res = {}
-        today = str(datetime.today())
+        today = datetime.today()
         for lot in self.browse(cr, uid, ids, context=context):
-            alert_date = ''
-            life_date = ''
-            removal_date = ''
             if lot.removal_date:
-                removal_date = str(datetime.strptime(lot.removal_date, DEFAULT_SERVER_DATETIME_FORMAT))
+                removal_date = lot.removal_date and \
+                    datetime.strptime(lot.removal_date,
+                                      DEFAULT_SERVER_DATETIME_FORMAT)
             if lot.alert_date:
-                alert_date = str(datetime.strptime(lot.alert_date, DEFAULT_SERVER_DATETIME_FORMAT))
+                alert_date = lot.alert_date and \
+                    datetime.strptime(lot.alert_date,
+                                      DEFAULT_SERVER_DATETIME_FORMAT)
             if lot.life_date:
-                life_date = str(datetime.strptime(lot.life_date, DEFAULT_SERVER_DATETIME_FORMAT))
+                life_date = lot.life_date and \
+                    datetime.strptime(lot.life_date,
+                                      DEFAULT_SERVER_DATETIME_FORMAT)
             res[lot.id] = 'normal'
             if life_date and life_date < today:
                 res[lot.id] = 'expired'
             elif removal_date and alert_date:
-                if removal_date > alert_date and removal_date < today:
+                if removal_date > alert_date and removal_date <= today:
                     res[lot.id] = 'to_remove'
-                elif today > alert_date and alert_date > removal_date or alert_date < removal_date:
+                elif today >= alert_date and alert_date > removal_date \
+                    or alert_date < removal_date:
                     res[lot.id] = 'alert'
             elif alert_date:
-                if alert_date < today:
+                if alert_date <= today:
                     res[lot.id] = 'alert'
         return res
 
@@ -56,7 +60,6 @@ class StockProductioLot(orm.Model):
             selection=[('expired', 'Expired'),
                        ('alert', 'In alert'),
                        ('normal', 'Normal'),
-                       ('to_remove', 'To remove'),
-                       ('end_of_life', 'End of life')],
+                       ('to_remove', 'To remove')],
             string='Product Expiry State'),
     }
