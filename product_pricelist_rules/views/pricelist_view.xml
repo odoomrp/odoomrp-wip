@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="pricelist_item_form_view_ext">
+            <field name="name">product.pricelist.item.form.ext</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view" />
+            <field name="arch" type="xml">
+                <data>
+                    <field name="price_max_margin" position="after">
+                        <newline />
+                        <field name="discount" />
+                        <field name="discount2" />
+                        <field name="offer_id" />
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pricelist_item_tree_view_ext">
+            <field name="name">product.pricelist.item.tree.ext</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_tree_view" />
+            <field name="arch" type="xml">
+                <data>
+                    <field name="min_quantity" position="after">
+                        <field name="discount" />
+                        <field name="discount2" />
+                        <field name="offer_id" />
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pricelist_item_offer_form_view">
+            <field name="name">product.pricelist.item.offer.form</field>
+            <field name="model">product.pricelist.item.offer</field>
+            <field name="arch" type="xml">
+                <form string="Offer">
+                    <group>
+                        <field name="name" />
+                        <field name="paid_qty" />
+                        <field name="free_qty" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pricelist_item_offer_tree_view">
+            <field name="name">product.pricelist.item.offer.tree</field>
+            <field name="model">product.pricelist.item.offer</field>
+            <field name="arch" type="xml">
+                <tree string="Offer" editable="bottom">
+                    <field name="name" />
+                    <field name="paid_qty" />
+                    <field name="free_qty" />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
