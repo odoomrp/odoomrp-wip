@@ -20,8 +20,8 @@ from openerp.osv import orm, fields
 import openerp.addons.decimal_precision as dp
 
 
-class PurchaseOrderLineSubtotal(orm.Model):
-    _name = 'purchase.order.line.subtotal'
+class SaleOrderLineSubtotal(orm.Model):
+    _name = 'sale.order.line.subtotal'
 
     def _calculate_subtotal(self, cr, uid, ids, field_name, arg, context=None):
         res = {}
@@ -45,21 +45,21 @@ class PurchaseOrderLineSubtotal(orm.Model):
         return res
 
     _columns = {
-        'line_id': fields.many2one('purchase.order.line', 'Line',
+        'line_id': fields.many2one('sale.order.line', 'Line',
                                    ondelete='cascade'),
-        'purchase_id': fields.related('line_id', 'order_id', type='many2one',
-                                  relation='purchase.order',
-                                  string='Purchase Order', store=True),
+        'sale_id': fields.related('line_id', 'order_id', type='many2one',
+                                  relation='sale.order', string='Sale Order',
+                                  store=True),
         'item_id': fields.many2one('product.pricelist.item', 'Pricelist Item',
                                    ondelete='cascade'),
         'subtotal': fields.function(_calculate_subtotal, type='float',
                                     method=True, string='Subtotal',
-                                    obj='purchase.order.pricelist.version'),
+                                    obj='sale.order.pricelist.version'),
     }
 
 
-class PurchaseOrderLine(orm.Model):
-    _inherit = 'purchase.order.line'
+class SaleOrderLine(orm.Model):
+    _inherit = 'sale.order.line'
 
     def _calc_price_subtotal(self, cr, uid, line, context=None):
         price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
@@ -90,26 +90,20 @@ class PurchaseOrderLine(orm.Model):
         return res
 
     _columns = {
-        'discount': fields.float('Discount (%)',
-                                  digits_compute=dp.get_precision('Discount')),
-                                  # readonly=True,
-                                  # states={'draft': [('readonly', False)]}),
         'discount2': fields.float('Discount (%)',
-                                  digits_compute=dp.get_precision('Discount')),
-                                  # readonly=True,
-                                  # states={'draft': [('readonly', False)]}),
+                                  digits_compute=dp.get_precision('Discount'),
+                                  readonly=True,
+                                  states={'draft': [('readonly', False)]}),
         'offer_id': fields.many2one('product.pricelist.item.offer', 'Offer'),
         'item_id': fields.many2one('product.pricelist.item', 'Pricelist Item'),
         'price_subtotal': fields.function(_amount_line, string='Subtotal',
                                           digits_compute=
                                           dp.get_precision('Account')),
-        'subtotal_ids': fields.one2many('purchase.order.line.subtotal',
-                                        'line_id',
+        'subtotal_ids': fields.one2many('sale.order.line.subtotal', 'line_id',
                                         'Subtotals by pricelist'),
     }
 
     _defaults = {
-        'discount': 0.0,
         'discount2': 0.0,
     }
 
@@ -119,13 +113,14 @@ class PurchaseOrderLine(orm.Model):
     ]
 
     def default_get(self, cr, uid, fields_list, context=None):
-        res = super(PurchaseOrderLine, self).default_get(cr, uid, fields_list,
-                                                         context=context)
+        res = super(SaleOrderLine, self).default_get(cr, uid, fields_list,
+                                                     context=context)
         item_obj = self.pool['product.pricelist.item']
-        item_id = item_obj.get_best_pricelist_item(cr, uid,
-                                                   context['pricelist_id'],
-                                                   context=context)
-        res.update({'item_id': item_id})
+        if context.get('pricelist_id'):
+            item_id = item_obj.get_best_pricelist_item(cr, uid,
+                                                       context['pricelist_id'],
+                                                       context=context)
+            res.update({'item_id': item_id})
         return res
 
     def onchange_item_id(self, cr, uid, ids, item_id, context=None):
@@ -140,13 +135,13 @@ class PurchaseOrderLine(orm.Model):
         }
         return {'value': values}
 
-class PurchaseOrder(orm.Model):
-    _inherit = 'purchase.order'
+class SaleOrder(orm.Model):
+    _inherit = 'sale.order'
 
     def _amount_line_tax(self, cr, uid, line, context=None):
         val = 0.0
         tax_obj = self.pool['account.tax']
-        line_obj = self.pool['purchase.order.line']
+        line_obj = self.pool['sale.order.line']
         new_price_subtotal = line_obj._calc_price_subtotal(cr, uid, line)
         qty = line_obj._calc_qty(cr, uid, line)
         for c in tax_obj.compute_all(cr, uid, line.tax_id, new_price_subtotal,
@@ -156,7 +151,6 @@ class PurchaseOrder(orm.Model):
         return val
 
     _columns = {
-        'subtotal_ids': fields.one2many('purchase.order.line.subtotal',
-                                        'purchase_id',
+        'subtotal_ids': fields.one2many('sale.order.line.subtotal', 'sale_id',
                                         'Subtotals per line by pricelist')
     }

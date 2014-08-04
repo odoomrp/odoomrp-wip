@@ -28,9 +28,8 @@
                         <attribute name="context">{'pricelist_id':pricelist_id}</attribute>
                     </field>
                     <xpath
-                        expr="//field[@name='order_line']/tree//field[@name='price_unit']"
+                        expr="//field[@name='order_line']/tree//field[@name='discount']"
                         position="after">
-                        <field name="discount" />
                         <field name="discount2" />
                         <field name="offer_id" />
                     </xpath>
@@ -43,12 +42,7 @@
             <field name="model">purchase.order.line</field>
             <field name="inherit_id" ref="purchase.purchase_order_line_form" />
             <field name="arch" type="xml">
-                <field name="price_unit" position="after">
-                    <label for="discount" />
-                    <div name="discount">
-                        <field name="discount" class="oe_inline" />
-                        %
-                    </div>
+                <field name="discount" position="after">
                     <label for="discount2" />
                     <div name="discount2">
                         <field name="discount2" class="oe_inline" />

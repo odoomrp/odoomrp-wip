@@ -21,7 +21,7 @@
     "version": "1.0",
     "depends": [
         "sale",
-        "pricelist_rules",
+        "product_pricelist_rules",
     ],
     "author": "OdooMRP team",
     "contributors": [
@@ -32,13 +32,16 @@
     "complexity": "normal",
     "summary": "",
     "description": """
-    Warning: This module requires pricelist rules that is incompatible with
-        'product_visible_discount'
+This module allows to apply *product_pricelist_rules* extended features to
+sale order lines and gets the best pricelist rule automatically.
+
+**Warning**: This module requires *product_pricelist_rules* that is
+incompatible with *product_visible_discount*
     """,
     "data": [
         "views/sale_pricelist_view.xml",
         "views/sale_view.xml",
     ],
     "installable": True,
-    "auto_install": False,
+    "auto_install": True,
 }
