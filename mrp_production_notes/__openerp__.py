@@ -17,14 +17,14 @@
 ##############################################################################
 
 {
-    "name": "MRP remarks",
+    "name": "Notes in production orders",
     "version": "1.0",
     "depends": ["mrp"],
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
-    "category": "Custom Module",
+    "category": "MRP",
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """

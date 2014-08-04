@@ -17,14 +17,14 @@
 ##############################################################################
 
 {
-    "name": "Remarks in lots",
+    "name": "Notes in stock lots",
     "version": "1.0",
     "depends": ["stock"],
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
-    "category": "Custom Module",
+    "category": "Stock management",
     "website": "http://www.odoomrp.com",
     "complexity": "normal",
     "summary": "",
