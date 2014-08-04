@@ -89,14 +89,8 @@ class PurchaseOrderLine(orm.Model):
         return res
 
     _columns = {
-        # 'discount': fields.float('Discount (%)',
-                                  # digits_compute=dp.get_precision('Discount')),
-                                  # readonly=True,
-                                  # states={'draft': [('readonly', False)]}),
         'discount2': fields.float('Discount (%)',
                                   digits_compute=dp.get_precision('Discount')),
-                                  # readonly=True,
-                                  # states={'draft': [('readonly', False)]}),
         'offer_id': fields.many2one('product.pricelist.item.offer', 'Offer'),
         'item_id': fields.many2one('product.pricelist.item', 'Pricelist Item'),
         'price_subtotal': fields.function(_amount_line, string='Subtotal',
@@ -108,7 +102,6 @@ class PurchaseOrderLine(orm.Model):
     }
 
     _defaults = {
-        # 'discount': 0.0,
         'discount2': 0.0,
     }
 

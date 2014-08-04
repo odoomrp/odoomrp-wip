@@ -21,26 +21,37 @@
         <record model="ir.ui.view" id="purchase_order_form_view_ext">
             <field name="name">purchase.order.form.ext</field>
             <field name="model">purchase.order</field>
-            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="inherit_id"
+                ref="purchase_discount.purchase_discount_order_form" />
             <field name="arch" type="xml">
-                <data>
-                    <field name="order_line" position="attributes">
-                        <attribute name="context">{'pricelist_id':pricelist_id}</attribute>
-                    </field>
-                    <xpath
-                        expr="//field[@name='order_line']/tree//field[@name='discount']"
-                        position="after">
-                        <field name="discount2" />
-                        <field name="offer_id" />
-                    </xpath>
-                </data>
+                <field name="order_line" position="attributes">
+                    <attribute name="context">{'pricelist_id':pricelist_id}</attribute>
+                </field>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='discount']" position="after">
+                    <field name="discount2" />
+                    <field name="offer_id" />
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_order_form_view_ext2">
+            <field name="name">purchase.order.form.ext2</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id"
+                ref="purchase_discount.purchase_discount_order_form" />
+            <field name="arch" type="xml">
+                <field name="discount" position="after">
+                    <field name="discount2" />
+                    <field name="offer_id" />
+                </field>
             </field>
         </record>
 
         <record model="ir.ui.view" id="purchase_order_line_form_view_ext">
             <field name="name">purchase.order.line.form.ext</field>
             <field name="model">purchase.order.line</field>
-            <field name="inherit_id" ref="purchase.purchase_order_line_form" />
+            <field name="inherit_id"
+                ref="purchase_discount.purchase_discount_order_line_form" />
             <field name="arch" type="xml">
                 <field name="discount" position="after">
                     <label for="discount2" />
