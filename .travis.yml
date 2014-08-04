@@ -11,9 +11,13 @@ virtualenv:
 
 install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - git clone https://github.com/OCA/purchase-workflow.git ${HOME}/purchase-workflow -b ${VERSION}
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly ${VERSION}
 
 script:
   - travis_run_flake8
   - travis_run_tests ${VERSION}
+
+after_success:
+  coveralls
