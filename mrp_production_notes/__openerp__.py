@@ -28,7 +28,8 @@
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
-    This module provide :
+This module adds remark field to:
+    * Manufacturing orders
     """,
     "data": [
         "views/mrp_production_view.xml",

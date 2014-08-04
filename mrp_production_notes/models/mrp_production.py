@@ -19,9 +19,9 @@
 from openerp.osv import orm, fields
 
 
-class StockProductionLot(orm.Model):
-    _inherit = 'stock.production.lot'
+class MrpProduction(orm.Model):
+    _inherit = 'mrp.production'
 
     _columns = {
-        'remark': fields.text('Remark'),
+        'notes': fields.html('Notes'),
     }

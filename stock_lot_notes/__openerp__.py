@@ -16,12 +16,25 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-
-
-class MrpProduction(orm.Model):
-    _inherit = 'mrp.production'
-
-    _columns = {
-        'remark': fields.text('Remark'),
-    }
+{
+    "name": "Remarks in lots",
+    "version": "1.0",
+    "depends": ["stock"],
+    "author": "OdooMRP team",
+    "contributors": [
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+    ],
+    "category": "Custom Module",
+    "website": "http://www.odoomrp.com",
+    "complexity": "normal",
+    "summary": "",
+    "description": """
+This module adds remark field to:
+    * Lot
+    """,
+    "data": [
+        "views/lot_view.xml",
+    ],
+    "installable": True,
+    "auto_install": False,
+}

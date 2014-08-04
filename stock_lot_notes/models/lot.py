@@ -16,24 +16,12 @@
 #
 ##############################################################################
 
-{
-    "name": "Remarks in lots",
-    "version": "1.0",
-    "depends": ["stock"],
-    "author": "OdooMRP team",
-    "contributors": [
-        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
-    ],
-    "category": "Custom Module",
-    "website": "http://www.odoomrp.com",
-    "complexity": "normal",
-    "summary": "",
-    "description": """
-    This module provide :
-    """,
-    "data": [
-        "views/lot_view.xml",
-    ],
-    "installable": True,
-    "auto_install": False,
-}
+from openerp.osv import orm, fields
+
+
+class StockProductionLot(orm.Model):
+    _inherit = 'stock.production.lot'
+
+    _columns = {
+        'notes': fields.html('Notes'),
+    }
