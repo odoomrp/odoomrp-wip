@@ -21,7 +21,7 @@
 ##############################################################################
 
 from openerp.osv import fields, orm
-from openerp.tools.translate import _
+# from openerp.tools.translate import _
 
 
 class SaleOrder(orm.Model):
@@ -30,10 +30,18 @@ class SaleOrder(orm.Model):
 
     def recalculate_prices(self, cr, uid, ids, context=None):
         records = self.browse(cr, uid, ids, context=context)
-        pricelist = records[0].pricelist_id.id
-        partner = records[0].partner_id.id
-        date_order = records[0].date_order
-        fiscal_position = records[0].fiscal_position.id
+        pricelist = ''
+        if records[0].pricelist_id.id:
+            pricelist = records[0].pricelist_id.id
+        partner = ''
+        if records[0].partner_id.id:
+            partner = records[0].partner_id.id
+        date_order = ''
+        if records[0].date_order:
+            date_order = records[0].date_order
+        fiscal_position = ''
+        if records[0].fiscal_position.id:
+            fiscal_position = records[0].fiscal_position.id
         if records[0].order_line:
             for line in records[0].order_line:
                 res = {}
@@ -46,6 +54,6 @@ class SaleOrder(orm.Model):
                                              context=context)
                 vals = {}
                 vals = res['value']
-                #raise orm.except_orm(_('LOL'), _("%s") % vals)
-                line.write(cr, uid, [line.id], vals, context=context)
+                # raise orm.except_orm(_('LOL'), _("%s") % vals)
+                line.write(cr, uid, line.id, vals, context=context)
         return True
