@@ -20,8 +20,7 @@
 #                                                                            #
 ##############################################################################
 
-from openerp.osv import fields, orm
-# from openerp.tools.translate import _
+from openerp.osv import orm
 
 
 class SaleOrder(orm.Model):
@@ -29,31 +28,37 @@ class SaleOrder(orm.Model):
     _inherit = 'sale.order'
 
     def recalculate_prices(self, cr, uid, ids, context=None):
-        records = self.browse(cr, uid, ids, context=context)
-        pricelist = ''
-        if records[0].pricelist_id.id:
-            pricelist = records[0].pricelist_id.id
-        partner = ''
-        if records[0].partner_id.id:
-            partner = records[0].partner_id.id
-        date_order = ''
-        if records[0].date_order:
-            date_order = records[0].date_order
-        fiscal_position = ''
-        if records[0].fiscal_position.id:
-            fiscal_position = records[0].fiscal_position.id
-        if records[0].order_line:
-            for line in records[0].order_line:
-                res = {}
-                res = line.product_id_change(pricelist, line.product_id.id,
-                                             line.product_uom_qty, False,
-                                             line.product_uos_qty, False,
-                                             line.name, partner, False,
-                                             True, date_order, False,
-                                             fiscal_position, False,
-                                             context=context)
-                vals = {}
-                vals = res['value']
-                # raise orm.except_orm(_('LOL'), _("%s") % vals)
-                line.write(cr, uid, line.id, vals, context=context)
+        for record in self.browse(cr, uid, ids, context=context):
+            pricelist = ''
+            if record.pricelist_id.id:
+                pricelist = record.pricelist_id.id
+            partner = ''
+            if record.partner_id.id:
+                partner = record.partner_id.id
+            date_order = ''
+            if record.date_order:
+                date_order = record.date_order
+            fiscal_position = ''
+            if record.fiscal_position.id:
+                fiscal_position = record.fiscal_position.id
+            if record.order_line:
+
+                for line in record.order_line:
+                    res = {}
+                    res = line.product_id_change(pricelist,
+                                                 line.product_id.id,
+                                                 line.product_uom_qty,
+                                                 False,
+                                                 line.product_uos_qty,
+                                                 False,
+                                                 line.name, partner,
+                                                 False,
+                                                 True, date_order,
+                                                 False,
+                                                 fiscal_position,
+                                                 False,
+                                                 context=context)
+                    vals = {}
+                    vals = res['value']
+                    line.write(vals, context=context)
         return True
