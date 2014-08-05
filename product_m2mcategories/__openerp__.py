@@ -19,8 +19,9 @@
     "name": "Product - Many Categories",
     "version": "1.0.2",
     "author": "Sharoon Thomas",
+    "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "website": "",
-    "category": "Added functionality",
+    "category": "Product Management",
     "depends": ['base', 'product'],
     "description": """
     This module Extends the existing functionality of Open ERP Products
@@ -28,11 +29,11 @@
 
     *Note: This module was built generically but in focus of the Magento"""
     """ Open ERP connector
+    **Note: The additional categories are only for classification and does"""
+    """ not affect other operations
     """,
     "data": [
             'views/product_view.xml'
     ],
     "installable": True,
 }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
