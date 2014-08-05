@@ -57,5 +57,5 @@ class StockProductioLot(orm.Model):
                        ('alert', 'In alert'),
                        ('normal', 'Normal'),
                        ('to_remove', 'To remove')],
-            string='Product Expiry State'),
+            string='Expiry state'),
     }

@@ -32,7 +32,7 @@ msgstr "Normal"
 
 #. module: product_expiry_ext
 #: field:stock.production.lot,expiry_state:0
-msgid "Product Expiry State"
+msgid "Expiry state"
 msgstr "Estado de caducidad"
 
 #. module: product_expiry_ext

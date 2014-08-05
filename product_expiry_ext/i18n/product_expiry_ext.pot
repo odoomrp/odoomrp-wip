@@ -32,7 +32,7 @@ msgstr ""
 
 #. module: product_expiry_ext
 #: field:stock.production.lot,expiry_state:0
-msgid "Product Expiry State"
+msgid "Expiry state"
 msgstr ""
 
 #. module: product_expiry_ext
