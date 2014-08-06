@@ -10,7 +10,8 @@
                     <page string="Customer observations">
                         <group colspan="2" col="2">
                             <label for="sale_comment" string="Comments" />
-                            <field name="sale_comment" nolabel="1" />
+                            <field name="sale_comment" nolabel="1"
+                                placeholder="Internal customer notes, see in partner..." />
                         </group>
                     </page>
                 </notebook>

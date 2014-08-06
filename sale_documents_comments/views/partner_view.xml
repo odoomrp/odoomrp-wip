@@ -13,27 +13,32 @@
                             <separator string="Sale Orders"
                                 colspan="2" />
                             <label for="sale_comment" string="Comments" />
-                            <field name="sale_comment" nolabel="1" />
+                            <field name="sale_comment" nolabel="1"
+                                placeholder="Internal comment displayed on sale orders" />
                             <label for="sale_propagated_comment"
                                 string="Propagated comments" />
                             <field name="sale_propagated_comment"
-                                nolabel="1" />
+                                nolabel="1"
+                                placeholder="Internal comment displayed on sale orders (it will be propagated)" />
                         </group>
                         <group colspan="2" col="2">
                             <separator string="Pickings"
                                 colspan="2" />
                             <label for="picking_comment" string="Comments" />
-                            <field name="picking_comment" nolabel="1" />
+                            <field name="picking_comment" nolabel="1"
+                                placeholder="Internal comment displayed on delivery orders" />
                             <label for="picking_propagated_comment"
                                 string="Propagated comments" />
                             <field name="picking_propagated_comment"
-                                nolabel="1" />
+                                nolabel="1"
+                                placeholder="Internal comment displayed on delivery orders (it will be propagated)" />
                         </group>
                         <group colspan="2" col="2">
                             <separator string="Invoices"
                                 colspan="2" />
                             <label for="invoice_comment" string="Comments" />
-                            <field name="invoice_comment" nolabel="1" />
+                            <field name="invoice_comment" nolabel="1"
+                                placeholder="Internal comment displayed on customer invoices" />
                         </group>
                     </page>
                 </notebook>
