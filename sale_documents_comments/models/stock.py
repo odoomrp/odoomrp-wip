@@ -23,9 +23,8 @@ class StockPicking(orm.Model):
     _inherit = 'stock.picking'
 
     _columns = {
-        'sale_comment': fields.text('Comments for customer'),
-        'sale_propagated_comment': fields.text('Propagated comments for'
-                                               ' customer'),
+        'sale_comment': fields.text('Internal comments'),
+        'sale_propagated_comment': fields.text('Propagated internal comments'),
     }
 
     def onchange_partner_id(self, cr, uid, ids, partner_id, context=None):

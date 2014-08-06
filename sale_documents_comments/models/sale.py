@@ -23,8 +23,8 @@ class SaleOrder(orm.Model):
     _inherit = 'sale.order'
 
     _columns = {
-        'comment': fields.text('Comments for customer'),
-        'propagated_comment': fields.text('Propagated comments for customer'),
+        'comment': fields.text('Internal comments'),
+        'propagated_comment': fields.text('Propagated internal comments'),
     }
 
     def _prepare_invoice(self, cr, uid, order, lines, context=None):

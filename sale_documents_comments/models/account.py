@@ -23,7 +23,7 @@ class AccountInvoice(orm.Model):
     _inherit = 'account.invoice'
 
     _columns = {
-        'sale_comment': fields.text('Comments for customer'),
+        'sale_comment': fields.text('Internal comments'),
     }
 
     def onchange_partner_id(self, cr, uid, ids, type, partner_id,

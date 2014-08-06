@@ -27,12 +27,12 @@
         "stock",
         "account",
     ],
-    "author": "AvanzOSC",
+    "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
     "category": "Custom Module",
-    "website": "http://www.avanzosc.es",
+    "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
 With this module you can add specific comments to a customer, for sale order,
