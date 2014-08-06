@@ -24,6 +24,7 @@
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
+
 class ProductCategory(orm.Model):
     _inherit = "product.category"
     _columns = {
@@ -34,7 +35,7 @@ class ProductCategory(orm.Model):
 
 class ProductTemplate(orm.Model):
     _inherit = "product.template"
-    
+
     def create_variant_ids(self, cr, uid, ids, context=None):
         for tmpl in self.browse(cr, uid, ids, context=context):
             if tmpl.no_variants or tmpl.categ_id.no_variants:
@@ -50,8 +51,8 @@ class ProductTemplate(orm.Model):
                                                   context=context)
 
     def _get_line_ids(self, cr, uid, ids, fields, arg, context=None):
-        res={}
-        line_ids=[]
+        res = {}
+        line_ids = []
         for tmpl in self.browse(cr, uid, ids, context=context):
             for line in tmpl.attribute_line_ids:
                 line_ids.append(line.id)
@@ -66,11 +67,11 @@ class ProductTemplate(orm.Model):
                                          method=True, string="Line Ids"),
         'final': fields.many2one('product.attribute.line', 'Final')}
 
-    def _final_attribute(self,cr, uid, ids, context=None):
+    def _final_attribute(self, cr, uid, ids, context=None):
         if not isinstance(ids, 'list'):
             ids = [ids]
         for tmpl in self.browse(cr, uid, ids, context=context):
-            attrs= [attr.id for attr in tmpl.attribute_line_ids]
+            attrs = [attr.id for attr in tmpl.attribute_line_ids]
             if tmpl.final.id not in attrs:
                 return False
         return True
@@ -89,8 +90,7 @@ class ProductAttribute(orm.Model):
             ('hidden', 'Hidden'),
             ('range', 'Range'),
             ('dimensions', 'Dimensions'),
-            ('custom', 'Custom')],
-        string="Type", type="char")}
+            ('custom', 'Custom')], string="Type", type="char")}
 
 
 class ProductAttributeLine(orm.Model):
