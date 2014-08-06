@@ -60,7 +60,7 @@ class StockPicking(orm.Model):
             partner = partner_obj.browse(cr, uid, partner_id, context=context)
             if values['sale_comment'] != partner.picking_comment:
                 values['sale_comment'] = (partner.picking_comment + '\n' +
-                    values['sale_comment'])
+                                          values['sale_comment'])
             if (values['sale_propagated_comment'] !=
                     partner.picking_propagated_comment):
                 values['sale_propagated_comment'] = (
