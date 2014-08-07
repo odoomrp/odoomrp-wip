@@ -3,7 +3,6 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2008-2013 AvanzOSC S.L. (Mikel Arregi) All Rights Reserved
 #
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -76,7 +75,7 @@ class ProductTemplate(orm.Model):
                 return False
         return True
 
-    _constrait = [(_final_attribute, 'This value is not in template values',
+    _constrait = [(_final_attribute, _('This value is not in template values'),
                    ['final'])]
 
 
@@ -101,7 +100,7 @@ class ProductAttributeLine(orm.Model):
         'attr_type': fields.related('attribute_id', 'type', type='char',
                                     string='Type', store=False)}
 
-    def _in_values(self, cr, uid, ids, context=None):
+    def _check_values(self, cr, uid, ids, context=None):
         if not isinstance(ids, 'list'):
             ids = [ids]
         for line in self.browse(cr, uid, ids, context=context):
@@ -110,7 +109,7 @@ class ProductAttributeLine(orm.Model):
                 return False
         return True
 
-    _constrait = [(_in_values, 'This value is not in template values',
+    _constraint = [(_check_values, _('This value is not in template values'),
                    ['final'])]
 
 

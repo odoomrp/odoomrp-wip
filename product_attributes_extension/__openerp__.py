@@ -2,9 +2,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution    
-#    Copyright (C) 2008-2013 AvanzOSC S.L. (Mikel Arregi) All Rights Reserved
-#    
+#    OpenERP, Open Source Management Solution
+#
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -20,6 +19,7 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+
 {
     "name": "Product attributes extension",
     "version": "1.0",
@@ -35,6 +35,6 @@
         - Option of create variants in time of sale
         ...
     """,
-    'data': ["views/product_view.xml",],
+    'data': ["views/product_view.xml"],
     'installable': True,
 }
