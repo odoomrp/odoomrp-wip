@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="sale_forecast_procurement_form_view">
+            <field name="name">sale.forecast.procurement.form</field>
+            <field name="model">sale.forecast.procurement</field>
+            <field name="arch" type="xml">
+                <form string="Sale Forecast">
+                    <field name="product_id"/>
+                    <field name="partner_id"/>
+                    <field name="date"/>
+                    <field name="qty"/>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_forecast_procurement_tree_view">
+            <field name="name">sale.forecast.procurement.tree</field>
+            <field name="model">sale.forecast.procurement</field>
+            <field name="arch" type="xml">
+                <tree string="Sale Forecast">
+                    <field name="product_id"/>
+                    <field name="partner_id"/>
+                    <field name="date"/>
+                    <field name="qty"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>
