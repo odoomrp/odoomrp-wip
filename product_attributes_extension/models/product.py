@@ -75,7 +75,7 @@ class ProductTemplate(orm.Model):
                 return False
         return True
 
-    _constraint = [(_final_attribute, _('This value is not in template values'),
+    _constrait = [(_final_attribute, _('This value is not in template values'),
                    ['final'])]
 
 
