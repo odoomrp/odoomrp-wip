@@ -23,7 +23,7 @@
 								<field name="attribute_lines">
 								<tree string="Attributes" editable="top">
 									<field name="attribute_id" />
-									<field name="value_id" />
+									<field name="value_id" domain="[('attribute_id','=',attribute_id)]"/>
 									<field name="custom_value" />
 								</tree>
 								</field>
