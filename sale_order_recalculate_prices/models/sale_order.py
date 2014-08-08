@@ -31,7 +31,6 @@ class SaleOrder(orm.Model):
         for record in self.browse(cr, uid, ids, context=context):
             if record.order_line:
                 for line in record.order_line:
-                    res = {}
                     res = line.product_id_change(record.pricelist_id.id,
                                                  line.product_id.id,
                                                  line.product_uom_qty,
