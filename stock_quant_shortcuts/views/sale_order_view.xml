@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <field name="order_line" position="before">
                     <div class="oe_right">
-                        <button class="oe_stat_button" name="%(stock.product_open_quants)d" icon="fa-building-o" type="action"  groups="stock.group_locations"/>
+                        <button name="action_view_quant" string="Quants" type="object" class="oe_stat_button" icon="fa-building-o"/>
                     </div>
                 </field>
             </field>
