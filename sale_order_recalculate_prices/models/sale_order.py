@@ -29,36 +29,22 @@ class SaleOrder(orm.Model):
 
     def recalculate_prices(self, cr, uid, ids, context=None):
         for record in self.browse(cr, uid, ids, context=context):
-            pricelist = ''
-            if record.pricelist_id.id:
-                pricelist = record.pricelist_id.id
-            partner = ''
-            if record.partner_id.id:
-                partner = record.partner_id.id
-            date_order = ''
-            if record.date_order:
-                date_order = record.date_order
-            fiscal_position = ''
-            if record.fiscal_position.id:
-                fiscal_position = record.fiscal_position.id
             if record.order_line:
-
                 for line in record.order_line:
                     res = {}
-                    res = line.product_id_change(pricelist,
+                    res = line.product_id_change(record.pricelist_id.id,
                                                  line.product_id.id,
                                                  line.product_uom_qty,
                                                  False,
                                                  line.product_uos_qty,
                                                  False,
-                                                 line.name, partner,
+                                                 line.name,
+                                                 record.partner_id.id,
                                                  False,
-                                                 True, date_order,
+                                                 True, record.date_order,
                                                  False,
-                                                 fiscal_position,
+                                                 record.fiscal_position.id,
                                                  False,
                                                  context=context)
-                    vals = {}
-                    vals = res['value']
-                    line.write(vals, context=context)
+                    line.write(res['value'], context=context)
         return True
