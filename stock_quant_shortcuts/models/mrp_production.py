@@ -20,16 +20,27 @@
 #                                                                            #
 ##############################################################################
 
-{
-    'name': 'Stock Quant Shortcuts',
-    'version': '1.0',
-    'category': 'Stock',
-    'description': """
-        This module adds filtered shortcuts for the quants.""",
-    'author': 'OdooMRP team',
-    'website': 'www.odoomrp.com',
-    'license': 'AGPL-3',
-    'depends': ['mrp', 'sale', 'stock'],
-    'data': ['views/mrp_production_view.xml', 'views/sale_order_view.xml'],
-    'installable': True,
-}
+from openerp.osv import orm
+
+
+class MrpProduction(orm.Model):
+
+    _inherit = 'mrp.production'
+
+    def action_view_quant(self, cr, uid, ids, context=None):
+        mod_obj = self.pool.get('ir.model.data')
+        act_obj = self.pool.get('ir.actions.act_window')
+        result = mod_obj.get_object_reference(cr, uid, 'stock',
+                                              'product_open_quants')
+        id = result and result[1] or False
+        result = act_obj.read(cr, uid, [id], context=context)[0]
+        prdct_ids = []
+        for order in self.browse(cr, uid, ids, context=context):
+            if order.state == 'draft':
+                prdct_ids += [
+                    line.product_id.id for line in order.product_lines]
+            else:
+                prdct_ids += [
+                    line.product_id.id for line in order.move_lines]
+        result['domain'] = '[("id","in",['+','.join(map(str, prdct_ids))+'])]'
+        return result
