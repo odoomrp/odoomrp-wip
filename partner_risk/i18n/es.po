@@ -1,13 +1,13 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
 #	* partner_risk
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: Odoo Server 8.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-19 09:56+0000\n"
-"PO-Revision-Date: 2014-02-19 09:56+0000\n"
+"POT-Creation-Date: 2014-07-29 10:30+0000\n"
+"PO-Revision-Date: 2014-07-29 10:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,84 +16,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: partner_risk
-#: code:addons/partner_risk/risk.py:251
-#: model:ir.model.fields,field_description:partner_risk.field_open_risk_window_draft_invoices_amount
-#: model:ir.model.fields,field_description:partner_risk.field_res_partner_draft_invoices_amount
-#: field:open.risk.window,draft_invoices_amount:0
-#: field:res.partner,draft_invoices_amount:0
-#, python-format
-msgid "Draft Invoices"
-msgstr "Facturas en borrador"
-
-#. module: partner_risk
-#: code:addons/partner_risk/risk.py:254
-#: model:ir.model.fields,field_description:partner_risk.field_open_risk_window_total_debt
-#: model:ir.model.fields,field_description:partner_risk.field_res_partner_total_debt
-#: field:open.risk.window,total_debt:0
-#: field:res.partner,total_debt:0
-#, python-format
-msgid "Total Debt"
-msgstr "Deuda total"
-
-#. module: partner_risk
 #: view:sale.order:0
 msgid "Approve Order"
 msgstr "Aprobar el pedido"
 
 #. module: partner_risk
-#: code:addons/partner_risk/risk.py:250
-#: model:ir.model.fields,field_description:partner_risk.field_res_partner_pending_amount
-#: field:res.partner,pending_amount:0
-#, python-format
-msgid "Unexpired Pending Payments"
-msgstr "Efectos pendientes no vencidos"
-
-#. module: partner_risk
-#: model:ir.actions.wizard,name:partner_risk.open_risk_wizard
-#: view:res.partner:0
-msgid "View Risk Information"
-msgstr "Ver información del riesgo"
-
-#. module: partner_risk
-#: code:addons/partner_risk/risk.py:256
-#: model:ir.model.fields,field_description:partner_risk.field_open_risk_window_total_risk_percent
-#: model:ir.model.fields,field_description:partner_risk.field_res_partner_total_risk_percent
-#: field:open.risk.window,total_risk_percent:0
-#: field:res.partner,total_risk_percent:0
-#, python-format
-msgid "Credit Usage (%)"
-msgstr "Uso del crédito (%)"
-
-#. module: partner_risk
-#: model:ir.actions.act_window,name:partner_risk.action_open_risk_window
-msgid "Show Partner Risk Information"
-msgstr "Ver Información Riesgo Partner"
-
-#. module: partner_risk
-#: view:sale.order:0
-msgid "Confirm Order"
-msgstr "Confirmar pedido"
-
-#. module: partner_risk
-#: code:addons/partner_risk/risk.py:255
-#: model:ir.model.fields,field_description:partner_risk.field_open_risk_window_available_risk
-#: model:ir.model.fields,field_description:partner_risk.field_res_partner_available_risk
-#: field:open.risk.window,available_risk:0
+#: code:addons/partner_risk/models/res_partner.py:218
 #: field:res.partner,available_risk:0
 #, python-format
 msgid "Available Credit"
 msgstr "Crédito disponible"
-
-#. module: partner_risk
-#: model:ir.model.fields,field_description:partner_risk.field_open_risk_window_pending_amount
-#: field:open.risk.window,pending_amount:0
-msgid "Unexpired Unpaid Payments"
-msgstr "Efectos impagados no vencidos"
-
-#. module: partner_risk
-#: model:ir.model,name:partner_risk.model_open_risk_window
-msgid "Partner's risk information"
-msgstr "Información Riesgo Partner"
 
 #. module: partner_risk
 #: view:sale.order:0
@@ -101,28 +33,60 @@ msgid "Cancel Order"
 msgstr "Cancelar pedido"
 
 #. module: partner_risk
-#: model:ir.model.fields,field_description:partner_risk.field_sale_order_amount_invoiced
-#: model:ir.model.fields,field_description:partner_risk.field_sale_order_line_amount_invoiced
-#: field:sale.order,amount_invoiced:0
-#: field:sale.order.line,amount_invoiced:0
-msgid "Invoiced Amount"
-msgstr "Importe facturado"
+#: view:sale.order:0
+msgid "Confirm Order"
+msgstr "Confirmar pedido"
 
 #. module: partner_risk
-#: code:addons/partner_risk/risk.py:249
-#: model:ir.model.fields,field_description:partner_risk.field_open_risk_window_unpayed_amount
-#: model:ir.model.fields,field_description:partner_risk.field_res_partner_unpayed_amount
-#: field:open.risk.window,unpayed_amount:0
+#: code:addons/partner_risk/models/sale_order.py:46
+#, python-format
+msgid "Credit Limit Exceeded"
+msgstr "Credit Limit Exceeded"
+
+#. module: partner_risk
+#: code:addons/partner_risk/models/res_partner.py:221
+#: field:res.partner,total_risk_percent:0
+#, python-format
+msgid "Credit Usage (%)"
+msgstr "Uso del crédito (%)"
+
+#. module: partner_risk
+#: code:addons/partner_risk/models/res_partner.py:206
+#: field:res.partner,draft_invoices_amount:0
+#, python-format
+msgid "Draft Invoices"
+msgstr "Facturas en borrador"
+
+#. module: partner_risk
+#: code:addons/partner_risk/models/res_partner.py:200
 #: field:res.partner,unpayed_amount:0
 #, python-format
 msgid "Expired Unpaid Payments"
 msgstr "Efectos impagados vencidos"
 
 #. module: partner_risk
-#: code:addons/partner_risk/risk.py:252
-#: model:ir.model.fields,field_description:partner_risk.field_open_risk_window_circulating_amount
-#: model:ir.model.fields,field_description:partner_risk.field_res_partner_circulating_amount
-#: field:open.risk.window,circulating_amount:0
+#: field:sale.order,amount_invoiced:0
+#: field:sale.order.line,amount_invoiced:0
+msgid "Invoiced Amount"
+msgstr "Importe facturado"
+
+#. module: partner_risk
+#: model:ir.model,name:partner_risk.model_res_partner
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: partner_risk
+#: view:res.partner:0
+msgid "Partner Risk Information"
+msgstr "Partner Risk Information"
+
+#. module: partner_risk
+#: model:ir.model,name:partner_risk.model_open_risk_window
+msgid "Partner's risk information"
+msgstr "Información Riesgo Partner"
+
+#. module: partner_risk
+#: code:addons/partner_risk/models/res_partner.py:210
 #: field:res.partner,circulating_amount:0
 #, python-format
 msgid "Payments Sent to Bank"
@@ -134,54 +98,6 @@ msgid "Risk Manager"
 msgstr "Gestión Riesgo"
 
 #. module: partner_risk
-#: code:addons/partner_risk/risk.py:69
-#, python-format
-msgid "Credit Limit Exceeded"
-msgstr "Limite Credito Excedido"
-
-#. module: partner_risk
-#: view:open.risk.window:0
-msgid "Partner Risk Information"
-msgstr "Información Riesgo Partner"
-
-#. module: partner_risk
-#: selection:sale.order,state:0
-#: view:sale.order:0
-msgid "Waiting Risk Approval"
-msgstr "Esperando aprobación de riesgo"
-
-#. module: partner_risk
-#: code:addons/partner_risk/risk.py:70
-#, python-format
-msgid "Warning: Credit Limit Exceeded.\n"
-"\n"
-"This partner has a credit limit of %(limit).2f and already has a debt of %(debt).2f."
-msgstr "Advertencia: Límite credito excedido.\n"
-"\n"
-"Este partner tiene un crédito de %(limit).2f y ya tiene una deuda de %(debt).2f."
-
-#. module: partner_risk
-#: model:ir.model.fields,field_description:partner_risk.field_open_risk_window_credit_limit
-#: field:open.risk.window,credit_limit:0
-msgid "Credit Limit"
-msgstr "Límite de crédito"
-
-#. module: partner_risk
-#: code:addons/partner_risk/risk.py:253
-#: model:ir.model.fields,field_description:partner_risk.field_open_risk_window_pending_orders_amount
-#: model:ir.model.fields,field_description:partner_risk.field_res_partner_pending_orders_amount
-#: field:open.risk.window,pending_orders_amount:0
-#: field:res.partner,pending_orders_amount:0
-#, python-format
-msgid "Uninvoiced Orders"
-msgstr "Pedidos de venta sin facturar"
-
-#. module: partner_risk
-#: model:ir.model,name:partner_risk.model_res_partner
-msgid "Partner"
-msgstr "Empresa"
-
-#. module: partner_risk
 #: model:ir.model,name:partner_risk.model_sale_order
 msgid "Sales Order"
 msgstr "Pedido de venta"
@@ -190,4 +106,50 @@ msgstr "Pedido de venta"
 #: model:ir.model,name:partner_risk.model_sale_order_line
 msgid "Sales Order Line"
 msgstr "Línea pedido de venta"
+
+#. module: partner_risk
+#: code:addons/partner_risk/models/res_partner.py:216
+#: field:res.partner,total_debt:0
+#, python-format
+msgid "Total Debt"
+msgstr "Deuda total"
+
+#. module: partner_risk
+#: view:sale.order:0
+msgid "True"
+msgstr "True"
+
+#. module: partner_risk
+#: code:addons/partner_risk/models/res_partner.py:204
+#: field:res.partner,pending_amount:0
+#, python-format
+msgid "Unexpired Pending Payments"
+msgstr "Efectos pendientes no vencidos"
+
+#. module: partner_risk
+#: code:addons/partner_risk/models/res_partner.py:213
+#: field:res.partner,pending_orders_amount:0
+#, python-format
+msgid "Uninvoiced Orders"
+msgstr "Pedidos de venta sin facturar"
+
+#. module: partner_risk
+#: view:res.partner:0
+msgid "View Risk Information"
+msgstr "Ver información del riesgo"
+
+#. module: partner_risk
+#: view:sale.order:0
+msgid "Waiting Risk Approval"
+msgstr "Esperando aprobación de riesgo"
+
+#. module: partner_risk
+#: code:addons/partner_risk/models/sale_order.py:47
+#, python-format
+msgid "Warning: Credit Limit Exceeded.\n"
+"\n"
+"This partner has a credit limit of %(limit).2f and already has a debt of %(debt).2f."
+msgstr "Warning: Credit Limit Exceeded.\n"
+"\n"
+"This partner has a credit limit of %(limit).2f and already has a debt of %(debt).2f."
 

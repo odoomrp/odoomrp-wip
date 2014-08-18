@@ -3,8 +3,6 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2008-2014 AvanzOSC (Daniel). All Rights Reserved
-#    Date: 10/07/2014
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -35,11 +33,11 @@
     """,
     "author": "Factor Libre S.L, NaN·tic",
     "website": "http://www.factorlibre.com",
-    "depends": ['sale', 'account', 'sale_stock', 'account_payment'],
+    "depends": ['account', 'sale_stock', 'account_payment'],
     "category": "Custom Modules",
     "data": [
-        'security/partner_risk_security'
-        'wizard/open_risk_window_view.xml',
+        'security/partner_risk_security.xml',
+#        'wizard/open_risk_window_view.xml',
         'views/risk_view.xml',
         'views/sale_view.xml',
         'views/sale_workflow.xml'],

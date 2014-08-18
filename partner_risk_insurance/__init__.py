@@ -3,8 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2009 Albert Cervera i Areny (http://www.nan-tic.com).
-#    All Rights Reserved
-#    Copyright (c) 2014 Factor Libre SL. All Rights Reserved
+#    Copyright (c) 2014 Factor Libre SL.
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by

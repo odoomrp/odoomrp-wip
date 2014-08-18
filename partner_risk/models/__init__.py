@@ -3,8 +3,6 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2008-2014 AvanzOSC (Daniel). All Rights Reserved
-#    Date: 22/07/2014
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -23,4 +21,3 @@
 
 from . import res_partner
 from . import sale_order
-from . import sale_order_line

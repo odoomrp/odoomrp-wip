@@ -4,11 +4,9 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2009 Albert Cervera i Areny (http://www.nan-tic.com).
-#    All Rights Reserved
-#    Copyright (c) 2011 Pexego Sistemas Informáticos. All Rights Reserved
+#    Copyright (c) 2011 Pexego Sistemas Informáticos.
 #                       Alberto Luengo Cabanillas <alberto@pexego.es>
-#    Copyright (c) 2014 Factor Libre SL. All Rights Reserved
-#
+#    Copyright (c) 2014 Factor Libre SL.
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
@@ -33,17 +31,17 @@ class SaleOrder(orm.Model):
 
     def __init__(self, pool, cr):
             """Add a new state value"""
-            super(SaleOrder, self).STATE_SELECTION.append(
-                'wait_risk', 'Waiting Risk Approval')
+            super(SaleOrder, self)._columns['state'].selection.append(
+                ('wait_risk', 'Waiting Risk Approval'))
             return super(SaleOrder, self).__init__(pool, cr)
 
     # Inherited onchange function
     def onchange_partner_id(self, cr, uid, ids, part, context=None):
         result = super(SaleOrder, self).onchange_partner_id(cr, uid, ids, part,
                                                             context)
-        partner_obj = self.pool.get['res.partner']
+        partner_obj = self.pool['res.partner']
         if part:
-            partner = partner_obj.browse(cr, uid, part)
+            partner = partner_obj.browse(cr, uid, part, context)
             if partner.available_risk < 0.0:
                 result['warning'] = {
                     'title': _('Credit Limit Exceeded'),
@@ -66,6 +64,60 @@ class SaleOrder(orm.Model):
                     amount += line.amount_invoiced
             result[order.id] = amount
         return result
+
+    _columns = {
+        'amount_invoiced': fields.function(_amount_invoiced, method=True,
+                                           string='Invoiced Amount',
+                                           type='float'),
+    }
+
+    def risk_to_router(self, cr, uid, ids, context=None):
+        if not context:
+            context = {}
+        result = {}
+        order = self.browse(cr, uid, ids[0])
+        partner = order.partner_id
+        if partner.comercial_risk_amount >= 0.0:
+            raise orm.except_orm(_('Error!'),
+                                 _('Warning: Comercial Risk Exceeded.\n'
+                                   'Partner has a risk limit of %(risk).2f ')
+                                 %{'risk': partner.financial_risk_amount})
+#            result['warning'] = {
+#                'title': _('Financial Risk Exceeded'),
+#                'message': _('Warning: Financial Risk Exceeded.\n'
+#                             'Partner has a risk limit of %(risk).2f ')
+#                                 %{'risk': partner.financial_risk_amount}
+#            }
+        return result
+
+class SaleOrderLine(orm.Model):
+    _inherit = 'sale.order.line'
+
+    def _amount_invoiced(self, cr, uid, ids, field_name, arg, context):
+        result = {}
+        for line in self.browse(cr, uid, ids, context):
+            # Calculate invoiced amount with taxes included.
+            # Note that if a line is only partially invoiced we consider
+            # the invoiced amount 0.
+            # The problem is we can't easily know if the user changed amounts
+            # once the invoice was created
+            if line.invoiced:
+                result[line.id] = (line.price_subtotal +
+                                   self._tax_amount(cr, uid, line))
+            else:
+                result[line.id] = 0.0
+        return result
+
+    def _tax_amount(self, cr, uid, line):
+        val = 0.0
+        account_tax_obj = self.pool['account.tax']
+        for c in account_tax_obj.compute_all(
+                cr, uid, line.tax_id,
+                line.price_unit * (1-(line.discount or 0.0)/100.0),
+                line.product_uom_qty, line.order_id.partner_invoice_id.id,
+                line.product_id, line.order_id.partner_id)['taxes']:
+            val += c['amount']
+        return val
 
     _columns = {
         'amount_invoiced': fields.function(_amount_invoiced, method=True,
