@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="product_sale_forecast_wizard_form_view">
+            <field name="name">product.sale.forecast.form</field>
+            <field name="model">product.sale.forecast.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sale Forecast" version="7.0">
+                    <group>
+                    <field name="partner_id"/>
+                    <field name="product_id"/>
+                    <field name="ref_date"/>
+                    <field name="period"/>
+                    <field name="start_date"/>
+                    </group>
+                    <footer>
+                        <button name="action_generate_sale_forecast" string="Generate" type="object" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel" type="object" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_product_sale_forecast_wizard">
+            <field name="name">Sale Forecast</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.sale.forecast.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_stock_sale_forecast_all" name="Sales Forecasts"
+                parent="stock.menu_stock_sched" sequence="20" action="action_view_stock_sale_forecast_form" />
+        <menuitem id="menu_stock_sale_forecast_wizard" name="Sales Forecasts Calculate"
+                parent="stock.menu_stock_sched" sequence="20" action="action_product_sale_forecast_wizard" />
+    </data>
+</openerp>

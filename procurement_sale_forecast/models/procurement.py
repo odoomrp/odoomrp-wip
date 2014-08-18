@@ -16,5 +16,13 @@
 #
 ##############################################################################
 
-from . import models
-from . import wizard
+from openerp.osv import orm, fields
+
+class ProcurementOrder(orm.Model):
+    _inherit = 'procurement.order'
+
+    _columns = {
+        'partner_id': fields.related('group_id', 'partner_id',
+                                     type='many2one', relation='res.partner',
+                                     string='Partner', store=True),
+    }

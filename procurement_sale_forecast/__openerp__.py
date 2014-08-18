@@ -17,23 +17,28 @@
 ##############################################################################
 
 {
-    "name": "",
+    "name": "MPS - Sale forecast",
     "version": "1.0",
     "depends": [
-        "",
+        "base",
+        "product",
+        "sale",
+        "stock",
     ],
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
-    "category": "",
+    "category": "MPS",
     "website": "http://www.odoomrp.com",
     "complexity": "normal",
-    "summary": "",
+    "summary": "Sale forecast",
     "description": """
+This module allows to create a sale forecast
     """,
     "data": [
-        "",
+        "views/sale_view.xml",
+        "wizard/sale_forecast_wizard_view.xml",
     ],
     "installable": True,
     "auto_install": False,

@@ -6,10 +6,10 @@
             <field name="model">sale.forecast.procurement</field>
             <field name="arch" type="xml">
                 <form string="Sale Forecast">
-                    <field name="product_id"/>
-                    <field name="partner_id"/>
-                    <field name="date"/>
-                    <field name="qty"/>
+                    <field name="product_id" />
+                    <field name="partner_id" />
+                    <field name="date" />
+                    <field name="qty" />
                 </form>
             </field>
         </record>
@@ -19,12 +19,51 @@
             <field name="model">sale.forecast.procurement</field>
             <field name="arch" type="xml">
                 <tree string="Sale Forecast">
-                    <field name="product_id"/>
-                    <field name="partner_id"/>
-                    <field name="date"/>
-                    <field name="qty"/>
+                    <field name="product_id" />
+                    <field name="partner_id" />
+                    <field name="date" />
+                    <field name="qty" />
                 </tree>
             </field>
         </record>
+
+        <record id="view_stock_sale_forecast_graph" model="ir.ui.view">
+            <field name="name">stock.sale.forecast.graph</field>
+            <field name="model">sale.forecast.procurement</field>
+            <field name="arch" type="xml">
+                <graph string="Stock and Sales Forecast" type="bar">
+                    <field name="product_id" type="row" />
+                    <field name="partner_id" type="row" />
+                    <field name="date" type="col" />
+                    <field name="qty" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_forecast_procurement_search_view">
+            <field name="name">sale.forecast.procurement.form</field>
+            <field name="model">sale.forecast.procurement</field>
+            <field name="arch" type="xml">
+                <search string="Sale Forecast Search">
+                    <field name="product_id" />
+                    <field name="partner_id" />
+                    <field name="date" />
+                </search>
+            </field>
+        </record>
+
+        <menuitem id="menu_stock_sale_forecast" name="Sales Forecasts"
+            parent="base.menu_base_partner" sequence="6" />
+
+        <record id="action_view_stock_sale_forecast_form" model="ir.actions.act_window">
+            <field name="name">Sales Forecast</field>
+            <field name="res_model">sale.forecast.procurement</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+        </record>
+
+        <menuitem id="menu_stock_sale_forecast_all" name="Sales Forecasts"
+            parent="menu_stock_sale_forecast" action="action_view_stock_sale_forecast_form" />
+
     </data>
 </openerp>

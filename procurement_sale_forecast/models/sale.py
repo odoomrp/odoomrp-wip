@@ -25,8 +25,9 @@ class SaleForecastProcurement(orm.Model):
 
     _columns = {
         'partner_id': fields.many2one('res.partner', 'Partner'),
-        'product_id': fields.many2one('product.product','Product'),
-        'date': fields.datetime('Date'),
+        'product_id': fields.many2one('product.product', 'Product'),
+        'date': fields.date('Date'),
         'qty': fields.float('Quantity',
-                            digits_compute=dp.get_precision('Product UoS')),
+                            digits_compute=dp.get_precision('Product Unit of'
+                                                            ' Measure')),
     }
