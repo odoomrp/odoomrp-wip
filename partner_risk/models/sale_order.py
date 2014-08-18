@@ -77,18 +77,25 @@ class SaleOrder(orm.Model):
         result = {}
         order = self.browse(cr, uid, ids[0])
         partner = order.partner_id
-        if partner.comercial_risk_amount >= 0.0:
+        if partner.comercial_risk_amount > partner.credit_limit:
             raise orm.except_orm(_('Error!'),
                                  _('Warning: Comercial Risk Exceeded.\n'
-                                   'Partner has a risk limit of %(risk).2f ')
-                                 %{'risk': partner.financial_risk_amount})
+                                   'Partner has a risk limit of %(risk).2f '
+                                   'and already has a debt of %(debt).2f.')
+                                 % {'risk': partner.credit_limit,
+                                    'debt': partner.comercial_risk_amount})
 #            result['warning'] = {
 #                'title': _('Financial Risk Exceeded'),
 #                'message': _('Warning: Financial Risk Exceeded.\n'
 #                             'Partner has a risk limit of %(risk).2f ')
 #                                 %{'risk': partner.financial_risk_amount}
 #            }
+        else:
+            from openerp import workflow
+            workflow.trg_validate(uid, 'sale.order', ids[0], 'risk_to_router',
+                                  cr, context)
         return result
+
 
 class SaleOrderLine(orm.Model):
     _inherit = 'sale.order.line'

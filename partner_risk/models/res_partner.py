@@ -186,16 +186,19 @@ class ResPartner(orm.Model):
         stock_move_obj = self.pool['stock.move']
         delivery_id = stpick_type_obj.search(cr, uid, [
             ('name', '=', 'Delivery Orders')])[0]
-        for id in ids:
+        if isinstance(ids, int):
+            ids = [ids]
+        for partner_id in ids:
             # check invoices residual
             invids = invoice_obj.search(cr, uid, [
-                ('partner_id', '=', id), ('state', '=', 'open'),
+                ('partner_id', '=', partner_id), ('state', '=', 'open'),
                 ('residual', '>', 0), '|', ('type', '=', 'out_invoice'),
                 ('type', '=', 'in_refund')], context=context)
             residual_total = 0.0
             total_undelibered = 0.0
             for invoice in invoice_obj.browse(cr, uid, invids, context):
                 residual_total += invoice.residual
+            total_undelibered = residual_total
             # check stock_pickings
             stpick_ids = stpick_obj.search(cr, uid, [
                 ('invoice_state', '=', '2binvoiced'),
@@ -212,14 +215,13 @@ class ResPartner(orm.Model):
                     # compute only delivered lines
                     if move.state == 'done':
                         line_amount = move.price_unit * move.product_qty
+                        stpick_amount += line_amount
                     else:
                         undelibered_amount = move.price_unit * move.product_qty
-                    stpick_amount += line_amount
-                    stpick_undelibered_amount += (undelibered_amount
-                                                  + line_amount)
+                        stpick_undelibered_amount += undelibered_amount
                 residual_total += stpick_amount
                 total_undelibered += stpick_amount + stpick_undelibered_amount
-            res[id] = {'financial_risk_amount': residual_total,
+            res[partner_id] = {'financial_risk_amount': residual_total,
                        'comercial_risk_amount': total_undelibered
                        }
         return res
