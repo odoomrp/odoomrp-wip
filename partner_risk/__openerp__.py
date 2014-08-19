@@ -37,7 +37,7 @@
     "category": "Custom Modules",
     "data": [
         'security/partner_risk_security.xml',
-#        'wizard/open_risk_window_view.xml',
+        'views/warning_view.xml',
         'views/risk_view.xml',
         'views/sale_view.xml',
         'views/sale_workflow.xml'],
