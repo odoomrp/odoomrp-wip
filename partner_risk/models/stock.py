@@ -50,6 +50,5 @@ class StockMove(orm.Model):
             return warning.warning(cr, uid, title=info['title'],
                                    message=info['message'])
         else:
-            kk
             return super(StockMove, self).action_done(cr, uid, ids,
                                                       context=context)
