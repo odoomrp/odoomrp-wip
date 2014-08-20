@@ -39,10 +39,6 @@ class MrpBomLine(orm.Model):
         return res
 
     _columns = {
-#        'operation': fields.function(_get_operation, type="many2one",
-#                                     method=True, store=True,
-#                                     obj="mrp.routing.operation",
-#                                     string="Consumed")
         'operation':fields.many2one('mrp.routing.operation', 'Consumed',
                                     selection=_get_operation),
                 }
