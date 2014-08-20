@@ -24,6 +24,7 @@
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
+
 class MrpRoutingOperation(orm.Model):
     _name = 'mrp.routing.operation'
     _description = 'MRP Routing Operation'
@@ -33,16 +34,17 @@ class MrpRoutingOperation(orm.Model):
         'code': fields.char('Code'),
     }
 
+
 class MrpRoutingWorkcenter(orm.Model):
     _inherit = 'mrp.routing.workcenter'
 
     _columns = {
         'operation_id': fields.many2one('mrp.routing.operation', 'Operation',
-                                     required=True),
+                                        required=True),
     }
 
     def onchange_operation(self, cr, uid, ids, operation_id, context=None):
-        values= {}
+        values = {}
         operation_obj = self.pool['mrp.routing.operation']
         operation = operation_obj.browse(cr, uid, operation_id, context)
         if operation:

@@ -24,21 +24,19 @@
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
+
 class MrpBomLine(orm.Model):
     _inherit = 'mrp.bom.line'
 
-    def _get_operation (self, cr, uid, context=None):
+    def _get_operation(self, cr, uid, context=None):
         routing_obj = self.pool['mrp.routing.operation']
-        
         ids = routing_obj.search(cr, uid, [], context=context)
-        
         res = routing_obj.read(cr, uid, ids, ['name', 'id'],
                                context=context)
-        
         res = [(r['id'], r['name']) for r in res]
         return res
 
     _columns = {
-        'operation':fields.many2one('mrp.routing.operation', 'Consumed',
-                                    selection=_get_operation),
-                }
+        'operation': fields.many2one('mrp.routing.operation', 'Consumed',
+                                     selection=_get_operation),
+    }

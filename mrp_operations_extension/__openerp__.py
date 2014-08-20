@@ -26,15 +26,14 @@
     "name": "MRP Master",
     "version": "1.0",
     "description": """
-                    This module adds a new table to store operations and 
+                    This module adds a new table to store operations and
                     to avoid typing them again.
     """,
     "author": "AvanzOSC",
     "website": "http://www.avanzosc.com",
-    "depends": ['mrp_operations','mrp'],
+    "depends": ['mrp_operations', 'mrp'],
     "category": "Manufacturing",
-    "data": [
-             'views/mrp_workcenter_view.xml',
+    "data": ['views/mrp_workcenter_view.xml',
              'views/mrp_bom_view.xml'],
     "installable": True
 }
