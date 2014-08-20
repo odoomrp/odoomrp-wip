@@ -26,8 +26,8 @@
     "name": "MRP Operations Extension",
     "version": "1.0",
     "description": """
-                    This module adds a new table to store operations and
-                    to avoid typing them again.
+    This module adds a new table to store operations and to avoid typing them
+    again.
     """,
     "author": "AvanzOSC",
     "website": "http://www.avanzosc.com",
