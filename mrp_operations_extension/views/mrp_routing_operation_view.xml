@@ -5,23 +5,10 @@
             <field name="name">rountig.operation.tree</field>
             <field name="model">mrp.routing.operation</field>
             <field name="arch" type="xml">
-                <tree string="Routing Operation">
+                <tree string="Routing Operation" editable="bottom">
                     <field name="name" />
                     <field name="code" />
                 </tree>
-            </field>
-        </record>
-
-        <record id="rountig_operation_form" model="ir.ui.view">
-            <field name="name">rountig.operation.form</field>
-            <field name="model">mrp.routing.operation</field>
-            <field name="arch" type="xml">
-                <form string="Operation">
-                    <group>
-                        <field name="name" />
-                        <field name="code" />
-                    </group>
-                </form>
             </field>
         </record>
 

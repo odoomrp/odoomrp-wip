@@ -34,6 +34,6 @@
     "depends": ['mrp_operations', 'mrp'],
     "category": "Manufacturing",
     "data": ['views/mrp_workcenter_view.xml',
-             'views/routing_operations_view.xml'],
+             'views/mrp_routing_operation_view.xml'],
     "installable": True
 }
