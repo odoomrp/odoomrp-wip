@@ -24,13 +24,11 @@
     'name': 'Sale Order Types',
     'version': '1.0',
     'category': 'Sales',
-    'description': """
-        This module adds a typology for the sale orders.""",
+    'description': """This module adds a typology for the sale orders.""",
     'author': 'OdooMRP team',
     'website': 'www.odoomrp.com',
     'license': 'AGPL-3',
     'depends': ['sale'],
-    'data': ['views/sale_order_view.xml',
-             'views/sale_order_type_view.xml'],
+    'data': ['views/sale_order_view.xml', 'views/sale_order_type_view.xml'],
     'installable': True,
 }

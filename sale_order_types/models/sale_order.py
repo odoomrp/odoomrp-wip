@@ -31,10 +31,10 @@ class SaleOrder(orm.Model):
         'type_id': fields.many2one('sale.order.type', 'Type', required=True),
     }
 
-    def on_change_type_id(self, cr, uid, ids, type_id, context=context):
+    def on_change_type_id(self, cr, uid, ids, type_id, context=None):
         vals = {}
         for order in self.browse(cr, uid, ids, context=context):
-            if type_id != False:
+            if type_id:
                 type_ids = self.pool['sale.order.type'].search(
                     cr, uid, [('id', '=', type_id)], context=context)
                 type_obj = self.pool['sale.order.type'].browse(
@@ -56,4 +56,4 @@ class SaleOrder(orm.Model):
             else:
                 vals['name'] = self.pool['ir.sequence'].get(cr,
                                                             uid, 'sale.order')
-        return super(sale_order, self).create(cr, uid, vals, context=ctx)
+        return super(SaleOrder, self).create(cr, uid, vals, context=context)
