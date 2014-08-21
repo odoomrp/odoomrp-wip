@@ -18,6 +18,7 @@
 
 from openerp.osv import orm, fields
 
+
 class ProcurementOrder(orm.Model):
     _inherit = 'procurement.order'
 

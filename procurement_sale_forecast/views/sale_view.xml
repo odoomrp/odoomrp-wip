@@ -6,10 +6,18 @@
             <field name="model">sale.forecast.procurement</field>
             <field name="arch" type="xml">
                 <form string="Sale Forecast">
-                    <field name="product_id" />
-                    <field name="partner_id" />
-                    <field name="date" />
-                    <field name="qty" />
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date" />
+                                <field name="partner_id" />
+                            </group>
+                            <group>
+                                <field name="product_id" />
+                                <field name="qty" />
+                            </group>
+                        </group>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -35,7 +43,7 @@
                     <field name="product_id" type="row" />
                     <field name="partner_id" type="row" />
                     <field name="date" type="col" />
-                    <field name="qty" type="measure"/>
+                    <field name="qty" type="measure" />
                 </graph>
             </field>
         </record>
@@ -48,6 +56,12 @@
                     <field name="product_id" />
                     <field name="partner_id" />
                     <field name="date" />
+                    <group expand="0" string="Group By">
+                        <filter string="Product" domain="[]"
+                            context="{'group_by':'product_id'}" />
+                        <filter string="Month"
+                            domain="[]" context="{'group_by':'date'}" />
+                    </group>
                 </search>
             </field>
         </record>

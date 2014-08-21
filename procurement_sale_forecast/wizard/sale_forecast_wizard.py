@@ -18,7 +18,7 @@
 
 from openerp.osv import orm, fields
 from dateutil.relativedelta import relativedelta
-from datetime import timedelta, datetime
+from datetime import datetime
 
 
 class SaleForecastWizard(orm.TransientModel):
@@ -39,17 +39,20 @@ class SaleForecastWizard(orm.TransientModel):
             data = self.browse(cr, uid, id, context=context)
             proc_obj = self.pool['procurement.order']
             sale_proc_obj = self.pool['sale.forecast.procurement']
-            domain = [['state','=','done']]
+            domain = [['state', '=', 'done']]
             values = {}
             if data.partner_id:
                 domain.append(['partner_id', '=', data.partner_id.id])
             if data.product_id:
                 domain.append(['product_id', '=', data.product_id.id])
             qty = {}
-            for num in range(1,data.period+1):
-                start = datetime.strptime(data.ref_date, '%Y-%m-%d') + relativedelta(months = num-1)
-                end = datetime.strptime(data.ref_date, '%Y-%m-%d') + relativedelta(months = num)
-                date = datetime.strptime(data.start_date, '%Y-%m-%d') + relativedelta(months = num-1)
+            for num in range(1, data.period+1):
+                start = (datetime.strptime(data.ref_date, '%Y-%m-%d') +
+                         relativedelta(months=num-1))
+                end = (datetime.strptime(data.ref_date, '%Y-%m-%d') +
+                       relativedelta(months=num))
+                date = (datetime.strptime(data.start_date, '%Y-%m-%d') +
+                        relativedelta(months=num-1))
                 domain.append(['date_planned', '>', str(start)])
                 domain.append(['date_planned', '<=', str(end)])
                 values['date'] = str(date)
