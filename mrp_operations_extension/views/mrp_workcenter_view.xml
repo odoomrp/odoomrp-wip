@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="mrp_routing_workcenter_tree_view_inh" model="ir.ui.view">
+            <field name="name">mrp.routing.workcenter.tree.inh</field>
+            <field name="model">mrp.routing.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                   <field name="operation_id"/>
+                </field>
+            </field>
+        </record>
+        
+        <record id="mrp_routing_workcenter_form_view_inh" model="ir.ui.view">
+            <field name="name">mrp.routing.workcenter.form.inh</field>
+            <field name="model">mrp.routing.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                   <field name="operation_id" on_change="onchange_operation(operation_id)"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
