@@ -23,26 +23,17 @@
 from openerp.osv import fields, orm
 
 
-class SaleOrder(orm.Model):
+class SaleOrderTypology(orm.Model):
 
-    _inherit = 'sale.order'
+    _name = 'sale.order.type'
+
+    _description = 'Type of sale order'
 
     _columns = {
-        'typology_id': fields.many2one('sale.order.typology',
-                                       'Typology', required=True),
+        'description': fields.text('Description'),
+        'name': fields.char('Name', required=True),
+        'sequence_id': fields.many2one('ir.sequence', 'Entry Sequence',
+                                       copy=False),
+        'warehouse_id': fields.many2one('stock.warehouse',
+                                        'Warehouse', required=True),
     }
-
-    def on_change_typology_id(self, cr, uid, ids,
-                              typology_id, context=context):
-        vals = {}
-        for order in self.browse(cr, uid, ids, context=context):
-            if order.typology_id:
-                typology_ids = self.pool['sale.order.typology'].search(
-                    cr, uid, [('id', '=', order.typology_id.id)],
-                    context=context)
-                typology = self.pool['sale.order.typology'].browse(
-                    cr, uid, typology_ids, context=context)
-                for t in typology:
-                    vals['warehouse_id'] = t.warehouse_id.id
-                    order.write(vals, context=context)
-        return True

@@ -20,17 +20,40 @@
 #                                                                            #
 ##############################################################################
 
-{
-    'name': 'Sale Order Typology',
-    'version': '1.0',
-    'category': 'Sales',
-    'description': """
-        This module adds a typology for the sale orders.""",
-    'author': 'OdooMRP team',
-    'website': 'www.odoomrp.com',
-    'license': 'AGPL-3',
-    'depends': ['sale'],
-    'data': ['views/sale_order_view.xml',
-             'views/sale_order_typology_view.xml'],
-    'installable': True,
-}
+from openerp.osv import fields, orm
+
+
+class SaleOrder(orm.Model):
+
+    _inherit = 'sale.order'
+
+    _columns = {
+        'type_id': fields.many2one('sale.order.type', 'Type', required=True),
+    }
+
+    def on_change_type_id(self, cr, uid, ids, type_id, context=context):
+        vals = {}
+        for order in self.browse(cr, uid, ids, context=context):
+            if type_id != False:
+                type_ids = self.pool['sale.order.type'].search(
+                    cr, uid, [('id', '=', type_id)], context=context)
+                type_obj = self.pool['sale.order.type'].browse(
+                    cr, uid, type_ids, context=context)
+                for t in type_obj:
+                    vals['warehouse_id'] = t.warehouse_id.id
+                    order.write(vals, context=context)
+        return True
+
+    def create(self, cr, uid, vals, context=None):
+        if vals.get('name', '/') == '/':
+            type_ids = self.pool['sale.order.type'].search(
+                cr, uid, [('id', '=', vals['type_id'])], context=context)
+            type_obj = self.pool['sale.order.type'].browse(
+                cr, uid, type_ids, context=context)
+            if type_obj[0].sequence_id:
+                vals['name'] = type_obj[0].sequence_id.get(cr,
+                                                           uid, 'sale.order')
+            else:
+                vals['name'] = self.pool['ir.sequence'].get(cr,
+                                                            uid, 'sale.order')
+        return super(sale_order, self).create(cr, uid, vals, context=ctx)

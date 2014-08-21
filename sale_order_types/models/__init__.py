@@ -20,18 +20,5 @@
 #                                                                            #
 ##############################################################################
 
-from openerp.osv import fields, orm
-
-
-class SaleOrderTypology(orm.Model):
-
-    _name = 'sale.order.typology'
-
-    _description = 'Type of sale order'
-
-    _columns = {
-        'description': fields.text('Description'),
-        'name': fields.char('Name', required=True),
-        'warehouse_id': fields.many2one('stock.warehouse',
-                                        'Warehouse', required=True),
-    }
+from . import sale_order
+from . import sale_order_type
