@@ -297,6 +297,7 @@
                 </form>
             </field>
         </record>
+
         <record id="action_qc_test_set_template_wizard_form"
             model="ir.actions.act_window">
             <field name="name">qc.test.set.template.wizard</field>
@@ -315,40 +316,50 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Test">
-                    <group col="7" colspan="4">
-                        <field name="name" select="1" />
-                        <field name="object_id" />
-                        <field name="test_template_id" readonly="True"
-                            select="1" />
-                        <button string="Select Template"
-                            name="%(action_qc_test_set_template_wizard_form)d"
-                            type="action" states="draft" />
-                    </group>
-                    <group col="1" colspan="2">
-                        <separator string="Internal Note" />
-                        <field name="test_internal_note" nolabel="1"
-                            select="2" />
-                    </group>
-                    <group col="1" colspan="2">
-                        <separator string="External Note" />
-                        <field name="test_external_note" nolabel="1"
-                            select="2" />
-                    </group>
-                    <separator string="Values" colspan="4" />
-                    <field name="test_line_ids" nolabel="1"
-                        colspan="4" />
-                    <group col="9" colspan="4">
-                        <field name="state" readonly="True"
-                            select="1" />
-                        <field name="success" />
-                        <field name="enabled" />
+                    <header>
                         <button name="confirm" states="draft"
                             string="Confirm" icon="gtk-ok" />
                         <button name="approve" states="waiting"
                             string="Approve" icon="gtk-ok" />
                         <button name="cancel" states="waiting,failed,success"
                             string="Cancel" icon="gtk-cancel" />
-                    </group>
+                        <field name="state" widget="statusbar"
+                            statusbar_visible="draft,waiting,done"
+                            statusbar_colors='{"success":"blue","failed":"red"}' />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name" select="1" />
+                            <field name="object_id" />
+                            <field name="test_template_id"
+                                readonly="True" select="1" />
+                            <button string="Select Template"
+                                name="%(action_qc_test_set_template_wizard_form)d"
+                                type="action" states="draft" />
+                        </group>
+                        <notebook>
+                            <page string="Values">
+                                <separator string="Values"
+                                    colspan="4" />
+                                <field name="test_line_ids"
+                                    nolabel="1" colspan="4" />
+                            </page>
+                            <page string="Notes">
+                                <separator string="Internal Note" />
+                                <field name="test_internal_note"
+                                    nolabel="1" select="2" />
+                                <separator string="External Note" />
+                                <field name="test_external_note"
+                                    nolabel="1" select="2" />
+                            </page>
+                        </notebook>
+                        <footer>
+                            <group col="4">
+                                <field name="success" />
+                                <field name="enabled" />
+                            </group>
+                        </footer>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -379,6 +390,7 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Test Line">
+
                     <group colspan="4"
                         attrs="{'invisible':[('proof_type','=','qualitative')]}">
                         <separator string="Test Result"
@@ -415,6 +427,7 @@
                         <field name="notes" colspan="4" />
                     </group>
                     <field name="success" />
+
                 </form>
             </field>
         </record>
@@ -448,7 +461,8 @@
         </record>
 
         <menuitem name="Quality Control" id="qc_menu" />
-        <menuitem parent="qc_menu" name="Configuration" id="qc_menu_config" />
+        <menuitem parent="qc_menu" name="Configuration" id="qc_menu_config"
+            sequence="50" />
         <menuitem name="Method" parent="qc_menu_config" id="qc_proof_method_menu"
             action="action_qc_proof_method" />
         <menuitem name="Posible Values" parent="qc_menu_config"
@@ -459,16 +473,17 @@
 
         <menuitem name="Test Template" parent="qc_menu_config"
             id="qc_test_template_menu" action="action_qc_test_template" />
-        <menuitem name="Test Template Lines" parent="qc_test_template_menu"
+        <menuitem name="Test Template Lines" parent="qc_menu_config"
             id="qc_test_template_line_menu" action="action_qc_test_template_line" />
-
 
         <menuitem name="Proof" parent="qc_menu_config" id="qc_proof_menu"
             action="action_qc_proof" />
 
-        <menuitem name="Tests" parent="qc_menu" id="qc_test_menu"
+        <menuitem name="Tests" parent="qc_menu" id="qc_menu_tests"
+            sequence="10" />
+        <menuitem name="Tests" parent="qc_menu_tests" id="qc_test_menu"
             action="action_qc_new_test" />
-        <menuitem name="Test Lines" parent="qc_test_menu" id="qc_test_lines_menu"
+        <menuitem name="Test Lines" parent="qc_menu_tests" id="qc_test_lines_menu"
             action="action_qc_test_line" />
 
     </data>

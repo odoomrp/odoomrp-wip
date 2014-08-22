@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
+#    Avanzosc - Advanced Open Source Consulting
 #    Copyright (C) 2011 - 2013 Avanzosc <http://www.avanzosc.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,21 +18,9 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-import time
-from osv import osv
-from osv import fields
-from tools.translate import _
 
-class sample_rank_line(osv.osv):
-
-    _name = 'sample.rank.line'
-    _description = 'Sample Rank Line'
-   
-    _columns = {'sample_rank_id':fields.many2one('sample.rank', 'Sample Rank', ondelete='cascade'),
-                'fromm': fields.integer('From', required=True),
-                'to': fields.integer('To', required=True),
-                'how_many': fields.integer('How Many', required=True),
-                }
-
-
-sample_rank_line()
+from . import mrp_production
+from . import stock_picking
+from . import stock_move
+from . import qc_test
+from . import sample_rank

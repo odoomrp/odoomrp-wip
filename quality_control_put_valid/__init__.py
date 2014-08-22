@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
+#    Avanzosc - Advanced Open Source Consulting
 #    Copyright (C) 2011 - 2014 Avanzosc <http://www.avanzosc.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,4 +18,5 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-import qc_test_ext
+
+from . import models

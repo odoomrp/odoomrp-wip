@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
+#    Avanzosc - Advanced Open Source Consulting
 #    Copyright (C) 2011 - 2013 Avanzosc <http://www.avanzosc.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,20 +18,32 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-import time
-from osv import osv
-from osv import fields
-from tools.translate import _
 
-class sample_rank(osv.osv):
+from openerp.osv import orm, fields
 
+
+class SampleRankLine(orm.Model):
+    _name = 'sample.rank.line'
+    _description = 'Sample Rank Line'
+
+    _columns = {
+        'sample_rank_id': fields.many2one('sample.rank', 'Sample Rank',
+                                          ondelete='cascade'),
+        'min': fields.integer('From', required=True),
+        'max': fields.integer('To', required=True),
+        'how_many': fields.integer('How Many', required=True),
+    }
+
+
+class SampleRank(orm.Model):
     _name = 'sample.rank'
     _description = 'Sample Rank'
-   
-    _columns = {'name':fields.char('Description', size=250, required=True),
-                'product_id': fields.many2one('product.product', 'Product'),
-                'category_id': fields.many2one('product.category', 'Category'),
-                'sample_rank_lines_ids':fields.one2many('sample.rank.line','sample_rank_id','Sample Rank Lines'),
-                }
 
-sample_rank()
+    _columns = {
+        'name': fields.char('Description', size=250, required=True),
+        'product_id': fields.many2one('product.product', 'Product'),
+        'category_id': fields.many2one('product.category', 'Category'),
+        'sample_rank_lines_ids': fields.one2many('sample.rank.line',
+                                                 'sample_rank_id',
+                                                 'Sample Rank Lines'),
+    }

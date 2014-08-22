@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
+#    Avanzosc - Advanced Open Source Consulting
 #    Copyright (C) 2011 - 2013 Avanzosc <http://www.avanzosc.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,12 +18,6 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-import wizard
-import mrp_production_ext
-import stock_picking_ext
-import stock_move_ext
-import qc_test_template_ext
-import qc_test_ext
-import qc_test_line_ext
-import sample_rank
-import sample_rank_line
+
+from . import wizard
+from . import models

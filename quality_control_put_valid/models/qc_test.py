@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
+#    Avanzosc - Advanced Open Source Consulting
 #    Copyright (C) 2011 - 2014 Avanzosc <http://www.avanzosc.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,29 +18,20 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from osv import osv
-from osv import fields
-from tools.translate import _
 
-class qc_test(osv.osv):
+from openerp.osv import orm, fields
 
+
+class QcTest(orm.Model):
     _inherit = 'qc.test'
-    
-    _columns = {'valid':fields.boolean('Valid', select="1"),
-                }
-    
+
+    _columns = {
+        'valid': fields.boolean('Valid', select="1"),
+    }
+
     def write(self, cr, uid, ids, vals, context=None):
-        found = False
-        if vals.has_key('state'):
-            state = vals.get('state')
-            if state == 'success':
-                found = True
-                
-        if found:
-            vals.update({'valid': True})
-                
-        result = super(qc_test, self).write(cr, uid, ids, vals, context=context)
-
+        if 'state' in vals:
+            if vals['state'] == 'success':
+                vals.update({'valid': True})
+        result = super(QcTest, self).write(cr, uid, ids, vals, context=context)
         return result
-
-qc_test()
