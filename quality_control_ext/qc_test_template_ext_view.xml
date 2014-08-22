@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+	
+		<record model="ir.ui.view" id="qc_test_template_tree_view_inh_qualitycontrolext">
+			<field name="name">qc.test.template.tree.view.inh.qualitycontrolext</field>
+			<field name="model">qc.test.template</field>
+			<field name="type">tree</field>
+			<field name="inherit_id" ref="nan_quality_control.qc_test_template_tree_view" />
+			<field name="arch" type="xml">
+				<field name="name" position="after" >
+					<field name="product_id" />
+					<field name="product_category_id" />
+				</field>
+			</field>
+		</record>
+		
+		<!-- *********************** VISTA SEARCH ****************** -->
+
+		<record model="ir.ui.view" id="qc_test_template_search_view_qualitycontrolext">
+			<field name="name">qc.test.template.search.view.qualitycontrolext</field>
+			<field name="model">qc.test.template</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+                <search string="Search Test Template">
+                    <group>
+						<field name="active" />
+						<field name="type" />
+						<field name="product_id" />
+						<field name="product_category_id" />
+						<field name="category_id" />
+						<field name="name" />
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+						<filter string="Active" domain="[]" context="{'group_by':'active'}" />
+						<filter string="Type" domain="[]" context="{'group_by':'type'}" />
+						<filter string="Product" domain="[]" context="{'group_by':'product_id'}" />
+						<filter string="Product Category" domain="[]" context="{'group_by':'product_category_id'}" />
+						<filter string="Category" domain="[]" context="{'group_by':'category_id'}" />
+						<filter string="Name" domain="[]" context="{'group_by':'name'}" />
+                   </group>
+                 </search>				
+			</field>
+		</record>
+		
+
+		<record model="ir.ui.view" id="qc_test_template_form_view_inh_qualitycontrolext">
+			<field name="name">qc.test.template.form.view.inh.qualitycontrolext</field>
+			<field name="model">qc.test.template</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="nan_quality_control.qc_test_template_form_view" />
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+                    <field name="product_id"/>
+                    <field name="product_category_id"/>
+                </field>
+			</field>
+		</record>
+
+
+	</data>
+</openerp>
