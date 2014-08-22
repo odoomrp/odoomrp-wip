@@ -32,28 +32,18 @@ class SaleOrder(orm.Model):
     }
 
     def on_change_type_id(self, cr, uid, ids, type_id, context=None):
-        vals = {}
-        for order in self.browse(cr, uid, ids, context=context):
-            if type_id:
-                type_ids = self.pool['sale.order.type'].search(
-                    cr, uid, [('id', '=', type_id)], context=context)
-                type_obj = self.pool['sale.order.type'].browse(
-                    cr, uid, type_ids, context=context)
-                for t in type_obj:
-                    vals['warehouse_id'] = t.warehouse_id.id
-                    order.write(vals, context=context)
-        return True
+        if type_id:
+            type_obj = self.pool['sale.order.type'].browse(
+                cr, uid, [type_id], context=context)
+            return {'value': {'warehouse_id': type_obj[0].warehouse_id.id}}
 
     def create(self, cr, uid, vals, context=None):
         if vals.get('name', '/') == '/':
-            type_ids = self.pool['sale.order.type'].search(
-                cr, uid, [('id', '=', vals['type_id'])], context=context)
-            type_obj = self.pool['sale.order.type'].browse(
-                cr, uid, type_ids, context=context)
+            if vals['type_id']:
+                type_obj = self.pool['sale.order.type'].browse(
+                    cr, uid, [vals['type_id']], context=context)
             if type_obj[0].sequence_id:
-                vals['name'] = type_obj[0].sequence_id.get(cr,
-                                                           uid, 'sale.order')
-            else:
-                vals['name'] = self.pool['ir.sequence'].get(cr,
-                                                            uid, 'sale.order')
+                sequence_obj = self.pool['ir.sequence']
+                vals['name'] = sequence_obj.next_by_id(
+                    cr, uid, type_obj[0].sequence_id.id)
         return super(SaleOrder, self).create(cr, uid, vals, context=context)
