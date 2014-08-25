@@ -2,9 +2,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
@@ -23,12 +20,13 @@
 {
     "name": "Product Purchase Warrant",
     "version": "1.0",
-    "depends": ["base", "stock"],
+    "depends": ["base", "stock", "product"],
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Product",
     "description": """
-    Implement a supplier purchase warrant for products with serial number.
+    Sets a purchase warranty term on product supplier info,
+    and apply it on incoming lots for this product and supplier
     """,
     'data': ["views/stock_view.xml", "views/product_view.xml"],
     "installable": True,
