@@ -36,14 +36,15 @@ class StockProductionLot(orm.Model):
                 cr, uid, values["product_id"], context=context)
             create_date = ('create_date' in values and
                            values['create_date'] or datetime.now())
-            if not 'sup_warrant' in context:
+            if 'sup_warrant' not in context:
                 warrant_limit = (
                     product.warranty and
                     (create_date +
                      relativedelta(months=int(product.warranty))))
             else:
-                warrant_limit = (create_date +
-                     relativedelta(months=int(context['sup_warrant'])))
+                warrant_limit = (
+                    create_date +
+                    relativedelta(months=int(context['sup_warrant'])))
             if warrant_limit:
                 values.update({'warrant_limit': warrant_limit})
         return super(StockProductionLot, self).create(cr, uid, values,
@@ -51,17 +52,17 @@ class StockProductionLot(orm.Model):
 
 
 class StockPackOperation(orm.Model):
-    
+
     _inherit = "stock.pack.operation"
-    
+
     def create_and_assign_lot(self, cr, uid, id, name, context=None):
         if context is None:
             context = {}
         pack_oper = self.browse(cr, uid, id, context=context)
-        if pack_oper.picking_id.location_id.usage=='supplier':
+        if pack_oper.picking_id.location_id.usage == 'supplier':
             sup_obj = self.pool['product.supplierinfo']
             suppinfo_id = sup_obj.search(
-                cr, uid, [('name','=',pack_oper.picking_id.partner_id.id),
+                cr, uid, [('name', '=', pack_oper.picking_id.partner_id.id),
                           ('product_tmpl_id', '=', pack_oper.product_id.id)],
                 context=context)
             sup = sup_obj.browse(cr, uid, suppinfo_id, context=context)
