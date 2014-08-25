@@ -77,7 +77,9 @@ class AccountInvoice(orm.Model):
                             partner_bank_id=False, company_id=False,
                             context=None):
         vals = super(AccountInvoice, self).onchange_partner_id(
-            cr, uid, ids, part, context=context)
+            cr, uid, ids, type, partner_id, date_invoice=date_invoice,
+            payment_term=payment_term, partner_bank_id=partner_bank_id,
+            company_id=company_id, context=context)
         if 'warning' in vals and vals['warning']:
             model_id = self.pool['ir.model'].search(
                 cr, uid, [('model', '=', self._name)], context=context)
@@ -94,8 +96,8 @@ class StockPicking(orm.Model):
 
     def onchange_partner_in(self, cr, uid, ids, partner_id=None,
                             context=None):
-        vals = super(StockPicking, self).onchange_partner_id(
-            cr, uid, ids, part, context=context)
+        vals = super(StockPicking, self).onchange_partner_in(
+            cr, uid, ids, partner_id=partner_id, context=context)
         if 'warning' in vals and vals['warning']:
             model_id = self.pool['ir.model'].search(
                 cr, uid, [('model', '=', self._name)], context=context)
@@ -107,7 +109,7 @@ class StockPicking(orm.Model):
         return vals
 
 
-class saleOrderLine(orm.Model):
+class SaleOrderLine(orm.Model):
     _inherit = 'sale.order.line'
 
     def product_id_change_with_wh(self, cr, uid, ids, pricelist, product,
@@ -117,8 +119,12 @@ class saleOrderLine(orm.Model):
                                   packaging=False, fiscal_position=False,
                                   flag=False, warehouse_id=False,
                                   context=None):
-        vals = super(saleOrderLine, self).onchange_partner_id(
-            cr, uid, ids, part, context=context)
+        vals = super(saleOrderLine, self).product_id_change_with_wh(
+            cr, uid, ids, pricelist, product, qty=qty, uom=uom,
+            qty_uos=qty_uos, uos=uos, name=name, partner_id=partner_id,
+            lang=lang, update_tax=update_tax, date_order=date_order,
+            packaging=packaging, fiscal_position=fiscal_position, flag=flag,
+            warehouse_id=warehouse_id, context=context)
         if 'warning' in vals and vals['warning']:
             model_id = self.pool['ir.model'].search(
                 cr, uid, [('model', '=', self._name)], context=context)
@@ -138,8 +144,11 @@ class PurchaseOrderLine(orm.Model):
                             fiscal_position_id=False, date_planned=False,
                             name=False, price_unit=False, state='draft',
                             notes=False, context=None):
-        vals = super(PurchaseOrderLine, self).onchange_partner_id(
-            cr, uid, ids, part, context=context)
+        vals = super(PurchaseOrderLine, self).onchange_product_id(
+            cr, uid, ids, pricelist, product, qty, uom, partner_id,
+            date_order=date_order, fiscal_position_id=fiscal_position_id,
+            date_planned=date_planned, name=name, price_unit=price_unit,
+            state='draft', notes=notes, context=context)
         if 'warning' in vals and vals['warning']:
             model_id = self.pool['ir.model'].search(
                 cr, uid, [('model', '=', self._name)], context=context)
