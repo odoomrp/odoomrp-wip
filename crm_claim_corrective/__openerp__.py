@@ -33,6 +33,7 @@
         This module extends CRM Claims with corrective measures
     """,
     "data": [
+        'security/ir.model.access.csv',
         'views/crm_claim_view.xml',
         'data/crm_claim_corrective_sequence.xml',
         'data/crm_claim_corrective_workflow.xml',
