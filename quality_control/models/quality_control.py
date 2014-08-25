@@ -135,14 +135,16 @@ class QcProof(orm.Model):
 
     def name_search(self, cr, uid, name='', args=None, operator='ilike',
                     context=None, limit=None):
-        result = super(QcProof, self).name_search(cr, uid, name, args,
-                                                  operator, context, limit)
+        result = super(QcProof, self).name_search(cr, uid, name=name,
+                                                  args=args, operator=operator,
+                                                  context=context, limit=limit)
         synonym_obj = self.pool['qc.proof.synonym']
         if name:
             ids = [x[0] for x in result]
             new_ids = []
-            syns = synonym_obj.name_search(cr, uid, name, args, operator,
-                                           context, limit)
+            syns = synonym_obj.name_search(cr, uid, name=name, args=args,
+                                           operator=operator, context=context,
+                                           limit=limit)
             syns = [x[0] for x in syns]
             for syn in synonym_obj.browse(cr, uid, syns, context=context):
                 if not syn.proof_id.id in ids:
@@ -150,14 +152,14 @@ class QcProof(orm.Model):
             result += self.name_get(cr, uid, new_ids, context=context)
         return result
 
-    def name_get(self, cr, uid, ids, context=None):
-        result = []
-        for proof in self.browse(cr, uid, ids, context=context):
-            text = proof.name
-            if proof.synonyms:
-                text += "  [%s]" % proof.synonyms
-            result.append((proof.id, text))
-        return result
+#     def name_get(self, cr, uid, ids, context=None):
+#         result = []
+#         for proof in self.browse(cr, uid, ids, context=context):
+#             text = proof.name
+#             if proof.synonym_ids:
+#                 text += "  [%s]" % proof.synonyms
+#             result.append((proof.id, text))
+#         return result
 
 
 class QcProofSynonym(orm.Model):
@@ -179,6 +181,7 @@ class QcTestTemplateCategory(orm.Model):
     This model is used to categorize proof templates.
     """
     _name = 'qc.test.template.category'
+    _description = 'Test Template Category'
 
     def name_get(self, cr, uid, ids, context=None):
         if not len(ids):
@@ -234,9 +237,11 @@ class QcTestTemplateCategory(orm.Model):
 
 class QcTestTemplateTrigger(orm.Model):
     _name = 'qc.test.template.trigger'
+    _description = 'Test Template Trigger'
 
     _columns = {
-        'name': fields.char('Name', size=64, required=True, readonly=False),
+        'name': fields.char('Name', size=64, required=True, readonly=False,
+                            translate=True),
         'active': fields.boolean('Active', required=False),
     }
 
@@ -313,6 +318,7 @@ class QcTestTemplateLine(orm.Model):
     value/values.
     """
     _name = 'qc.test.template.line'
+    _description = 'Test Template Line'
     _order = 'sequence asc'
     _rec_name = 'sequence'
 
@@ -625,42 +631,3 @@ class QcTestLine(orm.Model):
             else:
                 res.update({'success': False})
         return {'value': res}
-
-
-class QcTestWizard(orm.TransientModel):
-    """
-    This wizard is responsible for setting the proof template for a given test.
-    This will not only fill in the 'test_template_id' field, but will also fill
-    in all lines of the test with the corresponding lines of the template.
-    """
-    _name = 'qc.test.set.template.wizard'
-
-    def _default_test_template_id(self, cr, uid, context=None):
-        id = context.get('active_id', False)
-        test = self.pool['qc.test'].browse(cr, uid, id, context=context)
-        ids = self.pool['qc.test.template'].search(cr, uid, [('object_id', '=',
-                                                              test.object_id)],
-                                                   context=context)
-        return ids and ids[0] or False
-
-    _columns = {
-        'test_template_id': fields.many2one('qc.test.template', 'Template'),
-    }
-
-    _defaults = {
-        'test_template_id': _default_test_template_id,
-    }
-
-    def action_create_test(self, cr, uid, ids, context=None):
-        wizard = self.browse(cr, uid, ids[0], context=context)
-        self.pool['qc.test'].set_test_template(cr, uid, [context['active_id']],
-                                               wizard.test_template_id.id,
-                                               context=context)
-        return {
-            'type': 'ir.actions.act_window_close',
-        }
-
-    def action_cancel(self, cr, uid, ids, context=None):
-        return {
-            'type': 'ir.actions.act_window_close',
-        }

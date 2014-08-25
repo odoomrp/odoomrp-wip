@@ -39,16 +39,19 @@
     "summary": "Quality control",
     "description": """
 This module provides a generic infrastructure for quality tests. The idea is
- that it can be later be reused for doing quality tests in production lots but
-  also in any other areas a company may desire.
+that it can be later be reused for doing quality tests in production lots but
+also in any other areas a company may desire.
 
 Developed for Trod y Avia, S.L.""",
     "depends": [
         'product'
     ],
     "data": [
-        'workflow/test_workflow.xml',
         'data/quality_control_data.xml',
+        'security/quality_control_security.xml',
+        'security/ir.model.access.csv',
+        'workflow/test_workflow.xml',
+        'wizard/qc_test_wizard_view.xml',
         'views/quality_control_view.xml',
     ],
     "installable": True,
