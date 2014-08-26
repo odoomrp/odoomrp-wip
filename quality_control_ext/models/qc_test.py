@@ -20,7 +20,6 @@
 ##############################################################################
 
 from openerp.osv import orm, fields
-import time
 import openerp.addons.decimal_precision as dp
 
 
@@ -39,39 +38,74 @@ class QcTest(orm.Model):
                 res[test.id] = False
         return res
 
+    def _update_vals(self, cr, uid, vals, context=None):
+        if 'picking_id' in vals and vals['picking_id']:
+            if not 'object_id' in vals:
+                vals.update({'object_id': 'stock.picking,' +
+                             str(vals['picking_id'])})
+        if 'production_id' in vals and vals['production_id']:
+            if not 'object_id' in vals:
+                vals.update({'object_id': 'mrp.production,' +
+                             str(vals['production_id'])})
+        if 'stock_move_id' in vals and vals['stock_move_id']:
+            if not 'object_id' in vals:
+                vals.update({'object_id': 'stock.move,' +
+                             str(vals['stock_move_id'])})
+        if 'object_id' in vals and vals['object_id']:
+            ref = vals['object_id'].split(',')
+            model = ref[0]
+            res_id = int(ref[1])
+            if model == 'product.product' and not 'product_id' in vals:
+                vals.update({'product_id': res_id,
+                             'production_id': False,
+                             'stock_move_id': False,
+                             'picking_id': False})
+            elif model == 'mrp.production' and not 'production_id' in vals:
+                mrp_obj = self.pool['mrp.production']
+                mrp = mrp_obj.read(cr, uid, res_id, ['product_id'],
+                                   context=context)
+                vals.update({'production_id': res_id,
+                             'product_id': mrp['product_id'][0],
+                             'stock_move_id': False,
+                             'picking_id': False})
+            elif model == 'stock.move' and not 'stock_move_id' in vals:
+                move_obj = self.pool['stock.move']
+                move = move_obj.read(cr, uid, res_id, ['product_id',
+                                                       'picking_id',
+                                                       'production_id'],
+                                     context=context)
+                vals.update({'stock_move_id': res_id,
+                             'product_id': (move['product_id'] and
+                                            move['product_id'][0]),
+                             'picking_id': (move['picking_id'] and
+                                            move['picking_id'][0]),
+                             'production_id': (move['production_id'] and
+                                               move['production_id'][0])})
+        return vals
+
     _columns = {
-        'name': fields.char('Date', size=20, required=True, readonly=True,
-                            states={'draft': [('readonly', False)]},
-                            select="1"),
         'product_qty': fields.float('Quantity',
                                     digits_compute=dp.get_precision(
                                         'Product UoM')),
-        # Origen
         'origin': fields.char('Origin', size=128),
-        # Test asociados al movimiento
-        'stock_move_id': fields.many2one('stock.move', 'Move',
+        'stock_move_id': fields.many2one('stock.move', 'Stock Move',
                                          ondelete='cascade'),
-        # Producto del movimiento
         'product_id': fields.many2one('product.product', 'Product'),
-        # Categoria del producto
         'categ_id': fields.function(_get_categ, type='many2one',
                                     relation='product.category',
                                     string='Category', store=True),
-        # Albarán del movimiento
         'picking_id': fields.many2one('stock.picking', 'Picking'),
-        # Orden de producción del movimiento
         'production_id': fields.many2one('mrp.production', 'Production'),
     }
 
-    _defaults = {
-        'name': lambda *a: str(time.strftime('%Y%m%d%H%M%S')),
-    }
+    def create(self, cr, uid, vals, context=None):
+        vals = self._update_vals(cr, uid, vals, context=context)
+        return super(QcTest, self).create(cr, uid, vals, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
-        if context is None:
-            context = {}
-        move_obj = self.pool['stock.move']
+        vals = self._update_vals(cr, uid, vals, context=context)
         result = super(QcTest, self).write(cr, uid, ids, vals, context=context)
+        move_obj = self.pool['stock.move']
         if ids:
             if not isinstance(ids, list):
                 ids = [ids]

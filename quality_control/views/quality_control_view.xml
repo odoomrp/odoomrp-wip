@@ -225,7 +225,6 @@
 
         <menuitem name="Test Template Categories" parent="qc_menu_config" id="qc_template_category_menu"
             action="action_qc_test_template_category"/>
-        
 
         <menuitem name="Test Templates" parent="qc_menu_config"
             id="qc_menu_config_templates" sequence="10" />
@@ -341,7 +340,6 @@
             <field name="res_model">qc.test.template.line</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <!-- <field name="view_id" ref="qc_test_template_form_view"/> -->
         </record>
         <menuitem name="Test Template Lines" parent="qc_menu_config_templates"
             id="qc_test_template_line_menu" action="action_qc_test_template_line" />

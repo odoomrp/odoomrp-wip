@@ -19,11 +19,12 @@
 #
 ##############################################################################
 {
-    "name": "Avanzosc Nan Quality Control Ext",
+    "name": "Quality Control Extension",
     "version": "1.0",
     "depends": [
         "stock",
         "mrp",
+        "product",
         "quality_control",
     ],
     "author": "OdooMRP Team",
@@ -114,8 +115,8 @@ Enfoque técnico:
     productos, productos, albarán, of... etc.
     """,
     'data': [
-        #'security/avanzosc_nan_quality_control_ext.xml',
-        #'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
+        'data/quality_control_data.xml',
         'wizard/qc_test_set_template_wizard_ext_view.xml',
         'views/mrp_production_view.xml',
         'views/stock_picking_view.xml',

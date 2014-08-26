@@ -363,16 +363,18 @@ class QcTest(orm.Model):
     def _success(self, cr, uid, ids, field_name, arg, context=None):
         result = {}
         for test in self.browse(cr, uid, ids, context=context):
-            success = True
-            proof = {}
-            for line in test.test_line_ids:
-                proof[line.proof_id.id] = (proof.get(line.proof_id.id, False)
-                                           or line.success)
-
-            for p in proof:
-                if not proof[p]:
-                    success = False
-                    break
+            success = False
+            if len(test.test_line_ids):
+                success = True
+                proof = {}
+                for line in test.test_line_ids:
+                    proof[line.proof_id.id] = (proof.get(line.proof_id.id,
+                                                         False)
+                                               or line.success)
+                for p in proof:
+                    if not proof[p]:
+                        success = False
+                        break
             result[test.id] = success
         return result
 
@@ -429,7 +431,8 @@ class QcTest(orm.Model):
         'success': fields.function(_success, method=True, type='boolean',
                                    string='Success',
                                    help='This field will be active if all'
-                                   ' tests have succeeded.', select="1"),
+                                   ' tests have succeeded.', select="1",
+                                   store=True),
         'enabled': fields.boolean('Enabled', readonly=True,
                                   help='If a quality control test is not'
                                   ' enabled it means it can not be moved from'

@@ -37,10 +37,10 @@ class StockPicking(orm.Model):
                     created += 1
                     if line.state not in ('draft', 'waiting'):
                         done += 1
-                    if line.success:
-                        passed += 1
-                    else:
-                        failed += 1
+                        if line.state == 'success':
+                            passed += 1
+                        elif line.state == 'failed':
+                            failed += 1
             res[test.id] = {
                 'created_tests': created,
                 'done_tests': done,
@@ -85,5 +85,22 @@ class StockPicking(orm.Model):
                         if how_many > 0:
                             move_obj._create_test_automatically(
                                 cr, uid, how_many, move, context=context)
-
         return result
+
+    def action_done(self, cr, uid, ids, context=None):
+        done = super(StockPicking, self).action_done(cr, uid, ids,
+                                                     context=context)
+        if done:
+            for picking in self.browse(cr, uid, ids, context=context):
+                if (picking.state == 'done' and
+                        picking.picking_type_id.code == 'incoming' and
+                        picking.move_lines):
+                    move_obj = self.pool['stock.move']
+                    for move in picking.move_lines:
+                        how_many = move_obj._how_many_test_create(
+                            cr, uid, move.product_id, move.product_qty,
+                            context=context)
+                        if how_many > 0:
+                            move_obj._create_test_automatically(
+                                cr, uid, how_many, move, context=context)
+        return done

@@ -3,11 +3,9 @@
     <data>
 
         <record model="ir.ui.view"
-            id="qc_test_line_tree_view_inh_qualitycontrolext">
-            <field name="name">qc.test.line.tree.view.inh.qualitycontrolext
-            </field>
+            id="qc_test_line_extended_tree_view">
+            <field name="name">qc.test.line.extended.tree</field>
             <field name="model">qc.test.line</field>
-            <field name="type">tree</field>
             <field name="inherit_id" ref="quality_control.qc_test_line_tree_view" />
             <field name="arch" type="xml">
                 <field name="proof_id" position="before">
@@ -18,11 +16,9 @@
 
 
         <record model="ir.ui.view"
-            id="qc_test_line_form_view_inh_qualitycontrolext">
-            <field name="name">qc.test.line.form.view.inh.qualitycontrolext
-            </field>
+            id="qc_test_line_extended_form_view">
+            <field name="name">qc.test.line.extended.form</field>
             <field name="model">qc.test.line</field>
-            <field name="type">form</field>
             <field name="inherit_id"
                 ref="quality_control.qc_test_line_form_view" />
             <field name="arch" type="xml">
@@ -108,25 +104,29 @@
         </record>
 
 
-        <record model="ir.ui.view" id="qc_test_form_view_inh_qualitycontrolext">
-            <field name="name">qc.test.form.view.inh.qualitycontrolext
-            </field>
+        <record model="ir.ui.view" id="qc_test_extended_form_view">
+            <field name="name">qc.test.extended.form</field>
             <field name="model">qc.test</field>
             <field name="type">form</field>
             <field name="inherit_id" ref="quality_control.qc_test_form_view" />
             <field name="arch" type="xml">
-                <xpath expr="//button[@string='Select Template']"
+                <field name="state" position="before">
+                    <button name="button_create_test_lines" states="draft"
+                            string="Create Lines"/>
+                </field>
+                <xpath expr="//field[@name='test_template_id']/.." 
                     position="after">
-                    <field name="categ_id" colspan="7" invisible="1" />
-                    <field name="origin" colspan="3" />
-                    <field name="stock_move_id" colspan="4" />
-                    <field name="product_id" colspan="2"
-                        on_change="onchange_product(product_id)" />
-                    <field name="picking_id" colspan="2" />
-                    <field name="production_id" colspan="3" />
-                    <button name="button_create_test_lines"
-                        string="Create Test Lines" type="object"
-                        colspan="7" />
+                    <group>
+                    <field name="origin" />
+                    <field name="stock_move_id"  readonly="1"/>
+                    <field name="product_id" readonly="1" />
+                    <field name="categ_id" readonly="1" />
+                    <field name="picking_id"  readonly="1"/>
+                    <field name="production_id"  readonly="1"/>
+<!--                     <button name="button_create_test_lines" -->
+<!--                         string="Create Test Lines" type="object" -->
+<!--                         colspan="7" /> -->
+                    </group>
                 </xpath>
             </field>
         </record>

@@ -37,10 +37,10 @@ class MrpProduction(orm.Model):
                     created += 1
                     if line.state not in ('draft', 'waiting'):
                         done += 1
-                    if line.success:
-                        passed += 1
-                    else:
-                        failed += 1
+                        if line.state == 'success':
+                            passed += 1
+                        elif line.state == 'failed':
+                            failed += 1
             res[test.id] = {
                 'created_tests': created,
                 'done_tests': done,
@@ -71,21 +71,20 @@ class MrpProduction(orm.Model):
         test_obj = self.pool['qc.test']
         result = super(MrpProduction, self).action_confirm(cr, uid, ids,
                                                            context=context)
-        if ids:
-            for production in self.browse(cr, uid, ids, context=context):
-                if production.move_created_ids:
-                    for move in production.move_created_ids:
-                        how_many = move_obj._how_many_test_create(
-                            cr, uid, move.product_id, move.product_qty,
-                            context=context)
-                        if how_many > 0:
-                            move_obj._create_test_automatically(
-                                cr, uid, how_many, move, context=context)
-                            production2 = self.browse(cr, uid, production.id,
-                                                      context=context)
-                            if production2.qc_test_ids:
-                                for test in production2.qc_test_ids:
-                                    test_obj.write(cr, uid, [test.id],
-                                                   {'stock_move_id': False},
-                                                   context=context)
+        for production in self.browse(cr, uid, ids, context=context):
+            if production.move_created_ids:
+                for move in production.move_created_ids:
+                    how_many = move_obj._how_many_test_create(
+                        cr, uid, move.product_id, move.product_qty,
+                        context=context)
+                    if how_many > 0:
+                        move_obj._create_test_automatically(
+                            cr, uid, how_many, move, context=context)
+                        production2 = self.browse(cr, uid, production.id,
+                                                  context=context)
+                        if production2.qc_test_ids:
+                            for test in production2.qc_test_ids:
+                                test_obj.write(cr, uid, [test.id],
+                                               {'stock_move_id': False},
+                                               context=context)
         return result
