@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="lot_warrant_form_view">
+            <field name="name">Warrant Lot Form</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form" />
+            <field name="arch" type="xml">
+                <field name="ref" position="after">
+                    <field name="warrant_limit"/> months
+                </field>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="lot_warrant_tree_view">
+            <field name="name">Warrant Lot Tree</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_tree" />
+            <field name="arch" type="xml">
+                <field name="ref" position="after">
+                    <field name="warrant_limit" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
