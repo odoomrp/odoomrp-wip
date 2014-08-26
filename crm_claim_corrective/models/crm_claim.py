@@ -148,8 +148,8 @@ class CrmClaimCorrective(orm.Model):
 
     def default_get(self, cr, uid, fields_list, context=None):
         res = super(CrmClaimCorrective, self).default_get(cr, uid,
-                                                            fields_list,
-                                                            context=context)
+                                                          fields_list,
+                                                          context=context)
         if not context:
             context = {}
         cause_obj = self.pool['crm.claim.problem.cause']
