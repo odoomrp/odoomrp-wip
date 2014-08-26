@@ -28,14 +28,14 @@ class StockProductionLot(orm.Model):
         "warrant_limit": fields.datetime("Warranty")
         }
 
-    def create(self, cr, uid, values, context=None):
+    def create(self, cr, uid, vals, context=None):
         if context is None:
             context = {}
-        if values['product_id']:
+        if vals.get('product_id'):
             product = self.pool["product.product"].browse(
-                cr, uid, values["product_id"], context=context)
-            create_date = ('create_date' in values and
-                           values['create_date'] or datetime.now())
+                cr, uid, vals["product_id"], context=context)
+            create_date = ('create_date' in vals and
+                           vals['create_date'] or datetime.now())
             if 'sup_warrant' not in context:
                 warrant_limit = (
                     product.warranty and
@@ -46,8 +46,8 @@ class StockProductionLot(orm.Model):
                     create_date +
                     relativedelta(months=int(context['sup_warrant'])))
             if warrant_limit:
-                values.update({'warrant_limit': warrant_limit})
-        return super(StockProductionLot, self).create(cr, uid, values,
+                vals.update({'warrant_limit': warrant_limit})
+        return super(StockProductionLot, self).create(cr, uid, vals,
                                                       context=context)
 
 
