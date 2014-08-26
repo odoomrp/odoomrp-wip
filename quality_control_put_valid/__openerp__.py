@@ -29,9 +29,9 @@
     "author": "AvanzOSC",
     "category": "Custom Modules",
     "description": """
-Este módulo introduce un campo chek nuevo, llamado VÁLIDO. Si el test ha tenido éxito,
-el nuevo campo VALIDO será True, pero si el test no ha sido válido, el usuario tendrá
-la opción de marcar este nuevo campo como valido.
+Este módulo introduce un campo chek nuevo, llamado VÁLIDO. Si el test ha tenido
+éxito, el nuevo campo VALIDO será True, pero si el test no ha sido válido, el
+usuario tendrá la opción de marcar este nuevo campo como valido.
     """,
     'data': [
         'views/qc_test_ext_view.xml',
