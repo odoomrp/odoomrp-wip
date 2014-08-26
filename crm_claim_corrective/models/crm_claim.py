@@ -82,13 +82,15 @@ class CrmClaim(orm.Model):
             if ids:
                 if isinstance(ids, list):
                     ids = ids[0]
-                if self.browse(cr, uid, ids).desc_decis:
-                    decision_inicial = self.browse(cr, uid, ids).desc_decis
+                decision = self.read(cr, uid, ids, ['desc_decis'],
+                                     context=context)
+                if decision:
+                    decision_inicial = decision['desc_decis'][1]
                 if decision_inicial != '':
                     decision_inicial += '\n'
-            descript = self.pool['crm.claim.decision'].browse(cr, uid,
-                                                              decision_id,
-                                                              context=context)
+            decision_obj = self.pool['crm.claim.decision']
+            descript = decision_obj.browse(cr, uid, decision_id,
+                                           context=context)
             decision_text = decision_inicial + descript.name
             res = {'desc_decis': decision_text}
             return {'value': res}
@@ -99,12 +101,15 @@ class CrmClaim(orm.Model):
             if ids:
                 if isinstance(ids, list):
                     ids = ids[0]
-                if self.browse(cr, uid, ids).nfdesc_decis:
-                    nfdecision_inicial = self.browse(cr, uid, ids).nfdesc_decis
+                decision = self.read(cr, uid, ids, ['nfdesc_decis'],
+                                     context=context)
+                if decision:
+                    nfdecision_inicial = decision['nfdesc_decis'][1]
                 if nfdecision_inicial != '':
                     nfdecision_inicial += '\n'
             decision_obj = self.pool['crm.claim.decision']
-            decision = decision_obj.browse(cr, uid, nfdecision_id)
+            decision = decision_obj.browse(cr, uid, nfdecision_id,
+                                           context=context)
             decision_text = nfdecision_inicial + decision.name
             res = {'nfdesc_decis': decision_text}
             return {'value': res}
@@ -115,12 +120,15 @@ class CrmClaim(orm.Model):
             if ids:
                 if isinstance(ids, list):
                     ids = ids[0]
-                if self.browse(cr, uid, ids).description:
-                    description_inicial = self.browse(cr, uid, ids).description
+                description = self.read(cr, uid, ids, ['description'],
+                                        context=context)
+                if description:
+                    description_inicial = description['description'][1]
                 if description_inicial != '':
                     description_inicial += '\n'
             description_obj = self.pool['crm.claim.problem.description']
-            description = description_obj.browse(cr, uid, description_id)
+            description = description_obj.browse(cr, uid, description_id,
+                                                 context=context)
             description_text = description_inicial + description.name
             res = {'description': description_text}
             return {'value': res}
@@ -131,8 +139,9 @@ class CrmClaim(orm.Model):
             if ids:
                 if isinstance(ids, list):
                     ids = ids[0]
-                if self.browse(cr, uid, ids).cause:
-                    initial_cause = self.browse(cr, uid, ids).cause
+                cause = self.read(cr, uid, ids, ['cause'], context=context)
+                if cause:
+                    initial_cause = description['cause'][1]
                 if initial_cause != '':
                     initial_cause += '\n'
             cause_obj = self.pool['crm.claim.problem.cause']
