@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    "name": "Avanzosc Nan Quality Put Valid",
+    "name": "Quality Control Manual Validation",
     "version": "1.0",
     "depends": [
         "quality_control",
