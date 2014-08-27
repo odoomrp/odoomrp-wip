@@ -84,8 +84,8 @@ class CrmClaim(orm.Model):
                     ids = ids[0]
                 decision = self.read(cr, uid, ids, ['desc_decis'],
                                      context=context)
-                if decision:
-                    decision_inicial = decision['desc_decis'][1]
+                if decision and decision['desc_decis']:
+                    decision_inicial = decision['desc_decis']
                 if decision_inicial != '':
                     decision_inicial += '\n'
             decision_obj = self.pool['crm.claim.decision']
@@ -103,8 +103,8 @@ class CrmClaim(orm.Model):
                     ids = ids[0]
                 decision = self.read(cr, uid, ids, ['nfdesc_decis'],
                                      context=context)
-                if decision:
-                    nfdecision_inicial = decision['nfdesc_decis'][1]
+                if decision and decision['nfdesc_decis']:
+                    nfdecision_inicial = decision['nfdesc_decis']
                 if nfdecision_inicial != '':
                     nfdecision_inicial += '\n'
             decision_obj = self.pool['crm.claim.decision']
@@ -122,8 +122,8 @@ class CrmClaim(orm.Model):
                     ids = ids[0]
                 description = self.read(cr, uid, ids, ['description'],
                                         context=context)
-                if description:
-                    description_inicial = description['description'][1]
+                if description and description['description']:
+                    description_inicial = description['description']
                 if description_inicial != '':
                     description_inicial += '\n'
             description_obj = self.pool['crm.claim.problem.description']
@@ -140,12 +140,12 @@ class CrmClaim(orm.Model):
                 if isinstance(ids, list):
                     ids = ids[0]
                 cause = self.read(cr, uid, ids, ['cause'], context=context)
-                if cause:
-                    initial_cause = description['cause'][1]
+                if cause and cause['cause']:
+                    initial_cause = cause['cause']
                 if initial_cause != '':
                     initial_cause += '\n'
             cause_obj = self.pool['crm.claim.problem.cause']
-            cause = cause_obj.browse(cr, uid, cause_id)
+            cause = cause_obj.browse(cr, uid, cause_id, context=context)
             cause_text = initial_cause + cause.name
             res = {'cause': cause_text}
             return {'value': res}

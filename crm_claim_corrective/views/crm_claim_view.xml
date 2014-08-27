@@ -7,6 +7,7 @@
             <field name="model">crm.claim</field>
             <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
             <field name="arch" type="xml">
+                <field name="cause" position="replace" />
                 <xpath expr="//separator[@string='Root Causes']/.."
                     position="attributes">
                     <attribute name="invisible">1</attribute>
@@ -197,6 +198,7 @@
                             <separator string="Corrective Actions"
                                 colspan="10" />
                             <field name="sequence" colspan="2" />
+                            <field name="sol_claim_id" />
                         </group>
                         <group colspan="4">
                             <separator string="Corrective Action"
