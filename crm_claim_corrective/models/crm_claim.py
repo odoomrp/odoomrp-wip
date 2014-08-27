@@ -265,3 +265,27 @@ class CrmClaimCorrectiveAction(orm.Model):
         'corrective_action_id': fields.many2one('crm.claim.corrective',
                                                 'Corrective action'),
     }
+
+    def create(self, cr, uid, vals, context=None):
+        if 'corrective_action_id' in vals and vals['corrective_action_id'] \
+                and (not 'sol_claim_id' in vals or 'sol_claim_id' in vals and
+                     not vals['sol_claim_id']):
+            correct_obj = self.pool['crm.claim.corrective']
+            claim = correct_obj.read(cr, uid, vals['corrective_action_id'],
+                                        ['claim_id'], context=context)
+            claim_id = claim and claim['claim_id'] and claim['claim_id'][0]
+            if claim_id:
+                vals['sol_claim_id'] = claim_id
+        return super(CrmClaimCorrectiveAction, self).create(cr, uid, vals,
+                                                            context=context)
+
+    def write(self, cr, uid, ids, vals, context=None):
+        if 'corrective_action_id' in vals and vals['corrective_action_id']:
+            correct_obj = self.pool['crm.claim.corrective']
+            claim = correct_obj.read(cr, uid, vals['corrective_action_id'],
+                                        ['claim_id'], context=context)
+            claim_id = claim and claim['claim_id'] and claim['claim_id'][0]
+            if claim_id:
+                vals['sol_claim_id'] = claim_id
+        return super(CrmClaimCorrectiveAction, self).write(cr, uid, ids, vals,
+                                                            context=context)

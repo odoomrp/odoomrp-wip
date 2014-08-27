@@ -146,6 +146,25 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="crm_claim_corrective_form_view">
+            <field name="name">crm.claim.corrective.form</field>
+            <field name="model">crm.claim.corrective</field>
+            <field name="arch" type="xml">
+                <form string="Corrective Actions">
+                    <group>
+                        <field name="seq" />
+                        <field name="claim_id" />
+                        <field name="partner_id" />
+                        <field name="state" />
+                    </group>
+                    <group col="1">
+                        <separator string="Preventive/Corrective Action"/>
+                        <field name="sol_ids" nolabel="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
         <record model="ir.actions.act_window" id="action_crm_claim_corrective">
             <field name="name">Corrective Actions</field>
             <field name="res_model">crm.claim.corrective</field>
