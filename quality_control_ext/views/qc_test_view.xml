@@ -13,7 +13,6 @@
             </field>
         </record>
 
-
         <record model="ir.ui.view" id="qc_test_line_extended_form_view">
             <field name="name">qc.test.line.extended.form</field>
             <field name="model">qc.test.line</field>
@@ -39,12 +38,14 @@
             <field name="model">qc.test</field>
             <field name="inherit_id" ref="quality_control.qc_test_tree_view" />
             <field name="arch" type="xml">
-                <field name="test_template_id" position="after">
+                <field name="name" position="after">
                     <field name="origin" />
-                    <field name="stock_move_id" />
-                    <field name="categ_id" />
+                </field>
+                <field name="test_template_id" position="after">
                     <field name="product_id" />
+                    <field name="categ_id" />
                     <field name="picking_id" />
+                    <field name="stock_move_id" />
                     <field name="production_id" />
                 </field>
             </field>
@@ -102,7 +103,7 @@
             <field name="inherit_id" ref="quality_control.qc_test_form_view" />
             <field name="arch" type="xml">
                 <field name="state" position="before">
-                    <button name="button_create_test_lines"
+                    <button name="button_create_test_lines" type="object"
                         states="draft" string="Create Lines" />
                 </field>
                 <xpath expr="//field[@name='test_template_id']/.."
@@ -114,9 +115,6 @@
                         <field name="categ_id" readonly="1" />
                         <field name="picking_id" readonly="1" />
                         <field name="production_id" readonly="1" />
-                        <!-- <button name="button_create_test_lines" -->
-                        <!-- string="Create Test Lines" type="object" -->
-                        <!-- colspan="7" /> -->
                     </group>
                 </xpath>
             </field>

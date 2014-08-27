@@ -7,7 +7,9 @@
             <field name="model">qc.test.set.template.wizard</field>
             <field name="arch" type="xml">
                 <form string="Select Test Template" version="7.0">
-                    <field name="test_template_id" />
+                    <group>
+                        <field name="test_template_id" />
+                    </group>
                     <footer>
                         <button name="action_create_test"
                             string="Accept" type="object" class="oe_highlight"/>
