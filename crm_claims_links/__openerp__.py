@@ -21,7 +21,7 @@
 #
 ##############################################################################
 {
-    'name': 'Stock Picking CRM Repair',
+    'name': 'CRM claims Links',
     'version': "1.0",
     'category': "Generic Modules",
     'description': """
