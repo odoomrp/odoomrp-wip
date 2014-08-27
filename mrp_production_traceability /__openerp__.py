@@ -26,9 +26,9 @@
     'description': """
     This modules adds component traceability in production orders.
     """,
-    'author': 'AvanzOSC',
+    'author': 'OdooMRP team',
     'contributors': ["Daniel Campos <danielcampos@avanzosc.es>"],
-    'website': "http://www.avanzosc.com",
+    'website': "http://www.odoomrp.com",
     'depends': ["mrp"],
     'data': ["views/stock_move_view.xml"],
     'installable': True,
