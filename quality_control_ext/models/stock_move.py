@@ -60,7 +60,6 @@ class StockMove(orm.Model):
         template_obj = self.pool['qc.test.template']
         test_obj = self.pool['qc.test']
         test_line_obj = self.pool['qc.test.line']
-#         attachment_obj = self.pool['ir.attachment']
         template_ids = template_obj.search(
             cr, uid, [('product_id', '=', move.product_id.id),
                       ('active', '=', True)], context=context)
@@ -90,15 +89,6 @@ class StockMove(orm.Model):
                 elif move.production_id:
                     origin = (str(move.production_id.name) + ' - ' +
                               move.product_id.name)
-                # Cojo los archivos adjuntos compartidos
-#                 new_attachment = []
-#                 if template.attachment_ids:
-#                     for attachment in template.attachment_ids:
-#                         new_attachment.append(attachment.id)
-                # Cojo los archivos adjuntos NO compartidos
-#                 attachment_ids = attachment_obj.search(
-#                     cr, uid, [('res_model', '=', 'qc.test.template'),
-#                               ('res_id', '=', template.id)], context=context)
                 data = {
                     'name': time.strftime('%Y%m%d %H%M%S'),
                     'test_template_id': template.id,
@@ -113,17 +103,7 @@ class StockMove(orm.Model):
                     data.update({'picking_id': move.picking_id.id})
                 if move.production_id:
                     data.update({'production_id': move.production_id.id})
-#                 if new_attachment:
-#                     data.update({'attachment_ids': [(6, 0, new_attachment)]})
                 test_id = test_obj.create(cr, uid, data, context=context)
-#                 if attachment_ids:
-#                     for attachment_id in attachment_ids:
-#                         new_attachment_id = attachment_obj.copy(
-#                             cr, uid, attachment_id, context=context)
-#                         attachment_obj.write(cr, uid, [new_attachment_id],
-#                                              {'res_model': 'qc.test',
-#                                               'res_id': test_id},
-#                                              context=context)
                 # Creo las líneas del test
                 if template.test_template_line_ids:
                     count = 0

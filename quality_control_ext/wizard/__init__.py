@@ -18,4 +18,5 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-import qc_test_set_template_wizard_ext
+
+from . import qc_test_set_template_wizard_ext

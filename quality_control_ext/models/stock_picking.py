@@ -66,31 +66,11 @@ class StockPicking(orm.Model):
                                         type="integer", multi="test_count"),
     }
 
-    def write(self, cr, uid, ids, vals, context=None):
-        if context is None:
-            context = {}
-        move_obj = self.pool['stock.move']
-        found = False
-        if 'state' in vals and vals['state'] == 'done':
-            found = True
-        result = super(StockPicking, self).write(cr, uid, ids, vals,
-                                                 context=context)
-        if ids and found:
-            for picking in self.browse(cr, uid, ids, context=context):
-                if picking.type == 'in' and picking.move_lines:
-                    for move in picking.move_lines:
-                        how_many = move_obj._how_many_test_create(
-                            cr, uid, move.product_id, move.product_qty,
-                            context=context)
-                        if how_many > 0:
-                            move_obj._create_test_automatically(
-                                cr, uid, how_many, move, context=context)
-        return result
-
-    def action_done(self, cr, uid, ids, context=None):
-        done = super(StockPicking, self).action_done(cr, uid, ids,
-                                                     context=context)
-        if done:
+    # @api.cr_uid_ids_context  # this is taken from stock module
+    def do_transfer(self, cr, uid, ids, context=None):
+        do_transfer = super(StockPicking, self).do_transfer(cr, uid, ids,
+                                                            context=context)
+        if do_transfer:
             for picking in self.browse(cr, uid, ids, context=context):
                 if (picking.state == 'done' and
                         picking.picking_type_id.code == 'incoming' and
@@ -103,4 +83,4 @@ class StockPicking(orm.Model):
                         if how_many > 0:
                             move_obj._create_test_automatically(
                                 cr, uid, how_many, move, context=context)
-        return done
+        return do_transfer

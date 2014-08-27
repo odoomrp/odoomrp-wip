@@ -2,8 +2,7 @@
 <openerp>
     <data>
 
-        <record model="ir.ui.view"
-            id="qc_test_line_extended_tree_view">
+        <record model="ir.ui.view" id="qc_test_line_extended_tree_view">
             <field name="name">qc.test.line.extended.tree</field>
             <field name="model">qc.test.line</field>
             <field name="inherit_id" ref="quality_control.qc_test_line_tree_view" />
@@ -15,12 +14,10 @@
         </record>
 
 
-        <record model="ir.ui.view"
-            id="qc_test_line_extended_form_view">
+        <record model="ir.ui.view" id="qc_test_line_extended_form_view">
             <field name="name">qc.test.line.extended.form</field>
             <field name="model">qc.test.line</field>
-            <field name="inherit_id"
-                ref="quality_control.qc_test_line_form_view" />
+            <field name="inherit_id" ref="quality_control.qc_test_line_form_view" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='actual_value_qt']/.."
                     position="attributes">
@@ -37,11 +34,9 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="qc_test_tree_view_inh_qualitycontrolext">
-            <field name="name">qc.test.tree.view.inh.qualitycontrolext
-            </field>
+        <record model="ir.ui.view" id="qc_test_extended_tree_view">
+            <field name="name">qc.test.extended.tree</field>
             <field name="model">qc.test</field>
-            <field name="type">tree</field>
             <field name="inherit_id" ref="quality_control.qc_test_tree_view" />
             <field name="arch" type="xml">
                 <field name="test_template_id" position="after">
@@ -55,13 +50,9 @@
             </field>
         </record>
 
-        <!-- *********************** VISTA SEARCH ****************** -->
-
         <record model="ir.ui.view" id="qc_test_search_view_qualitycontrolext">
-            <field name="name">qc.test.search.view.qualitycontrolext
-            </field>
+            <field name="name">qc.test.extended.search</field>
             <field name="model">qc.test</field>
-            <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Search Test">
                     <group>
@@ -111,38 +102,23 @@
             <field name="inherit_id" ref="quality_control.qc_test_form_view" />
             <field name="arch" type="xml">
                 <field name="state" position="before">
-                    <button name="button_create_test_lines" states="draft"
-                            string="Create Lines"/>
+                    <button name="button_create_test_lines"
+                        states="draft" string="Create Lines" />
                 </field>
-                <xpath expr="//field[@name='test_template_id']/.." 
+                <xpath expr="//field[@name='test_template_id']/.."
                     position="after">
                     <group>
-                    <field name="origin" />
-                    <field name="stock_move_id"  readonly="1"/>
-                    <field name="product_id" readonly="1" />
-                    <field name="categ_id" readonly="1" />
-                    <field name="picking_id"  readonly="1"/>
-                    <field name="production_id"  readonly="1"/>
-<!--                     <button name="button_create_test_lines" -->
-<!--                         string="Create Test Lines" type="object" -->
-<!--                         colspan="7" /> -->
+                        <field name="origin" />
+                        <field name="stock_move_id" readonly="1" />
+                        <field name="product_id" readonly="1" />
+                        <field name="categ_id" readonly="1" />
+                        <field name="picking_id" readonly="1" />
+                        <field name="production_id" readonly="1" />
+                        <!-- <button name="button_create_test_lines" -->
+                        <!-- string="Create Test Lines" type="object" -->
+                        <!-- colspan="7" /> -->
                     </group>
                 </xpath>
-            </field>
-        </record>
-
-        <record model="ir.ui.view"
-            id="qc_test_template_tree_view_inh_qualitycontrolext">
-            <field name="name">qc.test.template.tree.view.inh.qualitycontrolext
-            </field>
-            <field name="model">qc.test.template</field>
-            <field name="inherit_id"
-                ref="quality_control.qc_test_template_tree_view" />
-            <field name="arch" type="xml">
-                <field name="name" position="after">
-                    <field name="product_id" />
-                    <field name="product_category_id" />
-                </field>
             </field>
         </record>
 
@@ -183,14 +159,13 @@
             </field>
         </record>
 
-
         <record model="ir.ui.view"
-            id="qc_test_template_form_view_inh_qualitycontrolext">
-            <field name="name">qc.test.template.form.view.inh.qualitycontrolext</field>
+            id="qc_test_template_tree_view_inh_qualitycontrolext">
+            <field name="name">qc.test.template.tree.view.inh.qualitycontrolext
+            </field>
             <field name="model">qc.test.template</field>
-            <field name="type">form</field>
             <field name="inherit_id"
-                ref="quality_control.qc_test_template_form_view" />
+                ref="quality_control.qc_test_template_tree_view" />
             <field name="arch" type="xml">
                 <field name="name" position="after">
                     <field name="product_id" />
@@ -199,7 +174,22 @@
             </field>
         </record>
 
-
+        <record model="ir.ui.view"
+            id="qc_test_template_form_view_inh_qualitycontrolext">
+            <field name="name">qc.test.template.extended.form</field>
+            <field name="model">qc.test.template</field>
+            <field name="type">form</field>
+            <field name="inherit_id"
+                ref="quality_control.qc_test_template_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']/.." position="after">
+                    <group>
+                        <field name="product_id" />
+                        <field name="product_category_id" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
 
     </data>
 </openerp>
