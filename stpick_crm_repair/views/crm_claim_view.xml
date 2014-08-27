@@ -1,0 +1,23 @@
+<openerp>
+    <data>
+<!-- CRM Claim -->
+        <record id="crm_case_claims_form_view_inherit" model="ir.ui.view">
+            <field name="name">crm.claim.inherit</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//page[@string='Claim Description']"
+                        position="after">
+                        <page string="Extra Information Related">
+                            <separator colspan="4" string="Stock Pickings Related" />
+                            <field name="st_picking" colspan="4" nolabel="1" widget="many2many"/>
+                            <separator colspan="4" string="Repairs Related" />
+                            <field name="repair_ids" colspan="4" nolabel="1" widget="many2many"/>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>
