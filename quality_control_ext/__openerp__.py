@@ -117,9 +117,9 @@ Enfoque técnico:
     'data': [
         'security/ir.model.access.csv',
         'data/quality_control_data.xml',
-        'wizard/qc_test_set_template_wizard_ext_view.xml',
+        'wizard/qc_test_wizard_view.xml',
         'views/mrp_production_view.xml',
-        'views/stock_picking_view.xml',
+        'views/stock_view.xml',
         'views/qc_test_view.xml',
         'views/sample_rank_view.xml',
     ],

@@ -72,6 +72,7 @@ class QcTest(orm.Model):
                 move_obj = self.pool['stock.move']
                 move = move_obj.read(cr, uid, res_id, ['product_id',
                                                        'picking_id',
+                                                       'restrict_lot_id',
                                                        'production_id'],
                                      context=context)
                 vals.update({'stock_move_id': res_id,
@@ -79,6 +80,8 @@ class QcTest(orm.Model):
                                             move['product_id'][0]),
                              'picking_id': (move['picking_id'] and
                                             move['picking_id'][0]),
+                             'lot_id': (move['restrict_lot_id'] and
+                                        move['restrict_lot_id'][0]),
                              'production_id': (move['production_id'] and
                                                move['production_id'][0])})
         return vals
@@ -95,6 +98,7 @@ class QcTest(orm.Model):
                                     relation='product.category',
                                     string='Category', store=True),
         'picking_id': fields.many2one('stock.picking', 'Picking'),
+        'lot_id': fields.many2one('stock.production.lot', 'Lot'),
         'production_id': fields.many2one('mrp.production', 'Production'),
     }
 
@@ -227,4 +231,8 @@ class QcTestTemplate(orm.Model):
         'product_id': fields.many2one('product.product', 'Product'),
         'product_category_id': fields.many2one('product.category',
                                                'Product Category'),
+        'picking_type_ids': fields.many2many('stock.picking.type',
+                                             'rel_qc_template_picking_type',
+                                             'template_id', 'type_id',
+                                             'Picking Types')
     }

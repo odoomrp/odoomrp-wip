@@ -19,4 +19,4 @@
 #
 ##############################################################################
 
-from . import qc_test_set_template_wizard_ext
+from . import qc_test_wizard

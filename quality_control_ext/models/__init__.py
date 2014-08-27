@@ -1,9 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Advanced Open Source Consulting
-#    Copyright (C) 2011 - 2013 Avanzosc <http://www.avanzosc.com>
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -20,7 +17,6 @@
 ##############################################################################
 
 from . import mrp_production
-from . import stock_picking
-from . import stock_move
+from . import stock
 from . import qc_test
 from . import sample_rank

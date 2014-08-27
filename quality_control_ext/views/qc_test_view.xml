@@ -46,6 +46,7 @@
                     <field name="categ_id" />
                     <field name="picking_id" />
                     <field name="stock_move_id" />
+                    <field name="lot_id" />
                     <field name="production_id" />
                 </field>
             </field>
@@ -68,6 +69,7 @@
                         <field name="categ_id" />
                         <field name="product_id" />
                         <field name="picking_id" />
+                        <field name="lot_id" />
                         <field name="production_id" />
                     </group>
                     <newline />
@@ -88,6 +90,8 @@
                             context="{'group_by':'product_id'}" />
                         <filter string="Picking" domain="[]"
                             context="{'group_by':'picking_id'}" />
+                        <filter string="Lot" domain="[]"
+                            context="{'group_by':'lot_id'}" />
                         <filter string="Production" domain="[]"
                             context="{'group_by':'production_id'}" />
                     </group>
@@ -114,18 +118,16 @@
                         <field name="product_id" readonly="1" />
                         <field name="categ_id" readonly="1" />
                         <field name="picking_id" readonly="1" />
+                        <field name="lot_id" readonly="1" />
                         <field name="production_id" readonly="1" />
                     </group>
                 </xpath>
             </field>
         </record>
 
-        <!-- *********************** VISTA SEARCH ****************** -->
-
         <record model="ir.ui.view"
-            id="qc_test_template_search_view_qualitycontrolext">
-            <field name="name">qc.test.template.search.view.qualitycontrolext
-            </field>
+            id="qc_test_template_extended_search_view">
+            <field name="name">qc.test.template.extended.search</field>
             <field name="model">qc.test.template</field>
             <field name="type">search</field>
             <field name="arch" type="xml">
@@ -173,7 +175,7 @@
         </record>
 
         <record model="ir.ui.view"
-            id="qc_test_template_form_view_inh_qualitycontrolext">
+            id="qc_test_template_extended_form_view">
             <field name="name">qc.test.template.extended.form</field>
             <field name="model">qc.test.template</field>
             <field name="type">form</field>
