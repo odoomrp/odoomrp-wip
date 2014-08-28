@@ -26,20 +26,18 @@ from openerp import _
 class MrpRepair(models.Model):
     _inherit = 'mrp.repair'
 
-    crm_name = fields.Many2one('crm.claim', string='CRM Claim', select=True)
+    claim_id = fields.Many2one('crm.claim', string='Claim', select=True)
 
 
 class CrmClaim(models.Model):
     _inherit = 'crm.claim'
 
-    st_picking = fields.One2many('stock.picking', 'crm_name',
-                                 string='Stock Picking')
-    repair_ids = fields.One2many('mrp.repair', 'crm_name',
-                                 string='Stock Picking')
+    pickings = fields.One2many('stock.picking', 'claim_id',
+                               string='Stock Picking')
+    repairs = fields.One2many('mrp.repair', 'claim_id', string='Stock Picking')
 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    crm_claims = fields.One2many('crm.claim', 'partner_id',
-                                 string='CRM Claims')
+    claims = fields.One2many('crm.claim', 'partner_id', string='Claims')

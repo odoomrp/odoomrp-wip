@@ -20,34 +20,32 @@
 ##############################################################################
 
 from openerp import fields, models, api, exceptions
-from openerp.tools.translate import _
+from openerp import _
 
 
 class StockPicking(models.Model):
     _description = 'stock picking Inheritance'
     _inherit = 'stock.picking'
 
-    crm_name = fields.Many2one('crm.claim', string='CRM Claim', select=True)
+    claim_id = fields.Many2one('crm.claim', string='Claim', select=True)
     suppliref = fields.Char(string='Supplier ref', select=True,
                             help='Supplier reference number')
 
     @api.multi
     def action_stock_return_picking(self):
-        if not self.crm_name:
-            raise exceptions.except_orm(_('Error'),
-                                        _("Selected Picking has no claim order"
-                                          " assigned"))
+        if not self.claim_id:
+            raise exceptions.Warning(_("Selected Picking has no claim order"
+                                       " assigned"))
         else:
             context = self.env.context.copy()
             context['active_id'] = self.id
             context['active_ids'] = self.ids
             context['active_model'] = 'stock.picking'
-            self.env.context = context
             return {'name': _('Return Shipment'),
                     'type': 'ir.actions.act_window',
                     'view_type': 'form',
                     'view_mode': 'form',
                     'res_model': 'stock.return.picking',
                     'target': 'new',
-                    'context': self.env.context,
+                    'context': context,
                     }

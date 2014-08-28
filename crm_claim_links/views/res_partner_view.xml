@@ -11,7 +11,7 @@
                 <data>
                     <xpath expr="//page[@name='sales_purchases']" position="after">
                         <page string="CRM Claims">
-                            <field name="crm_claims" colspan="4" nolabel="1" />
+                            <field name="claims" colspan="4" nolabel="1" />
                         </page>
                     </xpath>
                 </data>

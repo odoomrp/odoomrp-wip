@@ -11,7 +11,7 @@
                     <button name="action_stock_return_picking" string="Reverse Transfer" states="done" type="object" groups="base.group_user"/>
                 </button>
                 <field name="partner_id" position="after">
-                    <field name="crm_name" colspan="1" />
+                    <field name="claim_id" colspan="1" />
                 </field>
                 <field name="min_date" position="after">
                     <field name="suppliref" select="1" attrs="{'invisible':[('picking_type_id','!=',1)]}"/>
@@ -26,7 +26,7 @@
             <field name="arch" type="xml">
                 <field name="min_date" position="after">
                     <field name="suppliref" select="1" attrs="{'invisible':[('picking_type_id','!=',1)]}"/>
-                    <field name="crm_name"/>
+                    <field name="claim_id"/>
                 </field>
             </field>
         </record>

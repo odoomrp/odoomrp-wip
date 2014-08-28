@@ -11,9 +11,9 @@
                         position="after">
                         <page string="Extra Information Related">
                             <separator colspan="4" string="Stock Pickings Related" />
-                            <field name="st_picking" colspan="4" nolabel="1" widget="many2many"/>
+                            <field name="pickings" colspan="4" nolabel="1" widget="many2many"/>
                             <separator colspan="4" string="Repairs Related" />
-                            <field name="repair_ids" colspan="4" nolabel="1" widget="many2many"/>
+                            <field name="repairs" colspan="4" nolabel="1" widget="many2many"/>
                         </page>
                     </xpath>
                 </data>
