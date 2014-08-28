@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_invoice_tree_view_inh">
+            <field name="name">account.treasury.forecast.invoice.tree.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_invoice_tree_view"/>
+            <field name="model">account.treasury.forecast.invoice</field>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="payment_mode_id" />
+                    <field name="payment_term_id" />
+                    <field name="invoice_type" />
+                </field>
+                <xpath expr="/tree" position="attributes">
+                    <attribute name="colors">blue:inv_type in ('out_refund','in_refund');black:inv_type in ('out_invoice','in_invoice')</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_recurring_tree_view_inh">
+            <field name="name">account.treasury.forecast.recurring.tree.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_recurring_tree_view"/>
+            <field name="model">account.treasury.forecast.recurring</field>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="payment_mode_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_variable_tree_view_inh">
+            <field name="name">account.treasury.forecast.variable.tree.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_variable_tree_view" />
+            <field name="model">account.treasury.forecast.variable</field>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="payment_mode_id"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
