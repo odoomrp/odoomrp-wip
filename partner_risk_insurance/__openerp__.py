@@ -14,7 +14,7 @@
         'base',
     ],
     "category": "Custom Modules",
-    "data": ['views/partner_view.xml',],
+    "data": ['views/res_partner_view.xml',],
     "active": False,
     "installable": True
 }
