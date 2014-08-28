@@ -17,7 +17,9 @@
 #
 ##############################################################################
 
-from openerp import models, api, fields
+from openerp import models, api, fields, exceptions
+from openerp.tools.translate import _
+from datetime import datetime
 
 
 class EventsCopy(models.TransientModel):
@@ -31,7 +33,19 @@ class EventsCopy(models.TransientModel):
     def copy_events(self):
         event_obj = self.env['event.event']
         events = event_obj.browse(self.env.context['active_ids']).copy()
-        events.write({'project_id':self.project_id.id})
+        for event in events:
+            if event.project_id.date_start:
+                #try:
+                diff_days =self.start_date and datetime.strptime(self.start_date, "%Y-%m-%d %H:%M:%S") or datetime.combine(datetime.strptime(self.project_id.date_start, "%Y-%m-%d"), datetime.min.time()) - datetime.combine(datetime.strptime(event.project_id.date_start, "%Y-%m-%d"), datetime.min.time())
+                event.write({
+                         'project_id': self.project_id.id,
+                         'date_begin': datetime.strptime(event.date_begin, "%Y-%m-%d %H:%M:%S") + diff_days,
+                         'date_end': datetime.strptime(event.date_end, "%Y-%m-%d %H:%M:%S") + diff_days
+                         })
+                #except Exception, e:
+                    #raise exceptions.Warning("Date not set", "it is not date on project or event")
+            else:
+                event.write({'project_id':self.project_id.id})
         return{
                 'type': 'ir.actions.act_window_close',
          }
