@@ -19,32 +19,30 @@
 #
 ##############################################################################
 
-from openerp import fields, models, api, exceptions
-from openerp import _
+from openerp import fields, models, api, exceptions, _
 
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     claim = fields.Many2one('crm.claim', string='Claim', select=True)
-    supplier_ref = fields.Char(string='Supplier ref', select=True,
-                            help='Supplier reference number')
 
     @api.multi
     def action_stock_return_picking(self):
-        if not self.claim:
-            raise exceptions.Warning(_("Selected Picking has no claim order"
-                                       " assigned"))
-        else:
-            context = self.env.context.copy()
-            context['active_id'] = self.id
-            context['active_ids'] = self.ids
-            context['active_model'] = 'stock.picking'
-            return {'name': _('Return Shipment'),
-                    'type': 'ir.actions.act_window',
-                    'view_type': 'form',
-                    'view_mode': 'form',
-                    'res_model': 'stock.return.picking',
-                    'target': 'new',
-                    'context': context,
-                    }
+        for picking in self:
+            if not picking.claim:
+                raise exceptions.Warning(_("Selected Picking has no claim"
+                                           " order assigned"))
+            else:
+                context = self.env.context.copy()
+                context['active_id'] = self.id
+                context['active_ids'] = self.ids
+                context['active_model'] = 'stock.picking'
+                return {'name': _('Return Shipment'),
+                        'type': 'ir.actions.act_window',
+                        'view_type': 'form',
+                        'view_mode': 'form',
+                        'res_model': 'stock.return.picking',
+                        'target': 'new',
+                        'context': context,
+                        }

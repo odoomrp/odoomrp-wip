@@ -13,9 +13,6 @@
                 <field name="partner_id" position="after">
                     <field name="claim" colspan="1" />
                 </field>
-                <field name="min_date" position="after">
-                    <field name="supplier_ref" select="1" attrs="{'invisible':[('picking_type_id','!=',1)]}"/>
-                </field>
             </field>
         </record>
 
@@ -25,7 +22,6 @@
             <field name="inherit_id" ref="stock.vpicktree" />
             <field name="arch" type="xml">
                 <field name="min_date" position="after">
-                    <field name="supplier_ref" select="1" attrs="{'invisible':[('picking_type_id','!=',1)]}"/>
                     <field name="claim"/>
                 </field>
             </field>

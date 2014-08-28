@@ -20,7 +20,6 @@
 ##############################################################################
 
 from openerp import fields, models
-from openerp import _
 
 
 class CrmClaim(models.Model):
@@ -29,4 +28,3 @@ class CrmClaim(models.Model):
     pickings = fields.One2many('stock.picking', 'claim',
                                string='Stock Picking')
     repairs = fields.One2many('mrp.repair', 'claim', string='Stock Picking')
-

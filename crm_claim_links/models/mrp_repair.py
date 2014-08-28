@@ -19,7 +19,6 @@
 ##############################################################################
 
 from openerp import fields, models
-from openerp import _
 
 
 class MrpRepair(models.Model):
