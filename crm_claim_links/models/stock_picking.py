@@ -24,16 +24,15 @@ from openerp import _
 
 
 class StockPicking(models.Model):
-    _description = 'stock picking Inheritance'
     _inherit = 'stock.picking'
 
-    claim_id = fields.Many2one('crm.claim', string='Claim', select=True)
-    suppliref = fields.Char(string='Supplier ref', select=True,
+    claim = fields.Many2one('crm.claim', string='Claim', select=True)
+    supplier_ref = fields.Char(string='Supplier ref', select=True,
                             help='Supplier reference number')
 
     @api.multi
     def action_stock_return_picking(self):
-        if not self.claim_id:
+        if not self.claim:
             raise exceptions.Warning(_("Selected Picking has no claim order"
                                        " assigned"))
         else:

@@ -11,10 +11,10 @@
                     <button name="action_stock_return_picking" string="Reverse Transfer" states="done" type="object" groups="base.group_user"/>
                 </button>
                 <field name="partner_id" position="after">
-                    <field name="claim_id" colspan="1" />
+                    <field name="claim" colspan="1" />
                 </field>
                 <field name="min_date" position="after">
-                    <field name="suppliref" select="1" attrs="{'invisible':[('picking_type_id','!=',1)]}"/>
+                    <field name="supplier_ref" select="1" attrs="{'invisible':[('picking_type_id','!=',1)]}"/>
                 </field>
             </field>
         </record>
@@ -25,8 +25,8 @@
             <field name="inherit_id" ref="stock.vpicktree" />
             <field name="arch" type="xml">
                 <field name="min_date" position="after">
-                    <field name="suppliref" select="1" attrs="{'invisible':[('picking_type_id','!=',1)]}"/>
-                    <field name="claim_id"/>
+                    <field name="supplier_ref" select="1" attrs="{'invisible':[('picking_type_id','!=',1)]}"/>
+                    <field name="claim"/>
                 </field>
             </field>
         </record>

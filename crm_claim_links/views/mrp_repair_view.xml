@@ -9,7 +9,7 @@
             <field name="inherit_id" ref="mrp_repair.view_repair_order_form" />
             <field name="arch" type="xml">
                 <field name="address_id" position="after">
-                    <field name="claim_id" colspan="1" />
+                    <field name="claim" colspan="1" />
                 </field>
             </field>
         </record>

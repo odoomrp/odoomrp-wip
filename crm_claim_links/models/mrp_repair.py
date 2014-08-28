@@ -25,4 +25,4 @@ from openerp import _
 class MrpRepair(models.Model):
     _inherit = 'mrp.repair'
 
-    claim_id = fields.Many2one('crm.claim', string='Claim', select=True)
+    claim = fields.Many2one('crm.claim', string='Claim', select=True)

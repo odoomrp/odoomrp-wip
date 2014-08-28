@@ -26,7 +26,7 @@ from openerp import _
 class CrmClaim(models.Model):
     _inherit = 'crm.claim'
 
-    pickings = fields.One2many('stock.picking', 'claim_id',
+    pickings = fields.One2many('stock.picking', 'claim',
                                string='Stock Picking')
-    repairs = fields.One2many('mrp.repair', 'claim_id', string='Stock Picking')
+    repairs = fields.One2many('mrp.repair', 'claim', string='Stock Picking')
 
