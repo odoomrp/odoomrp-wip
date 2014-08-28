@@ -84,14 +84,3 @@ msgstr "Albarán"
 #: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
 msgid "Stock Pickings Related"
 msgstr "Albaranes relacionados"
-
-#. module: crm_claim_links
-#: field:stock.picking,suppliref:0
-msgid "Supplier ref"
-msgstr "Ref. proveedor"
-
-#. module: crm_claim_links
-#: help:stock.picking,suppliref:0
-msgid "Supplier reference number"
-msgstr "Número referencia proveedor"
-
