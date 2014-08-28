@@ -25,8 +25,8 @@
     'version': '1.0',
     'category': 'Purchase',
     'description': """
-This module allows to homologate suppliers with certain product categories, 
-or even products.
+This module allows to homologate suppliers with certain product categories,
+ or even products.
     """,
     'author': 'OdooMRP team',
     'website': 'www.odoomrp.com',

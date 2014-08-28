@@ -21,6 +21,9 @@
 ##############################################################################
 
 from openerp.osv import orm
+from openerp.tools.translate import _
+
+import exceptions
 
 
 class PurchaseOrderLine(orm.Model):
@@ -36,12 +39,13 @@ class PurchaseOrderLine(orm.Model):
                                              context=context)
         res_partner_approval = self.pool['purchase.homologation']
         approval_ids = res_partner_approval.search(
-            cr, uid, [
-            ('partner_id', '=', order_obj[0].partner_id.id),
-            ('category_id', '=', product_obj[0].product_tmpl_id.categ_id.id),
-            ('start_date', '<', vals['date_planned']),
-            ('end_date', '>', vals['date_planned'])], context=context)
-        if approval_ids == False:
+            cr, uid, [('partner_id', '=', order_obj[0].partner_id.id),
+                      ('category_id', '=',
+                       product_obj[0].product_tmpl_id.categ_id.id),
+                      ('start_date', '<', vals['date_planned']),
+                      ('end_date', '>', vals['date_planned'])],
+            context=context)
+        if approval_ids is False:
             raise exceptions.Warning(
                 _('Error!'),
                 _("This product isn't homologate for the supplier selected."))

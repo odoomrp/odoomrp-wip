@@ -33,7 +33,9 @@ class PurchaseHomologation(orm.Model):
         'category_id': fields.many2one('product.category', 'Category'),
         'comments': fields.text('Comments'),
         'end_date': fields.datetime('Finishing date'),
-        'partner_id': fields.many2one('res.partner', 'Supplier', required=True),
-        'product_id': fields.many2one('product.product', 'Product', domain=[('purchase_ok', '=', True)]),
+        'partner_id': fields.many2one('res.partner',
+                                      'Supplier', required=True),
+        'product_id': fields.many2one('product.product', 'Product',
+                                      domain=[('purchase_ok', '=', True)]),
         'start_date': fields.datetime('Beginning date'),
     }
