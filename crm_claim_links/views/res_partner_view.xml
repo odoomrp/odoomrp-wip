@@ -1,0 +1,22 @@
+<openerp>
+    <data>
+
+        <!-- Res Partner -->
+        <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">view.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//page[@name='sales_purchases']" position="after">
+                        <page string="CRM Claims">
+                            <field name="claims" colspan="4" nolabel="1" />
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>
