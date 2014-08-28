@@ -36,7 +36,7 @@ class EventsCopy(models.TransientModel):
         for event in events:
             if event.project_id.date_start:
                 #try:
-                diff_days =self.start_date and datetime.strptime(self.start_date, "%Y-%m-%d %H:%M:%S") or datetime.combine(datetime.strptime(self.project_id.date_start, "%Y-%m-%d"), datetime.min.time()) - datetime.combine(datetime.strptime(event.project_id.date_start, "%Y-%m-%d"), datetime.min.time())
+                diff_days =((self.start_date and datetime.strptime(self.start_date, "%Y-%m-%d %H:%M:%S")) or datetime.combine(datetime.strptime(self.project_id.date_start, "%Y-%m-%d"), datetime.min.time())) - datetime.combine(datetime.strptime(event.project_id.date_start, "%Y-%m-%d"), datetime.min.time())
                 event.write({
                          'project_id': self.project_id.id,
                          'date_begin': datetime.strptime(event.date_begin, "%Y-%m-%d %H:%M:%S") + diff_days,
