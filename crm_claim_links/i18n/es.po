@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-28 10:01+0000\n"
-"PO-Revision-Date: 2014-08-28 12:36+0100\n"
+"PO-Revision-Date: 2014-08-28 13:08+0100\n"
 "Last-Translator: Daniel <danielcampos@avanzosc.es>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -50,29 +50,29 @@ msgstr "Lista de albaranes"
 #. module: crm_claim_links
 #: model:ir.model,name:crm_claim_links.model_mrp_repair
 msgid "Repair Order"
-msgstr "Orden de Reparación"
+msgstr "Orden de reparación"
 
 #. module: crm_claim_links
 #: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
 msgid "Repairs Related"
-msgstr "Reparaciones Relacionadas"
+msgstr "Reparaciones relacionadas"
 
 #. module: crm_claim_links
 #: code:addons/crm_claim_links/models/stock_picking.py:44
 #, python-format
 msgid "Return Shipment"
-msgstr "Delvolver Envío"
+msgstr "Delvolver envío"
 
 #. module: crm_claim_links
 #: view:stock.picking:crm_claim_links.picking_in_form_pack
 msgid "Reverse Transfer"
-msgstr "Revertir Transferencia"
+msgstr "Revertir transferencia"
 
 #. module: crm_claim_links
 #: code:addons/crm_claim_links/models/stock_picking.py:37
 #, python-format
 msgid "Selected Picking has no claim order assigned"
-msgstr "El Albarán seleccionado no tiene una reclamación asignada"
+msgstr "El albarán seleccionado no tiene una reclamación asignada"
 
 #. module: crm_claim_links
 #: field:crm.claim,pickings:0
@@ -83,7 +83,7 @@ msgstr "Albarán"
 #. module: crm_claim_links
 #: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
 msgid "Stock Pickings Related"
-msgstr "Albaranes Relacionados"
+msgstr "Albaranes relacionados"
 
 #. module: crm_claim_links
 #: field:stock.picking,suppliref:0
