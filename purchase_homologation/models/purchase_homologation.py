@@ -20,22 +20,20 @@
 #                                                                            #
 ##############################################################################
 
-from openerp.osv import fields, orm
+from openerp import fields, models
 
 
-class PurchaseHomologation(orm.Model):
+class PurchaseHomologation(models.Model):
 
     _name = 'purchase.homologation'
 
     _description = 'Homologation for suppliers and categories'
 
-    _columns = {
-        'category_id': fields.many2one('product.category', 'Category'),
-        'comments': fields.text('Comments'),
-        'end_date': fields.datetime('Finishing date'),
-        'partner_id': fields.many2one('res.partner',
-                                      'Supplier', required=True),
-        'product_id': fields.many2one('product.product', 'Product',
-                                      domain=[('purchase_ok', '=', True)]),
-        'start_date': fields.datetime('Beginning date'),
-    }
+    category_id = fields.Many2one('product.category', string='Category'),
+    comments = fields.Text(string='Comments'),
+    end_date = fields.Datetime(string='Finishing date'),
+    partner_id = fields.Many2one('res.partner',
+                                 string='Supplier', required=True),
+    product_id = fields.Many2one('product.product', string='Product',
+                                 domain=[('purchase_ok', '=', True)]),
+    start_date = fields.Datetime(string='Beginning date'),
