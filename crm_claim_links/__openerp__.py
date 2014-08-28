@@ -37,7 +37,7 @@
     'contributors': ["Daniel Campos <danielcampos@avanzosc.es>"],
     'website': "http://www.odoomrp.com",
     'depends': ["crm_claim", "mrp_repair"],
-    'data': ["views/stock_view.xml",
+    'data': ["views/stock_picking_view.xml",
              "views/res_partner_view.xml",
              "views/mrp_repair_view.xml",
              "views/crm_claim_view.xml"

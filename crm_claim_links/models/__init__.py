@@ -20,4 +20,6 @@
 ##############################################################################
 
 from . import stock_picking
-from . import stpick_crm_mrp_repair
+from . import crm_claim
+from . import mrp_repair
+from . import res_partner

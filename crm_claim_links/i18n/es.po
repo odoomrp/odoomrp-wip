@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-28 10:01+0000\n"
-"PO-Revision-Date: 2014-08-28 12:25+0100\n"
+"PO-Revision-Date: 2014-08-28 12:36+0100\n"
 "Last-Translator: Daniel <danielcampos@avanzosc.es>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 #. module: crm_claim_links
 #: view:res.partner:crm_claim_links.view_partner_form_inherit
 msgid "CRM Claims"
-msgstr "Reclamaciones CRM"
+msgstr "Reclamaciones"
 
 #. module: crm_claim_links
 #: model:ir.model,name:crm_claim_links.model_crm_claim
@@ -35,17 +35,17 @@ msgstr "Reclamaciones"
 #. module: crm_claim_links
 #: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
 msgid "Extra Information Related"
-msgstr "Información Extra Relacionada"
+msgstr "Información extra relacionada"
 
 #. module: crm_claim_links
 #: model:ir.model,name:crm_claim_links.model_res_partner
 msgid "Partner"
-msgstr "Partner"
+msgstr "Empresa"
 
 #. module: crm_claim_links
 #: model:ir.model,name:crm_claim_links.model_stock_picking
 msgid "Picking List"
-msgstr "Lista de Albaranes"
+msgstr "Lista de albaranes"
 
 #. module: crm_claim_links
 #: model:ir.model,name:crm_claim_links.model_mrp_repair
@@ -93,5 +93,5 @@ msgstr "Ref Proveedor"
 #. module: crm_claim_links
 #: help:stock.picking,suppliref:0
 msgid "Supplier reference number"
-msgstr "Número Referencia Proveedor"
+msgstr "Número referencia proveedor"
 
