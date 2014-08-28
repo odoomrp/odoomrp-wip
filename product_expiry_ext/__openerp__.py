@@ -20,7 +20,7 @@
     "name": "Products Expiry Date Extension",
     "version": "1.0",
     "depends": ["stock","product_expiry"],
-    "author": "OdooMRP Team",
+    "author": "OdooMRP team",
     "contributors": [
         "Juan Ignacio Úbeda <juanignacioubeda@avanzosc.es>",
     ],
