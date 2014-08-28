@@ -1,0 +1,102 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* crm_claim_links
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-28 07:25+0000\n"
+"PO-Revision-Date: 2014-08-28 07:25+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: crm_claim_links
+#: field:mrp.repair,crm_name:0
+msgid "CRM Claim"
+msgstr "CRM Claim"
+
+#. module: crm_claim_links
+#: view:res.partner:crm_claim_links.view_partner_form_inherit
+#: field:res.partner,crm_claims:0
+msgid "CRM Claims"
+msgstr "CRM Claims"
+
+#. module: crm_claim_links
+#: model:ir.model,name:crm_claim_links.model_crm_claim
+msgid "Claim"
+msgstr "Claim"
+
+#. module: crm_claim_links
+#: code:addons/crm_claim_links/models/stock_picking.py:37
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: crm_claim_links
+#: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
+msgid "Extra Information Related"
+msgstr "Extra Information Related"
+
+#. module: crm_claim_links
+#: model:ir.model,name:crm_claim_links.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: crm_claim_links
+#: model:ir.model,name:crm_claim_links.model_stock_picking
+msgid "Picking List"
+msgstr "Picking List"
+
+#. module: crm_claim_links
+#: model:ir.model,name:crm_claim_links.model_mrp_repair
+msgid "Repair Order"
+msgstr "Repair Order"
+
+#. module: crm_claim_links
+#: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
+msgid "Repairs Related"
+msgstr "Repairs Related"
+
+#. module: crm_claim_links
+#: code:addons/crm_claim_links/models/stock_picking.py:46
+#, python-format
+msgid "Return Shipment"
+msgstr "Return Shipment"
+
+#. module: crm_claim_links
+#: view:stock.picking:crm_claim_links.picking_in_form_pack
+msgid "Reverse Transfer"
+msgstr "Reverse Transfer"
+
+#. module: crm_claim_links
+#: code:addons/crm_claim_links/models/stock_picking.py:38
+#, python-format
+msgid "Selected Picking has no claim order assigned"
+msgstr "Selected Picking has no claim order assigned"
+
+#. module: crm_claim_links
+#: field:crm.claim,repair_ids:0
+#: field:crm.claim,st_picking:0
+msgid "Stock Picking"
+msgstr "Stock Picking"
+
+#. module: crm_claim_links
+#: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
+msgid "Stock Pickings Related"
+msgstr "Stock Pickings Related"
+
+#. module: crm_claim_links
+#: field:stock.picking,suppliref:0
+msgid "Supplier ref"
+msgstr "Supplier ref"
+
+#. module: crm_claim_links
+#: help:stock.picking,suppliref:0
+msgid "Supplier reference number"
+msgstr "Supplier reference number"
+

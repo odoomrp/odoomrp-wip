@@ -21,11 +21,12 @@
 #
 ##############################################################################
 {
-    'name': 'CRM claims Links',
+    'name': 'CRM claim Links',
     'version': "1.0",
     'category': "Generic Modules",
     'description': """
-    This module adds: \n
+    This module adds:
+    
     - A link to crm claims in the stock pickings
     - A link to crm claims in repair orders
     - A Field for Supplier Stock Picking Reference in stock picking Receipts
