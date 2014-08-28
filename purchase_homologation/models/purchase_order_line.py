@@ -30,17 +30,13 @@ class PurchaseOrderLine(models.Model):
     @api.onchange('product_id')
     @api.one
     def onchange_product(self):
-        purchase_order = self.env['purchase.order']
-        order_obj = purchase_order.browse(self.order_id)
-        product_product = self.env['product.product']
-        product_obj = product_product.browse(self.product_id)
-        purchase_homologation = self.env['purchase.homologation']
-        homologation_obj = purchase_homologation.search([
-            ('partner_id', '=', order_obj.partner_id.id),
-            ('category_id', '=', product_obj.product_tmpl_id.categ_id.id),
-            ('start_date', '<', self.date_planned),
-            ('end_date', '>', self.date_planned)])
-        if homologation_obj is False:
+        homologation_obj = self.env['purchase.homologation']
+        homologations = homologation_obj.search([
+            ('partner_id', '=', self.order_id.partner_id.id),
+            ('category_id', '=', self.product_id.product_tmpl_id.categ_id.id),
+            ('start_date', '<=', self.date_planned),
+            ('end_date', '>=', self.date_planned)])
+        if not homologations:
             raise exceptions.Warning(
                 _('Error!'),
-                _("This product isn't homologate for the supplier selected."))
+                _("This product isn't homologate for the selected supplier."))
