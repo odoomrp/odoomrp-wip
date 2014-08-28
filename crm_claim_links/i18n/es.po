@@ -34,7 +34,7 @@ msgstr "Reclamaciones"
 
 #. module: crm_claim_links
 #: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
-msgid "Extra Information Related"
+msgid "Related Extra Information"
 msgstr "Información extra relacionada"
 
 #. module: crm_claim_links
@@ -54,7 +54,7 @@ msgstr "Orden de reparación"
 
 #. module: crm_claim_links
 #: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
-msgid "Repairs Related"
+msgid "Related Repairs"
 msgstr "Reparaciones relacionadas"
 
 #. module: crm_claim_links
@@ -82,5 +82,5 @@ msgstr "Albarán"
 
 #. module: crm_claim_links
 #: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
-msgid "Stock Pickings Related"
+msgid "Related Stock Pickings"
 msgstr "Albaranes relacionados"
