@@ -20,7 +20,7 @@
 #                                                                            #
 ##############################################################################
 
-from openerp import api, exceptions, models, _
+from openerp import api, models, _
 
 
 class PurchaseOrderLine(models.Model):
@@ -32,11 +32,23 @@ class PurchaseOrderLine(models.Model):
     def onchange_product(self):
         homologation_obj = self.env['purchase.homologation']
         homologations = homologation_obj.search([
-            ('partner_id', '=', self.order_id.partner_id.id),
-            ('category_id', '=', self.product_id.product_tmpl_id.categ_id.id),
-            ('start_date', '<=', self.date_planned),
-            ('end_date', '>=', self.date_planned)])
+            '&', ('&', ('partner_id', '=', self.order_id.partner_id.id),
+                  ('|', ('&', ('category_id', '=',
+                               self.product_id.product_tmpl_id.categ_id.id),
+                         ('product_id', '=', False)),
+                   ('&', ('category_id', '=', False),
+                    ('product_id', '=', self.product_id.id)))),
+            ('&', ('|', ('start_date', '<=', self.date_planned),
+                   ('start_date', '=', False)),
+             ('|', ('end_date', '>=', self.date_planned),
+              ('end_date', '=', False)))])
+        message = 'This product is not homologate for the selected supplier.'
         if not homologations:
-            raise exceptions.Warning(
-                _('Error!'),
-                _("This product isn't homologate for the selected supplier."))
+            flag = 0
+            for id in self.env.user.group_ids:
+                if id == self.env.ref('purchase_homologation.grp_homologate'):
+                    flag += 1
+            if flag > 0:
+                return {'warning': message}
+            else:
+                raise Warning(_('Warning!'), _(message))

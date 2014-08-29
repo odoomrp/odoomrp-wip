@@ -12,11 +12,11 @@
                             <group>
                                 <field name="partner_id"/>
                                 <field name="category_id"/>
-                                <field name="start_date"/>
-                                <field name="end_date"/>
+                                <field name="product_id"/>
                             </group>
                             <group>
-                                <field name="product_id"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
                             </group>
                         </group>
                         <group>
@@ -31,12 +31,13 @@
             <field name="name">purchase.homologation.tree.view</field>
             <field name="model">purchase.homologation</field>
             <field name="arch" type="xml">
-                <tree string="Supplier homologation">
+                <tree string="Supplier homologation" editable="bottom">
                     <field name="partner_id"/>
                     <field name="category_id"/>
                     <field name="product_id"/>
                     <field name="start_date"/>
                     <field name="end_date"/>
+                    <field name="comments"/>
                 </tree>
             </field>
         </record>
@@ -47,7 +48,7 @@
             <field name="view_mode">form,tree</field>
             <field name="view_id" ref="purchase_homologation_tree_view"/>
             <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Click to set a new supplier homologation for purchase order.</p>
+                <p class="oe_view_nocontent_create">Click here to set a new supplier homologation for certain product or category.</p>
             </field>
         </record>
 

@@ -20,7 +20,7 @@
 #                                                                            #
 ##############################################################################
 
-from openerp import fields, models
+from openerp import fields, models, api, _
 
 
 class PurchaseHomologation(models.Model):
@@ -37,3 +37,15 @@ class PurchaseHomologation(models.Model):
     product_id = fields.Many2one('product.product', string='Product',
                                  domain=[('purchase_ok', '=', True)]),
     start_date = fields.Datetime(string='Beginning date'),
+
+    @api.constrains('category_id', 'product_id')
+    @api.one
+    def check_category_and_product(self):
+        if not self.category_id and self.product_id:
+            raise Warning(
+                _('Error!'),
+                _('You must select a category or product.'))
+        if self.category_id and self.product_id:
+            raise Warning(
+                _('Error!'),
+                _('You only must select one of these: category or product.'))

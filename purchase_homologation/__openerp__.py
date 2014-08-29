@@ -26,8 +26,9 @@
     'category': 'Purchase',
     'description': """
 This module allows to homologate suppliers with certain product categories,
-or even products. In purchase orders are allowed to order products from
-suppliers that do not have homologated this product.
+or even products.
+Then, you won't be able to purchase any product that is not homologated,
+except users that has been granted to do it.
     """,
     'author': 'OdooMRP team',
     'website': 'www.odoomrp.com',
