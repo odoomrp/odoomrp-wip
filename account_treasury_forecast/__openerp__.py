@@ -32,7 +32,6 @@
         recurring payments and variable payments.
     """,
     'data': [
-        "security/account_treasury_forecast_security.xml",
         "security/ir.model.access.csv",
         "wizard/wiz_create_invoice_view.xml",
         "views/account_treasury_forecast_view.xml",

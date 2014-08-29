@@ -22,7 +22,6 @@ from openerp import models, fields, api, exceptions, _
 
 class AccountTreasuryForecastTemplate(models.Model):
     _inherit = 'account.treasury.forecast.template'
-    _description = ''
 
     receivable_ids = fields.One2many(
         "account.treasury.forecast.receivable.template",
@@ -34,6 +33,7 @@ class AccountTreasuryForecastTemplate(models.Model):
 
 class AccountTreasuryForecastReceivableTemplate(models.Model):
     _name = "account.treasury.forecast.receivable.template"
+    _description = "Receivable Payment Template"
 
     name = fields.Char(string="Description")
     date = fields.Date(string="Date")
@@ -46,6 +46,7 @@ class AccountTreasuryForecastReceivableTemplate(models.Model):
 
 class AccountTreasuryForecastCashflowTemplate(models.Model):
     _name = "account.treasury.forecast.cashflow.template"
+    _description = "Cash-Flow Record Template"
 
     name = fields.Char(string="Description")
     date = fields.Date(string="Date")
@@ -59,7 +60,7 @@ class AccountTreasuryForecastCashflowTemplate(models.Model):
 
     @api.one
     @api.constrains('flow_type', 'amount')
-    def _check_importe(self):
+    def _check_amount(self):
         if self.flow_type == 'in' and self.amount <= 0.0:
             raise exceptions.Warning(_("Error!:: If input cash-flow, "
                                        "amount must be positive"))

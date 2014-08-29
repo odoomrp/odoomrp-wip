@@ -16,5 +16,16 @@
 #
 ##############################################################################
 
-from . import models
-from . import report
+from openerp import models, fields
+
+
+class AccountTreasuryForecastReceivableemplate(models.Model):
+    _inherit = 'account.treasury.forecast.receivable.template'
+
+    payment_mode_id = fields.Many2one("payment.mode", string="Payment Mode")
+
+
+class AccountTreasuryForecastCashflowTemplate(models.Model):
+    _inherit = 'account.treasury.forecast.cashflow.template'
+
+    payment_mode_id = fields.Many2one("payment.mode", string="Payment Mode")

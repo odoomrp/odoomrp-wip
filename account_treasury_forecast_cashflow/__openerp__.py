@@ -32,5 +32,4 @@
              "views/account_treasury_forecast_view.xml"],
     'installable': True,
     'auto_install': False,
-#    'certificate': 'certificate',
 }

@@ -23,14 +23,16 @@ class AccountTreasuryForecastInvoice(models.Model):
     _inherit = 'account.treasury.forecast.invoice'
 
     payment_mode_id = fields.Many2one("payment.mode", string="Payment Mode",
+                                      store=True,
                                       related="invoice_id.payment_mode_id")
     invoice_type = fields.Selection([('out_invoice', 'Customer Invoice'),
                                      ('in_invoice', 'Supplier Invoice'),
                                      ('out_refund', 'Customer Refund'),
-                                     ('in_refund', 'Supplier Refund'),],
+                                     ('in_refund', 'Supplier Refund')],
                                     string="Type", related="invoice_id.type")
     payment_term_id = fields.Many2one("account.payment.term",
-                                     string="Payment Term")
+                                      string="Payment Term",
+                                      related="invoice_id.payment_term")
 
 
 class AccountTreasuryForecastRecurring(models.Model):

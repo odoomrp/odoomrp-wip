@@ -122,17 +122,17 @@
         </record>
 
         <record id="action_account_treasury_forecast_form" model="ir.actions.act_window">
-            <field name="name">Account Treasury Forecast</field>
+            <field name="name">Treasury Forecast</field>
             <field name="res_model">account.treasury.forecast</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="help">Account Treasury Forecast</field>
+            <field name="help">Treasury Forecast</field>
         </record>
 
         <menuitem id="menu_account_treasury_forecast" name="Account Treasury Forecast"
-            parent="account.menu_finance" sequence="8" groups="treasury_manager"/>
+            parent="account.menu_finance" sequence="8" groups="account.group_account_user"/>
         <menuitem action="action_account_treasury_forecast_form" id="menu_account_treasury_forecast_form"
-            parent="menu_account_treasury_forecast" groups="treasury_manager"/>
+            parent="menu_account_treasury_forecast" groups="account.group_account_user"/>
 
     </data>
 </openerp>

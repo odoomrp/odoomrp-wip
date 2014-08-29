@@ -16,5 +16,4 @@
 #
 ##############################################################################
 
-from . import models
-from . import report
+from . import account_treasury_forecast_analysis

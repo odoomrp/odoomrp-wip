@@ -22,14 +22,13 @@ from openerp import models, fields, api, exceptions, _
 
 class AccountTreasuryForecast(models.Model):
     _inherit = "account.treasury.forecast"
-    _description = ""
 
     @api.one
     def calc_final_amount(self):
         super(AccountTreasuryForecast, self).calc_final_amount()
         balance = 0
         for receivable in self.receivable_ids:
-            balance -= receivable.total_amount
+            balance += receivable.amount
         for cashfow in self.cashflow_ids:
             balance += cashfow.amount
         self.final_amount += balance
@@ -61,11 +60,10 @@ class AccountTreasuryForecast(models.Model):
         for receivable_o in self.template_id.receivable_ids:
             if ((receivable_o.date > self.start_date and
                     receivable_o.date < self.end_date) or
-                    not receivable_o.date) and not receivable_o.paid:
+                    not receivable_o.date):
                 values = {
                     'name': receivable_o.name,
                     'date': receivable_o.date,
-                    'partner_id': receivable_o.partner_id.id,
                     'template_line_id': receivable_o.id,
                     'amount': receivable_o.amount,
                     'treasury_id': self.id,
@@ -81,11 +79,10 @@ class AccountTreasuryForecast(models.Model):
         for cashflow_o in self.template_id.cashflow_ids:
             if ((cashflow_o.date > self.start_date and
                     cashflow_o.date < self.end_date) or
-                    not cashflow_o.date) and not cashflow_o.paid:
+                    not cashflow_o.date):
                 values = {
                     'name': cashflow_o.name,
                     'date': cashflow_o.date,
-                    'partner_id': cashflow_o.partner_id.id,
                     'template_line_id': cashflow_o.id,
                     'amount': cashflow_o.amount,
                     'flow_type': cashflow_o.flow_type,
@@ -98,6 +95,7 @@ class AccountTreasuryForecast(models.Model):
 
 class AccountTreasuryForecastReceivable(models.Model):
     _name = "account.treasury.forecast.receivable"
+    _description = "Receivable Payments"
 
     name = fields.Char(string="Description")
     date = fields.Date(string="Date")
@@ -113,6 +111,7 @@ class AccountTreasuryForecastReceivable(models.Model):
 
 class AccountTreasuryForecastCashflow(models.Model):
     _name = "account.treasury.forecast.cashflow"
+    _description = "Cash-Flow Records"
 
     name = fields.Char(string="Description")
     date = fields.Date(string="Date")
@@ -129,7 +128,7 @@ class AccountTreasuryForecastCashflow(models.Model):
 
     @api.one
     @api.constrains('flow_type', 'amount')
-    def _check_importe(self):
+    def _check_amount(self):
         if self.flow_type == 'in' and self.amount <= 0.0:
             raise exceptions.Warning(_("Error!:: If input cash-flow, "
                                        "amount must be positive"))

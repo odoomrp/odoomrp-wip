@@ -76,7 +76,7 @@
             <field name="name">account.treasury.forecast.template.search</field>
             <field name="model">account.treasury.forecast.template</field>
             <field name="arch" type="xml">
-                <search string="Account Treasury Forecast Template">
+                <search string="Treasury Forecast Template">
                     <field name="name" />
                 </search>
             </field>
@@ -86,7 +86,7 @@
             <field name="name">account.treasury.forecast.template.tree</field>
             <field name="model">account.treasury.forecast.template</field>
             <field name="arch" type="xml">
-                <tree string="Account Treasury Forecast Template">
+                <tree string="Treasury Forecast Template">
                     <field name="name" />
                 </tree>
             </field>
@@ -96,7 +96,7 @@
             <field name="name">account.treasury.forecast.template.form</field>
             <field name="model">account.treasury.forecast.template</field>
             <field name="arch" type="xml">
-                <form string="Account Treasury Forecast Template">
+                <form string="Treasury Forecast Template">
                     <group colspan="4" col="4">
                         <separator string="Account Treasury Forecast Template" colspan="4" />
                         <newline/>
@@ -115,14 +115,14 @@
         </record>
 
         <record id="action_account_treasury_forecast_template" model="ir.actions.act_window">
-            <field name="name">Account Treasury Forecast Template</field>
+            <field name="name">Treasury Forecast Template</field>
             <field name="res_model">account.treasury.forecast.template</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="help">Account Treasury Forecast Template</field>
+            <field name="help">Treasury Forecast Template</field>
         </record>
 
-        <menuitem action="action_account_treasury_forecast_template" id="menu_account_treasury_forecast_template_form" sequence="8" parent="menu_account_treasury_forecast" groups="treasury_manager"/>
+        <menuitem action="action_account_treasury_forecast_template" id="menu_account_treasury_forecast_template_form" sequence="8" parent="menu_account_treasury_forecast" groups="account.group_account_manager"/>
 
     </data>
 </openerp>

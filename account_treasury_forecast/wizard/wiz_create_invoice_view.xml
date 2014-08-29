@@ -7,10 +7,8 @@
             <field name="model">wiz.create.invoice</field>
             <field name="arch" type="xml">
                 <form string="Create Invoice">
-                    <header>
-                        <field name="description" required="1"/>
-                    </header>
                     <group>
+                        <field name="description" required="1" colspan="1"/>
                         <field name="partner_id" required="1"/>
                         <field name="journal_id" required="1"/>
                         <field name="amount" required="1"/>

@@ -17,7 +17,7 @@
 ##############################################################################
 
 import openerp.addons.decimal_precision as dp
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api
 
 
 class WizCreateInvoice(models.TransientModel):
@@ -36,18 +36,16 @@ class WizCreateInvoice(models.TransientModel):
     @api.one
     def button_create_inv(self):
         invoice_obj = self.env['account.invoice']
-        values = {'name': 'Treasury: ' + self.description + '/ Amount: ' +
-                  str(self.amount),
-                  'reference': 'Treasury: ' + self.description + '/ Amount: ' +
-                  str(self.amount),
-                  'partner_id': self.partner_id.id,
-                  'journal_id': self.journal_id.id,
-                  'type': 'in_invoice',
-#                  'account_id': self.partner_id.property_account_payable.id,
-#                  'payment_term': self.partner_id.property_payment_term.id,
-#                  'fiscal_position':
-#                      self.partner_id.property_account_position.id
-                  }
+        res_inv = invoice_obj.onchange_partner_id('in_invoice',
+                                                  self.partner_id.id)
+        values = res_inv['value']
+        values['name'] = ('Treasury: ' + self.description + '/ Amount: ' +
+                          str(self.amount))
+        values['reference'] = ('Treasury: ' + self.description + '/ Amount: ' +
+                               str(self.amount))
+        values['partner_id'] = self.partner_id.id
+        values['journal_id'] = self.journal_id.id
+        values['type'] = 'in_invoice'
         print values
         invoice_id = invoice_obj.create(values)
         if self.type == 'V':
@@ -55,6 +53,7 @@ class WizCreateInvoice(models.TransientModel):
         else:
             obj = self.env['account.treasury.forecast.recurring.template']
         pay_o = obj.browse(self.payment)
-        pay_o.write({'factura_id': invoice_id, 'paid': 1, 'journal_id':
-                     self.journal_id.id})
+        pay_o.write({'invoice_id': invoice_id.id, 'paid': 1, 'journal_id':
+                     self.journal_id.id, 'partner_id': self.partner_id.id,
+                     'amount': self.amount})
         return {'type': 'ir.actions.act_window_close'}

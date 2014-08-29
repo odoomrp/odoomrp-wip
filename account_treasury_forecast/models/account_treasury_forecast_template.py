@@ -22,7 +22,7 @@ from openerp import models, fields, api, _
 
 class AccountTreasuryForecastTemplate(models.Model):
     _name = 'account.treasury.forecast.template'
-    _description = ''
+    _description = 'Treasury Forecast Template'
 
     name = fields.Char(string="Description")
     recurring_ids = fields.One2many(
@@ -35,7 +35,7 @@ class AccountTreasuryForecastTemplate(models.Model):
 
 class AccountTreasuryForecastRecurringTemplate(models.Model):
     _name = 'account.treasury.forecast.recurring.template'
-    _description = ''
+    _description = 'Recurring Payment Template'
 
     name = fields.Char(string="Description")
     date = fields.Date(string="Date")
@@ -82,7 +82,7 @@ class AccountTreasuryForecastRecurringTemplate(models.Model):
 
 class AccountTreasuryForecastVariableTemplate(models.Model):
     _name = 'account.treasury.forecast.variable.template'
-    _description = ''
+    _description = 'Variable Payment Template'
 
     name = fields.Char(string="Description")
     date = fields.Date(string="Date")

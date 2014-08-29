@@ -25,7 +25,7 @@ from openerp import models, fields, api, exceptions, _
 
 class AccountTreasuryForecastInvoice(models.Model):
     _name = 'account.treasury.forecast.invoice'
-    _description = ''
+    _description = 'Treasury Forecast Invoice'
 
     invoice_id = fields.Many2one("account.invoice", string="Invoice")
     date_due = fields.Date(string="Due Date")
@@ -79,11 +79,13 @@ class AccountTreasuryForecast(models.Model):
     out_invoice_ids = fields.Many2many(
         comodel_name="account.treasury.forecast.invoice",
         relation="account_treasury_forecast_out_invoice_rel",
-        column1="treasury_id", column2="out_invoice_id", string="Out Invoices")
+        column1="treasury_id", column2="out_invoice_id",
+        string="Out Invoices")
     in_invoice_ids = fields.Many2many(
         comodel_name="account.treasury.forecast.invoice",
         relation="account_treasury_forecast_in_invoice_rel",
-        column1="treasury_id", column2="in_invoice_id", string="In Invoices")
+        column1="treasury_id", column2="in_invoice_id",
+        string="In Invoices")
     recurring_ids = fields.One2many("account.treasury.forecast.recurring",
                                     "treasury_id", string="Recurring Payments")
     variable_ids = fields.One2many("account.treasury.forecast.variable",
@@ -202,7 +204,7 @@ class AccountTreasuryForecast(models.Model):
 
 class AccountTreasuryForecastRecurring(models.Model):
     _name = 'account.treasury.forecast.recurring'
-    _description = ''
+    _description = 'Recurring Payments'
 
     name = fields.Char(string="Description")
     date = fields.Date(string="Date")
@@ -217,7 +219,7 @@ class AccountTreasuryForecastRecurring(models.Model):
 
 class AccountTreasuryForecastVariable(models.Model):
     _name = 'account.treasury.forecast.variable'
-    _description = ''
+    _description = 'Variable Payments'
 
     name = fields.Char(string="Description")
     partner_id = fields.Many2one("res.partner", string="Partner")

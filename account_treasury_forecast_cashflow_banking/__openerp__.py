@@ -16,5 +16,22 @@
 #
 ##############################################################################
 
-from . import models
-from . import report
+{
+    "name": "Account Treasury Forecast Cashflow Banking",
+    "version": "1.0",
+    "depends": ["account_treasury_forecast_banking",
+                "account_treasury_forecast_cashflow"],
+    "author": "AvanzOSC",
+    "category": "Accounting",
+    "description": """
+    This module:
+    Sorts receivable payments and Cash-Flow records by payment mode.
+    Extends Treasury Forecast Analysis Report for receivable payment and
+    Cash-Flow record management.
+    """,
+    'data': [],
+    'demo': ["views/account_treasury_forecast_template_view.xml",
+             "views/account_treasury_forecast_view.xml"],
+    'installable': True,
+    'auto_install': True,
+}

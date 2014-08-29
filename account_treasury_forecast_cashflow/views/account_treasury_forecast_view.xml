@@ -14,7 +14,7 @@
                 </tree>
             </field>
         </record>
-        
+
         <record model="ir.ui.view" id="account_treasury_forecast_receivable_form_view">
             <field name="name">account.treasury.forecast.receivable.form</field>
             <field name="model">account.treasury.forecast.receivable</field>
@@ -40,7 +40,7 @@
                 </tree>
             </field>
         </record>
-        
+
         <record model="ir.ui.view" id="account_treasury_forecast_cashflow_tree_view">
             <field name="name">account.treasury.forecast.cashflow.tree</field>
             <field name="model">account.treasury.forecast.cashflow</field>
@@ -54,7 +54,7 @@
                 </tree>
             </field>
         </record>
-        
+
         <record model="ir.ui.view" id="account_treasury_forecast_cashflow_form_view">
             <field name="name">account.treasury.forecast.cashflow.form</field>
             <field name="model">account.treasury.forecast.cashflow</field>
