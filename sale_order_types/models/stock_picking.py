@@ -20,40 +20,17 @@
 #                                                                            #
 ##############################################################################
 
-from openerp import api
-from openerp.osv import fields, orm
+from openerp import api, models
 
+class StockPicking(models.Model):
 
-class SaleOrder(orm.Model):
-
-    _inherit = 'sale.order'
-
-    _columns = {
-        'type_id': fields.many2one('sale.order.type', 'Type', required=True),
-    }
-
-    def on_change_type_id(self, cr, uid, ids, type_id, context=None):
-        if type_id:
-            type_obj = self.pool['sale.order.type'].browse(
-                cr, uid, [type_id], context=context)
-            return {'value': {'warehouse_id': type_obj[0].warehouse_id.id}}
-
-    def create(self, cr, uid, vals, context=None):
-        if vals.get('name', '/') == '/':
-            if vals['type_id']:
-                type_obj = self.pool['sale.order.type'].browse(
-                    cr, uid, [vals['type_id']], context=context)
-            if type_obj[0].sequence_id:
-                sequence_obj = self.pool['ir.sequence']
-                vals['name'] = sequence_obj.next_by_id(
-                    cr, uid, type_obj[0].sequence_id.id)
-        return super(SaleOrder, self).create(cr, uid, vals, context=context)
+    _inherit = "stock.picking"
 
     @api.model
-    def _prepare_invoice(self, order, line_ids):
-        res = super(SaleOrder, self)._prepare_invoice(order, line_ids)
-        orders = self.env['sale.order'].seach([('id', '=', order)])
-        invoice_vals = {
-            'journal_id': orders[0].type_id.journal_id.id
-        }
-        return res
+    def _create_invoice_from_picking(self, picking, vals):
+        if self.origin:
+            orders = self.env['sale.order'].seach(
+                [('name', '=', self.origin)])
+            vals['journal_id'] = orders[0].type_id.journal_id.id
+        return super(StockPicking, self)._create_invoice_from_picking(picking,
+                                                                      vals)
