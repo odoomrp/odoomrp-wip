@@ -1,11 +1,8 @@
 
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2008-2014 AvanzOSC (Daniel). All Rights Reserved
-#    Date: 10/07/2014
+#    Daniel Campos (danielcampos@avanzosc.es) Date: 25/08/2014
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -22,21 +19,10 @@
 #
 ##############################################################################
 
-{
-    "name": "MRP Operations Extension",
-    "version": "1.0",
-    "description": """
-    This module adds a new table to store operations to avoid typing them
-    again.
-    """,
-    'author': 'OdooMRP team',
-    'website': "http://www.odoomrp.com",
-    "depends": ['mrp_operations', 'mrp'],
-    "category": "Manufacturing",
-    "data": ['views/mrp_workcenter_view.xml',
-             'views/mrp_routing_operation_view.xml',
-             'views/mrp_production_view.xml',
-             'views/mrp_bom_view.xml'
-             ],
-    "installable": True
-}
+from openerp import models, fields
+
+
+class StockMove(models.Model):
+    _inherit = "stock.move"
+
+    operation = fields.Many2one('mrp.routing.workcenter', 'Operation')

@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view" />
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                   <field name="operation_id"/>
+                   <field name="operation"/>
                 </field>
             </field>
         </record>
@@ -19,7 +19,7 @@
             <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view" />
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                   <field name="operation_id" on_change="onchange_operation(operation_id)"/>
+                   <field name="operation"/>
                 </field>
             </field>
         </record>

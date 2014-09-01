@@ -1,5 +1,4 @@
 
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -22,21 +21,13 @@
 #
 ##############################################################################
 
-{
-    "name": "MRP Operations Extension",
-    "version": "1.0",
-    "description": """
-    This module adds a new table to store operations to avoid typing them
-    again.
-    """,
-    'author': 'OdooMRP team',
-    'website': "http://www.odoomrp.com",
-    "depends": ['mrp_operations', 'mrp'],
-    "category": "Manufacturing",
-    "data": ['views/mrp_workcenter_view.xml',
-             'views/mrp_routing_operation_view.xml',
-             'views/mrp_production_view.xml',
-             'views/mrp_bom_view.xml'
-             ],
-    "installable": True
-}
+from openerp import models, fields
+
+
+class MrpRoutingOperation(models.Model):
+    _name = 'mrp.routing.operation'
+    _description = 'MRP Routing Operation'
+
+    name = fields.Char('Name', required=True)
+    code = fields.Char('Code')
+    description = fields.Text('Description')

@@ -21,32 +21,18 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, fields, api
 
 
-class MrpRoutingOperation(orm.Model):
-    _name = 'mrp.routing.operation'
-    _description = 'MRP Routing Operation'
-
-    _columns = {
-        'name': fields.char('Name', required=True),
-        'code': fields.char('Code'),
-    }
-
-
-class MrpRoutingWorkcenter(orm.Model):
+class MrpRoutingWorkcenter(models.Model):
     _inherit = 'mrp.routing.workcenter'
 
-    _columns = {
-        'operation_id': fields.many2one('mrp.routing.operation', 'Operation',
-                                        required=True),
-    }
+    operation = fields.Many2one('mrp.routing.operation', 'Operation',
+                                required=True)
 
-    def onchange_operation(self, cr, uid, ids, operation_id, context=None):
-        values = {}
-        operation_obj = self.pool['mrp.routing.operation']
-        operation = operation_obj.browse(cr, uid, operation_id, context)
-        if operation:
-            values = {'name': operation.name}
-        return {'value': values}
+    @api.one
+    @api.onchange('operation')
+    def onchange_operation(self):
+        if self.operation:
+            self.name = self.operation.name
+            self.note = self.operation.description
