@@ -24,7 +24,7 @@
     "name": "Product attributes extension",
     "version": "1.0",
     "depends": ["base", "website_sale"],
-    "author": "Avanzosc",
+    "author": "OdooMRP team",
     "category": "Product",
     "description": """
     This module provide :
