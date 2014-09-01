@@ -29,19 +29,19 @@ class PurchaseHomologation(models.Model):
 
     _description = 'Homologation for suppliers and categories'
 
-    category_id = fields.Many2one('product.category', string='Category'),
-    comments = fields.Text(string='Comments'),
-    end_date = fields.Datetime(string='Finishing date'),
+    category_id = fields.Many2one('product.category', string='Category')
+    comments = fields.Text(string='Comments')
+    end_date = fields.Datetime(string='Finishing date')
     partner_id = fields.Many2one('res.partner',
-                                 string='Supplier', required=True),
+                                 string='Supplier', required=True)
     product_id = fields.Many2one('product.product', string='Product',
-                                 domain=[('purchase_ok', '=', True)]),
-    start_date = fields.Datetime(string='Beginning date'),
+                                 domain=[('purchase_ok', '=', True)])
+    start_date = fields.Datetime(string='Beginning date')
 
     @api.constrains('category_id', 'product_id')
     @api.one
     def check_category_and_product(self):
-        if not self.category_id and self.product_id:
+        if not self.category_id and not self.product_id:
             raise Warning(
                 _('Error!'),
                 _('You must select a category or product.'))
