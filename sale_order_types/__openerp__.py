@@ -28,7 +28,7 @@
     'author': 'OdooMRP team',
     'website': 'www.odoomrp.com',
     'license': 'AGPL-3',
-    'depends': ['sale','stock'],
+    'depends': ['sale', 'stock'],
     'data': ['views/sale_order_view.xml', 'views/sale_order_type_view.xml'],
     'installable': True,
 }
