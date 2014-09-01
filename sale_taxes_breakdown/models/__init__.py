@@ -18,4 +18,4 @@
 
 from . import sale_order
 from . import stock_picking
-from . import tax_apportionment
+from . import tax_breakdown

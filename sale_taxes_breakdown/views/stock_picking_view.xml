@@ -9,9 +9,9 @@
     	    <field name="arch" type="xml">
     	        <xpath expr="//notebook" position="inside">
 					<page string="Taxes Apportionment" >
-	                    <field name="tax_apportionment_ids" colspan="4" nolabel="1" />
-	                   	<button name="refresh_tax_apportionment" 
-					    	string="Refresh apportionment" type="object" icon="gtk-ok"/>
+	                    <field name="tax_breakdown_ids" colspan="4" nolabel="1" />
+	                   	<button name="refresh_tax_breakdown" 
+					    	string="Refresh breakdown" type="object" icon="gtk-ok"/>
 	                </page>
     	        </xpath>
     	    </field>

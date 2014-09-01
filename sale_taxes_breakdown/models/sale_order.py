@@ -24,21 +24,21 @@ class sale_order(orm.Model):
     _inherit = 'sale.order'
 
     _columns = {
-        'tax_apportionment_ids': fields.one2many('tax.apportionment',
+        'tax_breakdown_ids': fields.one2many('tax.breakdown',
                                                  'sale_id',
                                                  'Tax Apportionment'),
     }
 
-    def _calc_apportionment_taxes(self, cr, uid, ids, context=None):
+    def _calc_breakdown_taxes(self, cr, uid, ids, context=None):
         if not context:
             context = {}
 
-        apport_obj = self.pool['tax.apportionment']
+        apport_obj = self.pool['tax.breakdown']
         cur_obj = self.pool['res.currency']
 
         for order in self.browse(cr, uid, ids, context=context):
             self.write(cr, uid, order.id,
-                       {'tax_apportionment_ids': [(6, 0, [])]})
+                       {'tax_breakdown_ids': [(6, 0, [])]})
 
             for line in order.order_line:
                 cur = line.order_id.pricelist_id.currency_id
@@ -81,7 +81,7 @@ class sale_order(orm.Model):
         if not context:
             context = {}
 
-        self._calc_apportionment_taxes(cr, uid, ids, context=context)
+        self._calc_breakdown_taxes(cr, uid, ids, context=context)
 
         return super(sale_order, self).action_wait(cr, uid, ids, context)
 
@@ -90,6 +90,6 @@ class sale_order(orm.Model):
         super(sale_order, self).button_dummy(cr, uid, ids, context=context)
 
         if ids:
-            self._calc_apportionment_taxes(cr, uid, ids, context=context)
+            self._calc_breakdown_taxes(cr, uid, ids, context=context)
 
         return True

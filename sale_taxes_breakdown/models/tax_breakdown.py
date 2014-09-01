@@ -20,9 +20,9 @@ from openerp.osv import orm, fields
 import openerp.addons.decimal_precision as dp
 
 
-class tax_apportionment(orm.Model):
+class tax_breakdown(orm.Model):
 
-    _name = 'tax.apportionment'
+    _name = 'tax.breakdown'
     _description = 'Tax Apportionment'
 
     _columns = {

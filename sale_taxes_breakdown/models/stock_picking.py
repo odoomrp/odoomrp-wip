@@ -28,7 +28,7 @@ class stock_picking(orm.Model):
     _inherit = 'stock.picking'
 
     _columns = {
-        'tax_apportionment_ids': fields.one2many('tax.apportionment',
+        'tax_breakdown_ids': fields.one2many('tax.breakdown',
                                                  'picking_id',
                                                  'Tax Apportionment'),
     }
@@ -96,16 +96,16 @@ class stock_picking(orm.Model):
                                             'product_uos_qty'], 10),
                         },
                         multi='sums', help="The total amount."),
-        'tax_apportionment_ids': fields.one2many('tax.apportionment',
+        'tax_breakdown_ids': fields.one2many('tax.breakdown',
                                                  'picking_id',
                                                  'Tax Apportionment'),
     }
 
-    def _calc_apportionment_taxes(self, cr, uid, ids, context=None):
+    def _calc_breakdown_taxes(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
 
-        apportion_obj = self.pool['tax.apportionment']
+        apportion_obj = self.pool['tax.breakdown']
         tax_obj = self.pool['account.tax']
         cur_obj = self.pool['res.currency']
 
@@ -124,12 +124,12 @@ class stock_picking(orm.Model):
                             line.product_id,
                             sale_line.order_id.partner_id)
 
-                        apportionment_ids = apportion_obj.search(
+                        breakdown_ids = apportion_obj.search(
                             cr, uid, [('picking_id', '=', picking.id),
                                       ('tax_id', '=', tax.id)])
                         subtotal = cur_obj.round(cr, uid, cur, taxes['total'])
 
-                        if not apportionment_ids:
+                        if not breakdown_ids:
                             line_vals = {
                                 'picking_id': picking.id,
                                 'tax_id': tax.id,
@@ -144,7 +144,7 @@ class stock_picking(orm.Model):
                             apportion_obj.create(cr, uid, line_vals)
                         else:
                             apport = apportion_obj.browse(
-                                cr, uid, apportionment_ids[0])
+                                cr, uid, breakdown_ids[0])
                             untaxed_amount = subtotal + apport.untaxed_amount
                             taxation_amount = cur_obj.round(
                                 cr, uid, cur, (untaxed_amount * tax.amount))
@@ -161,18 +161,18 @@ class stock_picking(orm.Model):
         if context is None:
             context = {}
 
-        data.update({'tax_apportionment_ids': [(6, 0, [])]})
+        data.update({'tax_breakdown_ids': [(6, 0, [])]})
         super(stock_picking, self).write(cr, uid, ids, data, context=context)
-        self._calc_apportionment_taxes(cr, uid, ids, context=context)
+        self._calc_breakdown_taxes(cr, uid, ids, context=context)
 
         return True
 
-    def refresh_tax_apportionment(self, cr, uid, ids, context=None):
+    def refresh_tax_breakdown(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
 
         self.write(cr, uid, ids,
-                   {'tax_apportionment_ids': [(6, 0, [])]},
+                   {'tax_breakdown_ids': [(6, 0, [])]},
                    context=context)
 
         return True
@@ -193,6 +193,6 @@ class stock_move(orm.Model):
             picking_obj = self.pool['stock.picking']
             picking_obj.write(cr, uid,
                               [data['picking_id']],
-                              {'tax_apportionment_ids': [(6, 0, [])]})
+                              {'tax_breakdown_ids': [(6, 0, [])]})
 
         return move_id

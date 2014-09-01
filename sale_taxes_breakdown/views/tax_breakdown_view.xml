@@ -4,9 +4,9 @@
 
 		<!-- *********************** VISTA TREE ****************** -->
 
-		<record model="ir.ui.view" id="saleorder_taxapportionment_tree_view">
-			<field name="name">saleorder.taxapportionment.tree.view</field>
-			<field name="model">tax.apportionment</field>
+		<record model="ir.ui.view" id="saleorder_taxbreakdown_tree_view">
+			<field name="name">saleorder.taxbreakdown.tree.view</field>
+			<field name="model">tax.breakdown</field>
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
 				<tree string="Tax Apportionment">
@@ -20,9 +20,9 @@
 
 		 <!-- ******************* VISTA FORM ******************** --> 
 
-		<record model="ir.ui.view" id="saleorder_taxapportionment_form_view">
-			<field name="name">saleorder.taxapportionment.form.view</field>
-			<field name="model">tax.apportionment</field>
+		<record model="ir.ui.view" id="saleorder_taxbreakdown_form_view">
+			<field name="name">saleorder.taxbreakdown.form.view</field>
+			<field name="model">tax.breakdown</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Tax Apportionment" >
