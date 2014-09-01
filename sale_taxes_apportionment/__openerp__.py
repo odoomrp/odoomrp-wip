@@ -17,17 +17,17 @@
 ##############################################################################
 
 {
-    "name": "Sale Taxes Apportionment",
+    "name": "Sale Taxes Breakdown",
     "version": "1.0",
     "depends": [
         "sale",
         "stock",
     ],
-    "author": "AvanzOSC",
+    "author": "OdooMRP team",
     "category": "Custom Module",
-    "website": "http://www.avanzosc.es",
+    "website": "http://www.odoomrp.com",
     "description": """
-    This module breaks down sale taxes in sale.order and stock.picking
+This module breaks down sale taxes in sale.order and stock.picking
     """,
     "data": [
         "security/apportionment_taxes.xml",
