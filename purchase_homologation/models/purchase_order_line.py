@@ -46,7 +46,8 @@ class PurchaseOrderLine(models.Model):
         if not homologations:
             flag = 0
             for id in self.env.user.group_ids:
-                if id == self.env.ref('purchase_homologation.grp_homologate'):
+                if id == self.env.ref(
+                        'purchase_homologation.group_purchase_homologation'):
                     flag += 1
             if flag > 0:
                 return {'warning': message}
