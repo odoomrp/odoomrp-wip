@@ -19,13 +19,15 @@
 {
     "name": "Task delegation wizard",
     "version": "1.0",
-    "depends": ["project"],
-    "author": "AvanzOSC",
+    "depends": [
+        "project",
+    ],
+    "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
     "category": "Custom Module",
-    "website": "http://www.avanzosc.es",
+    "website": "http://www.odoomrp.com",
     "complexity": "normal",
     "summary": "",
     "description": """
@@ -36,5 +38,4 @@
         "wizard/project_task_delegate_view.xml",
     ],
     "installable": True,
-    "auto_install": False,
 }
