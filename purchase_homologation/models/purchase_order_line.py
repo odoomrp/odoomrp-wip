@@ -27,17 +27,54 @@ class PurchaseOrderLine(models.Model):
 
     _inherit = 'purchase.order.line'
 
-    @api.onchange('product_id')
+    #@api.onchange('product_id')
+    #@api.one
+    #def onchange_product(self):
+        #homologation_obj = self.env['purchase.homologation']
+        #homologations = homologation_obj.search([
+            #'&', ('&', ('partner_id', '=', self.order_id.partner_id.id),
+                  #('|', ('&', ('category_id', '=',
+                               #self.product_id.product_tmpl_id.categ_id.id),
+                         #('product_id', '=', False)),
+                   #('&', ('category_id', '=', False),
+                    #('product_id', '=', self.product_id.id)))),
+            #('&', ('|', ('start_date', '<=', self.date_planned),
+                   #('start_date', '=', False)),
+             #('|', ('end_date', '>=', self.date_planned),
+              #('end_date', '=', False)))])
+        #message = 'This product is not homologate for the selected supplier.'
+        #if not homologations:
+            #flag = 0
+            #for id in self.env.user.group_ids:
+                #if id == self.env.ref(
+                        #'purchase_homologation.group_purchase_homologation'):
+                    #flag += 1
+            #if flag > 0:
+                #return {'warning': message}
+            #else:
+                #raise Warning(_('Warning!'), _(message))
+
+    @api.model
     @api.one
-    def onchange_product(self):
+    def onchange_product_id(self, pricelist_id, product_id, qty, uom_id,
+                            partner_id, date_order=False,
+                            fiscal_position_id=False, date_planned=False,
+                            name=False, price_unit=False, state='draft'):
+        res = super(PurchaseOrderLine, self).onchange_product_id(
+            self, pricelist_id, product_id, qty, uom_id, partner_id,
+            date_order=date_order, fiscal_position_id=fiscal_position_id,
+            date_planned=date_planned, name=name, price_unit=price_unit,
+            state=state)
+        product_obj = self.env['product.product']
+        products = product_obj.search([('id', '=', product_id)])
         homologation_obj = self.env['purchase.homologation']
         homologations = homologation_obj.search([
             '&', ('&', ('partner_id', '=', self.order_id.partner_id.id),
                   ('|', ('&', ('category_id', '=',
-                               self.product_id.product_tmpl_id.categ_id.id),
+                               products[0].product_tmpl_id.categ_id.id),
                          ('product_id', '=', False)),
                    ('&', ('category_id', '=', False),
-                    ('product_id', '=', self.product_id.id)))),
+                    ('product_id', '=', products[0].id)))),
             ('&', ('|', ('start_date', '<=', self.date_planned),
                    ('start_date', '=', False)),
              ('|', ('end_date', '>=', self.date_planned),
@@ -50,6 +87,8 @@ class PurchaseOrderLine(models.Model):
                         'purchase_homologation.group_purchase_homologation'):
                     flag += 1
             if flag > 0:
-                return {'warning': message}
+                return res
             else:
                 raise Warning(_('Warning!'), _(message))
+        else:
+            return res
