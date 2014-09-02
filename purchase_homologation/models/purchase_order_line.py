@@ -32,26 +32,22 @@ class PurchaseOrderLine(models.Model):
     #def onchange_product(self):
         #homologation_obj = self.env['purchase.homologation']
         #homologations = homologation_obj.search([
-            #'&', ('&', ('partner_id', '=', self.order_id.partner_id.id),
-                  #('|', ('&', ('category_id', '=',
-                               #self.product_id.product_tmpl_id.categ_id.id),
-                         #('product_id', '=', False)),
-                   #('&', ('category_id', '=', False),
-                    #('product_id', '=', self.product_id.id)))),
-            #('&', ('|', ('start_date', '<=', self.date_planned),
-                   #('start_date', '=', False)),
+            #(('partner_id', '=', self.order_id.partner_id.id),
+             #('|',(('category_id', '=',
+                    #self.product_id.product_tmpl_id.categ_id.id),
+                   #('product_id', '=', False)),
+              #(('category_id', '=', False),
+               #('product_id', '=', self.product_id.id)))),
+            #(('|', ('start_date', '<=', self.date_planned),
+              #('start_date', '=', False)),
              #('|', ('end_date', '>=', self.date_planned),
               #('end_date', '=', False)))])
         #message = 'This product is not homologate for the selected supplier.'
         #if not homologations:
-            #flag = 0
-            #for id in self.env.user.group_ids:
-                #if id == self.env.ref(
-                        #'purchase_homologation.group_purchase_homologation'):
-                    #flag += 1
-            #if flag > 0:
-                #return {'warning': message}
-            #else:
+            #homologation_group_id = self.env.ref(
+                #'purchase_homologation.group_purchase_homologation')
+            #if not homologation_group_id in [
+                #x.id for x in self.env.user.group_ids]:
                 #raise Warning(_('Warning!'), _(message))
 
     @api.model
