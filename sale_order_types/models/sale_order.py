@@ -52,8 +52,5 @@ class SaleOrder(orm.Model):
     @api.model
     def _prepare_invoice(self, order, line_ids):
         res = super(SaleOrder, self)._prepare_invoice(order, line_ids)
-        orders = self.env['sale.order'].seach([('id', '=', order)])
-        invoice_vals = {
-            'journal_id': orders[0].type_id.journal_id.id
-        }
+        res['journal_id'] = order.type_id.journal_id.id
         return res
