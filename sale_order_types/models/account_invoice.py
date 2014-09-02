@@ -20,7 +20,19 @@
 #                                                                            #
 ##############################################################################
 
-from . import account_invoice
-from . import sale_order
-from . import sale_order_type
-from . import stock_picking
+from openerp import api, models
+
+class AccountInvoice(models.Model):
+
+    _inherit = 'account.invoice'
+
+    @api.model
+    @api.one
+    def _prepare_refund(self, invoice, date=None, period_id=None,
+                        description=None, journal_id=None):
+        if self.origin:
+            orders = self.env['sale.order'].seach(
+                [('name', '=', self.origin)])
+            journal_id = orders[0].type_id.journal_id.id
+        return super(AccountInvoice, self)._prepare_refund(
+            self, invoice, date, period_id, description, journal_id)

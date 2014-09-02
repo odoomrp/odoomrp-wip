@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-25 07:45+0000\n"
-"PO-Revision-Date: 2014-08-25 07:45+0000\n"
+"POT-Creation-Date: 2014-09-02 11:40+0000\n"
+"PO-Revision-Date: 2014-09-02 11:40+0000\n"
 "Last-Translator: Carlos Sánchez Cifuentes <csanchez@grupovermon.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,11 @@ msgid "<p class=\"oe_view_nocontent_create\">Click to set a new type for sale or
 "            "
 msgstr "<p class=\"oe_view_nocontent_create\">Pulsa para crear un nuevo tipo para los pedidos de venta.</p>\n"
 "            "
+
+#. module: sale_order_types
+#: field:sale.order.type,journal_id:0
+msgid "Billing Journal"
+msgstr "Diario de facturación"
 
 #. module: sale_order_types
 #: field:sale.order.type,create_uid:0
@@ -48,6 +53,11 @@ msgid "ID"
 msgstr "ID"
 
 #. module: sale_order_types
+#: model:ir.model,name:sale_order_types.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: sale_order_types
 #: field:sale.order.type,write_uid:0
 msgid "Last Updated by"
 msgstr "Última actualización por"
@@ -63,13 +73,24 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: sale_order_types
+#: model:ir.model,name:sale_order_types.model_stock_picking
+msgid "Picking List"
+msgstr "Albarán"
+
+#. module: sale_order_types
+#: field:sale.order.type,refund_journal_id:0
+msgid "Refund Billing Journal"
+msgstr "Diario de facturación rectificativa"
+
+#. module: sale_order_types
 #: model:ir.model,name:sale_order_types.model_sale_order
 msgid "Sales Order"
 msgstr "Pedido de venta"
 
 #. module: sale_order_types
 #: field:sale.order,type_id:0
-#: view:sale.order.type:0
+#: view:sale.order.type:sale_order_types.sot_sale_order_type_form_view
+#: view:sale.order.type:sale_order_types.sot_sale_order_type_tree_view
 msgid "Type"
 msgstr "Tipo"
 

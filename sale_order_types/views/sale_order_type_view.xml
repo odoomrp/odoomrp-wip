@@ -24,7 +24,7 @@
                             </group>
                             <group>
                                 <field name="journal_id"/>
-                                <field name="corrective_journal_id"/>
+                                <field name="refund_journal_id"/>
                             </group>
                         </group>
                         <group>
@@ -44,7 +44,7 @@
                     <field name="warehouse_id"/>
                     <field name="sequence_id"/>
                     <field name="journal_id"/>
-                    <field name="corrective_journal_id"/>
+                    <field name="refund_journal_id"/>
                     <field name="description"/>
                 </tree>
             </field>
