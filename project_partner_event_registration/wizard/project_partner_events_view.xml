@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="project_partner_events_form_view">
+            <field name="name">project.partner.to.events.form</field>
+            <field name="model">project.partner.to.events</field>
+            <field name="arch" type="xml">
+                <form string="Project partners to events">
+                    <p>This action will record the partners of
+                        associated project</p>
+                    <button name="assign_partners" string="Assign"
+                        type="object" icon="oe_highlight" />
+                    or
+                    <button string="Cancel" class="oe_link"
+                        special="cancel" />
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_project_partner_to_events"
+            multi="True" key2="client_action_multi" name="Assign partner"
+            res_model="project.partner.to.events" src_model="event.event"
+            view_mode="form" target="new" view_type="form" />
+    </data>
+</openerp>
