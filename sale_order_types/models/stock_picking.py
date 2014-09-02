@@ -22,14 +22,13 @@
 
 from openerp import api, models
 
+
 class StockPicking(models.Model):
 
     _inherit = "stock.picking"
 
     @api.model
     def _create_invoice_from_picking(self, picking, vals):
-
-
         if picking and picking.move_lines:
             if picking.move_lines[0].purchase_line_id:
                 purchase = picking.move_lines[0].purchase_line_id.order_id
