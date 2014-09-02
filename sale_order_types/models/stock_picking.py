@@ -28,9 +28,11 @@ class StockPicking(models.Model):
 
     @api.model
     def _create_invoice_from_picking(self, picking, vals):
-        if self.origin:
-            orders = self.env['sale.order'].seach(
-                [('name', '=', self.origin)])
-            vals['journal_id'] = orders[0].type_id.journal_id.id
+
+
+        if picking and picking.move_lines:
+            if picking.move_lines[0].purchase_line_id:
+                purchase = picking.move_lines[0].purchase_line_id.order_id
+                vals['journal_id'] = purchase.type_id.journal_id.id
         return super(StockPicking, self)._create_invoice_from_picking(picking,
                                                                       vals)
