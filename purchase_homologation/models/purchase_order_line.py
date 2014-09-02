@@ -55,7 +55,6 @@ class PurchaseOrderLine(models.Model):
                 #raise Warning(_('Warning!'), _(message))
 
     @api.model
-    @api.one
     def onchange_product_id(self, pricelist_id, product_id, qty, uom_id,
                             partner_id, date_order=False,
                             fiscal_position_id=False, date_planned=False,
@@ -69,26 +68,21 @@ class PurchaseOrderLine(models.Model):
         products = product_obj.search([('id', '=', product_id)])
         homologation_obj = self.env['purchase.homologation']
         homologations = homologation_obj.search([
-            '&', ('&', ('partner_id', '=', self.order_id.partner_id.id),
-                  ('|', ('&', ('category_id', '=',
-                               products[0].product_tmpl_id.categ_id.id),
-                         ('product_id', '=', False)),
-                   ('&', ('category_id', '=', False),
-                    ('product_id', '=', products[0].id)))),
-            ('&', ('|', ('start_date', '<=', self.date_planned),
-                   ('start_date', '=', False)),
+            (('partner_id', '=', self.order_id.partner_id.id),
+             ('|',
+              (('category_id', '=', products[0].product_tmpl_id.categ_id.id),
+               ('product_id', '=', False)),
+              (('category_id', '=', False),
+               ('product_id', '=', products[0].id)))),
+            (('|', ('start_date', '<=', self.date_planned),
+              ('start_date', '=', False)),
              ('|', ('end_date', '>=', self.date_planned),
               ('end_date', '=', False)))])
         message = 'This product is not homologate for the selected supplier.'
         if not homologations:
-            flag = 0
-            for id in self.env.user.group_ids:
-                if id == self.env.ref(
-                        'purchase_homologation.group_purchase_homologation'):
-                    flag += 1
-            if flag > 0:
-                return res
-            else:
+            homologation_group_id = self.env.ref(
+                'purchase_homologation.group_purchase_homologation')
+            if not homologation_group_id in [
+                x.id for x in self.env.user.group_ids]:
                 raise Warning(_('Warning!'), _(message))
-        else:
-            return res
+        return res

@@ -5,7 +5,6 @@
         <record id="group_purchase_homologation" model="res.groups">
             <field name="name">Purchase homologation</field>
             <field name="category_id" ref="base.module_category_purchase_management"/>
-            <field name="implied_ids" eval="[(4, ref('group_purchase_user'))]"/>
         </record>
 
     </data>

@@ -48,4 +48,4 @@ class PurchaseHomologation(models.Model):
         if self.category_id and self.product_id:
             raise Warning(
                 _('Error!'),
-                _('You only must select one of these: category or product.'))
+                _('You must only select one of these: category or product.'))
