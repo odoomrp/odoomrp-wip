@@ -12,8 +12,7 @@
                         <field name="partner_id" required="1"/>
                         <field name="journal_id" required="1"/>
                         <field name="amount" required="1"/>
-                        <field name="payment" invisible="1"/>
-                        <field name="type" invisible="1"/>
+                        <field name="line_id" invisible="1"/>
                     </group>
                     <footer>
                         <button name="button_create_inv" class="oe_highlight"

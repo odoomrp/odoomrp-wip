@@ -19,12 +19,6 @@
 from openerp import models, fields, api
 
 
-class AccountTreasuryForecastReceivable(models.Model):
-    _inherit = 'account.treasury.forecast.receivable'
-
-    payment_mode_id = fields.Many2one("payment.mode", string="Payment Mode")
-
-
 class AccountTreasuryForecastCashflow(models.Model):
     _inherit = 'account.treasury.forecast.cashflow'
 
@@ -35,17 +29,9 @@ class AccountTreasuryForecast(models.Model):
     _inherit = 'account.treasury.forecast'
 
     @api.one
-    def calculate_receivable(self):
-        result = super(AccountTreasuryForecast, self).calculate_receivable()
-        for receivable_o in result:
-            payment_mode_id = receivable_o.template_line_id.payment_mode_id.id
-            receivable_o.payment_mode_id = payment_mode_id
-        return result
-
-    @api.one
-    def calculate_cashflow(self, cr, uid, treasury_id, context=None):
+    def calculate_cashflow(self):
         result = super(AccountTreasuryForecast, self).calculate_cashflow()
-        for cashflow_o in result:
+        for cashflow_o in self.cashflow_ids:
             payment_mode_id = cashflow_o.template_line_id.payment_mode_id.id
             cashflow_o.payment_mode_id = payment_mode_id
         return result

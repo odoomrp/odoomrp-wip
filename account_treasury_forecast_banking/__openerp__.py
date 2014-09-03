@@ -29,10 +29,10 @@
     Sorts the treasury forecast records by payment mode.
     Creates new Treasury Forecast Analysis Report.
     """,
-    'data': [],
-    'demo': ['report/account_treasury_forecast_analysis_view.xml',
+    'data': ['report/account_treasury_forecast_analysis_view.xml',
              'views/account_treasury_forecast_template_view.xml',
              'views/account_treasury_forecast_view.xml'],
+    'demo': [],
     'installable': True,
     'auto_install': False,
 }

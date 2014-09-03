@@ -30,8 +30,8 @@ class WizCreateInvoice(models.TransientModel):
     description = fields.Char(string="Description")
     amount = fields.Float(string="Amount",
                           digits_compute=dp.get_precision('Account'))
-    payment = fields.Integer(string="Payment")
-    type = fields.Char(string="Type")
+    line_id = fields.Many2one("account.treasury.forecast.line.template",
+                              string="Payment")
 
     @api.one
     def button_create_inv(self):
@@ -46,14 +46,9 @@ class WizCreateInvoice(models.TransientModel):
         values['partner_id'] = self.partner_id.id
         values['journal_id'] = self.journal_id.id
         values['type'] = 'in_invoice'
-        print values
         invoice_id = invoice_obj.create(values)
-        if self.type == 'V':
-            obj = self.env['account.treasury.forecast.variable.template']
-        else:
-            obj = self.env['account.treasury.forecast.recurring.template']
-        pay_o = obj.browse(self.payment)
-        pay_o.write({'invoice_id': invoice_id.id, 'paid': 1, 'journal_id':
-                     self.journal_id.id, 'partner_id': self.partner_id.id,
-                     'amount': self.amount})
+        self.line_id.write({'invoice_id': invoice_id.id, 'paid': 1,
+                            'journal_id': self.journal_id.id,
+                            'partner_id': self.partner_id.id,
+                            'amount': self.amount})
         return {'type': 'ir.actions.act_window_close'}

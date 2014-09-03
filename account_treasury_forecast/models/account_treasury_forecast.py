@@ -47,7 +47,7 @@ class AccountTreasuryForecastInvoice(models.Model):
 
 class AccountTreasuryForecast(models.Model):
     _name = 'account.treasury.forecast'
-    _description = ''
+    _description = 'Treasury Forecast'
 
     @api.one
     def calc_final_amount(self):
@@ -56,10 +56,10 @@ class AccountTreasuryForecast(models.Model):
             balance += out_invoice.total_amount
         for in_invoice in self.in_invoice_ids:
             balance -= in_invoice.total_amount
-        for recurring_payment in self.recurring_ids:
-            balance -= recurring_payment.amount
-        for variable_payment in self.variable_ids:
-            balance -= variable_payment.amount
+        for recurring_line in self.recurring_line_ids:
+            balance -= recurring_line.amount
+        for variable_line in self.variable_line_ids:
+            balance -= variable_line.amount
         balance += self.start_amount
         self.final_amount = balance
 
@@ -86,10 +86,12 @@ class AccountTreasuryForecast(models.Model):
         relation="account_treasury_forecast_in_invoice_rel",
         column1="treasury_id", column2="in_invoice_id",
         string="In Invoices")
-    recurring_ids = fields.One2many("account.treasury.forecast.recurring",
-                                    "treasury_id", string="Recurring Payments")
-    variable_ids = fields.One2many("account.treasury.forecast.variable",
-                                   "treasury_id", string="Variable Payments")
+    recurring_line_ids = fields.One2many(
+        "account.treasury.forecast.line", "treasury_id",
+        string="Recurring Lines", domain=[('line_type', '=', 'recurring')])
+    variable_line_ids = fields.One2many(
+        "account.treasury.forecast.line", "treasury_id",
+        string="Variable Lines", domain=[('line_type', '=', 'variable')])
 
     @api.one
     @api.constrains('end_date', 'start_date')
@@ -110,16 +112,15 @@ class AccountTreasuryForecast(models.Model):
     def restart(self):
         self.out_invoice_ids.unlink()
         self.in_invoice_ids.unlink()
-        self.recurring_ids.unlink()
-        self.variable_ids.unlink()
+        self.recurring_line_ids.unlink()
+        self.variable_line_ids.unlink()
         return True
 
     @api.multi
     def button_calculate(self):
         self.restart()
         self.calculate_invoices()
-        self.calculate_recurring()
-        self.calculate_variable()
+        self.calculate_line()
         return True
 
     @api.one
@@ -162,71 +163,43 @@ class AccountTreasuryForecast(models.Model):
         return new_invoice_ids
 
     @api.one
-    def calculate_recurring(self):
-        recurring_obj = self.env['account.treasury.forecast.recurring']
-        new_recurring_ids = []
-        for recurring_o in self.template_id.recurring_ids:
-            if ((recurring_o.date > self.start_date and
-                    recurring_o.date < self.end_date) or
-                    not recurring_o.date) and not recurring_o.paid:
+    def calculate_line(self):
+        line_obj = self.env['account.treasury.forecast.line']
+        temp_line_obj = self.env['account.treasury.forecast.line.template']
+        new_line_ids = []
+        temp_line_lst = temp_line_obj.search([('treasury_template_id', '=',
+                                               self.template_id.id)])
+        for line_o in temp_line_lst:
+            if ((line_o.date > self.start_date and
+                    line_o.date < self.end_date) or
+                    not line_o.date) and not line_o.paid:
                 values = {
-                    'name': recurring_o.name,
-                    'date': recurring_o.date,
-                    'partner_id': recurring_o.partner_id.id,
-                    'template_line_id': recurring_o.id,
-                    'amount': recurring_o.amount,
+                    'name': line_o.name,
+                    'date': line_o.date,
+                    'line_type': line_o.line_type,
+                    'partner_id': line_o.partner_id.id,
+                    'template_line_id': line_o.id,
+                    'amount': line_o.amount,
                     'treasury_id': self.id,
                 }
-                new_recurring_id = recurring_obj.create(values)
-                new_recurring_ids.append(new_recurring_id)
-        return new_recurring_ids
-
-    @api.one
-    def calculate_variable(self):
-        variable_obj = self.env['account.treasury.forecast.variable']
-        new_variable_ids = []
-        for variable_o in self.template_id.variable_ids:
-            if ((variable_o.date > self.start_date and
-                    variable_o.date < self.end_date) or
-                    not variable_o.date) and not variable_o.paid:
-                values = {
-                    'name': variable_o.name,
-                    'date': variable_o.date,
-                    'partner_id': variable_o.partner_id.id,
-                    'template_line_id': variable_o.id,
-                    'amount': variable_o.amount,
-                    'treasury_id': self.id,
-                }
-                new_variable_id = variable_obj.create(values)
-                new_variable_ids.append(new_variable_id)
-        return new_variable_ids
+                new_line_id = line_obj.create(values)
+                new_line_ids.append(new_line_id)
+        return new_line_ids
 
 
-class AccountTreasuryForecastRecurring(models.Model):
-    _name = 'account.treasury.forecast.recurring'
-    _description = 'Recurring Payments'
+class AccountTreasuryForecastLine(models.Model):
+    _name = 'account.treasury.forecast.line'
+    _description = 'Treasury Forecast Line'
 
     name = fields.Char(string="Description")
+    line_type = fields.Selection([('recurring', 'Recurring'),
+                                  ('variable', 'Variable')],
+                                 string="Treasury Line Type")
     date = fields.Date(string="Date")
     partner_id = fields.Many2one("res.partner", string="Partner")
     amount = fields.Float(string="Amount",
                           digits_compute=dp.get_precision('Account'))
     template_line_id = fields.Many2one(
-        "account.treasury.forecast.recurring.template", string="Template Line")
-    treasury_id = fields.Many2one("account.treasury.forecast",
-                                  string="Treasury")
-
-
-class AccountTreasuryForecastVariable(models.Model):
-    _name = 'account.treasury.forecast.variable'
-    _description = 'Variable Payments'
-
-    name = fields.Char(string="Description")
-    partner_id = fields.Many2one("res.partner", string="Partner")
-    date = fields.Date(string="Date")
-    template_line_id = fields.Many2one(
-        "account.treasury.forecast.variable.template", string="Template Line")
-    amount = fields.Float(string="Amount",
-                          digits_compute=dp.get_precision('Account'))
+        "account.treasury.forecast.line.template", string="Template Line")
     treasury_id = fields.Many2one("account.treasury.forecast",
                                   string="Treasury")

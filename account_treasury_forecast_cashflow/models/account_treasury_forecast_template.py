@@ -23,25 +23,20 @@ from openerp import models, fields, api, exceptions, _
 class AccountTreasuryForecastTemplate(models.Model):
     _inherit = 'account.treasury.forecast.template'
 
-    receivable_ids = fields.One2many(
-        "account.treasury.forecast.receivable.template",
-        "treasury_template_id", string="Receivable Payments")
+    receivable_line_ids = fields.One2many(
+        "account.treasury.forecast.line.template", "treasury_template_id",
+        string="Receivable Line", domain=[('line_type', '=', 'receivable')])
     cashflow_ids = fields.One2many(
         "account.treasury.forecast.cashflow.template", "treasury_template_id",
         string="Cash-Flow")
 
 
-class AccountTreasuryForecastReceivableTemplate(models.Model):
-    _name = "account.treasury.forecast.receivable.template"
-    _description = "Receivable Payment Template"
+class AccountTreasuryForecastLineTemplate(models.Model):
+    _inherit = "account.treasury.forecast.line.template"
 
-    name = fields.Char(string="Description")
-    date = fields.Date(string="Date")
-    journal_id = fields.Many2one("account.journal", string="Journal")
-    amount = fields.Float(string="Amount",
-                          digits_compute=dp.get_precision("Account"))
-    treasury_template_id = fields.Many2one(
-        "account.treasury.forecast.template", string="Treasury Template")
+    line_type = fields.Selection([('recurring', 'Recurring'),
+                                  ('variable', 'Variable'),
+                                  ('receivable', 'Receivable')])
 
 
 class AccountTreasuryForecastCashflowTemplate(models.Model):

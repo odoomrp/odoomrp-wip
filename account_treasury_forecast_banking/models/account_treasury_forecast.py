@@ -35,14 +35,8 @@ class AccountTreasuryForecastInvoice(models.Model):
                                       related="invoice_id.payment_term")
 
 
-class AccountTreasuryForecastRecurring(models.Model):
-    _inherit = 'account.treasury.forecast.recurring'
-
-    payment_mode_id = fields.Many2one("payment.mode", string="Payment Mode")
-
-
-class AccountTreasuryForecastVariable(models.Model):
-    _inherit = 'account.treasury.forecast.variable'
+class AccountTreasuryForecastLine(models.Model):
+    _inherit = 'account.treasury.forecast.line'
 
     payment_mode_id = fields.Many2one("payment.mode", string="Payment Mode")
 
@@ -51,17 +45,11 @@ class AccountTreasuryForecast(models.Model):
     _inherit = 'account.treasury.forecast'
 
     @api.one
-    def calculate_recurring(self):
-        result = super(AccountTreasuryForecast, self).calculate_recurring()
-        for recurring_o in result:
-            payment_mode_id = recurring_o.template_line_id.payment_mode_id.id
-            recurring_o.payment_mode_id = payment_mode_id
-        return result
-
-    @api.one
-    def calculate_variable(self, cr, uid, treasury_id, context=None):
-        result = super(AccountTreasuryForecast, self).calculate_variable()
-        for variable_o in result:
-            payment_mode_id = variable_o.template_line_id.payment_mode_id.id
-            variable_o.payment_mode_id = payment_mode_id
+    def calculate_line(self):
+        treasury_line_obj = self.env["account.treasury.forecast.line"]
+        result = super(AccountTreasuryForecast, self).calculate_line()
+        line_lst = treasury_line_obj.search([("treasury_id", "=", self.id)])
+        for line_o in line_lst:
+            payment_mode_id = line_o.template_line_id.payment_mode_id.id
+            line_o.payment_mode_id = payment_mode_id
         return result

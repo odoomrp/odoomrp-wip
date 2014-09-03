@@ -19,13 +19,7 @@
 from openerp import models, fields
 
 
-class AccountTreasuryForecastRecurringTemplate(models.Model):
-    _inherit = 'account.treasury.forecast.recurring.template'
-
-    payment_mode_id = fields.Many2one("payment.mode", string="Payment Mode")
-
-
-class AccountTreasuryForecastVariableTemplate(models.Model):
-    _inherit = 'account.treasury.forecast.variable.template'
+class AccountTreasuryForecastLineTemplate(models.Model):
+    _inherit = 'account.treasury.forecast.line.template'
 
     payment_mode_id = fields.Many2one("payment.mode", string="Payment Mode")

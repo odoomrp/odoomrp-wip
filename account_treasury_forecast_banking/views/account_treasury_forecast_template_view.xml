@@ -2,10 +2,10 @@
 <openerp>
     <data>
 
-        <record model="ir.ui.view" id="account_treasury_forecast_recurring_template_tree_view_inh">
-            <field name="name">account.treasury.forecast.recurring.template.tree.inh</field>
-            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_recurring_template_tree_view"/>
-            <field name="model">account.treasury.forecast.recurring.template</field>
+        <record model="ir.ui.view" id="account_treasury_forecast_line_template_tree_view_inh">
+            <field name="name">account.treasury.forecast.line.template.tree.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_line_template_tree_view"/>
+            <field name="model">account.treasury.forecast.line.template</field>
             <field name="arch" type="xml">
                 <field name="journal_id" position="after">
                     <field name="payment_mode_id" />
@@ -13,33 +13,10 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="account_treasury_forecast_recurring_template_form_view_inh">
-            <field name="name">account.treasury.forecast.recurring.template.form.inh</field>
-            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_recurring_template_form_view"/>
-            <field name="model">account.treasury.forecast.recurring.template</field>
-            <field name="arch" type="xml">
-                <field name="journal_id" position="after">
-                    <field name="payment_mode_id" />
-                </field>
-            </field>
-        </record>
-
-
-        <record model="ir.ui.view" id="account_treasury_forecast_variable_template_tree_view_inh">
-            <field name="name">account.treasury.forecast.variable.template.tree.inh</field>
-            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_variable_template_tree_view"/>
-            <field name="model">account.treasury.forecast.variable.template</field>
-            <field name="arch" type="xml">
-                <field name="journal_id" position="after">
-                    <field name="payment_mode_id" />
-                </field>
-            </field>
-        </record>
-
-        <record model="ir.ui.view" id="account_treasury_forecast_variable_template_form_view_inh">
-            <field name="name">account.treasury.forecast.variable.template.form.inh</field>
-            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_variable_template_form_view"/>
-            <field name="model">account.treasury.forecast.variable.template</field>
+        <record model="ir.ui.view" id="account_treasury_forecast_line_template_form_view_inh">
+            <field name="name">account.treasury.forecast.line.template.form.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_line_template_form_view"/>
+            <field name="model">account.treasury.forecast.line.template</field>
             <field name="arch" type="xml">
                 <field name="journal_id" position="after">
                     <field name="payment_mode_id" />

@@ -2,44 +2,6 @@
 <openerp>
     <data>
 
-        <record model="ir.ui.view" id="account_treasury_forecast_receivable_tree_view">
-            <field name="name">account.treasury.forecast.receivable.tree</field>
-            <field name="model">account.treasury.forecast.receivable</field>
-            <field name="arch" type="xml">
-                <tree string="Recurring Payments" editable="bottom">
-                    <field name="date" />
-                    <field name="name" />
-                    <field name="journal_id" />
-                    <field name="amount" />
-                </tree>
-            </field>
-        </record>
-
-        <record model="ir.ui.view" id="account_treasury_forecast_receivable_form_view">
-            <field name="name">account.treasury.forecast.receivable.form</field>
-            <field name="model">account.treasury.forecast.receivable</field>
-            <field name="arch" type="xml">
-                <form string="Recurring Payments">
-                    <field name="date" />
-                    <field name="name" />
-                    <field name="journal_id" />
-                    <field name="amount" />
-                </form>
-            </field>
-        </record>
-
-        <record model="ir.ui.view" id="account_treasury_forecast_receivable_tree_view">
-            <field name="name">account.treasury.forecast.receivable.tree</field>
-            <field name="model">account.treasury.forecast.receivable</field>
-            <field name="arch" type="xml">
-                <tree string="Recurring Payments" editable="bottom">
-                    <field name="date" />
-                    <field name="name" />
-                    <field name="journal_id" />
-                    <field name="amount" />
-                </tree>
-            </field>
-        </record>
 
         <record model="ir.ui.view" id="account_treasury_forecast_cashflow_tree_view">
             <field name="name">account.treasury.forecast.cashflow.tree</field>
@@ -76,7 +38,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//notebook" position="inside">
                     <page string="Receivable Payments">
-                        <field name="receivable_ids"/>
+                        <field name="receivable_line_ids" nolabel="1"
+                            context="{'default_line_type': 'receivable'}"/>
                     </page>
                     <page string="Cash-Flow">
                         <field name="cashflow_ids"/>

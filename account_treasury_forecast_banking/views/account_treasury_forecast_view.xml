@@ -18,21 +18,10 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="account_treasury_forecast_recurring_tree_view_inh">
-            <field name="name">account.treasury.forecast.recurring.tree.inh</field>
-            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_recurring_tree_view"/>
-            <field name="model">account.treasury.forecast.recurring</field>
-            <field name="arch" type="xml">
-                <field name="partner_id" position="after">
-                    <field name="payment_mode_id"/>
-                </field>
-            </field>
-        </record>
-
-        <record model="ir.ui.view" id="account_treasury_forecast_variable_tree_view_inh">
-            <field name="name">account.treasury.forecast.variable.tree.inh</field>
-            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_variable_tree_view" />
-            <field name="model">account.treasury.forecast.variable</field>
+        <record model="ir.ui.view" id="account_treasury_forecast_line_tree_view_inh">
+            <field name="name">account.treasury.forecast.line.tree.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_line_tree_view"/>
+            <field name="model">account.treasury.forecast.line</field>
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
                     <field name="payment_mode_id"/>

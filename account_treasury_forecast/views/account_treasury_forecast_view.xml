@@ -22,26 +22,13 @@
         </record>
 
 
-        <record model="ir.ui.view" id="account_treasury_forecast_recurring_tree_view">
-            <field name="name">account.treasury.forecast.recurring.tree</field>
-            <field name="model">account.treasury.forecast.recurring</field>
+        <record model="ir.ui.view" id="account_treasury_forecast_line_tree_view">
+            <field name="name">account.treasury.forecast.line.tree</field>
+            <field name="model">account.treasury.forecast.line</field>
             <field name="arch" type="xml">
-                <tree string="Recurring Payments" editable="bottom">
+                <tree string="Treasury Forecast Line" editable="bottom">
                     <field name="date" />
-                    <field name="name" />
-                    <field name="partner_id" domain="[('supplier', '=', True)]"/>
-                    <field name="amount" sum="Total Amount" />
-                </tree>
-            </field>
-        </record>
-
-
-        <record model="ir.ui.view" id="account_treasury_forecast_variable_tree_view">
-            <field name="name">account.treasury.forecast.variable.tree</field>
-            <field name="model">account.treasury.forecast.variable</field>
-            <field name="arch" type="xml">
-                <tree string="Variable Payments" editable="bottom">
-                    <field name="date" />
+                    <field name="line_type" />
                     <field name="name" />
                     <field name="partner_id" domain="[('supplier', '=', True)]"/>
                     <field name="amount" sum="Total Amount" />
@@ -96,10 +83,12 @@
                             <field name="in_invoice_ids" nolabel="1" />
                         </page>
                         <page string="Recurring Payments">
-                            <field name="recurring_ids" nolabel="1" />
+                            <field name="recurring_line_ids" 
+                                context="{'default_line_type': 'recurring'}" nolabel="1"/>
                         </page>
                         <page string="Variable Payments">
-                            <field name="variable_ids" nolabel="1" />
+                            <field name="variable_line_ids" 
+                                context="{'default_line_type': 'variable'}" nolabel="1"/>
                         </page>
                     </notebook>
                     <group col="2" colspan="2">

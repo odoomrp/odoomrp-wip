@@ -27,50 +27,30 @@ class AccountTreasuryForecast(models.Model):
     def calc_final_amount(self):
         super(AccountTreasuryForecast, self).calc_final_amount()
         balance = 0
-        for receivable in self.receivable_ids:
-            balance += receivable.amount
+        for receivable_line in self.receivable_line_ids:
+            balance += receivable_line.amount
         for cashfow in self.cashflow_ids:
             balance += cashfow.amount
         self.final_amount += balance
 
-    receivable_ids = fields.One2many("account.treasury.forecast.receivable",
-                                     "treasury_id",
-                                     string="Receivable Payments")
+    receivable_line_ids = fields.One2many(
+        "account.treasury.forecast.line", "treasury_id",
+        string="Receivable Line", domain=[('line_type', '=', 'receivable')])
     cashflow_ids = fields.One2many("account.treasury.forecast.cashflow",
                                    "treasury_id", string="Cash-Flow")
 
     @api.one
     def restart(self):
         res = super(AccountTreasuryForecast, self).restart()
-        self.receivable_ids.unlink()
         self.cashflow_ids.unlink()
+        self.receivable_line_ids.unlink()
         return res
 
     @api.multi
     def button_calculate(self):
         res = super(AccountTreasuryForecast, self).button_calculate()
-        self.calculate_receivable()
         self.calculate_cashflow()
         return res
-
-    @api.one
-    def calculate_receivable(self):
-        receivable_obj = self.env['account.treasury.forecast.receivable']
-        new_receivable_ids = []
-        for receivable_o in self.template_id.receivable_ids:
-            if ((receivable_o.date > self.start_date and
-                    receivable_o.date < self.end_date) or
-                    not receivable_o.date):
-                values = {
-                    'name': receivable_o.name,
-                    'date': receivable_o.date,
-                    'template_line_id': receivable_o.id,
-                    'amount': receivable_o.amount,
-                    'treasury_id': self.id,
-                }
-                new_receivable_id = receivable_obj.create(values)
-                new_receivable_ids.append(new_receivable_id)
-        return new_receivable_ids
 
     @api.one
     def calculate_cashflow(self):
@@ -93,20 +73,12 @@ class AccountTreasuryForecast(models.Model):
         return new_cashflow_ids
 
 
-class AccountTreasuryForecastReceivable(models.Model):
-    _name = "account.treasury.forecast.receivable"
-    _description = "Receivable Payments"
+class AccountTreasuryForecastLine(models.Model):
+    _inherit = "account.treasury.forecast.line"
 
-    name = fields.Char(string="Description")
-    date = fields.Date(string="Date")
-    journal_id = fields.Many2one("account.journal", string="Journal")
-    amount = fields.Float(string="Amount",
-                          digits_compute=dp.get_precision("Account"))
-    template_line_id = fields.Many2one(
-        "account.treasury.forecast.receivable.template",
-        string="Template Line")
-    treasury_id = fields.Many2one("account.treasury.forecast",
-                                  string="Treasury")
+    line_type = fields.Selection([('recurring', 'Recurring'),
+                                  ('variable', 'Variable'),
+                                  ('receivable', 'Receivable')])
 
 
 class AccountTreasuryForecastCashflow(models.Model):

@@ -29,39 +29,21 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
             create or replace view report_account_treasury_forecast_analysis
                 as (
                 select
-                    treasury_id as treasury_id,
-                    -amount as amount,
-                    payment_mode_id as payment_mode_id,
+                    treasury_id,
+                    CASE WHEN tfl.line_type='receivable' THEN amount
+                    ELSE -amount
+                    END as amount,
+                    payment_mode_id,
                     'out' as type
                 from
                     account_treasury_forecast tf inner join
-                    account_treasury_forecast_recurring tfr on tf.id =
-                        tfr.treasury_id
+                    account_treasury_forecast_line tfl on tf.id =
+                        tfl.treasury_id
                 union
                 select
-                    treasury_id as treasury_id,
-                    -amount as amount,
-                    payment_mode_id as payment_mode_id,
-                    'out' as type
-                from
-                    account_treasury_forecast tf inner join
-                    account_treasury_forecast_variable tfv on tf.id =
-                        tfv.treasury_id
-                union
-                select
-                    treasury_id as treasury_id,
+                    treasury_id,
                     amount as amount,
-                    payment_mode_id as payment_mode_id,
-                    'in' as type
-                from
-                    account_treasury_forecast tf inner join
-                    account_treasury_forecast_receivable tfrc on tf.id =
-                        tfrc.treasury_id
-                union
-                select
-                    treasury_id as treasury_id,
-                    amount as amount,
-                    payment_mode_id as payment_mode_id,
+                    payment_mode_id,
                     flow_type as type
                 from
                     account_treasury_forecast tf inner join
@@ -69,9 +51,9 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
                         tcf.treasury_id
                 union
                 select
-                    treasury_id as treasury_id,
+                    treasury_id,
                     -tfii.total_amount as amount,
-                    tfii.payment_mode_id as payment_mode_id,
+                    tfii.payment_mode_id,
                     'out' as type
                 from
                     account_treasury_forecast tf inner join
@@ -81,9 +63,9 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
                         tfiir.in_invoice_id
                 union
                 select
-                    treasury_id as treasury_id,
+                    treasury_id,
                     tfio.total_amount as amount,
-                    tfio.payment_mode_id as payment_mode_id,
+                    tfio.payment_mode_id,
                     'in' as type
                 from
                     account_treasury_forecast tf inner join

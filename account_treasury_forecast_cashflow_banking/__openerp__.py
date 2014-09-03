@@ -29,9 +29,9 @@
     Extends Treasury Forecast Analysis Report for receivable payment and
     Cash-Flow record management.
     """,
-    'data': [],
-    'demo': ["views/account_treasury_forecast_template_view.xml",
+    'data': ["views/account_treasury_forecast_template_view.xml",
              "views/account_treasury_forecast_view.xml"],
+    'demo': [],
     'installable': True,
     'auto_install': True,
 }
