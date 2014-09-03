@@ -21,35 +21,18 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields
 
 
 class MrpBom(models.Model):
     _inherit = 'mrp.bom'
-
-    @api.model
-    def _bom_explode(self, bom, product, factor, properties=None, level=0,
-                     routing_id=False, previous_products=None,
-                     master_bom=None):
-        res = super(MrpBom, self)._bom_explode(bom, product, factor,
-                                               properties, level, routing_id,
-                                               previous_products, master_bom)
-        # process 1 of results
-        n = 0
-        bom_lines = bom.bom_line_ids
-        for data in res[0]:
-            if 'product_id' in data:
-                for bom_line in bom_lines:
-                    if bom_line.product_id.id == data['product_id']:
-                        res[0][n].update({'operation': bom_line.operation.id})
-            n += 1
-        return res
 
 
 class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
 
     def _get_operation(self, cr, uid, context=None):
+        # TODO Operarion Domain
         routing_obj = self.pool['mrp.routing.operation']
         ids = routing_obj.search(cr, uid, [], context=context)
         res = routing_obj.read(cr, uid, ids, ['name', 'id'],

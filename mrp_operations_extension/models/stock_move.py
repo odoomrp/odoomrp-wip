@@ -25,4 +25,5 @@ from openerp import models, fields
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    operation = fields.Many2one('mrp.routing.workcenter', 'Operation')
+    work_order = fields.Many2one('mrp.production.workcenter.line',
+                                 string='Work Order')

@@ -26,8 +26,13 @@
     "name": "MRP Operations Extension",
     "version": "1.0",
     "description": """
-    This module adds a new table to store operations to avoid typing them
-    again.
+    This module adds:
+
+    - New table to store operations to avoid typing them again.
+    - Adds a relation from WorkcenterLines to BOM Lists.
+    - Adds a relation from WorkcenterLines to Manufacturing Orders in
+    Scheduled/Consumed/Finished Products.
+    
     """,
     'author': 'OdooMRP team',
     'website': "http://www.odoomrp.com",

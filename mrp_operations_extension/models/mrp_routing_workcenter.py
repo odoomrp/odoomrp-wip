@@ -27,8 +27,7 @@ from openerp import models, fields, api
 class MrpRoutingWorkcenter(models.Model):
     _inherit = 'mrp.routing.workcenter'
 
-    operation = fields.Many2one('mrp.routing.operation', 'Operation',
-                                required=True)
+    operation = fields.Many2one('mrp.routing.operation', string='Operation')
 
     @api.one
     @api.onchange('operation')

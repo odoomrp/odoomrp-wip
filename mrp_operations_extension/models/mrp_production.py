@@ -25,20 +25,37 @@ from openerp import models, fields, api
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    @api.model
-    def _make_consume_line_from_data(self, production, product, uom_id,
-                                     qty, uos_id, uos_qty):
-        res = super(MrpProduction, self)._make_consume_line_from_data(
-            production, product, uom_id, qty, uos_id, uos_qty)
-        mppl_lines = production.product_lines
-        st_move = self.env['stock.move'].browse(res)
-        for line in mppl_lines:
-            if st_move.product_id.id == line.product_id.id:
-                st_move.operation = line.operation.id
+    @api.multi
+    def _action_compute_lines(self, properties=None):
+        # TODO Link work Orders : Product Lines
+        res = super(MrpProduction,
+                    self)._action_compute_lines(properties=properties)
+        workcenter_lines = self.workcenter_lines
+        n = 0
+        for wk_line in workcenter_lines:
+            self.product_lines[n].work_order = wk_line.id
+            n += 1
+        return res
+
+    @api.multi
+    def action_confirm(self):
+        res = super(MrpProduction, self).action_confirm()
+        for move_line in self.move_lines:
+            for product_line in self.product_lines:
+                if product_line.product_id.id == move_line.product_id.id:
+                    move_line.work_order = product_line.work_order.id
         return res
 
 
 class MrpProductionProductLine(models.Model):
     _inherit = 'mrp.production.product.line'
 
-    operation = fields.Many2one('mrp.routing.workcenter', 'Operation')
+    work_order = fields.Many2one('mrp.production.workcenter.line',
+                                 'Work Order')
+
+
+class mrp_production_workcenter_line(models.Model):
+    _inherit = 'mrp.production.workcenter.line'
+
+    product_line = fields.One2many('mrp.production.product.line',
+                                   'work_order', string='Product Lines')
