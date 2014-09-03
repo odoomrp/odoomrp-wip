@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="purchase_homologation_form_view" model="ir.ui.view">
+            <field name="name">purchase.homologation.form.view</field>
+            <field name="model">purchase.homologation</field>
+            <field name="arch" type="xml">
+                <form string="Supplier homologation" version="7.0">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="category_id"/>
+                                <field name="product_id"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="comments"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="purchase_homologation_tree_view" model="ir.ui.view">
+            <field name="name">purchase.homologation.tree.view</field>
+            <field name="model">purchase.homologation</field>
+            <field name="arch" type="xml">
+                <tree string="Supplier homologation" editable="bottom">
+                    <field name="partner_id"/>
+                    <field name="category_id"/>
+                    <field name="product_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="comments"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="purchase_homologation_action" model="ir.actions.act_window">
+            <field name="name">Supplier homologation</field>
+            <field name="res_model">purchase.homologation</field>
+            <field name="view_mode">form,tree</field>
+            <field name="view_id" ref="purchase_homologation_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click here to set a new supplier homologation for certain product or category.</p>
+            </field>
+        </record>
+
+        <record id="purchase_homologation_action_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="purchase_homologation_form_view"/>
+            <field name="act_window_id" ref="purchase_homologation_action"/>
+        </record>
+
+        <record id="purchase_homologation_action_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="purchase_homologation_tree_view"/>
+            <field name="act_window_id" ref="purchase_homologation_action"/>
+        </record>
+
+        <menuitem id="purchase_homologation_menu" parent="purchase.menu_procurement_management" action="purchase_homologation_action" name="Supplier homologation" sequence="20"/>
+
+    </data>
+</openerp>
