@@ -23,29 +23,40 @@ from datetime import datetime
 
 
 class EventsCopy(models.TransientModel):
-    
+
     _name = "events.copy"
     _rec_name = "project_id"
     project_id = fields.Many2one('project.project', string="Project")
     start_date = fields.Datetime(string="Start Date")
-    
+
     @api.multi
     def copy_events(self):
         event_obj = self.env['event.event']
         events = event_obj.browse(self.env.context['active_ids']).copy()
         for event in events:
             if event.project_id.date_start:
-                #try:
-                diff_days = datetime.strptime(event.date_begin, "%Y-%m-%d %H:%M:%S").date() - datetime.strptime(event.project_id.date_start, "%Y-%m-%d %H:%M:%S").date()
-                date_begin=(self.start_date and datetime.strptime(self.start_date, "%Y-%m-%d %H:%M:%S").date()) or datetime.strptime(self.project_id.date_start, "%Y-%m-%d %H:%M:%S").date() + diff_days,
-                event_days= datetime.strptime(event.date_end, "%Y-%m-%d %H:%M:%S").date()-datetime.strptime(event.date_begin, "%Y-%m-%d %H:%M:%S").date()
+                diff_days = datetime.strptime(
+                    event.date_begin, "%Y-%m-%d %H:%M:%S").date() - \
+                    datetime.strptime(event.project_id.date_start,
+                                      "%Y-%m-%d").date()
+                date_begin = (
+                    self.start_date and datetime.strptime(
+                        self.start_date, "%Y-%m-%d %H:%M:%S").date()) or \
+                    datetime.strptime(self.project_id.date_start,
+                                      "%Y-%m-%d").date() + diff_days
+                event_days = datetime.strptime(
+                    event.date_end, "%Y-%m-%d %H:%M:%S").date() - \
+                    datetime.strptime(
+                        event.date_begin, "%Y-%m-%d %H:%M:%S").date()
                 event.write({
-                         'project_id': self.project_id.id,
-                         'date_begin': date_begin,
-                         'date_end': datetime.combine(date_begin+event_days, datetime.strptime(event.date_end, "%Y-%m-%d %H:%M:%S").time()),
-                         })
+                    'project_id': self.project_id.id,
+                    'date_begin': date_begin,
+                    'date_end':
+                        datetime.combine(
+                            date_begin + event_days,
+                            datetime.strptime(event.date_end,
+                                              "%Y-%m-%d %H:%M:%S").time())
+                        })
             else:
-                event.write({'project_id':self.project_id.id})
-        return{
-                'type': 'ir.actions.act_window_close',
-         }
+                event.write({'project_id': self.project_id.id})
+        return{'type': 'ir.actions.act_window_close'}

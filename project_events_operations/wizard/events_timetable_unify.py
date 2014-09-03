@@ -23,22 +23,21 @@ from datetime import datetime
 
 
 class EventsTimeModify(models.TransientModel):
-    
+
     _name = 'events.time.modify'
     _rec_name = 'start_time'
     start_time = fields.Datetime(string='Start Time')
     qty = fields.Integer(string='qty')
-    
+
     @api.multi
     def change_time(self):
         event_obj = self.env['event.event']
         events = event_obj.browse(self.env.context['active_ids'])
         for event in events:
-            event_date=datetime.combine(datetime.strptime(event.date_begin, "%Y-%m-%d %H:%M:%S"), datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S").time())
+            event_date = datetime.combine(
+                datetime.strptime(event.date_begin, "%Y-%m-%d %H:%M:%S"),
+                datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S").time())
             event.write({
-                     'date_begin': event_date,
-                     'date_end': event_date + relativedelta(hours=self.qty),
-                     })
-        return{
-                'type': 'ir.actions.act_window_close',
-         }
+                'date_begin': event_date,
+                'date_end': event_date + relativedelta(hours=self.qty)})
+        return {'type': 'ir.actions.act_window_close'}
