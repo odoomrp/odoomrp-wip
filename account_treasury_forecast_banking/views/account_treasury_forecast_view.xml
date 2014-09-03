@@ -13,7 +13,7 @@
                     <field name="invoice_type" />
                 </field>
                 <xpath expr="/tree" position="attributes">
-                    <attribute name="colors">blue:inv_type in ('out_refund','in_refund');black:inv_type in ('out_invoice','in_invoice')</attribute>
+                    <attribute name="colors">blue:invoice_type in ('out_refund','in_refund');black:invoice_type in ('out_invoice','in_invoice')</attribute>
                 </xpath>
             </field>
         </record>
