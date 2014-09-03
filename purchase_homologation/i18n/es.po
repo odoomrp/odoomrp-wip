@@ -19,7 +19,7 @@ msgstr ""
 #: model:ir.actions.act_window,help:purchase_homologation.purchase_homologation_action
 msgid "<p class=\"oe_view_nocontent_create\">Click here to set a new supplier homologation for certain product or category.</p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\">Pulsa aquí para añadir una nueva homologación de proveedor para productos o categorías.</p>\n"
+msgstr "<p class=\"oe_view_nocontent_create\">Pulse aquí para añadir una nueva homologación de proveedor para productos o categorías.</p>\n"
 "            "
 
 #. module: purchase_homologation
@@ -45,7 +45,7 @@ msgstr "Creador por"
 #. module: purchase_homologation
 #: field:purchase.homologation,create_date:0
 msgid "Created on"
-msgstr "Creado el"
+msgstr "Creado en"
 
 #. module: purchase_homologation
 #: code:addons/purchase_homologation/models/purchase_homologation.py:46
@@ -82,7 +82,7 @@ msgstr "Última actualización el"
 #. module: purchase_homologation
 #: field:purchase.homologation,product_id:0
 msgid "Product"
-msgstr "Productp"
+msgstr "Producto"
 
 #. module: purchase_homologation
 #: model:ir.model,name:purchase_homologation.model_purchase_order_line
@@ -112,11 +112,17 @@ msgstr "¡Advertencia!"
 #: code:addons/purchase_homologation/models/purchase_homologation.py:51
 #, python-format
 msgid "You must only select one of these: category or product."
-msgstr "Debes seleccionar sólo uno de éstos: categoría o producto."
+msgstr "Debe seleccionar sólo uno de éstos: categoría o producto."
 
 #. module: purchase_homologation
 #: code:addons/purchase_homologation/models/purchase_homologation.py:47
 #, python-format
 msgid "You must select a category or product."
-msgstr "Debes seleccionar una categoría o producto."
+msgstr "Debe seleccionar una categoría o producto."
 
+
+#. module: purchase_homologation
+#: code:addons/purchase_homologation/models/purchase_homologation.py:59
+#, python-format
+msgid "Este producto no está homologado para el proveedor seleccionado."
+msgstr ""

@@ -3,8 +3,8 @@
     <data noupdate="1">
 
         <record id="group_purchase_homologation" model="res.groups">
-            <field name="name">Purchase homologation</field>
-            <field name="category_id" ref="base.module_category_purchase_management"/>
+            <field name="name">Bypass purchase homologation</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
         </record>
 
     </data>

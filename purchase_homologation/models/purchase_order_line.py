@@ -20,65 +20,53 @@
 #                                                                            #
 ##############################################################################
 
-from openerp import api, models, _
+from openerp import api, models, exceptions, _
 
 
 class PurchaseOrderLine(models.Model):
-
     _inherit = 'purchase.order.line'
 
-    #@api.onchange('product_id')
-    #@api.one
-    #def onchange_product(self):
-        #homologation_obj = self.env['purchase.homologation']
-        #homologations = homologation_obj.search([
-            #(('partner_id', '=', self.order_id.partner_id.id),
-             #('|',(('category_id', '=',
-                    #self.product_id.product_tmpl_id.categ_id.id),
-                   #('product_id', '=', False)),
-              #(('category_id', '=', False),
-               #('product_id', '=', self.product_id.id)))),
-            #(('|', ('start_date', '<=', self.date_planned),
-              #('start_date', '=', False)),
-             #('|', ('end_date', '>=', self.date_planned),
-              #('end_date', '=', False)))])
-        #message = 'This product is not homologate for the selected supplier.'
-        #if not homologations:
-            #homologation_group_id = self.env.ref(
-                #'purchase_homologation.group_purchase_homologation')
-            #if not homologation_group_id in [
-                #x.id for x in self.env.user.group_ids]:
-                #raise Warning(_('Warning!'), _(message))
-
-    @api.model
-    def onchange_product_id(self, pricelist_id, product_id, qty, uom_id,
-                            partner_id, date_order=False,
+    def onchange_product_id(self, cr, uid, ids, pricelist_id, product_id, qty,
+                            uom_id, partner_id, date_order=False,
                             fiscal_position_id=False, date_planned=False,
-                            name=False, price_unit=False, state='draft'):
+                            name=False, price_unit=False, state='draft',
+                            context=None):
         res = super(PurchaseOrderLine, self).onchange_product_id(
-            self, pricelist_id, product_id, qty, uom_id, partner_id,
+            cr, uid, ids, pricelist_id, product_id, qty, uom_id, partner_id,
             date_order=date_order, fiscal_position_id=fiscal_position_id,
             date_planned=date_planned, name=name, price_unit=price_unit,
-            state=state)
-        product_obj = self.env['product.product']
-        products = product_obj.search([('id', '=', product_id)])
-        homologation_obj = self.env['purchase.homologation']
-        homologations = homologation_obj.search([
-            (('partner_id', '=', self.order_id.partner_id.id),
-             ('|',
-              (('category_id', '=', products[0].product_tmpl_id.categ_id.id),
-               ('product_id', '=', False)),
-              (('category_id', '=', False),
-               ('product_id', '=', products[0].id)))),
-            (('|', ('start_date', '<=', self.date_planned),
-              ('start_date', '=', False)),
-             ('|', ('end_date', '>=', self.date_planned),
-              ('end_date', '=', False)))])
-        message = 'This product is not homologate for the selected supplier.'
-        if not homologations:
-            homologation_group_id = self.env.ref(
-                'purchase_homologation.group_purchase_homologation')
-            if not homologation_group_id in [
-                x.id for x in self.env.user.group_ids]:
-                raise Warning(_('Warning!'), _(message))
+            state=state, context=context)
+        if not product_id:
+            return res
+        product_obj = self.pool['product.product']
+        product = product_obj.browse(cr, uid, product_id, context=context)
+        homologation_obj = self.pool['purchase.homologation']
+        homologation_ids = homologation_obj.search(
+            cr, uid,
+            [('partner_id', '=', partner_id),
+             '|',
+             ('start_date', '<=', date_planned),
+             ('start_date', '=', False),
+             '|',
+             ('end_date', '>=', date_planned),
+             ('end_date', '=', False),
+             '|',
+             ('category_id', '=', product.product_tmpl_id.categ_id.id),
+             ('category_id', '=', False),
+             '|',
+             ('product_id', '=', False),
+             ('product_id', '=', product_id)], context=context)
+        message = _('This product is not homologated for the selected '
+                    'supplier.')
+        if not homologation_ids:
+            data_obj = self.pool['ir.model.data']
+            xml_id = data_obj._get_id(cr, uid, 'purchase_homologation',
+                                      'group_purchase_homologation')
+            group_id = data_obj.read(cr, uid, xml_id, ['res_id'],
+                                     context=context)['res_id']
+            user = self.pool['res.users'].browse(cr, uid, uid, context=context)
+            if group_id in [x.id for x in user.groups_id]:
+                res['warning'] = {'message': _(message)}
+            else:
+                raise exceptions.Warning(_(message))
         return res

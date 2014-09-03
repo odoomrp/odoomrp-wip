@@ -34,6 +34,9 @@ except users that has been granted to do it.
     'website': 'www.odoomrp.com',
     'license': 'AGPL-3',
     'depends': ['purchase'],
-    'data': ["views/purchase_homologation_view.xml"],
+    'data': [
+        "security/res_groups.xml",
+        "views/purchase_homologation_view.xml",
+    ],
     'installable': True,
 }
