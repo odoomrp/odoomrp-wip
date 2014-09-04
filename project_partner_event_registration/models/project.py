@@ -21,9 +21,9 @@ from openerp import api, models, fields
 
 
 class ProjectProject(models.Model):
-    
+
     _inherit = "project.project"
-    partner_lines = fields.Many2many(comodel_name='res.partner',
-                              relation='projet_partner_rel',
-                              column1='project',
-                              column2='partner')
+    partners = fields.Many2many(comodel_name='res.partner',
+                                relation='projet_partner_rel',
+                                column1='project',
+                                column2='partner')

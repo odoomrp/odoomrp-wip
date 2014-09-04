@@ -29,7 +29,7 @@ class ProjectPartnerToEvents(models.TransientModel):
         registry_obj = self.env['event.registration']
         event_obj = self.env['event.event']
         for event in event_obj.browse(event_obj.env.context['active_ids']):
-            for partner in event.project_id.partner_lines:
+            for partner in event.project_id.partners:
                 if not registry_obj.search_count(
                         [('event_id', '=', event.id),
                          ('partner_id', '=', partner.id)]):
