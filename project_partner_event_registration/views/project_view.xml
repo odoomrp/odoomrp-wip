@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <page string="Project Stages" position="after">
                     <page string="Partners">
-                        <field name="partner_lines" />
+                        <field name="partners" />
                     </page>
                 </page>
             </field>

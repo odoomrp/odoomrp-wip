@@ -20,6 +20,6 @@
         <act_window id="action_project_partner_to_events"
             multi="True" key2="client_action_multi" name="Assign partner"
             res_model="project.partner.to.events" src_model="event.event"
-            view_mode="form" target="new" view_type="form" />
+            view_mode="form" target="new" view_type="form" view_id="project_partner_events_form_view"/>
     </data>
 </openerp>
