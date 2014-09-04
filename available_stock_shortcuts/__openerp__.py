@@ -24,10 +24,10 @@
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "quants",
     "description": """
-    Adds shorcut buttons to quants on manufacturing orders and puchase order.
+    Adds shorcut buttons to quants on manufacturing orders and purchase order.
     """,
-    'data': ['views/purchase_view.xml',
-             'views/mrp_view.xml'
+    'data': ['views/purchase_order_view.xml',
+             'views/mrp_production_view.xml'
              ],
     "installable": True,
     "auto_install": False,

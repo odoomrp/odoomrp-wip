@@ -17,5 +17,5 @@
 #
 ##############################################################################
 
-from . import purchase
-from . import mrp
+from . import purchase_order
+from . import mrp_production

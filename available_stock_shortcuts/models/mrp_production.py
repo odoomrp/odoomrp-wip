@@ -17,18 +17,20 @@
 #
 ##############################################################################
 
-from openerp import models, api
+from openerp import api, models
 
 
-class PurchaseOrder(models.Model):
-    
-    _inherit = 'purchase.order'
-    
-    @api.multi
+class MrpProduction(models.Model):
+
+    _inherit = 'mrp.production'
+
     def _get_products(self):
         products = []
-        for purchase in self:
-            products += [x.product_id.id for x in purchase.order_line]
+        for production in self:
+            if production.state in ['in_production', 'done']:
+                products += [x.product_id.id for x in production.move_lines]
+            else:
+                products += [x.product_id.id for x in production.product_lines]
         return products
 
     @api.multi
@@ -36,6 +38,8 @@ class PurchaseOrder(models.Model):
         template_obj = self.env['product.template']
         products = self._get_products()
         result = template_obj._get_act_window_dict('stock.product_open_quants')
-        result['domain'] = "[('product_id','in',[" + ','.join(map(str, products)) + "])]"
-        result['context'] = "{'search_default_productgroup': 1, 'search_default_internal_loc': 1}"
+        result['domain'] = "[('product_id','in',[" + ','.join(
+            map(str, products)) + "])]"
+        result['context'] = "{'search_default_productgroup': 1, "
+        "'search_default_internal_loc': 1}"
         return result
