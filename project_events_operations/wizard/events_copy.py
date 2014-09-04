@@ -20,6 +20,8 @@
 from openerp import models, api, fields, exceptions
 from openerp.tools.translate import _
 from datetime import datetime
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, \
+    DEFAULT_SERVER_DATE_FORMAT
 
 
 class EventsCopy(models.TransientModel):
@@ -36,26 +38,31 @@ class EventsCopy(models.TransientModel):
         for event in events:
             if event.project_id.date_start:
                 diff_days = datetime.strptime(
-                    event.date_begin, "%Y-%m-%d %H:%M:%S").date() - \
+                    event.date_begin,
+                    DEFAULT_SERVER_DATETIME_FORMAT).date() - \
                     datetime.strptime(event.project_id.date_start,
-                                      "%Y-%m-%d").date()
+                                      DEFAULT_SERVER_DATE_FORMAT).date()
                 date_begin = (
                     self.start_date and datetime.strptime(
-                        self.start_date, "%Y-%m-%d %H:%M:%S").date()) or \
+                        self.start_date,
+                        DEFAULT_SERVER_DATETIME_FORMAT).date()) or \
                     datetime.strptime(self.project_id.date_start,
-                                      "%Y-%m-%d").date() + diff_days
+                                      DEFAULT_SERVER_DATE_FORMAT).date() + \
+                    diff_days
                 event_days = datetime.strptime(
-                    event.date_end, "%Y-%m-%d %H:%M:%S").date() - \
+                    event.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date() - \
                     datetime.strptime(
-                        event.date_begin, "%Y-%m-%d %H:%M:%S").date()
+                        event.date_begin,
+                        DEFAULT_SERVER_DATETIME_FORMAT).date()
                 event.write({
                     'project_id': self.project_id.id,
                     'date_begin': date_begin,
                     'date_end':
                         datetime.combine(
                             date_begin + event_days,
-                            datetime.strptime(event.date_end,
-                                              "%Y-%m-%d %H:%M:%S").time())
+                            datetime.strptime(
+                                event.date_end,
+                                DEFAULT_SERVER_DATETIME_FORMAT).time())
                         })
             else:
                 event.write({'project_id': self.project_id.id})

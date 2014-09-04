@@ -20,6 +20,7 @@
 from openerp import api, models, fields
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class EventsDateModify(models.TransientModel):
@@ -40,22 +41,24 @@ class EventsDateModify(models.TransientModel):
                 event.write({
                     'date_begin':
                         datetime.strptime(
-                            event.date_begin, "%Y-%m-%d %H:%M:%S") +
+                            event.date_begin, DEFAULT_SERVER_DATETIME_FORMAT) +
                         relativedelta(months=(self.forward and -self.qty)
                                       or self.qty),
                     'date_end':
                         datetime.strptime(
-                            event.date_end, "%Y-%m-%d %H:%M:%S") +
+                            event.date_end, DEFAULT_SERVER_DATETIME_FORMAT) +
                         relativedelta(months=(self.forward and -self.qty)
                                       or self.qty)})
             else:
                 event.write({
-                    'date_begin': datetime.strptime(
-                        event.date_begin, "%Y-%m-%d %H:%M:%S") + relativedelta(
-                            days=(self.forward and -self.qty) or self.qty),
+                    'date_begin':
+                        datetime.strptime(
+                            event.date_begin, DEFAULT_SERVER_DATETIME_FORMAT) +
+                        relativedelta(days=(self.forward and -self.qty)
+                                      or self.qty),
                     'date_end':
                         datetime.strptime(event.date_end,
-                                          "%Y-%m-%d %H:%M:%S") +
+                                          DEFAULT_SERVER_DATETIME_FORMAT) +
                         relativedelta(days=(self.forward and -self.qty)
                                       or self.qty)})
         return {'type': 'ir.actions.act_window_close'}

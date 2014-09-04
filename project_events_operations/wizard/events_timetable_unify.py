@@ -20,6 +20,7 @@
 from openerp import api, models, fields
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class EventsTimeModify(models.TransientModel):
@@ -35,8 +36,10 @@ class EventsTimeModify(models.TransientModel):
         events = event_obj.browse(self.env.context['active_ids'])
         for event in events:
             event_date = datetime.combine(
-                datetime.strptime(event.date_begin, "%Y-%m-%d %H:%M:%S"),
-                datetime.strptime(self.start_time, "%Y-%m-%d %H:%M:%S").time())
+                datetime.strptime(event.date_begin,
+                                  DEFAULT_SERVER_DATETIME_FORMAT),
+                datetime.strptime(self.start_time,
+                                  DEFAULT_SERVER_DATETIME_FORMAT).time())
             event.write({
                 'date_begin': event_date,
                 'date_end': event_date + relativedelta(hours=self.qty)})
