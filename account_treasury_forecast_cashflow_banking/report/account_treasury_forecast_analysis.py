@@ -29,10 +29,18 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
             create or replace view report_account_treasury_forecast_analysis
                 as (
                 select
+                    tfl.id || 'l' AS id,
                     treasury_id,
+                    tfl.date as date,
                     CASE WHEN tfl.line_type='receivable' THEN amount
-                    ELSE -amount
-                    END as amount,
+                    ELSE 0.0
+                    END as credit,
+                    CASE WHEN tfl.line_type='receivable' THEN 0.0
+                    ELSE amount
+                    END as debit,
+                    CASE WHEN tfl.line_type='receivable' THEN -amount
+                    ELSE amount
+                    END as balance,
                     payment_mode_id,
                     'out' as type
                 from
@@ -41,8 +49,12 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
                         tfl.treasury_id
                 union
                 select
+                    tcf.id || 'c' AS id,
                     treasury_id,
-                    amount as amount,
+                    tcf.date as date,
+                    amount as credit,
+                    0.0 as debit,
+                    -amount as balance,
                     payment_mode_id,
                     flow_type as type
                 from
@@ -51,8 +63,12 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
                         tcf.treasury_id
                 union
                 select
+                    tfii.id || 'i' AS id,
                     treasury_id,
-                    -tfii.total_amount as amount,
+                    tfii.date_due as date,
+                    0.0 as credit,
+                    tfii.total_amount as debit,
+                    tfii.total_amount as balance,
                     tfii.payment_mode_id,
                     'out' as type
                 from
@@ -63,8 +79,12 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
                         tfiir.in_invoice_id
                 union
                 select
+                    tfio.id || 'o' AS id,
                     treasury_id,
-                    tfio.total_amount as amount,
+                    tfio.date_due as date,
+                    tfio.total_amount as credit,
+                    0.0 as debit,
+                    -tfio.total_amount as balance,
                     tfio.payment_mode_id,
                     'in' as type
                 from

@@ -29,5 +29,12 @@
             </field>
         </record>
 
+        <act_window name="Breakdown Balance"
+        domain="[('treasury_id', '=', active_id)]"
+        res_model="report.account.treasury.forecast.analysis"
+        src_model="account.treasury.forecast"
+        id="act_treasury_forecast_2_report"
+        context="{'group_by':'payment_mode_id'}"/>
+
     </data>
 </openerp>

@@ -7,9 +7,12 @@
             <field name="arch" type="xml">
                 <tree string="Breakdown Balance" create="false">
                     <field name="treasury_id"/>
+                    <field name="date"/>
                     <field name="payment_mode_id" />
                     <field name="type"/>
-                    <field name="amount"/>
+                    <field name="debit"/>
+                    <field name="credit"/>
+                    <field name="balance"/>
                 </tree>
             </field>
         </record>
@@ -20,10 +23,12 @@
             <field name="arch" type="xml">
                 <search string="Breakdown Balance">
                     <field name="treasury_id"/>
+                    <field name="date"/>
                     <field name="payment_mode_id"/>
                     <field name="type"/>
                     <separator/>
                     <filter icon="" string="Treasury Forecast" context="{'group_by': 'treasury_id'}"/>
+                    <filter icon="" string="Date" context="{'group_by': 'date'}"/>
                     <filter icon="" string="Payment Mode" context="{'group_by': 'payment_mode_id'}"/>
                     <filter icon="" string="Type" context="{'group_by': 'type'}"/>
                 </search>
@@ -37,9 +42,12 @@
                 <form string="Breakdown Balance">
                     <group>
                         <field name="treasury_id"/>
+                        <field name="date"/>
                         <field name="payment_mode_id" />
                         <field name="type"/>
-                        <field name="amount"/>
+                        <field name="debit"/>
+                        <field name="credit"/>
+                        <field name="balance"/>
                     </group>
                 </form>
             </field>

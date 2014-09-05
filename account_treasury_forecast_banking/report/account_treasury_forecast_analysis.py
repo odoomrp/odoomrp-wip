@@ -17,7 +17,7 @@
 ##############################################################################
 
 import openerp.addons.decimal_precision as dp
-from openerp import models, fields, tools
+from openerp import models, fields, tools, api
 
 
 class ReportAccountTreasuryForecastAnalysis(models.Model):
@@ -28,10 +28,15 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
     treasury_id = fields.Many2one("account.treasury.forecast",
                                   string="Treasury")
     payment_mode_id = fields.Many2one("payment.mode", string="Payment Mode")
-    amount = fields.Float(string="Amount",
+    debit = fields.Float(string="Debit",
+                         digits_compute=dp.get_precision('Account'))
+    credit = fields.Float(string="Credit",
                           digits_compute=dp.get_precision('Account'))
+    balance = fields.Float(string="Balance",
+                           digits_compute=dp.get_precision('Account'))
     type = fields.Selection([('in', 'Input'), ('out', 'Output')],
                             string="Type")
+    date = fields.Date(string="Date")
 
     def init(self, cr):
         tools.drop_view_if_exists(cr,
@@ -40,8 +45,12 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
             create or replace view report_account_treasury_forecast_analysis
                 as (
                 select
+                    tfl.id || 'l' AS id,
                     treasury_id,
-                    -amount as amount,
+                    tfl.date as date,
+                    0.0 as credit,
+                    amount as debit,
+                    amount as balance,
                     payment_mode_id,
                     'out' as type
                 from
@@ -50,8 +59,12 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
                         tfl.treasury_id
                 union
                 select
+                    tfii.id || 'i' AS id,
                     treasury_id,
-                    -tfii.total_amount as amount,
+                    tfii.date_due as date,
+                    0.0 as credit,
+                    tfii.total_amount as debit,
+                    tfii.total_amount as balance,
                     tfii.payment_mode_id,
                     'out' as type
                 from
@@ -62,8 +75,12 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
                         tfiir.in_invoice_id
                 union
                 select
+                    tfio.id || 'o' AS id,
                     treasury_id,
-                    tfio.total_amount as amount,
+                    tfio.date_due as date,
+                    tfio.total_amount as credit,
+                    0.0 as debit,
+                    -tfio.total_amount as balance,
                     tfio.payment_mode_id,
                     'in' as type
                 from
