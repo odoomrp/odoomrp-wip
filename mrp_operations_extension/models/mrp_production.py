@@ -27,14 +27,20 @@ class MrpProduction(models.Model):
 
     @api.multi
     def _action_compute_lines(self, properties=None):
-        # TODO Link work Orders : Product Lines
         res = super(MrpProduction,
                     self)._action_compute_lines(properties=properties)
         workcenter_lines = self.workcenter_lines
-        n = 0
-        for wk_line in workcenter_lines:
-            self.product_lines[n].work_order = wk_line.id
-            n += 1
+        product_lines = self.product_lines
+        for p_line in product_lines:
+            mrp_bom = self.env['mrp.bom'].search([
+                ('routing_id', '=', self.routing_id.id),
+                ('product_tmpl_id', '=', self.product_id.product_tmpl_id.id)])
+            for bom_line in mrp_bom[0].bom_line_ids:
+                if bom_line.product_id.id == p_line.product_id.id:
+                    for wc_line in workcenter_lines:
+                        if wc_line.routing_wc_line.id == bom_line.operation.id:
+                            p_line.work_order = wc_line.id
+                            break
         return res
 
     @api.multi
@@ -59,3 +65,5 @@ class mrp_production_workcenter_line(models.Model):
 
     product_line = fields.One2many('mrp.production.product.line',
                                    'work_order', string='Product Lines')
+    routing_wc_line = fields.Many2one('mrp.routing.workcenter',
+                                      string='Routing WC Line')

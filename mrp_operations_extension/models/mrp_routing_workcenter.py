@@ -28,6 +28,9 @@ class MrpRoutingWorkcenter(models.Model):
     _inherit = 'mrp.routing.workcenter'
 
     operation = fields.Many2one('mrp.routing.operation', string='Operation')
+    workcenter_ids = fields.Many2many(
+        'mrp.workcenter', 'mrp_routing_workcenter_rel', 'routing_id', 
+        'workcenter_id', 'Work centers')
 
     @api.one
     @api.onchange('operation')
@@ -35,3 +38,11 @@ class MrpRoutingWorkcenter(models.Model):
         if self.operation:
             self.name = self.operation.name
             self.note = self.operation.description
+
+    @api.one
+    @api.onchange('workcenter_id')
+    def onchange_workcenter(self):
+        if self.workcenter_id:
+            lst = self.workcenter_ids.ids
+            lst.append(self.workcenter_id.id)
+            self.workcenter_ids = lst

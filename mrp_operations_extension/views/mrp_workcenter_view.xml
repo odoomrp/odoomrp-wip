@@ -18,10 +18,13 @@
             <field name="model">mrp.routing.workcenter</field>
             <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view" />
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='name']" position="before">
+                <field name="name" position="before">
                     <field name="operation" />
                     <newline/>
-                </xpath>
+                </field>
+                <field name="workcenter_id" position="after">
+                    <field name="workcenter_ids"/>
+                </field>
             </field>
         </record>
     </data>

@@ -21,18 +21,45 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, tools
 
 
 class MrpBom(models.Model):
     _inherit = 'mrp.bom'
+
+    def _bom_explode(self, cr, uid, bom, product, factor, properties=None,
+                     level=0, routing_id=False, previous_products=None,
+                     master_bom=None):
+        routing_line_obj = self.pool['mrp.routing.workcenter']
+        res = super(MrpBom, self)._bom_explode(cr, uid, bom, product, factor,
+                                               properties=None, level=0,
+                                               routing_id=False,
+                                               previous_products=None,
+                                               master_bom=None)
+        result, result2 = res
+        for work_order in result2:
+            seq = work_order['sequence'] - level
+            routing_lines = routing_line_obj.search(cr, uid, [
+                ('routing_id', '=', routing_id), ('sequence', '=', seq)])
+            routing_line_id = False
+            if len(routing_lines) == 1:
+                routing_line_id = routing_lines[0]
+            elif len(routing_lines) > 1:
+                for routing_line in routing_line_obj.browse(cr, uid,
+                                                            routing_lines):
+                    name_val = tools.ustr(routing_line.name) + ' - '
+                    if name_val in work_order['name']:
+                        routing_line_id = routing_line.id
+                        break
+            work_order['routing_wc_line'] = routing_line_id
+        return result, result2
 
 
 class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
 
     def _get_operation(self, cr, uid, context=None):
-        # TODO Operarion Domain
+        # TODO Operarion Domainin BOM
         routing_obj = self.pool['mrp.routing.operation']
         ids = routing_obj.search(cr, uid, [], context=context)
         res = routing_obj.read(cr, uid, ids, ['name', 'id'],
