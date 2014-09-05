@@ -31,13 +31,13 @@ class OperationTime(models.Model):
     _inherit = 'mrp.production.workcenter.line'
     operation_time_lines = fields.One2many('operation.time.lines',
                                            'operation_time')
-    #task_id = fields.Many2one('project.task')
+
 
 class OperationTimeLines(models.Model):
-    
+
     _name = 'operation.time.lines'
     _rec_name = 'operation_time'
-    start_date =fields.Datetime(string='Start Date') 
+    start_date = fields.Datetime(string='Start Date')
     end_date = fields.Datetime(string='End Date')
     operation_time = fields.Many2one('mrp.production.workcenter.line')
     uptime = fields.Float(string='Uptime', compute='operation_uptime',
@@ -50,8 +50,10 @@ class OperationTimeLines(models.Model):
     @api.depends('start_date', 'end_date')
     def operation_uptime(self):
         if self.end_date and self.start_date:
-            timedelta = datetime.strptime(self.end_date, DEFAULT_SERVER_DATETIME_FORMAT) - \
-                datetime.strptime(self.start_date, DEFAULT_SERVER_DATETIME_FORMAT)
+            timedelta = datetime.strptime(self.end_date,
+                                          DEFAULT_SERVER_DATETIME_FORMAT) - \
+                datetime.strptime(self.start_date,
+                                  DEFAULT_SERVER_DATETIME_FORMAT)
             self.uptime = timedelta.total_seconds()/3600.
         else:
             self.uptime = 0
