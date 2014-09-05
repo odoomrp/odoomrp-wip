@@ -1,0 +1,75 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* avanzosc_purchase_requisition_ext
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.1-20120523-233315\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-15 14:20+0000\n"
+"PO-Revision-Date: 2014-05-15 14:20+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: avanzosc_purchase_requisition_ext
+#: field:purchase.order.line,purchase_requisition_line_id:0
+msgid "Purchase Requisition Line"
+msgstr "Purchase Requisition Line"
+
+#. module: avanzosc_purchase_requisition_ext
+#: model:ir.model,name:avanzosc_purchase_requisition_ext.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Purchase Order Line"
+
+#. module: avanzosc_purchase_requisition_ext
+#: view:purchase.requisition:0
+msgid "Create Purchase Order"
+msgstr "Create Purchase Order"
+
+#. module: avanzosc_purchase_requisition_ext
+#: code:addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:93
+#: code:addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:155
+#: code:addons/openerp/addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:93
+#: code:addons/openerp/addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:155
+#, python-format
+msgid "Please select the warehouse"
+msgstr "Please select the warehouse"
+
+#. module: avanzosc_purchase_requisition_ext
+#: code:addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:93
+#: code:addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:153
+#: code:addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:155
+#: code:addons/openerp/addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:93
+#: code:addons/openerp/addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:153
+#: code:addons/openerp/addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:155
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: avanzosc_purchase_requisition_ext
+#: field:purchase.requisition,purchase_order_line_ids:0
+msgid "Purchase Order Lines"
+msgstr "Purchase Order Lines"
+
+#. module: avanzosc_purchase_requisition_ext
+#: code:addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:153
+#: code:addons/openerp/addons/avanzosc_purchase_requisition_ext/avanzosc_purchase_requisition_ext.py:153
+#, python-format
+msgid "You have already one %s purchase order for this partner, you must cancel this purchase order to create a new quotation."
+msgstr "You have already one %s purchase order for this partner, you must cancel this purchase order to create a new quotation."
+
+#. module: avanzosc_purchase_requisition_ext
+#: view:purchase.requisition:0
+msgid "Purchase Lines Info"
+msgstr "Purchase Lines Info"
+
+#. module: avanzosc_purchase_requisition_ext
+#: model:ir.model,name:avanzosc_purchase_requisition_ext.model_purchase_requisition
+#: field:purchase.order.line,purchase_requisition_id:0
+msgid "Purchase Requisition"
+msgstr "Purchase Requisition"
+
