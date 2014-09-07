@@ -54,13 +54,14 @@ class StockPicking(orm.Model):
                 if sale_ids:
                     sale = sale_obj.browse(cr, uid, sale_ids[0],
                                            context=context)
-                    values['sale_propagated_comment'] += (
-                        sale.propagated_comment)
+                    if sale.propagated_comment:
+                        values['sale_propagated_comment'] += (
+                            sale.propagated_comment)
             partner = partner_obj.browse(cr, uid, partner_id, context=context)
-            if values['sale_comment'] != partner.picking_comment:
+            if partner.picking_comment and values['sale_comment'] != partner.picking_comment:
                 values['sale_comment'] = (partner.picking_comment + '\n' +
                                           values['sale_comment'])
-            if (values['sale_propagated_comment'] !=
+            if partner.picking_propagated_comment and (values['sale_propagated_comment'] !=
                     partner.picking_propagated_comment):
                 values['sale_propagated_comment'] = (
                     partner.picking_propagated_comment + '\n' +
