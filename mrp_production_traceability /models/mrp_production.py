@@ -19,25 +19,22 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models
 
 
-class MrpProduction(orm.Model):
+class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
     def action_produce(self, cr, uid, production_id, production_qty,
                        production_mode, wiz=False, context=None):
         st_move_obj = self.pool['stock.move']
-        move_ids_pre = st_move_obj.search(cr, uid,
-                                          [('raw_material_production_id', '=',
-                                            production_id)], context=context)
         res = super(MrpProduction, self).action_produce(
             cr, uid, production_id, production_qty, production_mode,
             wiz=wiz, context=context)
         if wiz.lot_id:
             move_ids_post = st_move_obj.search(
-                cr, uid, [('raw_material_production_id', '=', production_id),
-                          ('id', 'not in', move_ids_pre)], context=context)
+                cr, uid, [('raw_material_production_id', '=', production_id)],
+                context=context)
             st_move_obj.write(cr, uid, move_ids_post,
-                              {'production_lot_id': wiz.lot_id.id})
+                              {'prod_parent_lot': wiz.lot_id.id})
         return res

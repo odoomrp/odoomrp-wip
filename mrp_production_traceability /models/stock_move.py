@@ -19,13 +19,11 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class StockMove(orm.Model):
+class StockMove(models.Model):
     _inherit = "stock.move"
 
-    _columns = {
-        'production_lot_id': fields.many2one('stock.production.lot',
-                                             'Production Lot'),
-    }
+    prod_parent_lot = fields.Many2one('stock.production.lot',
+                                      'Parent production lot')
