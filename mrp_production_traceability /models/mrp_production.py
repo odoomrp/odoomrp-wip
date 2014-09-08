@@ -28,14 +28,24 @@ class MrpProduction(models.Model):
     def action_produce(self, cr, uid, production_id, production_qty,
                        production_mode, wiz=False, context=None):
         st_move_obj = self.pool['stock.move']
+        pre_move_ids_assing = st_move_obj.search(
+            cr, uid, [('raw_material_production_id', '=', production_id),
+                      ('state', 'not in', ('done', 'cancel'))],
+                                                 context=context)
+        pre_move_ids = st_move_obj.search(
+            cr, uid, [('raw_material_production_id', '=', production_id)],
+            context=context)
         res = super(MrpProduction, self).action_produce(
             cr, uid, production_id, production_qty, production_mode,
             wiz=wiz, context=context)
         if wiz.lot_id:
-            move_ids_post = st_move_obj.search(
-                cr, uid, [('raw_material_production_id', '=', production_id)],
-                context=context)
-            if move_ids_post:
-                st_move_obj.write(cr, uid, move_ids_post,
+            post_move_ids = st_move_obj.search(
+                cr, uid, [('raw_material_production_id', '=', production_id),
+                         ('id', 'not in', pre_move_ids)], context=context)
+            if post_move_ids:
+                st_move_obj.write(cr, uid, post_move_ids,
+                                  {'prod_parent_lot': wiz.lot_id.id})
+            else:
+                st_move_obj.write(cr, uid, pre_move_ids_assing,
                                   {'prod_parent_lot': wiz.lot_id.id})
         return res
