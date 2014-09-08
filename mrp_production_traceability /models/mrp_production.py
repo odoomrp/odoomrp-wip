@@ -35,7 +35,7 @@ class MrpProduction(models.Model):
             move_ids_post = st_move_obj.search(
                 cr, uid, [('raw_material_production_id', '=', production_id)],
                 context=context)
-            if move_ids_post != []:
+            if move_ids_post:
                 st_move_obj.write(cr, uid, move_ids_post,
                                   {'prod_parent_lot': wiz.lot_id.id})
         return res
