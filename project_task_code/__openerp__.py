@@ -17,20 +17,20 @@
 ##############################################################################
 
 {
-    "name": "Sequence for Tasks",
+    "name": "Sequential Code for Tasks",
     "version": "1.0",
     "depends": [
         "project",
     ],
-    "author": "AvanzOSC",
+    "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
     "category": "Custom Module",
-    "website": "http://www.avanzosc.es",
-    "summary": "Task sequence generator",
+    "website": "http://www.odoomrp.com",
+    "summary": "Task sequential code generator",
     "description": """
-    This module provide :
+    This module creates a sequential code for tasks
     """,
     "data": [
         "data/task_sequence.xml",

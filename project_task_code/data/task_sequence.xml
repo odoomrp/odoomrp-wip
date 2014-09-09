@@ -13,6 +13,5 @@
             <field eval="4" name="padding" />
             <field name="prefix">TSK</field>
         </record>
-
     </data>
 </openerp>
