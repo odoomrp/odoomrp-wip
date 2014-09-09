@@ -24,9 +24,7 @@ class ProjectTask(orm.Model):
     _inherit = 'project.task'
 
     def do_delegate(self, cr, uid, ids, delegate_data=None, context=None):
-        """
-        Delegate Task to another users.
-        """
+        """ Delegate Task to another users. """
         if delegate_data is None:
             delegate_data = {}
         assert (delegate_data['user_id'],

@@ -31,7 +31,7 @@
     "complexity": "normal",
     "summary": "",
     "description": """
-    This module provide :
+This module extends the task delegation wizard
     """,
     "data": [
         "data/project_data.xml",

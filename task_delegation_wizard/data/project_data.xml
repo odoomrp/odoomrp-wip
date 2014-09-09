@@ -7,6 +7,5 @@
             <field name="fold" eval="1"/>
             <field name="description">This stage means that the task must be checked.</field>
         </record>
-    
     </data>
 </openerp>
