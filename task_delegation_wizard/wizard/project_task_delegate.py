@@ -38,7 +38,7 @@ class ProjectTaskDelegate(orm.TransientModel):
 
         if context is None:
             context = {}
-        record_id = context and context.get('active_id', False) or False
+        record_id = context.get('active_id', False)
         if not record_id:
             return res
         task_obj = self.pool['project.task']

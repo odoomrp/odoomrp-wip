@@ -30,7 +30,7 @@ class ProjectTask(orm.Model):
         assert (delegate_data['user_id'],
                 _("Delegated User should be specified"))
         delegated_tasks = {}
-        if not 'split_in' in delegate_data or not delegate_data['split_in']:
+        if not delegate_data.get('split_in'):
             delegated_tasks = super(ProjectTask, self).do_delegate(
                 cr, uid, ids, delegate_data=delegate_data, contex=context)
         else:
@@ -54,7 +54,7 @@ class ProjectTask(orm.Model):
                     self._delegate_task_attachments(cr, uid, task.id,
                                                     delegated_task_id,
                                                     context=context)
-    
+
                 remain = (delegate_data['split_in'] *
                           delegate_data['planned_hours_me'])
                 task.write({
