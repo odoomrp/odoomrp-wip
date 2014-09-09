@@ -154,9 +154,9 @@ class AccountTreasuryForecast(models.Model):
             }
             new_id = treasury_invoice_obj.create(values)
             new_invoice_ids.append(new_id)
-            if invoice_o.type == "out_invoice":
+            if invoice_o.type in ("out_invoice", "out_refund"):
                 out_invoice_lst.append(new_id.id)
-            elif invoice_o.type == "in_invoice":
+            elif invoice_o.type in ("in_invoice", "in_refund"):
                 in_invoice_lst.append(new_id.id)
         self.write({'out_invoice_ids': [(6, 0, out_invoice_lst)],
                     'in_invoice_ids': [(6, 0, in_invoice_lst)]})

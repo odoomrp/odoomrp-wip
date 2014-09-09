@@ -48,9 +48,9 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
                     tfl.id || 'l' AS id,
                     treasury_id,
                     tfl.date as date,
-                    0.0 as credit,
-                    amount as debit,
-                    amount as balance,
+                    amount as credit,
+                    0.0 as debit,
+                    -amount as balance,
                     payment_mode_id,
                     'out' as type
                 from
@@ -62,9 +62,9 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
                     tfii.id || 'i' AS id,
                     treasury_id,
                     tfii.date_due as date,
-                    0.0 as credit,
-                    tfii.total_amount as debit,
-                    tfii.total_amount as balance,
+                    tfii.total_amount as credit,
+                    0.0 as debit,
+                    -tfii.total_amount as balance,
                     tfii.payment_mode_id,
                     'out' as type
                 from
@@ -78,9 +78,9 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
                     tfio.id || 'o' AS id,
                     treasury_id,
                     tfio.date_due as date,
-                    tfio.total_amount as credit,
-                    0.0 as debit,
-                    -tfio.total_amount as balance,
+                    0.0 as credit,
+                    tfio.total_amount as debit,
+                    tfio.total_amount as balance,
                     tfio.payment_mode_id,
                     'in' as type
                 from
