@@ -33,6 +33,19 @@ class WarningLog(orm.Model):
         "msg": fields.text("Message"),
         "type": fields.many2one("ir.model", "Model")}
 
+    def create_warning_log(self, cr, uid, ids, model, warning,
+                           context=None):
+
+        if warning:
+            model_id = self.pool['ir.model'].search(
+                cr, uid, [('model', '=', model)], context=context)
+            self.create(
+                cr, uid, {
+                    'date': datetime.now(), 'user': uid,
+                    'msg': warning.get('message'),
+                    'type': model_id[0]}, context=context)
+        return vals
+
 
 class SaleOrder(orm.Model):
 
@@ -41,15 +54,10 @@ class SaleOrder(orm.Model):
     def onchange_partner_id(self, cr, uid, ids, part, context=None):
         vals = super(SaleOrder, self).onchange_partner_id(cr, uid, ids, part,
                                                           context=context)
-        if 'warning' in vals and vals['warning']:
-            model_id = self.pool['ir.model'].search(
-                cr, uid, [('model', '=', self._name)], context=context)
-            self.pool['warning.log'].create(
-                cr, uid, {
-                    'date': datetime.now(), 'user': uid,
-                    'msg': 'warning' in vals and vals['warning']['message'],
-                    'type': model_id[0]}, context=context)
-        return vals
+        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                           self._name,
+                                                           vals.get('warning'),
+                                                           context=context)
 
 
 class PurchaseOrder(orm.Model):
@@ -58,15 +66,10 @@ class PurchaseOrder(orm.Model):
     def onchange_partner_id(self, cr, uid, ids, part, context=None):
         vals = super(PurchaseOrder, self).onchange_partner_id(
             cr, uid, ids, part, context=context)
-        if 'warning' in vals and vals['warning']:
-            model_id = self.pool['ir.model'].search(
-                cr, uid, [('model', '=', self._name)], context=context)
-            self.pool['warning.log'].create(
-                cr, uid, {
-                    'date': datetime.now(), 'user': uid,
-                    'msg': 'warning' in vals and vals['warning']['message'],
-                    'type': model_id[0]}, context=context)
-        return vals
+        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                           self._name,
+                                                           vals.get('warning'),
+                                                           context=context)
 
 
 class AccountInvoice(orm.Model):
@@ -80,15 +83,10 @@ class AccountInvoice(orm.Model):
             cr, uid, ids, type, partner_id, date_invoice=date_invoice,
             payment_term=payment_term, partner_bank_id=partner_bank_id,
             company_id=company_id, context=context)
-        if 'warning' in vals and vals['warning']:
-            model_id = self.pool['ir.model'].search(
-                cr, uid, [('model', '=', self._name)], context=context)
-            self.pool['warning.log'].create(
-                cr, uid, {
-                    'date': datetime.now(), 'user': uid,
-                    'msg': 'warning' in vals and vals['warning']['message'],
-                    'type': model_id[0]}, context=context)
-        return vals
+        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                           self._name,
+                                                           vals.get('warning'),
+                                                           context=context)
 
 
 class StockPicking(orm.Model):
@@ -98,15 +96,10 @@ class StockPicking(orm.Model):
                             context=None):
         vals = super(StockPicking, self).onchange_partner_in(
             cr, uid, ids, partner_id=partner_id, context=context)
-        if 'warning' in vals and vals['warning']:
-            model_id = self.pool['ir.model'].search(
-                cr, uid, [('model', '=', self._name)], context=context)
-            self.pool['warning.log'].create(
-                cr, uid, {
-                    'date': datetime.now(), 'user': uid,
-                    'msg': 'warning' in vals and vals['warning']['message'],
-                    'type': model_id[0]}, context=context)
-        return vals
+        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                           self._name,
+                                                           vals.get('warning'),
+                                                           context=context)
 
 
 class SaleOrderLine(orm.Model):
@@ -125,15 +118,10 @@ class SaleOrderLine(orm.Model):
             lang=lang, update_tax=update_tax, date_order=date_order,
             packaging=packaging, fiscal_position=fiscal_position, flag=flag,
             warehouse_id=warehouse_id, context=context)
-        if 'warning' in vals and vals['warning']:
-            model_id = self.pool['ir.model'].search(
-                cr, uid, [('model', '=', self._name)], context=context)
-            self.pool['warning.log'].create(
-                cr, uid, {
-                    'date': datetime.now(), 'user': uid,
-                    'msg': 'warning' in vals and vals['warning']['message'],
-                    'type': model_id[0]}, context=context)
-        return vals
+        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                           self._name,
+                                                           vals.get('warning'),
+                                                           context=context)
 
 
 class PurchaseOrderLine(orm.Model):
@@ -149,12 +137,7 @@ class PurchaseOrderLine(orm.Model):
             date_order=date_order, fiscal_position_id=fiscal_position_id,
             date_planned=date_planned, name=name, price_unit=price_unit,
             state='draft', notes=notes, context=context)
-        if 'warning' in vals and vals['warning']:
-            model_id = self.pool['ir.model'].search(
-                cr, uid, [('model', '=', self._name)], context=context)
-            self.pool['warning.log'].create(
-                cr, uid, {
-                    'date': datetime.now(), 'user': uid,
-                    'msg': 'warning' in vals and vals['warning']['message'],
-                    'type': model_id[0]}, context=context)
-        return vals
+        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                           self._name,
+                                                           vals.get('warning'),
+                                                           context=context)
