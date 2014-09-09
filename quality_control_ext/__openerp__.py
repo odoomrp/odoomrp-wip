@@ -27,7 +27,7 @@
         "product",
         "quality_control",
     ],
-    "author": "OdooMRP Team",
+    "author": "OdooMRP team",
     "category": "Custom Modules",
     "description": """
 Se propone realizar una extensión del módulo de calidad que incluya la
