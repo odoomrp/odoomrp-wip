@@ -32,6 +32,23 @@
                 </page>
             </field>
         </record>
+        
+        <record model="ir.ui.view" id="operation_time_form_view">
+            <field name="name">Operation Time Form View</field>
+            <field name="model">mrp.production.workcenter.line</field>
+            <field name="inherit_id"
+                ref="mrp_operations.mrp_production_workcenter_tree_view_inherit" />
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                     <button name="button_start_working" string="Start" states="draft" class="oe_highlight"/>
+                     <button name="button_resume" string="Resume" states="pause" class="oe_highlight"/>
+                     <button name="button_done" string="Finished" states="startworking" class="oe_highlight"/>
+                     <button name="button_pause" string="Pending" states="startworking"/>
+                     <button name="button_draft" string="Set Draft" states="cancel"/>
+                     <button name="button_cancel" string="Cancel" states="draft,startworking"/>
+                </field>
+            </field>
+        </record>        
 
         <record model="ir.ui.view" id="operation_time_lines_form_view">
             <field name="name">operation.time.line.form</field>
