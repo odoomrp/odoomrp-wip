@@ -20,6 +20,7 @@
 #                                                                            #
 ##############################################################################
 
+from openerp import api
 from openerp.osv import fields, orm
 
 
@@ -47,3 +48,9 @@ class SaleOrder(orm.Model):
                 vals['name'] = sequence_obj.next_by_id(
                     cr, uid, type_obj[0].sequence_id.id)
         return super(SaleOrder, self).create(cr, uid, vals, context=context)
+
+    @api.model
+    def _prepare_invoice(self, order, line_ids):
+        res = super(SaleOrder, self)._prepare_invoice(order, line_ids)
+        res['journal_id'] = order.type_id.journal_id.id
+        return res

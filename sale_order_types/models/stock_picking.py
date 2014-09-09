@@ -20,15 +20,18 @@
 #                                                                            #
 ##############################################################################
 
-{
-    'name': 'Sale Order Types',
-    'version': '1.0',
-    'category': 'Sales',
-    'description': """This module adds a typology for the sale orders.""",
-    'author': 'OdooMRP team',
-    'website': 'www.odoomrp.com',
-    'license': 'AGPL-3',
-    'depends': ['sale', 'stock'],
-    'data': ['views/sale_order_view.xml', 'views/sale_order_type_view.xml'],
-    'installable': True,
-}
+from openerp import api, models
+
+
+class StockPicking(models.Model):
+
+    _inherit = "stock.picking"
+
+    @api.model
+    def _create_invoice_from_picking(self, picking, vals):
+        if picking and picking.move_lines:
+            if picking.move_lines[0].purchase_line_id:
+                purchase = picking.move_lines[0].purchase_line_id.order_id
+                vals['journal_id'] = purchase.type_id.journal_id.id
+        return super(StockPicking, self)._create_invoice_from_picking(picking,
+                                                                      vals)

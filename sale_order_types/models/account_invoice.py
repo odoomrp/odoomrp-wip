@@ -20,15 +20,21 @@
 #                                                                            #
 ##############################################################################
 
-{
-    'name': 'Sale Order Types',
-    'version': '1.0',
-    'category': 'Sales',
-    'description': """This module adds a typology for the sale orders.""",
-    'author': 'OdooMRP team',
-    'website': 'www.odoomrp.com',
-    'license': 'AGPL-3',
-    'depends': ['sale', 'stock'],
-    'data': ['views/sale_order_view.xml', 'views/sale_order_type_view.xml'],
-    'installable': True,
-}
+from openerp import api, models
+
+
+class AccountInvoice(models.Model):
+
+    _inherit = 'account.invoice'
+
+    @api.model
+    @api.one
+    def _prepare_refund(self, invoice, date=None, period_id=None,
+                        description=None, journal_id=None):
+        if self.origin:
+            orders = self.env['sale.order'].seach(
+                [('name', '=', self.origin)])
+            if orders:
+                journal_id = orders[0].type_id.journal_id.id
+        return super(AccountInvoice, self)._prepare_refund(
+            self, invoice, date, period_id, description, journal_id)

@@ -30,7 +30,11 @@ class SaleOrderTypology(orm.Model):
     _description = 'Type of sale order'
 
     _columns = {
+        'refund_journal_id': fields.many2one('account.journal',
+                                                 'Refund Billing Journal'),
         'description': fields.text('Description'),
+        'journal_id': fields.many2one('account.journal',
+                                      'Billing Journal'),
         'name': fields.char('Name', required=True),
         'sequence_id': fields.many2one('ir.sequence', 'Entry Sequence',
                                        copy=False),
