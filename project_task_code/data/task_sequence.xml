@@ -11,7 +11,7 @@
             <field name="name">Task Sequence</field>
             <field name="code">sequence.project.task</field>
             <field eval="4" name="padding" />
-            <field name="prefix">TSK</field>
+            <field name="prefix">T</field>
         </record>
     </data>
 </openerp>
