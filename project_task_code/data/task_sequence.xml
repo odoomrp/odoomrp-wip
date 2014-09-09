@@ -8,7 +8,7 @@
         </record>
 
         <record forcecreate="1" id="task_claim" model="ir.sequence">
-            <field name="name">Task Sequence</field>
+            <field name="name">Task sequence</field>
             <field name="code">sequence.project.task</field>
             <field eval="4" name="padding" />
             <field name="prefix">T</field>
