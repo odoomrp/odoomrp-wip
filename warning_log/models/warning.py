@@ -33,6 +33,24 @@ class WarningLog(orm.Model):
         "msg": fields.text("Message"),
         "type": fields.many2one("ir.model", "Model")}
 
+    def name_search(cr, user, name='', args=None, operator='ilike',
+                    context=None, limit=100):
+        if not args:
+            args = []
+        ids = self.search(cr, user, [('user', operator, name)] + args,
+                          limit=limit, context=context)
+        ids += self.search(cr, user, [('date', operator, name)] + args,
+                           limit=limit, context=context)
+        return self.name_get(cr, user, ids, context)
+
+    def name_get(self, cr, uid, ids, context=None):
+        """Get Product In Picking"""
+        if not len(ids):
+            return []
+        res = [(r.user.login, r.date)
+               for r in self.browse(cr, uid, ids, context=context)]
+        return res
+
     def create_warning_log(self, cr, uid, ids, model, warning,
                            context=None):
 
