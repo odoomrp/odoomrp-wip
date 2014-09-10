@@ -23,15 +23,24 @@ from openerp.osv import orm, fields
 import openerp.addons.decimal_precision as dp
 
 
+class StockPickingTax(models.Model):
+    _name = 'stock.picking.tax_breakdown'
+
+    picking = fields.Many2one('stock.picking', string='Picking',
+                                 ondelete='cascade')
+    tax = fields.Many2one('account.tax', string='Tax')
+    untaxed_amount = fields.Float(string='Untaxed Amount',
+                                  digits=dp.get_precision('Sale Price'))
+    taxation_amount = fields.Float(string='Taxation',
+                                   digits=dp.get_precision('Sale Price'))
+    total_amount = fields.Float(string='Total',
+                                digits=dp.get_precision('Sale Price'))
+
 class stock_picking(orm.Model):
 
     _inherit = 'stock.picking'
 
-    _columns = {
-        'tax_breakdown_ids': fields.one2many('tax.breakdown',
-                                                 'picking_id',
-                                                 'Tax Apportionment'),
-    }
+
 
     def _amount_all(self, cr, uid, ids, field_name, arg, context=None):
         cur_obj = self.pool['res.currency']
@@ -70,6 +79,11 @@ class stock_picking(orm.Model):
                                                    context=context):
             result[move.picking_id.id] = True
         return result.keys()
+
+
+        'tax_breakdown_i:ds' fields.one2many('tax.breakdown',
+                                                 'picking_id',
+                                                 'Tax Apportionment'),
 
     _columns = {
         'amount_untaxed':
