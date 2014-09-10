@@ -17,7 +17,7 @@
 #
 ##############################################################################
 {
-    "name": "available_stock_shortcuts",
+    "name": "Stock Quants Shortcut",
     "version": "1.0",
     "depends": ["base", "stock", "purchase", "mrp"],
     "author": "OdooMRP team",
