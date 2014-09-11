@@ -33,15 +33,15 @@ class WarningLog(orm.Model):
         "msg": fields.text("Message"),
         "type": fields.many2one("ir.model", "Model")}
 
-    def name_search(cr, user, name='', args=None, operator='ilike',
+    def name_search(cr, uid, name='', args=None, operator='ilike',
                     context=None, limit=100):
         if not args:
             args = []
-        ids = self.search(cr, user, [('user', operator, name)] + args,
+        ids = self.search(cr, uid, [('user', operator, name)] + args,
                           limit=limit, context=context)
-        ids += self.search(cr, user, [('date', operator, name)] + args,
+        ids += self.search(cr, uid, [('date', operator, name)] + args,
                            limit=limit, context=context)
-        return self.name_get(cr, user, ids, context)
+        return self.name_get(cr, uid, ids, context)
 
     def name_get(self, cr, uid, ids, context=None):
         """Get Product In Picking"""
@@ -62,7 +62,6 @@ class WarningLog(orm.Model):
                     'date': datetime.now(), 'user': uid,
                     'msg': warning.get('message'),
                     'type': model_id[0]}, context=context)
-        return vals
 
 
 class SaleOrder(orm.Model):
@@ -72,10 +71,11 @@ class SaleOrder(orm.Model):
     def onchange_partner_id(self, cr, uid, ids, part, context=None):
         vals = super(SaleOrder, self).onchange_partner_id(cr, uid, ids, part,
                                                           context=context)
-        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
-                                                           self._name,
-                                                           vals.get('warning'),
-                                                           context=context)
+        self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                    self._name,
+                                                    vals.get('warning'),
+                                                    context=context)
+        return vals
 
 
 class PurchaseOrder(orm.Model):
@@ -84,10 +84,11 @@ class PurchaseOrder(orm.Model):
     def onchange_partner_id(self, cr, uid, ids, part, context=None):
         vals = super(PurchaseOrder, self).onchange_partner_id(
             cr, uid, ids, part, context=context)
-        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
-                                                           self._name,
-                                                           vals.get('warning'),
-                                                           context=context)
+        self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                    self._name,
+                                                    vals.get('warning'),
+                                                    context=context)
+        return vals
 
 
 class AccountInvoice(orm.Model):
@@ -101,10 +102,11 @@ class AccountInvoice(orm.Model):
             cr, uid, ids, type, partner_id, date_invoice=date_invoice,
             payment_term=payment_term, partner_bank_id=partner_bank_id,
             company_id=company_id, context=context)
-        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
-                                                           self._name,
-                                                           vals.get('warning'),
-                                                           context=context)
+        self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                    self._name,
+                                                    vals.get('warning'),
+                                                    context=context)
+        return vals
 
 
 class StockPicking(orm.Model):
@@ -114,10 +116,11 @@ class StockPicking(orm.Model):
                             context=None):
         vals = super(StockPicking, self).onchange_partner_in(
             cr, uid, ids, partner_id=partner_id, context=context)
-        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
-                                                           self._name,
-                                                           vals.get('warning'),
-                                                           context=context)
+        self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                    self._name,
+                                                    vals.get('warning'),
+                                                    context=context)
+        return vals
 
 
 class SaleOrderLine(orm.Model):
@@ -136,10 +139,11 @@ class SaleOrderLine(orm.Model):
             lang=lang, update_tax=update_tax, date_order=date_order,
             packaging=packaging, fiscal_position=fiscal_position, flag=flag,
             warehouse_id=warehouse_id, context=context)
-        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
-                                                           self._name,
-                                                           vals.get('warning'),
-                                                           context=context)
+        self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                    self._name,
+                                                    vals.get('warning'),
+                                                    context=context)
+        return vals
 
 
 class PurchaseOrderLine(orm.Model):
@@ -155,7 +159,8 @@ class PurchaseOrderLine(orm.Model):
             date_order=date_order, fiscal_position_id=fiscal_position_id,
             date_planned=date_planned, name=name, price_unit=price_unit,
             state='draft', notes=notes, context=context)
-        return self.pool['warning.log'].create_warning_log(cr, uid, ids,
-                                                           self._name,
-                                                           vals.get('warning'),
-                                                           context=context)
+        self.pool['warning.log'].create_warning_log(cr, uid, ids,
+                                                    self._name,
+                                                    vals.get('warning'),
+                                                    context=context)
+        return vals
