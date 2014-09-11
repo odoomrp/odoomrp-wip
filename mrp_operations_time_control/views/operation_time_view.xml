@@ -33,7 +33,7 @@
             </field>
         </record>
         
-        <record model="ir.ui.view" id="operation_time_form_view">
+        <record model="ir.ui.view" id="operation_time_tree_view">
             <field name="name">Operation Time Form View</field>
             <field name="model">mrp.production.workcenter.line</field>
             <field name="inherit_id"
