@@ -18,16 +18,25 @@
 ##############################################################################
 
 {
-    "name": "product_variants_sale",
+    "name": "Sale - Product variants",
     "version": "1.0",
-    "depends": ["base","sale"],
+    "depends": [
+        "base",
+        "sale",
+    ],
     "author": "OdooMRP team",
-    "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
-    "category": "Product ",
+    "contributors": [
+        "Mikel Arregi <mikelarregi@avanzosc.es>",
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+    ],
+    "category": "Custom Module",
+    "website": "http://www.odoomrp.com",
+    "summary": "",
     "description": """
-    Custom product create on time of sale
+Create custom product from a sale order
     """,
-    'data': ["views/sale_view.xml"],
+    "data": [
+        "views/sale_view.xml",
+    ],
     "installable": True,
-    "auto_install": False,
 }

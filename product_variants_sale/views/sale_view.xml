@@ -1,45 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
-	<data>
-		<record model="ir.ui.view" id="sale_variants_form_view">
-			<field name="name">sale.variants.line</field>
-			<field name="model">sale.order</field>
-			<field name="inherit_id" ref="sale.view_order_form" />
-			<field name="arch" type="xml">
-				<page string="Other Information" position="after">
-					<page string="Variants Lines">
-						<field name="sale_variant_lines">
-							<tree string="Variants">
-								<field name="tmpl_id" />
-								<field name="attribute_lines" />
-								<field name="final_value_lines" />
-								<button name="create_lines" string="Create Order Lines"
-									type="object" icon="gtk-ok" />
-							</tree>
-							<form string="Variants">
-								<field name="tmpl_id" />
-								<button name="bring_tmpl_attributes" string="Bring Attributes"
-									type="object" icon="gtk-ok" />
-								<field name="attribute_lines">
-								<tree string="Attributes" editable="top">
-									<field name="attribute_id" />
-									<field name="value_id" domain="[('attribute_id','=',attribute_id)]"/>
-									<field name="custom_value" />
-								</tree>
-								</field>
-								<field name="final_value_lines" >
-								<tree string="Variants" editable="top">
-									<field name="value_id" />
-									<field name="qty" />
-								</tree>
-								</field>
-								<button name="create_lines" string="Create Order Lines"
-									type="object" icon="gtk-ok" />
-							</form>
-						</field>
-					</page>
-				</page>
-			</field>
-		</record>
-	</data>
+    <data>
+<!--         <record model="ir.ui.view" id="sale_variants_form_view"> -->
+<!--             <field name="name">sale.variants.line</field> -->
+<!--             <field name="model">sale.order</field> -->
+<!--             <field name="inherit_id" ref="sale.view_order_form" /> -->
+<!--             <field name="arch" type="xml"> -->
+<!--                 <page string="Other Information" position="after"> -->
+<!--                     <page string="Variants Lines"> -->
+<!--                         <field name="sale_variant_lines"> -->
+<!--                             <tree string="Variants"> -->
+<!--                                 <field name="tmpl_id" /> -->
+<!--                                 <field name="attribute_lines" /> -->
+<!--                                 <field name="final_value_lines" /> -->
+<!--                                 <button name="create_lines" -->
+<!--                                     string="Create Order Lines" type="object" -->
+<!--                                     icon="gtk-ok" /> -->
+<!--                             </tree> -->
+<!--                             <form string="Variants"> -->
+<!--                                 <field name="tmpl_id" /> -->
+<!--                                 <button name="bring_tmpl_attributes" -->
+<!--                                     string="Bring Attributes" type="object" -->
+<!--                                     icon="gtk-ok" /> -->
+<!--                                 <field name="attribute_lines"> -->
+<!--                                     <tree string="Attributes" -->
+<!--                                         editable="top"> -->
+<!--                                         <field name="attribute_id" /> -->
+<!--                                         <field name="value_id" -->
+<!--                                             domain="[('attribute_id','=',attribute_id)]" /> -->
+<!--                                         <field name="custom_value" /> -->
+<!--                                     </tree> -->
+<!--                                 </field> -->
+<!--                                 <field name="final_value_lines"> -->
+<!--                                     <tree string="Variants" -->
+<!--                                         editable="top"> -->
+<!--                                         <field name="value_id" /> -->
+<!--                                         <field name="qty" /> -->
+<!--                                     </tree> -->
+<!--                                 </field> -->
+<!--                                 <button name="create_lines" -->
+<!--                                     string="Create Order Lines" type="object" -->
+<!--                                     icon="gtk-ok" /> -->
+<!--                             </form> -->
+<!--                         </field> -->
+<!--                     </page> -->
+<!--                 </page> -->
+<!--             </field> -->
+<!--         </record> -->
+
+        <record model="ir.ui.view" id="sale_order_extended_form_view">
+            <field name="name">sale.order.extended.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"  position="before">
+                    <field name="type" />
+                </xpath>
+                <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"  position="after">
+                    <field name="product_template" attrs="{'invisible':[('type','!=','variant')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"  position="attributes">
+                    <attribute name="attrs">{'invisible':[('type','!=','product')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/form//label[@for='name']" position="before">
+                    <label for="product_attributes" attrs="{'invisible':[('type','!=','variant')]}"/>
+                    <field name="product_attributes" attrs="{'invisible':[('type','!=','variant')]}" options="{'no_create': True}">
+                        <tree create="false">
+                            <field name="attribute" />
+                            <field name="value" />
+                        </tree>
+                        <form>
+                        <group>
+                            <field name="attribute" />
+                            <field name="value" />
+                            </group>
+                        </form>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_order_line_extended_form_view">
+            <field name="name">sale.order.line.extended.form</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_order_line_form2"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="before">
+                    <field name="type" />
+                </field>
+                <field name="product_id" position="after">
+                    <field name="product_template" />
+                </field>
+            </field>
+        </record>
+    </data>
 </openerp>
