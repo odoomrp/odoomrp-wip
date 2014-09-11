@@ -10,22 +10,22 @@
                 ref="mrp_operations.mrp_production_form_inherit_view" />
             <field name="arch" type="xml">
                     <button name="button_start_working" position="attributes">
-                        <attribute name="icon" />
+                        <attribute name="icon"></attribute>
                     </button>
                     <button name="button_resume" position="attributes">
-                        <attribute name="icon" />
+                        <attribute name="icon" ></attribute>
                     </button>
                     <button name="button_done" position="attributes">
-                        <attribute name="icon" />
+                        <attribute name="icon" ></attribute>
                     </button>
                     <button name="button_pause" position="attributes">
-                        <attribute name="icon" />
+                        <attribute name="icon" ></attribute>
                     </button>
                     <button name="button_draft" position="attributes">
-                        <attribute name="icon" />
+                        <attribute name="icon" ></attribute>
                     </button>
                     <button name="button_cancel" position="attributes">
-                        <attribute name="icon" />
+                        <attribute name="icon" ></attribute>
                     </button>
             </field>
         </record>

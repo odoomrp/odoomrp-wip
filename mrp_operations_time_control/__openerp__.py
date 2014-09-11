@@ -18,7 +18,7 @@
 ##############################################################################
 
 {
-    "name": "mrp_operations_time_control",
+    "name": "MRP Operations Time Control",
     "version": "1.0",
     "depends": ["base", "mrp"],
     "author": "OdooMRP team",
