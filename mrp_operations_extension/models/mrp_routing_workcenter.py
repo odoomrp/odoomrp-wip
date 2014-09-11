@@ -28,9 +28,9 @@ class MrpRoutingWorkcenter(models.Model):
     _inherit = 'mrp.routing.workcenter'
 
     operation = fields.Many2one('mrp.routing.operation', string='Operation')
-    workcenter_ids = fields.Many2many(
-        'mrp.workcenter', 'mrp_routing_workcenter_rel', 'routing_id', 
-        'workcenter_id', 'Work centers')
+    op_wc_lines = fields.One2many('mrp.operation.workcenter',
+                                  'routing_workcenter',
+                                  'Workcenter Info Lines')
 
     @api.one
     @api.onchange('operation')
@@ -38,11 +38,24 @@ class MrpRoutingWorkcenter(models.Model):
         if self.operation:
             self.name = self.operation.name
             self.note = self.operation.description
+            op_wc_lst = []
+            data = {}
+            for operation_wc in self.operation.workcenters:
+                data = {'workcenter': operation_wc.id,
+                        'capacity_per_cycle': operation_wc.capacity_per_cycle,
+                        'time_efficiency': operation_wc.time_efficiency,
+                        'time_cycle': operation_wc.time_cycle,
+                        'time_start': operation_wc.time_start,
+                        'time_stop': operation_wc.time_stop,
+                        'default': False
+                        }
+                op_wc_lst.append(data)
+            self.op_wc_lines = op_wc_lst
 
     @api.one
-    @api.onchange('workcenter_id')
-    def onchange_workcenter(self):
-        if self.workcenter_id:
-            lst = self.workcenter_ids.ids
-            lst.append(self.workcenter_id.id)
-            self.workcenter_ids = lst
+    @api.onchange('op_wc_lines')
+    def onchange_default(self):
+        for opwc_line in self.op_wc_lines:
+            if opwc_line.default:
+                self.workcenter_id = opwc_line.workcenter.id
+                break

@@ -21,7 +21,36 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
+
+
+class MrpOperationWorkcenter(models.Model):
+    _name = 'mrp.operation.workcenter'
+    _description = 'MRP Operation Workcenter'
+
+    workcenter = fields.Many2one('mrp.workcenter', string='Work Center')
+    routing_workcenter = fields.Many2one('mrp.routing.workcenter',
+                                         'Routing Workcenter')
+    time_efficiency = fields.Float('Efficiency Factor')
+    capacity_per_cycle = fields.Float('Capacity per Cycle')
+    time_cycle = fields.Float('Time for 1 cycle (hour)',
+                              help="Time in hours for doing one cycle.")
+    time_start = fields.Float('Time before prod.',
+                              help="Time in hours for the setup.")
+    time_stop = fields.Float('Time after prod.',
+                             help="Time in hours for the cleaning.")
+    default = fields.Boolean('Default')
+
+    @api.one
+    @api.onchange('workcenter')
+    def onchange_workcenter(self):
+        if self.workcenter:
+            self.capacity_per_cycle = self.workcenter.capacity_per_cycle
+            self.time_efficiency = self.workcenter.time_efficiency
+            self.time_cycle = self.workcenter.time_cycle
+            self.time_start = self.workcenter.time_start
+            self.time_stop = self.workcenter.time_stop
+            self.default = False
 
 
 class MrpRoutingOperation(models.Model):
@@ -31,3 +60,8 @@ class MrpRoutingOperation(models.Model):
     name = fields.Char('Name', required=True)
     code = fields.Char('Code')
     description = fields.Text('Description')
+    steps = fields.Text('Relevant Steps')
+    workcenters = fields.Many2many(
+        'mrp.workcenter', 'mrp_operation_workcenter_relation', 'operation',
+        'workcenter', 'Work centers')
+    op_number = fields.Integer('Número de Persona', default='0')

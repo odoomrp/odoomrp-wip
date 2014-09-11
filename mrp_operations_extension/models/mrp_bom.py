@@ -67,5 +67,6 @@ class MrpBomLine(models.Model):
         res = [(r['id'], r['name']) for r in res]
         return res
 
-    operation = fields.Many2one('mrp.routing.workcenter', 'Consumed',)
-    # domain=[('operation','in','routing_id.workcenter_lines')])
+    operation = fields.Many2one('mrp.routing.workcenter', 'Consumed',
+                                domain=[('routing_id', '=',
+                                         'bom_id.routing_id')])
