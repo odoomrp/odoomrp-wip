@@ -21,7 +21,7 @@
 #
 ##############################################################################
 
-from openerp import api, models, fields
+from openerp import api, models, fields, exceptions
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
@@ -30,7 +30,8 @@ class MrpProductionWorkcenterLine(models.Model):
 
     _inherit = 'mrp.production.workcenter.line'
     operation_time_lines = fields.One2many('operation.time.line',
-                                           'operation_time')
+                                           'operation_time',
+                                           string='Operation Time Lines')
 
     def _create_operation_line(self):
         self.env['operation.time.line'].create({
@@ -90,4 +91,3 @@ class OperationTimeLine(models.Model):
             self.uptime = timedelta.total_seconds() / 3600.
         else:
             self.uptime = 0
-        return True
