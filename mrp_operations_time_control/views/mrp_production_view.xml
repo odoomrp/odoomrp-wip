@@ -27,6 +27,11 @@
                     <button name="button_cancel" position="attributes">
                         <attribute name="icon" ></attribute>
                     </button>
+                    <field name="product_line" position="after">
+                        <group string="Operation Times" colspan="4" col="4">
+                        <field name="operation_time_lines" nolabel="1" colspan="4" col="4"/>
+                        </group>
+                    </field>
             </field>
         </record>
     </data>

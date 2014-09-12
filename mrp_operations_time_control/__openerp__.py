@@ -20,7 +20,7 @@
 {
     "name": "MRP Operations Time Control",
     "version": "1.0",
-    "depends": ["base", "mrp"],
+    "depends": ["base", "mrp", "mrp_operations_extension"],
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "mrp",
