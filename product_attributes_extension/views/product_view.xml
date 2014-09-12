@@ -21,6 +21,18 @@
         </record>
 
         <record model="ir.ui.view"
+            id="product_attribute_extended_tree_view">
+            <field name="name">product.attribute.extended.tree</field>
+            <field name="model">product.attribute</field>
+            <field name="inherit_id" ref="product.attribute_tree_view" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="type" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view"
             id="product_attribute_value_extended_tree_view">
             <field name="name">product.attribute.value.extended.tree</field>
             <field name="model">product.attribute.value</field>
@@ -35,5 +47,48 @@
                 </field>
             </field>
         </record>
+
+        <record model="ir.ui.view"
+            id="product_attribute_line_tree_view">
+            <field name="name">product.attribute.line.tree</field>
+            <field name="model">product.attribute.line</field>
+            <field name="arch" type="xml">
+                <tree string="Attribute lines">
+                    <field name="obligatory" />
+                    <field name="product_tmpl_id" />
+                    <field name="attribute_id" />
+                    <field name="attr_type" />
+                    <field name="default" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view"
+            id="product_attribute_line_form_view">
+            <field name="name">product.attribute.line.form</field>
+            <field name="model">product.attribute.line</field>
+            <field name="arch" type="xml">
+                <form string="Attribute lines">
+                    <group>
+                        <field name="obligatory" />
+                        <field name="product_tmpl_id" />
+                        <field name="attribute_id" />
+                        <field name="attr_type" readonly="1"/>
+                        <field name="default" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_product_attribute_line">
+            <field name="name">Attribute lines</field>
+            <field name="res_model">product.attribute.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="mi_product_attribute_line" action="action_product_attribute_line"
+            parent="product.prod_config_main" />
     </data>
 </openerp>
