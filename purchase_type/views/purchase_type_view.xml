@@ -1,95 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-    
-		<function model="purchase.order" name="_delete_constraint"/>
-		
+        <function model="purchase.order" name="_delete_constraint" />
+
         <record model="ir.ui.view" id="purchase_type_tree_view">
             <field name="name">purchase.type.tree</field>
             <field name="model">purchase.type</field>
             <field name="arch" type="xml">
                 <tree string="Purchase Type">
-                    <field name="name"/>
-                    <field name="sequence"/>
+                    <field name="name" />
+                    <field name="sequence" />
                 </tree>
             </field>
         </record>
-            
+
         <record model="ir.ui.view" id="purchase_type_form_view">
             <field name="name">purchase.type.form</field>
             <field name="model">purchase.type</field>
             <field name="arch" type="xml">
                 <form string="Purchase Type">
-                    <field name="name"/>
-                    <field name="sequence"/>
+                    <field name="name" />
+                    <field name="sequence" />
                 </form>
             </field>
         </record>
-            
+
         <record model="ir.actions.act_window" id="action_purchase_type_tree_view">
             <field name="name">Purchase Type</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">purchase.type</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="purchase_type_tree_view"/>
+            <field name="view_id" ref="purchase_type_tree_view" />
         </record>
 
-        <menuitem id="purchase_type_menu" name="Purchase Type" parent="purchase.menu_purchase_config_purchase" action="action_purchase_type_tree_view"/>
-		
-		<!-- Modificación del SEARCH de solicitudes de presupuesto -->
-		<record model="ir.ui.view" id="view_request_for_quotation_filter_inh_purchasetype">
-			<field name="name">view.request.for.quotation.filter.inh.purchasetypew</field>
-			<field name="model">purchase.order</field>
-			<field name="inherit_id" ref="purchase.view_request_for_quotation_filter" />
-			<field name="arch" type="xml">
-				<field name="name" position="after">
-					<field name="type"/>
-				</field>	
-				<filter string="Not Invoiced" position="before">
-					<filter string="Type" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'type'}"/>
-				</filter>
-			</field>
-		</record>
+        <menuitem id="purchase_type_menu" name="Purchase Type"
+            parent="purchase.menu_purchase_config_purchase" action="action_purchase_type_tree_view" />
+
+        <!-- Modificación del SEARCH de solicitudes de presupuesto -->
+        <record model="ir.ui.view" id="view_request_for_quotation_filter_inh_purchasetype">
+            <field name="name">view.request.for.quotation.filter.inh.purchasetype</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.view_request_for_quotation_filter" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="type" />
+                </field>
+                <filter string="Not Invoiced" position="before">
+                    <filter string="Type"
+                        icon="terp-stock_effects-object-colorize"
+                        domain="[]" context="{'group_by':'type'}" />
+                </filter>
+            </field>
+        </record>
 
         <record id="view_purchase_order_filter_inh_purchasetype" model="ir.ui.view">
             <field name="name">view.purchase.order.filter.inh.purchasetype</field>
             <field name="model">purchase.order</field>
-            <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
             <field name="arch" type="xml">
                 <field name="partner_id" position="before">
-                    <field name="type" widget="selection"/>
+                    <field name="type" widget="selection" />
                 </field>
                 <filter string="Not Invoiced" position="before">
-                    <filter string="Type" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'type'}"/>
+                    <filter string="Type"
+                        icon="terp-stock_effects-object-colorize"
+                        domain="[]" context="{'group_by':'type'}" />
                 </filter>
             </field>
         </record>
-        
+
         <record id="purchase_order_tree_inh_purchasetype" model="ir.ui.view">
             <field name="name">purchase.order.tree.inh.purchasetype</field>
             <field name="model">purchase.order</field>
-            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
-            <field name="type">tree</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree" />
             <field name="arch" type="xml">
                 <field name="name" position="before">
-                    <field name="type"/>
+                    <field name="type" />
                 </field>
-                
             </field>
         </record>
 
-   		<record model="ir.ui.view" id="purchase_order_form_inh_purchasetype">
-        	<field name="name">purchase.order.form.inh.purchasetype</field>
+        <record model="ir.ui.view" id="purchase_order_form_inh_purchasetype">
+            <field name="name">purchase.order.form.inh.purchasetype</field>
             <field name="model">purchase.order</field>
-            <field name="type">form</field>
-            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                    <field name="type" colspan="2" widget="selection"/>
+                    <field name="type" colspan="2" widget="selection" />
                 </field>
             </field>
         </record>
-
     </data>
 </openerp>

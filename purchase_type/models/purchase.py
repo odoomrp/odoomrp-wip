@@ -40,10 +40,6 @@ class PurchaseOrder(orm.Model):
         return True
 
     _columns = {
-        'name': fields.char('Order Reference', size=64, required=True,
-                            select=True, help="unique number of the purchase "
-                            "order,computed automatically when the purchase "
-                            "order is created"),
         'type': fields.many2one('purchase.type', 'Type', required=True),
     }
     _defaults = {'name': lambda *a: 'PO/'
