@@ -80,6 +80,25 @@
             </field>
         </record>
 
+        <record model="ir.ui.view"
+            id="product_attribute_line_search_view">
+            <field name="name">product.attribute.line.search</field>
+            <field name="model">product.attribute.line</field>
+            <field name="arch" type="xml">
+                <search string="Attribute lines">
+                    <field name="product_tmpl_id" />
+                    <field name="attribute_id" />
+                    <field name="attr_type" />
+                    <separator />
+                    <filter name="obligatory" string="Obligatory" domain="[('obligatory', 'is', True)]"/>
+                    <filter name="optional" string="Optional" domain="[('obligatory', 'is', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Product" domain="[]" context="{'group_by':'product_tmpl_id'}"/>
+                        <filter string="Attribute" domain="[]" context="{'group_by':'attribute_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
 
         <record model="ir.actions.act_window" id="action_product_attribute_line">
             <field name="name">Attribute lines</field>
