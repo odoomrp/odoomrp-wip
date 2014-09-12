@@ -23,9 +23,12 @@
                     <field name="description" colspan="2"/>
                     <field name="steps"  colspan="2"/>
                     <field name="op_number"  colspan="4" />
-                    <separator string="Workcenters" colspan="4"/>
-                    <field name="workcenters" colspan="4" nolabel="1"/>
                 </group>
+                <notebook>
+                    <page string="Workcenters">
+                        <field name="workcenters" colspan="4" nolabel="1"/>
+                    </page>
+                </notebook>
                 </form>
             </field>
         </record>
