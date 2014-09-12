@@ -21,7 +21,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions
 
 
 class MrpOperationWorkcenter(models.Model):
@@ -39,6 +39,7 @@ class MrpOperationWorkcenter(models.Model):
                               help="Time in hours for the setup.")
     time_stop = fields.Float('Time after prod.',
                              help="Time in hours for the cleaning.")
+    op_number = fields.Integer('Número de Persona', default='0')
     default = fields.Boolean('Default')
 
     @api.one
@@ -62,6 +63,6 @@ class MrpRoutingOperation(models.Model):
     description = fields.Text('Description')
     steps = fields.Text('Relevant Steps')
     workcenters = fields.Many2many(
-        'mrp.workcenter', 'mrp_operation_workcenter_relation', 'operation',
+        'mrp.workcenter', 'mrp_operation_workcenter_rel', 'operation',
         'workcenter', 'Work centers')
     op_number = fields.Integer('Número de Persona', default='0')

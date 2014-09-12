@@ -21,7 +21,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
 
 
 class MrpRoutingWorkcenter(models.Model):
@@ -47,15 +47,37 @@ class MrpRoutingWorkcenter(models.Model):
                         'time_cycle': operation_wc.time_cycle,
                         'time_start': operation_wc.time_start,
                         'time_stop': operation_wc.time_stop,
-                        'default': False
+                        'default': False,
+                        'op_number': self.operation.op_number
                         }
                 op_wc_lst.append(data)
             self.op_wc_lines = op_wc_lst
 
-    @api.one
+    @api.multi
     @api.onchange('op_wc_lines')
     def onchange_default(self):
+        for record in self:
+            kont = 0
+            wkc = False
+            for opwc_line in record.op_wc_lines:
+                if opwc_line.default:
+                    kont += 1
+                    if not wkc:
+                        record.workcenter_id = opwc_line.workcenter.id
+            if kont > 1:
+                raise exceptions.Warning(_('There is another line set as '
+                                           'default, disable it first.'))
+
+    @api.one
+    @api.constrains('op_wc_lines')
+    def _check_default(self):
+        kont = 0
+        wkc = False
         for opwc_line in self.op_wc_lines:
             if opwc_line.default:
-                self.workcenter_id = opwc_line.workcenter.id
-                break
+                kont += 1
+                if not wkc:
+                    self.workcenter_id = opwc_line.workcenter.id
+            if kont > 1:
+                raise exceptions.Warning(_('There is another line set as '
+                                           'default, disable it first.'))

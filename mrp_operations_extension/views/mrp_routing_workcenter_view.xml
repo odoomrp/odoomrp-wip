@@ -28,7 +28,10 @@
                             <field name="workcenter"/>
                             <field name="time_efficiency" />
                             <field name="capacity_per_cycle" />
+                            <field name="time_start" widget="float_time" />
+                            <field name="time_stop" widget="float_time" />
                             <field name="time_cycle" widget="float_time"/>
+                            <field name="op_number"/>
                             <field name="default"/>
                         </tree>
                         <form string="Workcenter Info Lines">
@@ -39,6 +42,7 @@
                                 <field name="time_cycle" widget="float_time"/>
                                 <field name="time_start" widget="float_time" />
                                 <field name="time_stop" widget="float_time" />
+                                <field name="op_number"/>
                                 <field name="default"/>
                             </group>
                         </form>

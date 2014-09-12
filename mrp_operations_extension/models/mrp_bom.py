@@ -58,15 +58,4 @@ class MrpBom(models.Model):
 class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
 
-    def _get_operation(self, cr, uid, context=None):
-        # TODO Operarion Domainin BOM
-        routing_obj = self.pool['mrp.routing.operation']
-        ids = routing_obj.search(cr, uid, [], context=context)
-        res = routing_obj.read(cr, uid, ids, ['name', 'id'],
-                               context=context)
-        res = [(r['id'], r['name']) for r in res]
-        return res
-
-    operation = fields.Many2one('mrp.routing.workcenter', 'Consumed',
-                                domain=[('routing_id', '=',
-                                         'bom_id.routing_id')])
+    operation = fields.Many2one('mrp.routing.workcenter', 'Consumed')
