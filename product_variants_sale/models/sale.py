@@ -17,6 +17,7 @@
 ##############################################################################
 
 from openerp import models, fields, api
+from openerp.tools.translate import _
 
 
 class ProductAttributeValueSaleLine(models.Model):
@@ -37,10 +38,12 @@ class SaleOrderLine(models.Model):
     type = fields.Selection([('product', 'Product'), ('variant', 'Variant')],
                             string='Type', default='variant')
     product_template = fields.Many2one(comodel_name='product.template',
+                                       domain="[('attribute_line_ids', '!=', False)]",
                                        string='Product Template')
     product_attributes = fields.One2many('sale.order.line.attribute',
                                          'sale_line',
-                                         string='Product attributes')
+                                         string='Product attributes',
+                                         copyable=True)
 
     @api.one
     @api.onchange('product_template')
@@ -49,6 +52,24 @@ class SaleOrderLine(models.Model):
         for attribute in self.product_template.attribute_line_ids:
             product_attributes.append({'attribute': attribute.attribute_id})
         self.product_attributes = product_attributes
+
+    @api.one
+    def action_duplicate(self):
+        self.copy()
+        # Force reload of payment order view as a workaround for lp:1155525
+        return {
+            'name': _('Sale order'),
+            'context': self.env.context,
+            'view_type': 'form',
+            'view_mode': 'form,tree',
+            'res_model': 'sale.order',
+            'res_id': self.order_id.id,
+            'type': 'ir.actions.act_window',
+        }
+
+#     @api.one
+#     def copy(self):
+#         return super(SaleOrderLine, self).copy()
 
 
 class SaleOrder(models.Model):

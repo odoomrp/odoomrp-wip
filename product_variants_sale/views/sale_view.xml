@@ -5,30 +5,46 @@
             <field name="name">sale.order.extended.form</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form" />
-            <field name="priority" eval="20"/>
+            <field name="priority" eval="20" />
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"  position="before">
+                <xpath
+                    expr="//field[@name='order_line']/tree//field[@name='product_id']"
+                    position="after">
+                    <field name="product_template" />
+                </xpath>
+                <xpath
+                    expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
+                    position="after">
+                    <button name="action_duplicate" state="draft" string="Duplicate" type="object" icon="gtk-go-forward" help="Duplicate line"/>
+                </xpath>
+                <xpath
+                    expr="//field[@name='order_line']/form//field[@name='product_id']"
+                    position="before">
                     <field name="type" />
                 </xpath>
-                <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"  position="after">
-                    <field name="product_template" attrs="{'invisible':[('type','!=','variant')]}"/>
+                <xpath
+                    expr="//field[@name='order_line']/form//field[@name='product_id']"
+                    position="after">
+                    <field name="product_template"
+                        attrs="{'invisible':[('type','!=','variant')]}" />
                 </xpath>
-                <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"  position="attributes">
+                <xpath
+                    expr="//field[@name='order_line']/form//field[@name='product_id']"
+                    position="attributes">
                     <attribute name="attrs">{'invisible':[('type','!=','product')]}</attribute>
                 </xpath>
-                <xpath expr="//field[@name='order_line']/form//label[@for='name']" position="before">
-                    <label for="product_attributes" attrs="{'invisible':[('type','!=','variant')]}"/>
-                    <field name="product_attributes" attrs="{'invisible':[('type','!=','variant')]}" options="{'no_create': True}">
-                        <tree create="false">
+                <xpath
+                    expr="//field[@name='order_line']/form//label[@for='name']"
+                    position="before">
+                    <label for="product_attributes"
+                        attrs="{'invisible':[('type','!=','variant')]}" />
+                    <field name="product_attributes"
+                        attrs="{'invisible':[('type','!=','variant')]}"
+                        options="{'no_create': True, 'no_delete': True}">
+                        <tree create="false" editable="1">
                             <field name="attribute" />
                             <field name="value" />
                         </tree>
-                        <form>
-                        <group>
-                            <field name="attribute" />
-                            <field name="value" />
-                            </group>
-                        </form>
                     </field>
                 </xpath>
             </field>
@@ -37,13 +53,14 @@
         <record model="ir.ui.view" id="sale_order_line_extended_form_view">
             <field name="name">sale.order.line.extended.form</field>
             <field name="model">sale.order.line</field>
-            <field name="inherit_id" ref="sale.view_order_line_form2"/>
+            <field name="inherit_id" ref="sale.view_order_line_form2" />
             <field name="arch" type="xml">
                 <field name="product_id" position="before">
                     <field name="type" />
                 </field>
                 <field name="product_id" position="after">
-                    <field name="product_template" />
+                    <field name="product_template"
+                        attrs="{'invisible':[('type','!=','variant')]}" />
                 </field>
             </field>
         </record>

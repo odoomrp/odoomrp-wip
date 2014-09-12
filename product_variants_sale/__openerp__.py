@@ -37,6 +37,7 @@ Create custom product from a sale order
     """,
     "data": [
         "views/sale_view.xml",
+        "views/product_view.xml",
     ],
     "installable": True,
 }
