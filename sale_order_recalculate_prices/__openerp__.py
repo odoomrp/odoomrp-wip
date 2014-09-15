@@ -26,13 +26,13 @@
     "depends": [
         "sale",
     ],
-    "author": "AvanzOSC",
+    "author": "OdooMRP team",
     "contributors": [
         "Carlos Sánchez Cifuentes <csanchez@grupovermon.com>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
     "category": "Custom Module",
-    "website": "http://www.avanzosc.es",
+    "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
 This module adds a button that recalculate the sale order prices.
