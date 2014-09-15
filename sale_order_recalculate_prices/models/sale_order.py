@@ -20,15 +20,15 @@
 #                                                                            #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models, api
 
 
-class SaleOrder(orm.Model):
-
+class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    def recalculate_prices(self, cr, uid, ids, context=None):
-        for record in self.browse(cr, uid, ids, context=context):
+    @api.multi
+    def recalculate_prices(self):
+        for record in self:
             if record.order_line:
                 for line in record.order_line:
                     res = line.product_id_change(
@@ -36,6 +36,7 @@ class SaleOrder(orm.Model):
                         line.product_uom_qty, False, line.product_uos_qty,
                         False, line.name, record.partner_id.id, False,
                         True, record.date_order, False,
-                        record.fiscal_position.id, False, context=context)
+                        record.fiscal_position.id, False,
+                        context=self.env.context)
                     line.write(res['value'])
         return True
