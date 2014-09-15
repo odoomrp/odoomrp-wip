@@ -1,9 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
-#    Copyright (C) 2011 - 2014 Avanzosc <http://www.avanzosc.com>
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -22,16 +19,22 @@
 {
     "name": "Purchase Type",
     "version": "1.0",
-    "author": "AvanzOSC",
-    "category": "Custom Modules",
-    "website": "www.avanzosc.es",
+    "depends": [
+        "purchase",
+    ],
+    "author": "OdooMRP team",
+    "contributors": [
+        "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
+    ],
+    "category": "Purchase Management",
+    "website": "http://www.odoomrp.com",
+    "summary": "",
     "description": """
-    This module provide :
-        Can create different type of purchases with a different sequence for
-        each.
+This module provide :
+    Can create different type of purchases with a different sequence for each.
     """,
-    "depends": ['purchase', ],
-    'data': ['views/purchase_type_view.xml',
-             ],
-    'installable': True,
+    "data": [
+        "views/purchase_type_view.xml",
+    ],
+    "installable": True,
 }
