@@ -89,6 +89,16 @@ class SaleOrderLine(models.Model):
             line.write({'product_id': product_id})
         super(SaleOrderLine, self).button_confirm()
 
+    @api.multi
+    def write(self, values):
+        if values.get('product_id') and not values.get('product_template'):
+            product_obj = self.pool['product.product']
+            product_template = product_obj.read(
+                self.env.cr, self.env.uid, values['product_id'],
+                ['product_tmpl_id'], context=self.env.context)
+            values['product_template'] = product_template['id']
+        super(SaleOrderLine, self).write(values)
+
 #     @api.one
 #     def copy(self):
 #         return super(SaleOrderLine, self).copy()
