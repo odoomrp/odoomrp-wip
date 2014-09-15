@@ -21,15 +21,24 @@
 ##############################################################################
 
 {
-    'name': 'Sale Order Recalculate Prices',
-    'version': '1.0',
-    'category': 'Sales',
-    'description': """
-        This module adds a button that recalculate the sale order prices.""",
-    'author': 'OdooMRP team',
-    'website': 'www.odoomrp.com',
-    'license': 'AGPL-3',
-    'depends': ['sale'],
-    'data': ['views/sale_order_view.xml'],
-    'installable': True,
+    "name": "Sale Order Recalculate Prices",
+    "version": "1.0",
+    "depends": [
+        "sale",
+    ],
+    "author": "AvanzOSC",
+    "contributors": [
+        "Carlos Sánchez Cifuentes <csanchez@grupovermon.com>",
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+    ],
+    "category": "Custom Module",
+    "website": "http://www.avanzosc.es",
+    "summary": "",
+    "description": """
+This module adds a button that recalculate the sale order prices.
+    """,
+    "data": [
+        "views/sale_order_view.xml",
+    ],
+    "installable": True,
 }
