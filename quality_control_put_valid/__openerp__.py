@@ -26,7 +26,7 @@
         "quality_control",
         "quality_control_ext",
     ],
-    "author": "AvanzOSC",
+    "author": "OdooMRP team",
     "category": "Custom Modules",
     "description": """
 Este módulo introduce un campo chek nuevo, llamado VÁLIDO. Si el test ha tenido
