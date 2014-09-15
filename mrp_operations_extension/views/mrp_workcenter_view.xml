@@ -15,7 +15,7 @@
                 </field>
                 <xpath expr="//page[@string='General Information']" position="after">
                     <page string="Routing Operations">
-                        <field name="rt_operarions" nolabel="1"/>
+                        <field name="rt_operations" nolabel="1"/>
                     </page>
                 </xpath>
             </field>
