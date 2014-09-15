@@ -29,7 +29,7 @@
     This module adds a new table to store operations to avoid typing them 
     again.
     """,
-    "author": "AvanzOSC",
+    "author": "OdooMRP team",
     "website": "http://www.avanzosc.com",
     "depends": ['mrp_operations', 'mrp'],
     "category": "Manufacturing",
