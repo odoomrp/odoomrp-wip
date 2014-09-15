@@ -38,7 +38,8 @@ class SaleOrderLine(models.Model):
     type = fields.Selection([('product', 'Product'), ('variant', 'Variant')],
                             string='Type', default='variant')
     product_template = fields.Many2one(comodel_name='product.template',
-                                       domain="[('attribute_line_ids', '!=', False)]",
+                                       domain="[('attribute_line_ids', '!=',"
+                                       " False)]",
                                        string='Product Template')
     product_attributes = fields.One2many('sale.order.line.attribute',
                                          'sale_line',
@@ -67,34 +68,27 @@ class SaleOrderLine(models.Model):
             'type': 'ir.actions.act_window',
         }
 
+    @api.multi
+    def button_confirm(self):
+        for line in self:
+            tmpl_id = line.product_template.id
+            att_values = [attr_line.value and attr_line.value.id or False
+                          for attr_line in line.product_attributes]
+            domain = [('product_tmpl_id', '=', tmpl_id)]
+            for value in att_values:
+                domain.append(('attribute_value_ids', '=', value))
+            product_obj = self.pool['product.product']
+            product_id = product_obj.search(self.env.cr, self.env.uid, domain,
+                                            context=self.env.context)
+            if not product_id:
+                product_id = product_obj.create(
+                    self.env.cr, self.env.uid,
+                    {'product_tmpl_id': tmpl_id,
+                     'attribute_value_ids': [(6, 0, att_values)]},
+                    context=self.env.context)
+            line.write({'product_id': product_id})
+        super(SaleOrderLine, self).button_confirm()
+
 #     @api.one
 #     def copy(self):
 #         return super(SaleOrderLine, self).copy()
-
-
-class SaleOrder(models.Model):
-    _inherit = 'sale.order'
-
-    def action_button_confirm(self, cr, uid, ids, context=None):
-        for order in self.browse(cr, uid, ids, context=context):
-            for line in order.order_line:
-                tmpl_id = line.product_template.id
-                att_values = [attr_line.value and attr_line.value.id or False
-                              for attr_line in line.product_attributes]
-                domain = [('product_tmpl_id', '=', tmpl_id)]
-                for value in att_values:
-                    domain.append(('attribute_value_ids', '=', value))
-                product_obj = self.pool['product.product']
-                product_id = product_obj.search(cr, uid, domain,
-                                                context=context)
-                if not product_id:
-                    product_id = product_obj.create(
-                        cr, uid, {'product_tmpl_id': tmpl_id,
-                                  'attribute_value_ids': [(6, 0,
-                                                           att_values)]},
-                        context=context)
-                self.pool['sale.order.line'].write(cr, uid, line.id,
-                                                   {'product_id': product_id},
-                                                   context=context)
-        return super(SaleOrder, self).action_button_confirm(cr, uid, ids,
-                                                            context=context)

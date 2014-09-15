@@ -21,8 +21,8 @@
     "name": "Sale - Product variants",
     "version": "1.0",
     "depends": [
-        "base",
         "sale",
+        "product",
     ],
     "author": "OdooMRP team",
     "contributors": [
