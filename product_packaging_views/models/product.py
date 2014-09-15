@@ -16,23 +16,20 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class ProductTemplate(orm.Model):
+class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    _columns = {
-        'packaging_ids': fields.one2many('product.packaging',
-                                         'product_tmpl_id',
-                                         'Packagings'),
-    }
+    packaging_ids = fields.One2many(comodel_name='product.packaging',
+                                    inverse_name='product_tmpl_id',
+                                    string='Packagings')
 
 
-class ProductUl(orm.Model):
+class ProductUl(models.Model):
     _inherit = 'product.ul'
 
-    _columns = {
-        'packaging_ids': fields.one2many('product.packaging', 'ul',
-                                         'Packagings'),
-    }
+    packaging_ids = fields.One2many(comodel_name='product.packaging',
+                                    inverse_name='ul',
+                                    string='Packagings')
