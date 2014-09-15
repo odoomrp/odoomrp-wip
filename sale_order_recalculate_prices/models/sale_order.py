@@ -37,5 +37,5 @@ class SaleOrder(orm.Model):
                         False, line.name, record.partner_id.id, False,
                         True, record.date_order, False,
                         record.fiscal_position.id, False, context=context)
-                    line.write(res['value'], context=context)
+                    line.write(res['value'])
         return True
