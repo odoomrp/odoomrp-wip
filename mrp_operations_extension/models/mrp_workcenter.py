@@ -31,6 +31,6 @@ class MrpWorkcenter(models.Model):
                                      string='Pre Operation Cost')
     post_op_product = fields.Many2one('product.product',
                                       string='Post Operation Cost')
-    rt_operarions = fields.Many2many(
+    rt_operations = fields.Many2many(
         'mrp.routing.operation', 'mrp_operation_workcenter_rel', 'workcenter',
         'operation', 'Routing Operations')
