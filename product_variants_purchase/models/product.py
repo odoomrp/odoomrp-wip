@@ -42,7 +42,7 @@ class ProductTemplate(models.Model):
 
     @api.multi
     def create_variant_ids(self):
-        for tmpl in self.browse(cr, uid, ids, context=context):
+        for tmpl in self:
             if tmpl.purchase_no_variants or tmpl.categ_id.purchase_no_variants:
                 return True
             else:
