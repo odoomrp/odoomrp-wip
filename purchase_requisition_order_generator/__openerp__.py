@@ -17,7 +17,7 @@
 ##############################################################################
 
 {
-    "name": "Purchase Requisition Extension",
+    "name": "Purchase Requisition Order Generator",
     "version": "1.0",
     "depends": [
         "purchase_requisition",
