@@ -25,6 +25,7 @@
     "author": "OdooMRP team",
     "contributors": [
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
     "category": "Purchase Management",
     "website": "http://www.odoomrp.com",
@@ -36,7 +37,7 @@ Además en la solicitud de compra crea una nueva pestaña, en la que muestra
 todas las líneas de compra generadas.
     """,
     "data": [
-        "views/purchase_requisition_ext_view.xml",
+        "views/purchase_requisition_view.xml",
     ],
     "installable": True,
 }
