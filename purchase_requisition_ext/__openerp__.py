@@ -31,10 +31,9 @@
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
-Este módulo relaciona la línea de pedido de compra, con la solicitud de
-compra.
-Además en la solicitud de compra crea una nueva pestaña, en la que muestra
-todas las líneas de compra generadas.
+While standard module allows to create a purchase order for one partner each
+time, this module allows to create purchase orders for all registered suppliers
+in product information clicking a button
     """,
     "data": [
         "views/purchase_requisition_view.xml",
