@@ -93,7 +93,7 @@ class SaleOrder(orm.Model):
         else:
             from openerp import workflow
             workflow.trg_validate(uid, 'sale.order', ids[0], 'risk_to_router',
-                                  cr, context)
+                                  cr)
         return result
 
 
