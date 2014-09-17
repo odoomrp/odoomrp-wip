@@ -49,6 +49,8 @@ class ProductAttributeValue(orm.Model):
     _inherit = "product.attribute.value"
 
     _columns = {
+        'attr_type': fields.related('attribute_id', 'type', type='char',
+                                    string='Type', store=False),
         'custom_value': fields.char('Custom Value', size=128),
         'numeric_value': fields.float('Numeric Value', digits=(12, 6)),
         'min_range': fields.float('Min', digits=(12, 6)),

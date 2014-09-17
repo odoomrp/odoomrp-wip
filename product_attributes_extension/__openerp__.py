@@ -28,7 +28,7 @@
         "Mikel Arregi <mikelarregi@avanzosc.es>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
-    "category": "Product",
+    "category": "Product Management",
     "website": "http://www.odoomrp.com",
     "description": """
 This module provide :

@@ -33,10 +33,13 @@
             <field name="model">product.attribute.value</field>
             <field name="inherit_id" ref="product.variants_tree_view" />
             <field name="arch" type="xml">
+                <field name="attribute_id" position="after">
+                    <field name="attr_type" readonly="1"/>
+                </field>
                 <field name="name" position="after">
-                    <field name="numeric_value" />
-                    <field name="min_range" />
-                    <field name="max_range" />
+                    <field name="numeric_value" attrs="{'readonly':[('attr_type','!=','numeric')],'required':[('attr_type','=','numeric')]}" />
+                    <field name="min_range" attrs="{'readonly':[('attr_type','!=','range')],'required':[('attr_type','=','range')]}" />
+                    <field name="max_range" attrs="{'readonly':[('attr_type','!=','range')],'required':[('attr_type','=','range')]}" />
                 </field>
             </field>
         </record>
