@@ -1,0 +1,21 @@
+﻿<?xml version="1.0"?>
+<openerp>
+	<data> 
+	
+        <record id="category_form_view_inh_supplierfromcateg" model="ir.ui.view">
+            <field name="name">category.form.view.inh.supplierfromcateg</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//group[@name='parent']" position="inside">
+                        <group name="suppliers" string="Suppliers" colspan="2">
+                            <field name="suppliers_ids" nolabel="1" domain="[('supplier','=',True)]" />
+                        </group>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+	</data>
+</openerp>
