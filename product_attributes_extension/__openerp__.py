@@ -33,8 +33,8 @@
     "description": """
 This module provide :
     New features in product attributes:
-        * Obligatory fields
-        * Default Attribute value
+        * Mandatory fields
+        * Default attribute value
         * Range based type of attribute
         * ...
     """,

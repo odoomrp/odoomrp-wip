@@ -20,27 +20,6 @@ from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
-class ProductTemplate(orm.Model):
-    _inherit = "product.template"
-
-    _columns = {
-        'final': fields.many2one('product.attribute.line', 'Final',
-                                 domain="[('product_tmpl_id', '=', id)]")
-    }
-
-    def _final_attribute(self, cr, uid, ids, context=None):
-        if not isinstance(ids, 'list'):
-            ids = [ids]
-        for tmpl in self.browse(cr, uid, ids, context=context):
-            attrs = [attr.id for attr in tmpl.attribute_line_ids]
-            if tmpl.final.id not in attrs:
-                return False
-        return True
-
-    _constraint = [(_final_attribute,
-                    _('This value is not in template values'), ['final'])]
-
-
 class ProductAttribute(orm.Model):
     _inherit = "product.attribute"
 
@@ -60,23 +39,11 @@ class ProductAttributeLine(orm.Model):
     _inherit = "product.attribute.line"
 
     _columns = {
-        'obligatory': fields.boolean('Obligatory'),
+        'required': fields.boolean('Required'),
         'default': fields.many2one('product.attribute.value', 'Default'),
         'attr_type': fields.related('attribute_id', 'type', type='char',
-                                    string='Type', store=False),
+                                    string='Type', store=True),
     }
-
-    def _check_values(self, cr, uid, ids, context=None):
-        if not isinstance(ids, 'list'):
-            ids = [ids]
-        for line in self.browse(cr, uid, ids, context=context):
-            values = [value.id for value in line.value_ids]
-            if line.default.id in values:
-                return False
-        return True
-
-    _constraint = [(_check_values, _('This value is not in template values'),
-                   ['final'])]
 
 
 class ProductAttributeValue(orm.Model):

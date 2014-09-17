@@ -6,13 +6,8 @@
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_only_form_view" />
             <field name="arch" type="xml">
-                <field name="attribute_line_ids" position="before">
-                    <group>
-                        <field name="final" />
-                    </group>
-                </field>
                 <field name="attribute_id" position="before">
-                    <field name="obligatory" />
+                    <field name="required" />
                 </field>
                 <field name="value_ids" position="after">
                     <field name="attr_type" invisible="1" />
@@ -53,8 +48,8 @@
             <field name="name">product.attribute.line.tree</field>
             <field name="model">product.attribute.line</field>
             <field name="arch" type="xml">
-                <tree string="Attribute lines">
-                    <field name="obligatory" />
+                <tree string="Attribute lines" editable="bottom">
+                    <field name="required" />
                     <field name="product_tmpl_id" />
                     <field name="attribute_id" />
                     <field name="attr_type" />
@@ -70,7 +65,7 @@
             <field name="arch" type="xml">
                 <form string="Attribute lines">
                     <group>
-                        <field name="obligatory" />
+                        <field name="required" />
                         <field name="product_tmpl_id" />
                         <field name="attribute_id" />
                         <field name="attr_type" readonly="1"/>
@@ -90,8 +85,8 @@
                     <field name="attribute_id" />
                     <field name="attr_type" />
                     <separator />
-                    <filter name="obligatory" string="Obligatory" domain="[('obligatory', 'is', True)]"/>
-                    <filter name="optional" string="Optional" domain="[('obligatory', 'is', False)]"/>
+                    <filter name="required" string="Required" domain="[('required', '=', True)]"/>
+                    <filter name="optional" string="Optional" domain="[('required', '=', False)]"/>
                     <group expand="0" string="Group By">
                         <filter string="Product" domain="[]" context="{'group_by':'product_tmpl_id'}"/>
                         <filter string="Attribute" domain="[]" context="{'group_by':'attribute_id'}"/>
