@@ -1,0 +1,138 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_variants_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-17 09:26+0000\n"
+"PO-Revision-Date: 2014-09-17 11:29+0100\n"
+"Last-Translator: Oihane <oihanecruce@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: product_variants_sale
+#: field:sale.order.line.attribute,attribute:0
+msgid "Attribute"
+msgstr "Atributo"
+
+#. module: product_variants_sale
+#: help:product.category,sale_no_variants:0
+#: help:product.template,sale_no_variants:0
+msgid "Create product variants when a sale order is confirmed."
+msgstr "Crear variante de producto al confirmar el pedido de venta."
+
+#. module: product_variants_sale
+#: field:sale.order.line.attribute,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: product_variants_sale
+#: field:sale.order.line.attribute,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: product_variants_sale
+#: view:sale.order:product_variants_sale.sale_order_extended_form_view
+msgid "Duplicate"
+msgstr "Duplicar"
+
+#. module: product_variants_sale
+#: view:sale.order:product_variants_sale.sale_order_extended_form_view
+msgid "Duplicate line"
+msgstr "Duplicar línea"
+
+#. module: product_variants_sale
+#: field:sale.order.line.attribute,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: product_variants_sale
+#: field:sale.order.line.attribute,write_uid:0
+msgid "Last Updated by"
+msgstr "Actualizado por"
+
+#. module: product_variants_sale
+#: field:sale.order.line.attribute,write_date:0
+msgid "Last Updated on"
+msgstr "Actualizado el"
+
+#. module: product_variants_sale
+#: field:sale.order.line.attribute,sale_line:0
+msgid "Order line"
+msgstr "Línea de pedido"
+
+#. module: product_variants_sale
+#: view:sale.order.line:product_variants_sale.sale_order_line_extended_search_view
+#: selection:sale.order.line,type:0
+msgid "Product"
+msgstr "Producto"
+
+#. module: product_variants_sale
+#: model:ir.model,name:product_variants_sale.model_product_category
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: product_variants_sale
+#: model:ir.model,name:product_variants_sale.model_product_template
+#: field:sale.order.line,product_template:0
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: product_variants_sale
+#: field:sale.order.line,product_attributes:0
+msgid "Product attributes"
+msgstr "Atributos del producto"
+
+#. module: product_variants_sale
+#: code:addons/product_variants_sale/models/sale_order.py:62
+#, python-format
+msgid "Sale order"
+msgstr "Pedido de venta"
+
+#. module: product_variants_sale
+#: model:ir.model,name:product_variants_sale.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: product_variants_sale
+#: model:ir.model,name:product_variants_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea pedido de venta"
+
+#. module: product_variants_sale
+#: view:sale.order.line:product_variants_sale.sale_order_line_extended_search_view
+msgid "Template"
+msgstr "Plantilla"
+
+#. module: product_variants_sale
+#: field:sale.order.line,type:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: product_variants_sale
+#: field:sale.order.line.attribute,value:0
+msgid "Value"
+msgstr "Valor"
+
+#. module: product_variants_sale
+#: selection:sale.order.line,type:0
+msgid "Variant"
+msgstr "Variante"
+
+#. module: product_variants_sale
+#: field:product.category,sale_no_variants:0
+#: field:product.template,sale_no_variants:0
+msgid "Variants on sale"
+msgstr "Variantes en venta"
+
+#. module: product_variants_sale
+#: view:sale.order:product_variants_sale.sale_order_extended_form_view
+#: view:sale.order.line:product_variants_sale.sale_order_line_extended_form_view
+msgid "{'invisible':[('type','!=','product')]}"
+msgstr "{'invisible':[('type','!=','product')]}"
+
