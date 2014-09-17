@@ -35,12 +35,6 @@ class ProductTemplate(models.Model):
                                           ' purchase order is confirmed.')
 
     @api.multi
-    def write(self, values):
-        if not values.get('purchase_no_variants'):
-            self.create_variant_ids()
-        return super(ProductTemplate, self).write(values)
-
-    @api.multi
     def create_variant_ids(self):
         for tmpl in self:
             if tmpl.purchase_no_variants or tmpl.categ_id.purchase_no_variants:

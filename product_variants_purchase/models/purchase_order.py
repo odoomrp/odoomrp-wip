@@ -53,6 +53,7 @@ class PurchaseOrderLine(models.Model):
         for attribute in self.product_template.attribute_line_ids:
             product_attributes.append({'attribute': attribute.attribute_id})
         self.product_attributes = product_attributes
+        self.name = self.product_template.name
 
     @api.one
     def action_duplicate(self):
@@ -71,34 +72,20 @@ class PurchaseOrderLine(models.Model):
     @api.multi
     def action_confirm(self):
         for line in self:
-            if not line.product_id:
-                tmpl_id = line.product_template.id
-                if not tmpl_id:
-                    tmpl_id = line.product_id.product_tmpl_id.id
-                att_values = [attr_line.value and attr_line.value.id or False
-                              for attr_line in line.product_attributes]
-                domain = [('product_tmpl_id', '=', tmpl_id)]
-                for value in att_values:
+            if line.type == 'variant':
+                product_obj = self.env['product.product']
+                att_values_ids = [attr_line.value and attr_line.value.id or False
+                                  for attr_line in line.product_attributes]
+                domain = [('product_tmpl_id', '=', line.product_template.id)]
+                for value in att_values_ids:
                     domain.append(('attribute_value_ids', '=', value))
-                    product_obj = self.env['product.product']
                 product = product_obj.search(domain)
                 if not product:
                     product = product_obj.create(
-                        {'product_tmpl_id': tmpl_id,
-                         'attribute_value_ids': [(6, 0, att_values)]})
+                        {'product_tmpl_id': line.product_template.id,
+                         'attribute_value_ids': [(6, 0, att_values_ids)]})
                 line.write({'product_id': product.id})
-            elif not line.product_template:
-                line.write({'product_template': line.product_id.product_tmpl_id.id})
         super(PurchaseOrderLine, self).action_confirm()
-
-    @api.multi
-    def write(self, values):
-        if values.get('product_id') and not values.get('product_template'):
-            product_obj = self.env['product.product']
-            product_template = product_obj.browse(
-                values['product_id']).product_tmpl_id
-            values['product_template'] = product_template.id
-        super(PurchaseOrderLine, self).write(values)
 
 #     @api.one
 #     def copy(self):
