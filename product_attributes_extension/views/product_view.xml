@@ -34,11 +34,9 @@
             <field name="inherit_id" ref="product.variants_tree_view" />
             <field name="arch" type="xml">
                 <field name="name" position="after">
+                    <field name="numeric_value" />
                     <field name="min_range" />
                     <field name="max_range" />
-                    <field name="height" />
-                    <field name="width" />
-                    <field name="depth" />
                 </field>
             </field>
         </record>

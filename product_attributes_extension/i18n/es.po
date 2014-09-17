@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-17 08:02+0000\n"
-"PO-Revision-Date: 2014-09-17 08:02+0000\n"
+"POT-Creation-Date: 2014-09-17 08:36+0000\n"
+"PO-Revision-Date: 2014-09-17 08:36+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -50,24 +50,9 @@ msgid "Default"
 msgstr "Por defecto"
 
 #. module: product_attributes_extension
-#: field:product.attribute.value,depth:0
-msgid "Depth"
-msgstr "Profundidad"
-
-#. module: product_attributes_extension
-#: selection:product.attribute,type:0
-msgid "Dimensions"
-msgstr "Dimensiones"
-
-#. module: product_attributes_extension
 #: view:product.attribute.line:product_attributes_extension.product_attribute_line_search_view
 msgid "Group By"
 msgstr "Agrupar por"
-
-#. module: product_attributes_extension
-#: field:product.attribute.value,height:0
-msgid "Height"
-msgstr "Altura"
 
 #. module: product_attributes_extension
 #: selection:product.attribute,type:0
@@ -77,12 +62,22 @@ msgstr "Oculto"
 #. module: product_attributes_extension
 #: field:product.attribute.value,max_range:0
 msgid "Max"
-msgstr "Máx"
+msgstr "Max"
 
 #. module: product_attributes_extension
 #: field:product.attribute.value,min_range:0
 msgid "Min"
-msgstr "Mín"
+msgstr "Min"
+
+#. module: product_attributes_extension
+#: selection:product.attribute,type:0
+msgid "Numeric"
+msgstr "Numérico"
+
+#. module: product_attributes_extension
+#: field:product.attribute.value,numeric_value:0
+msgid "Numeric Value"
+msgstr "Valor numérico"
 
 #. module: product_attributes_extension
 #: view:product.attribute.line:product_attributes_extension.product_attribute_line_search_view
@@ -97,7 +92,7 @@ msgstr "Producto"
 #. module: product_attributes_extension
 #: model:ir.model,name:product_attributes_extension.model_product_attribute
 msgid "Product Attribute"
-msgstr "Atributo de producto"
+msgstr "Product Attribute"
 
 #. module: product_attributes_extension
 #: model:ir.model,name:product_attributes_extension.model_product_category
@@ -135,16 +130,11 @@ msgstr "Seleccionar"
 #: code:addons/product_attributes_extension/models/product.py:109
 #, python-format
 msgid "This value is not in template values"
-msgstr "Este valor no es un valor de la plantilla"
+msgstr "Este valor no se encuentra en los valores de la plantilla"
 
 #. module: product_attributes_extension
 #: field:product.attribute,type:0
 #: field:product.attribute.line,attr_type:0
 msgid "Type"
 msgstr "Tipo"
-
-#. module: product_attributes_extension
-#: field:product.attribute.value,width:0
-msgid "Width"
-msgstr "Anchura"
 

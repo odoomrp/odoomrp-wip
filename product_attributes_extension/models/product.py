@@ -17,7 +17,6 @@
 ##############################################################################
 
 from openerp.osv import orm, fields
-from openerp.tools.translate import _
 
 
 class ProductAttribute(orm.Model):
@@ -30,7 +29,7 @@ class ProductAttribute(orm.Model):
             ('color', 'Color'),
             ('hidden', 'Hidden'),
             ('range', 'Range'),
-            ('dimensions', 'Dimensions'),
+            ('numeric', 'Numeric'),
             ('custom', 'Custom')], string="Type", type="char"),
     }
 
@@ -51,9 +50,7 @@ class ProductAttributeValue(orm.Model):
 
     _columns = {
         'custom_value': fields.char('Custom Value', size=128),
+        'numeric_value': fields.float('Numeric Value', digits=(12, 6)),
         'min_range': fields.float('Min', digits=(12, 6)),
         'max_range': fields.float('Max', digits=(12, 6)),
-        'height': fields.float('Height', digits=(12, 6)),
-        'width': fields.float('Width', digits=(12, 6)),
-        'depth': fields.float('Depth', digits=(12, 6)),
     }
