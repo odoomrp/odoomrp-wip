@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="product_supplierinfo_extended_form_view">
+            <field name="name">product.supplierinfo.extended.form</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_form_view" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="type" invisible="1" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_supplierinfo_extended_tree_view">
+            <field name="name">product.supplierinfo.extended.tree</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view" />
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="type" invisible="1" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_template_extended_form_view">
+            <field name="name">product.template.extended.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view" />
+            <field name="arch" type="xml">
+                <field name="seller_ids" position="attributes">
+                    <attribute name="context">{'default_search_type':'supplier','default_type':'supplier'}
+                    </attribute>
+                </field>
+                <xpath
+                    expr="//separator[@string='Description for Quotations']"
+                    position="before">
+                    <separator string="Customers" />
+                    <field name="customer_ids"
+                        context="{'default_search_type':'customer','default_type':'customer'}">
+                        <form string="Customer Information">
+                            <group col="4">
+                                <field name="name" string="Customer"
+                                    context="{'default_supplier': 0, 'search_default_customer': 1, 'default_customer': 1}" />
+                                <field name="type" invisible="1" />
+                                <field name="sequence" />
+                                <field name="product_name" />
+                                <field name="product_code" />
+                                <field name="min_qty" />
+                                <field name="product_uom" groups="product.group_uom" />
+                                <field name="delay" />
+                                <field name="company_id"
+                                    groups="base.group_multi_company"
+                                    widget="selection" />
+                            </group>
+                            <p groups="product.group_purchase_pricelist"
+                                class="oe_grey">The prices below will only be
+                                taken into account when your pricelist
+                                is set as based on supplier prices.</p>
+                            <field groups="product.group_purchase_pricelist"
+                                name="pricelist_ids">
+                                <tree editable="bottom" string="Pricelist">
+                                    <field name="min_quantity" />
+                                    <field name="price" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="min_quantity" />
+                                        <field name="price" />
+                                    </group>
+                                </form>
+                            </field>
+                        </form>
+                    </field>
+
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
