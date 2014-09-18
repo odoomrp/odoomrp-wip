@@ -50,7 +50,8 @@ class SaleOrder(models.Model):
                 cur = line.order_id.pricelist_id.currency_id
                 for tax in line.tax_id:
                     apport_ids = apport_obj.search(self.env.cr, self.env.uid,
-                                                   [('sale_order', '=', order.id),
+                                                   [('sale_order', '=',
+                                                     order.id),
                                                     ('tax', '=', tax.id)],
                                                    context=self.env.context)
                     if not apport_ids:
@@ -90,7 +91,8 @@ class SaleOrder(models.Model):
 
     def action_wait(self, cr, uid, ids, context=None):
         self._calc_breakdown_taxes(cr, uid, ids, context=context)
-        return super(SaleOrder, self).action_wait(cr, uid, ids, context=context)
+        return super(SaleOrder, self).action_wait(cr, uid, ids,
+                                                  context=context)
 
     def button_dummy(self, cr, uid, ids, context=None):
         super(SaleOrder, self).button_dummy(cr, uid, ids, context=context)

@@ -33,7 +33,7 @@ This module breaks down sale taxes in sale.order and stock.picking
 #         "security/breakdown_taxes.xml",
 #         "security/ir.model.access.csv",
         "views/sale_order_view.xml",
-#         "views/stock_picking_view.xml",
+        "views/stock_picking_view.xml",
 #         "views/tax_breakdown_view.xml"
     ],
     "installable": True,
