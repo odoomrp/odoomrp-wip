@@ -20,13 +20,14 @@
     "name": "Use product supplier info for customers too",
     "version": "1.0",
     "depends": [
+        "base",
         "product",
     ],
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
-    "category": "Custom Module",
+    "category": "Sales Management",
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """

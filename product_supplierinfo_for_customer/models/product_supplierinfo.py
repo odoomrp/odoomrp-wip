@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class ProductSupplierinfo(models.Model):
@@ -25,3 +25,13 @@ class ProductSupplierinfo(models.Model):
     type = fields.Selection([('customer', 'Customer'),
                              ('supplier', 'Supplier')], string='Type',
                             default='supplier')
+    name = fields.Many2one(domain=[])
+
+    @api.multi
+    @api.onchange('type')
+    def _domain_according_type(self):
+        if self.type == 'supplier':
+            return {'domain':{'name': [('supplier', '=', True)]}}
+        elif self.type == 'customer':
+            return {'domain':{'name': [('customer', '=', True)]}}
+        return {'domain':{'name': []}}
