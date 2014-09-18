@@ -1,9 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Advanced Open Source Consulting
-#    Copyright (C) 2011 - 2013 Avanzosc <http://www.avanzosc.com>
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -48,7 +45,7 @@ class StockPicking(models.Model):
         return result.keys()
 
     taxes = fields.One2many('stock.picking.tax_breakdown', 'picking',
-                            string='Tax Breakdown'),
+                            string='Tax Breakdown')
     amount_untaxed = fields.Float(string='Untaxed Amount',
                                   compute='_amount_all',
                                   digits=dp.get_precision('Sale Price'),
@@ -61,8 +58,6 @@ class StockPicking(models.Model):
     @api.depends('move_lines', 'move_lines.product_qty',
                  'move_lines.product_uos_qty')
     def _amount_all(self):
-        cur_obj = self.pool['res.currency']
-        tax_obj = self.pool['account.tax']
         for picking in self:
             picking.amount_untaxed = 0.0
             picking.amount_total = 0.0
@@ -73,97 +68,72 @@ class StockPicking(models.Model):
                     cur = sale_line.order_id.pricelist_id.currency_id
                     price = sale_line.price_unit * (
                         1 - (sale_line.discount or 0.0) / 100.0)
-                    taxes = tax_obj.compute_all(
-                        self.env.cr, self.env.uid, sale_line.tax_id,
+                    taxes = sale_line.tax_id.compute_all(
                         price, line.product_qty,
                         sale_line.order_id.partner_invoice_id.id,
                         line.product_id, sale_line.order_id.partner_id)
-                    val1 += cur_obj.round(self.env.cr, self.env.uid, cur,
-                                          taxes['total'])
-                    val += cur_obj.round(self.env.cr, self.env.uid, cur,
-                                         taxes['total_included'])
+                    val1 += cur.round(taxes['total'])
+                    val += cur.round(taxes['total_included'])
             picking.amount_untaxed = val1
             picking.amount_total = val
 
-#     def _calc_breakdown_taxes(self, cr, uid, ids, context=None):
-#         if context is None:
-#             context = {}
-#         apportion_obj = self.pool['tax.breakdown']
-#         tax_obj = self.pool['account.tax']
-#         cur_obj = self.pool['res.currency']
-#         for picking in self.browse(cr, uid, ids, context=context):
-#             for line in picking.move_lines:
-#                 if line.procurement_id and line.procurement_id.sale_line_id:
-#                     sale_line = line.procurement_id.sale_line_id
-#                     cur = sale_line.order_id.pricelist_id.currency_id
-#                     for tax in sale_line.tax_id:
-#                         price = sale_line.price_unit * (
-#                             1 - (sale_line.discount or 0.0) / 100.0)
-#                         taxes = tax_obj.compute_all(
-#                             cr, uid, sale_line.tax_id,
-#                             price, line.product_qty,
-#                             sale_line.order_id.partner_invoice_id.id,
-#                             line.product_id,
-#                             sale_line.order_id.partner_id)
-#                         breakdown_ids = apportion_obj.search(
-#                             cr, uid, [('picking_id', '=', picking.id),
-#                                       ('tax_id', '=', tax.id)])
-#                          subtotal = cur_obj.round(cr, uid, cur,
-#                                                   taxes['total'])
-#                         if not breakdown_ids:
-#                             line_vals = {
-#                                 'picking_id': picking.id,
-#                                 'tax_id': tax.id,
-#                                 'untaxed_amount': subtotal,
-#                                 'taxation_amount':
-#                                 cur_obj.round(cr, uid, cur,
-#                                               (subtotal * tax.amount)),
-#                                 'total_amount':
-#                                 cur_obj.round(cr, uid, cur,
-#                                               (subtotal * (1 + tax.amount)))
-#                             }
-#                             apportion_obj.create(cr, uid, line_vals)
-#                         else:
-#                             apport = apportion_obj.browse(
-#                                 cr, uid, breakdown_ids[0])
-#                             untaxed_amount = subtotal + apport.untaxed_amount
-#                             taxation_amount = cur_obj.round(
-#                                 cr, uid, cur, (untaxed_amount * tax.amount))
-#                             total_amount = untaxed_amount + taxation_amount
-#                             apportion_obj.write(
-#                                 cr, uid, [apport.id],
-#                                 {'untaxed_amount': untaxed_amount,
-#                                  'taxation_amount': taxation_amount,
-#                                  'total_amount': total_amount})
-#         return True
+    @api.multi
+    def _calc_breakdown_taxes(self):
+        apportion_obj = self.env['stock.picking.tax_breakdown']
+        for picking in self:
+            picking.write({'taxes': [(6, 0, [])]})
+            for line in picking.move_lines:
+                if line.procurement_id and line.procurement_id.sale_line_id:
+                    sale_line = line.procurement_id.sale_line_id
+                    cur = sale_line.order_id.pricelist_id.currency_id
+                    for tax in sale_line.tax_id:
+                        price = sale_line.price_unit * (
+                            1 - (sale_line.discount or 0.0) / 100.0)
+                        taxes = tax.compute_all(
+                            price, line.product_qty,
+                            sale_line.order_id.partner_invoice_id.id,
+                            line.product_id,
+                            sale_line.order_id.partner_id)
+                        breakdown_ids = apportion_obj.search(
+                            [('picking', '=', picking.id),
+                             ('tax', '=', tax.id)])
+                        subtotal = cur.round(taxes['total'])
+                        if not breakdown_ids:
+                            line_vals = {
+                                'picking': picking.id,
+                                'tax': tax.id,
+                                'untaxed_amount': subtotal,
+                                'taxation_amount':
+                                cur.round((subtotal * tax.amount)),
+                                'total_amount':
+                                cur.round((subtotal * (1 + tax.amount)))
+                            }
+                            apportion_obj.create(line_vals)
+                        else:
+                            apport = breakdown_ids[0]
+                            untaxed_amount = subtotal + apport.untaxed_amount
+                            taxation_amount = cur.round(
+                                (untaxed_amount * tax.amount))
+                            total_amount = untaxed_amount + taxation_amount
+                            apport.write(
+                                {'untaxed_amount': untaxed_amount,
+                                 'taxation_amount': taxation_amount,
+                                 'total_amount': total_amount})
+        return True
 
-#     def write(self, cr, uid, ids, data, context=None):
-#         if context is None:
-#             context = {}
-#         data.update({'tax_breakdown_ids': [(6, 0, [])]})
-#         super(stock_picking, self).write(cr, uid, ids, data, context=context)
-#         self._calc_breakdown_taxes(cr, uid, ids, context=context)
-#         return True
-
-#     def refresh_tax_breakdown(self, cr, uid, ids, context=None):
-#         if context is None:
-#             context = {}
-#         self.write(cr, uid, ids,
-#                    {'tax_breakdown_ids': [(6, 0, [])]},
-#                    context=context)
-#         return True
+    @api.multi
+    def refresh_tax_breakdown(self):
+        return self._calc_breakdown_taxes()
 
 
-# class stock_move(orm.Model):
-#     _inherit = 'stock.move'
-#     def create(self, cr, uid, data, context=None):
-#         if context is None:
-#             context = {}
-#         move_id = super(stock_move, self).create(cr, uid,
-#                                                  data, context=context)
-#         if 'picking_id' in data:
-#             picking_obj = self.pool['stock.picking']
-#             picking_obj.write(cr, uid,
-#                               [data['picking_id']],
-#                               {'tax_breakdown_ids': [(6, 0, [])]})
-#         return move_id
+class StockMove(models.Model):
+    _inherit = 'stock.move'
+
+    @api.model
+    def create(self, data):
+        move_id = super(StockMove, self).create(data)
+        if 'picking_id' in data:
+            picking_obj = self.env['stock.picking']
+            picking = picking_obj.browse(data['picking_id'])
+            picking._calc_breakdown_taxes()
+        return move_id

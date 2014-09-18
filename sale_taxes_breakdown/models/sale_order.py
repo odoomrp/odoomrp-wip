@@ -42,60 +42,48 @@ class SaleOrder(models.Model):
 
     @api.multi
     def _calc_breakdown_taxes(self):
-        apport_obj = self.pool['sale.order.tax_breakdown']
-        cur_obj = self.pool['res.currency']
+        apport_obj = self.env['sale.order.tax_breakdown']
         for order in self:
             order.write({'taxes': [(6, 0, [])]})
             for line in order.order_line:
                 cur = line.order_id.pricelist_id.currency_id
                 for tax in line.tax_id:
-                    apport_ids = apport_obj.search(self.env.cr, self.env.uid,
-                                                   [('sale_order', '=',
-                                                     order.id),
-                                                    ('tax', '=', tax.id)],
-                                                   context=self.env.context)
+                    apport_ids = apport_obj.search(
+                        [('sale_order', '=', order.id),
+                         ('tax', '=', tax.id)])
                     if not apport_ids:
                         line_vals = {
                             'sale_order': order.id,
                             'tax': tax.id,
                             'untaxed_amount':
-                            cur_obj.round(self.env.cr, self.env.uid, cur,
-                                          line.price_subtotal),
+                            cur.round(line.price_subtotal),
                             'taxation_amount':
-                            cur_obj.round(self.env.cr, self.env.uid, cur,
-                                          (line.price_subtotal * tax.amount)),
+                            cur.round((line.price_subtotal * tax.amount)),
                             'total_amount':
-                            cur_obj.round(self.env.cr, self.env.uid, cur,
-                                          (line.price_subtotal *
-                                           (1 + tax.amount)))
+                            cur.round((line.price_subtotal * (1 + tax.amount)))
                         }
-                        apport_obj.create(self.env.cr, self.env.uid, line_vals)
+                        apport_obj.create(line_vals)
                     else:
-                        apport = apport_obj.browse(self.env.cr, self.env.uid,
-                                                   apport_ids[0])
-                        untaxed_amount = cur_obj.round(
-                            self.env.cr, self.env.uid, cur,
+                        apport = apport_ids[0]
+                        untaxed_amount = cur.round(
                             line.price_subtotal + apport.untaxed_amount)
-                        taxation_amount = cur_obj.round(
-                            self.env.cr, self.env.uid, cur,
+                        taxation_amount = cur.round(
                             untaxed_amount * tax.amount)
-                        total_amount = cur_obj.round(
-                            self.env.cr, self.env.uid, cur,
+                        total_amount = cur.round(
                             untaxed_amount + taxation_amount)
-                        apport_obj.write(self.env.cr, self.env.uid,
-                                         [apport.id],
-                                         {'untaxed_amount': untaxed_amount,
-                                          'taxation_amount': taxation_amount,
-                                          'total_amount': total_amount})
+                        apport.write({'untaxed_amount': untaxed_amount,
+                                      'taxation_amount': taxation_amount,
+                                      'total_amount': total_amount})
         return True
 
-    def action_wait(self, cr, uid, ids, context=None):
-        self._calc_breakdown_taxes(cr, uid, ids, context=context)
-        return super(SaleOrder, self).action_wait(cr, uid, ids,
-                                                  context=context)
+    @api.multi
+    def action_wait(self):
+        self._calc_breakdown_taxes()
+        return super(SaleOrder, self).action_wait()
 
-    def button_dummy(self, cr, uid, ids, context=None):
-        super(SaleOrder, self).button_dummy(cr, uid, ids, context=context)
-        if ids:
-            self._calc_breakdown_taxes(cr, uid, ids, context=context)
+    @api.multi
+    def button_dummy(self):
+        super(SaleOrder, self).button_dummy()
+        if self.ids:
+            self._calc_breakdown_taxes()
         return True
