@@ -38,10 +38,8 @@ class SaleOrder(orm.Model):
         types = type_obj.browse(cr, uid, type_ids, context=context)
         return types and types[0] or False
 
-    _defaults = {
-                 'type_id': _get_order_type
-                 }
-    
+    _defaults = {'type_id': _get_order_type}
+
     def on_change_type_id(self, cr, uid, ids, type_id, context=None):
         if type_id:
             type_obj = self.pool['sale.order.type'].browse(
