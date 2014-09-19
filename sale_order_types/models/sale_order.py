@@ -35,8 +35,7 @@ class SaleOrder(orm.Model):
     def _get_order_type(self, cr, uid, context=None):
         type_obj = self.pool['sale.order.type']
         type_ids = type_obj.search(cr, uid, [], context=context)
-        types = type_obj.browse(cr, uid, type_ids, context=context)
-        return types and types[0] or False
+        return type_ids and type_ids[0] or False
 
     _defaults = {'type_id': _get_order_type}
 
