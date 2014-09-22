@@ -7,8 +7,8 @@
             <field name="inherit_id" ref="product.product_pricelist_item_form_view" />
             <field name="arch" type="xml">
                 <field name="product_id" position="before">
+                    <field name="pricelist_id" />
                     <field name="price_version_id" />
-                    <newline />
                 </field>
                 <field name="price_max_margin" position="after">
                     <newline />
@@ -25,6 +25,7 @@
             <field name="inherit_id" ref="product.product_pricelist_item_tree_view" />
             <field name="arch" type="xml">
                 <field name="name" position="before">
+                    <field name="pricelist_id" />
                     <field name="price_version_id" />
                 </field>
                 <field name="min_quantity" position="after">
@@ -35,10 +36,33 @@
                 <field name="base" position="after">
                     <field name="price_discount" />
                     <field name="price_surcharge" />
-                    <field name="price_round" />
-                    <field name="price_min_margin" />
-                    <field name="price_max_margin" />
                 </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pricelist_item_search_view">
+            <field name="name">product.pricelist.item.search</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="arch" type="xml">
+                <search name="Pricelist item search">
+                    <field name="name" />
+                    <field name="pricelist_id" />
+                    <field name="price_version_id" />
+                    <field name="product_id" />
+                    <field name="product_tmpl_id" />
+                    <field name="categ_id" />
+                    <field name="base" />
+                    <group expand="0" string="Group by...">
+                        <filter string="Pricelist" name="pricelist_id" domain="[]" context="{'group_by' : 'pricelist_id'}"/>
+                        <filter string="Pricelist Version" name="version_id" domain="[]" context="{'group_by' : 'price_version_id'}"/>
+                        <separator />
+                        <filter string="Product" name="product_id" domain="[]" context="{'group_by' : 'product_id'}"/>
+                        <filter string="Product Template" name="template_id" domain="[]" context="{'group_by' : 'product_tmpl_id'}"/>
+                        <filter string="Product Category" name="categ_id" domain="[]" context="{'group_by' : 'categ_id'}"/>
+                        <separator />
+                        <filter string="Based on" name="base" domain="[]" context="{'group_by' : 'base'}"/>
+                    </group>
+                </search>
             </field>
         </record>
 

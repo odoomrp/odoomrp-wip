@@ -35,6 +35,11 @@ class PricelistItem(orm.Model):
     _inherit = 'product.pricelist.item'
 
     _columns = {
+        'pricelist_id': fields.related('price_version_id', 'pricelist_id',
+                                       type="many2one",
+                                       relation='product.pricelist',
+                                       string="Pricelist",
+                                       store=True),
         'offer_id': fields.many2one('product.pricelist.item.offer', 'Offer'),
         'discount': fields.float('Discount %',
                                  digits_compute=dp.get_precision(
