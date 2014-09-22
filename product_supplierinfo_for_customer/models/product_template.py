@@ -27,6 +27,6 @@ class ProductTemplate(models.Model):
                                    string='Customer',
                                    domain=[('type', '=', 'customer')])
     supplier_ids = fields.One2many(comodel_name='product.supplierinfo',
-                                 inverse_name='product_tmpl_id',
-                                 string='Supplier',
-                                 domain=[('type', '=', 'supplier')])
+                                   inverse_name='product_tmpl_id',
+                                   string='Supplier',
+                                   domain=[('type', '=', 'supplier')])
