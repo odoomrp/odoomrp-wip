@@ -32,7 +32,7 @@
     "summary": "",
     "description": """
 This module extends product.supplierinfo object with a combo to allow using
-it for sale pricelist
+it for sale pricelists
     """,
     "data": [
         "views/product_view.xml",
