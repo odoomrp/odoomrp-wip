@@ -6,14 +6,16 @@
             <field name="model">product.pricelist.item</field>
             <field name="inherit_id" ref="product.product_pricelist_item_form_view" />
             <field name="arch" type="xml">
-                <data>
-                    <field name="price_max_margin" position="after">
-                        <newline />
-                        <field name="discount" />
-                        <field name="discount2" />
-                        <field name="offer_id" />
-                    </field>
-                </data>
+                <field name="product_id" position="before">
+                    <field name="price_version_id" />
+                    <newline />
+                </field>
+                <field name="price_max_margin" position="after">
+                    <newline />
+                    <field name="discount" />
+                    <field name="discount2" />
+                    <field name="offer_id" />
+                </field>
             </field>
         </record>
 
@@ -22,13 +24,21 @@
             <field name="model">product.pricelist.item</field>
             <field name="inherit_id" ref="product.product_pricelist_item_tree_view" />
             <field name="arch" type="xml">
-                <data>
-                    <field name="min_quantity" position="after">
-                        <field name="discount" />
-                        <field name="discount2" />
-                        <field name="offer_id" />
-                    </field>
-                </data>
+                <field name="name" position="before">
+                    <field name="price_version_id" />
+                </field>
+                <field name="min_quantity" position="after">
+                    <field name="discount" />
+                    <field name="discount2" />
+                    <field name="offer_id" />
+                </field>
+                <field name="base" position="after">
+                    <field name="price_discount" />
+                    <field name="price_surcharge" />
+                    <field name="price_round" />
+                    <field name="price_min_margin" />
+                    <field name="price_max_margin" />
+                </field>
             </field>
         </record>
 
