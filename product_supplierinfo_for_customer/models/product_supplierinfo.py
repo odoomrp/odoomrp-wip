@@ -29,7 +29,7 @@ class ProductSupplierinfo(models.Model):
 
     @api.multi
     @api.onchange('type')
-    def _onchange_type(self):
+    def onchange_type(self):
         if self.type == 'supplier':
             return {'domain': {'name': [('supplier', '=', True)]}}
         elif self.type == 'customer':
