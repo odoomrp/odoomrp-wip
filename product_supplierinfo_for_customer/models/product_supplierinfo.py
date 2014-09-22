@@ -25,7 +25,6 @@ class ProductSupplierinfo(models.Model):
     type = fields.Selection([('customer', 'Customer'),
                              ('supplier', 'Supplier')], string='Type',
                             default='supplier')
-    name = fields.Many2one(domain=[])
 
     @api.multi
     @api.onchange('type')
