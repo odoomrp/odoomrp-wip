@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="category_supplier_form_view">
+            <field name="name">category.supplier.form.view</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view" />
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <group string="Suppliers" col="4" colspan="4" >
+                        <field name="suppliers" nolabel="1" domain="[('supplier','=',True)]" col="4" colspan="4" />
+                    </group>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="get_supplier_form_view">
+            <field name="name">get.supplier.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view" />
+            <field name="arch" type="xml">
+                <field name="seller_ids" position="before">
+                    <button name="%(act_add_suppliers)d" string="Get Suppliers"
+                        type="action" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="get_product_supplier_form_view">
+            <field name="name">get.supplier.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <field name="seller_ids" position="before">
+                    <button name="%(act_add_suppliers)d" string="Get Suppliers"
+                        type="action" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

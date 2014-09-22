@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="add_suppliers_form_view">
+            <field name="name">add.suppliers.form</field>
+            <field name="model">add.suppliers</field>
+            <field name="arch" type="xml">
+                <form string="form_string">
+                    <group>
+                    <field name="remove_others" />
+                    </group>
+                    <footer>
+                        <button name="assign_suppliers" type="object"
+                            string="Confirm" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link"
+                            special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="act_add_suppliers" model="ir.actions.act_window">
+            <field name="name">Add suppliers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">add.suppliers</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>
