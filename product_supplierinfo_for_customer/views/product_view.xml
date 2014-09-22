@@ -12,16 +12,13 @@
                     <attribute name="context">{}</attribute>
                 </field>
                 <field name="product_name" position="attributes">
-                    <attribute name="string">Partner Product Name
-                    </attribute>
+                    <attribute name="string">Partner Product Name</attribute>
                 </field>
                 <field name="product_code" position="attributes">
-                    <attribute name="string">Partner Product Code
-                    </attribute>
+                    <attribute name="string">Partner Product Code</attribute>
                 </field>
                 <field name="product_uom" position="attributes">
-                    <attribute name="string">Partner Unit of Measure
-                    </attribute>
+                    <attribute name="string">Partner Unit of Measure</attribute>
                 </field>
                 <field name="name" position="before">
                     <field name="type" />
@@ -93,6 +90,11 @@
                 <field name="seller_ids" position="attributes">
                     <attribute name="context">{'default_search_type':'supplier','default_type':'supplier'}</attribute>
                     <attribute name="domain">[('type','=','supplier')]</attribute>
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="seller_ids" position="after">
+                    <field name="supplier_ids" context="{'defautl_search_type':'supplier','default_type':'supplier'}"
+                        domain="[('type','=','supplier')]" />
                 </field>
                 <xpath
                     expr="//separator[@string='Description for Quotations']"
