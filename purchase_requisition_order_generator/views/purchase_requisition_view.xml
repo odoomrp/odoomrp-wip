@@ -8,7 +8,7 @@
                 ref="purchase_requisition.view_purchase_requisition_form" />
             <field name="arch" type="xml">
                 <button name="open_rfq" position="before">
-                    <button name="make_purchase_order_avanzosc"
+                    <button name="generate_purchase_orders"
                         type="object" string="Request Quotations"
                         icon="gtk-execute"
                         attrs="{'invisible': ['|', ('line_ids','=',[]),('state', 'in', ('draft' ,'open','done'))]}" />
