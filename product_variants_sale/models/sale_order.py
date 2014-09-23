@@ -53,6 +53,7 @@ class SaleOrderLine(models.Model):
         for attribute in self.product_template.attribute_line_ids:
             product_attributes.append({'attribute': attribute.attribute_id})
         self.product_attributes = product_attributes
+        self.name = self.product_template.name
 
     @api.one
     def action_duplicate(self):
@@ -73,7 +74,8 @@ class SaleOrderLine(models.Model):
         for line in self:
             if line.type == 'variant':
                 product_obj = self.env['product.product']
-                att_values_ids = [attr_line.value and attr_line.value.id or False
+                att_values_ids = [attr_line.value and attr_line.value.id
+                                  or False
                                   for attr_line in line.product_attributes]
                 domain = [('product_tmpl_id', '=', line.product_template.id)]
                 for value in att_values_ids:

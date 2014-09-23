@@ -21,8 +21,9 @@
     "name": "Sale - Product variants",
     "version": "1.0",
     "depends": [
-        "sale",
         "product",
+        "sale",
+        "product_variants_base",
     ],
     "author": "OdooMRP team",
     "contributors": [
@@ -36,8 +37,8 @@
 Create custom product from a sale order
     """,
     "data": [
+        "security/ir.model.access.csv",
         "views/sale_view.xml",
-        "views/product_view.xml",
     ],
     "installable": True,
 }
