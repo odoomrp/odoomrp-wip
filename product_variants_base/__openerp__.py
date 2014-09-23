@@ -26,10 +26,14 @@
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
-    "category": "Custom Module",
+    "category": "Hidden/Dependency",
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
+This module creates a check in categories and an option in product templates,
+so that it does not create the product variants when the attributes are
+assigned. This is used by those modules that create the product when it is
+estrictly necessary.
     """,
     "data": [
         "views/product_view.xml",
