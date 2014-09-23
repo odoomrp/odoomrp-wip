@@ -29,6 +29,7 @@
     'website': 'www.odoomrp.com',
     'license': 'AGPL-3',
     'depends': ['sale', 'stock'],
-    'data': ['views/sale_order_view.xml', 'views/sale_order_type_view.xml'],
+    'data': ['views/sale_order_view.xml', 'views/sale_order_type_view.xml',
+             'data/default_type.xml'],
     'installable': True,
 }
