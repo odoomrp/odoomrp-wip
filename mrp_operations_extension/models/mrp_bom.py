@@ -29,13 +29,14 @@ class MrpBom(models.Model):
 
     def _bom_explode(self, cr, uid, bom, product, factor, properties=None,
                      level=0, routing_id=False, previous_products=None,
-                     master_bom=None):
+                     master_bom=None, context=None):
         routing_line_obj = self.pool['mrp.routing.workcenter']
         res = super(MrpBom, self)._bom_explode(cr, uid, bom, product, factor,
                                                properties=None, level=0,
                                                routing_id=False,
                                                previous_products=None,
-                                               master_bom=None)
+                                               master_bom=None,
+                                               context=context)
         result, result2 = res
         for work_order in result2:
             seq = work_order['sequence'] - level
