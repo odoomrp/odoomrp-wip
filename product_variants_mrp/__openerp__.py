@@ -22,6 +22,7 @@
     "depends": [
         "product",
         "purchase",
+        "product_variants_base",
     ],
     "author": "OdooMRP team",
     "contributors": [

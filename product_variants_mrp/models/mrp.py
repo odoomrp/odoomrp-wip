@@ -53,3 +53,46 @@ class MrpBomLine(models.Model):
         for attribute in self.product_template.attribute_line_ids:
             product_attributes.append({'attribute': attribute.attribute_id})
         self.product_attributes = product_attributes
+
+
+class MrpProductionAttribute(models.Model):
+    _name = 'mrp.production.attribute'
+
+    mrp_production = fields.Many2one(comodel_name='mrp.production.attribute',
+                                     string='Manufacturing Order')
+    attribute = fields.Many2one(comodel_name='product.attribute',
+                                string='Attribute')
+    value = fields.Many2one(comodel_name='product.attribute.value',
+                            domain="[('attribute_id', '=', attribute)]",
+                            string='Value')
+
+
+class MrpProduction(models.Model):
+    _inherit = 'mrp.production'
+
+    product_id = fields.Many2one(required=False)
+    product_template = fields.Many2one(comodel_name='product.template',
+                                       string='Product', readonly=True,
+                                       states={'draft': [('readonly', False)]})
+    product_attributes = fields.One2many(
+        comodel_name='mrp.production.attribute', inverse_name='mrp_production',
+        string='Product attributes', copyable=True, readonly=True,
+        states={'draft': [('readonly', False)]},)
+
+    def product_id_change(self, cr, uid, ids, product_id, product_qty=0,
+                          context=None):
+        result = super(MrpProduction, self).product_id_change(
+            cr, uid, ids, product_id, product_qty=product_qty, context=context)
+        product_obj = self.pool['product.product']
+        product = product_obj.browse(cr, uid, product_id, context=context)
+        result['value'].update(
+            {'product_template': product.product_tmpl_id.id})
+        return result
+
+    @api.one
+    @api.onchange('product_template')
+    def onchange_product_template(self):
+        product_attributes = []
+        for attribute in self.product_template.attribute_line_ids:
+            product_attributes.append({'attribute': attribute.attribute_id})
+        self.product_attributes = product_attributes
