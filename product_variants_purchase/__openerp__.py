@@ -22,6 +22,7 @@
     "depends": [
         "product",
         "purchase",
+        "product_variants_base",
     ],
     "author": "OdooMRP team",
     "contributors": [
@@ -34,8 +35,8 @@
 Create custom product from a purchase order
     """,
     "data": [
+        "security/ir.model.access.csv",
         "views/purchase_view.xml",
-        "views/product_view.xml",
     ],
     "installable": True,
 }
