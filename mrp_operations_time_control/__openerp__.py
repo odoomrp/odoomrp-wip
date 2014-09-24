@@ -27,7 +27,8 @@
     "description": """
     Manufacturing operations time control
     """,
-    'data': ["views/operation_time_view.xml",
+    'data': ["wizard/mrp_workorder_produce_view.xml",
+             "views/operation_time_view.xml",
              "views/mrp_production_view.xml"],
     "installable": True,
     "auto_install": False,

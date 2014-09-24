@@ -2,6 +2,10 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2008-2013 AvanzOSC S.L. (Mikel Arregi) All Rights Reserved
+#
+#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
@@ -17,6 +21,4 @@
 #
 ##############################################################################
 
-from . import models
-from . import wizard
-
+from . import mrp_product_produce
