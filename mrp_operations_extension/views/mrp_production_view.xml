@@ -52,8 +52,16 @@
                 <xpath
                     expr="//field[@name='workcenter_lines']/form//field[@name='hour']"
                     position="after">
-                    <field name="routing_wc_line"/>
-                    <field name="product_line" nolabel="1" colspan="4"/>
+                         <field name="routing_wc_line" colspan="4"/>
+                </xpath>
+                <xpath
+                    expr="//field[@name='workcenter_lines']/form//group"
+                    position="after">
+                    <notebook>
+                        <page string="Product Lines">
+                            <field name="product_line" nolabel="1" colspan="4"/>
+                        </page>
+                    </notebook>
                 </xpath>
             </field>
         </record>
