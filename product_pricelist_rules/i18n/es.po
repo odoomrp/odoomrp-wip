@@ -1,0 +1,125 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_pricelist_rules
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-22 14:09+0000\n"
+"PO-Revision-Date: 2014-09-22 14:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_pricelist_rules
+#: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
+msgid "Based on"
+msgstr "Basado en"
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item.offer,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item.offer,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item,discount:0
+msgid "Discount %"
+msgstr "Descuento %"
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item,discount2:0
+msgid "Discount 2 %"
+msgstr "Descuento 2 %"
+
+#. module: product_pricelist_rules
+#: sql_constraint:product.pricelist.item:0
+msgid "Discount must be lower than 100%."
+msgstr "El descuento debe ser menor que el 100%."
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item.offer,free_qty:0
+msgid "Free quantity"
+msgstr "Cantidad gratuita"
+
+#. module: product_pricelist_rules
+#: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
+msgid "Group by..."
+msgstr "Agrupar por..."
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item.offer,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item.offer,write_uid:0
+msgid "Last Updated by"
+msgstr "Modificado por"
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item.offer,write_date:0
+msgid "Last Updated on"
+msgstr "Modificado el"
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item,offer_id:0
+#: view:product.pricelist.item.offer:product_pricelist_rules.pricelist_item_offer_form_view
+#: view:product.pricelist.item.offer:product_pricelist_rules.pricelist_item_offer_tree_view
+msgid "Offer"
+msgstr "Oferta"
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item.offer,name:0
+msgid "Offer Name"
+msgstr "Nombre de la oferta"
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item.offer,paid_qty:0
+msgid "Paid quantity"
+msgstr "Cantidad a pagar"
+
+#. module: product_pricelist_rules
+#: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
+#: field:product.pricelist.item,pricelist_id:0
+msgid "Pricelist"
+msgstr "Tarifa"
+
+#. module: product_pricelist_rules
+#: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
+msgid "Pricelist Version"
+msgstr "Version de tarifa"
+
+#. module: product_pricelist_rules
+#: model:ir.model,name:product_pricelist_rules.model_product_pricelist_item
+msgid "Pricelist item"
+msgstr "Elemento de la tarifa"
+
+#. module: product_pricelist_rules
+#: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
+msgid "Product"
+msgstr "Producto"
+
+#. module: product_pricelist_rules
+#: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
+msgid "Product Category"
+msgstr "Categoria de producto"
+
+#. module: product_pricelist_rules
+#: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: product_pricelist_rules
+#: sql_constraint:product.pricelist.item:0
+msgid "Second discount must be lower than 100%."
+msgstr "El segundo descuento debe ser menor que el 100%."
+

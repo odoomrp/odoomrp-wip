@@ -66,7 +66,8 @@ class PurchaseOrderLine(models.Model):
                                      context=context)['res_id']
             user = self.pool['res.users'].browse(cr, uid, uid, context=context)
             if group_id in [x.id for x in user.groups_id]:
-                res['warning'] = {'message': _(message)}
+                res['warning'] = {'title': _('Homologation error'),
+                                  'message': message}
             else:
-                raise exceptions.Warning(_(message))
+                raise exceptions.Warning(message)
         return res

@@ -6,14 +6,16 @@
             <field name="model">product.pricelist.item</field>
             <field name="inherit_id" ref="product.product_pricelist_item_form_view" />
             <field name="arch" type="xml">
-                <data>
-                    <field name="price_max_margin" position="after">
-                        <newline />
-                        <field name="discount" />
-                        <field name="discount2" />
-                        <field name="offer_id" />
-                    </field>
-                </data>
+                <field name="product_id" position="before">
+                    <field name="pricelist" />
+                    <field name="price_version_id" />
+                </field>
+                <field name="price_max_margin" position="after">
+                    <newline />
+                    <field name="discount" />
+                    <field name="discount2" />
+                    <field name="offer" />
+                </field>
             </field>
         </record>
 
@@ -22,13 +24,44 @@
             <field name="model">product.pricelist.item</field>
             <field name="inherit_id" ref="product.product_pricelist_item_tree_view" />
             <field name="arch" type="xml">
-                <data>
-                    <field name="min_quantity" position="after">
-                        <field name="discount" />
-                        <field name="discount2" />
-                        <field name="offer_id" />
-                    </field>
-                </data>
+                <field name="name" position="before">
+                    <field name="pricelist" />
+                    <field name="price_version_id" />
+                </field>
+                <field name="min_quantity" position="after">
+                    <field name="discount" />
+                    <field name="discount2" />
+                    <field name="offer" />
+                </field>
+                <field name="base" position="after">
+                    <field name="item_formula" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pricelist_item_search_view">
+            <field name="name">product.pricelist.item.search</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="arch" type="xml">
+                <search name="Pricelist item search">
+                    <field name="name" />
+                    <field name="pricelist" />
+                    <field name="price_version_id" />
+                    <field name="product_id" />
+                    <field name="product_tmpl_id" />
+                    <field name="categ_id" />
+                    <field name="base" />
+                    <group expand="0" string="Group by...">
+                        <filter string="Pricelist" name="pricelist_id" domain="[]" context="{'group_by' : 'pricelist'}"/>
+                        <filter string="Pricelist Version" name="version_id" domain="[]" context="{'group_by' : 'price_version_id'}"/>
+                        <separator />
+                        <filter string="Product" name="product_id" domain="[]" context="{'group_by' : 'product_id'}"/>
+                        <filter string="Product Template" name="template_id" domain="[]" context="{'group_by' : 'product_tmpl_id'}"/>
+                        <filter string="Product Category" name="categ_id" domain="[]" context="{'group_by' : 'categ_id'}"/>
+                        <separator />
+                        <filter string="Based on" name="base" domain="[]" context="{'group_by' : 'base'}"/>
+                    </group>
+                </search>
             </field>
         </record>
 
