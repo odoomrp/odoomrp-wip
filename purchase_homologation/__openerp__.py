@@ -1,10 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #                                                                            #
-#  OpenERP, Open Source Management Solution.                                 #
-#                                                                            #
-#  @author Carlos Sánchez Cifuentes <csanchez@grupovermon.com>               #
-#                                                                            #
 #  This program is free software: you can redistribute it and/or modify      #
 #  it under the terms of the GNU Affero General Public License as            #
 #  published by the Free Software Foundation, either version 3 of the        #
@@ -21,16 +17,30 @@
 ##############################################################################
 
 {
-    'name': 'Purchase Homologation',
+    'name': 'Purchase homologation',
     'version': '1.0',
-    'category': 'Purchase',
+    'category': 'Purchase Management',
     'description': """
-This module allows to homologate suppliers with certain product categories,
-or even products.
-Then, you won't be able to purchase any product that is not homologated,
-except users that has been granted to do it.
+This module restricts making purchase orders if you don't register an
+homologation record. This record can be filled with:
+
+* Supplier and product, so the purchase is allowed for that supplier and the
+  concrete product.
+* Supplier and product category, so the authorization extends to all the
+  products of the category or its child categories for that supplier.
+* Only product or product category, allowing to purchase the product or
+  products within category for any supplier.
+* Start and end date that restrict the homologation to that interval of time.
+
+You can also set the permission "Bypass purchase homologation" to certain users
+to not restrict the creation of the purchase order, but only warn about the
+lack of the homologation.
     """,
     'author': 'OdooMRP team',
+    'contributors': [
+        'Carlos Sánchez Cifuentes <csanchez@grupovermon.com>',
+        'Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>',
+    ],
     'website': 'www.odoomrp.com',
     'license': 'AGPL-3',
     'depends': ['purchase'],

@@ -1,10 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #                                                                            #
-#  OpenERP, Open Source Management Solution.                                 #
-#                                                                            #
-#  @author Carlos Sánchez Cifuentes <csanchez@grupovermon.com>               #
-#                                                                            #
 #  This program is free software: you can redistribute it and/or modify      #
 #  it under the terms of the GNU Affero General Public License as            #
 #  published by the Free Software Foundation, either version 3 of the        #
@@ -20,7 +16,7 @@
 #                                                                            #
 ##############################################################################
 
-from openerp import api, models, exceptions, _
+from openerp import api, models, _
 
 
 class PurchaseOrderLine(models.Model):
@@ -40,10 +36,19 @@ class PurchaseOrderLine(models.Model):
             return res
         product_obj = self.pool['product.product']
         product = product_obj.browse(cr, uid, product_id, context=context)
+        categ_ids = []
+        categ = product.product_tmpl_id.categ_id
+        while categ:
+            categ_ids.append(categ.id)
+            categ = categ.parent_id
+        partner_obj = self.pool['res.partner']
+        partner = partner_obj.browse(cr, uid, partner_id, context=context)
         homologation_obj = self.pool['purchase.homologation']
         homologation_ids = homologation_obj.search(
             cr, uid,
-            [('partner_id', '=', partner_id),
+            ['|',
+             ('partner_id', '=', False),
+             ('partner_id', '=', partner.commercial_partner_id.id),
              '|',
              ('start_date', '<=', date_planned),
              ('start_date', '=', False),
@@ -51,23 +56,23 @@ class PurchaseOrderLine(models.Model):
              ('end_date', '>=', date_planned),
              ('end_date', '=', False),
              '|',
-             ('category_id', '=', product.product_tmpl_id.categ_id.id),
+             ('category_id', 'in', categ_ids),
              ('category_id', '=', False),
              '|',
-             ('product_id', '=', False),
-             ('product_id', '=', product_id)], context=context)
-        message = _('This product is not homologated for the selected '
-                    'supplier.')
+             ('product_id', '=', product_id),
+             ('product_id', '=', False)],
+            context=context)
+        message = _("This product is not homologated for purchasing it.")
         if not homologation_ids:
+            res['warning'] = {'message': _(message)}
             data_obj = self.pool['ir.model.data']
             xml_id = data_obj._get_id(cr, uid, 'purchase_homologation',
                                       'group_purchase_homologation')
             group_id = data_obj.read(cr, uid, xml_id, ['res_id'],
                                      context=context)['res_id']
             user = self.pool['res.users'].browse(cr, uid, uid, context=context)
-            if group_id in [x.id for x in user.groups_id]:
-                res['warning'] = {'title': _('Homologation error'),
-                                  'message': message}
-            else:
-                raise exceptions.Warning(message)
+            if group_id not in [x.id for x in user.groups_id]:
+                # Block the use of that product
+                return {'value': {'product_id': False},
+                        'warning': res['warning']}
         return res

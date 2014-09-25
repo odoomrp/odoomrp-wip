@@ -96,11 +96,10 @@ msgstr "Proveedor"
 
 #. module: purchase_homologation
 #: model:ir.actions.act_window,name:purchase_homologation.purchase_homologation_action
-#: model:ir.ui.menu,name:purchase_homologation.purchase_homologation_menu
 #: view:purchase.homologation:purchase_homologation.purchase_homologation_form_view
 #: view:purchase.homologation:purchase_homologation.purchase_homologation_tree_view
-msgid "Supplier homologation"
-msgstr "Homologación de proveedor"
+msgid "Purchase homologation"
+msgstr "Homologación de compras"
 
 #. module: purchase_homologation
 #: code:addons/purchase_homologation/models/purchase_order_line.py:83
@@ -124,5 +123,5 @@ msgstr "Debe seleccionar una categoría o producto."
 #. module: purchase_homologation
 #: code:addons/purchase_homologation/models/purchase_homologation.py:59
 #, python-format
-msgid "Este producto no está homologado para el proveedor seleccionado."
-msgstr ""
+msgid "This product is not homologated for purchasing it."
+msgstr "Este producto no está homologado para su compra."

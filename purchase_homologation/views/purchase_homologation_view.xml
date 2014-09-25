@@ -7,7 +7,9 @@
             <field name="model">purchase.homologation</field>
             <field name="arch" type="xml">
                 <tree string="Supplier homologation" editable="bottom">
-                    <field name="partner_id" context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}" domain="[('supplier','=',True)]"/>
+                    <field name="partner_id"
+                           context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}"
+                           domain="[('supplier','=',True), ('parent_id', '=', False)]"/>
                     <field name="category_id"/>
                     <field name="product_id"/>
                     <field name="start_date"/>
@@ -30,7 +32,6 @@
         <menuitem id="purchase_homologation_menu"
                   parent="purchase.menu_procurement_management"
                   action="purchase_homologation_action"
-                  name="Supplier homologation"
                   sequence="20"/>
 
     </data>

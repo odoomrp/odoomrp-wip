@@ -100,9 +100,8 @@ msgstr ""
 
 #. module: purchase_homologation
 #: model:ir.actions.act_window,name:purchase_homologation.purchase_homologation_action
-#: model:ir.ui.menu,name:purchase_homologation.purchase_homologation_menu
 #: view:purchase.homologation:purchase_homologation.purchase_homologation_tree_view
-msgid "Supplier homologation"
+msgid "Purchase homologation"
 msgstr ""
 
 #. module: purchase_homologation
@@ -120,5 +119,5 @@ msgstr ""
 #. module: purchase_homologation
 #: code:addons/purchase_homologation/models/purchase_homologation.py:59
 #, python-format
-msgid "This product is not homologated for the selected supplier."
+msgid "This product is not homologated for purchasing it."
 msgstr ""

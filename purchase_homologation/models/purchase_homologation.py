@@ -20,11 +20,10 @@
 #                                                                            #
 ##############################################################################
 
-from openerp import fields, models, api, _
+from openerp import fields, models, api, exceptions, _
 
 
 class PurchaseHomologation(models.Model):
-
     _name = 'purchase.homologation'
 
     _description = 'Homologation for suppliers and categories'
@@ -32,8 +31,7 @@ class PurchaseHomologation(models.Model):
     category_id = fields.Many2one('product.category', string='Category')
     comments = fields.Text(string='Comments')
     end_date = fields.Datetime(string='Finishing date')
-    partner_id = fields.Many2one('res.partner',
-                                 string='Supplier', required=True)
+    partner_id = fields.Many2one('res.partner', string='Supplier')
     product_id = fields.Many2one('product.product', string='Product',
                                  domain=[('purchase_ok', '=', True)])
     start_date = fields.Datetime(string='Beginning date')
