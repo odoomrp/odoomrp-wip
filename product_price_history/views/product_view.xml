@@ -39,9 +39,9 @@
                     <field name="product_template_id" />
                     <field name="cost" />
                     <group expand="0" string="Group by...">
-                        <filter string="Historization Time" name="datetime"
+                        <filter string="Date" name="datetime"
                             domain="[]" context="{'group_by' : 'datetime'}" />
-                        <filter string="Product Template" name="template_id"
+                        <filter string="Product template" name="template_id"
                             domain="[]"
                             context="{'group_by' : 'product_template_id'}" />
                         <filter string="Company" name="company_id"
@@ -53,7 +53,7 @@
         </record>
 
         <record id="action_product_price_history_filtered" model="ir.actions.act_window">
-            <field name="name">Price history by Product</field>
+            <field name="name">Price history by product</field>
             <field name="res_model">product.price.history</field>
             <field name="view_mode">tree,form</field>
             <field name="context">{
@@ -66,7 +66,7 @@
         </record>
 
         <record id="action_product_price_history" model="ir.actions.act_window">
-            <field name="name">Price history by Product</field>
+            <field name="name">Price history by product</field>
             <field name="res_model">product.price.history</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="product_price_history_search_view" />
@@ -83,7 +83,7 @@
                 <field name="standard_price" position="after">
                     <button name="%(action_product_price_history_filtered)d"
                         string="Price history" type="action"
-                        class="oe_edit_only oe_link" />
+                        class="oe_link" />
                 </field>
             </field>
         </record>
