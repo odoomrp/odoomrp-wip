@@ -25,10 +25,11 @@
     "version": "1.0",
     "depends": ["base", "warning"],
     "author": "OdooMRP team",
+    "website": "http://www.odoomrp.com",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
-    "category": "category",
+    "category": "Tools",
     "description": """
-    This module provide :
+This module provide :
     New menu entry with log of warnigs raised by "warning" module
     """,
     'data': ["views/warning_log_view.xml"],
