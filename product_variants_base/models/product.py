@@ -42,7 +42,7 @@ class ProductTemplate(models.Model):
                                           " variants will be automatically"
                                           " generated and if empty it will"
                                           " check in the category.",
-                                          required=True)
+                                          required=True, default='no')
 
     @api.multi
     def create_variant_ids(self):
