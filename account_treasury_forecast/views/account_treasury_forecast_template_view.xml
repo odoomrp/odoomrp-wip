@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_line_template_tree_view">
+            <field name="name">account.treasury.forecast.line.template.tree</field>
+            <field name="model">account.treasury.forecast.line.template</field>
+            <field name="arch" type="xml">
+                <tree string="Treasury Forecast Line" editable="bottom">
+                    <field name="date" />
+                    <field name="line_type" />
+                    <field name="name" />
+                    <field name="partner_id" domain="[('supplier', '=', True)]"/>
+                    <field name="invoice_id"/>
+                    <field name="journal_id" />
+                    <field name="amount" />
+                    <field name="paid" />
+                    <button name="create_invoice" string="Create Invoice" type="object"
+                            icon="gtk-execute" attrs="{'invisible':[('invoice_id', '!=', False)]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_line_template_form_view">
+            <field name="name">account.treasury.forecast.line.template.form</field>
+            <field name="model">account.treasury.forecast.line.template</field>
+            <field name="arch" type="xml">
+                <form string="Treasury Forecast Line">
+                    <field name="date" />
+                    <field name="line_type" />
+                    <field name="name" />
+                    <field name="partner_id" domain="[('supplier', '=', True)]"/>
+                    <field name="invoice_id" context="{'type':'in_invoice', 'journal_type': 'purchase'}"/>
+                    <field name="journal_id" />
+                    <field name="amount" />
+                    <field name="paid" />
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="account_treasury_forecast_template_search_view">
+            <field name="name">account.treasury.forecast.template.search</field>
+            <field name="model">account.treasury.forecast.template</field>
+            <field name="arch" type="xml">
+                <search string="Treasury Forecast Template">
+                    <field name="name" />
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_template_tree_view">
+            <field name="name">account.treasury.forecast.template.tree</field>
+            <field name="model">account.treasury.forecast.template</field>
+            <field name="arch" type="xml">
+                <tree string="Treasury Forecast Template">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_template_form_view">
+            <field name="name">account.treasury.forecast.template.form</field>
+            <field name="model">account.treasury.forecast.template</field>
+            <field name="arch" type="xml">
+                <form string="Treasury Forecast Template">
+                    <group colspan="4" col="4">
+                        <separator string="Account Treasury Forecast Template" colspan="4" />
+                        <newline/>
+                        <field name="name" colspan="4" />
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Recurring Payments">
+                            <field name="recurring_line_ids" 
+                                context="{'default_line_type': 'recurring'}" nolabel="1" />
+                        </page>
+                        <page string="Variable Payments">
+                            <field name="variable_line_ids" 
+                                context="{'default_line_type': 'variable'}" nolabel="1" />
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_account_treasury_forecast_template" model="ir.actions.act_window">
+            <field name="name">Treasury Forecast Template</field>
+            <field name="res_model">account.treasury.forecast.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Treasury Forecast Template</field>
+        </record>
+
+        <menuitem action="action_account_treasury_forecast_template" id="menu_account_treasury_forecast_template_form" sequence="8" parent="menu_account_treasury_forecast" groups="account.group_account_manager"/>
+
+    </data>
+</openerp>

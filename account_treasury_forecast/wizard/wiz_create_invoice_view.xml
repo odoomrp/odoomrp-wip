@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="wiz_create_invoice_form_view">
+            <field name="name">wiz.create.invoice.form</field>
+            <field name="model">wiz.create.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Create Invoice">
+                    <group>
+                        <field name="description" required="1" colspan="1"/>
+                        <field name="partner_id" required="1"/>
+                        <field name="journal_id" required="1"/>
+                        <field name="amount" required="1"/>
+                        <field name="line_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="button_create_inv" class="oe_highlight"
+                            type="object" string="Create Invoice" />
+                        or
+                        <button class="oe_link" special="cancel" string="Cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_wiz_create_invoice_view">
+            <field name="name">Create Invoice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wiz.create.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_invoice_tree_view_inh">
+            <field name="name">account.treasury.forecast.invoice.tree.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_invoice_tree_view"/>
+            <field name="model">account.treasury.forecast.invoice</field>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="payment_mode_id" />
+                    <field name="payment_term_id" />
+                    <field name="invoice_type" />
+                </field>
+                <xpath expr="/tree" position="attributes">
+                    <attribute name="colors">blue:invoice_type in ('out_refund','in_refund');black:invoice_type in ('out_invoice','in_invoice')</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_line_tree_view_inh">
+            <field name="name">account.treasury.forecast.line.tree.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_line_tree_view"/>
+            <field name="model">account.treasury.forecast.line</field>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="payment_mode_id"/>
+                </field>
+            </field>
+        </record>
+
+        <act_window name="Breakdown Balance"
+        domain="[('treasury_id', '=', active_id)]"
+        res_model="report.account.treasury.forecast.analysis"
+        src_model="account.treasury.forecast"
+        id="act_treasury_forecast_2_report"
+        context="{'group_by':'payment_mode_id'}"/>
+
+    </data>
+</openerp>

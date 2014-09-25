@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_treasury_forecast_cashflow_banking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-09 10:32+0000\n"
+"PO-Revision-Date: 2014-09-09 12:53+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: account_treasury_forecast_cashflow_banking
+#: model:ir.model,name:account_treasury_forecast_cashflow_banking.model_account_treasury_forecast_cashflow_template
+msgid "Cash-Flow Record Template"
+msgstr "Plantilla de registros de entrada y salida de caja"
+
+#. module: account_treasury_forecast_cashflow_banking
+#: model:ir.model,name:account_treasury_forecast_cashflow_banking.model_account_treasury_forecast_cashflow
+msgid "Cash-Flow Records"
+msgstr "Registros de entrada y salida de caja"
+
+#. module: account_treasury_forecast_cashflow_banking
+#: field:account.treasury.forecast.cashflow,payment_mode_id:0
+#: field:account.treasury.forecast.cashflow.template,payment_mode_id:0
+msgid "Payment Mode"
+msgstr "Modo de pago"
+
+#. module: account_treasury_forecast_cashflow_banking
+#: model:ir.model,name:account_treasury_forecast_cashflow_banking.model_account_treasury_forecast
+msgid "Treasury Forecast"
+msgstr "Previsión de tesorería"
+
+#. module: account_treasury_forecast_cashflow_banking
+#: model:ir.model,name:account_treasury_forecast_cashflow_banking.model_report_account_treasury_forecast_analysis
+msgid "Treasury Forecast Analysis"
+msgstr "Análisis de previsión de tesorería"
+

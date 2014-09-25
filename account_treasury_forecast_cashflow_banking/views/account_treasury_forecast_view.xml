@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_cashflow_tree_view_inh">
+            <field name="name">account.treasury.forecast.cashflow.tree.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast_cashflow.account_treasury_forecast_cashflow_tree_view" />
+            <field name="model">account.treasury.forecast.cashflow</field>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="payment_mode_id"/>
+                </field>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="account_treasury_forecast_cashflow_form_view_inh">
+            <field name="name">account.treasury.forecast.cashflow.form.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast_cashflow.account_treasury_forecast_cashflow_form_view" />
+            <field name="model">account.treasury.forecast.cashflow</field>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="payment_mode_id"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

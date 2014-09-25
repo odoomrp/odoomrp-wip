@@ -1,0 +1,67 @@
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="report_treasury_forecast_analysis_tree">
+            <field name="name">report.treasury.forecast.analysis.tree</field>
+            <field name="model">report.account.treasury.forecast.analysis</field>
+            <field name="arch" type="xml">
+                <tree string="Breakdown Balance" create="false">
+                    <field name="treasury_id"/>
+                    <field name="date"/>
+                    <field name="payment_mode_id" />
+                    <field name="type"/>
+                    <field name="debit"/>
+                    <field name="credit"/>
+                    <field name="balance"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="report_treasury_forecast_analysis_search">
+            <field name="name">report.treasury.forecast.analysis.search</field>
+            <field name="model">report.account.treasury.forecast.analysis</field>
+            <field name="arch" type="xml">
+                <search string="Breakdown Balance">
+                    <field name="treasury_id"/>
+                    <field name="date"/>
+                    <field name="payment_mode_id"/>
+                    <field name="type"/>
+                    <separator/>
+                    <filter icon="" string="Treasury Forecast" context="{'group_by': 'treasury_id'}"/>
+                    <filter icon="" string="Date" context="{'group_by': 'date'}"/>
+                    <filter icon="" string="Payment Mode" context="{'group_by': 'payment_mode_id'}"/>
+                    <filter icon="" string="Type" context="{'group_by': 'type'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="report_treasury_forecast_analysis_form">
+            <field name="name">report.treasury.forecast.analysis.form</field>
+            <field name="model">report.account.treasury.forecast.analysis</field>
+            <field name="arch" type="xml">
+                <form string="Breakdown Balance">
+                    <group>
+                        <field name="treasury_id"/>
+                        <field name="date"/>
+                        <field name="payment_mode_id" />
+                        <field name="type"/>
+                        <field name="debit"/>
+                        <field name="credit"/>
+                        <field name="balance"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_treasury_forecast_analysis">
+            <field name="name">Account Treasury Forecast Analysis</field>
+            <field name="res_model">report.account.treasury.forecast.analysis</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem string="Treasury Analysis Report" parent="account_treasury_forecast.menu_account_treasury_forecast" action="action_treasury_forecast_analysis" id="menu_report_treasury_forecast_analysis" sequence="50"
+        groups="account.group_account_user"/>
+        
+    </data>
+</openerp>

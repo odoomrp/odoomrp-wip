@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_line_template_tree_view_inh">
+            <field name="name">account.treasury.forecast.line.template.tree.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_line_template_tree_view"/>
+            <field name="model">account.treasury.forecast.line.template</field>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="payment_mode_id" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_line_template_form_view_inh">
+            <field name="name">account.treasury.forecast.line.template.form.inh</field>
+            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_line_template_form_view"/>
+            <field name="model">account.treasury.forecast.line.template</field>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="payment_mode_id" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

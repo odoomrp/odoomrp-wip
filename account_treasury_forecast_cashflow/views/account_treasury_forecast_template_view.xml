@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_cashflow_template_tree_view">
+            <field name="name">account.treasury.forecast.cashflow.template.tree</field>
+            <field name="model">account.treasury.forecast.cashflow.template</field>
+            <field name="arch" type="xml">
+                <tree string="Cash Flow" editable="bottom">
+                    <field name="date" />
+                    <field name="name" />
+                    <field name="journal_id" />
+                    <field name="flow_type"/>
+                    <field name="amount" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_cashflow_template_form_view">
+            <field name="name">account.treasury.forecast.cashflow.template.form</field>
+            <field name="model">account.treasury.forecast.cashflow.template</field>
+            <field name="arch" type="xml">
+                <form string="Cash Flow">
+                    <field name="date" />
+                    <field name="name" />
+                    <field name="journal_id" />
+                    <field name="flow_type"/>
+                    <field name="amount" />
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_treasury_forecast_template_form_view_inh">
+            <field name="name">account.treasury.forecast.template.form.inh</field>
+            <field name="model">account.treasury.forecast.template</field>
+            <field name="inherit_id" ref="account_treasury_forecast.account_treasury_forecast_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Receivable Payments">
+                        <field name="receivable_line_ids" nolabel="1"
+                            context="{'default_line_type': 'receivable'}"/>
+                    </page>
+                    <page string="Cash-Flow">
+                        <field name="cashflow_ids"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
