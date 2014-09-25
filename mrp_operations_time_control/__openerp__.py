@@ -23,7 +23,8 @@
     "depends": ["base", "mrp", "mrp_operations_extension"],
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
-    "category": "mrp",
+    "website": "http://www.odoomrp.com",
+    "category": "Manufacturing",
     "description": """
     Manufacturing operations time control
     """,
