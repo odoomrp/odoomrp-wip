@@ -32,7 +32,7 @@ class AccountInvoice(models.Model):
     def _prepare_refund(self, invoice, date=None, period_id=None,
                         description=None, journal_id=None):
         if self.origin:
-            orders = self.env['sale.order'].seach(
+            orders = self.env['sale.order'].search(
                 [('name', '=', self.origin)])
             if orders:
                 journal_id = orders[0].type_id.journal_id.id

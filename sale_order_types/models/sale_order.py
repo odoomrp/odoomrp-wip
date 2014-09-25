@@ -32,6 +32,13 @@ class SaleOrder(orm.Model):
         'type_id': fields.many2one('sale.order.type', 'Type', required=True),
     }
 
+    def _get_order_type(self, cr, uid, context=None):
+        type_obj = self.pool['sale.order.type']
+        type_ids = type_obj.search(cr, uid, [], context=context)
+        return type_ids and type_ids[0] or False
+
+    _defaults = {'type_id': _get_order_type}
+
     def on_change_type_id(self, cr, uid, ids, type_id, context=None):
         if type_id:
             type_obj = self.pool['sale.order.type'].browse(
