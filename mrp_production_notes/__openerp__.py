@@ -24,7 +24,7 @@
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
-    "category": "MRP",
+    "category": "Manufacturing",
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
