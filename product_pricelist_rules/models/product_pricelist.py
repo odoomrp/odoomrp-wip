@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
 import openerp.addons.decimal_precision as dp
 import time
 
@@ -56,27 +56,29 @@ class PricelistItem(models.Model):
         self.item_formula = (_('Base price * (1 + %s) + %s') %
                              (self.price_discount, self.price_discount))
 
-    def domain_by_pricelist(self, pricelist):
+    @api.model
+    def domain_by_pricelist(self, pricelist_id):
         vers_obj = self.env['product.pricelist.version']
         today = time.strftime('%Y-%m-%d')
-        vers_ids = vers_obj.search([('pricelist_id', '=', pricelist.id),
+        vers_ids = vers_obj.search([('pricelist_id', '=', pricelist_id),
                                     '|', ('date_start', '=', False),
                                     ('date_start', '<=', today),
                                     '|', ('date_end', '=', False),
                                     ('date_end', '>=', today)])
-        item_ids = self.search([('price_version_id', 'in', vers_ids)],
+        item_ids = self.search([('price_version_id', 'in', vers_ids.ids)],
                                order='sequence')
         for item in item_ids:
             if item.base == -1:
-                item_ids.remove(item.id)
+                item_ids.remove(item)
                 new_item_ids = self.domain_by_pricelist(
                     item.base_pricelist_id)
                 item_ids += new_item_ids
-        return item_ids
+        return item_ids.ids
 
+    @api.model
     def get_best_pricelist_item(self, pricelist_id):
         pricelist_item_id = False
-        pricelist_item_ids = self.domain_by_pricelist(pricelist)
+        pricelist_item_ids = self.domain_by_pricelist(pricelist_id)
         if pricelist_item_ids:
             pricelist_item_id = pricelist_item_ids[0]
         return pricelist_item_id
