@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="warning_log_tree_view">
+            <field name="name">warning.log.tree</field>
+            <field name="model">warning.log</field>
+            <field name="arch" type="xml">
+                <tree string="Warning Log">
+                    <field name="date" />
+                    <field name="user" />
+                    <field name="msg" />
+                    <field name="type" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="warning_log_form_view">
+            <field name="name">warning.log.form</field>
+            <field name="model">warning.log</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Warning Log">
+                    <group>
+                        <field name="date" />
+                        <field name="user" />
+                        <field name="msg" />
+                        <field name="type" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_warning_log">
+            <field name="name">Warning Log</field>
+            <field name="res_model">warning.log</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="warning_log_tree_view" />
+        </record>
+
+        <menuitem id="warning_log_top_menu" name="Warnings"
+            parent="base.menu_config" />
+        <menuitem id="warning_action_menu" name="Warnings"
+            parent="warning_log_top_menu" action="action_warning_log" />
+
+    </data>
+</openerp>
