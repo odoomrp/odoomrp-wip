@@ -21,19 +21,22 @@
     "name": "Product attributes extension",
     "version": "1.0",
     "depends": [
-        "base",
         "product",
     ],
     "author": "OdooMRP team",
-    "category": "Product",
+    "contributors": [
+        "Mikel Arregi <mikelarregi@avanzosc.es>",
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+    ],
+    "category": "Product Management",
+    "website": "http://www.odoomrp.com",
     "description": """
 This module provide :
-New features in protuct attributes:
-    - Obligatory fields
-    - Default Attribute value
-    - Range based type of attribute
-    - Option of create variants in time of sale
-    ...
+    New features in product attributes:
+        * Mandatory fields
+        * Default attribute value
+        * Range based type of attribute
+        * ...
     """,
     'data': [
         "views/product_view.xml",
