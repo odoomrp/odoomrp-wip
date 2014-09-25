@@ -19,8 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
-from openerp.exceptions import except_orm
+from openerp import models, fields
 
 
 class QcTest(models.Model):

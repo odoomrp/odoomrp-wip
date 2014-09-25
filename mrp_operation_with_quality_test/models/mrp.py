@@ -144,6 +144,18 @@ class MrpProductionWorkcenterLine(models.Model):
     @api.one
     @api.model
     def action_start_working(self):
-        result = super(MrpProductionWorkcenterLine, self).action_start_working()
+        result = super(MrpProductionWorkcenterLine,
+                       self).action_start_working()
         self.create_quality_test()
         return result
+
+    @api.one
+    @api.model
+    def action_done(self):
+        if self.test_ids:
+            for test in self.test_ids:
+                if test.state != 'Quality Success':
+                    raise except_orm(_('Finalization Operation Error!'),
+                                     _("The Operation has quality test without"
+                                       "QUALITY SUCCESS state"))
+        return super(MrpProductionWorkcenterLine, self).action_done()
