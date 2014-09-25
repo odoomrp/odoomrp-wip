@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
 import time
 
@@ -51,7 +51,8 @@ class PricelistItem(models.Model):
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
          'Second discount must be lower than 100%.'),
     ]
-    
+
+    @api.one
     def _item_formula(self):
         self.item_formula = (_('Base price * (1 + %s) + %s') %
                              (self.price_discount, self.price_discount))
