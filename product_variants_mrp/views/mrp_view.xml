@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="mrp_bom_extended_form_view">
+            <field name="name">mrp.bom.extended.form</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bom_line_ids']/tree"
+                    position="attributes">
+                    <attribute name="editable" />
+                </xpath>
+                <xpath
+                    expr="//field[@name='bom_line_ids']//field[@name='product_id']"
+                    position="before">
+                    <field name="product_template" />
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mrp_bom_line_form_view">
+            <field name="name">mrp.bom.line.form</field>
+            <field name="model">mrp.bom.line</field>
+            <field name="arch" type="xml">
+                <form string="Bill of Material Lines">
+                    <group>
+                        <group>
+                            <field name="sequence" widget="handle" />
+                            <field name="type" />
+                            <field name="product_template" />
+                            <field name="product_id" />
+                            <field name="product_rounding" />
+                            <field name="product_efficiency" />
+                            <label for="product_qty" />
+                            <div>
+                                <field name="product_qty" class="oe_inline" />
+                                <field name="product_uom" groups="product.group_uom"
+                                    class="oe_inline" />
+                            </div>
+                            <label for="product_uos_qty" groups="product.group_uos" />
+                            <div>
+                                <field name="product_uos_qty"
+                                    groups="product.group_uos" class="oe_inline" />
+                                <field name="product_uos" groups="product.group_uos"
+                                    class="oe_inline" />
+                            </div>
+                        </group>
+                        <group>
+                            <field name="date_start" />
+                            <field name="date_stop" />
+                            <field name="routing_id" />
+                        </group>
+                    </group>
+                    <label for="attribute_value_ids" />
+                    <field name="attribute_value_ids" widget="many2many_tags" />
+                    <label for="property_ids" />
+                    <field name="property_ids" widget="many2many_tags" />
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mrp_production_extended_form_view">
+            <field name="name">mrp.production.extended.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <field name="product_id" position="before">
+                    <field name="product_template" />
+                </field>
+                <notebook position="before">
+                    <field name="product_attributes"
+                        options="{'no_create': True, 'no_delete': True}">
+                        <tree create="false" editable="1">
+                            <field name="attribute" />
+                            <field name="value" />
+                        </tree>
+                    </field>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</openerp>
