@@ -1,5 +1,3 @@
-
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -26,14 +24,27 @@
     "name": "MRP Operations Extension",
     "version": "1.0",
     "description": """
-    This module adds a new table to store operations to avoid typing them 
-    again.
+    This module adds:
+
+    - New table to store operations to avoid typing them again.
+    - Adds a relation from WorkcenterLines to BOM Lists.
+    - Adds a relation from WorkcenterLines to Manufacturing Orders in
+    Scheduled/Consumed/Finished Products.
+
+    - Add a relation between Routing Work Center Lines and Work Center extra
+    Info.
+
     """,
-    "author": "OdooMRP team",
-    "website": "http://www.avanzosc.com",
+    'author': 'OdooMRP team',
+    'website': "http://www.odoomrp.com",
     "depends": ['mrp_operations', 'mrp'],
     "category": "Manufacturing",
     "data": ['views/mrp_workcenter_view.xml',
-             'views/mrp_routing_operation_view.xml'],
+             'views/mrp_routing_operation_view.xml',
+             'views/mrp_production_view.xml',
+             'views/mrp_bom_view.xml',
+             'views/mrp_workcenter_view.xml',
+             'views/mrp_routing_workcenter_view.xml',
+             ],
     "installable": True
 }

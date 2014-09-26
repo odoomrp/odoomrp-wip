@@ -2,26 +2,24 @@
 <openerp>
     <data>
 
-        <record id="mrp_routing_workcenter_tree_view_inh" model="ir.ui.view">
-            <field name="name">mrp.routing.workcenter.tree.inh</field>
-            <field name="model">mrp.routing.workcenter</field>
-            <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view" />
+        <record id="mrp_workcenter_form_view_inh" model="ir.ui.view">
+            <field name="name">mrp.workcenter.tree.inh</field>
+            <field name="model">mrp.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
             <field name="arch" type="xml">
-                <field name="name" position="after">
-                   <field name="operation_id"/>
+                <field name="time_start" position="after">
+                   <field name="pre_op_product"/>
                 </field>
+                <field name="time_stop" position="after">
+                    <field name="post_op_product"/>
+                </field>
+                <xpath expr="//page[@string='General Information']" position="after">
+                    <page string="Routing Operations">
+                        <field name="rt_operations" nolabel="1"/>
+                    </page>
+                </xpath>
             </field>
         </record>
-        
-        <record id="mrp_routing_workcenter_form_view_inh" model="ir.ui.view">
-            <field name="name">mrp.routing.workcenter.form.inh</field>
-            <field name="model">mrp.routing.workcenter</field>
-            <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view" />
-            <field name="arch" type="xml">
-                <field name="name" position="after">
-                   <field name="operation_id" on_change="onchange_operation(operation_id)"/>
-                </field>
-            </field>
-        </record>
+
     </data>
 </openerp>
