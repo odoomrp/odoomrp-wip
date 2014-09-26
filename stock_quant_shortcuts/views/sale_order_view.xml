@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="sqsf_view_order_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <h1 position="before">
+                    <div class="oe_right oe_button_box" name="buttons">
+                        <button name="action_view_quant" string="Quants" type="object" class="oe_stat_button" icon="fa-building-o"/>
+                    </div>
+                </h1>
+                <h1 position="replace">
+                    <div class="oe_left oe_title">
+                        <h1>
+                            <label string="Quotation " attrs="{'invisible': [('state','not in',('draft','sent'))]}"/>
+                            <label string="Sales Order " attrs="{'invisible': [('state','in',('draft','sent'))]}"/>
+                            <field name="name" class="oe_inline" readonly="1"/>
+                        </h1>
+                    </div>
+                </h1>
+            </field>
+        </record>
+
+    </data>
+</openerp>

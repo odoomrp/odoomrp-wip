@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="sqsf_mrp_production_form_view" model="ir.ui.view">
+            <field name="name">mrp.production.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <div class="oe_title" position="before">
+                    <div class="oe_right oe_button_box" name="buttons">
+                        <button name="action_view_quant" string="Quants" type="object" class="oe_stat_button" icon="fa-building-o"/>
+                    </div>
+                </div>
+                <div class="oe_title" position="replace">
+                    <div class="oe_left oe_title">
+                        <h1>Manufacturing Order <field name="name" class="oe_inline"/></h1>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+    </data>
+</openerp>
