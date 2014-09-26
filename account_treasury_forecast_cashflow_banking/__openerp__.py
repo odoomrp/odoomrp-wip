@@ -21,7 +21,8 @@
     "version": "1.0",
     "depends": ["account_treasury_forecast_banking",
                 "account_treasury_forecast_cashflow"],
-    "author": "AvanzOSC",
+    "author": "Avanzosc, S.L.",
+    "website": "http://www.avanzosc.es",
     "category": "Accounting",
     "description": """
     This module:

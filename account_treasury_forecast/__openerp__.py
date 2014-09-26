@@ -23,8 +23,8 @@
         "account",
         "purchase",
     ],
-    "author": "Avanzosc S.L.",
-    "website": "http://www.avanzosc.com",
+    "author": "Avanzosc, S.L.",
+    "website": "http://www.avanzosc.es",
     "category": "Accounting",
     "description": """
         This module manages the treasury forecast.

@@ -20,7 +20,8 @@
     "name": "Account Treasury Forecast Cashflow",
     "version": "1.0",
     "depends": ["account_treasury_forecast"],
-    "author": "AvanzOSC",
+    "author": "Avanzosc, S.L.",
+    "website": "http://www.avanzosc.es",
     "category": "Accounting",
     "description": """
     This module adds two new treasury forecast types:

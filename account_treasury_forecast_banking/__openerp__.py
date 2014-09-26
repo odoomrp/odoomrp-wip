@@ -22,7 +22,8 @@
     "depends": ["account_treasury_forecast",
                 "account_payment_sale",
                 "account_payment_purchase"],
-    "author": "AvanzOSC",
+    "author": "Avanzosc, S.L.",
+    "website": "http://www.avanzosc.es",
     "category": "Accounting",
     "description": """
     This module:
