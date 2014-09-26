@@ -58,35 +58,3 @@ class QcTestSetTemplateWizard(orm.TransientModel):
         'product_id': _default_product_id,
         'product_category_id': _default_product_category_id,
     }
-
-    def action_create_test(self, cr, uid, ids, context=None):
-        template_obj = self.pool['qc.test.template']
-        test_obj = self.pool['qc.test']
-#        attachment_obj = self.pool['ir.attachment']
-        wizard = self.browse(cr, uid, ids[0], context=context)
-        template = template_obj.browse(cr, uid, wizard.test_template_id.id,
-                                       context=context)
-
-        # Cojo los archivos adjuntos compartidos
-#        new_attachment = []
-#        if template.attachment_ids:
-#            for attachment in template.attachment_ids:
-#               new_attachment.append(attachment.id)
-#        if new_attachment:
-#            test_obj.write(cr, uid, [context['active_id']],
-#                           {'attachment_ids': [(6, 0, new_attachment)]},
-#                           context=context)
-
-        # Cojo los archivos adjuntos NO compartidos
-#        attachment_ids = attachment_obj.search(
-#           cr, uid, [('res_model', '=', 'qc.test.template'),
-#                     ('res_id', '=', template.id)], context=context)
-#        if attachment_ids:
-#            for attachment_id in attachment_ids:
-#                new_attachment_id = attachment_obj.copy(cr, uid, attachment_id)
-#                attachment_obj.write(cr, uid, [new_attachment_id],
-#                                     {'res_model': 'qc.test',
-#                                      'res_id': context['active_id']},
-#                                     context=context)
-        return super(QcTestSetTemplateWizard, self).action_create_test(
-            cr, uid, ids, context=context)
