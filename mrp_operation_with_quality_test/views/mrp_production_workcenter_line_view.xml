@@ -25,7 +25,7 @@
             <field name="model">mrp.production</field>
             <field name="inherit_id" ref="mrp_operations_extension.mrp_production_form_view_inh"/>
             <field name="arch" type="xml">
-                <page string="Product Lines" position="after" >
+                <page string="Information" position="after" >
                     <page string="Quality Test" attrs="{'invisible': [('required_test','=',False)]}">
                         <field name="test_ids" nolabel="1" colspan="4"/>
                     </page>
