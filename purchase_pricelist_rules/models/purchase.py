@@ -129,7 +129,7 @@ class PurchaseOrderLine(orm.Model):
         values = {
             'discount': item.discount,
             'discount2': item.discount2,
-            'offer_id': item.offer_id.id,
+            'offer_id': item.offer.id,
         }
         return {'value': values}
 
