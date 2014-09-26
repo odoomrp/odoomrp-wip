@@ -19,11 +19,11 @@
 #
 ##############################################################################
 {
-    "name": "product Last Purchase Sale Info",
+    "name": "Product Last Purchase Sale Info",
     "version": "1.0",
-    "author": "AvanzOSC",
+    "author": "OdooMRP team",
     "category": "Product",
-    "website": "www.avanzosc.es",
+    "website": "www.odoomrp.com",
     "description": """
     This module adds new calculate fields in product:
         'last_purchase_price'
