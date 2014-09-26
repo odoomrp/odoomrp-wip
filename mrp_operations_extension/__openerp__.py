@@ -37,7 +37,7 @@
     """,
     'author': 'OdooMRP team',
     'website': "http://www.odoomrp.com",
-    "depends": ['mrp_operations', 'mrp'],
+    "depends": ['mrp_operations', 'mrp', 'stock', ],
     "category": "Manufacturing",
     "data": ['views/mrp_workcenter_view.xml',
              'views/mrp_routing_operation_view.xml',
