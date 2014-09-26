@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="wkf_crm_claim_corrective" model="workflow">
+            <field name="name">crm.claim.corrective.basic</field>
+            <field name="osv">crm.claim.corrective</field>
+            <field name="on_create">True</field>
+        </record>
+
+        <record id="act_new" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_crm_claim_corrective" />
+            <field name="flow_start">True</field>
+            <field name="name">new</field>
+            <field name="kind">function</field>
+            <field name="action">action_new()</field>
+        </record>
+
+        <record id="act_pending" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_crm_claim_corrective" />
+            <field name="name">pending</field>
+            <field name="kind">function</field>
+            <field name="action">action_pending()</field>
+        </record>
+
+        <record id="act_close" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_crm_claim_corrective" />
+            <field name="name">close</field>
+            <field name="kind">function</field>
+            <field name="action">action_close()</field>
+        </record>
+
+        <record id="trans_new_pending" model="workflow.transition">
+            <field name="act_from" ref="act_new" />
+            <field name="act_to" ref="act_pending" />
+            <field name="signal">button_pending</field>
+        </record>
+
+        <record id="trans_pending_closed" model="workflow.transition">
+            <field name="act_from" ref="act_pending" />
+            <field name="act_to" ref="act_close" />
+            <field name="signal">button_close</field>
+        </record>
+
+    </data>
+</openerp>

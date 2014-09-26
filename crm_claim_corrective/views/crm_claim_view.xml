@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="crm_claim_extended_form_view">
+            <field name="name">crm.claim.form</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
+            <field name="arch" type="xml">
+                <field name="cause" position="replace" />
+                <xpath expr="//separator[@string='Root Causes']/.."
+                    position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//separator[@string='Actions']/.."
+                    position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//separator[@string='Resolution Actions']/.."
+                    position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="date_closed" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="write_date" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="description" position="before">
+                    <field name="description_id" colspan="2"
+                        on_change="onchange_description(description_id)" />
+                </field>
+                <field name="create_date" position="after">
+                    <field name="moddate" />
+                </field>
+                <xpath expr="//separator[@string='Dates']/.."
+                    position="before">
+                    <group colspan="2" col="2">
+                        <separator string="Analysis of Causes"
+                            colspan="2" />
+                        <field name="cause_id" colspan="2"
+                            on_change="onchange_cause(cause_id)" />
+                        <field name="cause" colspan="2" nolabel="1" />
+                    </group>
+                    <group colspan="2" col="2">
+                        <separator string="Nonconformity Decision"
+                            colspan="2" />
+                        <field name="nfdecision_id"
+                            on_change="onchange_nfdecision(nfdecision_id)"
+                            colspan="2" />
+                        <field name="nfdesc_decis" colspan="2"
+                            nolabel="1" />
+                    </group>
+                    <group colspan="2" col="2">
+                        <separator string="Resolution Actions"
+                            colspan="2" />
+                        <field name="decision_id" colspan="2" string="Action"
+                            on_change="onchange_decision(decision_id)" />
+                        <field name="aaccseq" />
+                        <field name="desc_decis" colspan="2"
+                            nolabel="1" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_claim_descriptions_form_view">
+            <field name="name">crm.claim.descriptions.form.view</field>
+            <field name="model">crm.claim.problem.description</field>
+            <field name="arch" type="xml">
+                <form string="Description Notes">
+                    <separator string="Description Notes"
+                        colspan="4" />
+                    <field name="name" nolabel="1" colspan="4" />
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="crm_claim_decision_form_view">
+            <field name="name">crm.claim.decision.form</field>
+            <field name="model">crm.claim.decision</field>
+            <field name="arch" type="xml">
+                <form string="Decision Notes">
+                    <separator string="Decision Notes"
+                        colspan="4" />
+                    <field name="name" nolabel="1" colspan="4" />
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_claim_causes_form_view">
+            <field name="name">crm.claim.causes.form.view</field>
+            <field name="model">crm.claim.problem.cause</field>
+            <field name="arch" type="xml">
+                <form string="Cause Notes">
+                    <separator string="Cause Notes" colspan="4" />
+                    <field name="name" nolabel="1" colspan="4" />
+                    <field name="solution_ids" nolabel="1"
+                        colspan="4" />
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_claim_solutions_form_view">
+            <field name="name">crm.claim.solutions.form.view</field>
+            <field name="model">crm.claim.problem.solution</field>
+            <field name="arch" type="xml">
+                <form string="Solutions">
+                    <separator string="Solutions" colspan="4" />
+                    <field name="name" nolabel="1" colspan="4" />
+                    <field name="cause_ids" nolabel="1" colspan="4" />
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_claim_corrective_search_view">
+            <field name="name">crm.claim.corrective.search</field>
+            <field name="model">crm.claim.corrective</field>
+            <field name="arch" type="xml">
+                <search string="Search Corrective Actions">
+                    <group>
+                        <field name="seq" />
+                        <field name="state" />
+                        <field name="claim_id" />
+                        <field name="partner_id" />
+                    </group>
+                    <group expand="0" string="Group By...">
+                        <filter string="Customer" domain="[]"
+                            context="{'group_by':'partner_id'}" />
+                        <filter string="State" domain="[]"
+                            context="{'group_by':'state'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_claim_corrective_tree_view">
+            <field name="name">crm.claim.corrective.tree</field>
+            <field name="model">crm.claim.corrective</field>
+            <field name="arch" type="xml">
+                <tree string="Corrective Actions">
+                    <field name="seq" />
+                    <field name="claim_id" />
+                    <field name="partner_id" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_claim_corrective_form_view">
+            <field name="name">crm.claim.corrective.form</field>
+            <field name="model">crm.claim.corrective</field>
+            <field name="arch" type="xml">
+                <form string="Corrective Actions">
+                    <group>
+                        <field name="seq" />
+                        <field name="claim_id" />
+                        <field name="partner_id" />
+                        <field name="state" />
+                    </group>
+                    <group col="1">
+                        <separator string="Preventive/Corrective Action"/>
+                        <field name="sol_ids" nolabel="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_crm_claim_corrective">
+            <field name="name">Corrective Actions</field>
+            <field name="res_model">crm.claim.corrective</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_corrective_actions" name="Corrective Actions"
+            parent="base.menu_aftersale" action="action_crm_claim_corrective" />
+
+        <record model="ir.ui.view" id="crm_claim_corrective_action_search_view">
+            <field name="name">crm.claim.corrective.action.search</field>
+            <field name="model">crm.claim.corrective.action</field>
+            <field name="arch" type="xml">
+                <search string="Search Preventive/Corrective Actions">
+                    <field name="sol_claim_id" />
+                    <field name="corrective_action_id" />
+                    <field name="sequence" />
+                    <field name="name" nolabel="1" />
+                    <field name="responsible_id" />
+                    <field name="date_planned" />
+                    <field name="date_done" />
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_claim_corrective_action_tree_view">
+            <field name="name">crm.claim.corrective.action.tree</field>
+            <field name="model">crm.claim.corrective.action</field>
+            <field name="arch" type="xml">
+                <tree string="Preventive/Corrective Actions">
+                    <field name="sol_claim_id" />
+                    <field name="corrective_action_id" />
+                    <field name="sequence" />
+                    <field name="name" string="Corrective Action" />
+                    <field name="responsible_id" />
+                    <field name="date_planned" />
+                    <field name="date_done" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_claim_corrective_action_form_view">
+            <field name="name">crm.claim.corrective.action.form.view
+            </field>
+            <field name="model">crm.claim.corrective.action</field>
+            <field name="arch" type="xml">
+                <form string="Preventive/Corrective Actions">
+                    <sheet>
+                        <group colspan="4" col="10">
+                            <separator string="Corrective Actions"
+                                colspan="10" />
+                            <field name="sequence" colspan="2" />
+                            <field name="sol_claim_id" />
+                        </group>
+                        <group colspan="4">
+                            <separator string="Corrective Action"
+                                colspan="4" />
+                            <field name="name" nolabel="1"
+                                colspan="4" />
+                        </group>
+                        <group colspan="4" col="10">
+                            <field name="responsible_id" colspan="6" />
+                            <field name="date_planned" colspan="2" />
+                            <field name="date_done" colspan="2" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_crm_claim_corrective_action">
+            <field name="name">Preventive/Corrective Actions</field>
+            <field name="res_model">crm.claim.corrective.action</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="crm_correct_actions_menu_view" name="Preventive/Corrective Actions"
+            parent="base.menu_aftersale" action="action_crm_claim_corrective_action" />
+
+    </data>
+</openerp>
