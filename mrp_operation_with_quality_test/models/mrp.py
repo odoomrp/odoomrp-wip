@@ -154,7 +154,7 @@ class MrpProductionWorkcenterLine(models.Model):
     def action_done(self):
         if self.test_ids:
             for test in self.test_ids:
-                if test.state not in ('success', 'failed'):
+                if test.state not in ('success', 'failed', 'canceled'):
                     raise except_orm(_('Finalization Operation Error!'),
                                      _("The Operation has quality test without"
                                        "QUALITY SUCCESS state"))
