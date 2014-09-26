@@ -22,7 +22,7 @@ from openerp import models, fields
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    packaging_ids = fields.One2many(comodel_name='product.packaging',
+    packaging = fields.One2many(comodel_name='product.packaging',
                                     inverse_name='product_tmpl_id',
                                     string='Packagings')
 
@@ -30,6 +30,16 @@ class ProductTemplate(models.Model):
 class ProductUl(models.Model):
     _inherit = 'product.ul'
 
-    packaging_ids = fields.One2many(comodel_name='product.packaging',
+    packaging = fields.One2many(comodel_name='product.packaging',
                                     inverse_name='ul',
                                     string='Packagings')
+    product = fields.Many2one(comodel_name='product.product',
+                              string='Product',
+                              help='This is the related product when the UL is'
+                              ' sold.')
+
+
+class ProductPackaging(models.Model):
+    _inherit = 'product.packaging'
+
+    product_tmpl_id = fields.Many2one(required=False)
