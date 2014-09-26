@@ -427,6 +427,7 @@ class QcTest(orm.Model):
             ('waiting', 'Waiting Supervisor Approval'),
             ('success', 'Quality Success'),
             ('failed', 'Quality Failed'),
+            ('canceled', 'Canceled'),
         ], 'State', readonly=True, select="1"),
         'success': fields.function(_success, method=True, type='boolean',
                                    string='Success',
@@ -462,12 +463,14 @@ class QcTest(orm.Model):
         return super(orm.Model, self).create(cr, uid, datas, context=context)
 
     def qc_test_success(self, cr, uid, ids, context=None):
+        print '*** ESTOY EN QC_TEST_SUCCESS'
         self.write(cr, uid, ids, {
             'state': 'success'
         }, context=context)
         return True
 
     def qc_test_failed(self, cr, uid, ids, context=None):
+        print '*** qc_test_failed'
         self.write(cr, uid, ids, {
             'state': 'failed'
         }, context=context)
