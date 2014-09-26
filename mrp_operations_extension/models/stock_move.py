@@ -2,6 +2,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
+#    Daniel Campos (danielcampos@avanzosc.es) Date: 25/08/2014
+#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -17,9 +19,11 @@
 #
 ##############################################################################
 
-from . import mrp_routing_operation
-from . import stock_move
-from . import mrp_routing_workcenter
-from . import mrp_production
-from . import mrp_bom
-from . import mrp_workcenter
+from openerp import models, fields
+
+
+class StockMove(models.Model):
+    _inherit = "stock.move"
+
+    work_order = fields.Many2one('mrp.production.workcenter.line',
+                                 string='Work Order')
