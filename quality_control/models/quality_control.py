@@ -129,7 +129,7 @@ class QcProof(orm.Model):
     }
 
     _sql_constraints = [
-        ('proof_method_unique', 'UNIQUE (proof_id, method_id)',
+        ('proof_method_unique', 'UNIQUE (id, method_id)',
          _('Proof-Method relation alredy exists!')),
     ]
 
