@@ -40,10 +40,10 @@ class PurchaseHomologation(models.Model):
     @api.one
     def check_category_and_product(self):
         if not self.category_id and not self.product_id:
-            raise Warning(
+            raise exceptions.Warning(
                 _('Error!'),
                 _('You must select a category or product.'))
         if self.category_id and self.product_id:
-            raise Warning(
+            raise exceptions.Warning(
                 _('Error!'),
                 _('You must only select one of these: category or product.'))

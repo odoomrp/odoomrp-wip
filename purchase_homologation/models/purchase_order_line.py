@@ -16,7 +16,7 @@
 #                                                                            #
 ##############################################################################
 
-from openerp import api, models, _
+from openerp import models, _
 
 
 class PurchaseOrderLine(models.Model):

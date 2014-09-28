@@ -30,8 +30,8 @@
 This module breaks down sale taxes in sale.order and stock.picking
     """,
     "data": [
-#         "security/breakdown_taxes.xml",
-#         "security/ir.model.access.csv",
+        # "security/breakdown_taxes.xml",
+        # "security/ir.model.access.csv",
         "views/sale_order_view.xml",
         "views/stock_picking_view.xml",
     ],

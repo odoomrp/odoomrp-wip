@@ -20,7 +20,7 @@
 {
     "name": "Project events copy",
     "version": "1.0",
-    "depends": ["base","project_events"],
+    "depends": ["base", "project_events"],
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "project",

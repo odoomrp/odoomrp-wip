@@ -36,11 +36,11 @@ class PricelistItem(models.Model):
                                 related='price_version_id.pricelist_id',
                                 string='Pricelist', store=True)
     offer = fields.Many2one(comodel_name='product.pricelist.item.offer',
-                               string='Offer')
+                            string='Offer')
     discount = fields.Float('Discount %',
                             digits=dp.get_precision('Product Price'))
     discount2 = fields.Float('Discount 2 %',
-                            digits=dp.get_precision('Product Price'))
+                             digits=dp.get_precision('Product Price'))
     product_ul = fields.Many2one(comodel_name='product.ul',
                                  string='Logistic Unit')
     item_formula = fields.Char(compute='_item_formula')

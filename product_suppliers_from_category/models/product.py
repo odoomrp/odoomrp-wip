@@ -17,7 +17,7 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models
+from openerp import fields, models
 
 
 class ProductCategory(models.Model):
