@@ -40,10 +40,11 @@ class ProjectTask(orm.Model):
                         'name': delegate_data['name'],
                         'user_id': False,
                         'project_id': (delegate_data['project_id'] and
-                                       delegate_data['project_id'][0] or False),
+                                       delegate_data['project_id'][0] or
+                                       False),
                         'stage_id': task.stage_id.id,
                         'planned_hours': delegate_data['planned_hours'] or 0.0,
-                        'remaining_hours': (delegate_data['planned_hours'] or 
+                        'remaining_hours': (delegate_data['planned_hours'] or
                                             0.0),
                         'parent_ids': [(6, 0, [task.id])],
                         'description': (delegate_data['new_task_description']
