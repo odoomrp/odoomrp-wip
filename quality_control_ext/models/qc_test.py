@@ -40,27 +40,27 @@ class QcTest(orm.Model):
 
     def _update_vals(self, cr, uid, vals, context=None):
         if 'picking_id' in vals and vals['picking_id']:
-            if not 'object_id' in vals:
+            if 'object_id' not in vals:
                 vals.update({'object_id': 'stock.picking,' +
                              str(vals['picking_id'])})
         if 'production_id' in vals and vals['production_id']:
-            if not 'object_id' in vals:
+            if 'object_id' not in vals:
                 vals.update({'object_id': 'mrp.production,' +
                              str(vals['production_id'])})
         if 'stock_move_id' in vals and vals['stock_move_id']:
-            if not 'object_id' in vals:
+            if 'object_id' not in vals:
                 vals.update({'object_id': 'stock.move,' +
                              str(vals['stock_move_id'])})
         if 'object_id' in vals and vals['object_id']:
             ref = vals['object_id'].split(',')
             model = ref[0]
             res_id = int(ref[1])
-            if model == 'product.product' and not 'product_id' in vals:
+            if model == 'product.product' and 'product_id' not in vals:
                 vals.update({'product_id': res_id,
                              'production_id': False,
                              'stock_move_id': False,
                              'picking_id': False})
-            elif model == 'mrp.production' and not 'production_id' in vals:
+            elif model == 'mrp.production' and 'production_id' not in vals:
                 mrp_obj = self.pool['mrp.production']
                 mrp = mrp_obj.read(cr, uid, res_id, ['product_id'],
                                    context=context)
@@ -68,7 +68,7 @@ class QcTest(orm.Model):
                              'product_id': mrp['product_id'][0],
                              'stock_move_id': False,
                              'picking_id': False})
-            elif model == 'stock.move' and not 'stock_move_id' in vals:
+            elif model == 'stock.move' and 'stock_move_id' not in vals:
                 move_obj = self.pool['stock.move']
                 move = move_obj.read(cr, uid, res_id, ['product_id',
                                                        'picking_id',
@@ -189,7 +189,7 @@ class QcTestLine(orm.Model):
     }
 
     def create(self, cr, uid, data, context=None):
-        if not 'sequence' in data:
+        if 'sequence' not in data:
             data.update({'sequence': 1})
         picking_obj = self.pool['stock.picking']
         production_obj = self.pool['mrp.production']

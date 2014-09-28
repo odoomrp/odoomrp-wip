@@ -33,7 +33,7 @@
     This module adds :
     * A customer reference code when the partner is supplier
     * A supplier reference code when the partner is customer
-    
+
     All this data is from the partner
     """,
     "data": [

@@ -34,14 +34,15 @@ class machinery(models.Model):
         if self.wcenter:
             self.name = self.wcenter.name
 
-    def copy(self, cr, uid, id, default=None, context={}):
+    def copy(self, cr, uid, id, default=None, context=None):
         if not default:
             default = {}
         default.update({
             'name': 'New Machine Name',
             'regnno': 'New Registration no',
         })
-        return super(machinery, self).copy(cr, uid, id, default, context)
+        return super(machinery, self).copy(cr, uid, id, default,
+                                           context=context)
 
     def _def_company(self):
         return self.env.user.company_id.id

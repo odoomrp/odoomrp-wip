@@ -267,12 +267,10 @@ class CrmClaimCorrectiveAction(orm.Model):
     }
 
     def create(self, cr, uid, vals, context=None):
-        if 'corrective_action_id' in vals and vals['corrective_action_id'] \
-                and (not 'sol_claim_id' in vals or 'sol_claim_id' in vals and
-                     not vals['sol_claim_id']):
+        if vals.get('corrective_action_id') and not vals.get('sol_claim_id'):
             correct_obj = self.pool['crm.claim.corrective']
             claim = correct_obj.read(cr, uid, vals['corrective_action_id'],
-                                        ['claim_id'], context=context)
+                                     ['claim_id'], context=context)
             claim_id = claim and claim['claim_id'] and claim['claim_id'][0]
             if claim_id:
                 vals['sol_claim_id'] = claim_id
@@ -283,9 +281,9 @@ class CrmClaimCorrectiveAction(orm.Model):
         if 'corrective_action_id' in vals and vals['corrective_action_id']:
             correct_obj = self.pool['crm.claim.corrective']
             claim = correct_obj.read(cr, uid, vals['corrective_action_id'],
-                                        ['claim_id'], context=context)
+                                     ['claim_id'], context=context)
             claim_id = claim and claim['claim_id'] and claim['claim_id'][0]
             if claim_id:
                 vals['sol_claim_id'] = claim_id
         return super(CrmClaimCorrectiveAction, self).write(cr, uid, ids, vals,
-                                                            context=context)
+                                                           context=context)

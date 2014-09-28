@@ -97,7 +97,8 @@ class StockMove(orm.Model):
                     'stock_move_id': move.id,
                     'lot_id': move.lot_ids and move.lot_ids.id,
                     'picking_id': move.picking_id and move.picking_id.id,
-                    'production_id': move.production_id and move.production_id.id
+                    'production_id': (move.production_id and
+                                      move.production_id.id),
                 }
                 test_id = test_obj.create(cr, uid, data, context=context)
                 # Creo las líneas del test

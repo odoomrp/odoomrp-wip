@@ -22,7 +22,6 @@ from datetime import datetime
 
 
 class EventsCopy(models.TransientModel):
-
     _name = "events.copy"
     _rec_name = "project_id"
     project_id = fields.Many2one('project.project', string="Project")
@@ -33,18 +32,21 @@ class EventsCopy(models.TransientModel):
         event_obj = self.env['event.event']
         events = event_obj.browse(self.env.context['active_ids']).copy()
         for event in events:
+            event_dic = {'project_id': self.project_id.id}
             if event.project_id.date_start:
-                diff_days = ((self.start_date and
-                              datetime.strptime(self.start_date,
-                                               "%Y-%m-%d %H:%M:%S")) or
-                             datetime.combine(datetime.strptime(
-                                self.project_id.date_start, "%Y-%m-%d"),
-                                             datetime.min.time())) - datetime.combine(datetime.strptime(event.project_id.date_start, "%Y-%m-%d"), datetime.min.time())
-                event.write({
-                    'project_id': self.project_id.id,
-                    'date_begin': datetime.strptime(event.date_begin, "%Y-%m-%d %H:%M:%S") + diff_days,
-                    'date_end': datetime.strptime(event.date_end, "%Y-%m-%d %H:%M:%S") + diff_days
-                })
-            else:
-                event.write({'project_id': self.project_id.id})
+                if self.start_date:
+                    start = fields.Datetime.from_string(self.start_date)
+                else:
+                    start = datetime.combine(fields.Date.from_string(
+                        self.project_id.date_start), datetime.min.time())
+                end = datetime.combine(fields.Date.from_string(
+                    event.project_id.date_start, datetime.min.time()))
+                diff_days = start - end
+                begin = (fields.Datetime.from_string(event.date_begin) +
+                         diff_days)
+                end = (fields.Datetime.from_string(event.date_end) +
+                       diff_days)
+                event_dic['date_begin'] = fields.Datetime.to_string(begin)
+                event_dic['date_end'] = fields.Datetime.to_string(end)
+            event.write(event_dic)
         return {'type': 'ir.actions.act_window_close'}

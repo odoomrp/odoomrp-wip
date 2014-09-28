@@ -19,7 +19,7 @@
 {
     "name": "Products Expiry Date Extension",
     "version": "1.0",
-    "depends": ["stock","product_expiry"],
+    "depends": ["stock", "product_expiry"],
     "author": "OdooMRP team",
     "contributors": [
         "Juan Ignacio Úbeda <juanignacioubeda@avanzosc.es>",
@@ -29,11 +29,12 @@
     "complexity": "normal",
     "summary": "",
     "description": """
-    This module color lines in list of production lots based on expiration dates:
-        In alert : Orange color,
-        To remove : Blue color,
-        Expired : Red color,
-        Normal : Black color
+This module color lines in list of production lots based on expiration dates:
+
+* In alert : Orange color
+* To remove : Blue color
+* Expired : Red color
+* Normal : Black color
     """,
     "images": [],
     "data": ["views/production_lot_ext_view.xml"],

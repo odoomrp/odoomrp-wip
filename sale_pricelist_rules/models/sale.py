@@ -28,7 +28,7 @@ class SaleOrderLineSubtotal(orm.Model):
         cur_obj = self.pool['res.currency']
         tax_obj = self.pool['account.tax']
         for item in self.browse(cr, uid, ids, context=context):
-            price = (item.line_id.price_unit * 
+            price = (item.line_id.price_unit *
                      (1 - (item.item_id.discount or 0.0) / 100) *
                      (1 - (item.item_id.discount2 or 0.0) / 100))
             qty = item.line_id.product_uom_qty
@@ -65,7 +65,7 @@ class SaleOrderLine(orm.Model):
         price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
         extra_discount = line.discount2 or 0.0
         return price * (1 - extra_discount / 100.0)
-    
+
     def _calc_qty(self, cr, uid, line, context=None):
         qty = line.product_uom_qty
         if line.offer_id:
@@ -96,9 +96,9 @@ class SaleOrderLine(orm.Model):
                                   states={'draft': [('readonly', False)]}),
         'offer_id': fields.many2one('product.pricelist.item.offer', 'Offer'),
         'item_id': fields.many2one('product.pricelist.item', 'Pricelist Item'),
-        'price_subtotal': fields.function(_amount_line, string='Subtotal',
-                                          digits_compute=
-                                          dp.get_precision('Account')),
+        'price_subtotal': fields.function(
+            _amount_line, string='Subtotal',
+            digits_compute=dp.get_precision('Account')),
         'subtotal_ids': fields.one2many('sale.order.line.subtotal', 'line_id',
                                         'Subtotals by pricelist'),
     }
@@ -134,6 +134,7 @@ class SaleOrderLine(orm.Model):
             'offer_id': item.offer.id,
         }
         return {'value': values}
+
 
 class SaleOrder(orm.Model):
     _inherit = 'sale.order'

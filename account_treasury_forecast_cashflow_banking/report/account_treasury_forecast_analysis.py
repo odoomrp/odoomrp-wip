@@ -32,7 +32,6 @@ class ReportAccountTreasuryForecastAnalysis(models.Model):
                     tfl.id || 'l' AS id,
                     treasury_id,
                     tfl.date as date,
-                    
                     CASE WHEN tfl.line_type='receivable' THEN 0.0
                     ELSE amount
                     END as credit,

@@ -17,8 +17,7 @@
 #
 ##############################################################################
 
-from openerp import models, api, fields, exceptions
-from openerp.tools.translate import _
+from openerp import models, api, fields
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, \
     DEFAULT_SERVER_DATE_FORMAT

@@ -26,17 +26,12 @@ class AccountInvoice(orm.Model):
     _inherit = 'account.invoice'
 
     def action_date_assign(self):
-        product_obj = self.pool['product.product']
         res = super(AccountInvoice, self).action_date_assign()
         for o in self:
-            ctx = dict(self._context)
-            print '*** ctx: ' + str(ctx)
             for line in o.invoice_line:
-                if line.product_id and o.type in ('out_invoice', 'in_invoice'):
-                    if (o.type == 'out_invoice'):
-                        vals = {'last_sale_price': line.price_unit, }
-                    elif (o.type == 'in_invoice'):
-                        vals = {'last_purchase_price': line.price_unit, }
-                    product_obj.write(self.cr, self.uid, [line.product_id.id],
-                                      vals, context)
-        return True
+                if line.product_id:
+                    if o.type == 'out_invoice':
+                        line.product_id.last_sale_price = line.price_unit
+                    elif o.type == 'in_invoice':
+                        line.product_id.last_purchase_price = line.price_unit
+        return res

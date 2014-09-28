@@ -38,4 +38,4 @@ class SaleOrder(orm.Model):
                             }
                     product_obj.write(cr, uid, [line.product_id.id], vals,
                                       context)
-        return True
+        return res

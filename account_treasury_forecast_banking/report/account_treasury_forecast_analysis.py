@@ -17,7 +17,7 @@
 ##############################################################################
 
 import openerp.addons.decimal_precision as dp
-from openerp import models, fields, tools, api
+from openerp import models, fields, tools
 
 
 class ReportAccountTreasuryForecastAnalysis(models.Model):
