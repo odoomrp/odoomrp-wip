@@ -27,7 +27,7 @@ class AccountInvoice(models.Model):
 
     _inherit = 'account.invoice'
 
-    @api.model
+    @api.multi
     @api.one
     def _prepare_refund(self, invoice, date=None, period_id=None,
                         description=None, journal_id=None):

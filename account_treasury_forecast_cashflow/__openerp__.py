@@ -28,8 +28,11 @@
         - Receivable payments
         - Cash-Flow: Input and Output
     """,
-    'data': ["views/account_treasury_forecast_template_view.xml",
-             "views/account_treasury_forecast_view.xml"],
+    'data': [
+        "views/account_treasury_forecast_template_view.xml",
+        "views/account_treasury_forecast_view.xml",
+        "security/ir.model.access.csv",
+    ],
     'demo': [],
     'installable': True,
     'auto_install': False,

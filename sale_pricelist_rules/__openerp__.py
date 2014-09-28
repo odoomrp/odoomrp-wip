@@ -21,6 +21,7 @@
     "version": "1.0",
     "depends": [
         "sale",
+        "account",
         "product_pricelist_rules",
     ],
     "author": "OdooMRP team",
@@ -41,6 +42,7 @@ incompatible with *product_visible_discount*
     "data": [
         "views/sale_pricelist_view.xml",
         "views/sale_view.xml",
+        "security/ir.model.access.csv",
     ],
     "installable": True,
     "auto_install": True,

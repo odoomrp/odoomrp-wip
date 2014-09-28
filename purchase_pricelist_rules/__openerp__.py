@@ -45,6 +45,7 @@ https://github.com/OCA/purchase-workflow.
     "data": [
         "views/purchase_pricelist_view.xml",
         "views/purchase_view.xml",
+        "security/ir.model.access.csv",
     ],
     "installable": True,
     "auto_install": True,

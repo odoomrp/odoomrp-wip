@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_homologation_user,access_purchase_homologation_user,model_purchase_homologation,purchase.group_purchase_user,1,0,0,0
+access_purchase_homologation_manager,access_purchase_homologation_manager,model_purchase_homologation,purchase_homologation.group_purchase_homologation,1,1,1,1

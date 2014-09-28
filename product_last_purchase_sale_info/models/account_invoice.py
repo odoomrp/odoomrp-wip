@@ -19,19 +19,19 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models
 
 
-class AccountInvoice(orm.Model):
+class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     def action_date_assign(self):
         res = super(AccountInvoice, self).action_date_assign()
-        for o in self:
-            for line in o.invoice_line:
+        for invoice in self:
+            for line in invoice.invoice_line:
                 if line.product_id:
-                    if o.type == 'out_invoice':
+                    if invoice.type == 'out_invoice':
                         line.product_id.last_sale_price = line.price_unit
-                    elif o.type == 'in_invoice':
+                    elif invoice.type == 'in_invoice':
                         line.product_id.last_purchase_price = line.price_unit
         return res

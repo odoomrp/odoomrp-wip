@@ -39,6 +39,7 @@ discount, and to add an 'special offer' like "Buy two and get one free
     """,
     "data": [
         "views/pricelist_view.xml",
+        "security/ir.model.access.csv",
     ],
     "installable": True,
     "auto_install": False,

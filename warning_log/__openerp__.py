@@ -32,7 +32,10 @@
 This module provide :
     New menu entry with log of warnigs raised by "warning" module
     """,
-    'data': ["views/warning_log_view.xml"],
+    'data': [
+        "views/warning_log_view.xml",
+        "security/ir.model.access.csv",
+    ],
     "installable": True,
     "auto_install": False,
 }

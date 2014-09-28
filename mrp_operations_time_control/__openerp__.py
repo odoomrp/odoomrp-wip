@@ -28,8 +28,11 @@
     "description": """
     Manufacturing operations time control
     """,
-    'data': ["views/operation_time_view.xml",
-             "views/mrp_production_view.xml"],
+    'data': [
+        "views/operation_time_view.xml",
+        "views/mrp_production_view.xml",
+        "security/ir.model.access.csv",
+    ],
     "installable": True,
     "auto_install": False,
 }

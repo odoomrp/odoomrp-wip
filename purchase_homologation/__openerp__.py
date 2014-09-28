@@ -46,6 +46,7 @@ lack of the homologation.
     'depends': ['purchase'],
     'data': [
         "security/res_groups.xml",
+        "security/ir.model.access.csv",
         "views/purchase_homologation_view.xml",
     ],
     'installable': True,
