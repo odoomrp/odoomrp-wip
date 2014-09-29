@@ -75,6 +75,8 @@
                 <xpath
                     expr="//field[@name='workcenter_lines']/form//field[@name='sequence']"
                     position="after">
+                    <field name="final_product_to_stock" colspan="2" />
+                    <group colspan="2" />
                     <notebook colspan="4">
                         <page string="Information">
                             <group>
@@ -124,6 +126,9 @@
                             colspan="4" col="4" />
                     </group>
                 </group>
+                <field name="sequence" position="after">
+                    <field name="final_product_to_stock" />
+                </field>
             </field>
         </record>
     </data>
