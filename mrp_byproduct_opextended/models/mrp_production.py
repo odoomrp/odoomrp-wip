@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, api
 
 
 class MrpProduction(models.Model):
