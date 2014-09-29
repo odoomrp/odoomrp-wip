@@ -35,8 +35,6 @@ class ProductAttributeValueSaleLine(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    type = fields.Selection([('product', 'Product'), ('variant', 'Variant')],
-                            string='Type', default='product')
     product_template = fields.Many2one(comodel_name='product.template',
                                        domain="[('attribute_line_ids', '!=',"
                                        " False)]",

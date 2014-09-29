@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <xpath
                     expr="//field[@name='order_line']/tree//field[@name='product_id']"
-                    position="after">
+                    position="before">
                     <field name="product_template" />
                 </xpath>
                 <xpath
@@ -17,36 +17,6 @@
                     position="after">
                     <button name="action_duplicate" state="draft" string="Duplicate" type="object" icon="gtk-go-forward" help="Duplicate line"/>
                 </xpath>
-<!--                 <xpath -->
-<!--                     expr="//field[@name='order_line']/form//field[@name='product_id']" -->
-<!--                     position="before"> -->
-<!--                     <field name="type" /> -->
-<!--                 </xpath> -->
-<!--                 <xpath -->
-<!--                     expr="//field[@name='order_line']/form//field[@name='product_id']" -->
-<!--                     position="after"> -->
-<!--                     <field name="product_template" -->
-<!--                         attrs="{'invisible':[('type','!=','variant')]}" /> -->
-<!--                 </xpath> -->
-<!--                 <xpath -->
-<!--                     expr="//field[@name='order_line']/form//field[@name='product_id']" -->
-<!--                     position="attributes"> -->
-<!--                     <attribute name="attrs">{'invisible':[('type','!=','product')]}</attribute> -->
-<!--                 </xpath> -->
-<!--                 <xpath -->
-<!--                     expr="//field[@name='order_line']/form//label[@for='name']" -->
-<!--                     position="before"> -->
-<!--                     <label for="product_attributes" -->
-<!--                         attrs="{'invisible':[('type','!=','variant')]}" /> -->
-<!--                     <field name="product_attributes" -->
-<!--                         attrs="{'invisible':[('type','!=','variant')]}" -->
-<!--                         options="{'no_create': True, 'no_delete': True}"> -->
-<!--                         <tree create="false" editable="1"> -->
-<!--                             <field name="attribute" /> -->
-<!--                             <field name="value" /> -->
-<!--                         </tree> -->
-<!--                     </field> -->
-<!--                 </xpath> -->
             </field>
         </record>
 
@@ -56,20 +26,11 @@
             <field name="inherit_id" ref="purchase.purchase_order_line_form" />
             <field name="arch" type="xml">
                 <field name="product_id" position="before">
-                    <field name="type" />
-                </field>
-                <field name="product_id" position="after">
-                    <field name="product_template"
-                        attrs="{'invisible':[('type','!=','variant')]}" />
-                </field>
-                <field name="product_id" position="attributes">
-                    <attribute name="attrs">{'invisible':[('type','!=','product')]}</attribute>
+                    <field name="product_template" />
                 </field>
                 <field name="name" position="after">
-                    <label for="product_attributes"
-                        attrs="{'invisible':[('type','!=','variant')]}" />
+                    <label for="product_attributes" />
                     <field name="product_attributes"
-                        attrs="{'invisible':[('type','!=','variant')]}"
                         options="{'no_create': True, 'no_delete': True}">
                         <tree create="false" editable="1">
                             <field name="attribute" />
@@ -86,20 +47,11 @@
             <field name="inherit_id" ref="purchase.purchase_order_line_form2" />
             <field name="arch" type="xml">
                 <field name="product_id" position="before">
-                    <field name="type" />
-                </field>
-                <field name="product_id" position="after">
-                    <field name="product_template"
-                        attrs="{'invisible':[('type','!=','variant')]}" />
-                </field>
-                <field name="product_id" position="attributes">
-                    <attribute name="attrs">{'invisible':[('type','!=','product')]}</attribute>
+                    <field name="product_template" />
                 </field>
                 <field name="name" position="after">
-                    <label for="product_attributes"
-                        attrs="{'invisible':[('type','!=','variant')]}" />
+                    <label for="product_attributes" />
                     <field name="product_attributes"
-                        attrs="{'invisible':[('type','!=','variant')]}"
                         options="{'no_create': True, 'no_delete': True}">
                         <tree create="false" editable="1">
                             <field name="attribute" />
@@ -116,25 +68,10 @@
             <field name="inherit_id" ref="purchase.purchase_order_line_tree" />
             <field name="arch" type="xml">
                 <field name="product_id" position="before">
-                    <field name="type" />
                     <field name="product_template" />
                 </field>
             </field>
         </record>
 
-<!--         <record model="ir.ui.view" id="sale_order_line_extended_search_view"> -->
-<!--             <field name="name">sale.order.line.extended.search</field> -->
-<!--             <field name="model">sale.order.line</field> -->
-<!--             <field name="inherit_id" ref="sale.view_sales_order_line_filter" /> -->
-<!--             <field name="arch" type="xml"> -->
-<!--                 <field name="product_id" position="after"> -->
-<!--                     <field name="product_template" /> -->
-<!--                 </field> -->
-<!--                 <filter string="Product" position="after"> -->
-<!--                     <filter string="Template" icon="terp-accessories-archiver" -->
-<!--                         domain="[]" context="{'group_by':'product_template'}" /> -->
-<!--                 </filter> -->
-<!--             </field> -->
-<!--         </record> -->
     </data>
 </openerp>

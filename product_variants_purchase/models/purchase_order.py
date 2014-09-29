@@ -35,8 +35,6 @@ class ProductAttributeValuePurchaseLine(models.Model):
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
-    type = fields.Selection([('product', 'Product'), ('variant', 'Variant')],
-                            string='Type', default='variant')
     product_template = fields.Many2one(comodel_name='product.template',
                                        domain="[('attribute_line_ids', '!=',"
                                        " False)]",
