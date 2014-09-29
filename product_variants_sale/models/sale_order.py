@@ -101,7 +101,7 @@ class SaleOrderLine(models.Model):
     @api.multi
     def button_confirm(self):
         for line in self:
-            if line.type == 'variant':
+            if not line.product_id:
                 product_obj = self.env['product.product']
                 att_values_ids = [attr_line.value and attr_line.value.id
                                   or False
