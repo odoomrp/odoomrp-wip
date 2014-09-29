@@ -16,8 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
 
 
 class ProductAttributeValuePurchaseLine(models.Model):
@@ -63,18 +62,36 @@ class PurchaseOrderLine(models.Model):
                                [('product_tmpl_id', '=',
                                  line.product_template.id)]}}
 
-    def onchange_product_id(self, cr, uid, ids, pricelist_id, product_id, qty,
+    @api.one
+    @api.onchange('product_attributes')
+    def onchange_product_attributes(self):
+        if not self.product_id:
+            product_obj = self.env['product.product']
+            att_values_ids = [attr_line.value and attr_line.value.id
+                              or False
+                              for attr_line in self.product_attributes]
+            domain = [('product_tmpl_id', '=', self.product_template.id)]
+            for value in att_values_ids:
+                domain.append(('attribute_value_ids', '=', value))
+            self.product_id = product_obj.search(domain)
+
+    @api.multi
+    def onchange_product_id(self, pricelist_id, product_id, qty,
                             uom_id, partner_id, date_order=False,
                             fiscal_position_id=False, date_planned=False,
-                            name=False, price_unit=False, state='draft',
-                            context=None):
+                            name=False, price_unit=False, state='draft'):
         res = super(PurchaseOrderLine, self).onchange_product_id(
-            cr, uid, ids, pricelist_id, product_id, qty, uom_id, partner_id,
+            pricelist_id, product_id, qty, uom_id, partner_id,
             date_order=date_order, fiscal_position_id=fiscal_position_id,
             date_planned=date_planned, name=name, price_unit=price_unit,
-            state=state, context=context)
-        product_obj = self.pool['product.product']
-        product = product_obj.browse(cr, uid, product_id, context=context)
+            state=state)
+        product_obj = self.env['product.product']
+        product = product_obj.browse(product_id)
+        attributes = []
+        for attribute_value in product.attribute_value_ids:
+            attributes.append({'attribute': attribute_value.attribute_id.id,
+                               'value': attribute_value.id})
+        res['value'].update({'product_attributes': attributes})
         res['value'].update({'product_template': product.product_tmpl_id.id})
         return res
 

@@ -16,8 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
-from openerp import _
+from openerp import models, fields, api, _
 
 
 class ProductAttributeValueSaleLine(models.Model):
@@ -30,11 +29,6 @@ class ProductAttributeValueSaleLine(models.Model):
     value = fields.Many2one(comodel_name='product.attribute.value',
                             domain="[('attribute_id', '=', attribute)]",
                             string='Value')
-
-    @api.one
-    @api.onchange('value')
-    def onchange_attribute_value(self):
-        return True
 
 
 class SaleOrderLine(models.Model):
@@ -68,19 +62,37 @@ class SaleOrderLine(models.Model):
                                [('product_tmpl_id', '=',
                                  line.product_template.id)]}}
 
-    def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
+    @api.one
+    @api.onchange('product_attributes')
+    def onchange_product_attributes(self):
+        if not self.product_id:
+            product_obj = self.env['product.product']
+            att_values_ids = [attr_line.value and attr_line.value.id
+                              or False
+                              for attr_line in self.product_attributes]
+            domain = [('product_tmpl_id', '=', self.product_template.id)]
+            for value in att_values_ids:
+                domain.append(('attribute_value_ids', '=', value))
+            self.product_id = product_obj.search(domain)
+
+    @api.multi
+    def product_id_change(self, pricelist, product, qty=0,
                           uom=False, qty_uos=0, uos=False, name='',
                           partner_id=False, lang=False, update_tax=True,
                           date_order=False, packaging=False,
-                          fiscal_position=False, flag=False, context=None):
+                          fiscal_position=False, flag=False):
         res = super(SaleOrderLine, self).product_id_change(
-            cr, uid, ids, pricelist, product, qty=qty, uom=uom,
-            qty_uos=qty_uos, uos=uos, name=name, partner_id=partner_id,
-            lang=lang, update_tax=update_tax, date_order=date_order,
-            packaging=packaging, fiscal_position=fiscal_position, flag=flag,
-            context=context)
-        product_obj = self.pool['product.product']
-        product = product_obj.browse(cr, uid, product, context=context)
+            pricelist, product, qty=qty, uom=uom, qty_uos=qty_uos, uos=uos,
+            name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
+            date_order=date_order, packaging=packaging,
+            fiscal_position=fiscal_position, flag=flag)
+        product_obj = self.env['product.product']
+        product = product_obj.browse(product)
+        attributes = []
+        for attribute_value in product.attribute_value_ids:
+            attributes.append({'attribute': attribute_value.attribute_id.id,
+                               'value': attribute_value.id})
+        res['value'].update({'product_attributes': attributes})
         res['value'].update({'product_template': product.product_tmpl_id.id})
         return res
 
