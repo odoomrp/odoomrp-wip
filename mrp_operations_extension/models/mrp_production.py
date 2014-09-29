@@ -79,4 +79,3 @@ class mrp_production_workcenter_line(models.Model):
             data.update({'final_product_to_stock':
                          work.operation.final_product_to_stock})
         return super(mrp_production_workcenter_line, self).create(data)
-
