@@ -14,16 +14,13 @@
 # You should have received a copy of the GNU General Public License      #
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.  #
 ##########################################################################
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class ProductTemplate(orm.Model):
+class ProductTemplate(models.Model):
     _inherit = "product.template"
-    _columns = {
-        'categ_id': fields.many2one('product.category',
-                                    'Pricing/Primary Category', required=True,
-                                    change_default=True),
-        'categ_ids': fields.many2many('product.category', 'product_categ_rel',
-                                      'product_id', 'categ_id',
-                                      'Product Categories')
-    }
+
+    categ_id = fields.Many2one(string='Pricing/Primary Category')
+    categ_ids = fields.Many2many(
+        comodel_name='product.category', relation='product_categ_rel',
+        column1='product_id', column2='categ_id', string='Product Categories')
