@@ -26,7 +26,7 @@
     "website": "www.avanzosc.es",
     "description": """
     This module performs the following:
-    1.- In Operation create 3 new fiels: 
+    1.- In Operation create 3 new fiels:
         1.1.- required_test: Indicates whether the operation has a template of
               quality test.
         1.2.- qtemplate_id: ID of template quality test.
