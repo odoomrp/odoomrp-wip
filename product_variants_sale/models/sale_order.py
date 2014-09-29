@@ -31,27 +31,58 @@ class ProductAttributeValueSaleLine(models.Model):
                             domain="[('attribute_id', '=', attribute)]",
                             string='Value')
 
+    @api.one
+    @api.onchange('value')
+    def onchange_attribute_value(self):
+        return True
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     product_template = fields.Many2one(comodel_name='product.template',
-                                       domain="[('attribute_line_ids', '!=',"
-                                       " False)]",
                                        string='Product Template')
     product_attributes = fields.One2many('sale.order.line.attribute',
                                          'sale_line',
                                          string='Product attributes',
                                          copyable=True)
 
-    @api.one
+    @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
-        product_attributes = []
-        for attribute in self.product_template.attribute_line_ids:
-            product_attributes.append({'attribute': attribute.attribute_id})
-        self.product_attributes = product_attributes
-        self.name = self.product_template.name
+        for line in self:
+            product_attributes = []
+            if not line.product_template.attribute_line_ids:
+                line.product_id = (
+                    line.product_template.product_variant_ids and
+                    line.product_template.product_variant_ids[0])
+            if (line.product_id and line.product_id not in
+                    line.product_template.product_variant_ids):
+                line.product_id = False
+            for attribute in line.product_template.attribute_line_ids:
+                product_attributes.append({'attribute':
+                                           attribute.attribute_id})
+            line.product_attributes = product_attributes
+            line.name = line.product_template.name
+            return {'domain': {'product_id':
+                               [('product_tmpl_id', '=',
+                                 line.product_template.id)]}}
+
+    def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
+                          uom=False, qty_uos=0, uos=False, name='',
+                          partner_id=False, lang=False, update_tax=True,
+                          date_order=False, packaging=False,
+                          fiscal_position=False, flag=False, context=None):
+        res = super(SaleOrderLine, self).product_id_change(
+            cr, uid, ids, pricelist, product, qty=qty, uom=uom,
+            qty_uos=qty_uos, uos=uos, name=name, partner_id=partner_id,
+            lang=lang, update_tax=update_tax, date_order=date_order,
+            packaging=packaging, fiscal_position=fiscal_position, flag=flag,
+            context=context)
+        product_obj = self.pool['product.product']
+        product = product_obj.browse(cr, uid, product, context=context)
+        res['value'].update({'product_template': product.product_tmpl_id.id})
+        return res
 
     @api.one
     def action_duplicate(self):

@@ -36,22 +36,47 @@ class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
     product_template = fields.Many2one(comodel_name='product.template',
-                                       domain="[('attribute_line_ids', '!=',"
-                                       " False)]",
                                        string='Product Template')
     product_attributes = fields.One2many('purchase.order.line.attribute',
                                          'purchase_line',
                                          string='Product attributes',
                                          copyable=True)
 
-    @api.one
+    @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
-        product_attributes = []
-        for attribute in self.product_template.attribute_line_ids:
-            product_attributes.append({'attribute': attribute.attribute_id})
-        self.product_attributes = product_attributes
-        self.name = self.product_template.name
+        for line in self:
+            product_attributes = []
+            if not line.product_template.attribute_line_ids:
+                line.product_id = (
+                    line.product_template.product_variant_ids and
+                    line.product_template.product_variant_ids[0])
+            if (line.product_id and line.product_id not in
+                    line.product_template.product_variant_ids):
+                line.product_id = False
+            for attribute in line.product_template.attribute_line_ids:
+                product_attributes.append({'attribute':
+                                           attribute.attribute_id})
+            line.product_attributes = product_attributes
+            line.name = line.product_template.name
+            return {'domain': {'product_id':
+                               [('product_tmpl_id', '=',
+                                 line.product_template.id)]}}
+
+    def onchange_product_id(self, cr, uid, ids, pricelist_id, product_id, qty,
+                            uom_id, partner_id, date_order=False,
+                            fiscal_position_id=False, date_planned=False,
+                            name=False, price_unit=False, state='draft',
+                            context=None):
+        res = super(PurchaseOrderLine, self).onchange_product_id(
+            cr, uid, ids, pricelist_id, product_id, qty, uom_id, partner_id,
+            date_order=date_order, fiscal_position_id=fiscal_position_id,
+            date_planned=date_planned, name=name, price_unit=price_unit,
+            state=state, context=context)
+        product_obj = self.pool['product.product']
+        product = product_obj.browse(cr, uid, product_id, context=context)
+        res['value'].update({'product_template': product.product_tmpl_id.id})
+        return res
 
     @api.one
     def action_duplicate(self):
