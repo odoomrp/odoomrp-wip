@@ -89,4 +89,4 @@ class StockProductioLot(orm.Model):
 
     _constraints = [(_check_dates, _('Dates must be: Alert Date < Removal Date'
                     '< Best Before Date < Expiry Date'),
-                     ['date_alert', 'date_removal', 'date_use', 'date_life'])]
+                     ['alert_date', 'removal_date', 'use_date', 'life_date'])]
