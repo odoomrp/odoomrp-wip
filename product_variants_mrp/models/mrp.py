@@ -70,7 +70,11 @@ class MrpProductionAttribute(models.Model):
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    product_id = fields.Many2one(required=False)
+
+#     product_id = fields.Many2one(
+#         comodel_name='product.product', string='Product', required=False,
+#         readonly=True, states={'draft': [('readonly', False)]},
+#         domain=[('type','!=','service')])
     product_template = fields.Many2one(comodel_name='product.template',
                                        string='Product', readonly=True,
                                        states={'draft': [('readonly', False)]})
@@ -89,10 +93,37 @@ class MrpProduction(models.Model):
             {'product_template': product.product_tmpl_id.id})
         return result
 
-    @api.one
+    @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
-        product_attributes = []
-        for attribute in self.product_template.attribute_line_ids:
-            product_attributes.append({'attribute': attribute.attribute_id})
-        self.product_attributes = product_attributes
+        for mo in self:
+            product_attributes = []
+            if not mo.product_template.attribute_line_ids or not mo.product_id:
+                mo.product_id = (
+                    mo.product_template.product_variant_ids and
+                    mo.product_template.product_variant_ids[0])
+            if (mo.product_id and mo.product_id not in
+                    mo.product_template.product_variant_ids):
+                mo.product_id = (
+                    mo.product_template.product_variant_ids and
+                    mo.product_template.product_variant_ids[0])
+            for attribute in mo.product_template.attribute_line_ids:
+                product_attributes.append({'attribute':
+                                           attribute.attribute_id})
+            mo.product_attributes = product_attributes
+            return {'domain': {'product_id':
+                               [('product_tmpl_id', '=',
+                                 mo.product_template.id)]}}
+
+    @api.one
+    @api.onchange('product_attributes')
+    def onchange_product_attributes(self):
+        if not self.product_id:
+            product_obj = self.env['product.product']
+            att_values_ids = [attr_line.value and attr_line.value.id
+                              or False
+                              for attr_line in self.product_attributes]
+            domain = [('product_tmpl_id', '=', self.product_template.id)]
+            for value in att_values_ids:
+                domain.append(('attribute_value_ids', '=', value))
+            self.product_id = product_obj.search(domain)
