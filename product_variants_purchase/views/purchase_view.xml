@@ -31,6 +31,7 @@
                 <field name="name" position="after">
                     <label for="product_attributes" />
                     <field name="product_attributes"
+                        attrs="{'invisible': [('product_attributes','=',[])]}"
                         options="{'no_create': True, 'no_delete': True}">
                         <tree create="false" editable="1">
                             <field name="attribute" />
@@ -55,6 +56,7 @@
                 <field name="name" position="after">
                     <label for="product_attributes" />
                     <field name="product_attributes"
+                        attrs="{'invisible': [('product_attributes','=',[])]}"
                         options="{'no_create': True, 'no_delete': True}">
                         <tree create="false" editable="1">
                             <field name="attribute" />
