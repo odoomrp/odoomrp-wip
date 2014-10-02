@@ -16,43 +16,26 @@
 #
 ##############################################################################
 
-from openerp import models, api
+from openerp import models
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    @api.one
     def write(self, values):
-        sale_obj = self.pool['sale.order']
-        picking_obj = self.pool['stock.picking']
-        if 'picking_id' in values or 'group_id' in values:
-            pick_id = False
-            group_id = False
-            if 'picking_id' in values:
-                if values['picking_id']:
-                    pick_id = values['picking_id']
-            if 'group_id' in values:
-                group_id = values['group_id']
-            for rec in self:
-                if not pick_id and rec.picking_id:
-                    pick_id = rec.picking_id.id
-                if not group_id and rec.group_id:
-                    group_id = rec.group_id.id
-                sale_ids = sale_obj.search(self.env.cr, self.env.uid,
-                                           [('procurement_group_id',
-                                             '=', group_id)],
-                                           context=self.env.context)
-                if sale_ids:
-                    sale = sale_obj.browse(self.env.cr, self.env.uid,
-                                           sale_ids[0],
-                                           context=self.env.context)
-                    inv_type = sale.invoice_type_id.id
-                picking_obj.write(self.env.cr, self.env.uid,
-                                  pick_id,
-                                  {'invoice_type_id': inv_type},
-                                  context=self.env.context)
-        super(StockMove, self).write(values)
+        sale_obj = self.env['sale.order']
+        pick_id = values.get('picking_id', False)
+        group_id = values.get('group_id', False)
+        for rec in self:
+            if not pick_id and rec.picking_id:
+                pick_id = rec.picking_id.id
+            if not group_id and rec.group_id:
+                group_id = rec.group_id.id
+            orders = sale_obj.search([('procurement_group_id', '=', group_id)])
+            if orders:
+                inv_type = orders[0].invoice_type_id.id
+            pick_id.write({'invoice_type_id': inv_type})
+        return super(StockMove, self).write(values)
 
 
 class StockPicking(models.Model):

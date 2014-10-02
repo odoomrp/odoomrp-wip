@@ -25,7 +25,7 @@
                      "Ainara Galdona <ainaragaldona@avanzosc.es>"],
     "category": "stock_picking",
     "description": """
-        Carry invoicing type from sale order to stock picking.
+        This propagates invoicing type from sale order to stock picking.
         Wizard Create invoice from picking:
             Group by partner according to invoicing type's config.
     """,
