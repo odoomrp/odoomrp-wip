@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <notebook position="inside">
                     <page string="Packaging">
-                        <field name="packaging_ids" context="{'default_product_tmpl_id':id}">
+                        <field name="packagings" context="{'default_product_tmpl_id':id}">
                             <tree>
                                 <field name="ean"/>
                                 <field name="qty"/>
@@ -26,7 +26,8 @@
             <field name="arch" type="xml">
                 <sheet position="inside">
                     <group>
-                        <field name="packaging_ids" nolabel="1" context="{'default_ul':id}">
+                        <field name="product" />
+                        <field name="packagings" nolabel="1" context="{'default_ul':id}">
                             <tree>
                                 <field name="ean"/>
                                 <field name="product_tmpl_id"/>
