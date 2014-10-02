@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+       <record id="mrp_bom_change_tree_view" model="ir.ui.view">
+            <field name="name">mrp.bom.change.tree.view</field>
+            <field name="model">mrp.bom.change</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="component"/>
+                     <field name="comp2mod"/>
+                      <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="mrp_bom_change_form_view" model="ir.ui.view">
+            <field name="name">mrp.bom.change.form.view</field>
+            <field name="model">mrp.bom.change</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" clickable="True"
+                        statusbar_colors='{"draft":"red","done":"red"}'/>
+                    </header>
+                    <group col="4">
+                        <field name="name" colspan="4" attrs="{'readonly':[('state','=',('done'))]}"/>
+                        <field name="component" attrs="{'readonly':[('state','=',('done'))]}" />
+                        <field name="comp2mod" attrs="{'readonly':[('state','=',('done'))]}"/>
+                         <button class="oe_highlight" name="do_component_change" string="Change Component" type="object"
+                         attrs="{'invisible':[('state','in',('draft','done'))]}" />
+                         <button class="oe_highlight" name="do_revert" string="Revert" type="object"
+                         attrs="{'invisible':[('state','in',('draft','process'))]}" />
+                    </group>
+                    <field name="boms" attrs="{'readonly':[('state','=',('done'))]}"/>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_bom_change_view">
+            <field name="name">BOM Component Change</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.bom.change</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_bom_change_view" name="BOM Component Modifications"
+            id="mrp_bom_change_menu" parent="mrp.menu_mrp_configuration" />
+    </data>
+</openerp>
