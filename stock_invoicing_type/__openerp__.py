@@ -26,7 +26,7 @@
     "category": "stock_picking",
     "description": """
         Carry invoicing type from sale order to stock picking.
-        Wizard Create invoice from picking: 
+        Wizard Create invoice from picking:
             Group by partner according to invoicing type's config.
     """,
     'data': ["wizard/stock_invoice_onshipping_view.xml"],
