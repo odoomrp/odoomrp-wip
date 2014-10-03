@@ -72,7 +72,7 @@ class MrpBomChange(models.Model):
         data.write({'name': _('Revert - ') + self.name,
                     'state': 'process',
                     'old_component': self.new_component.id,
-                    'new_comnponent': self.old_component.id,
+                    'new_component': self.old_component.id,
                     'user': None, 'date': None})
         return True
 
