@@ -25,4 +25,4 @@ from openerp import models, fields
 class ProjectTask(models.Model):
     _inherit = 'project.task'
 
-    wk_order = fields.Many2one('mrp.production.workcenter.line', 'Operation')
+    wk_order = fields.Many2one('mrp.production.workcenter.line', 'Work Order')
