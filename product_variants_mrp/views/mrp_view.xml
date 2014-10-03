@@ -69,6 +69,7 @@
                 </field>
                 <notebook position="before">
                     <field name="product_attributes"
+                        attrs="{'invisible':[('product_attributes','=',[])]}"
                         options="{'no_create': True, 'no_delete': True}">
                         <tree create="false" editable="1">
                             <field name="attribute" />
