@@ -1,9 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
-#    Copyright (C) 2011 - 2014 Avanzosc <http://www.avanzosc.com>
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -21,9 +18,9 @@
 {
     "name": "MRP Operation With Quality Test",
     "version": "1.0",
-    "author": "AvanzOSC",
+    "author": "OdooMRP team",
     "category": "MRP",
-    "website": "www.avanzosc.es",
+    "website": "http://www.odoomrp.com",
     "description": """
     This module performs the following:
     1.- In Operation create 3 new fiels:
