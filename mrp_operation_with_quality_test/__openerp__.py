@@ -1,9 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
-#    Copyright (C) 2011 - 2014 Avanzosc <http://www.avanzosc.com>
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -22,37 +19,32 @@
     "name": "MRP Operation With Quality Test",
     "version": "1.0",
     "author": "OdooMRP team",
-    "category": "Manufacturing",
-    "website": "www.odoomrp.com",
+    "category": "MRP",
+    "website": "http://www.odoomrp.com",
     "description": """
-This module performs the following:
+    This module performs the following:
+    1.- In Operation create 3 new fiels:
+        1.1.- required_test: Indicates whether the operation has a template of
+              quality test.
+        1.2.- qtemplate_id: ID of template quality test.
+        1.3.- analytic_journal_id: ID of analytic journal
 
-1.- In operations creates 3 new fiels:
-
-    1.1.- required_test: Indicates whether the operation has a template of
-          quality test.
-    1.2.- qtemplate_id: ID of template quality test.
-    1.3.- analytic_journal_id: ID of analytic journal
-
-2.- In workorder of production, create this:
-
-    2.1.- required_test: Indicates whether the operation has a template of
-          quality test.
-    2.2.- qtemplate_id: ID of template quality test.
-    2.3.- analytic_journal_id: ID of analytic journal
-    2.4.- A button por create test from template.
-    2.5.- When you init de workorder, automatically create one test from
-          template.
+    2.- In workorder of productión, create this:
+        2.1.- required_test: Indicates whether the operation has a template of
+              quality test.
+        2.2.- qtemplate_id: ID of template quality test.
+        2.3.- analytic_journal_id: ID of analytic journal
+        2.4.- A button por create test from template.
+        2.5.- When you init de workorder, automatically create one test from
+              template.
     """,
-    "depends": [
-        'mrp',
-        'mrp_operations_extension',
-        'quality_control',
-        'account',
-    ],
-    "data": [
-        'views/mrp_routing_operation_view.xml',
-        'views/mrp_production_workcenter_line_view.xml',
-    ],
+    "depends": ['mrp',
+                'mrp_operations_extension',
+                'quality_control',
+                'account',
+                ],
+    "data": ['views/mrp_routing_operation_view.xml',
+             'views/mrp_production_workcenter_line_view.xml',
+             ],
     "installable": True
 }
