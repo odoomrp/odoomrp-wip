@@ -66,6 +66,5 @@ class MrpRoutingOperation(models.Model):
     op_number = fields.Integer('Número de Persona', default='0')
     final_product_to_stock = fields.Boolean(
         string='Move Final Product to Stock')
-    picking_type_ids = fields.Many2many(
-        'stock.picking.type', 'operation_picking_type', 'operation_id',
-        'picking_type_id', string='Picking Types')
+    picking_type_id = fields.Many2one(
+        'stock.picking.type', string='Picking Type')

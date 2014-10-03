@@ -25,13 +25,11 @@
                     <field name="steps"  colspan="2"/>
                     <field name="op_number"  colspan="2" />
                     <field name="final_product_to_stock"  colspan="2" />
+                    <field name="picking_type_id" colspan="2" />
                 </group>
                 <notebook>
                     <page string="Workcenters">
                         <field name="workcenters" colspan="4" nolabel="1"/>
-                    </page>
-                    <page string="Picking Types">
-                        <field name="picking_type_ids" colspan="4" nolabel="1"/>
                     </page>
                 </notebook>
                 </form>
