@@ -73,7 +73,7 @@ class SaleOrderLine(models.Model):
             domain = [('product_tmpl_id', '=', self.product_template.id)]
             for value in att_values_ids:
                 domain.append(('attribute_value_ids', '=', value))
-            self.product_id = product_obj.search(domain)
+            self.product_id = product_obj.search(domain, limit=1)
 
     @api.multi
     def product_id_change(self, pricelist, product, qty=0,
@@ -92,8 +92,8 @@ class SaleOrderLine(models.Model):
         for attribute_value in product.attribute_value_ids:
             attributes.append({'attribute': attribute_value.attribute_id.id,
                                'value': attribute_value.id})
-        res['value'].update({'product_attributes': attributes})
-        res['value'].update({'product_template': product.product_tmpl_id.id})
+        res['value'].update({'product_attributes': attributes,
+                             'product_template': product.product_tmpl_id.id})
         return res
 
     @api.one
@@ -128,7 +128,3 @@ class SaleOrderLine(models.Model):
                          'attribute_value_ids': [(6, 0, att_values_ids)]})
                 line.write({'product_id': product.id})
         super(SaleOrderLine, self).button_confirm()
-
-#     @api.one
-#     def copy(self):
-#         return super(SaleOrderLine, self).copy()
