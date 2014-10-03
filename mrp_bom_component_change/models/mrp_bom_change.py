@@ -20,52 +20,63 @@
 ##############################################################################
 
 from openerp import models, fields, api, exceptions, _
+from datetime import datetime as dt
 
 
 class MrpBomChange(models.Model):
     _name = 'mrp.bom.change'
-    _descrition = 'Mrp BOM Component Change'
+    _descrition = 'Mrp BoM Component Change'
 
     name = fields.Char('Name', required=True)
-    component = fields.Many2one('product.product', 'Selected Component')
-    comp2mod = fields.Many2one('product.product', 'Component to Modify')
+    new_component = fields.Many2one('product.product', 'New Component')
+    old_component = fields.Many2one('product.product', 'Old Component')
     state = fields.Selection([('draft', 'Draft'), ('process', 'In Process'),
                               ('done', 'Done')], 'State', default='draft',
                              required=True)
     boms = fields.Many2many('mrp.bom', 'mrp_bom_change_rel', 'bom_change',
                             'bom_id')
+    date = fields.Date('Change Date', readonly=True)
+    user = fields.Many2one('res.users', 'Changed By', readonly=True)
 
     @api.one
-    @api.onchange('component')
+    @api.onchange('old_component')
     def onchange_operation(self):
-        bom_obj = self.env['mrp.bom']
-        bom_lst = []
-        for bom in bom_obj.search([]):
-            for bom_line in bom.bom_line_ids:
-                if bom_line.product_id.id == self.component.id:
-                    bom_lst.append(bom.id)
-                    break
-        self.boms = bom_lst
-        self.state = 'process'
+        if self.old_component:
+            bom_obj = self.env['mrp.bom']
+            bom_lst = []
+            for bom in bom_obj.search([]):
+                for bom_line in bom.bom_line_ids:
+                    if bom_line.product_id.id == self.old_component.id:
+                        bom_lst.append(bom.id)
+                        break
+            self.boms = bom_lst
+            if self.state != 'process':
+                self.state = 'process'
 
     @api.one
     def do_component_change(self):
-        if not self.component or not self.comp2mod:
+        if not self.old_component or not self.new_component:
             raise exceptions.Warning(_("Not Components selected!"))
         if not self.boms:
-            raise exceptions.Warning(_("There is no BOM list for current "
-                                       "selected component!"))
+            raise exceptions.Warning(_("There isn't any BoM for selected "
+                                       "component"))
         for bom in self.boms:
             for bom_line in bom.bom_line_ids:
-                if bom_line.product_id.id == self.component.id:
-                    bom_line.product_id = self.comp2mod.id
-        self.state = 'done'
+                if bom_line.product_id.id == self.old_component.id:
+                    bom_line.product_id = self.new_component.id
+        self.write({'state': 'done', 'date': dt.now(), 'user': self.env.uid})
 
     @api.one
     def do_revert(self):
         data = self.copy()
         data.write({'name': _('Revert - ') + self.name,
                     'state': 'process',
-                    'component': self.comp2mod.id,
-                    'comp2mod': self.component.id})
+                    'old_component': self.new_component.id,
+                    'new_comnponent': self.old_component.id,
+                    'user': None, 'date': None})
         return True
+
+    @api.one
+    def clear_list(self):
+        for bom_id in self.boms.ids:
+            self.boms = [(5, bom_id)]

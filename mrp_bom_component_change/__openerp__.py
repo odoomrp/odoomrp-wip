@@ -20,11 +20,11 @@
 ##############################################################################
 
 {
-    "name": "MRP BOM component massive change",
+    "name": "MRP BoM component massive change",
     "version": "1.0",
     "description": """
-    This module allows change massively one component for another on a list of
-    BOMs.
+    This module allows to change massively one component by another on a list
+    of BoMs.
     """,
     'author': 'OdooMRP team',
     'website': "http://www.odoomrp.com",
