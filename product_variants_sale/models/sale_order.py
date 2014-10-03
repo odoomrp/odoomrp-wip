@@ -16,8 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
-from openerp import _
+from openerp import models, fields, api, _
 
 
 class ProductAttributeValueSaleLine(models.Model):
@@ -35,25 +34,67 @@ class ProductAttributeValueSaleLine(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    type = fields.Selection([('product', 'Product'), ('variant', 'Variant')],
-                            string='Type', default='product')
     product_template = fields.Many2one(comodel_name='product.template',
-                                       domain="[('attribute_line_ids', '!=',"
-                                       " False)]",
                                        string='Product Template')
     product_attributes = fields.One2many('sale.order.line.attribute',
                                          'sale_line',
                                          string='Product attributes',
                                          copyable=True)
 
-    @api.one
+    @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
-        product_attributes = []
-        for attribute in self.product_template.attribute_line_ids:
-            product_attributes.append({'attribute': attribute.attribute_id})
-        self.product_attributes = product_attributes
-        self.name = self.product_template.name
+        for line in self:
+            product_attributes = []
+            if not line.product_template.attribute_line_ids:
+                line.product_id = (
+                    line.product_template.product_variant_ids and
+                    line.product_template.product_variant_ids[0])
+            if (line.product_id and line.product_id not in
+                    line.product_template.product_variant_ids):
+                line.product_id = False
+            for attribute in line.product_template.attribute_line_ids:
+                product_attributes.append({'attribute':
+                                           attribute.attribute_id})
+            line.product_attributes = product_attributes
+            line.name = line.product_template.name
+            return {'domain': {'product_id':
+                               [('product_tmpl_id', '=',
+                                 line.product_template.id)]}}
+
+    @api.one
+    @api.onchange('product_attributes')
+    def onchange_product_attributes(self):
+        if not self.product_id:
+            product_obj = self.env['product.product']
+            att_values_ids = [attr_line.value and attr_line.value.id
+                              or False
+                              for attr_line in self.product_attributes]
+            domain = [('product_tmpl_id', '=', self.product_template.id)]
+            for value in att_values_ids:
+                domain.append(('attribute_value_ids', '=', value))
+            self.product_id = product_obj.search(domain, limit=1)
+
+    @api.multi
+    def product_id_change(self, pricelist, product, qty=0,
+                          uom=False, qty_uos=0, uos=False, name='',
+                          partner_id=False, lang=False, update_tax=True,
+                          date_order=False, packaging=False,
+                          fiscal_position=False, flag=False):
+        res = super(SaleOrderLine, self).product_id_change(
+            pricelist, product, qty=qty, uom=uom, qty_uos=qty_uos, uos=uos,
+            name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
+            date_order=date_order, packaging=packaging,
+            fiscal_position=fiscal_position, flag=flag)
+        product_obj = self.env['product.product']
+        product = product_obj.browse(product)
+        attributes = []
+        for attribute_value in product.attribute_value_ids:
+            attributes.append({'attribute': attribute_value.attribute_id.id,
+                               'value': attribute_value.id})
+        res['value'].update({'product_attributes': attributes,
+                             'product_template': product.product_tmpl_id.id})
+        return res
 
     @api.one
     def action_duplicate(self):
@@ -72,7 +113,7 @@ class SaleOrderLine(models.Model):
     @api.multi
     def button_confirm(self):
         for line in self:
-            if line.type == 'variant':
+            if not line.product_id:
                 product_obj = self.env['product.product']
                 att_values_ids = [attr_line.value and attr_line.value.id
                                   or False
@@ -87,7 +128,3 @@ class SaleOrderLine(models.Model):
                          'attribute_value_ids': [(6, 0, att_values_ids)]})
                 line.write({'product_id': product.id})
         super(SaleOrderLine, self).button_confirm()
-
-#     @api.one
-#     def copy(self):
-#         return super(SaleOrderLine, self).copy()

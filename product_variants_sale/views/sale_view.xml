@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <xpath
                     expr="//field[@name='order_line']/tree//field[@name='product_id']"
-                    position="after">
+                    position="before">
                     <field name="product_template" />
                 </xpath>
                 <xpath
@@ -22,26 +22,19 @@
                 <xpath
                     expr="//field[@name='order_line']/form//field[@name='product_id']"
                     position="before">
-                    <field name="type" />
-                </xpath>
-                <xpath
-                    expr="//field[@name='order_line']/form//field[@name='product_id']"
-                    position="after">
-                    <field name="product_template"
-                        attrs="{'invisible':[('type','!=','variant')]}" />
+                    <field name="product_template" />
                 </xpath>
                 <xpath
                     expr="//field[@name='order_line']/form//field[@name='product_id']"
                     position="attributes">
-                    <attribute name="attrs">{'invisible':[('type','!=','product')]}</attribute>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath
                     expr="//field[@name='order_line']/form//label[@for='name']"
                     position="before">
-                    <label for="product_attributes"
-                        attrs="{'invisible':[('type','!=','variant')]}" />
+                    <label for="product_attributes" />
                     <field name="product_attributes"
-                        attrs="{'invisible':[('type','!=','variant')]}"
+                        attrs="{'invisible':[('product_attributes','=',[])]}"
                         options="{'no_create': True, 'no_delete': True}">
                         <tree create="false" editable="1">
                             <field name="attribute" />
@@ -58,20 +51,15 @@
             <field name="inherit_id" ref="sale.view_order_line_form2" />
             <field name="arch" type="xml">
                 <field name="product_id" position="before">
-                    <field name="type" />
-                </field>
-                <field name="product_id" position="after">
-                    <field name="product_template"
-                        attrs="{'invisible':[('type','!=','variant')]}" />
+                    <field name="product_template" />
                 </field>
                 <field name="product_id" position="attributes">
-                    <attribute name="attrs">{'invisible':[('type','!=','product')]}</attribute>
+                    <attribute name="invisible">1</attribute>
                 </field>
                 <field name="name" position="after">
-                    <label for="product_attributes"
-                        attrs="{'invisible':[('type','!=','variant')]}" />
+                    <label for="product_attributes" />
                     <field name="product_attributes"
-                        attrs="{'invisible':[('type','!=','variant')]}"
+                        attrs="{'invisible': [('product_attributes','=',[])]}"
                         options="{'no_create': True, 'no_delete': True}">
                         <tree create="false" editable="1">
                             <field name="attribute" />
@@ -88,7 +76,6 @@
             <field name="inherit_id" ref="sale.view_order_line_tree" />
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                    <field name="type" />
                     <field name="product_template" />
                     <field name="product_id" />
                 </field>
