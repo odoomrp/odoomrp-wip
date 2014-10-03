@@ -70,11 +70,6 @@ class MrpProductionAttribute(models.Model):
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-
-#     product_id = fields.Many2one(
-#         comodel_name='product.product', string='Product', required=False,
-#         readonly=True, states={'draft': [('readonly', False)]},
-#         domain=[('type','!=','service')])
     product_template = fields.Many2one(comodel_name='product.template',
                                        string='Product', readonly=True,
                                        states={'draft': [('readonly', False)]})
@@ -126,4 +121,4 @@ class MrpProduction(models.Model):
             domain = [('product_tmpl_id', '=', self.product_template.id)]
             for value in att_values_ids:
                 domain.append(('attribute_value_ids', '=', value))
-            self.product_id = product_obj.search(domain)
+            self.product_id = product_obj.search(domain, limit=1)
