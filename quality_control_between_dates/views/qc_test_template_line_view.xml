@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="qc_test_template_line_form_view_inh_between_dates" model="ir.ui.view">
+            <field name="name">qc.test.template.line.form.view.inh.between.dates</field>
+            <field name="model">qc.test.template.line</field>
+            <field name="inherit_id" ref="quality_control.qc_test_template_line_form_view"/>
+            <field name="arch" type="xml">
+                <field name="proof_id" position="after">
+                    <field name="validity_start_date" />
+                    <field name="validity_end_date" />
+                </field>
+            </field>
+        </record>
+        <record id="qc_test_template_line_tree_view_inh_between_dates" model="ir.ui.view">
+            <field name="name">qc.test.template.line.tree.view.inh.between.dates</field>
+            <field name="model">qc.test.template.line</field>
+            <field name="inherit_id" ref="quality_control.qc_test_template_line_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="proof_id" position="after">
+                    <field name="validity_start_date" />
+                    <field name="validity_end_date" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
