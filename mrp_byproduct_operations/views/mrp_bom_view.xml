@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="mrp_subproduct_view_inherit" model="ir.ui.view">
+            <field name="name">mrp.bom.sub.product</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp_byproduct.mrp_subproduct_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree[@string='Byproducts']/field[@name='product_id']" position="after">
+                    <field name="operation" domain="[('routing_id', '=', parent.routing_id)]"/>
+                </xpath>
+                <xpath expr="//form[@string='Byproducts']/field[@name='product_id']" position="after">
+                    <field name="operation" domain="[('routing_id', '=', parent.routing_id)]" />
+                </xpath>
+            </field>
+        </record>
+  </data>
+</openerp>
