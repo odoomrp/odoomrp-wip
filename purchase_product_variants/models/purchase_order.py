@@ -75,18 +75,18 @@ class PurchaseOrderLine(models.Model):
                 domain.append(('attribute_value_ids', '=', value))
             self.product_id = product_obj.search(domain, limit=1)
 
-    @api.multi
-    def onchange_product_id(self, pricelist_id, product_id, qty,
+    def onchange_product_id(self, cr, uid, ids, pricelist_id, product_id, qty,
                             uom_id, partner_id, date_order=False,
                             fiscal_position_id=False, date_planned=False,
-                            name=False, price_unit=False, state='draft'):
+                            name=False, price_unit=False, state='draft',
+                            context=None):
         res = super(PurchaseOrderLine, self).onchange_product_id(
-            pricelist_id, product_id, qty, uom_id, partner_id,
+            cr, uid, ids, pricelist_id, product_id, qty, uom_id, partner_id,
             date_order=date_order, fiscal_position_id=fiscal_position_id,
             date_planned=date_planned, name=name, price_unit=price_unit,
-            state=state)
-        product_obj = self.env['product.product']
-        product = product_obj.browse(product_id)
+            state=state, context=context)
+        product_obj = self.pool['product.product']
+        product = product_obj.browse(cr, uid, product_id, context=context)
         attributes = []
         for attribute_value in product.attribute_value_ids:
             attributes.append({'attribute': attribute_value.attribute_id.id,
