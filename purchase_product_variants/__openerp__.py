@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -18,27 +17,26 @@
 ##############################################################################
 
 {
-    "name": "Sale - Product variants",
+    "name": "Purchase - Product variants",
     "version": "1.0",
     "depends": [
         "product",
-        "sale",
-        "product_variants_base",
+        "purchase",
+        "base_product_variants",
     ],
     "author": "OdooMRP team",
     "contributors": [
-        "Mikel Arregi <mikelarregi@avanzosc.es>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
-Create custom product from a sale order
+Create custom product from a purchase order
     """,
     "data": [
         "security/ir.model.access.csv",
-        "views/sale_view.xml",
+        "views/purchase_view.xml",
     ],
     "installable": True,
 }
