@@ -6,6 +6,9 @@
             <field name="model">mrp.workcenter</field>
             <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
             <field name="arch" type="xml">
+                <field name="code" position="after">
+                    <field name="machine" />
+                </field>
                 <field name="note" position="after">
                    <field name="operators" />
                 </field>

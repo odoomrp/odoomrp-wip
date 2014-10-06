@@ -11,7 +11,7 @@
 
         <record id="machines_form" model="ir.ui.view">
             <field name="name">machines.form</field>
-            <field name="model">machinery</field>
+            <field name="model">mrp.machinery</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Machines">
@@ -22,7 +22,6 @@
                         <field name="name" />
                         <field name="regnno" />
                         <field name="company" invisible="1"/>
-                        <field name="wcenter" />
                         <field name="product" domain="[('name','=',name)]" />
                         <field name="location" />
                     </group>
@@ -105,7 +104,7 @@
 
         <record id="machine_tree" model="ir.ui.view">
             <field name="name">machine.tree</field>
-            <field name="model">machinery</field>
+            <field name="model">mrp.machinery</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Machines">
@@ -122,7 +121,7 @@
 
         <record id="machine_form_act" model="ir.actions.act_window">
             <field name="name">Machines</field>
-            <field name="res_model">machinery</field>
+            <field name="res_model">mrp.machinery</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>

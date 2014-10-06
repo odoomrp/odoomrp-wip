@@ -20,29 +20,22 @@
 ##############################################################################
 
 
-from openerp import models, fields, api, _
+from openerp import models, fields, _
 import time
 
 
-class machinery(models.Model):
-    _name = "machinery"
+class MrpMachinery(models.Model):
+    _name = "mrp.machinery"
     _description = "Holds records of Machines"
 
-    @api.one
-    @api.onchange('wcenter')
-    def onchange_wcenter(self):
-        if self.wcenter:
-            self.name = self.wcenter.name
-
-    def copy(self, cr, uid, id, default=None, context=None):
+    def copy(self, cr, uid, id, default=None, context={}):
         if not default:
             default = {}
         default.update({
             'name': 'New Machine Name',
             'regnno': 'New Registration no',
         })
-        return super(machinery, self).copy(cr, uid, id, default,
-                                           context=context)
+        return super(MrpMachinery, self).copy(cr, uid, id, default, context)
 
     def _def_company(self):
         return self.env.user.company_id.id
@@ -57,11 +50,10 @@ class machinery(models.Model):
     assetacc = fields.Many2one('account.account', string='Asset Account',
                                domain=[('user_type.code', '=', 'asset')])
     depracc = fields.Many2one('account.account', string='Depreciation Account')
-    wcenter = fields.Many2one('mrp.workcenter', string='Work Center')
     year = fields.Char('Year')
     model = fields.Char('Model')
     serial = fields.Char('Product Serial #')
-    type = fields.Many2one('machine.model', 'Type')
+    type = fields.Many2one('mrp.machine.model', 'Type')
     status = fields.Selection([('active', 'Active'), ('inactive', 'InActive'),
                                ('outofservice', 'Out of Service')],
                               'Status', required=True, default='active')
