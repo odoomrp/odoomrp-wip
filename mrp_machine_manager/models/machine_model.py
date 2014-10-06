@@ -22,9 +22,9 @@
 from openerp import models, fields
 
 
-class MachineModel(models.Model):
-    _name = 'machine.model'
-    _description = 'Machine model'
+class MrpMachineModel(models.Model):
+    _name = 'mrp.machine.model'
+    _description = 'MRP Machine model'
 
     name = fields.Char('Name')
     type = fields.Char('Type')
