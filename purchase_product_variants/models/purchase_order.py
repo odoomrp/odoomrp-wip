@@ -75,7 +75,6 @@ class PurchaseOrderLine(models.Model):
                 domain.append(('attribute_value_ids', '=', value))
             self.product_id = product_obj.search(domain, limit=1)
 
-    #@api.multi
     def onchange_product_id(self, cr, uid, ids, pricelist_id, product_id, qty,
                             uom_id, partner_id, date_order=False,
                             fiscal_position_id=False, date_planned=False,
@@ -86,7 +85,6 @@ class PurchaseOrderLine(models.Model):
             date_order=date_order, fiscal_position_id=fiscal_position_id,
             date_planned=date_planned, name=name, price_unit=price_unit,
             state=state, context=context)
-
         product_obj = self.pool['product.product']
         product = product_obj.browse(cr, uid, product_id, context=context)
         attributes = []
