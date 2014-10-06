@@ -28,15 +28,14 @@ class MrpMachinery(models.Model):
     _name = "mrp.machinery"
     _description = "Holds records of Machines"
 
-    def copy(self, cr, uid, id, default=None, context={}):
+    def copy(self, cr, uid, id, default=None, context=None):
         if default is None:
             default = {}
         default.update({
             'name': 'New Machine Name',
             'regnno': 'New Registration no',
         })
-        return super(MrpMachinery, self).copy(cr, uid, id, default=default,
-                                              context=context)
+        return super(MrpMachinery, self).copy(cr, uid, id, default, context)
 
     def _def_company(self):
         return self.env.user.company_id.id
