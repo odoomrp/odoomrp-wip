@@ -29,7 +29,7 @@ class MrpMachinery(models.Model):
     _description = "Holds records of Machines"
 
     def copy(self, cr, uid, id, default=None, context={}):
-        if default == None:
+        if default is None:
             default = {}
         default.update({
             'name': 'New Machine Name',
