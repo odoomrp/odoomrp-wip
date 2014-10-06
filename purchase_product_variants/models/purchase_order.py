@@ -82,8 +82,7 @@ class PurchaseOrderLine(models.Model):
                             name=False, price_unit=False, state='draft',
                             context=None):
         res = super(PurchaseOrderLine, self).onchange_product_id(
-            cr, uid, ids,
-            pricelist_id, product_id, qty, uom_id, partner_id,
+            cr, uid, ids, pricelist_id, product_id, qty, uom_id, partner_id,
             date_order=date_order, fiscal_position_id=fiscal_position_id,
             date_planned=date_planned, name=name, price_unit=price_unit,
             state=state, context=context)
