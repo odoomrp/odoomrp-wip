@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    "name": "MRP byproduct Operations Extension",
+    "name": "MRP byproduct Operations",
     "version": "1.0",
     "description": """
     This module links mrp_byproduct module with mrp_operations_extension.
