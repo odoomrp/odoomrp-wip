@@ -25,7 +25,7 @@ from openerp import models, api
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    @api.one
+    @api.multi
     def action_confirm(self):
         picking_id = super(MrpProduction, self).action_confirm()
         move_obj = self.env['stock.move']

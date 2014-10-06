@@ -25,4 +25,5 @@ from openerp import models, fields
 class MrpSubproduct(models.Model):
     _inherit = 'mrp.subproduct'
 
-    operation = fields.Many2one('mrp.routing.workcenter', 'Produced')
+    operation = fields.Many2one('mrp.routing.workcenter',
+                                'Production Operation')
