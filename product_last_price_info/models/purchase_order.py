@@ -29,10 +29,11 @@ class PurchaseOrder(orm.Model):
         for o in self.browse(cr, uid, ids, context):
             for line in o.order_line:
                 if line.product_id:
+                    price_unit = line.price_subtotal / line.price_subtotal
                     vals = {'last_purchase_date':
                             time.strftime('%Y-%m-%d %H:%M:%S'),
                             'last_supplier_id': line.order_id.partner_id.id,
-                            'last_purchase_price': line.price_subtotal
+                            'last_purchase_price': price_unit
                             }
                     product_obj.write(cr, uid, [line.product_id.id], vals,
                                       context)
