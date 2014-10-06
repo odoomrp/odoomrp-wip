@@ -35,7 +35,8 @@ class MrpMachinery(models.Model):
             'name': 'New Machine Name',
             'regnno': 'New Registration no',
         })
-        return super(MrpMachinery, self).copy(cr, uid, id, default, context)
+        return super(MrpMachinery, self).copy(cr, uid, id, default=default,
+                                              context=context)
 
     def _def_company(self):
         return self.env.user.company_id.id
@@ -105,6 +106,6 @@ class MrpMachinery(models.Model):
 
     _sql_constraints = [(
         'uniq_regn_no', 'unique (regnno)',
-        _('The registration no of the machine must be unique !')),
+        _('The registration no of the machine must be unique!')),
         ('name_uniq', 'unique(name)', _('The machine already exist!')),
         ]
