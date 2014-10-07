@@ -25,7 +25,7 @@ from datetime import datetime as dt
 
 class MrpBomChange(models.Model):
     _name = 'mrp.bom.change'
-    _descrition = 'Mrp BoM Component Change'
+    _description = 'Mrp BoM Component Change'
 
     name = fields.Char('Name', required=True)
     new_component = fields.Many2one('product.product', 'New Component')
@@ -38,7 +38,7 @@ class MrpBomChange(models.Model):
     date = fields.Date('Change Date', readonly=True)
     user = fields.Many2one('res.users', 'Changed By', readonly=True)
 
-    @api.one
+    @api.multi
     @api.onchange('old_component')
     def onchange_operation(self):
         if self.old_component:
@@ -52,6 +52,7 @@ class MrpBomChange(models.Model):
             self.boms = bom_lst
             if self.state != 'process':
                 self.state = 'process'
+        return {'domain': {'boms': [('id', 'in', bom_lst)]}}
 
     @api.one
     def do_component_change(self):
