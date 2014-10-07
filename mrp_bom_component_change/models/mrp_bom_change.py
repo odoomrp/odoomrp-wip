@@ -25,7 +25,7 @@ from datetime import datetime as dt
 
 class MrpBomChange(models.Model):
     _name = 'mrp.bom.change'
-    _descrition = 'Mrp BoM Component Change'
+    _description = 'Mrp BoM Component Change'
 
     name = fields.Char('Name', required=True)
     new_component = fields.Many2one('product.product', 'New Component')
