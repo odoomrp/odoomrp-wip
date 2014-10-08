@@ -8,36 +8,53 @@
             <field name="arch" type="xml">
                 <notebook position="inside">
                     <page string="Packaging">
-                        <field name="packagings" context="{'default_product_tmpl_id':id}">
+                        <field name="packagings"
+                            context="{'default_product_tmpl_id':id}">
                             <tree>
-                                <field name="ean"/>
-                                <field name="qty"/>
-                                <field name="ul"/>
+                                <field name="ean" />
+                                <field name="qty" />
+                                <field name="ul" />
                             </tree>
                         </field>
                     </page>
                 </notebook>
             </field>
         </record>
+
         <record model="ir.ui.view" id="product_ul_packaging_form_view">
             <field name="name">product.ul.packaging.form</field>
             <field name="model">product.ul</field>
-            <field name="inherit_id" ref="product.product_ul_form_view"/>
+            <field name="inherit_id" ref="product.product_ul_form_view" />
             <field name="arch" type="xml">
                 <sheet position="inside">
                     <group>
                         <field name="product" />
-                        <field name="packagings" nolabel="1" context="{'default_ul':id}">
+                        <field name="packagings" nolabel="1"
+                            context="{'default_ul_container':id}">
                             <tree>
-                                <field name="ean"/>
-                                <field name="product_tmpl_id"/>
-                                <field name="qty"/>
-                                <field name="ul"/>
+                                <field name="ean" />
+                                <field name="ul_container" />
+                                <field name="product_tmpl_id" />
+                                <field name="qty" />
+                                <field name="ul" />
                             </tree>
                         </field>
                     </group>
                 </sheet>
             </field>
         </record>
+
+        <record id="product_packaging_form_action" model="ir.actions.act_window">
+            <field name="name">Product Packagings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.packaging</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            action="product_packaging_form_action" groups="product.group_stock_packaging"
+            id="menu_product_packaging_form_action" parent="product.prod_config_main" sequence="6"/>
+
     </data>
 </openerp>

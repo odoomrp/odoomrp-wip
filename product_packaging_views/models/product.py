@@ -31,7 +31,7 @@ class ProductUl(models.Model):
     _inherit = 'product.ul'
 
     packagings = fields.One2many(comodel_name='product.packaging',
-                                 inverse_name='ul',
+                                 inverse_name='ul_container',
                                  string='Packagings')
     product = fields.Many2one(comodel_name='product.product',
                               string='Product',
