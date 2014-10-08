@@ -19,5 +19,4 @@
 #
 ##############################################################################
 
-from . import pricelist_line
-from . import file_price_load
+from . import product_pricelist_load

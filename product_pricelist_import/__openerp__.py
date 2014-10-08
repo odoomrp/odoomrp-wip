@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Daniel Campos (danielcampos@avanzosc.es) Date: 06/10/2014
+#    Daniel Campos (danielcampos@avanzosc.es) Date: 08/10/2014
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -19,21 +19,24 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+{
+    "name": "Product Pricelist Import",
+    "version": "1.0",
+    "description": """
+    This module allows to load product price list from a file.
+    The file format must have this colummns:
 
-
-class PricelistLine(models.Model):
-    _name = 'pricelist.line'
-    _description = 'Lineas de Fichero'
-
-    code = fields.Char('Product Code')
-    info = fields.Char('Product Description')
-    price = fields.Float('Product Price')
-    discount_1 = fields.Float('Product Discount 1')
-    discount_2 = fields.Float('Product Discount 2')
-    retail = fields.Float('Retail Price')
-    pdv1 = fields.Float('PDV1')
-    pdv2 = fields.Float('PDV2')
-    fail = fields.Boolean('Fail')
-    fail_reason = fields.Char('Fail Reason')
-    file_load = fields.Many2one('file.price.load', 'Load')
+    keys = ['code', 'info', 'price', 'discount_1', 'discount_2', 'retail',
+    'pdv1', 'pdv2']
+    """,
+    'author': 'OdooMRP team',
+    'website': "http://www.odoomrp.com",
+    "depends": ['purchase'],
+    "category": "Manufacturing",
+    "data": ['wizard/import_price_file_view.xml',
+             'views/product_pricelist_load_line_view.xml',
+             'views/product_pricelist_load_view.xml',
+             'security/ir.model.access.csv'
+             ],
+    "installable": True
+}

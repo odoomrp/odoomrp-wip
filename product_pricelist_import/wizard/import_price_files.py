@@ -30,8 +30,9 @@ except:
     exceptions.Warning(_('pyExcelerator Python module not installed'))
 
 
-class ImportPriceFiles(models.TransientModel):
-    _name = 'import.price.files'
+class ImportPriceFile(models.TransientModel):
+    _name = 'import.price.file'
+    _description = 'Import Price List File'
 
     data = fields.Binary('File', required=True)
     name = fields.Char('Filename', required=False)
@@ -47,7 +48,7 @@ class ImportPriceFiles(models.TransientModel):
         @param delimeter: CSV file data delimeter
         @return: Imported file number
         """
-        file_line_obj = self.env['pricelist.line']
+        file_line_obj = self.env['product.pricelist.load.line']
         data = base64.b64decode(file_data)
         file_input = cStringIO.StringIO(data)
         file_input.seek(0)
@@ -92,7 +93,7 @@ class ImportPriceFiles(models.TransientModel):
             import xlrd
         except ImportError:
             exceptions.Warning(_("xlrd python lib  not installed"))
-        file_line_obj = self.env['pricelist.line']
+        file_line_obj = self.env['product.pricelist.load.line']
         file_1 = base64.decodestring(file_data)
         (fileno, fp_name) = tempfile.mkstemp('.xls', 'openerp_')
         file = open(fp_name, "w")
@@ -125,7 +126,7 @@ class ImportPriceFiles(models.TransientModel):
 
     @api.multi
     def action_import(self):
-        file_load_obj = self.env['file.price.load']
+        file_load_obj = self.env['product.pricelist.load']
         context = self._context
         if 'active_id' in context:
             load_id = context['active_id']

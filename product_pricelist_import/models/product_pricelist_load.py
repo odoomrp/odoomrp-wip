@@ -22,15 +22,15 @@
 from openerp import models, fields, exceptions, api, _
 
 
-class FilePriceLoad(models.Model):
-    _name = 'file.price.load'
-    _description = 'File Price Load'
+class ProductPricelistLoad(models.Model):
+    _name = 'product.pricelist.load'
+    _description = 'Product Price List Load'
 
     name = fields.Char('Load')
     date = fields.Date('Date:', readonly=True)
     file_name = fields.Char('File Name', readonly=True)
-    file_lines = fields.One2many('pricelist.line', 'file_load',
-                                 'File Pricelist Lines')
+    file_lines = fields.One2many('product.pricelist.load.line', 'file_load',
+                                 'Product Price List Lines')
     fails = fields.Integer('Fail Lines:', readonly=True)
     process = fields.Integer('Lines to Process:', readonly=True)
 
@@ -58,3 +58,21 @@ class FilePriceLoad(models.Model):
                         else:
                             line.fail_reason = _('Product not found')
         return True
+
+
+class ProductPricelistLoadLine(models.Model):
+    _name = 'product.pricelist.load.line'
+    _description = 'Product Price List Load Line'
+
+    code = fields.Char('Product Code', required=True)
+    info = fields.Char('Product Description')
+    price = fields.Float('Product Price', required=True)
+    discount_1 = fields.Float('Product Discount 1')
+    discount_2 = fields.Float('Product Discount 2')
+    retail = fields.Float('Retail Price', required=True)
+    pdv1 = fields.Float('PDV1')
+    pdv2 = fields.Float('PDV2')
+    fail = fields.Boolean('Fail')
+    fail_reason = fields.Char('Fail Reason')
+    file_load = fields.Many2one('product.pricelist.load', 'Load',
+                                required=True)
