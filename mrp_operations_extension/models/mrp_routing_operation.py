@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions
 
 
 class MrpOperationWorkcenter(models.Model):
@@ -64,3 +64,7 @@ class MrpRoutingOperation(models.Model):
         'mrp.workcenter', 'mrp_operation_workcenter_rel', 'operation',
         'workcenter', 'Work centers')
     op_number = fields.Integer('Número de Persona', default='0')
+    final_product_to_stock = fields.Boolean(
+        string='Move Final Product to Stock')
+    picking_type_id = fields.Many2one(
+        'stock.picking.type', string='Picking Type')

@@ -35,8 +35,7 @@ class MrpBom(models.Model):
                                                properties=None, level=0,
                                                routing_id=False,
                                                previous_products=None,
-                                               master_bom=None,
-                                               context=context)
+                                               master_bom=None,)
         result, result2 = res
         for work_order in result2:
             seq = work_order['sequence'] - level
