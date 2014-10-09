@@ -24,12 +24,12 @@
     "description": """
     This module performs the following:
 
-    1.- Created two new fields in the test template line, are as follows:
+    1.- Created two new fields in the test template line:
 
         1.1.- Validity Start Date, required.
         1.2.- Validity End Date.
 
-    Before creating a new object in test template line, will validate that
+    Before creating a new object in test template line, it will validate that
     there is no previous line without Validity End Date, for the new test
     template line you want to create.
 
