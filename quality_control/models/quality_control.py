@@ -120,8 +120,7 @@ class QcProof(orm.Model):
                                       'qc_proof_posible_value_rel', 'proof_id',
                                       'posible_value_id', 'Posible Values'),
         'synonyms': fields.function(_synonyms, method=True, type='char',
-                                    size='1000', string='Synonyms',
-                                    store=False),
+                                    string='Synonyms', store=False),
     }
 
     _defaults = {
