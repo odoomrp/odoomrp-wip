@@ -338,7 +338,7 @@ class QcTestTemplateLine(orm.Model):
         'valid_value_ids': fields.many2many('qc.posible.value',
                                             'qc_template_value_rel',
                                             'template_line_id', 'value_id',
-                                            'Responses'),
+                                            'Answers'),
         'method_id': fields.many2one('qc.proof.method', 'Method', select="1"),
         'notes': fields.text('Notes'),
         'min_value': fields.float('Min', digits=(16, 5)),  # Quantitative only
@@ -509,33 +509,40 @@ class QcTest(orm.Model):
         if test.test_template_id.fill_correct_values:
             fill = True
         for line in test.test_template_id.test_template_line_ids:
-            data = {}
-            data = {'test_id': test.id,
-                    'method_id': line.method_id.id,
-                    'proof_id': line.proof_id.id,
-                    'test_template_line_id': line.id,
-                    'notes': line.notes,
-                    'min_value': line.min_value,
-                    'max_value': line.max_value,
-                    'uom_id': line.uom_id.id,
-                    'test_uom_id': line.uom_id.id,
-                    'proof_type': line.type,
-                    }
-            if fill or force_fill:
-                if line.type == 'qualitative':
-                    # Fill with the first correct value finded.
-                    data['actual_value_ql'] = (
-                        len(line.valid_value_ids) and
-                        line.valid_value_ids[0] and
-                        line.valid_value_ids[0].id or False)
-                else:
-                    # Fill with value inside range.
-                    data['actual_value_qt'] = line.min_value
-                    data['test_uom_id'] = line.uom_id.id
-            data['valid_value_ids'] = [(6, 0, [x.id for x in
-                                               line.valid_value_ids])]
+            data = self.self._prepare_test_line(
+                cr, uid, test, line, fill, force_fill=force_fill,
+                context=context)
             new_data.append((0, 0, data))
         return new_data
+
+    def _prepare_test_line(self, cr, uid, test, line, fill, force_fill=False,
+                           context=None):
+        data = {}
+        data = {'test_id': test.id,
+                'method_id': line.method_id.id,
+                'proof_id': line.proof_id.id,
+                'test_template_line_id': line.id,
+                'notes': line.notes,
+                'min_value': line.min_value,
+                'max_value': line.max_value,
+                'uom_id': line.uom_id.id,
+                'test_uom_id': line.uom_id.id,
+                'proof_type': line.type,
+                }
+        if fill or force_fill:
+            if line.type == 'qualitative':
+                # Fill with the first correct value found.
+                data['actual_value_ql'] = (
+                    len(line.valid_value_ids) and
+                    line.valid_value_ids[0] and
+                    line.valid_value_ids[0].id or False)
+            else:
+                # Fill with value inside range.
+                data['actual_value_qt'] = line.min_value
+                data['test_uom_id'] = line.uom_id.id
+        data['valid_value_ids'] = [(6, 0, [x.id for x in
+                                           line.valid_value_ids])]
+        return data
 
 
 class QcTestLine(orm.Model):
@@ -585,7 +592,7 @@ class QcTestLine(orm.Model):
         'valid_value_ids': fields.many2many('qc.posible.value',
                                             'qc_test_value_rel',
                                             'test_line_id', 'value_id',
-                                            'Responses'),
+                                            'Answers'),
         'actual_value_qt': fields.float('Qt.Value', digits=(16, 5),
                                         help="Value of the result if it is a"
                                         " quantitative proof."),

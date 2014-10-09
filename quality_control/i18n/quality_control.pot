@@ -398,7 +398,7 @@ msgstr ""
 #. module: quality_control
 #: field:qc.test.line,valid_value_ids:0
 #: field:qc.test.template.line,valid_value_ids:0
-msgid "Responses"
+msgid "Answers"
 msgstr ""
 
 #. module: quality_control

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-09 14:29+0000\n"
-"PO-Revision-Date: 2014-10-09 16:49+0100\n"
+"PO-Revision-Date: 2014-10-09 17:41+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -144,7 +144,7 @@ msgstr "Nota externa"
 #. module: quality_control
 #: field:qc.test.template,fill_correct_values:0
 msgid "Fill With Correct Values"
-msgstr "Llenar con valores correctos"
+msgstr "Pre-rellenar con valores correctos"
 
 #. module: quality_control
 #: field:qc.test.template.category,complete_name:0
@@ -398,7 +398,7 @@ msgstr "Relacionado"
 #. module: quality_control
 #: field:qc.test.line,valid_value_ids:0
 #: field:qc.test.template.line,valid_value_ids:0
-msgid "Responses"
+msgid "Answers"
 msgstr "Respuestas"
 
 #. module: quality_control
@@ -425,7 +425,7 @@ msgstr "Correcto"
 #. module: quality_control
 #: field:qc.test.line,success:0
 msgid "Success?"
-msgstr "Correcto?"
+msgstr "¿Correcto?"
 
 #. module: quality_control
 #: model:ir.actions.act_window,name:quality_control.action_proof_synonym
