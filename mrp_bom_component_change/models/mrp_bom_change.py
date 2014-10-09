@@ -37,6 +37,7 @@ class MrpBomChange(models.Model):
                             'bom_id')
     date = fields.Date('Change Date', readonly=True)
     user = fields.Many2one('res.users', 'Changed By', readonly=True)
+    reason = fields.Char('Reason')
 
     @api.multi
     @api.onchange('old_component')

@@ -11,6 +11,7 @@
                     <field name="new_component"/>
                     <field name="date"/>
                     <field name="user"/>
+                    <field name="reason" />
                     <field name="state"/>
                 </tree>
             </field>
@@ -27,7 +28,8 @@
                     <group col="6">
                             <field name="name" attrs="{'readonly':[('state','=',('done'))]}"/>
                             <field name="date"/>
-                            <field name="user"/>)
+                            <field name="user"/>
+                            <field name="reason" colspan="6" />
                     </group>
                     <group col="4">
                         <field name="old_component" attrs="{'readonly':[('state','=',('done'))]}"/>
