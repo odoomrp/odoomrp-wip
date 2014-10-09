@@ -510,13 +510,11 @@ class QcTest(orm.Model):
             fill = True
         for line in test.test_template_id.test_template_line_ids:
             data = self.self._prepare_test_line(
-                cr, uid, test, line, fill, force_fill=force_fill,
-                context=context)
+                cr, uid, test, line, fill=fill or force_fill,  context=context)
             new_data.append((0, 0, data))
         return new_data
 
-    def _prepare_test_line(self, cr, uid, test, line, fill, force_fill=False,
-                           context=None):
+    def _prepare_test_line(self, cr, uid, test, line, fill=None, context=None):
         data = {}
         data = {'test_id': test.id,
                 'method_id': line.method_id.id,
@@ -529,7 +527,7 @@ class QcTest(orm.Model):
                 'test_uom_id': line.uom_id.id,
                 'proof_type': line.type,
                 }
-        if fill or force_fill:
+        if fill:
             if line.type == 'qualitative':
                 # Fill with the first correct value found.
                 data['actual_value_ql'] = (
