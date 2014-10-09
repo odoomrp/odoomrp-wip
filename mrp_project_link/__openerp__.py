@@ -17,25 +17,17 @@
 ##############################################################################
 
 {
-    "name": "Mrp Project Link",
+    "name": "MRP Project Link",
     "version": "1.0",
-    "depends": ["mrp_operations_project"],
-    "author": "Odoo MRP team",
+    "depends": [
+        "mrp_operations_project",
+    ],
+    "author": "OdooMRP team",
     "category": "Manufacturing",
-    "description": """
-        New Manufacturing Order(MO) and Workorder(WO) links on Project Task.
-
-        New Features:
-            - When a MO starts, create a task and assign to the order.
-            - When a WO starts:
-                * Create a task for each user assigned to the WO.
-                * Assign all created task to the WO.
-                * Assign all created task to the Workorder's MO.
-                * Assign MO's task as WO's task's parent.
-    """,
-    'data': ["views/project_task_view.xml",
-             "views/mrp_production_view.xml"],
-    'demo': [],
+    'data': [
+        "views/project_task_view.xml",
+        "views/mrp_production_view.xml",
+    ],
     'installable': True,
     'auto_install': False,
 }
