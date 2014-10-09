@@ -27,11 +27,13 @@ from openerp import api, fields, models
 class MrpWorkOrderProduce(models.TransientModel):
 
     _name = "mrp.work.order.produce"
-    
+
     def default_get(self, cr, uid, fields, context=None):
-        a=super(MrpWorkOrderProduce, self).default_get( cr, uid, fields, context=context)
-        work = self.pool['mrp.production.workcenter.line'].browse(cr, uid, context.get('active_ids'), context=context)[0]
-        a.update({'final_product':work.final_product_to_stock})
+        a = super(MrpWorkOrderProduce, self).default_get(
+            cr, uid, fields, context=context)
+        work = self.pool['mrp.production.workcenter.line'].browse(
+            cr, uid, context.get('active_ids'), context=context)[0]
+        a.update({'final_product': work.final_product_to_stock})
         return a
 
     def _get_product_id(self):
@@ -58,7 +60,7 @@ class MrpWorkOrderProduce(models.TransientModel):
         self.pool['mrp.production'].action_produce(
             cr, uid, production_id, False, data.mode, data, context=context)
         return {}
-    
+
     def do_consume(self, cr, uid, ids, context=None):
         work_line = self.pool['mrp.production.workcenter.line'].browse(
             cr, uid, context.get("active_id"), context=context)
@@ -68,7 +70,7 @@ class MrpWorkOrderProduce(models.TransientModel):
         self.pool['mrp.production'].action_produce(
             cr, uid, production_id, False, 'consume', data, context=context)
         return {}
-    
+
     def do_consume_produce(self, cr, uid, ids, context=None):
         work_line = self.pool['mrp.production.workcenter.line'].browse(
             cr, uid, context.get("active_id"), context=context)
@@ -76,7 +78,8 @@ class MrpWorkOrderProduce(models.TransientModel):
         assert production_id
         data = self.browse(cr, uid, ids[0], context=context)
         self.pool['mrp.production'].action_produce(
-            cr, uid, production_id, False, 'consume_produce', data, context=context)
+            cr, uid, production_id, False, 'consume_produce', data,
+            context=context)
         return {}
 
     def on_change_qty(self, cr, uid, ids, product_qty, consume_lines,
@@ -101,7 +104,7 @@ class MrpWorkOrderProduce(models.TransientModel):
         for consume in consume_lines:
             new_consume_lines.append([0, False, consume])
         return {'value': {'consume_lines': new_consume_lines}}
-    
+
     def _get_product_qty(self):
         """ To obtain product quantity
         @param self: The object pointer.
@@ -119,10 +122,11 @@ class MrpWorkOrderProduce(models.TransientModel):
                 if not move.scrapped:
                     done += move.product_qty
         return (prod.product_qty - done) or prod.product_qty
-    
+
 #    @api.one
 #    def _get_final_product(self):
-#        work = self.env['mrp.production.workcenter.line'].browse(self.env.context.get('active_ids'))[0]
+#        work = self.env['mrp.production.workcenter.line'].browse(
+#            self.env.context.get('active_ids'))[0]
 #        return work.final_product_to_stock
 
     product_id = fields.Many2one('product.product',
@@ -131,7 +135,7 @@ class MrpWorkOrderProduce(models.TransientModel):
                                digits=(12, 6), required=True,
                                default=_get_product_qty)
     mode = fields.Selection([('consume_produce', 'Consume & Produce'),
-                                  ('consume', 'Consume Only')],
+                             ('consume', 'Consume Only')],
                             string='Mode', required=True,
                             default='consume')
     lot_id = fields.Many2one('stock.production.lot', 'Lot')
@@ -139,7 +143,7 @@ class MrpWorkOrderProduce(models.TransientModel):
                                     'work_produce_id',
                                     string='Products Consumed')
     track_production = fields.Boolean('Track production', default=_get_track)
-    
+
     final_product = fields.Boolean(string='Final Product to Stock')
 
 
