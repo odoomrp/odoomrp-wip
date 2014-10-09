@@ -7,8 +7,8 @@
             <field name="inherit_id" ref="quality_control.qc_test_template_line_form_view"/>
             <field name="arch" type="xml">
                 <field name="proof_id" position="after">
-                    <field name="validity_start_date" />
-                    <field name="validity_end_date" />
+                    <field name="date_start" />
+                    <field name="date_end" />
                 </field>
             </field>
         </record>
@@ -18,8 +18,8 @@
             <field name="inherit_id" ref="quality_control.qc_test_template_line_tree_view"/>
             <field name="arch" type="xml">
                 <field name="proof_id" position="after">
-                    <field name="validity_start_date" />
-                    <field name="validity_end_date" />
+                    <field name="date_start" />
+                    <field name="date_end" />
                 </field>
             </field>
         </record>

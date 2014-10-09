@@ -16,17 +16,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: quality_control_between_dates
-#: code:addons/quality_control_between_dates/models/qc_test.py:41
-#, python-format
-msgid "Template Test Line Error!!"
-msgstr ""
-
-#. module: quality_control_between_dates
-#: model:ir.model,name:quality_control_between_dates.model_qc_test_template_line
-msgid "Test Template Line"
-msgstr ""
-
-#. module: quality_control_between_dates
 #: field:qc.test.template.line,validity_end_date:0
 msgid "Validity End Date"
 msgstr ""
@@ -37,8 +26,8 @@ msgid "Validity Start Date"
 msgstr ""
 
 #. module: quality_control_between_dates
-#: code:addons/quality_control_between_dates/models/qc_test.py:42
+#: code:addons/quality_control_between_dates/models/qc_test.py:50
 #, python-format
-msgid "You must include Validity End Date in the previous lines of that question."
-msgstr ""
+msgid "You cannot have 2 lines of the same question that overlap!"
+msgstr "No puede tener dos líneas de la misma pregunta que se superpongan."
 
