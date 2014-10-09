@@ -31,12 +31,12 @@
                         <field name="product" />
                         <field name="packagings" nolabel="1"
                             context="{'default_ul_container':id}">
-                            <tree>
-                                <field name="ean" />
-                                <field name="ul_container" />
-                                <field name="product_tmpl_id" />
-                                <field name="qty" />
-                                <field name="ul" />
+                            <tree editable="bottom">
+                                <field name="ul_qty"/>
+                                <field name="rows"/>
+                                <field name="ul"/>
+                                <field name="qty"/>
+                                <field name="product_tmpl_id"/>
                             </tree>
                         </field>
                     </group>
