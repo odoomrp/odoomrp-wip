@@ -19,13 +19,6 @@
 from openerp import models, fields
 
 
-class MrpProductionProductLine(models.Model):
-
-    _inherit = 'mrp.production.product.line'
-
-    task_id = fields.Many2one('project.task', string="Task")
-
-
 class Task(models.Model):
     _inherit = "project.task"
 

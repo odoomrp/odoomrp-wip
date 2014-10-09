@@ -20,12 +20,11 @@ from openerp import models, fields, api
 
 
 class MrpProduction(models.Model):
-
     _inherit = 'mrp.production'
 
-    analytic_account_id = fields.Many2one("account.analytic.account",
-                                          string="Analytic Account")
     project_id = fields.Many2one("project.project", string="Project")
+    analytic_account_id = fields.Many2one(
+        "account.analytic.account", string="Analytic Account")
 
     @api.multi
     def action_in_production(self):
@@ -39,15 +38,15 @@ class MrpProduction(models.Model):
                 project_domain = [('analytic_account_id', '=',
                                    record.analytic_account_id.id)]
                 projects = project_obj.search(project_domain)
-                
                 if projects:
                     project_id = projects[0]
                 else:
                     analytic_account = record.analytic_account_id.id
-                    proj_vals = {'use_tasks': True,
-                                 'analytic_account_id': analytic_account,
-                                 'user_id': record.user_id.id,
-                                }
+                    proj_vals = {
+                        'use_tasks': True,
+                        'analytic_account_id': analytic_account,
+                        'user_id': record.user_id.id,
+                    }
                     project_id = project_obj.create(proj_vals)
                 record.project_id = project_id.id
             task_domain = [('mrp_production_id', '=', record.id),
@@ -66,20 +65,19 @@ class MrpProduction(models.Model):
                 """) % (record.name, record.product_id.default_code,
                         record.product_id.name, record.product_qty,
                         record.bom_id.name, record.date_planned)
-                task_values = {'mrp_production_id': record.id,
-                               'user_id': record.user_id.id,
-                               'reviewer_id': record.user_id.id,
-                               'name': task_name,
-                               'project_id': project_id.id,
-                               'description': task_descr
-                               }
+                task_values = {
+                    'mrp_production_id': record.id,
+                    'user_id': record.user_id.id,
+                    'reviewer_id': record.user_id.id,
+                    'name': task_name,
+                    'project_id': project_id.id,
+                    'description': task_descr
+                }
                 task_obj.create(task_values)
-        res = super(MrpProduction, self).action_in_production()
-        return res
+        return super(MrpProduction, self).action_in_production()
 
 
 class MrpProductionWorkcenterLine(models.Model):
-
     _inherit = 'mrp.production.workcenter.line'
 
     @api.multi
@@ -98,23 +96,28 @@ class MrpProductionWorkcenterLine(models.Model):
             Hour: %s
             """) % (record.production_id.name, record.name,
                     record.workcenter_id.name, record.cycle, record.hour)
-            task_values = {'mrp_production_id': record.production_id.id,
-                           'wk_order': record.id,
-                           'user_id': False,
-                           'reviewer_id': record.production_id.user_id.id,
-                           'description': task_descr,
-                           'project_id': record.production_id.project_id.id,
-                           'parent_ids': [(6, 0, production_tasks.ids)]
-                           }
+            task_values = {
+                'mrp_production_id': record.production_id.id,
+                'wk_order': record.id,
+                'user_id': False,
+                'reviewer_id': record.production_id.user_id.id,
+                'description': task_descr,
+                'project_id': record.production_id.project_id.id,
+                'parent_ids': [(6, 0, production_tasks.ids)]
+            }
             if record.routing_wc_line.operation:
                 count = record.routing_wc_line.operation.op_number
-                if count > 0:
-                    while count > 0:
-                        task_name = ("%s:: WO%s-%s:: %s") % \
-                                    (record.production_id.name,
-                                     str(record.sequence).zfill(3),
-                                     str(count).zfill(3), record.name)
-                        task_values['name'] = task_name
-                        task_obj.create(task_values)
-                        count -= 1
+                for i in range(count):
+                    task_name = ("%s:: WO%s-%s:: %s") % \
+                                (record.production_id.name,
+                                 str(record.sequence).zfill(3),
+                                 str(i).zfill(3), record.name)
+                    task_values['name'] = task_name
+                    task_obj.create(task_values)
         return res
+
+
+class MrpProductionProductLine(models.Model):
+    _inherit = 'mrp.production.product.line'
+
+    task_id = fields.Many2one('project.task', string="Task")
