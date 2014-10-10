@@ -61,19 +61,15 @@ class StockProductioLot(orm.Model):
             res[lot.id] = 'normal'
             if life_date and life_date < today:
                 res[lot.id] = 'expired'
-                continue
-            if alert_date and removal_date and today > alert_date and \
+            elif alert_date and removal_date and today > alert_date and \
                     today <= removal_date:
                 res[lot.id] = 'alert'
-                continue
-            if removal_date and use_date and today > removal_date and \
+            elif removal_date and use_date and today > removal_date and \
                     today <= use_date:
                 res[lot.id] = 'to_remove'
-                continue
-            if use_date and life_date and today > use_date and \
+            elif use_date and life_date and today > use_date and \
                     today <= life_date:
                 res[lot.id] = 'best_before'
-                continue
         return res
 
     _columns = {
