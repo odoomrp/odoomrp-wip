@@ -62,11 +62,31 @@ class QcPosibleValue(orm.Model):
         'name': fields.char('Name', size=200, required=True, select="1",
                             translate=True),
         'active': fields.boolean('Active', select="1"),
+        'ok': fields.boolean('Ok', select="1"),
+        'no_ok': fields.boolean('No Ok', select="1"),
     }
 
     _defaults = {
         'active': True,
     }
+
+    def onchange_ok_no_ok(self, cr, uid, ids, ok, no_ok, context=None):
+        res = {}
+        if not ok and not no_ok:
+            return {'value': {},
+                    'warning': {'title': _('Ok-No Ok Error'),
+                                'message': _('You must indicate whether the'
+                                             ' response is ok, or not ok')
+                                }
+                    }
+        if ok and no_ok:
+            return {'value': {'no_ok': False},
+                    'warning': {'title': _('Ok-No Ok Error'),
+                                'message': _('The answer may not be ok, and'
+                                             ' not ok')
+                                }
+                    }
+        return {'value': res}
 
     def search(self, cr, uid, args, offset=0, limit=None, order=None,
                context=None, count=False):
@@ -506,7 +526,7 @@ class QcTest(orm.Model):
         new_data = []
         fill = test.test_template_id.fill_correct_values
         for line in test.test_template_id.test_template_line_ids:
-            data = self.self._prepare_test_line(
+            data = self._prepare_test_line(
                 cr, uid, test, line, fill=fill or force_fill,  context=context)
             new_data.append((0, 0, data))
         return new_data
@@ -547,34 +567,6 @@ class QcTestLine(orm.Model):
     _name = 'qc.test.line'
     _rec_name = 'proof_id'
 
-    def quality_test_check(self, cr, uid, ids, field_name, field_value,
-                           context=None):
-        res = {}
-        lines = self.browse(cr, uid, ids, context=None)
-        for line in lines:
-            if line.proof_type == 'qualitative':
-                res[line.id] = self.quality_test_qualitative_check(
-                    cr, uid, line, context=None)
-            else:
-                res[line.id] = self.quality_test_quantitative_check(
-                    cr, uid, line, context=None)
-        return res
-
-    def quality_test_qualitative_check(self, cr, uid, test_line, context=None):
-        if test_line.actual_value_ql in test_line.valid_value_ids:
-            return True
-        else:
-            return False
-
-    def quality_test_quantitative_check(self, cr, uid, test_line,
-                                        context=None):
-        amount = self.pool['product.uom']._compute_qty(
-            cr, uid, test_line.uom_id.id, test_line.actual_value_qt,
-            test_line.test_uom_id.id)
-        if amount >= test_line.min_value and amount <= test_line.max_value:
-            return True
-        else:
-            return False
 
     _columns = {
         'test_id': fields.many2one('qc.test', 'Test'),
@@ -610,8 +602,7 @@ class QcTestLine(orm.Model):
         'proof_type': fields.selection([('qualitative', 'Qualitative'),
                                         ('quantitative', 'Quantitative')],
                                        'Proof Type', readonly=True),
-        'success': fields.function(quality_test_check, type='boolean',
-                                   method=True, string="Success?", select="1"),
+        'success': fields.boolean('Success?', select="1"),
     }
 
     def onchange_actual_value_qt(self, cr, uid, ids, uom_id, test_uom_id,
@@ -631,10 +622,18 @@ class QcTestLine(orm.Model):
     def onchange_actual_value_ql(self, cr, uid, ids, actual_value_ql,
                                  valid_value_ids, context=None):
         res = {}
+        value_obj = self.pool['qc.posible.value']
+        print '*** ESTOY EN ONCHANGE_QL, actual_value_ql: ' + str(actual_value_ql)
         if actual_value_ql:
             valid = valid_value_ids[0][2]
+            print '*** valid: ' + str(valid)
             if actual_value_ql in valid:
-                res.update({'success': True})
+                value = value_obj.browse(cr, uid, actual_value_ql, context)
+                if value.ok:
+                    res.update({'success': True})
+                else:
+                    res.update({'success': False})
             else:
+                print '*** por 2'
                 res.update({'success': False})
         return {'value': res}

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-09 13:58+0000\n"
-"PO-Revision-Date: 2014-10-09 13:58+0000\n"
+"POT-Creation-Date: 2014-10-10 11:14+0000\n"
+"PO-Revision-Date: 2014-10-10 11:14+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,6 +28,12 @@ msgstr ""
 #: field:qc.test.template.category,active:0
 #: field:qc.test.template.trigger,active:0
 msgid "Active"
+msgstr ""
+
+#. module: quality_control
+#: field:qc.test.line,valid_value_ids:0
+#: field:qc.test.template.line,valid_value_ids:0
+msgid "Answers"
 msgstr ""
 
 #. module: quality_control
@@ -129,7 +135,7 @@ msgid "Enabled"
 msgstr ""
 
 #. module: quality_control
-#: code:addons/quality_control/models/quality_control.py:230
+#: code:addons/quality_control/models/quality_control.py:249
 #: constraint:qc.test.template.category:0
 #, python-format
 msgid "Error ! You can not create recursive categories."
@@ -269,10 +275,27 @@ msgid "Name"
 msgstr ""
 
 #. module: quality_control
+#: field:qc.posible.value,no_ok:0
+msgid "No Ok"
+msgstr ""
+
+#. module: quality_control
 #: view:qc.test:quality_control.qc_test_form_view
 #: field:qc.test.line,notes:0
 #: field:qc.test.template.line,notes:0
 msgid "Notes"
+msgstr ""
+
+#. module: quality_control
+#: field:qc.posible.value,ok:0
+msgid "Ok"
+msgstr ""
+
+#. module: quality_control
+#: code:addons/quality_control/models/quality_control.py:77
+#: code:addons/quality_control/models/quality_control.py:84
+#, python-format
+msgid "Ok-No Ok Error"
 msgstr ""
 
 #. module: quality_control
@@ -323,7 +346,7 @@ msgid "Proof Type"
 msgstr ""
 
 #. module: quality_control
-#: code:addons/quality_control/models/quality_control.py:133
+#: code:addons/quality_control/models/quality_control.py:152
 #: sql_constraint:qc.proof:0
 #, python-format
 msgid "Proof-Method relation alredy exists!"
@@ -393,12 +416,6 @@ msgstr ""
 #. module: quality_control
 #: selection:qc.test.template,type:0
 msgid "Related"
-msgstr ""
-
-#. module: quality_control
-#: field:qc.test.line,valid_value_ids:0
-#: field:qc.test.template.line,valid_value_ids:0
-msgid "Answers"
 msgstr ""
 
 #. module: quality_control
@@ -559,6 +576,12 @@ msgid "The active field allows you to hide the category without removing it."
 msgstr ""
 
 #. module: quality_control
+#: code:addons/quality_control/models/quality_control.py:85
+#, python-format
+msgid "The answer may not be ok, and not ok"
+msgstr ""
+
+#. module: quality_control
 #: help:qc.test,success:0
 msgid "This field will be active if all tests have succeeded."
 msgstr ""
@@ -614,6 +637,12 @@ msgstr ""
 #. module: quality_control
 #: selection:qc.test,state:0
 msgid "Waiting Supervisor Approval"
+msgstr ""
+
+#. module: quality_control
+#: code:addons/quality_control/models/quality_control.py:78
+#, python-format
+msgid "You must indicate whether the response is ok, or not ok"
 msgstr ""
 
 #. module: quality_control
