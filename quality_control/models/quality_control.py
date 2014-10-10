@@ -623,10 +623,8 @@ class QcTestLine(orm.Model):
                                  valid_value_ids, context=None):
         res = {}
         value_obj = self.pool['qc.posible.value']
-        print '*** ESTOY EN ONCHANGE_QL, actual_value_ql: ' + str(actual_value_ql)
         if actual_value_ql:
             valid = valid_value_ids[0][2]
-            print '*** valid: ' + str(valid)
             if actual_value_ql in valid:
                 value = value_obj.browse(cr, uid, actual_value_ql, context)
                 if value.ok:
@@ -634,6 +632,5 @@ class QcTestLine(orm.Model):
                 else:
                     res.update({'success': False})
             else:
-                print '*** por 2'
                 res.update({'success': False})
         return {'value': res}
