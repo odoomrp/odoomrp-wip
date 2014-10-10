@@ -28,18 +28,19 @@
             <field name="arch" type="xml">
                 <sheet position="inside">
                     <group>
+                        <field name="ul_qty" />
                         <field name="product" />
-                        <field name="packagings" nolabel="1"
-                            context="{'default_ul_container':id}">
-                            <tree editable="bottom">
-                                <field name="ul_qty"/>
-                                <field name="rows"/>
-                                <field name="ul"/>
-                                <field name="qty"/>
-                                <field name="product_tmpl_id"/>
-                            </tree>
-                        </field>
                     </group>
+                    <field name="packagings" nolabel="1"
+                        context="{'default_ul_container':id}">
+                        <tree editable="bottom">
+                            <field name="ul_qty"/>
+                            <field name="rows"/>
+                            <field name="ul"/>
+                            <field name="qty"/>
+                            <field name="product_tmpl_id"/>
+                        </tree>
+                    </field>
                 </sheet>
             </field>
         </record>

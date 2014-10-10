@@ -37,6 +37,7 @@ class ProductUl(models.Model):
                               string='Product',
                               help='This is the related product when the UL is'
                               ' sold.')
+    ul_qty = fields.Float(string='Quantity')
 
 
 class ProductPackaging(models.Model):
