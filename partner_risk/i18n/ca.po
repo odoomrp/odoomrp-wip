@@ -1,0 +1,197 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* nan_partner_risk
+#
+# Albert Cervera i Areny <albert@nan-tic.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 5.0.5-bzr\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-04-19 14:12+0000\n"
+"PO-Revision-Date: 2012-03-06 23:49+0000\n"
+"Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
+"<jesteve@zikzakmedia.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-08-28 08:38+0000\n"
+"X-Generator: Launchpad (build 15864)\n"
+"Language: ca\n"
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:241
+#: field:open.risk.window,draft_invoices_amount:0
+#: field:res.partner,draft_invoices_amount:0
+#, python-format
+msgid "Draft Invoices"
+msgstr "Factures esborrany"
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:244
+#: field:open.risk.window,total_debt:0
+#: field:res.partner,total_debt:0
+#, python-format
+msgid "Total Debt"
+msgstr "Deute total"
+
+#. module: nan_partner_risk
+#: view:sale.order:0
+msgid "Approve Order"
+msgstr "Aprova la comanda"
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:240
+#: field:res.partner,pending_amount:0
+#, python-format
+msgid "Unexpired Pending Payments"
+msgstr "Efectes pendents no vençuts"
+
+#. module: nan_partner_risk
+#: model:ir.actions.wizard,name:nan_partner_risk.open_risk_wizard
+#: view:res.partner:0
+msgid "View Risk Information"
+msgstr "Veure la informació del risc"
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:246
+#: field:open.risk.window,total_risk_percent:0
+#: field:res.partner,total_risk_percent:0
+#, python-format
+msgid "Credit Usage (%)"
+msgstr "Ús del crèdit (%)"
+
+#. module: nan_partner_risk
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La referència de la comanda ha de ser única!"
+
+#. module: nan_partner_risk
+#: model:ir.actions.act_window,name:nan_partner_risk.action_open_risk_window
+msgid "Show Partner Risk Information"
+msgstr "Mostra informació del risc comptable d'una empresa"
+
+#. module: nan_partner_risk
+#: view:sale.order:0
+msgid "Confirm Order"
+msgstr "Confirma la comanda"
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:245
+#: field:open.risk.window,available_risk:0
+#: field:res.partner,available_risk:0
+#, python-format
+msgid "Available Credit"
+msgstr "Crèdit disponible"
+
+#. module: nan_partner_risk
+#: field:open.risk.window,pending_amount:0
+msgid "Unexpired Unpaid Payments"
+msgstr "Efectes impagats no vençuts"
+
+#. module: nan_partner_risk
+#: view:sale.order:0
+msgid "Cancel Order"
+msgstr "Cancel·la la comanda"
+
+#. module: nan_partner_risk
+#: field:sale.order,amount_invoiced:0
+#: field:sale.order.line,amount_invoiced:0
+msgid "Invoiced Amount"
+msgstr "Import facturat"
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:239
+#: field:open.risk.window,unpayed_amount:0
+#: field:res.partner,unpayed_amount:0
+#, python-format
+msgid "Expired Unpaid Payments"
+msgstr "Efectes impagats vençuts"
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:97
+#, python-format
+msgid ""
+"Gives the state of the quotation or sale order. The exception state is "
+"automatically set when a cancel operation occurs in the invoice validation "
+"(Invoice Exception) or in the packing list process (Shipping Exception). The "
+"'Waiting Schedule' state is set when the invoice is confirmed but waiting "
+"for the scheduler to run on the date 'Date Ordered'."
+msgstr ""
+"Mostra l'estat del pressupost o comanda de venda. L'estat 'Excepció' es posa "
+"automàticament quan succeeix una operació de cancel·lació durant la "
+"validació de la factura (Excepció de Factura) o en el procés d'emetre "
+"l'albarà (Excepció d'albarà). L'estat 'Esperant planificació' es posa quan "
+"la factura està confirmada però esperant el planificador per llançar-la el "
+"dia 'Data comanda'."
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:242
+#: field:open.risk.window,circulating_amount:0
+#: field:res.partner,circulating_amount:0
+#, python-format
+msgid "Payments Sent to Bank"
+msgstr "Efectes en circulació"
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:65
+#, python-format
+msgid "Credit Limit Exceeded"
+msgstr "S'ha excedit el crèdit concedit"
+
+#. module: nan_partner_risk
+#: view:create.project.from.sale:0
+msgid "Partner Risk Information"
+msgstr "Informació risc comptable empresa"
+
+#. module: nan_partner_risk
+#: view:sale.order:0
+msgid "Waiting Risk Approval"
+msgstr "Esperant l'aprovació del risc"
+
+#. module: nan_partner_risk
+#: model:ir.model,name:nan_partner_risk.model_open_risk_window
+msgid "open.risk.window"
+msgstr "open.risk.window"
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:66
+#, python-format
+msgid ""
+"Warning: Credit Limit Exceeded.\n"
+"\n"
+"This partner has a credit limit of %(limit).2f and already has a debt of "
+"%(debt).2f."
+msgstr ""
+"Advertència: S'ha excedit el crèdit concedit.\n"
+"\n"
+"Aquesta empresa té un crèdit concedit màxim de %(limit).2f i ja té un deute "
+"de %(debt).2f."
+
+#. module: nan_partner_risk
+#: field:open.risk.window,credit_limit:0
+msgid "Credit Limit"
+msgstr "Crèdit concedit"
+
+#. module: nan_partner_risk
+#: code:addons/nan_partner_risk/risk.py:243
+#: field:open.risk.window,pending_orders_amount:0
+#: field:res.partner,pending_orders_amount:0
+#, python-format
+msgid "Uninvoiced Orders"
+msgstr "Comandes pendents de facturar"
+
+#. module: nan_partner_risk
+#: model:ir.model,name:nan_partner_risk.model_res_partner
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: nan_partner_risk
+#: model:ir.model,name:nan_partner_risk.model_sale_order
+msgid "Sales Order"
+msgstr "Comanda de venda"
+
+#. module: nan_partner_risk
+#: model:ir.model,name:nan_partner_risk.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línia comanda de venda"
