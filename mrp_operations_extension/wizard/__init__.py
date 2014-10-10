@@ -3,12 +3,12 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2008-2014 AvanzOSC (Daniel). All Rights Reserved
-#    Date: 10/07/2014
+#    Copyright (C) 2008-2013 AvanzOSC S.L. (Mikel Arregi) All Rights Reserved
+#
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
@@ -21,5 +21,4 @@
 #
 ##############################################################################
 
-from . import models
-from . import wizard
+from . import mrp_product_produce

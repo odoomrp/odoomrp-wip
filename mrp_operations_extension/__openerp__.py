@@ -37,16 +37,16 @@
     """,
     'author': 'OdooMRP team',
     'website': "http://www.odoomrp.com",
-    "depends": ['mrp_operations', 'mrp'],
+    "depends": ['mrp_operations', 'mrp', 'stock', ],
     "category": "Manufacturing",
-    "data": [
-        'views/mrp_workcenter_view.xml',
-        'views/mrp_routing_operation_view.xml',
-        'views/mrp_production_view.xml',
-        'views/mrp_bom_view.xml',
-        'views/mrp_workcenter_view.xml',
-        'views/mrp_routing_workcenter_view.xml',
-        'security/ir.model.access.csv',
-    ],
+    "data": ['wizard/mrp_workorder_produce_view.xml',
+             'views/mrp_workcenter_view.xml',
+             'views/mrp_routing_operation_view.xml',
+             'views/mrp_production_view.xml',
+             'views/mrp_bom_view.xml',
+             'views/mrp_workcenter_view.xml',
+             'views/mrp_routing_workcenter_view.xml',
+             'security/ir.model.access.csv'
+             ],
     "installable": True
 }

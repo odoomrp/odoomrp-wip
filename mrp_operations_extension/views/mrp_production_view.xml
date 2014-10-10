@@ -58,6 +58,8 @@
                     expr="//field[@name='workcenter_lines']/form//field[@name='workcenter_id']"
                     position="after">
                     <field name="production_id" />
+                    <button name='%(act_mrp_work_order_produce)d'
+                        type='action' string='Produce' colspan="2"/>
                 </xpath>
                 <xpath
                     expr="//field[@name='workcenter_lines']/form//field[@name='sequence']"
@@ -75,6 +77,8 @@
                 <xpath
                     expr="//field[@name='workcenter_lines']/form//field[@name='sequence']"
                     position="after">
+                    <field name="final_product_to_stock" colspan="2" />
+                    <group colspan="2" />
                     <notebook colspan="4">
                         <page string="Information">
                             <group>
@@ -110,6 +114,19 @@
                 </xpath>
             </field>
         </record>
+        <record model="ir.ui.view" id="mrp_production_tree_view_inh">
+            <field name="name">Operation Time Form View</field>
+            <field name="model">mrp.production.workcenter.line</field>
+            <field name="inherit_id"
+                ref="mrp_operations.mrp_production_workcenter_tree_view_inherit" />
+            <field name="arch" type="xml">
+                <field name="production_id" position="after">
+                    <button name='%(act_mrp_work_order_produce)d'
+                        type='action' string='Produce' />
+                </field>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="workcenter_line_inh_form_view">
             <field name="name">Work centre line inh</field>
             <field name="model">mrp.production.workcenter.line</field>
@@ -124,6 +141,14 @@
                             colspan="4" col="4" />
                     </group>
                 </group>
+                <field name="production_id" position="after">
+                    <button name='%(act_mrp_work_order_produce)d'
+                        type='action' string='Produce' colspan="2" col="2"/>
+
+                </field>
+                <field name="sequence" position="after">
+                    <field name="final_product_to_stock" />
+                </field>
             </field>
         </record>
     </data>
