@@ -186,7 +186,7 @@ msgstr "Diario"
 #: field:account.treasury.forecast.template,write_uid:0
 #: field:wiz.create.invoice,write_uid:0
 msgid "Last Updated by"
-msgstr "Actualizado por última vez por"
+msgstr "Última actualización de"
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,write_date:0
@@ -196,7 +196,7 @@ msgstr "Actualizado por última vez por"
 #: field:account.treasury.forecast.template,write_date:0
 #: field:wiz.create.invoice,write_date:0
 msgid "Last Updated on"
-msgstr "Actualizado por última vez el"
+msgstr "Última actualización en"
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,check_open:0
