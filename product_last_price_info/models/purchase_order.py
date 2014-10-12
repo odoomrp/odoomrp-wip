@@ -1,9 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
-#    Copyright (C) 2011 - 2014 Avanzosc <http://www.avanzosc.com>
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -18,7 +15,6 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-
 from openerp.osv import orm
 import time
 
@@ -36,6 +32,7 @@ class PurchaseOrder(orm.Model):
                     vals = {'last_purchase_date':
                             time.strftime('%Y-%m-%d %H:%M:%S'),
                             'last_supplier_id': line.order_id.partner_id.id,
+                            'last_purchase_price': line.price_unit
                             }
                     product_obj.write(cr, uid, [line.product_id.id], vals,
                                       context)

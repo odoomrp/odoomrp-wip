@@ -1,9 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
-#    Copyright (C) 2011 - 2014 Avanzosc <http://www.avanzosc.com>
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -18,7 +15,22 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from . import product
-from . import sale_order
-from . import purchase_order
-from . import account_invoice
+{
+    "name": "Product Last Price Info",
+    "version": "1.0",
+    "author": "OdooMRP team",
+    "category": "Product",
+    "website": "www.odoomrp.com",
+    "description": """
+    This module adds new calculate fields in product:
+        'last_purchase_price'
+        'last_purchase_date'
+        'last_supplier_id
+        'last_sale_price'
+        'last_sale_date'
+        'last_customer_id
+    """,
+    "depends": ['product', 'sale', 'purchase', ],
+    "data": ['views/product_view.xml', ],
+    "installable": True
+}
