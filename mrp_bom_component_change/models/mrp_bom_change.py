@@ -28,8 +28,10 @@ class MrpBomChange(models.Model):
     _description = 'Mrp BoM Component Change'
 
     name = fields.Char('Name', required=True)
-    new_component = fields.Many2one('product.product', 'New Component')
-    old_component = fields.Many2one('product.product', 'Old Component')
+    new_component = fields.Many2one('product.product', 'New Component',
+                                    required=True)
+    old_component = fields.Many2one('product.product', 'Old Component',
+                                    required=True)
     state = fields.Selection([('draft', 'Draft'), ('process', 'In Process'),
                               ('done', 'Done')], 'State', default='draft',
                              required=True)
@@ -53,7 +55,8 @@ class MrpBomChange(models.Model):
             self.boms = bom_lst
             if self.state != 'process':
                 self.state = 'process'
-        return {'domain': {'boms': [('id', 'in', bom_lst)]}}
+            return {'domain': {'boms': [('id', 'in', bom_lst)]}}
+        return {}
 
     @api.one
     def do_component_change(self):
