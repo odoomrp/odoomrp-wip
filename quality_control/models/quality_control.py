@@ -62,7 +62,10 @@ class QcPosibleValue(orm.Model):
         'name': fields.char('Name', size=200, required=True, select="1",
                             translate=True),
         'active': fields.boolean('Active', select="1"),
-        'ok': fields.boolean('Ok'),
+        'ok': fields.boolean('Correct answer',
+                             help = "When this field is True, the answer\n"
+                                    " is correct, When is False the answer\n"
+                                    " is not correct."),
     }
 
     _defaults = {
@@ -624,9 +627,9 @@ class QcTestLine(orm.Model):
                                                            actual_value_qt,
                                                            test_uom_id)
             if amount >= min_value and amount <= max_value:
-                res.update({'success': True})
+                res['success'] = True
             else:
-                res.update({'success': False})
+                res['success'] = False
         return {'value': res}
 
     def onchange_actual_value_ql(self, cr, uid, ids, actual_value_ql,
@@ -637,7 +640,7 @@ class QcTestLine(orm.Model):
             valid = valid_value_ids[0][2]
             if actual_value_ql in valid:
                 value = value_obj.browse(cr, uid, actual_value_ql, context)
-                res.update({'success': value.ok})
+                res['success'] = value.ok
             else:
-                res.update({'success': False})
+                res['success'] = False
         return {'value': res}
