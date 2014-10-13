@@ -21,7 +21,9 @@
 #
 ##############################################################################
 
-from openerp import api, models, fields
+from openerp import api, models, fields, exceptions
+from datetime import datetime
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class MrpProductionWorkcenterLine(models.Model):
