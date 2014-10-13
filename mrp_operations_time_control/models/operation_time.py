@@ -22,7 +22,6 @@
 ##############################################################################
 
 from openerp import api, models, fields
-from datetime import datetime
 
 
 class MrpProductionWorkcenterLine(models.Model):
