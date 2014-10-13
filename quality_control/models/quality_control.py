@@ -63,9 +63,9 @@ class QcPosibleValue(orm.Model):
                             translate=True),
         'active': fields.boolean('Active', select="1"),
         'ok': fields.boolean('Correct answer',
-                             help = "When this field is True, the answer\n"
-                                    " is correct, When is False the answer\n"
-                                    " is not correct."),
+                             help="When this field is True, the answer\n"
+                                  " is correct, When is False the answer\n"
+                                  " is not correct."),
     }
 
     _defaults = {
