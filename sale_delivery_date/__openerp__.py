@@ -35,6 +35,7 @@ This module creates:
     * a field 'delivery_date' on sale.order.line which default is sale.order's
       'delivery_date'
 
+    TODO: Take this into account for the procurements...
     """,
     "data": [
         "views/sale_order_view.xml",
