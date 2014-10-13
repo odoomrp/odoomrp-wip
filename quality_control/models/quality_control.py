@@ -567,7 +567,6 @@ class QcTestLine(orm.Model):
     _name = 'qc.test.line'
     _rec_name = 'proof_id'
 
-
     _columns = {
         'test_id': fields.many2one('qc.test', 'Test'),
         'test_template_line_id': fields.many2one('qc.test.template.line',
