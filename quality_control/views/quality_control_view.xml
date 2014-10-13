@@ -45,11 +45,10 @@
             <field name="model">qc.posible.value</field>
             <field name="arch" type="xml">
                 <form string="Proof Posible Value">
-                    <group colspan="4" col="6">
+                    <group colspan="4" col="10">
                         <field name="name" colspan="6"/>
                         <field name="active" colspan="2" />
-                        <field name="ok" on_change="onchange_ok_no_ok(ok, no_ok)" colspan="2" />
-                        <field name="no_ok" on_change="onchange_ok_no_ok(ok, no_ok)" colspan="2" />
+                        <field name="ok" colspan="2" />
                     </group>
                 </form>
             </field>
@@ -61,7 +60,6 @@
                 <tree string="Posible Value">
                     <field name="name" />
                         <field name="ok" />
-                        <field name="no_ok" />
                 </tree>
             </field>
         </record>
