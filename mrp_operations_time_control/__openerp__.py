@@ -20,7 +20,8 @@
 {
     "name": "MRP Operations Time Control",
     "version": "1.0",
-    "depends": ["base", "mrp", "mrp_operations_extension", "mrp_operation_with_quality_test"],
+    "depends": ["base", "mrp", "mrp_operations_extension",
+                "mrp_operation_with_quality_test"],
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "mrp",
@@ -28,7 +29,8 @@
     Manufacturing operations time control
     """,
     'data': ["views/operation_time_view.xml",
-             "views/mrp_production_view.xml"],
+             "views/mrp_production_view.xml"
+             "security/ir.model.access.csv"],
     "installable": True,
     "auto_install": False,
 }
