@@ -30,6 +30,7 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     @api.multi
+    @api.depends('acc_move_lines.debit', 'acc_move_lines.credit')
     def _unpayed_amount(self):
         move_line_obj = self.env['account.move.line']
         account_obj = self.env['account.account']
@@ -52,11 +53,13 @@ class ResPartner(models.Model):
             partner.unpayed_amount = amount
 
     @api.multi
+    @api.depends('acc_move_lines.debit', 'acc_move_lines.credit',
+                 'acc_move_lines.amount_residual')
     def _circulating_amount(self):
+        today = fields.date.today()
+        move_line_obj = self.env['account.move.line']
+        account_obj = self.env['account.account']
         for partner in self:
-            move_line_obj = self.env['account.move.line']
-            account_obj = self.env['account.account']
-            today = fields.date.today()
             account_lst = account_obj.search(['|', ('type', '=', 'receivable'),
                                              ('type', '=', 'payable')]).ids
             line_ids = move_line_obj.search([('partner_id', '=', partner.id),
@@ -75,6 +78,7 @@ class ResPartner(models.Model):
             partner.circulating_amount = amount
 
     @api.multi
+    @api.depends('acc_move_lines.amount_residual')
     def _pending_amount(self):
         today = fields.date.today()
         move_line_obj = self.env['account.move.line']
@@ -98,6 +102,7 @@ class ResPartner(models.Model):
             partner.pending_amount = amount
 
     @api.multi
+    @api.depends('invoice_ids.amount_total')
     def _draft_invoices_amount(self):
         today = fields.date.today()
         invoice_obj = self.env['account.invoice']
@@ -121,6 +126,8 @@ class ResPartner(models.Model):
             partner.draft_invoices_amount = val
 
     @api.multi
+    @api.depends('sale_order_ids.amount_total',
+                 'sale_order_ids.amount_invoiced')
     def _pending_orders_amount(self):
         for partner in self:
             sale_obj = self.env['sale.order']
@@ -160,6 +167,8 @@ class ResPartner(models.Model):
             self.total_risk_percent = 100
 
     @api.multi
+    @api.depends('invoice_ids.residual', 'stock_move_lines.price_unit',
+                 'stock_move_lines.product_qty')
     def _fc_risk_amount(self):
         for partner in self:
             invoice_obj = self.env['account.invoice']
@@ -241,3 +250,7 @@ class ResPartner(models.Model):
                                   compute=_available_risk)
     total_risk_percent = fields.Float(string=_('Credit Usage (%)'),
                                       compute=_total_risk_percent)
+    acc_move_lines = fields.One2many('account.move.line', 'partner_id',
+                                     'Account Move lines')
+    stock_move_lines = fields.One2many('stock.move', 'partner_id',
+                                       'Stock Move lines')
