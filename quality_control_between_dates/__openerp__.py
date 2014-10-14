@@ -19,27 +19,29 @@
     "name": "Quality Control Between Dates",
     "version": "1.0",
     "author": "OdooMRP team",
-    "category": "MRP",
+    "category": "Manufacturing",
     "website": "http://www.odoomrp.com",
     "description": """
-    This module performs the following:
+This module performs the following:
 
     1.- Created two new fields in the test template line:
 
         1.1.- Validity Start Date, required.
         1.2.- Validity End Date.
 
-    Before creating a new object in test template line, it will validate that
-    there is no previous line without Validity End Date, for the new test
-    template line you want to create.
+Before creating a new object in test template line, it will validate that
+there is no previous line without Validity End Date, for the new test
+template line you want to create.
 
-    When a new test line is created from a template, will validate that the
-    date on which this object is created, is between the new dates of the
-    Test Template Line.
+When a new test line is created from a template, will validate that the
+date on which this object is created, is between the new dates of the
+Test Template Line.
     """,
-    "depends": ['quality_control',
-                ],
-    "data": ['views/qc_test_template_line_view.xml',
-             ],
+    "depends": [
+        'quality_control',
+    ],
+    "data": [
+        'views/qc_test_template_line_view.xml',
+    ],
     "installable": True
 }
