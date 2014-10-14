@@ -23,6 +23,10 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
+                    <button class="oe_highlight" name="do_component_change" string="Change Component" type="object"
+                         states="process"/>
+                    <button class="oe_highlight" name="clear_list" string="Clear List" type="object" states="process"/>
+                    <button class="oe_highlight" name="do_revert" string="Revert" type="object" states="done"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <group col="6">
@@ -35,10 +39,6 @@
                         <field name="old_component" attrs="{'readonly':[('state','=',('done'))]}"/>
                         <field name="new_component" attrs="{'readonly':[('state','=',('done'))]}"/>
                     </group>
-                    <button class="oe_highlight" name="do_component_change" string="Change Component" type="object"
-                         states="process"/>
-                    <button class="oe_highlight" name="clear_list" string="Clear List" type="object" states="process"/>
-                    <button class="oe_highlight" name="do_revert" string="Revert" type="object" states="done"/>
                     <field name="boms" attrs="{'readonly':[('state','=',('done'))]}"/>
                 </form>
             </field>
