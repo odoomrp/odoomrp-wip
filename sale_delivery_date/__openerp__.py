@@ -32,7 +32,7 @@
     "description": """
 This module creates:
     * a field 'delivery_date' on sale.order
-    * a field 'delivery_date' on sale.order.line which default is sale.order's
+    * a field 'delivery_date' on sale.order.line whose default is sale.order's
       'delivery_date'
 
     TODO: Take this into account for the procurements...
