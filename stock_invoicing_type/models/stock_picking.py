@@ -24,17 +24,18 @@ class StockMove(models.Model):
 
     def write(self, values):
         sale_obj = self.env['sale.order']
-        pick_id = values.get('picking_id', False)
+        picking = False
+        if values.get('picking_id'):
+            picking = self.env['stock.picking'].browse(values['picking_id'])
         group_id = values.get('group_id', False)
         for rec in self:
-            if not pick_id and rec.picking_id:
-                pick_id = rec.picking_id.id
+            res_picking = picking or rec.picking_id
             if not group_id and rec.group_id:
                 group_id = rec.group_id.id
             orders = sale_obj.search([('procurement_group_id', '=', group_id)])
-            if orders:
+            if orders and res_picking:
                 inv_type = orders[0].invoice_type_id.id
-            pick_id.write({'invoice_type_id': inv_type})
+                res_picking.write({'invoice_type_id': inv_type})
         return super(StockMove, self).write(values)
 
 
