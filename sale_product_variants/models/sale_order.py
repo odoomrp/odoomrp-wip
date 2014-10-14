@@ -99,7 +99,7 @@ class SaleOrderLine(models.Model):
     @api.one
     def action_duplicate(self):
         self.copy()
-        # Force reload of payment order view as a workaround for lp:1155525
+        # Force reload of the view as a workaround for lp:1155525
         return {
             'name': _('Sale order'),
             'context': self.env.context,
