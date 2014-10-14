@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class SaleOrder(models.Model):
@@ -25,9 +25,14 @@ class SaleOrder(models.Model):
     delivery_date = fields.Date(string='Delivery date',
                                 default=fields.Date.today())
 
+    @api.one
+    @api.onchange('delivery_date')
+    def onchange_delivery_date(self):
+        for line in self.order_line:
+            line.delivery_date = self.delivery_date
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    delivery_date = fields.Date(string='Delivery date',
-                                default=fields.Date.today())
+    delivery_date = fields.Date(string='Delivery date')
