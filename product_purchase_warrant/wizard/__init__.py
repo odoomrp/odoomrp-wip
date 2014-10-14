@@ -17,20 +17,4 @@
 #
 ##############################################################################
 
-{
-    "name": "Product Purchase Warrant",
-    "version": "1.0",
-    "depends": ["base", "stock", "product"],
-    "author": "OdooMRP team",
-    "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
-    "category": "Product",
-    "description": """
-    Sets a purchase warranty term on product supplier info,
-    and apply it on incoming lots for this product and supplier
-    """,
-    'data': ["views/stock_view.xml", "views/product_view.xml",
-             "wizard/stock_transfer_details_view.xml"
-             ],
-    "installable": True,
-    "auto_install": False,
-}
+from . import stock_transfer_details
