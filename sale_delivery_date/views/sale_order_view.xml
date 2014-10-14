@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="sale_order_delivery_date_form_view">
+            <field name="name">sale.order.delivery.date.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="date_order" position="after">
+                    <field name="delivery_date" />
+                </field>
+                <field name="order_line" position="attributes">
+                    <attribute name="context">{'default_delivery_date':delivery_date}</attribute>
+                </field>
+                <xpath expr="//field[@name='order_line']/form//field[@name='tax_id']" position="after">
+                    <field name="delivery_date" />
+                </xpath>
+            </field>
+        </record>
+    
+    </data>
+</openerp>
