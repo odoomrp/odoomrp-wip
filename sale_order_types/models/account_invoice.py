@@ -28,13 +28,20 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     @api.multi
-    @api.one
     def _prepare_refund(self, invoice, date=None, period_id=None,
                         description=None, journal_id=None):
-        if self.origin:
+        values = super(AccountInvoice, self)._prepare_refund(
+            invoice, date, period_id, description, journal_id)
+        if invoice.origin:
             orders = self.env['sale.order'].search(
-                [('name', '=', self.origin)])
+                [('name', '=', invoice.origin)])
             if orders:
-                journal_id = orders[0].type_id.journal_id.id
-        return super(AccountInvoice, self)._prepare_refund(
-            self, invoice, date, period_id, description, journal_id)
+                journal = orders[0].type_id.refund_journal_id
+            else:
+                pickings = self.env['stock.picking'].search(
+                    [('name', '=', invoice.origin)])
+                if pickings:
+                    journal = pickings[0].sale_id.type_id.refund_journal_id
+            if journal:
+                values['journal_id'] = journal.id
+        return values
