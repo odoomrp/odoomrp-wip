@@ -53,7 +53,7 @@ class MrpBomChange(models.Model):
             self.boms = bom_lst
             if self.state != 'process':
                 self.state = 'process'
-        return {'domain': {'boms': [('id', 'in', bom_lst)]}}
+            return {'domain': {'boms': [('id', 'in', bom_lst)]}}
 
     @api.one
     def do_component_change(self):
