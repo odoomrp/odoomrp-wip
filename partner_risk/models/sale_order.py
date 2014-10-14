@@ -31,7 +31,7 @@ class SaleOrder(models.Model):
                 ('draft', 'Draft Quotation'))
             super(SaleOrder, self)._columns['state'].selection.insert(
                 i+1, ('wait_risk', 'Waiting Risk Approval'))
-        return super(SaleOrder, self).__init__(pool, cr)
+        super(SaleOrder, self).__init__(pool, cr)
 
     amount_invoiced = fields.Float(string='Invoiced Amount',
                                    compute="_amount_invoiced")

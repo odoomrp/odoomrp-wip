@@ -30,7 +30,6 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     @api.multi
-    @api.depends('unpayed_amount')
     def _unpayed_amount(self):
         move_line_obj = self.env['account.move.line']
         account_obj = self.env['account.account']
@@ -53,7 +52,6 @@ class ResPartner(models.Model):
             partner.unpayed_amount = amount
 
     @api.multi
-    @api.depends('circulating_amount')
     def _circulating_amount(self):
         for partner in self:
             move_line_obj = self.env['account.move.line']
@@ -77,7 +75,6 @@ class ResPartner(models.Model):
             partner.circulating_amount = amount
 
     @api.multi
-    @api.depends('pending_amount')
     def _pending_amount(self):
         today = fields.date.today()
         move_line_obj = self.env['account.move.line']
@@ -101,7 +98,6 @@ class ResPartner(models.Model):
             partner.pending_amount = amount
 
     @api.multi
-    @api.depends('draft_invoices_amount')
     def _draft_invoices_amount(self):
         today = fields.date.today()
         invoice_obj = self.env['account.invoice']
@@ -125,7 +121,6 @@ class ResPartner(models.Model):
             partner.draft_invoices_amount = val
 
     @api.multi
-    @api.depends('pending_orders_amount')
     def _pending_orders_amount(self):
         for partner in self:
             sale_obj = self.env['sale.order']
@@ -138,7 +133,8 @@ class ResPartner(models.Model):
             partner.pending_orders_amount = total
 
     @api.multi
-    @api.depends('total_debt')
+    @api.depends('unpayed_amount', 'pending_amount', 'circulating_amount',
+                 'pending_orders_amount')
     def _total_debt(self):
         for partner in self:
             pending_orders = partner.pending_orders_amount or 0.0
@@ -149,25 +145,21 @@ class ResPartner(models.Model):
             partner.total_debt = (pending_orders + circulating + unpayed +
                                   pending + draft_invoices)
 
-    @api.multi
-    @api.depends('available_risk')
+    @api.one
+    @api.depends('total_debt', 'credit_limit')
     def _available_risk(self):
-        for partner in self:
-            av_risk = partner.credit_limit - partner.total_debt
-            partner.available_risk = av_risk
+        self.available_risk = self.credit_limit - self.total_debt
 
-    @api.multi
-    @api.depends('total_risk_percent')
+    @api.one
+    @api.depends('total_debt', 'credit_limit')
     def _total_risk_percent(self):
-        for partner in self:
-            if partner.credit_limit:
-                partner.total_risk_percent = (100.0 * partner.total_debt /
-                                              partner.credit_limit)
-            else:
-                partner.total_risk_percent = 100
+        if self.credit_limit:
+            self.total_risk_percent = (100.0 * self.total_debt /
+                                       self.credit_limit)
+        else:
+            self.total_risk_percent = 100
 
     @api.multi
-    @api.depends('financial_risk_amount', 'comercial_risk_amount')
     def _fc_risk_amount(self):
         for partner in self:
             invoice_obj = self.env['account.invoice']
