@@ -19,19 +19,15 @@
 
 {
     "name": "Partner Risk Insurance",
-    "version": "0.1",
+    "version": "1.0",
     "description": """
     This module adds a new tab in the partner form to introduce risk insurance
      information.
-    --Module of nan-tic nan_partner_insurance ported by Factor Libre to
-     OpenERP 7
 """,
     "author": "Factor Libre S.L, NaN·tic, AvanzOSC",
     'contributors': ["Daniel Campos <danielcampos@avanzosc.es>"],
     "website": "http://www.factorlibre.com",
-    "depends": [
-        'base',
-    ],
+    "depends": [],
     "category": "Custom Modules",
     "data": ['views/res_partner_view.xml'],
     "active": False,
