@@ -34,7 +34,7 @@ class ResPartner(models.Model):
     def _unpayed_amount(self):
         move_line_obj = self.env['account.move.line']
         account_obj = self.env['account.account']
-        today = fields.date.today()
+        today = fields.Date.today()
         for partner in self:
             account_lst = account_obj.search(['|', ('type', '=', 'receivable'),
                                               ('type', '=', 'payable')]).ids
