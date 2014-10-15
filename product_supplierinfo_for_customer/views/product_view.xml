@@ -46,12 +46,12 @@
             <field name="inherit_id" ref="product.product_template_form_view" />
             <field name="arch" type="xml">
                 <field name="seller_ids" position="attributes">
-                    <attribute name="context">{'default_search_type':'supplier','default_type':'supplier'}</attribute>
+                    <attribute name="context">{'default_search_type':'supplier','default_type':'supplier','default_product_tmpl_id':id}</attribute>
                     <attribute name="domain">[('type','=','supplier')]</attribute>
                     <attribute name="invisible">1</attribute>
                 </field>
                 <field name="seller_ids" position="after">
-                    <field name="supplier_ids" context="{'defautl_search_type':'supplier','default_type':'supplier'}"
+                    <field name="supplier_ids" context="{'defautl_search_type':'supplier','default_type':'supplier','default_product_tmpl_id':id}"
                         domain="[('type','=','supplier')]" />
                 </field>
                 <xpath
@@ -59,7 +59,7 @@
                     position="before">
                     <separator string="Customers" />
                     <field name="customer_ids"
-                        context="{'default_search_type':'customer','default_type':'customer'}">
+                        context="{'default_search_type':'customer','default_type':'customer','default_product_tmpl_id':id}">
                     </field>
                 </xpath>
             </field>
