@@ -67,8 +67,8 @@ class mrp_production_workcenter_line(models.Model):
                                    'work_order', string='Product Lines')
     routing_wc_line = fields.Many2one('mrp.routing.workcenter',
                                       string='Routing WC Line')
-    final_product_to_stock = fields.Boolean(
-        string='Move Final Product to Stock')
+    make_production = fields.Boolean(
+        string='Move produced quantity to stock')
 
     @api.model
     def create(self, data):
@@ -76,6 +76,6 @@ class mrp_production_workcenter_line(models.Model):
         if 'routing_wc_line' in data:
             routing_wc_line_id = data.get('routing_wc_line')
             work = workcenter_obj.browse(routing_wc_line_id)
-            data.update({'final_product_to_stock':
-                         work.operation.final_product_to_stock})
+            data.update({'make_production':
+                         work.operation.make_production})
         return super(mrp_production_workcenter_line, self).create(data)

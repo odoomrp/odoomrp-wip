@@ -75,8 +75,7 @@
                 <xpath
                     expr="//field[@name='workcenter_lines']/form//field[@name='sequence']"
                     position="after">
-                    <field name="final_product_to_stock" colspan="2" />
-                    <group colspan="2" />
+                    <field name="make_production" colspan="2" />
                     <notebook colspan="4">
                         <page string="Materials">
                             <group string="Product Lines">
@@ -169,11 +168,14 @@
                 <button name="button_cancel" position="after">
                     <button name='%(act_mrp_work_order_produce)d'
                         type='action' string='Produce'
-                        attrs="{'invisible':[('final_product_to_stock','=',False)]}"
+                        attrs="{'invisible':[('make_production','=',False),('state','in',['draft','cancel','pause','done'])]}"
+                        states="startworking"
                         />
                     <button name='%(act_mrp_work_order_produce)d'
-                        type='action' string='Consume' 
-                        attrs="{'invisible':[('final_product_to_stock','=',True)]}" />
+                        type='action' string='Consume'
+                        attrs="{'invisible':[('make_production','=',True),('state','in',['draft','cancel','pause','done'])]}" 
+                        states="startworking"
+                        />
                 </button>
                 <page string="Information" position="inside">
                     <group string="Product Lines" colspan="4" col="4">
@@ -217,7 +219,7 @@
                     name='%(act_mrp_work_order_produce)d' type='action' string='Produce' colspan="2" 
                     col="2" /> </field> -->
                 <field name="sequence" position="after">
-                    <field name="final_product_to_stock" />
+                    <field name="make_production" />
                 </field>
             </field>
 
