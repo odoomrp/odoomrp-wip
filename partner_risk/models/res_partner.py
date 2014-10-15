@@ -56,7 +56,7 @@ class ResPartner(models.Model):
     @api.depends('acc_move_lines.debit', 'acc_move_lines.credit',
                  'acc_move_lines.amount_residual')
     def _circulating_amount(self):
-        today = fields.date.today()
+        today = fields.Date.today()
         move_line_obj = self.env['account.move.line']
         account_obj = self.env['account.account']
         for partner in self:
@@ -80,7 +80,7 @@ class ResPartner(models.Model):
     @api.multi
     @api.depends('acc_move_lines.amount_residual')
     def _pending_amount(self):
-        today = fields.date.today()
+        today = fields.Date.today()
         move_line_obj = self.env['account.move.line']
         account_obj = self.env['account.account']
         for partner in self:
@@ -104,7 +104,7 @@ class ResPartner(models.Model):
     @api.multi
     @api.depends('invoice_ids.amount_total')
     def _draft_invoices_amount(self):
-        today = fields.date.today()
+        today = fields.Date.today()
         invoice_obj = self.env['account.invoice']
         for partner in self:
             invids = invoice_obj.search([('partner_id', '=', partner.id),
