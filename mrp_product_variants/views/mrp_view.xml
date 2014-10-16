@@ -6,18 +6,17 @@
             <field name="model">mrp.bom</field>
             <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
             <field name="arch" type="xml">
-                <field name="bom_line_ids" position="attributes">
-                    <attribute name="context">{'bom_template_id': product_tmpl_id}</attribute>
-                </field>
-                <xpath expr="//field[@name='bom_line_ids']/tree"
-                    position="attributes">
-                    <attribute name="editable" />
-                </xpath>
                 <xpath
                     expr="//field[@name='bom_line_ids']//field[@name='product_id']"
                     position="before">
                     <field name="product_template" />
+                    <field name="possible_values" invisible="1" />
                 </xpath>
+                <xpath
+                    expr="//field[@name='bom_line_ids']//field[@name='attribute_value_ids']"
+                    position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                    </xpath>
             </field>
         </record>
 
@@ -54,6 +53,7 @@
                             <field name="routing_id" />
                         </group>
                     </group>
+                    <field name="possible_values" />
                     <label for="attribute_value_ids" />
                     <field name="attribute_value_ids" widget="many2many_tags" />
                     <label for="property_ids" />
@@ -71,12 +71,16 @@
                     <field name="product_template" />
                 </field>
                 <notebook position="before">
+                    <field name="possible_values" invisible="1"/>
                     <field name="product_attributes"
                         attrs="{'invisible':[('product_attributes','=',[])]}"
-                        options="{'no_create': True, 'no_delete': True}">
-                        <tree create="false" editable="1">
+                        options="{'no_create': True, 'no_delete': True}"
+                        context="{'default_mrp_production':id}">
+                        <tree create="0" editable="1">
+                            <field name="mrp_production" />
                             <field name="attribute" />
-                            <field name="value" />
+                            <field name="value" options="{'no_create': True}"/>
+                            <field name="possible_values" invisible="1" />
                         </tree>
                     </field>
                 </notebook>
