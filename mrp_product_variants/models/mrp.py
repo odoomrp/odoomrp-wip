@@ -33,7 +33,19 @@ class MrpBomAttribute(models.Model):
 class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
 
+    @api.depends('bom_id.template')
+    def _domain_attribute_value(self):
+        domain = []
+        template_id = self.env.context.get('bom_template_id')
+        template = self.env['product.template'].browse(template_id)
+        for attr_line in template.attribute_line_ids:
+            for attr_value in attr_line.value_ids:
+                domain.append(attr_value.id)
+        return [('id', 'in', domain)]
+
+    attribute_value_ids = fields.Many2many(domain=_domain_attribute_value)
     product_id = fields.Many2one(required=False)
+
     product_template = fields.Many2one(comodel_name='product.template',
                                        string='Product')
     product_attributes = fields.One2many(comodel_name='mrp.bom.attribute',
@@ -46,13 +58,18 @@ class MrpBomLine(models.Model):
     def onchange_product_product(self):
         self.product_template = self.product_id.product_tmpl_id
 
-    @api.one
+    @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
-        product_attributes = []
-        for attribute in self.product_template.attribute_line_ids:
-            product_attributes.append({'attribute': attribute.attribute_id})
-        self.product_attributes = product_attributes
+        if self.product_template:
+            product_attributes = []
+            for attribute in self.product_template.attribute_line_ids:
+                product_attributes.append({'attribute':
+                                           attribute.attribute_id})
+            self.product_attributes = product_attributes
+            return {'domain': {'product_id': [('product_tmpl_id', '=',
+                                               self.product_template.id)]}}
+        return {'domain': {'product_id': []}}
 
 
 class MrpProductionAttribute(models.Model):
@@ -69,6 +86,8 @@ class MrpProductionAttribute(models.Model):
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
+
+    product_id = fields.Many2one(required=False)
 
     product_template = fields.Many2one(comodel_name='product.template',
                                        string='Product', readonly=True,
