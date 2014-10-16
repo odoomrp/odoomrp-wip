@@ -53,8 +53,9 @@ class MrpMachinery(models.Model):
     year = fields.Char('Year')
     model = fields.Char('Model')
     product = fields.Many2one('product.product', 'Product Associated',
-                              help="This association is necessary if you want"
+                              help="This association is needed if you want"
                               " to make repair orders with the machine")
+    serial_char = fields.Char('Product Serial #')
     serial = fields.Many2one('stock.production.lot', string='Product Serial #',
                              domain="[('product_id', '=', product)]")
     type = fields.Many2one('mrp.machine.model', 'Type')
