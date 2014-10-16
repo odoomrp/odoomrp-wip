@@ -30,28 +30,41 @@ class MrpBomAttribute(models.Model):
                             string='Value')
 
 
+class MrpBom(models.Model):
+    _inherit = 'mrp.bom'
+
+    possible_values = fields.Many2many(comodel_name='product.attribute.value',
+                                       compute='_get_possible_attribute_values',
+                                       store=True)
+
+    @api.one
+    @api.depends('product_tmpl_id')
+    def _get_possible_attribute_values(self):
+        domain = []
+        for attr_line in self.product_tmpl_id.attribute_line_ids:
+            for attr_value in attr_line.value_ids:
+                domain.append(attr_value.id)
+        self.possible_values = domain
+
+
 class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
 
-    @api.depends('bom_id.template')
-    def _domain_attribute_value(self):
-        domain = []
-        template_id = self.env.context.get('bom_template_id')
-        template = self.env['product.template'].browse(template_id)
-        for attr_line in template.attribute_line_ids:
-            for attr_value in attr_line.value_ids:
-                domain.append(attr_value.id)
-        return [('id', 'in', domain)]
-
-    attribute_value_ids = fields.Many2many(domain=_domain_attribute_value)
     product_id = fields.Many2one(required=False)
-
     product_template = fields.Many2one(comodel_name='product.template',
                                        string='Product')
     product_attributes = fields.One2many(comodel_name='mrp.bom.attribute',
                                          inverse_name='mrp_bom_line',
                                          string='Product attributes',
                                          copyable=True)
+    attribute_value_ids = fields.Many2many(domain="[('id','in',possible_values[0][2])]")
+    possible_values = fields.Many2many(comodel_name='product.attribute.value',
+                                       compute='_get_possible_attribute_values')
+
+    @api.one
+    @api.depends('bom_id')
+    def _get_possible_attribute_values(self):
+        self.possible_values = self.bom_id.possible_values
 
     @api.one
     @api.onchange('product_id')
@@ -75,13 +88,21 @@ class MrpBomLine(models.Model):
 class MrpProductionAttribute(models.Model):
     _name = 'mrp.production.attribute'
 
-    mrp_production = fields.Many2one(comodel_name='mrp.production.attribute',
+    mrp_production = fields.Many2one(comodel_name='mrp.production',
                                      string='Manufacturing Order')
     attribute = fields.Many2one(comodel_name='product.attribute',
                                 string='Attribute')
     value = fields.Many2one(comodel_name='product.attribute.value',
-                            domain="[('attribute_id', '=', attribute)]",
-                            string='Value')
+                            string='Value',
+                            domain="[('attribute_id','=',attribute),"
+                            "('id','in',possible_values[0][2])]")
+    possible_values = fields.Many2many(comodel_name='product.attribute.value',
+                                       compute='_get_possible_attribute_values')
+
+    @api.one
+    @api.depends('mrp_production')
+    def _get_possible_attribute_values(self):
+        self.possible_values = self.mrp_production.possible_values
 
 
 class MrpProduction(models.Model):
@@ -96,6 +117,18 @@ class MrpProduction(models.Model):
         comodel_name='mrp.production.attribute', inverse_name='mrp_production',
         string='Product attributes', copyable=True, readonly=True,
         states={'draft': [('readonly', False)]},)
+    possible_values = fields.Many2many(comodel_name='product.attribute.value',
+                                       compute='_get_possible_attribute_values',
+                                       store=True)
+
+    @api.one
+    @api.depends('product_template')
+    def _get_possible_attribute_values(self):
+        domain = []
+        for attr_line in self.product_template.attribute_line_ids:
+            for attr_value in attr_line.value_ids:
+                domain.append(attr_value.id)
+        self.possible_values = domain
 
     def product_id_change(self, cr, uid, ids, product_id, product_qty=0,
                           context=None):
@@ -112,12 +145,7 @@ class MrpProduction(models.Model):
     def onchange_product_template(self):
         for mo in self:
             product_attributes = []
-            if not mo.product_template.attribute_line_ids or not mo.product_id:
-                mo.product_id = (
-                    mo.product_template.product_variant_ids and
-                    mo.product_template.product_variant_ids[0])
-            if (mo.product_id and mo.product_id not in
-                    mo.product_template.product_variant_ids):
+            if not mo.product_template.attribute_line_ids:
                 mo.product_id = (
                     mo.product_template.product_variant_ids and
                     mo.product_template.product_variant_ids[0])
