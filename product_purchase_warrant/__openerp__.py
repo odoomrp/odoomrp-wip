@@ -28,7 +28,9 @@
     Sets a purchase warranty term on product supplier info,
     and apply it on incoming lots for this product and supplier
     """,
-    'data': ["views/stock_view.xml", "views/product_view.xml"],
+    'data': ["views/stock_view.xml", "views/product_view.xml",
+             "wizard/stock_transfer_details_view.xml"
+             ],
     "installable": True,
     "auto_install": False,
 }

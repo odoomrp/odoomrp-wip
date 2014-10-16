@@ -23,5 +23,5 @@ from openerp.osv import orm, fields
 class ProductSupplierinfo(orm.Model):
     _inherit = "product.supplierinfo"
     _columns = {
-        'warrant_months': fields.integer("Warranty")
+        'warrant_months': fields.float("Warranty")
         }

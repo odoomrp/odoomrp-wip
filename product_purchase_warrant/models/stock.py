@@ -44,7 +44,10 @@ class StockProductionLot(orm.Model):
             else:
                 warrant_limit = (
                     create_date +
-                    relativedelta(months=int(context['sup_warrant'])))
+                    relativedelta(months=int(context['sup_warrant']) +
+                                  relativedelta(
+                        days=int(31*(context['sup_warrant'] -
+                                     int(context['sup_warrant']))))))
             if warrant_limit:
                 vals.update({'warrant_limit': warrant_limit})
         return super(StockProductionLot, self).create(cr, uid, vals,
@@ -63,7 +66,8 @@ class StockPackOperation(orm.Model):
             sup_obj = self.pool['product.supplierinfo']
             suppinfo_id = sup_obj.search(
                 cr, uid, [('name', '=', pack_oper.picking_id.partner_id.id),
-                          ('product_tmpl_id', '=', pack_oper.product_id.id)],
+                          ('product_tmpl_id', '=',
+                           pack_oper.product_id.product_tmpl_id.id)],
                 context=context)
             sup = sup_obj.browse(cr, uid, suppinfo_id, context=context)
             sup_warrant = sup and sup[0].warrant_months
