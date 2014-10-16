@@ -71,15 +71,14 @@
                     <field name="product_template" />
                 </field>
                 <notebook position="before">
-                    <field name="possible_values" invisible="1"/>
+                    <field name="possible_values" invisible="1" />
                     <field name="product_attributes"
                         attrs="{'invisible':[('product_attributes','=',[])]}"
                         options="{'no_create': True, 'no_delete': True}"
                         context="{'default_mrp_production':id}">
                         <tree create="0" editable="1">
-                            <field name="mrp_production" />
                             <field name="attribute" />
-                            <field name="value" options="{'no_create': True}"/>
+                            <field name="value" options="{'no_create': True}" />
                             <field name="possible_values" invisible="1" />
                         </tree>
                     </field>

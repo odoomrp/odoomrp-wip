@@ -33,9 +33,9 @@ class MrpBomAttribute(models.Model):
 class MrpBom(models.Model):
     _inherit = 'mrp.bom'
 
-    possible_values = fields.Many2many(comodel_name='product.attribute.value',
-                                       compute='_get_possible_attribute_values',
-                                       store=True)
+    possible_values = fields.Many2many(
+        comodel_name='product.attribute.value',
+        compute='_get_possible_attribute_values', store=True)
 
     @api.one
     @api.depends('product_tmpl_id')
@@ -57,9 +57,11 @@ class MrpBomLine(models.Model):
                                          inverse_name='mrp_bom_line',
                                          string='Product attributes',
                                          copyable=True)
-    attribute_value_ids = fields.Many2many(domain="[('id','in',possible_values[0][2])]")
-    possible_values = fields.Many2many(comodel_name='product.attribute.value',
-                                       compute='_get_possible_attribute_values')
+    attribute_value_ids = fields.Many2many(
+        domain="[('id','in',possible_values[0][2])]")
+    possible_values = fields.Many2many(
+        comodel_name='product.attribute.value',
+        compute='_get_possible_attribute_values')
 
     @api.one
     @api.depends('bom_id')
@@ -96,11 +98,13 @@ class MrpProductionAttribute(models.Model):
                             string='Value',
                             domain="[('attribute_id','=',attribute),"
                             "('id','in',possible_values[0][2])]")
-    possible_values = fields.Many2many(comodel_name='product.attribute.value',
-                                       compute='_get_possible_attribute_values')
+    possible_values = fields.Many2many(
+        comodel_name='product.attribute.value',
+        compute='_get_possible_attribute_values')
 
     @api.one
-    @api.depends('mrp_production')
+    @api.depends('mrp_production', 'mrp_production.possible_values',
+                 'mrp_production.product_template')
     def _get_possible_attribute_values(self):
         self.possible_values = self.mrp_production.possible_values
 
@@ -117,9 +121,9 @@ class MrpProduction(models.Model):
         comodel_name='mrp.production.attribute', inverse_name='mrp_production',
         string='Product attributes', copyable=True, readonly=True,
         states={'draft': [('readonly', False)]},)
-    possible_values = fields.Many2many(comodel_name='product.attribute.value',
-                                       compute='_get_possible_attribute_values',
-                                       store=True)
+    possible_values = fields.Many2many(
+        comodel_name='product.attribute.value',
+        compute='_get_possible_attribute_values', store=True)
 
     @api.one
     @api.depends('product_template')
