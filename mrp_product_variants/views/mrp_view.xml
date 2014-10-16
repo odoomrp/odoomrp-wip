@@ -6,6 +6,9 @@
             <field name="model">mrp.bom</field>
             <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
             <field name="arch" type="xml">
+                <field name="bom_line_ids" position="attributes">
+                    <attribute name="context">{'bom_template_id': product_tmpl_id}</attribute>
+                </field>
                 <xpath expr="//field[@name='bom_line_ids']/tree"
                     position="attributes">
                     <attribute name="editable" />
