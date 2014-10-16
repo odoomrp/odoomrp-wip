@@ -34,7 +34,8 @@
                                 colspan="4" />
                                 <field name="year" />
                                 <field name="model" />
-                                <field name="serial" />
+                                <field name="serial_char" attrs="{'invisible':[('product','!=', False)]}"/>
+                                <field name="serial" attrs="{'invisible':[('product','=', False)]}"/>
                                 <field name="type" />
                                 <separator string="Current Details"
                                     colspan="4" />
