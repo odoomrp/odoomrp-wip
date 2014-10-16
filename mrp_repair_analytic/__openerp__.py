@@ -16,7 +16,7 @@
 #
 ##############################################################################
 {
-    "name": "MRP Repair With Analytic",
+    "name": "MRP Repair Analytic",
     "version": "1.0",
     "author": "OdooMRP team",
     "category": "MRP Repair",

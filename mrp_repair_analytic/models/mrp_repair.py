@@ -21,8 +21,8 @@ from openerp import models, fields, api
 class MrpRepair(models.Model):
     _inherit = 'mrp.repair'
 
-    account_id = fields.Many2one(
-        'account.analytic.account', string='Analytic Account', required=True)
+    analytic_account = fields.Many2one(
+        'account.analytic.account', string='Analytic Account')
 
     @api.one
     @api.model
@@ -53,7 +53,6 @@ class MrpRepair(models.Model):
                            categ_id.property_account_income_categ or
                            False)
         vals = {'name': name,
-                'account_id': self.account_id.id,
                 'user_id': line.user_id.id,
                 'date': analytic_line_obj._get_default_date(),
                 'product_id': line.product_id.id,
@@ -62,6 +61,8 @@ class MrpRepair(models.Model):
                 'amount': line.price_subtotal,
                 'to_invoice': factor.id
                 }
+        if self.analytic_account:
+            vals.update({'account_id': self.analytic_account.id})
         if general_account:
             vals.update({'general_account_id': general_account.id})
         return vals
@@ -71,14 +72,15 @@ class MrpRepair(models.Model):
     def action_invoice_create(self, group=False):
         res = super(MrpRepair, self).action_invoice_create(group=False)
         for line in self.fees_lines:
-            if line.invoice_line_id:
+            if line.invoice_line_id and self.analytic_account:
                 line.invoice_line_id.write({'account_analytic_id':
-                                            self.account_id.id})
+                                            self.analytic_account.id})
         for line in self.operations:
-            if line.invoice_line_id:
+            if line.invoice_line_id and self.analytic_account:
                 line.invoice_line_id.write({'account_analytic_id':
-                                            self.account_id.id})
+                                            self.analytic_account.id})
         return res
+
 
 class MrpRepairLine(models.Model):
     _inherit = 'mrp.repair.line'

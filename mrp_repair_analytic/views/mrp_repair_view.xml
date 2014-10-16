@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="mrp_repair.view_repair_order_tree"/>
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                    <field name="account_id" />
+                    <field name="analytic_account" />
                 </field>
             </field>
         </record>
@@ -17,7 +17,7 @@
             <field name="inherit_id" ref="mrp_repair.view_repair_order_form"/>
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
-                    <field name="account_id" />
+                    <field name="analytic_account" />
                 </field>
                 <xpath expr="//form[@string='Fees']/group/group/field[@name='to_invoice']" position="before">
                     <field name="user_id"/>
