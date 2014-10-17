@@ -38,8 +38,8 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="mrp_production_extended_form_view">
-            <field name="name">mrp.production.extended.form</field>
+        <record model="ir.ui.view" id="mrp_production_samples_form_view">
+            <field name="name">mrp.production.samples.form</field>
             <field name="model">mrp.production</field>
             <field name="type">form</field>
             <field name="inherit_id" ref="mrp.mrp_production_form_view" />

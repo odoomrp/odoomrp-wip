@@ -45,11 +45,6 @@ class StockMove(orm.Model):
                 for line in rank.sample_rank_lines_ids:
                     if qty >= line.min and qty <= line.max:
                         how_many = line.how_many
-        if how_many <= 0:
-            raise orm.except_orm(
-                _('Test Creation Error !'),
-                _('Shows not found for product: %s, category: %s') %
-                (product.name, product.categ_id.name))
         return how_many
 
     def _create_test_automatically(self, cr, uid, how_many, move,
