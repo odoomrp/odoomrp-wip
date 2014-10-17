@@ -4,8 +4,8 @@ python:
   - "2.7"
 
 env:
-  - VERSION="8.0" ODOO_REPO="odoo/odoo" EXCLUDE="sale_order_types"
-  - VERSION="8.0" ODOO_REPO="OCA/OCB" EXCLUDE="sale_order_types"
+  - VERSION="8.0" ODOO_REPO="odoo/odoo" 
+  - VERSION="8.0" ODOO_REPO="OCA/OCB"
 
 virtualenv:
   system_site_packages: true
