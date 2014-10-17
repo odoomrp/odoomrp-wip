@@ -70,7 +70,7 @@ class MrpRepair(models.Model):
     @api.one
     @api.model
     def action_invoice_create(self, group=False):
-        res = super(MrpRepair, self).action_invoice_create(group=False)
+        res = super(MrpRepair, self).action_invoice_create(group=group)
         for line in self.fees_lines:
             if line.invoice_line_id and self.analytic_account:
                 line.invoice_line_id.write({'account_analytic_id':
