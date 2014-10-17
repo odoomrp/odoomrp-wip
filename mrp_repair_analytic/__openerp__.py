@@ -19,28 +19,29 @@
     "name": "MRP Repair Analytic",
     "version": "1.0",
     "author": "OdooMRP team",
-    "category": "MRP Repair",
+    "category": "Manufacturing",
     "website": "http://www.odoomrp.com",
     "description": """
-    This module performs the following:
+This module performs the following:
 
-    1.- Is created the new field 'Analytic Account' in the object MRP Repair.
+1.- It creates a new field 'Analytic Account' in the object MRP Repair.
 
-    2.- Is created the new filed 'User' in the operations, and components of
-        the repair order.
+2.- It creates a new field 'User' in the operations, and components of
+    the repair order.
 
-    When the repair order is confirmed, for each line of operations, and
-    components, will create one analytic line.
+When the repair order is confirmed, for each line of operations, and
+components, will create one analytic line.
 
-    When the invoice is created, will take analytic account of repair, and
-    takes it to the invoice line.
+When the invoice is created, will take analytic account of repair, and
+takes it to the invoice line.
     """,
     "depends": ['account',
                 'analytic',
                 'hr_timesheet_invoice',
                 'mrp_repair',
                 ],
-    "data": ['views/mrp_repair_view.xml',
+    "data": ['security/ir.model.access.csv',
+             'views/mrp_repair_view.xml',
              ],
     "installable": True
 }
