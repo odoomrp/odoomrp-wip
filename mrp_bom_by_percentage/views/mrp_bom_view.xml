@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="mrp_bom_form_view_inh_withsumqtytoconsume" model="ir.ui.view">
+            <field name="name">mrp.bom.form.view.inh.withsumqtytoconsume</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr='//field[@name="routing_id"]/..' position="after">
+                    <field name="qty_to_consume" />
+                </xpath>
+                 <xpath expr='/form/group/group//field[@name="type"]' position="replace">
+                    <group colspan="2" col="4">
+                        <field name="type" />
+                        <field name="by_percentage" />
+                    </group>
+                 </xpath>
+                 <xpath expr='/form/group/group//field[@name="product_qty"]' position="attributes">
+                    <attribute name="attrs">{'invisible': [('by_percentage','=',True)]}</attribute>
+                 </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
