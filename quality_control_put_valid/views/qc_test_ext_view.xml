@@ -29,5 +29,16 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="qc_test_search_view_inh_controlputvalid">
+            <field name="name">qc.test.search.view.inh.controlputvalid</field>
+            <field name="model">qc.test</field>
+            <field name="inherit_id" ref="quality_control.qc_test_search_view" />
+            <field name="arch" type="xml">
+                <field name="success" position="after">
+                    <field name="valid" />
+                </field>
+            </field>
+        </record>
+
     </data>
 </openerp>
