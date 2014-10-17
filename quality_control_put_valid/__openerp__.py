@@ -24,7 +24,6 @@
     "version": "1.0",
     "depends": [
         "quality_control",
-        "quality_control_ext",
     ],
     "author": "OdooMRP team",
     "category": "Custom Modules",
