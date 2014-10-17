@@ -40,8 +40,7 @@ takes it to the invoice line.
                 'hr_timesheet_invoice',
                 'mrp_repair',
                 ],
-    "data": ['security/ir.model.access.csv',
-             'views/mrp_repair_view.xml',
+    "data": ['views/mrp_repair_view.xml',
              ],
     "installable": True
 }
