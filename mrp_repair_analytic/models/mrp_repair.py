@@ -85,12 +85,12 @@ class MrpRepair(models.Model):
 class MrpRepairLine(models.Model):
     _inherit = 'mrp.repair.line'
 
-    user_id = fields.Many2one(
-        'res.users', string='User', required=True)
+    user_id = fields.Many2one('res.users', string='User', required=True,
+                              default=lambda self: self.env.user)
 
 
 class MrpRepairFee(models.Model):
     _inherit = 'mrp.repair.fee'
 
-    user_id = fields.Many2one(
-        'res.users', string='User', required=True)
+    user_id = fields.Many2one('res.users', string='User', required=True,
+                              default=lambda self: self.env.user)
