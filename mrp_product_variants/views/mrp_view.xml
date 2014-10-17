@@ -53,7 +53,6 @@
                             <field name="routing_id" />
                         </group>
                     </group>
-                    <field name="possible_values" />
                     <label for="attribute_value_ids" />
                     <field name="attribute_value_ids" widget="many2many_tags" />
                     <label for="property_ids" />
@@ -71,11 +70,9 @@
                     <field name="product_template" />
                 </field>
                 <notebook position="before">
-                    <field name="possible_values" invisible="1" />
                     <field name="product_attributes"
                         attrs="{'invisible':[('product_attributes','=',[])]}"
-                        options="{'no_create': True, 'no_delete': True}"
-                        context="{'default_mrp_production':id}">
+                        options="{'no_create': True, 'no_delete': True}" >
                         <tree create="0" editable="1">
                             <field name="attribute" />
                             <field name="value" options="{'no_create': True}" />
