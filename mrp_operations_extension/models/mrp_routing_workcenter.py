@@ -31,6 +31,8 @@ class MrpRoutingWorkcenter(models.Model):
     op_wc_lines = fields.One2many('mrp.operation.workcenter',
                                   'routing_workcenter',
                                   'Workcenter Info Lines')
+    do_production = fields.Boolean(
+        string='Move produced quantity to stock')
 
     @api.one
     @api.onchange('operation')

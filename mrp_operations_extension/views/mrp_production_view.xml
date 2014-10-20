@@ -27,6 +27,7 @@
         <record id="mrp_production_form_view_inh" model="ir.ui.view">
             <field name="name">mrp.production.form.view.inh</field>
             <field name="model">mrp.production</field>
+            <field name="sequence" eval="10" />
             <field name="inherit_id" ref="mrp.mrp_production_form_view" />
             <field name="arch" type="xml">
                 <xpath
@@ -72,11 +73,16 @@
                     expr="//field[@name='workcenter_lines']/form//field[@name='hour']"
                     position="replace">
                 </xpath>
+                <xpath expr="//field[@name='workcenter_lines']/form//header" 
+                    position="inside"> <button name='%(act_mrp_work_order_produce)d' type='action' 
+                    string='Produce' attrs="{'invisible':['|',('do_production','=',False),('state','in',['draft','cancel','pause','done'])]}" 
+                    /> <button name='%(act_mrp_work_order_consume)d' type='action' 
+                    string='Consume' attrs="{'invisible':[('state','in',['draft','cancel','pause','done'])]}" 
+                    /> </xpath>
                 <xpath
                     expr="//field[@name='workcenter_lines']/form//field[@name='sequence']"
                     position="after">
-                    <field name="final_product_to_stock" colspan="2" />
-                    <group colspan="2" />
+                    <field name="do_production" colspan="2" />
                     <notebook colspan="4">
                         <page string="Materials">
                             <group string="Product Lines">
@@ -112,20 +118,33 @@
                 </xpath>
             </field>
         </record>
-        <record model="ir.ui.view" id="mrp_production_tree_view_inh">
-            <field name="name">Operation Time Form View</field>
-            <field name="model">mrp.production.workcenter.line</field>
+
+<!--         <record id="mrp_production_form_view_inh_consume_produce_buttons"
+            model="ir.ui.view">
+            <field name="name">mrp.production.form.view.inh</field>
+            <field name="model">mrp.production</field>
+            <field name="sequence" eval="20" />
             <field name="inherit_id"
-                ref="mrp_operations.mrp_production_workcenter_tree_view_inherit" />
+                ref="mrp_operations.mrp_production_form_inherit_view" />
             <field name="arch" type="xml">
-                <field name="production_id" position="after">
+
+                <xpath expr="//field[@name='workcenter_lines']/form//header" position="inside">
                     <button name='%(act_mrp_work_order_produce)d'
-                        type='action' string='Produce' states="startworking"/>
+                        type='action' string='Produce'
+                        attrs="{'invisible':[('state','in',['draft','cancel','pause','done'])]}"
+                        states="startworking" />
                     <button name='%(act_mrp_work_order_produce)d'
-                        type='action' string='Consume' states="startworking" />
-                </field>
+                        type='action' string='Consume'
+                        attrs="{'invisible':[('state','in',['draft','cancel','pause','done'])]}"
+                        states="startworking" />
+                </xpath>
+                <xpath
+                    expr="//field[@name='workcenter_lines']/form//field[@name='sequence']"
+                    position="after">
+                    <field name="do_production" colspan="2" />
+                </xpath>
             </field>
-        </record>
+        </record> -->
 
         <record model="ir.ui.view"
             id="mrp_production_operation_buttons_form_view">
@@ -169,11 +188,10 @@
                 <button name="button_cancel" position="after">
                     <button name='%(act_mrp_work_order_produce)d'
                         type='action' string='Produce'
-                        attrs="{'invisible':[('final_product_to_stock','=',False)]}"
-                        />
-                    <button name='%(act_mrp_work_order_produce)d'
-                        type='action' string='Consume' 
-                        attrs="{'invisible':[('final_product_to_stock','=',True)]}" />
+                        attrs="{'invisible':['|',('do_production','=',False),('state','in',['draft','cancel','pause','done'])]}"/>
+                    <button name='%(act_mrp_work_order_consume)d'
+                        type='action' string='Consume'
+                        attrs="{'invisible':[('state','in',['draft','cancel','pause','done'])]}"/>
                 </button>
                 <page string="Information" position="inside">
                     <group string="Product Lines" colspan="4" col="4">
@@ -213,11 +231,8 @@
                     </page>
                 </page>
 
-                <!-- <field name="production_id" position="after"> <button 
-                    name='%(act_mrp_work_order_produce)d' type='action' string='Produce' colspan="2" 
-                    col="2" /> </field> -->
                 <field name="sequence" position="after">
-                    <field name="final_product_to_stock" />
+                    <field name="do_production" />
                 </field>
             </field>
 

@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
 
 
 class MrpProduction(models.Model):
@@ -45,6 +45,17 @@ class MrpProduction(models.Model):
 
     @api.multi
     def action_confirm(self):
+        produce = False
+        for workcenter_line in self.workcenter_lines:
+            if workcenter_line.do_production:
+                produce = True
+                break
+        if not produce:
+            raise exceptions.Warning(
+                _('Produce Operation'), _('At least one operation '
+                                          'must have checked '
+                                          '"Move produced quantity to stock"'
+                                          'field'))
         res = super(MrpProduction, self).action_confirm()
         for move_line in self.move_lines:
             for product_line in self.product_lines:
@@ -67,7 +78,7 @@ class mrp_production_workcenter_line(models.Model):
                                    'work_order', string='Product Lines')
     routing_wc_line = fields.Many2one('mrp.routing.workcenter',
                                       string='Routing WC Line')
-    final_product_to_stock = fields.Boolean(
+    do_production = fields.Boolean(
         string='Move Final Product to Stock')
 
     @api.model
@@ -76,6 +87,6 @@ class mrp_production_workcenter_line(models.Model):
         if 'routing_wc_line' in data:
             routing_wc_line_id = data.get('routing_wc_line')
             work = workcenter_obj.browse(routing_wc_line_id)
-            data.update({'final_product_to_stock':
-                         work.operation.final_product_to_stock})
+            data.update({'do_production':
+                         work.operation.do_production})
         return super(mrp_production_workcenter_line, self).create(data)

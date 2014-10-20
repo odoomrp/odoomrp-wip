@@ -33,7 +33,7 @@ class MrpWorkOrderProduce(models.TransientModel):
             cr, uid, fields, context=context)
         work = self.pool['mrp.production.workcenter.line'].browse(
             cr, uid, context.get('active_ids'), context=context)[0]
-        a.update({'final_product': work.final_product_to_stock})
+        a.update({'final_product': work.do_production})
         return a
 
     def _get_product_id(self):
@@ -100,9 +100,10 @@ class MrpWorkOrderProduce(models.TransientModel):
         if product_qty > 0.0:
             consume_lines = prod_obj._calculate_qty(
                 cr, uid, production, product_qty=product_qty, context=context)
-
+        line_ids = [i.product_id.id for i in work_line.product_line]
         for consume in consume_lines:
-            new_consume_lines.append([0, False, consume])
+            if consume['product_id'] in line_ids:
+                new_consume_lines.append([0, False, consume])
         return {'value': {'consume_lines': new_consume_lines}}
 
     def _get_product_qty(self):
@@ -122,12 +123,6 @@ class MrpWorkOrderProduce(models.TransientModel):
                 if not move.scrapped:
                     done += move.product_qty
         return (prod.product_qty - done) or prod.product_qty
-
-#    @api.one
-#    def _get_final_product(self):
-#        work = self.env['mrp.production.workcenter.line'].browse(
-#            self.env.context.get('active_ids'))[0]
-#        return work.final_product_to_stock
 
     product_id = fields.Many2one('product.product',
                                  string='Product', default=_get_product_id)
