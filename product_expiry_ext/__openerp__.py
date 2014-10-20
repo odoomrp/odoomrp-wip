@@ -38,7 +38,8 @@ This module color lines in list of production lots based on expiration dates:
 * Expired : Red color
     """,
     "images": [],
-    "data": ["views/production_lot_ext_view.xml"],
+    "data": ["views/production_lot_ext_view.xml",
+             "wizard/stock_transfer_details_view.xml"],
     "qweb": [],
     "demo": [],
     "test": [],
