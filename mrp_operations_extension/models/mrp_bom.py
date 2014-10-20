@@ -26,8 +26,7 @@ from openerp import models, fields, tools
 
 class MrpBom(models.Model):
     _inherit = 'mrp.bom'
-    
-    
+
     def _bom_explode(self, cr, uid, bom, product, factor, properties=None,
                      level=0, routing_id=False, previous_products=None,
                      master_bom=None, context=None):
