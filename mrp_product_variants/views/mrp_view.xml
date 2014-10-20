@@ -69,6 +69,9 @@
                 <field name="product_id" position="before">
                     <field name="product_template" />
                 </field>
+<!--                 <field name="product_id" position="attributes"> -->
+<!--                     <attribute name="invisible">1</attribute> -->
+<!--                 </field> -->
                 <notebook position="before">
                     <field name="product_attributes"
                         attrs="{'invisible':[('product_attributes','=',[])]}"
@@ -80,6 +83,34 @@
                         </tree>
                     </field>
                 </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mrp_production_product_line_extended_form_view">
+            <field name="name">mrp.production.product.line.extended.form</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="inherit_id" ref="mrp.mrp_production_product_form_view" />
+            <field name="arch" type="xml">
+                <field name="product_id" position="before">
+                    <field name="product_template" />
+                </field>
+                <field name="product_id" position="attributes">
+                    <attribute name="string">Product Variants</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mrp_production_product_line_extended_tree_view">
+            <field name="name">mrp.production.product.line.extended.tree</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="inherit_id" ref="mrp.mrp_production_product_tree_view" />
+            <field name="arch" type="xml">
+                <field name="product_id" position="before">
+                    <field name="product_template" />
+                </field>
+                <field name="product_id" position="attributes">
+                    <attribute name="string">Product Variants</attribute>
+                </field>
             </field>
         </record>
     </data>

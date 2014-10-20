@@ -40,8 +40,8 @@ class MrpBomLine(models.Model):
                                          inverse_name='mrp_bom_line',
                                          string='Product attributes',
                                          copyable=True)
-#     attribute_value_ids = fields.Many2many(
-#         domain="[('id','in',possible_values[0][2])]")
+    # attribute_value_ids = fields.Many2many(
+    #     domain="[('id','in',possible_values[0][2])]")
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
@@ -74,6 +74,10 @@ class MrpBomLine(models.Model):
         return {'domain': {'product_id': []}}
 
 
+class MrpBom(models.Model):
+    _inherit = 'mrp.bom'
+
+
 class MrpProductionAttribute(models.Model):
     _name = 'mrp.production.attribute'
 
@@ -82,8 +86,8 @@ class MrpProductionAttribute(models.Model):
     attribute = fields.Many2one(comodel_name='product.attribute',
                                 string='Attribute')
     value = fields.Many2one(comodel_name='product.attribute.value',
-#                             domain="[('attribute_id','=',attribute),"
-#                             "('id','in',possible_values[0][2])]",
+                            #  domain="[('attribute_id','=',attribute),"
+                            #  "('id','in',possible_values[0][2])]",
                             string='Value')
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
@@ -125,22 +129,27 @@ class MrpProduction(models.Model):
     @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
-        for mo in self:
+        if self.product_template:
+            self.product_uom = self.product_template.uom_id
             product_attributes = []
-            if not mo.product_template.attribute_line_ids:
-                mo.product_id = (
-                    mo.product_template.product_variant_ids and
-                    mo.product_template.product_variant_ids[0])
-            for attribute in mo.product_template.attribute_line_ids:
+            if not self.product_template.attribute_line_ids:
+                self.product_id = (
+                    self.product_template.product_variant_ids and
+                    self.product_template.product_variant_ids[0])
+            for attribute in self.product_template.attribute_line_ids:
                 product_attributes.append({'attribute':
                                            attribute.attribute_id})
-            mo.product_attributes = product_attributes
+            self.product_attributes = product_attributes
+            self.bom_id = self.env['mrp.bom']._bom_find(
+                product_tmpl_id=self.product_template.id)
+            self.routing_id = self.bom_id.routing_id
             return {'domain': {'product_id':
                                [('product_tmpl_id', '=',
-                                 mo.product_template.id)],
+                                 self.product_template.id)],
                                'bom_id':
                                [('product_tmpl_id', '=',
-                                 mo.product_template.id)]}}
+                                 self.product_template.id)]}}
+        return {'domain': {}}
 
     @api.one
     @api.onchange('product_attributes')
@@ -154,3 +163,10 @@ class MrpProduction(models.Model):
             for value in att_values_ids:
                 domain.append(('attribute_value_ids', '=', value))
             self.product_id = product_obj.search(domain, limit=1)
+
+
+class MrpProductionProductLine(models.Model):
+    _inherit = 'mrp.production.product.line'
+
+    product_template = fields.Many2one(comodel_name='product.template',
+                                       string='Product')
