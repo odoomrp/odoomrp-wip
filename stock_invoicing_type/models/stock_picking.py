@@ -19,26 +19,6 @@
 from openerp import models
 
 
-class StockMove(models.Model):
-    _inherit = "stock.move"
-
-    def write(self, values):
-        sale_obj = self.env['sale.order']
-        picking = False
-        if values.get('picking_id'):
-            picking = self.env['stock.picking'].browse(values['picking_id'])
-        group_id = values.get('group_id', False)
-        for rec in self:
-            res_picking = picking or rec.picking_id
-            if not group_id and rec.group_id:
-                group_id = rec.group_id.id
-            orders = sale_obj.search([('procurement_group_id', '=', group_id)])
-            if orders and res_picking:
-                inv_type = orders[0].invoice_type_id.id
-                res_picking.write({'invoice_type_id': inv_type})
-        return super(StockMove, self).write(values)
-
-
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
