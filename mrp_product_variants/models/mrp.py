@@ -40,8 +40,13 @@ class MrpBomLine(models.Model):
                                          inverse_name='mrp_bom_line',
                                          string='Product attributes',
                                          copyable=True)
+<<<<<<< HEAD
 #     attribute_value_ids = fields.Many2many(
 #         domain="[('id','in',possible_values[0][2])]")
+=======
+    attribute_value_ids = fields.Many2many(
+        domain="[('id','in',possible_values[0][2])]")
+>>>>>>> 289bafc4979d829ff7db6c1e719d444062ae28ad
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
@@ -82,9 +87,15 @@ class MrpProductionAttribute(models.Model):
     attribute = fields.Many2one(comodel_name='product.attribute',
                                 string='Attribute')
     value = fields.Many2one(comodel_name='product.attribute.value',
+<<<<<<< HEAD
 #                             domain="[('attribute_id','=',attribute),"
 #                             "('id','in',possible_values[0][2])]",
                             string='Value')
+=======
+                            string='Value',
+                            domain="[('attribute_id','=',attribute),"
+                            "('id','in',possible_values[0][2])]")
+>>>>>>> 289bafc4979d829ff7db6c1e719d444062ae28ad
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
