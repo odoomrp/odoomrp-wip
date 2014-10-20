@@ -22,13 +22,27 @@ from openerp import models, fields, api, _
 class ProductAttributeValueSaleLine(models.Model):
     _name = 'sale.order.line.attribute'
 
-    sale_line = fields.Many2one(comodel_name='sale.order.line',
-                                string='Order line')
-    attribute = fields.Many2one(comodel_name='product.attribute',
-                                string='Attribute')
-    value = fields.Many2one(comodel_name='product.attribute.value',
-                            domain="[('attribute_id', '=', attribute)]",
-                            string='Value')
+    @api.one
+    @api.depends('attribute', 'sale_line.product_template',
+                 'sale_line.product_template.attribute_line_ids')
+    def _get_possible_attribute_values(self):
+        domain_ids = []
+        for attr_line in self.sale_line.product_template.attribute_line_ids:
+            if attr_line.attribute_id.id == self.attribute.id:
+                for attr_value in attr_line.value_ids:
+                    domain_ids.append(attr_value.id)
+        self.possible_values = domain_ids
+
+    sale_line = fields.Many2one(
+        comodel_name='sale.order.line', string='Order line')
+    attribute = fields.Many2one(
+        comodel_name='product.attribute', string='Attribute')
+    value = fields.Many2one(
+        comodel_name='product.attribute.value', string='Value',
+        domain="[('id', 'in', possible_values[0][2])]")
+    possible_values = fields.Many2many(
+        comodel_name='product.attribute.value',
+        compute='_get_possible_attribute_values')
 
 
 class SaleOrderLine(models.Model):
@@ -36,65 +50,39 @@ class SaleOrderLine(models.Model):
 
     product_template = fields.Many2one(comodel_name='product.template',
                                        string='Product Template')
-    product_attributes = fields.One2many('sale.order.line.attribute',
-                                         'sale_line',
-                                         string='Product attributes',
-                                         copyable=True)
+    product_attributes = fields.One2many(
+        comodel_name='sale.order.line.attribute', inverse_name='sale_line',
+        string='Product attributes', copyable=True)
 
     @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
         for line in self:
+            line.name = line.product_template.name
             product_attributes = []
             if not line.product_template.attribute_line_ids:
                 line.product_id = (
                     line.product_template.product_variant_ids and
                     line.product_template.product_variant_ids[0])
-            if (line.product_id and line.product_id not in
-                    line.product_template.product_variant_ids):
+            else:
                 line.product_id = False
-            for attribute in line.product_template.attribute_line_ids:
-                product_attributes.append({'attribute':
-                                           attribute.attribute_id})
+                for attribute in line.product_template.attribute_line_ids:
+                    product_attributes.append({'attribute':
+                                               attribute.attribute_id})
             line.product_attributes = product_attributes
-            line.name = line.product_template.name
-            return {'domain': {'product_id':
-                               [('product_tmpl_id', '=',
-                                 line.product_template.id)]}}
+        return {'domain': {'product_id': [('product_tmpl_id', '=',
+                                           self.product_template.id)]}}
 
     @api.one
     @api.onchange('product_attributes')
     def onchange_product_attributes(self):
-        if not self.product_id:
-            product_obj = self.env['product.product']
-            att_values_ids = [attr_line.value and attr_line.value.id
-                              or False
-                              for attr_line in self.product_attributes]
-            domain = [('product_tmpl_id', '=', self.product_template.id)]
-            for value in att_values_ids:
-                domain.append(('attribute_value_ids', '=', value))
-            self.product_id = product_obj.search(domain, limit=1)
-
-    @api.multi
-    def product_id_change(self, pricelist, product, qty=0,
-                          uom=False, qty_uos=0, uos=False, name='',
-                          partner_id=False, lang=False, update_tax=True,
-                          date_order=False, packaging=False,
-                          fiscal_position=False, flag=False):
-        res = super(SaleOrderLine, self).product_id_change(
-            pricelist, product, qty=qty, uom=uom, qty_uos=qty_uos, uos=uos,
-            name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
-            date_order=date_order, packaging=packaging,
-            fiscal_position=fiscal_position, flag=flag)
         product_obj = self.env['product.product']
-        product = product_obj.browse(product)
-        attributes = []
-        for attribute_value in product.attribute_value_ids:
-            attributes.append({'attribute': attribute_value.attribute_id.id,
-                               'value': attribute_value.id})
-        res['value'].update({'product_attributes': attributes,
-                             'product_template': product.product_tmpl_id.id})
-        return res
+        att_values_ids = [attr_line.value.id
+                          for attr_line in self.product_attributes]
+        domain = [('product_tmpl_id', '=', self.product_template.id)]
+        for value in att_values_ids:
+            domain.append(('attribute_value_ids', '=', value))
+        self.product_id = product_obj.search(domain, limit=1)
 
     @api.one
     def action_duplicate(self):

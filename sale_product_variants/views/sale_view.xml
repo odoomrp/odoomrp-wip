@@ -38,6 +38,7 @@
                         options="{'no_create': True, 'no_delete': True}">
                         <tree create="false" editable="1">
                             <field name="attribute" />
+                            <field name="possible_values" invisible="True"/>
                             <field name="value" />
                         </tree>
                     </field>
