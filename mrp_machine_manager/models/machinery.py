@@ -109,4 +109,4 @@ class MrpMachinery(models.Model):
         'uniq_regn_no', 'unique (regnno)',
         _('The registration no of the machine must be unique!')),
         ('name_uniq', 'unique(name)', _('The machine already exist!')),
-        ]
+    ]

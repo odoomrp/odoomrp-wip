@@ -57,12 +57,12 @@ class EventsCopy(models.TransientModel):
                     'project_id': self.project_id.id,
                     'date_begin': date_begin,
                     'date_end':
-                        datetime.combine(
-                            date_begin + event_days,
-                            datetime.strptime(
-                                event.date_end,
-                                DEFAULT_SERVER_DATETIME_FORMAT).time())
-                        })
+                    datetime.combine(
+                        date_begin + event_days,
+                        datetime.strptime(
+                            event.date_end,
+                            DEFAULT_SERVER_DATETIME_FORMAT).time())
+                })
             else:
                 event.write({'project_id': self.project_id.id})
         return{'type': 'ir.actions.act_window_close'}

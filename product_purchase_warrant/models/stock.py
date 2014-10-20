@@ -26,7 +26,7 @@ class StockProductionLot(orm.Model):
     _inherit = "stock.production.lot"
     _columns = {
         "warrant_limit": fields.datetime("Warranty")
-        }
+    }
 
     def create(self, cr, uid, vals, context=None):
         if context is None:
