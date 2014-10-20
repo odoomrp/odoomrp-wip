@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="procurement_tree_view_inh_withplan" >
+            <field name="name">procurement.tree.view.inh.withplan</field>
+            <field name="model">procurement.order</field>
+            <field name="inherit_id" ref="procurement.procurement_tree_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="date_planned" position="before">
+                        <field name="plan_id" />
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="procurement_form_view_inh_withplan" >
+            <field name="name">procurement.form.view.inh.withplan</field>
+            <field name="model">procurement.order</field>
+            <field name="inherit_id" ref="procurement.procurement_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <group name="scheduling" position="before">
+                        <group>
+                            <field name="plan_id" string="Plan"/>
+                        </group>
+                    </group>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_procurement_filter_inh_withplan" >
+            <field name="name">view.procurement.filter.inh.withplan</field>
+            <field name="model">procurement.order</field>
+            <field name="inherit_id" ref="procurement.view_procurement_filter"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="origin" position="before">
+                        <field name="plan_id" />
+                    </field>
+                    <filter string="Product" position="before">
+                        <filter string="Plan" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'plan_id'}"/>
+                    </filter>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>
