@@ -64,7 +64,7 @@ class MrpRoutingOperation(models.Model):
         'mrp.workcenter', 'mrp_operation_workcenter_rel', 'operation',
         'workcenter', 'Work centers')
     op_number = fields.Integer('Número de Persona', default='0')
-    make_production = fields.Boolean(
+    do_production = fields.Boolean(
         string='Move Final Product to Stock')
     picking_type_id = fields.Many2one(
         'stock.picking.type', string='Picking Type')
