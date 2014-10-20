@@ -154,19 +154,44 @@ class MrpProduction(models.Model):
     @api.one
     @api.onchange('product_attributes')
     def onchange_product_attributes(self):
-        if not self.product_id:
-            product_obj = self.env['product.product']
-            att_values_ids = [attr_line.value and attr_line.value.id
-                              or False
-                              for attr_line in self.product_attributes]
-            domain = [('product_tmpl_id', '=', self.product_template.id)]
-            for value in att_values_ids:
-                domain.append(('attribute_value_ids', '=', value))
-            self.product_id = product_obj.search(domain, limit=1)
+        product_obj = self.env['product.product']
+        att_values_ids = [attr_line.value and attr_line.value.id
+                          or False
+                          for attr_line in self.product_attributes]
+        domain = [('product_tmpl_id', '=', self.product_template.id)]
+        for value in att_values_ids:
+            domain.append(('attribute_value_ids', '=', value))
+        self.product_id = product_obj.search(domain, limit=1)
 
+
+class MrpProductionProductLineAttribute(models.Model):
+    _name = 'mrp.production.product.line.attribute'
+
+    product_line = fields.Many2one(
+        comodel_name='mrp.production.product.line.attribute',
+        string='Product line')
+    attribute = fields.Many2one(comodel_name='product.attribute',
+                                string='Attribute')
+    value = fields.Many2one(comodel_name='product.attribute.value',
+                            domain="[('attribute_id', '=', attribute)]",
+                            string='Value')
 
 class MrpProductionProductLine(models.Model):
     _inherit = 'mrp.production.product.line'
 
     product_template = fields.Many2one(comodel_name='product.template',
                                        string='Product')
+    product_attributes = fields.One2many(
+        comodel_name='mrp.production.product.line.attribute',
+        inverse_name='product_line', string='Product attributes',
+        copyable=True)
+
+    @api.one
+    @api.onchange('product_template')
+    def onchange_product_template(self):
+        if self.product_template:
+            product_attributes = []
+            for attribute in self.product_template.attribute_line_ids:
+                product_attributes.append({'attribute':
+                                           attribute.attribute_id})
+            self.product_attributes = product_attributes
