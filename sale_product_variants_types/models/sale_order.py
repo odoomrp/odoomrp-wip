@@ -16,24 +16,10 @@
 #
 ##############################################################################
 
-{
-    "name": "MRP product attributes",
-    "version": "1.0",
-    "depends": [
-        "mrp_product_variants",
-        "product_attribute_types",
-    ],
-    "author": "OdooMRP team",
-    "contributors": [
-        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
-    ],
-    "category": "Hidden/Dependency",
-    "website": "http://www.odoomrp.com",
-    "summary": "",
-    "description": """
-    This module provide :
-    """,
-    "data": [],
-    "installable": True,
-    "auto_install": True,
-}
+from openerp import models, fields
+
+
+class SaleOrderLineAttribute(models.Model):
+    _inherit = 'sale.order.line.attribute'
+
+    custom_value = fields.Float(string='Custom value')

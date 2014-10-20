@@ -15,3 +15,27 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+
+{
+    "name": "Sale product variants types",
+    "version": "1.0",
+    "depends": [
+        "sale_product_variants",
+        "product_attribute_types",
+    ],
+    "author": "OdooMRP team",
+    "contributors": [
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+    ],
+    "category": "Hidden/Dependency",
+    "website": "http://www.odoomrp.com",
+    "summary": "",
+    "description": """
+    This module provide :
+    """,
+    "data": [
+        "views/sale_order_view.xml",
+    ],
+    "installable": True,
+    "auto_install": True,
+}
