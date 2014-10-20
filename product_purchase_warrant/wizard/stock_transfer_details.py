@@ -46,7 +46,7 @@ class StockTransferDetails(models.TransientModel):
                     item.update({'warrant': datetime.now() +
                                  relativedelta(months=int(warrant)) +
                                  relativedelta(
-                        days=int(31*(warrant - int(warrant))))})
+                        days=int(31 * (warrant - int(warrant))))})
         return result
 
     def default_get(self, cr, uid, fields, context=None):

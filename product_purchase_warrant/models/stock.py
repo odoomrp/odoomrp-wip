@@ -25,8 +25,7 @@ from dateutil.relativedelta import relativedelta
 class StockProductionLot(orm.Model):
     _inherit = "stock.production.lot"
     _columns = {
-        "warrant_limit": fields.datetime("Warranty")
-        }
+        "warrant_limit": fields.datetime("Warranty")}
 
     def create(self, cr, uid, vals, context=None):
         if context is None:
@@ -46,7 +45,7 @@ class StockProductionLot(orm.Model):
                     create_date +
                     relativedelta(months=int(context['sup_warrant']) +
                                   relativedelta(
-                        days=int(31*(context['sup_warrant'] -
+                        days=int(31 * (context['sup_warrant'] -
                                      int(context['sup_warrant']))))))
             if warrant_limit:
                 vals.update({'warrant_limit': warrant_limit})
