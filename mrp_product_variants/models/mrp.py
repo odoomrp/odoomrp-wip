@@ -93,7 +93,8 @@ class MrpProductionAttribute(models.Model):
     @api.depends('mrp_production.product_template')
     def _get_possible_attribute_values(self):
         domain = []
-        for attr_line in self.mrp_production.product_template.attribute_line_ids:
+        for attr_line in (
+                self.mrp_production.product_template.attribute_line_ids):
             for attr_value in attr_line.value_ids:
                 domain.append(attr_value.id)
         self.possible_values = domain
