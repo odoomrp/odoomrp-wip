@@ -46,7 +46,7 @@ class StockProductionLot(orm.Model):
                     relativedelta(months=int(context['sup_warrant']) +
                                   relativedelta(
                         days=int(31 * (context['sup_warrant'] -
-                                     int(context['sup_warrant']))))))
+                                       int(context['sup_warrant']))))))
             if warrant_limit:
                 vals.update({'warrant_limit': warrant_limit})
         return super(StockProductionLot, self).create(cr, uid, vals,
