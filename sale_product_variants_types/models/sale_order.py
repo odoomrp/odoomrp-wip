@@ -23,3 +23,5 @@ class SaleOrderLineAttribute(models.Model):
     _inherit = 'sale.order.line.attribute'
 
     custom_value = fields.Float(string='Custom value')
+    attr_type = fields.Selection(string='Type', store=False,
+                                 related='attribute.attr_type')
