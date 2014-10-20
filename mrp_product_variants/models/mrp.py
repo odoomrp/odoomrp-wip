@@ -40,36 +40,70 @@ class MrpBomLine(models.Model):
                                          inverse_name='mrp_bom_line',
                                          string='Product attributes',
                                          copyable=True)
+    attribute_value_ids = fields.Many2many(
+        domain="[('id','in',possible_values[0][2])]")
+    possible_values = fields.Many2many(
+        comodel_name='product.attribute.value',
+        compute='_get_possible_attribute_values')
+
+    @api.one
+    @api.depends('bom_id.product_tmpl_id')
+    def _get_possible_attribute_values(self):
+        domain = []
+        for attr_line in self.bom_id.product_tmpl_id.attribute_line_ids:
+            for attr_value in attr_line.value_ids:
+                domain.append(attr_value.id)
+        self.possible_values = domain
 
     @api.one
     @api.onchange('product_id')
     def onchange_product_product(self):
         self.product_template = self.product_id.product_tmpl_id
 
-    @api.one
+    @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
-        product_attributes = []
-        for attribute in self.product_template.attribute_line_ids:
-            product_attributes.append({'attribute': attribute.attribute_id})
-        self.product_attributes = product_attributes
+        if self.product_template:
+            product_attributes = []
+            for attribute in self.product_template.attribute_line_ids:
+                product_attributes.append({'attribute':
+                                           attribute.attribute_id})
+            self.product_attributes = product_attributes
+            return {'domain': {'product_id': [('product_tmpl_id', '=',
+                                               self.product_template.id)]}}
+        return {'domain': {'product_id': []}}
 
 
 class MrpProductionAttribute(models.Model):
     _name = 'mrp.production.attribute'
 
-    mrp_production = fields.Many2one(comodel_name='mrp.production.attribute',
+    mrp_production = fields.Many2one(comodel_name='mrp.production',
                                      string='Manufacturing Order')
     attribute = fields.Many2one(comodel_name='product.attribute',
                                 string='Attribute')
     value = fields.Many2one(comodel_name='product.attribute.value',
-                            domain="[('attribute_id', '=', attribute)]",
-                            string='Value')
+                            string='Value',
+                            domain="[('attribute_id','=',attribute),"
+                            "('id','in',possible_values[0][2])]")
+    possible_values = fields.Many2many(
+        comodel_name='product.attribute.value',
+        compute='_get_possible_attribute_values')
+
+    @api.one
+    @api.depends('mrp_production.product_template')
+    def _get_possible_attribute_values(self):
+        domain = []
+        for attr_line in (
+                self.mrp_production.product_template.attribute_line_ids):
+            for attr_value in attr_line.value_ids:
+                domain.append(attr_value.id)
+        self.possible_values = domain
 
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
+    product_id = fields.Many2one(required=False)
     product_template = fields.Many2one(comodel_name='product.template',
                                        string='Product', readonly=True,
                                        states={'draft': [('readonly', False)]})
@@ -93,12 +127,7 @@ class MrpProduction(models.Model):
     def onchange_product_template(self):
         for mo in self:
             product_attributes = []
-            if not mo.product_template.attribute_line_ids or not mo.product_id:
-                mo.product_id = (
-                    mo.product_template.product_variant_ids and
-                    mo.product_template.product_variant_ids[0])
-            if (mo.product_id and mo.product_id not in
-                    mo.product_template.product_variant_ids):
+            if not mo.product_template.attribute_line_ids:
                 mo.product_id = (
                     mo.product_template.product_variant_ids and
                     mo.product_template.product_variant_ids[0])

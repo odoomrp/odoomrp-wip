@@ -6,15 +6,17 @@
             <field name="model">mrp.bom</field>
             <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='bom_line_ids']/tree"
-                    position="attributes">
-                    <attribute name="editable" />
-                </xpath>
                 <xpath
                     expr="//field[@name='bom_line_ids']//field[@name='product_id']"
                     position="before">
                     <field name="product_template" />
+                    <field name="possible_values" invisible="1" />
                 </xpath>
+                <xpath
+                    expr="//field[@name='bom_line_ids']//field[@name='attribute_value_ids']"
+                    position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                    </xpath>
             </field>
         </record>
 
@@ -70,10 +72,11 @@
                 <notebook position="before">
                     <field name="product_attributes"
                         attrs="{'invisible':[('product_attributes','=',[])]}"
-                        options="{'no_create': True, 'no_delete': True}">
-                        <tree create="false" editable="1">
+                        options="{'no_create': True, 'no_delete': True}" >
+                        <tree create="0" editable="1">
                             <field name="attribute" />
-                            <field name="value" />
+                            <field name="value" options="{'no_create': True}" />
+                            <field name="possible_values" invisible="1" />
                         </tree>
                     </field>
                 </notebook>
