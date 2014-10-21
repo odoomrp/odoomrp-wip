@@ -35,7 +35,7 @@ class StockInventory(models.Model):
             if line.fail:
                 if not line.product:
                     prod_lst = product_obj.search([('default_code', '=',
-                                                line.code)])
+                                                    line.code)])
                     if prod_lst:
                         product = prod_lst[0]
                     else:
