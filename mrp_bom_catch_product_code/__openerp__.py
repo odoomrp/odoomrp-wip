@@ -16,7 +16,7 @@
 #
 ##############################################################################
 {
-    "name": "MRP Bom Catch Product Reference",
+    "name": "MRP Bom Catch Product Code",
     "version": "1.0",
     "author": "OdooMRP team",
     "category": "MRP",
