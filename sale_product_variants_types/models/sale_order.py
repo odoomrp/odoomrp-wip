@@ -29,9 +29,10 @@ class SaleOrderLineAttribute(models.Model):
     @api.one
     @api.constrains('custom_value')
     def _custom_value_in_range(self):
-        if not (self.value.min_range <= self.custom_value and 
+        if not (self.value.min_range <= self.custom_value and
                 self.value.max_range >= self.custom_value):
             raise exceptions.Warning(
-                _("Custom value from attribute '%s' must be between %s and %s.")
+                _("Custom value from attribute '%s' must be between %s and"
+                  " %s.")
                 % (self.attribute.name, self.value.min_range,
                    self.value.max_range))
