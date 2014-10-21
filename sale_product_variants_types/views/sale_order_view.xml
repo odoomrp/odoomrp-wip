@@ -10,7 +10,9 @@
                 <xpath
                     expr="//field[@name='order_line']/form//field[@name='product_attributes']/tree//field[@name='value']"
                     position="after">
-                    <field name="custom_value" />
+                    <field name="attr_type" invisible="1" />
+                    <field name="custom_value"
+                        attrs="{'readonly':[('attr_type','!=','range')]}" />
                 </xpath>
             </field>
         </record>
@@ -24,7 +26,9 @@
                 <xpath
                     expr="//field[@name='product_attributes']/tree//field[@name='value']"
                     position="after">
-                    <field name="custom_value" />
+                    <field name="attr_type" invisible="1" />
+                    <field name="custom_value"
+                        attrs="{'readonly':[('attr_type','!=','range')]}" />
                 </xpath>
             </field>
         </record>

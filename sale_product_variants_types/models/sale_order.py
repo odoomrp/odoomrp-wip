@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api, exceptions, _
 
 
 class SaleOrderLineAttribute(models.Model):
@@ -25,3 +25,13 @@ class SaleOrderLineAttribute(models.Model):
     custom_value = fields.Float(string='Custom value')
     attr_type = fields.Selection(string='Type', store=False,
                                  related='attribute.attr_type')
+
+    @api.one
+    @api.constrains('custom_value')
+    def _custom_value_in_range(self):
+        if not (self.value.min_range <= self.custom_value and 
+                self.value.max_range >= self.custom_value):
+            raise exceptions.Warning(
+                _("Custom value from attribute '%s' must be between %s and %s.")
+                % (self.attribute.name, self.value.min_range,
+                   self.value.max_range))
