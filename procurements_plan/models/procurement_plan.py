@@ -1,9 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
-#    Copyright (C) 2011 - 2014 Avanzosc <http://www.avanzosc.com>
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -40,9 +37,9 @@ class ProcurementPlan(models.Model):
     project_id = fields.Many2one('project.project', string='Project',
                                  required=True)
     procurement_ids = fields.One2many(
-        'procurement.order', 'plan_id', string='Procurements', readonly=True)
+        'procurement.order', 'plan', string='Procurements', readonly=True)
     purchase_ids = fields.One2many(
-        'purchase.order', 'plan_id', string='Purchases', readonly=True)
+        'purchase.order', 'plan', string='Purchases', readonly=True)
     state = fields.Selection(
         [('draft', 'Draft'),
          ('done', 'Done'),
@@ -65,11 +62,11 @@ class ProcurementPlan(models.Model):
         proc_obj = self.env['procurement.order']
         cond = [('date_planned', '>=', self.from_date),
                 ('date_planned', '<=', self.to_date),
-                ('plan_id', '=', False),
+                ('plan', '=', False),
                 ('state', 'in', ('running', 'confirmed'))]
         procurements = proc_obj.search(cond)
         if procurements:
-            procurements.write({'plan_id': self.id})
+            procurements.write({'plan': self.id})
         return True
 
     @api.multi
@@ -90,7 +87,7 @@ class ProcurementPlan(models.Model):
             my_proc.append(proc.id)
         cond = [('state', '=', 'confirmed'),
                 ('id', 'not in', my_proc),
-                ('plan_id', '=', False)]
+                ('plan', '=', False)]
         procurements = proc_obj.search(cond)
         for procurement in procurements:
             if procurement.sale_line_id:
@@ -106,7 +103,7 @@ class ProcurementPlan(models.Model):
             procurements.write(vals)
         cond = [('state', '=', 'running'),
                 ('id', 'not in', my_proc),
-                ('plan_id', '=', False)]
+                ('plan', '=', False)]
         procurements = proc_obj.search(cond)
         for procurement in procurements:
             if procurement.sale_line_id:
@@ -123,7 +120,7 @@ class ProcurementPlan(models.Model):
         self.env.cr.commit()
         threaded_calculation = threading.Thread(
             target=comp_obj.with_context(
-                plan_id=plan.id)._procure_calculation_all,
+                plan=plan.id)._procure_calculation_all,
             args=([]))
         threaded_calculation.start()
         cond = [('origin_state', '=', 'confirmed')]
@@ -147,5 +144,5 @@ class ProcurementPlan(models.Model):
     def action_cancel(self):
         for proc in self:
             if proc.procurement_ids:
-                proc.procurement_ids.write({'plan_id': False})
+                proc.procurement_ids.write({'plan': False})
         return self.write({'state': 'cancel'})

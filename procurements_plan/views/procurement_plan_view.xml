@@ -61,9 +61,9 @@
                     </group>
                     <notebook>
                         <page string="Procurements">
-                            <field name="procurement_ids" context="{'default_plan_id': False, 'search_default_plan_id': False}">
+                            <field name="procurement_ids" context="{'default_plan': False, 'search_default_plan': False}">
                                 <tree string="Procurement Lines" colors="red:date_planned&lt;current_date and state == 'exception';black:state=='running';darkgreen:state=='confirmed';gray:state in ['done','cancel'];blue:state == 'ready'">
-                                    <field name="plan_id" invisible="1" />
+                                    <field name="plan" invisible="1" />
                                     <field name="date_planned" widget="date"/>
                                     <field name="origin"/>
                                     <field name="product_id"/>

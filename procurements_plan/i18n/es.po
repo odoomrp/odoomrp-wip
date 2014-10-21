@@ -1,0 +1,291 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* procurements_plan
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-21 09:11+0000\n"
+"PO-Revision-Date: 2014-10-21 11:20+0100\n"
+"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: procurements_plan
+#: selection:stock.move,origin_state:0
+msgid "Available"
+msgstr "Disponible"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: procurements_plan
+#: selection:procurement.order,origin_state:0
+#: selection:procurement.plan,state:0
+#: selection:stock.move,origin_state:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: procurements_plan
+#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
+msgid "Compute all procurements with plan in the background."
+msgstr "Calcular todos los abastecimientos con plan en segundo plano."
+
+#. module: procurements_plan
+#: selection:procurement.order,origin_state:0
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: procurements_plan
+#: field:procurement.plan,create_uid:0
+#: field:run.scheduler.with.plan,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: procurements_plan
+#: field:procurement.plan,create_date:0
+#: field:run.scheduler.with.plan,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: procurements_plan
+#: field:procurement.plan,name:0
+msgid "Description"
+msgstr "Descripción"
+
+#. module: procurements_plan
+#: selection:procurement.order,origin_state:0
+#: selection:procurement.plan,state:0
+#: selection:stock.move,origin_state:0
+msgid "Done"
+msgstr "Realizado"
+
+#. module: procurements_plan
+#: selection:procurement.plan,state:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: procurements_plan
+#: code:addons/procurements_plan/models/procurement_plan.py:83
+#, python-format
+msgid "Error!"
+msgstr "Error!"
+
+#. module: procurements_plan
+#: selection:procurement.order,origin_state:0
+msgid "Exception"
+msgstr "Excepción"
+
+#. module: procurements_plan
+#: field:procurement.plan,from_date:0
+msgid "From Date"
+msgstr "Desde fecha"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_search_view
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: procurements_plan
+#: field:procurement.plan,id:0
+#: field:run.scheduler.with.plan,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "Import Procurements"
+msgstr "Importar abastecimientos"
+
+#. module: procurements_plan
+#: field:procurement.plan,write_uid:0
+#: field:run.scheduler.with.plan,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: procurements_plan
+#: field:procurement.plan,write_date:0
+#: field:run.scheduler.with.plan,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: procurements_plan
+#: selection:stock.move,origin_state:0
+msgid "New"
+msgstr "Nuevo"
+
+#. module: procurements_plan
+#: code:addons/procurements_plan/models/procurement_plan.py:84
+#, python-format
+msgid "No procurements to treat"
+msgstr "No hay abastecimientos para tratar"
+
+#. module: procurements_plan
+#: field:procurement.order,origin_state:0
+#: field:stock.move,origin_state:0
+msgid "Origin Status"
+msgstr "Estado origen"
+
+#. module: procurements_plan
+#: view:procurement.order:procurements_plan.procurement_form_view_inh_withplan
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
+#: field:procurement.order,plan:0
+#: view:purchase.order:procurements_plan.view_purchase_order_filter_inh_withplan
+#: view:purchase.order:procurements_plan.view_request_for_quotation_filter_inh_withplan
+#: field:purchase.order,plan:0
+#: field:run.scheduler.with.plan,plan:0
+msgid "Plan"
+msgstr "Plan"
+
+#. module: procurements_plan
+#: model:ir.model,name:procurements_plan.model_procurement_order
+msgid "Procurement"
+msgstr "Abastecimiento"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "Procurement Lines"
+msgstr "Línas de abastecimientos"
+
+#. module: procurements_plan
+#: model:ir.model,name:procurements_plan.model_procurement_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+#: model:res.groups,name:procurements_plan.group_procurement_plan
+msgid "Procurement Plan"
+msgstr "Plan abastecimientos"
+
+#. module: procurements_plan
+#: model:ir.actions.act_window,name:procurements_plan.action_procurement_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_tree_view
+msgid "Procurement Plans"
+msgstr "Planes de abastecimientos"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+#: field:procurement.plan,procurement_ids:0
+msgid "Procurements"
+msgstr "Abastecimientos"
+
+#. module: procurements_plan
+#: model:ir.ui.menu,name:procurements_plan.procurement_plan_menu_view
+msgid "Procurements Plans"
+msgstr "Planes de abastecimientos"
+
+#. module: procurements_plan
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
+msgid "Product"
+msgstr "Producto"
+
+#. module: procurements_plan
+#: field:procurement.plan,project_id:0
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: procurements_plan
+#: model:ir.model,name:procurements_plan.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "Purchase Orders"
+msgstr "Pedido de compra"
+
+#. module: procurements_plan
+#: field:procurement.plan,purchase_ids:0
+msgid "Purchases"
+msgstr "Compras"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "Run"
+msgstr "Ejecutar"
+
+#. module: procurements_plan
+#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
+msgid "Run Plan"
+msgstr "Ejecutar plan"
+
+#. module: procurements_plan
+#: model:ir.model,name:procurements_plan.model_run_scheduler_with_plan
+msgid "Run Scheduler With Plan"
+msgstr "Ejecutar abastecimiento con plan"
+
+#. module: procurements_plan
+#: model:ir.actions.act_window,name:procurements_plan.action_run_schedulers_with_plan
+msgid "Run Schedulers With Plan"
+msgstr "Ejecutar abastecimientos con plan"
+
+#. module: procurements_plan
+#: selection:procurement.order,origin_state:0
+msgid "Running"
+msgstr "Ejecutándose"
+
+#. module: procurements_plan
+#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
+msgid "Scheduler Parameters With Plan"
+msgstr "Párametros programados con plan"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_search_view
+msgid "Search Procurement Plan"
+msgstr "Buscar plan de abastecimientos"
+
+#. module: procurements_plan
+#: field:procurement.plan,sequence:0
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_search_view
+msgid "State"
+msgstr "Estado"
+
+#. module: procurements_plan
+#: field:procurement.plan,state:0
+msgid "Status"
+msgstr "Estatus"
+
+#. module: procurements_plan
+#: model:ir.model,name:procurements_plan.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: procurements_plan
+#: view:purchase.order:procurements_plan.view_purchase_order_filter_inh_withplan
+#: view:purchase.order:procurements_plan.view_request_for_quotation_filter_inh_withplan
+msgid "Supplier"
+msgstr "Proveedor"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "Unit of Measure"
+msgstr "Unidad de medida"
+
+#. module: procurements_plan
+#: selection:stock.move,origin_state:0
+msgid "Waiting Another Move"
+msgstr "Esperando otro movimiento"
+
+#. module: procurements_plan
+#: selection:stock.move,origin_state:0
+msgid "Waiting Availability"
+msgstr "Esperando disponibilidad"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "name"
+msgstr "descripción"
+
+#. module: procurements_plan
+#: field:procurement.plan,to_date:0
+msgid "to Date"
+msgstr "Hasta fecha"
+

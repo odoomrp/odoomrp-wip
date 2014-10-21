@@ -1,9 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
-#    Copyright (C) 2011 - 2014 Avanzosc <http://www.avanzosc.com>
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -18,11 +15,7 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-
-from openerp import models, fields
-
-
-class PurchaseOrder(models.Model):
-    _inherit = 'purchase.order'
-
-    plan_id = fields.Many2one('procurement.plan', string='Plan')
+from . import procurement
+from . import purchase_order
+from . import procurement_plan
+from . import stock_move

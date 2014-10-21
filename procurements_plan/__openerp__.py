@@ -1,9 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Avanzosc - Avanced Open Source Consulting
-#    Copyright (C) 2011 - 2014 Avanzosc <http://www.avanzosc.com>
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -19,11 +16,11 @@
 #
 ##############################################################################
 {
-    "name": "Procurements With Plan",
+    "name": "Procurements Plan",
     "version": "1.0",
-    "author": "AvanzOSC",
-    "category": "Product",
-    "website": "www.avanzosc.es",
+    "author": "OdooMRP team",
+    "category": "Procurements",
+    "website": "http://www.odoomrp.com",
     "description": """
     This module performs the following:
     1.- Create the action ASSIGN PROJECT/ANALYTIC ACCOUNT in the object

@@ -10,7 +10,7 @@
                         Compute all procurements with plan in the background.
                     </p>
                     <group>
-                        <field name="plan_id" colspan="4" domain="[('state','=','draft')]"/>
+                        <field name="plan" colspan="4" domain="[('state','=','draft')]"/>
                     </group>
                     <footer>
                         <button name="procure_calculation_plan" string="Run Plan" type="object"  class="oe_highlight"  />
