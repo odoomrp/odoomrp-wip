@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {
-    "name": "Quality Control Extension",
+    "name": "Quality Control Samples",
     "version": "1.0",
     "depends": [
         "stock",

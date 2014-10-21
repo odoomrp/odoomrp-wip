@@ -2,8 +2,8 @@
 <openerp>
     <data>
 
-        <record model="ir.ui.view" id="qc_test_line_extended_tree_view">
-            <field name="name">qc.test.line.extended.tree</field>
+        <record model="ir.ui.view" id="qc_test_line_samples_tree_view">
+            <field name="name">qc.test.line.samples.tree</field>
             <field name="model">qc.test.line</field>
             <field name="inherit_id" ref="quality_control.qc_test_line_tree_view" />
             <field name="arch" type="xml">
@@ -13,8 +13,8 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="qc_test_line_extended_form_view">
-            <field name="name">qc.test.line.extended.form</field>
+        <record model="ir.ui.view" id="qc_test_line_samples_form_view">
+            <field name="name">qc.test.line.samples.form</field>
             <field name="model">qc.test.line</field>
             <field name="inherit_id" ref="quality_control.qc_test_line_form_view" />
             <field name="arch" type="xml">
@@ -33,8 +33,8 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="qc_test_extended_tree_view">
-            <field name="name">qc.test.extended.tree</field>
+        <record model="ir.ui.view" id="qc_test_samples_tree_view">
+            <field name="name">qc.test.samples.tree</field>
             <field name="model">qc.test</field>
             <field name="inherit_id" ref="quality_control.qc_test_tree_view" />
             <field name="arch" type="xml">
@@ -52,56 +52,38 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="qc_test_search_view_qualitycontrolext">
-            <field name="name">qc.test.extended.search</field>
+        <record model="ir.ui.view" id="qc_test_search_view_inh_controlsamples">
+            <field name="name">qc.test.search.view.inh.controlsamples</field>
             <field name="model">qc.test</field>
+            <field name="inherit_id" ref="quality_control.qc_test_search_view" />
             <field name="arch" type="xml">
-                <search string="Search Test">
-                    <group>
-                        <field name="name" />
-                        <field name="origin" />
-                        <field name="object_id" />
-                        <field name="test_template_id" />
-                        <field name="state" />
-                        <field name="success" />
-                        <field name="enabled" />
-                        <newline />
-                        <field name="categ_id" />
-                        <field name="product_id" />
-                        <field name="picking_id" />
-                        <field name="lot_id" />
-                        <field name="production_id" />
-                    </group>
+                <field name="name" position="after">
+                    <field name="origin" />
+                </field>
+                <field name="enabled" position="after">
                     <newline />
-                    <group expand="0" string="Group By...">
-                        <filter string="Reference" domain="[]"
-                            context="{'group_by':'object_id'}" />
-                        <filter string="Template" domain="[]"
-                            context="{'group_by':'test_template_id'}" />
-                        <filter string="State" domain="[]"
-                            context="{'group_by':'state'}" />
-                        <filter string="Success" domain="[]"
-                            context="{'group_by':'success'}" />
-                        <filter string="Enabled" domain="[]"
-                            context="{'group_by':'enabled'}" />
-                        <filter string="Category" domain="[]"
-                            context="{'group_by':'categ_id'}" />
-                        <filter string="Product" domain="[]"
-                            context="{'group_by':'product_id'}" />
-                        <filter string="Picking" domain="[]"
-                            context="{'group_by':'picking_id'}" />
-                        <filter string="Lot" domain="[]"
-                            context="{'group_by':'lot_id'}" />
-                        <filter string="Production" domain="[]"
-                            context="{'group_by':'production_id'}" />
-                    </group>
-                </search>
+                    <field name="categ_id" />
+                    <field name="product_id" />
+                    <field name="picking_id" />
+                    <field name="lot_id" />
+                    <field name="production_id" />
+                </field>
+                <filter string="Enabled" position="after">
+                    <filter string="Category" domain="[]"
+                        context="{'group_by':'categ_id'}" />
+                    <filter string="Product" domain="[]"
+                        context="{'group_by':'product_id'}" />
+                    <filter string="Picking" domain="[]"
+                        context="{'group_by':'picking_id'}" />
+                    <filter string="Lot" domain="[]"
+                        context="{'group_by':'lot_id'}" />
+                    <filter string="Production" domain="[]"
+                        context="{'group_by':'production_id'}" />
+                </filter>
             </field>
         </record>
-
-
-        <record model="ir.ui.view" id="qc_test_extended_form_view">
-            <field name="name">qc.test.extended.form</field>
+        <record model="ir.ui.view" id="qc_test_samples_form_view">
+            <field name="name">qc.test.samples.form</field>
             <field name="model">qc.test</field>
             <field name="type">form</field>
             <field name="inherit_id" ref="quality_control.qc_test_form_view" />
@@ -126,8 +108,8 @@
         </record>
 
         <record model="ir.ui.view"
-            id="qc_test_template_extended_search_view">
-            <field name="name">qc.test.template.extended.search</field>
+            id="qc_test_template_samples_search_view">
+            <field name="name">qc.test.template.samples.search</field>
             <field name="model">qc.test.template</field>
             <field name="type">search</field>
             <field name="arch" type="xml">
@@ -160,8 +142,8 @@
         </record>
 
         <record model="ir.ui.view"
-            id="qc_test_template_tree_view_inh_qualitycontrolext">
-            <field name="name">qc.test.template.tree.view.inh.qualitycontrolext
+            id="qc_test_template_tree_view_inh_qualitycontrolsamples">
+            <field name="name">qc.test.template.tree.view.inh.qualitycontrolsamples
             </field>
             <field name="model">qc.test.template</field>
             <field name="inherit_id"
@@ -175,8 +157,8 @@
         </record>
 
         <record model="ir.ui.view"
-            id="qc_test_template_extended_form_view">
-            <field name="name">qc.test.template.extended.form</field>
+            id="qc_test_template_samples_form_view">
+            <field name="name">qc.test.template.samples.form</field>
             <field name="model">qc.test.template</field>
             <field name="type">form</field>
             <field name="inherit_id"
