@@ -16,7 +16,10 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+import time
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from openerp import models, fields, api, exceptions, tools, _
+from openerp.addons.product import _common
 
 
 class MrpBomAttribute(models.Model):
@@ -76,6 +79,137 @@ class MrpBomLine(models.Model):
 
 class MrpBom(models.Model):
     _inherit = 'mrp.bom'
+
+    @api.model
+    def _bom_explode(self, bom, product, factor, properties=None, level=0,
+                     routing_id=False, previous_products=None,
+                     master_bom=None):
+        """ Finds Products and Work Centers for related BoM for manufacturing
+        order.
+        @param bom: BoM of particular product template.
+        @param product: Select a particular variant of the BoM. If False use
+                        BoM without variants.
+        @param factor: Factor represents the quantity, but in UoM of the BoM,
+                        taking into account the numbers produced by the BoM
+        @param properties: A List of properties Ids.
+        @param level: Depth level to find BoM lines starts from 10.
+        @param previous_products: List of product previously use by bom explore
+                        to avoid recursion
+        @param master_bom: When recursion, used to display the name of the
+                        master bom
+        @return: result: List of dictionaries containing product details.
+                 result2: List of dictionaries containing Work Center details.
+        """
+        uom_obj = self.env["product.uom"]
+        routing_obj = self.env['mrp.routing']
+        master_bom = master_bom or bom
+
+        def _factor(factor, product_efficiency, product_rounding):
+            factor = factor / (product_efficiency or 1.0)
+            factor = _common.ceiling(factor, product_rounding)
+            if factor < product_rounding:
+                factor = product_rounding
+            return factor
+
+        factor = _factor(factor, bom.product_efficiency, bom.product_rounding)
+
+        result = []
+        result2 = []
+
+        routing = ((routing_id and routing_obj.browse(routing_id)) or
+                   bom.routing_id or False)
+        if routing:
+            for wc_use in routing.workcenter_lines:
+                wc = wc_use.workcenter_id
+                d, m = divmod(factor, wc_use.workcenter_id.capacity_per_cycle)
+                mult = (d + (m and 1.0 or 0.0))
+                cycle = mult * wc_use.cycle_nbr
+                result2.append({
+                    'name': (tools.ustr(wc_use.name) + ' - ' +
+                             tools.ustr(bom.product_tmpl_id.name_get()[0][1])),
+                    'workcenter_id': wc.id,
+                    'sequence': level + (wc_use.sequence or 0),
+                    'cycle': cycle,
+                    'hour': float(wc_use.hour_nbr * mult +
+                                  ((wc.time_start or 0.0) +
+                                   (wc.time_stop or 0.0) + cycle *
+                                   (wc.time_cycle or 0.0)) *
+                                  (wc.time_efficiency or 1.0)),
+                })
+
+        for bom_line_id in bom.bom_line_ids:
+            if bom_line_id.date_start and \
+                (bom_line_id.date_start >
+                 time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)) or \
+                bom_line_id.date_stop and \
+                (bom_line_id.date_stop <
+                 time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)):
+                    continue
+            # all bom_line_id variant values must be in the product
+            if bom_line_id.attribute_value_ids:
+                if not product or \
+                        (set(map(int, bom_line_id.attribute_value_ids or [])) -
+                         set(map(int, product.attribute_value_ids))):
+                    continue
+
+            if previous_products and (bom_line_id.product_id.product_tmpl_id.id
+                                      in previous_products):
+                raise exceptions.Warning(
+                    _('Invalid Action! BoM "%s" contains a BoM line with a'
+                      ' product recursion: "%s".') %
+                    (master_bom.name, bom_line_id.product_id.name_get()[0][1]))
+
+            quantity = _factor(bom_line_id.product_qty * factor,
+                               bom_line_id.product_efficiency,
+                               bom_line_id.product_rounding)
+            if not bom_line_id.product_id:
+                bom_id = self._bom_find(
+                    product_tmpl_id=bom_line_id.product_template.id,
+                    properties=properties)
+            else:
+                bom_id = self._bom_find(product_id=bom_line_id.product_id.id,
+                                        properties=properties)
+
+            #  If BoM should not behave like PhantoM, just add the product,
+            #  otherwise explode further
+            if (bom_line_id.type != "phantom" and
+                    (not bom_id or self.browse(bom_id).type != "phantom")):
+                result.append({
+                    'name': (bom_line_id.product_id.name or
+                             bom_line_id.product_template.name),
+                    'product_id': bom_line_id.product_id.id,
+                    'product_template': bom_line_id.product_template.id,
+                    'product_qty': quantity,
+                    'product_uom': bom_line_id.product_uom.id,
+                    'product_uos_qty': (bom_line_id.product_uos and
+                                        _factor((bom_line_id.product_uos_qty *
+                                                 factor),
+                                                bom_line_id.product_efficiency,
+                                                bom_line_id.product_rounding)
+                                        or False),
+                    'product_uos': (bom_line_id.product_uos and
+                                    bom_line_id.product_uos.id or False),
+                })
+            elif bom_id:
+                all_prod = [bom.product_tmpl_id.id] + (previous_products or [])
+                bom2 = self.browse(bom_id)
+                # We need to convert to units/UoM of chosen BoM
+                factor2 = uom_obj._compute_qty(
+                    bom_line_id.product_uom.id, quantity, bom2.product_uom.id)
+                quantity2 = factor2 / bom2.product_qty
+                res = self._bom_explode(
+                    bom2, bom_line_id.product_id, quantity2,
+                    properties=properties, level=level + 10,
+                    previous_products=all_prod, master_bom=master_bom)
+                result = result + res[0]
+                result2 = result2 + res[1]
+            else:
+                raise exceptions.Warning(
+                    _('Invalid Action! BoM "%s" contains a phantom BoM line'
+                      ' but the product "%s" does not have any BoM defined.') %
+                    (master_bom.name, bom_line_id.product_id.name_get()[0][1]))
+
+        return result, result2
 
 
 class MrpProductionAttribute(models.Model):
@@ -176,9 +310,11 @@ class MrpProductionProductLineAttribute(models.Model):
                             domain="[('attribute_id', '=', attribute)]",
                             string='Value')
 
+
 class MrpProductionProductLine(models.Model):
     _inherit = 'mrp.production.product.line'
 
+    product_id = fields.Many2one(required=False)
     product_template = fields.Many2one(comodel_name='product.template',
                                        string='Product')
     product_attributes = fields.One2many(
@@ -190,8 +326,25 @@ class MrpProductionProductLine(models.Model):
     @api.onchange('product_template')
     def onchange_product_template(self):
         if self.product_template:
+            self.product_uom = self.product_template.uom_id
             product_attributes = []
+            if not self.product_template.attribute_line_ids:
+                self.product_id = (
+                    self.product_template.product_variant_ids and
+                    self.product_template.product_variant_ids[0])
             for attribute in self.product_template.attribute_line_ids:
                 product_attributes.append({'attribute':
                                            attribute.attribute_id})
             self.product_attributes = product_attributes
+
+    @api.one
+    @api.onchange('product_attributes')
+    def onchange_product_attributes(self):
+        product_obj = self.env['product.product']
+        att_values_ids = [attr_line.value and attr_line.value.id
+                          or False
+                          for attr_line in self.product_attributes]
+        domain = [('product_tmpl_id', '=', self.product_template.id)]
+        for value in att_values_ids:
+            domain.append(('attribute_value_ids', '=', value))
+        self.product_id = product_obj.search(domain, limit=1)
