@@ -22,6 +22,7 @@
                         <field name="import_lines">
                             <tree colors="red:fail==True;green:fail==False"
                                 editable="bottom">
+                                <field name="product"/>
                                 <field name="code"/>
                                 <field name="quantity"/>
                                 <field name="location_id" />

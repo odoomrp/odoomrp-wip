@@ -5,6 +5,7 @@ from openerp import models, fields, api, exceptions, _
 class StockInventory(models.Model):
     _inherit = "stock.inventory"
 
+    @api.model
     def _get_available_filters(self):
         cr = self._cr
         uid = self._uid
@@ -17,14 +18,13 @@ class StockInventory(models.Model):
     imported = fields.Boolean('Imported')
     import_lines = fields.One2many('stock.inventory.import.line',
                                    'inventory_id', string='Imported Lines')
-    filter = fields.Selection(_get_available_filters, 'Selection Filter',
+    filter = fields.Selection(_get_available_filters,
+                              string='Selection Filter',
                               required=True)
 
     @api.one
     def process_import_lines(self):
-        """
-        Process Inventory Load lines.
-        """
+        """Process Inventory Load lines."""
         if not self.import_lines:
             raise exceptions.Warning(_("There must be one line at least to "
                                        "process"))
@@ -33,13 +33,16 @@ class StockInventory(models.Model):
         product_obj = self.env['product.product']
         for line in self.import_lines:
             if line.fail:
-                prod_lst = product_obj.search([('default_code', '=',
+                if not line.product:
+                    prod_lst = product_obj.search([('default_code', '=',
                                                 line.code)])
-                if prod_lst:  # Create inventory line
-                    product = prod_lst[0]
-                else:
-                    line.fail_reason = _('No product code found')
+                    if prod_lst:
+                        product = prod_lst[0]
+                    else:
+                        line.fail_reason = _('No product code found')
                     continue
+                else:
+                    product = line.product
                 lot_id = None
                 if line.lot:
                     lot_lst = stk_lot_obj.search([('name', '=', line.lot)])
@@ -64,6 +67,7 @@ class StockInventoryImportLine(models.Model):
     _description = "Stock Inventory Import Line"
 
     code = fields.Char('Product Code')
+    product = fields.Many2one('product.product', 'Found Product')
     quantity = fields.Float('Quantity')
     inventory_id = fields.Many2one('stock.inventory', 'Inventory',
                                    readonly=True)

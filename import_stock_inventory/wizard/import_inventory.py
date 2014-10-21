@@ -25,13 +25,12 @@ class ImportInventory(models.TransientModel):
 
     @api.one
     def action_import(self):
-        """
-        Load Inventory data from the CSV file.
-        """
+        """Load Inventory data from the CSV file."""
         ctx = self._context
         stloc_obj = self.env['stock.location']
         inventory_obj = self.env['stock.inventory']
         inv_imporline_obj = self.env['stock.inventory.import.line']
+        product_obj = self.env['product.product']
         if 'active_id' in ctx:
             inventory = inventory_obj.browse(ctx['active_id'])
         if not self.data:
@@ -74,6 +73,10 @@ class ImportInventory(models.TransientModel):
                                                values['location'])])
                 if locat_lst:
                     prod_location = locat_lst[0]
+            prod_lst = product_obj.search([('default_code', '=',
+                                            values['code'])])
+            if prod_lst:
+                val['product'] = prod_lst[0].id
             if 'lot' in values and values['lot']:
                 val['lot'] = values['lot']
             val['code'] = values['code']
