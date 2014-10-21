@@ -23,6 +23,7 @@
         "product",
         "mrp",
         "product_variants_no_automatic_creation",
+        "mrp_production_editable_scheduled_products",
     ],
     "author": "OdooMRP team",
     "contributors": [
