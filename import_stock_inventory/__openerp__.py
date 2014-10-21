@@ -10,7 +10,7 @@
     (if not defined, default inventory location will be used)
     You can also add a fourth column with Key "lot" to add a product lot.
     """,
-    'author': 'AvanzOSC',
+    'author': 'OdooMRP team',
     'contributors': ["Daniel Campos <danielcampos@avanzosc.es>"],
     'website': "http://www.avanzosc.com",
     'depends': ['stock'],
