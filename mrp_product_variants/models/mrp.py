@@ -83,7 +83,7 @@ class MrpBom(models.Model):
     @api.model
     def _bom_explode(self, bom, product, factor, properties=None, level=0,
                      routing_id=False, previous_products=None,
-                     master_bom=None):
+                     master_bom=None, production=None):
         """ Finds Products and Work Centers for related BoM for manufacturing
         order.
         @param bom: BoM of particular product template.
@@ -147,11 +147,17 @@ class MrpBom(models.Model):
                     continue
             # all bom_line_id variant values must be in the product
             if bom_line_id.attribute_value_ids:
-                if not product or \
+                production_attr_values = []
+                if not product and production:
+                    for attr_value in production.product_attributes:
+                        production_attr_values.append(attr_value.value.id)
+                    if (set(map(int, bom_line_id.attribute_value_ids or [])) -
+                            set(map(int, production_attr_values))):
+                        continue
+                elif not product or\
                         (set(map(int, bom_line_id.attribute_value_ids or [])) -
                          set(map(int, product.attribute_value_ids))):
                     continue
-
             if previous_products and (bom_line_id.product_id.product_tmpl_id.id
                                       in previous_products):
                 raise exceptions.Warning(
@@ -178,7 +184,9 @@ class MrpBom(models.Model):
                     'name': (bom_line_id.product_id.name or
                              bom_line_id.product_template.name),
                     'product_id': bom_line_id.product_id.id,
-                    'product_template': bom_line_id.product_template.id,
+                    'product_template': (
+                        bom_line_id.product_template.id or
+                        bom_line_id.product_id.product_tmpl_id.id),
                     'product_qty': quantity,
                     'product_uom': bom_line_id.product_uom.id,
                     'product_uos_qty': (bom_line_id.product_uos and
@@ -296,6 +304,66 @@ class MrpProduction(models.Model):
         for value in att_values_ids:
             domain.append(('attribute_value_ids', '=', value))
         self.product_id = product_obj.search(domain, limit=1)
+
+    @api.multi
+    def _action_compute_lines(self, properties=None):
+        """ Compute product_lines and workcenter_lines from BoM structure
+        @return: product_lines
+        """
+        if properties is None:
+            properties = []
+        results = []
+        bom_obj = self.env['mrp.bom']
+        uom_obj = self.env['product.uom']
+        prod_line_obj = self.env['mrp.production.product.line']
+        workcenter_line_obj = self.env['mrp.production.workcenter.line']
+        for production in self:
+            #  unlink product_lines
+            production.product_lines.unlink()
+            #  unlink workcenter_lines
+            production.workcenter_lines.unlink()
+            #  search BoM structure and route
+            bom_point = production.bom_id
+            bom_id = production.bom_id.id
+            if not bom_point:
+                if not production.product_id:
+                    bom_obj._bom_find(
+                        product_tmpl_id=production.product_template.id,
+                        properties=properties)
+                else:
+                    bom_id = bom_obj._bom_find(
+                        product_id=production.product_id.id,
+                        properties=properties)
+                if bom_id:
+                    bom_point = bom_obj.browse(bom_id)
+                    routing_id = bom_point.routing_id.id or False
+                    self.write({'bom_id': bom_id, 'routing_id': routing_id})
+
+            if not bom_id:
+                raise exceptions.Warning(
+                    _('Error! Cannot find a bill of material for this'
+                      ' product.'))
+
+            # get components and workcenter_lines from BoM structure
+            factor = uom_obj._compute_qty(production.product_uom.id,
+                                          production.product_qty,
+                                          bom_point.product_uom.id)
+            # product_lines, workcenter_lines
+            results, results2 = bom_obj._bom_explode(
+                bom_point, production.product_id,
+                factor / bom_point.product_qty, properties,
+                routing_id=production.routing_id.id, production=production)
+
+            #  reset product_lines in production order
+            for line in results:
+                line['production_id'] = production.id
+                prod_line_obj.create(line)
+
+            #  reset workcenter_lines in production order
+            for line in results2:
+                line['production_id'] = production.id
+                workcenter_line_obj.create(line)
+        return results
 
 
 class MrpProductionProductLineAttribute(models.Model):
