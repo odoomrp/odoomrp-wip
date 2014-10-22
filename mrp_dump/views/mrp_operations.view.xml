@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="mrp_production_download_form">
+            <field name="name">MRP download form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <page string="Extra Information" position="after">
+                    <page string="Download">
+                        <group>
+                            <group string="Pack" colspan="4" col="4">
+                                <field name="pack" nolabel="1" colspan="4"
+                                    col="4">
+                                    <tree string="Pack">
+                                        <field name="product" />
+                                        <field name="ref" />
+                                        <field name="qty" />
+                                        <field name="fill" />
+                                        <field name="lot" />
+                                        <field name="ul" />
+                                    </tree>
+                                    <form string="Pack">
+                                        <group>
+                                            <field name="product" />
+                                            <field name="ref" />
+                                            <field name="qty" />
+                                            <field name="fill" />
+                                            <field name="lot"
+                                                domain="[('product_id','=',product)]" />
+                                            <field name="ul" domain="[('type','=','unit')]"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+
+                            <group string="Sample" colspan="4" col="4">
+                                <field name="sample" nolabel="1" colspan="4"
+                                    col="4" />
+                            </group>
+                            <field name="sample_taken" />
+                            <group colspan="4" col="4">
+                                <field name="claim" colspan="2"
+                                    col="2" />
+                                <field name="download_user"
+                                    colspan="2" col="2" />
+                            </group>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+    </data>
+</openerp>
