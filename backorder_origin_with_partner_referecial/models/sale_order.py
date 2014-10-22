@@ -32,3 +32,4 @@ class SaleOrder(models.Model):
             if self.client_order_ref and '-' not in pick.origin:
                     pick.origin = '-'.join([pick.origin,
                                             self.client_order_ref])
+        return res
