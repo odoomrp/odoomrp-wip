@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
+from openerp import models, fields, api
 
 
 class ProductAttributeValueSaleLine(models.Model):
@@ -83,12 +83,12 @@ class SaleOrderLine(models.Model):
             domain.append(('attribute_value_ids', '=', value))
         self.product_id = product_obj.search(domain, limit=1)
 
-    @api.one
+    @api.multi
     def action_duplicate(self):
+        self.ensure_one()
         self.copy()
         # Force reload of the view as a workaround for lp:1155525
         return {
-            'name': _('Sale order'),
             'context': self.env.context,
             'view_type': 'form',
             'view_mode': 'form,tree',

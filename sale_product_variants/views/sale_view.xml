@@ -16,7 +16,7 @@
                     expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
                     position="after">
                     <button name="action_duplicate" state="draft"
-                        string="Duplicate" type="object" icon="gtk-go-forward"
+                        string="Duplicate" type="object" icon="STOCK_COPY"
                         help="Duplicate line" />
                 </xpath>
                 <xpath
