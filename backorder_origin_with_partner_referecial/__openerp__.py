@@ -20,7 +20,7 @@
 {
     "name": "Backorder origin with partner reference",
     "version": "1.0",
-    "depends": ["base", "stock"],
+    "depends": ["base", "sale"],
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Stock",

@@ -17,4 +17,18 @@
 #
 ##############################################################################
 
-from . import sale_order
+from openerp import api, models
+
+
+class SaleOrder(models.Model):
+
+    _inherit = "sale.order"
+
+    @api.one
+    def action_ship_create(self):
+
+        res = super(SaleOrder, self).action_ship_create()
+        for pick in self.picking_ids:
+            if self.client_order_ref and '-' not in pick.origin:
+                    pick.origin = '-'.join([pick.origin,
+                                            self.client_order_ref])
