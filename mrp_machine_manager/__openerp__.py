@@ -32,6 +32,7 @@
     "data": ['views/machinery_view.xml',
              'views/machine_model_view.xml',
              'views/mrp_workcenter_view.xml',
+             'views/product_view.xml',
              'security/ir.model.access.csv',
              ],
     "installable": True
