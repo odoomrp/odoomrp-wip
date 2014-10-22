@@ -30,9 +30,6 @@ class MrpMachinery(models.Model):
     def _def_company(self):
         return self.env.user.company_id.id
 
-    def _def_enroll(self):
-        return fields.Date.today()
-
     name = fields.Char('Machine Name', required=True)
     company = fields.Many2one('res.company', 'Company', required=True,
                               default=_def_company)
@@ -41,11 +38,11 @@ class MrpMachinery(models.Model):
     depracc = fields.Many2one('account.account', string='Depreciation Account')
     year = fields.Char('Year')
     model = fields.Char('Model')
-    product = fields.Many2one('product.product', 'Product Associated')
+    product = fields.Many2one('product.product', 'Associated product')
     serial_char = fields.Char('Product Serial #')
     serial = fields.Many2one('stock.production.lot', string='Product Serial #',
                              domain="[('product_id', '=', product)]")
-    type = fields.Many2one('mrp.machine.model', 'Type')
+    model_type = fields.Many2one('mrp.machine.model', 'Type')
     status = fields.Selection([('active', 'Active'), ('inactive', 'InActive'),
                                ('outofservice', 'Out of Service')],
                               'Status', required=True, default='active')
@@ -80,7 +77,8 @@ class MrpMachinery(models.Model):
                                help="This association is necessary if you want"
                                " to make repair orders with the machine")
     enrolldate = fields.Date('Enrollment date', required=True,
-                             default=_def_enroll)
+                             default=lambda
+                             self: fields.Date.context_today(self))
     ambit = fields.Selection([('local', 'Local'), ('national', 'National'),
                               ('international', 'International')],
                              'Ambit', default='local', required=True)
