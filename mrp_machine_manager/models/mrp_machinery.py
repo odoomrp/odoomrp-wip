@@ -27,15 +27,6 @@ class MrpMachinery(models.Model):
     _name = "mrp.machinery"
     _description = "Holds records of Machines"
 
-    def copy(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        default.update({
-            'name': 'New Machine Name',
-            'regnno': 'New Registration no',
-        })
-        return super(MrpMachinery, self).copy(cr, uid, id, default, context)
-
     def _def_company(self):
         return self.env.user.company_id.id
 
@@ -43,7 +34,6 @@ class MrpMachinery(models.Model):
         return fields.Date.today()
 
     name = fields.Char('Machine Name', required=True)
-    regnno = fields.Char('Machine Registration #', required=True)
     company = fields.Many2one('res.company', 'Company', required=True,
                               default=_def_company)
     assetacc = fields.Many2one('account.account', string='Asset Account',
@@ -101,9 +91,3 @@ class MrpMachinery(models.Model):
     mac = fields.Char('MAC Address')
     insurance = fields.Char('Insurance Name')
     policy = fields.Char('Machine policy')
-
-    _sql_constraints = [(
-        'uniq_regn_no', 'unique (regnno)',
-        _('The registration no of the machine must be unique!')),
-        ('name_uniq', 'unique(name)', _('The machine already exist!')),
-        ]

@@ -20,10 +20,11 @@
                             colspan="6" />
                         <newline />
                         <field name="name" />
-                        <field name="regnno" />
                         <field name="company" invisible="1"/>
-                        <field name="product" domain="[('machine_ok','=',True)]" />
                         <field name="location" />
+                        <field name="product" domain="[('machine_ok','=',True)]" />
+                        <field name="serial_char" attrs="{'invisible':[('product','!=', False)]}"/>
+                        <field name="serial" attrs="{'invisible':[('product','=', False)]}"/>
                     </group>
                     <separator string="Analysis Information"
                         colspan="4" />
@@ -34,8 +35,6 @@
                                 colspan="4" />
                                 <field name="year" />
                                 <field name="model" />
-                                <field name="serial_char" attrs="{'invisible':[('product','!=', False)]}"/>
-                                <field name="serial" attrs="{'invisible':[('product','=', False)]}"/>
                                 <field name="type" />
                                 <separator string="Current Details"
                                     colspan="4" />
@@ -110,7 +109,6 @@
             <field name="arch" type="xml">
                 <tree string="Machines">
                     <field name="name" />
-                    <field name="regnno"/>
                     <field name="company"  />
                     <field name="year" />
                     <field name="model" />
