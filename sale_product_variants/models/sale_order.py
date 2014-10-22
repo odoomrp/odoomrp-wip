@@ -77,12 +77,18 @@ class SaleOrderLine(models.Model):
     @api.onchange('product_attributes')
     def onchange_product_attributes(self):
         product_obj = self.env['product.product']
-        att_values_ids = [attr_line.value.id
-                          for attr_line in self.product_attributes]
+        description = self.product_template.name
+        att_values_ids = []
+        for attr_line in self.product_attributes:
+            att_values_ids.append(attr_line.value.id)
+            if attr_line.value:
+                description += _('\n%s: %s') % (attr_line.attribute.name,
+                                                attr_line.value.name)
         domain = [('product_tmpl_id', '=', self.product_template.id)]
         for value in att_values_ids:
             domain.append(('attribute_value_ids', '=', value))
         self.product_id = product_obj.search(domain, limit=1)
+        self.name = description
 
     @api.one
     def action_duplicate(self):
