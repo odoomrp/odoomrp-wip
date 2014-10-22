@@ -43,20 +43,18 @@ class MrpBomLine(models.Model):
                                          inverse_name='mrp_bom_line',
                                          string='Product attributes',
                                          copyable=True)
-    # attribute_value_ids = fields.Many2many(
-    #     domain="[('id','in',possible_values[0][2])]")
+    attribute_value_ids = fields.Many2many(
+        domain="[('id', 'in', possible_values[0][2])]")
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
 
     @api.one
-    @api.depends('bom_id.product_tmpl_id')
+    @api.depends('bom_id.product_tmpl_id',
+                 'bom_id.product_tmpl_id.attribute_line_ids')
     def _get_possible_attribute_values(self):
-        domain = []
-        for attr_line in self.bom_id.product_tmpl_id.attribute_line_ids:
-            for attr_value in attr_line.value_ids:
-                domain.append(attr_value.id)
-        self.possible_values = domain
+        self.possible_values = self.mapped(
+            'bom_id.product_tmpl_id.attribute_line_ids').sorted()
 
     @api.one
     @api.onchange('product_id')
@@ -238,12 +236,8 @@ class MrpProductionAttribute(models.Model):
     @api.one
     @api.depends('mrp_production.product_template')
     def _get_possible_attribute_values(self):
-        domain = []
-        for attr_line in (
-                self.mrp_production.product_template.attribute_line_ids):
-            for attr_value in attr_line.value_ids:
-                domain.append(attr_value.id)
-        self.possible_values = domain
+        self.possible_values = self.mapped(
+            'mrp_production.product_template.attribute_line_ids').sorted()
 
 
 class MrpProduction(models.Model):
@@ -271,6 +265,7 @@ class MrpProduction(models.Model):
     @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
+        self.ensure_one()
         if self.product_template:
             self.product_uom = self.product_template.uom_id
             product_attributes = []
