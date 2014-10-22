@@ -17,7 +17,6 @@
 ##############################################################################
 from openerp import models, fields, api, _
 from openerp.exceptions import except_orm
-import threading
 
 
 class ProcurementPlan(models.Model):
@@ -118,11 +117,7 @@ class ProcurementPlan(models.Model):
             vals = {'state': 'cancel', 'origin_state': 'running'}
             procurements.write(vals)
         self.env.cr.commit()
-        threaded_calculation = threading.Thread(
-            target=comp_obj.with_context(
-                plan=plan.id)._procure_calculation_all,
-            args=([]))
-        threaded_calculation.start()
+        comp_obj.with_context(plan=plan.id)._procure_calculation_all()
         cond = [('origin_state', '=', 'confirmed')]
         procurements = proc_obj.search(cond)
         if procurements:
