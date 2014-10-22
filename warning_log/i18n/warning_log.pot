@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-06 09:05+0000\n"
-"PO-Revision-Date: 2014-08-06 09:05+0000\n"
+"POT-Creation-Date: 2014-10-22 15:07+0000\n"
+"PO-Revision-Date: 2014-10-22 15:07+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,8 @@ msgstr ""
 
 #. module: warning_log
 #: model:ir.actions.act_window,name:warning_log.action_warning_log
-#: view:warning.log:0
+#: view:warning.log:warning_log.warning_log_form_view
+#: view:warning.log:warning_log.warning_log_tree_view
 msgid "Warning Log"
 msgstr ""
 
@@ -100,10 +101,5 @@ msgstr ""
 #: model:ir.ui.menu,name:warning_log.warning_action_menu
 #: model:ir.ui.menu,name:warning_log.warning_log_top_menu
 msgid "Warnings"
-msgstr ""
-
-#. module: warning_log
-#: model:ir.model,name:warning_log.model_warning_log
-msgid "warning.log"
 msgstr ""
 
