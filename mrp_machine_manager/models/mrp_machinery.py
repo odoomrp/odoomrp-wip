@@ -20,7 +20,7 @@
 ##############################################################################
 
 
-from openerp import models, fields, _
+from openerp import models, fields
 
 
 class MrpMachinery(models.Model):
