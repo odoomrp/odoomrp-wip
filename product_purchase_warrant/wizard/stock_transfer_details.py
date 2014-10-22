@@ -17,55 +17,53 @@
 #
 ##############################################################################
 
-from openerp import fields, models, api
-from dateutil.relativedelta import relativedelta
-from datetime import datetime
+from openerp import fields, models
 
 
-class StockTransferDetails(models.TransientModel):
+#class StockTransferDetails(models.TransientModel):
+#
+#    _inherit = "stock.transfer_details"
 
-    _inherit = "stock.transfer_details"
-
-    def get_warrant(self, cr, uid, result, context=None):
-        sup_obj = self.pool['product.supplierinfo']
-        prod_obj = self.pool['product.product']
-        for pick in self.pool['stock.picking'].browse(
-                cr, uid, context['active_ids'], context=context):
-            if pick.location_id.usage == 'supplier':
-                for item in result['item_ids'] + result['packop_ids']:
-                    product = prod_obj.browse(cr, uid, item['product_id'],
-                                              context=context)[0]
-                    sup = sup_obj.search(
-                        cr, uid, [('name', '=', pick.partner_id.id),
-                                  ('product_tmpl_id', '=',
-                                   product.product_tmpl_id.id)],
-                        context=context)
-                    warrant = sup and sup_obj.browse(
-                        cr, uid, sup[0],
-                        context=context).warrant_months or product.warranty
-                    item.update({'warrant': datetime.now() +
-                                 relativedelta(months=int(warrant)) +
-                                 relativedelta(
-                        days=int(31 * (warrant - int(warrant))))})
-        return result
-
-    def default_get(self, cr, uid, fields, context=None):
-        res = super(StockTransferDetails, self).default_get(cr, uid, fields,
-                                                            context=context)
-        result = res.copy()
-        return self.get_warrant(cr, uid, result, context=context)
-
-    @api.one
-    def do_detailed_transfer(self):
-        res = super(StockTransferDetails, self).do_detailed_transfer()
-        for lstits in [self.item_ids, self.packop_ids]:
-            for prod in lstits:
-                if prod.lot_id:
-                    prod.lot_id.warrant_limit = prod.warrant
-        return res
+#    def get_warrant(self, cr, uid, result, context=None):
+#        sup_obj = self.pool['product.supplierinfo']
+#        prod_obj = self.pool['product.product']
+#        for pick in self.pool['stock.picking'].browse(
+#                cr, uid, context['active_ids'], context=context):
+#            if pick.location_id.usage == 'supplier':
+#                for item in result['item_ids'] + result['packop_ids']:
+#                    product = prod_obj.browse(cr, uid, item['product_id'],
+#                                              context=context)[0]
+#                    sup = sup_obj.search(
+#                        cr, uid, [('name', '=', pick.partner_id.id),
+#                                  ('product_tmpl_id', '=',
+#                                   product.product_tmpl_id.id)],
+#                        context=context)
+#                    warrant = sup and sup_obj.browse(
+#                        cr, uid, sup[0],
+#                        context=context).warrant_months or product.warranty
+#                    item.update({'warrant': datetime.now() +
+#                                 relativedelta(months=int(warrant)) +
+#                                 relativedelta(
+#                        days=int(31 * (warrant - int(warrant))))})
+#        return result
+#
+#    def default_get(self, cr, uid, fields, context=None):
+#        res = super(StockTransferDetails, self).default_get(cr, uid, fields,
+#                                                            context=context)
+#        result = res.copy()
+#        return self.get_warrant(cr, uid, result, context=context)
+#
+#    @api.one
+#    def do_detailed_transfer(self):
+#        res = super(StockTransferDetails, self).do_detailed_transfer()
+#        for lstits in [self.item_ids, self.packop_ids]:
+#            for prod in lstits:
+#                if prod.lot_id:
+#                    prod.lot_id.warrant_limit = prod.warrant
+#        return res
 
 
 class TransferDetailsItems(models.TransientModel):
     _inherit = 'stock.transfer_details_items'
 
-    warrant = fields.Datetime(string='Warrant')
+    warrant = fields.Datetime(string='Warrant', related='lot_id.warrant_limit')
