@@ -31,7 +31,7 @@
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
-This module extends product variants on sales. It adds the possibility of 
+This module extends product variants on sales. It adds the possibility of
 defining a custom value when the attribute is range type.
     """,
     "data": [
