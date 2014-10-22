@@ -22,7 +22,7 @@
                         <field name="name" />
                         <field name="regnno" />
                         <field name="company" invisible="1"/>
-                        <field name="product" domain="[('name','=',name)]" />
+                        <field name="product" />
                         <field name="location" />
                     </group>
                     <separator string="Analysis Information"

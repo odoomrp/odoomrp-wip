@@ -21,7 +21,6 @@
 
 
 from openerp import models, fields, _
-import time
 
 
 class MrpMachinery(models.Model):
@@ -41,7 +40,7 @@ class MrpMachinery(models.Model):
         return self.env.user.company_id.id
 
     def _def_enroll(self):
-        return time.strftime('%Y-%m-%d')
+        return fields.Date.today()
 
     name = fields.Char('Machine Name', required=True)
     regnno = fields.Char('Machine Registration #', required=True)
@@ -52,9 +51,7 @@ class MrpMachinery(models.Model):
     depracc = fields.Many2one('account.account', string='Depreciation Account')
     year = fields.Char('Year')
     model = fields.Char('Model')
-    product = fields.Many2one('product.product', 'Product Associated',
-                              help="This association is needed if you want"
-                              " to make repair orders with the machine")
+    product = fields.Many2one('product.product', 'Product Associated')
     serial_char = fields.Char('Product Serial #')
     serial = fields.Many2one('stock.production.lot', string='Product Serial #',
                              domain="[('product_id', '=', product)]")
