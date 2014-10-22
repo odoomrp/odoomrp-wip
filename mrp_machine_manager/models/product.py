@@ -22,8 +22,8 @@
 from openerp import models, fields
 
 
-class ProductProduct(models.Model):
-    _inherit = "product.product"
+class ProductTemplate(models.Model):
+    _inherit = "product.template"
 
-    machine_ok = fields.Boolean('Is a machine', help="Determines if the "
-                                "product is a machine.")
+    machine_ok = fields.Boolean('Machine relation', help="Determines if the "
+                                "product is related with a machine.")

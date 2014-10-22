@@ -20,7 +20,7 @@
 ##############################################################################
 
 from . import product
-from . import machine_model
-from . import machinery
+from . import mrp_machine_model
+from . import mrp_machinery
 from . import mrp_workcenter
 from . import res_users
