@@ -60,18 +60,3 @@ class StockInventory(models.Model):
                                            'prod_lot_id': lot_id})
                 line.write({'fail': False, 'fail_reason': _('Processed')})
         return True
-
-
-class StockInventoryImportLine(models.Model):
-    _name = "stock.inventory.import.line"
-    _description = "Stock Inventory Import Line"
-
-    code = fields.Char('Product Code')
-    product = fields.Many2one('product.product', 'Found Product')
-    quantity = fields.Float('Quantity')
-    inventory_id = fields.Many2one('stock.inventory', 'Inventory',
-                                   readonly=True)
-    location_id = fields.Many2one('stock.location', 'Location')
-    lot = fields.Char('Product Lot')
-    fail = fields.Boolean('Fail')
-    fail_reason = fields.Char('Fail Reason')
