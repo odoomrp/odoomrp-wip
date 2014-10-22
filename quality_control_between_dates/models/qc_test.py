@@ -35,7 +35,7 @@ class QcTestTemplateLine(models.Model):
     @api.one
     @api.constrains('date_start', 'date_end', 'test_template_id')
     def _check_line_validities(self):
-        domain = [('id', '!=', self.id), ('proof_id', '=', self.proof_id)]
+        domain = [('id', '!=', self.id), ('proof_id', '=', self.proof_id.id)]
         if self.date_start:
             domain.append('|')
             domain.append(('date_end', '>=', self.date_start))
