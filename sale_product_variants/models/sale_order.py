@@ -26,12 +26,11 @@ class ProductAttributeValueSaleLine(models.Model):
     @api.depends('attribute', 'sale_line.product_template',
                  'sale_line.product_template.attribute_line_ids')
     def _get_possible_attribute_values(self):
-        domain_ids = []
+        attr_values = self.env['product.attribute.value']
         for attr_line in self.sale_line.product_template.attribute_line_ids:
             if attr_line.attribute_id.id == self.attribute.id:
-                for attr_value in attr_line.value_ids:
-                    domain_ids.append(attr_value.id)
-        self.possible_values = domain_ids
+                attr_values |= attr_line.value_ids
+        self.possible_values = attr_values.sorted()
 
     sale_line = fields.Many2one(
         comodel_name='sale.order.line', string='Order line')
