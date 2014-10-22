@@ -80,14 +80,11 @@ class SaleOrderLine(models.Model):
         description = self.product_template.name
         att_values_ids = []
         for attr_line in self.product_attributes:
-            att_values_ids.append(attr_line.value.id)
             if attr_line.value:
                 description += _('\n%s: %s') % (attr_line.attribute.name,
                                                 attr_line.value.name)
-        domain = [('product_tmpl_id', '=', self.product_template.id)]
-        for value in att_values_ids:
-            domain.append(('attribute_value_ids', '=', value))
-        self.product_id = product_obj.search(domain, limit=1)
+        self.product_id = product_obj._product_find(self.product_template,
+                                                    self.product_attributes)
         self.name = description
 
     @api.one
