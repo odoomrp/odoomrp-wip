@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="qc_test_form_view_inh_tolerancepercen" model="ir.ui.view">
+            <field name="name">qc.test.form.view.inh.tolerancepercen</field>
+            <field name="model">qc.test</field>
+            <field name="inherit_id" ref="quality_control.qc_test_form_view"/>
+            <field name="arch" type="xml">
+                <field name="test_template_id" position="after">
+                    <field name="tolerance_status" />
+                </field>
+            </field>
+        </record>
+        <record id="qc_test_tree_view_inh_tolerancepercen" model="ir.ui.view">
+            <field name="name">qc.test.tree.view.inh.tolerancepercen</field>
+            <field name="model">qc.test</field>
+            <field name="inherit_id" ref="quality_control.qc_test_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="test_template_id" position="after">
+                    <field name="tolerance_status" />
+                </field>
+                <tree string="Test" position="attributes">
+                    <attribute name="colors">red:tolerance_status in ('noadmissible');orange:tolerance_status in ('admissible');blue:tolerance_status in ('tolerable');green:tolerance_status in ('optimal')</attribute>
+                </tree>
+            </field>
+        </record>
+        <record id="qc_test_template_line_form_view_inh_tolerancepercen" model="ir.ui.view">
+            <field name="name">qc.test.template.line.form_view.inh.tolerancepercen</field>
+            <field name="model">qc.test.template.line</field>
+            <field name="inherit_id" ref="quality_control.qc_test_template_line_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='valid_value_ids']/../.." position="before">
+                    <group colspan="4" attrs="{'invisible':[('type','=','qualitative')]}">
+                        <field name="percen_permissible_tolerance" />
+                        <field name="percen_variable_tolerance" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <record id="qc_test_template_line_tree_view_inh_tolerancepercen" model="ir.ui.view">
+            <field name="name">qc.test.template.line.tree_view.inh.tolerancepercen</field>
+            <field name="model">qc.test.template.line</field>
+            <field name="inherit_id" ref="quality_control.qc_test_template_line_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="max_value" position="after">
+                    <field name="percen_permissible_tolerance" />
+                    <field name="percen_variable_tolerance" />
+                </field>
+            </field>
+        </record>
+        <record id="qc_test_line_form_view_inh_tolerancepercen" model="ir.ui.view">
+            <field name="name">qc.test.line.form_view.inh.tolerancepercen</field>
+            <field name="model">qc.test.line</field>
+            <field name="inherit_id" ref="quality_control.qc_test_line_form_view"/>
+            <field name="arch" type="xml">
+                <field name="actual_value_qt" position="attributes">
+                    <attribute name="on_change"></attribute>
+                </field>
+                <field name="success" position="after">
+                    <field name="min_allowed" invisible="1" />
+                    <field name="max_allowed" invisible="1" />
+                    <field name="min_variable" invisible="1" />
+                    <field name="max_variable" invisible="1" />
+                    <field name="test_template_line_id" invisible="1" />
+                </field>
+            </field>
+        </record>
+        <record id="qc_test_line_tree_view_inh_tolerancepercen" model="ir.ui.view">
+            <field name="name">qc.test.line.tree,view.inh.tolerancepercen</field>
+            <field name="model">qc.test.line</field>
+            <field name="inherit_id" ref="quality_control.qc_test_line_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="actual_value_qt" position="attributes">
+                    <attribute name="on_change"></attribute>
+                </field>
+                <field name="success" position="after">
+                    <field name="min_allowed" invisible="1" />
+                    <field name="max_allowed" invisible="1" />
+                    <field name="min_variable" invisible="1" />
+                    <field name="max_variable" invisible="1" />
+                    <field name="test_template_line_id" invisible="1" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

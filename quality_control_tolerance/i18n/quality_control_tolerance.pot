@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* quality_control_tolerance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-15 09:13+0000\n"
+"PO-Revision-Date: 2014-10-15 09:13+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: quality_control_tolerance
+#: view:qc.test:quality_control_tolerance.qc_test_tree_view_inh_tolerancepercen
+msgid "Test"
+msgstr ""
+
+#. module: quality_control_tolerance
+#: model:ir.model,name:quality_control_tolerance.model_qc_test_template_line
+msgid "Test Template Line"
+msgstr ""
+
+#. module: quality_control_tolerance
+#: view:qc.test.line:quality_control_tolerance.qc_test_line_form_view_inh_tolerancepercen
+#: view:qc.test.line:quality_control_tolerance.qc_test_line_tree_view_inh_tolerancepercen
+msgid "onchange_actual_value_qt_tolerancepercen(uom_id, test_uom_id, actual_value_qt, min_value, max_value, min_allowed, max_allowed, min_variable, max_variable, test_template_line_id)"
+msgstr ""
+
+#. module: quality_control_tolerance
+#: view:qc.test:quality_control_tolerance.qc_test_tree_view_inh_tolerancepercen
+msgid "red:tolerance_status in ('noadmissible');orange:tolerance_status in ('admissible');blue:tolerance_status in ('tolerable');green:tolerance_status in ('optimal')"
+msgstr ""
+
