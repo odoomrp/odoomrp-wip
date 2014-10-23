@@ -21,37 +21,6 @@ from openerp import models, fields, api
 class QcTest(models.Model):
     _inherit = 'qc.test'
 
-    @api.one
-    @api.depends('state')
-    def _compute_tolerance_status(self):
-        uom_obj = self.pool['product.uom']
-        self.tolerance_status = False
-        if self.state == 'success' and self.test_line_ids:
-            line = self.test_line_ids[0]
-            if (line.proof_type != 'qualitative' and
-                    line.test_template_line_id):
-                amount = uom_obj._compute_qty(
-                    self._cr, self._uid, line.uom_id.id,
-                    line.actual_value_qt, line.test_uom_id.id)
-                if line.min_value <= amount <= line.max_value:
-                    self.tolerance_status = 'optimal'
-                elif ((line.min_allowed <= amount < line.min_variable)
-                      or (line.max_variable <= amount <=
-                          line.max_allowed)):
-                    self.tolerance_status = 'tolerable'
-                elif ((line.min_variable <= amount < line.min_value) or
-                      (line.max_value < amount < line.max_variable)):
-                    self.tolerance_status = 'admissible'
-        elif self.state == 'failed':
-            self.tolerance_status = 'noadmissible'
-
-    tolerance_status = fields.Selection(
-        [('optimal', 'Optimal'),
-         ('tolerable', 'Tolerable'),
-         ('admissible', 'Admissible'),
-         ('noadmissible', 'Not Admissible'),
-         ], string='Tolerance Status', compute='_compute_tolerance_status')
-
 
 class QcTestTemplateLine(models.Model):
     _inherit = 'qc.test.template.line'
@@ -113,6 +82,36 @@ class QcTestLine(models.Model):
                 self.max_variable = (self.max_value + self.max_value * per
                                      / 100)
 
+    @api.one
+    @api.depends('test_id.state', 'min_value', 'max_value', 'min_allowed',
+                 'max_allowed', 'min_variable', 'max_variable',
+                 'actual_value_qt', 'uom_id', 'test_uom_id')
+    def _compute_tolerance_status(self):
+        uom_obj = self.pool['product.uom']
+        self.tolerance_status = 'noadmissible'
+        self.success = False
+        if (self.proof_type != 'qualitative' and self.test_template_line_id):
+            amount = uom_obj._compute_qty(
+                self._cr, self._uid, self.uom_id.id, self.actual_value_qt,
+                self.test_uom_id.id)
+            if self.min_value <= amount <= self.max_value:
+                self.success = True
+                self.tolerance_status = 'optimal'
+            elif ((self.min_allowed <= amount < self.min_variable)
+                  or (self.max_variable <= amount <= self.max_allowed)):
+                self.tolerance_status = 'tolerable'
+                self.success = True
+            elif ((self.min_variable <= amount < self.min_value) or
+                  (self.max_value < amount < self.max_variable)):
+                self.tolerance_status = 'admissible'
+                self.success = True
+
+    tolerance_status = fields.Selection(
+        [('optimal', 'Optimal'),
+         ('tolerable', 'Tolerable'),
+         ('admissible', 'Admissible'),
+         ('noadmissible', 'Not Admissible'),
+         ], string='Tolerance Status', compute='_compute_tolerance_status')
     min_allowed = fields.Float(string='Minimum allowed', digits=(5, 2),
                                compute='_compute_min_allowed')
     max_allowed = fields.Float(string='Maximum allowed', digits=(5, 2),
@@ -121,23 +120,3 @@ class QcTestLine(models.Model):
                                 compute='_compute_min_variable')
     max_variable = fields.Float(string='Maximum variable', digits=(5, 2),
                                 compute='_compute_max_variable')
-
-    @api.onchange('actual_value_qt', 'uom_id', 'test_uom_id', 'min_allowed',
-                  'max_allowed', 'min_variable', 'max_variable')
-    def onchange_actual_value_qt_tolerancepercen(self):
-        uom_obj = self.pool['product.uom']
-        self.success = False
-        if self.actual_value_qt:
-            amount = uom_obj._compute_qty(
-                self._cr, self._uid, self.uom_id.id, self.actual_value_qt,
-                self.test_uom_id.id)
-            if self.min_value <= amount <= self.max_value:
-                self.success = True
-            else:
-                if self.test_template_line_id:
-                    if ((self.min_allowed <= amount < self.min_variable) or
-                            (self.max_variable <= amount <= self.max_allowed)):
-                        self.success = True
-                    elif ((self.min_variable <= amount < self.min_value) or
-                          (self.max_value < amount < self.max_variable)):
-                        self.success = True
