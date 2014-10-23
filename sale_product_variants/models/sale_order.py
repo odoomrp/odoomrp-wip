@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class ProductAttributeValueSaleLine(models.Model):
