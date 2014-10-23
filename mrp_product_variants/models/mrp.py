@@ -116,8 +116,8 @@ class MrpBom(models.Model):
 
         for bom_line_id in bom.bom_line_ids:
             if bom_line_id.date_start and \
-                    (bom_line_id.date_start > fields.Date.context_today(self)) or \
-                    bom_line_id.date_stop and \
+                    (bom_line_id.date_start > fields.Date.context_today(self))\
+                    or bom_line_id.date_stop and \
                     (bom_line_id.date_stop < fields.Date.context_today(self)):
                 continue
             # all bom_line_id variant values must be in the product
