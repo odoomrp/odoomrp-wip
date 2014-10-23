@@ -89,18 +89,22 @@ class QcTestLine(models.Model):
     def _compute_tolerance_status(self):
         uom_obj = self.pool['product.uom']
         self.tolerance_status = 'noadmissible'
+        self.success = False
         if (self.proof_type != 'qualitative' and self.test_template_line_id):
             amount = uom_obj._compute_qty(
                 self._cr, self._uid, self.uom_id.id, self.actual_value_qt,
                 self.test_uom_id.id)
             if self.min_value <= amount <= self.max_value:
+                self.success = True
                 self.tolerance_status = 'optimal'
             elif ((self.min_allowed <= amount < self.min_variable)
                   or (self.max_variable <= amount <= self.max_allowed)):
                 self.tolerance_status = 'tolerable'
+                self.success = True
             elif ((self.min_variable <= amount < self.min_value) or
                   (self.max_value < amount < self.max_variable)):
                 self.tolerance_status = 'admissible'
+                self.success = True
 
     tolerance_status = fields.Selection(
         [('optimal', 'Optimal'),
@@ -116,27 +120,3 @@ class QcTestLine(models.Model):
                                 compute='_compute_min_variable')
     max_variable = fields.Float(string='Maximum variable', digits=(5, 2),
                                 compute='_compute_max_variable')
-
-    @api.onchange('actual_value_qt', 'uom_id', 'test_uom_id', 'min_allowed',
-                  'max_allowed', 'min_variable', 'max_variable')
-    def onchange_actual_value_qt_tolerancepercen(self):
-        uom_obj = self.pool['product.uom']
-        self.success = False
-        self.tolerance_status = 'noadmissible'
-        if self.actual_value_qt:
-            amount = uom_obj._compute_qty(
-                self._cr, self._uid, self.uom_id.id, self.actual_value_qt,
-                self.test_uom_id.id)
-            if self.min_value <= amount <= self.max_value:
-                self.tolerance_status = 'optimal'
-                self.success = True
-            else:
-                if self.test_template_line_id:
-                    if ((self.min_allowed <= amount < self.min_variable) or
-                            (self.max_variable <= amount <= self.max_allowed)):
-                        self.tolerance_status = 'tolerable'
-                        self.success = True
-                    elif ((self.min_variable <= amount < self.min_value) or
-                          (self.max_value < amount < self.max_variable)):
-                        self.tolerance_status = 'admissible'
-                        self.success = True
