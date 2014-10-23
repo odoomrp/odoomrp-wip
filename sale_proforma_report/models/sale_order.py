@@ -16,14 +16,10 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields
 
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     proforma = fields.Boolean(string='Proforma')
-
-
-
-
