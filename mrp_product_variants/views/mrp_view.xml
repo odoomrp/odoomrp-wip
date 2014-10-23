@@ -81,8 +81,7 @@
                         <tree create="0" delete="0" editable="1">
                             <field name="attribute" />
                             <field name="value" options="{'no_create': True}" />
-                            <!-- <field name="possible_values" invisible="1" 
-                                /> -->
+                            <field name="possible_values" invisible="1" />
                         </tree>
                     </field>
                 </notebook>

@@ -36,8 +36,10 @@ class MrpBomLine(models.Model):
     @api.depends('bom_id.product_tmpl_id',
                  'bom_id.product_tmpl_id.attribute_line_ids')
     def _get_possible_attribute_values(self):
-        self.possible_values = self.mapped(
-            'bom_id.product_tmpl_id.attribute_line_ids').sorted()
+        attr_values = self.env['product.attribute.value']
+        for attr_line in self.bom_id.product_tmpl_id.attribute_line_ids:
+            attr_values |= attr_line.value_ids
+        self.possible_values = attr_values.sorted()
 
     @api.one
     @api.onchange('product_id')
@@ -203,18 +205,22 @@ class MrpProductionAttribute(models.Model):
     attribute = fields.Many2one(comodel_name='product.attribute',
                                 string='Attribute')
     value = fields.Many2one(comodel_name='product.attribute.value',
-                            #  domain="[('attribute_id','=',attribute),"
-                            #  "('id','in',possible_values[0][2])]",
+                            domain="[('attribute_id', '=', attribute),"
+                            "('id', 'in', possible_values[0][2])]",
                             string='Value')
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
 
     @api.one
-    @api.depends('mrp_production.product_template')
+    @api.depends('attribute', 'mrp_production.product_template',
+                 'mrp_production.product_template.attribute_line_ids')
     def _get_possible_attribute_values(self):
-        self.possible_values = self.mapped(
-            'mrp_production.product_template.attribute_line_ids').sorted()
+        attr_values = self.env['product.attribute.value']
+        for attr_line in self.mrp_production.product_template.attribute_line_ids:
+            if attr_line.attribute_id.id == self.attribute.id:
+                attr_values |= attr_line.value_ids
+        self.possible_values = attr_values.sorted()
 
 
 class MrpProduction(models.Model):
