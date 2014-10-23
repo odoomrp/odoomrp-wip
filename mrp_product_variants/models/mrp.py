@@ -16,21 +16,8 @@
 #
 ##############################################################################
 
-import time
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp import models, fields, api, exceptions, tools, _
 from openerp.addons.product import _common
-
-
-class MrpBomAttribute(models.Model):
-    _name = 'mrp.bom.attribute'
-
-    mrp_bom_line = fields.Many2one(comodel_name='mrp.bom.line', string='BoM')
-    attribute = fields.Many2one(comodel_name='product.attribute',
-                                string='Attribute')
-    value = fields.Many2one(comodel_name='product.attribute.value',
-                            domain="[('attribute_id', '=', attribute)]",
-                            string='Value')
 
 
 class MrpBomLine(models.Model):
@@ -39,10 +26,6 @@ class MrpBomLine(models.Model):
     product_id = fields.Many2one(required=False)
     product_template = fields.Many2one(comodel_name='product.template',
                                        string='Product')
-    product_attributes = fields.One2many(comodel_name='mrp.bom.attribute',
-                                         inverse_name='mrp_bom_line',
-                                         string='Product attributes',
-                                         copyable=True)
     attribute_value_ids = fields.Many2many(
         domain="[('id', 'in', possible_values[0][2])]")
     possible_values = fields.Many2many(
@@ -59,17 +42,13 @@ class MrpBomLine(models.Model):
     @api.one
     @api.onchange('product_id')
     def onchange_product_product(self):
-        self.product_template = self.product_id.product_tmpl_id
+        if not self.product_template:
+            self.product_template = self.product_id.product_tmpl_id
 
     @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
         if self.product_template:
-            product_attributes = []
-            for attribute in self.product_template.attribute_line_ids:
-                product_attributes.append({'attribute':
-                                           attribute.attribute_id})
-            self.product_attributes = product_attributes
             return {'domain': {'product_id': [('product_tmpl_id', '=',
                                                self.product_template.id)]}}
         return {'domain': {'product_id': []}}
@@ -137,12 +116,10 @@ class MrpBom(models.Model):
 
         for bom_line_id in bom.bom_line_ids:
             if bom_line_id.date_start and \
-                (bom_line_id.date_start >
-                 time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)) or \
-                bom_line_id.date_stop and \
-                (bom_line_id.date_stop <
-                 time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)):
-                    continue
+                    (bom_line_id.date_start > fields.Date.context_today(self)) or \
+                    bom_line_id.date_stop and \
+                    (bom_line_id.date_stop < fields.Date.context_today(self)):
+                continue
             # all bom_line_id variant values must be in the product
             if bom_line_id.attribute_value_ids:
                 production_attr_values = []
