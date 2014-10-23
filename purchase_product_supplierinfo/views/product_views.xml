@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="product_supplierinfo_purchase_action" model="ir.actions.act_window">
+            <field name="name">Information about a product</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.supplierinfo</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="product_supplierinfo_for_customer.product_supplierinfo_search_view" />
+            <field name="domain">[]</field>
+            <field name="context">{'search_default_type': 'supplier','default_type': 'supplier'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new product.supplierinfo.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="product_supplierinfo_purchase_menu" parent="purchase.menu_purchase_config_purchase"
+            action="product_supplierinfo_purchase_action" />
+
+    </data>
+</openerp>
