@@ -24,7 +24,7 @@
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Manufacturing",
     "description": """
-    Create manufacturing order from produce summary
+    Create manufacturing order from produced summary
     """,
     'data': ["views/mrp_production2production_view.xml"],
     "installable": True,
