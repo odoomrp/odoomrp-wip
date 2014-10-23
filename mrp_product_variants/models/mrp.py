@@ -217,7 +217,8 @@ class MrpProductionAttribute(models.Model):
                  'mrp_production.product_template.attribute_line_ids')
     def _get_possible_attribute_values(self):
         attr_values = self.env['product.attribute.value']
-        for attr_line in self.mrp_production.product_template.attribute_line_ids:
+        template = self.mrp_production.product_template
+        for attr_line in template.attribute_line_ids:
             if attr_line.attribute_id.id == self.attribute.id:
                 attr_values |= attr_line.value_ids
         self.possible_values = attr_values.sorted()
@@ -387,10 +388,5 @@ class MrpProductionProductLine(models.Model):
     @api.onchange('product_attributes')
     def onchange_product_attributes(self):
         product_obj = self.env['product.product']
-        att_values_ids = [attr_line.value and attr_line.value.id
-                          or False
-                          for attr_line in self.product_attributes]
-        domain = [('product_tmpl_id', '=', self.product_template.id)]
-        for value in att_values_ids:
-            domain.append(('attribute_value_ids', '=', value))
-        self.product_id = product_obj.search(domain, limit=1)
+        self.product_id = product_obj._product_find(self.product_template,
+                                                    self.product_attributes)
