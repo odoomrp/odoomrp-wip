@@ -34,7 +34,9 @@
 This module extends product_supplierinfo_for_customer adding the equivalent
 menu on purchase menu. It will be installed automatically if required
     """,
-    "data": [],
+    "data": [
+        "views/product_views.xml",
+    ],
     "installable": True,
     "auto_install": True,
 }

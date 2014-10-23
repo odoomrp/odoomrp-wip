@@ -72,8 +72,8 @@
                 <search string="Supplierinfo search">
                     <field name="name" />
                     <field name="product_tmpl_id" />
-                    <filter string="Customer" domain="[('type','=','customer')]" />
-                    <filter string="Supplier" domain="[('type','=','supplier')]" />
+                    <filter string="Customer" domain="[('type','=','customer')]" name="is_customer_filter"/>
+                    <filter string="Supplier" domain="[('type','=','supplier')]" name="is_supplier_filter"/>
                     <group expand="0" string="Group By">
                         <filter string="Partner" icon="terp-partner"
                             domain="[]" context="{'group_by':'name'}" />
@@ -95,8 +95,10 @@
             <field name="view_type">form</field>
             <field name="search_view_id" ref="product_supplierinfo_search_view" />
             <field name="domain">[]</field>
-            <field name="context">{'default_search_type':'customer',
-            'default_type':'customer'}</field>
+            <field name="context">{
+                    'search_default_is_customer_filter': 1
+                }
+            </field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                     Click to define a new product.supplierinfo.

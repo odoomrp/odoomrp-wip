@@ -10,7 +10,10 @@
             <field name="view_type">form</field>
             <field name="search_view_id" ref="product_supplierinfo_for_customer.product_supplierinfo_search_view" />
             <field name="domain">[]</field>
-            <field name="context">{'search_default_type': 'supplier','default_type': 'supplier'}</field>
+            <field name="context">{
+                    'search_default_is_supplier_filter': 1
+                }
+            </field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                     Click to define a new product.supplierinfo.
@@ -18,7 +21,7 @@
             </field>
         </record>
 
-        <menuitem id="product_supplierinfo_purchase_menu" parent="purchase.menu_purchase_config_purchase"
+        <menuitem id="product_supplierinfo_purchase_menu" parent="purchase.menu_procurement_management_product"
             action="product_supplierinfo_purchase_action" />
 
     </data>
