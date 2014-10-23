@@ -31,18 +31,13 @@ class ProductCategory(models.Model):
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    no_create_variants = fields.Selection([('yes', 'Yes'), ('no', 'No'),
-                                           ('empty',
-                                            'Take the category value')],
-                                          string='No automatic variants',
-                                          help="This selection disables the"
-                                          " automatic creation of product"
-                                          " variants. If 'yes' it will not"
-                                          " create the variants, if 'no'"
-                                          " variants will be automatically"
-                                          " generated and if empty it will"
-                                          " check in the category.",
-                                          required=True, default='no')
+    no_create_variants = fields.Selection(
+        [('yes', 'Yes'), ('no', 'No'), ('empty', 'Take the category value')],
+        string='No automatic variants',
+        help="This selection disables the automatic creation of product"
+        " variants. If 'yes' it will not create the variants, if 'no'"
+        " variants will be automatically generated and if empty it will"
+        " check in the category.", required=True, default='no')
 
     @api.multi
     def create_variant_ids(self):
@@ -53,3 +48,20 @@ class ProductTemplate(models.Model):
                 return super(ProductTemplate, self).create_variant_ids()
             else:
                 return True
+
+
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    def _product_find(self, product_template, product_attributes):
+        domain = []
+        if product_template:
+            domain.append(('product_tmpl_id', '=', product_template.id))
+            for attr_line in product_attributes:
+                if len(product_template.attribute_line_ids.search(
+                        [('product_tmpl_id', '=', product_template.id),
+                         ('attribute_id', '=',
+                          attr_line.attribute.id)]).value_ids) > 1:
+                    domain.append(('attribute_value_ids', '=',
+                                   attr_line.value.id))
+        return self.search(domain, limit=1) or False
