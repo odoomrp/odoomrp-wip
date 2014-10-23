@@ -19,7 +19,7 @@
 {
     "name": "Manufacturing order from produce summary",
     "version": "1.0",
-    "depends": ["base", "mrp_mo_produce_summary"],
+    "depends": ["base", "mrp_dump"],
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Manufacturing",

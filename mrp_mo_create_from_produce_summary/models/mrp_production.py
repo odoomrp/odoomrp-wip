@@ -73,4 +73,4 @@ class MrpProduction(models.Model):
                 'product_qty': op.qty,
                 'move_lines': [(0, 0, ul_move['value']),
                                (0, 0, ul_bulk['value'])]})
-            new_op = self.create(data['value'])
+            self.create(data['value'])
