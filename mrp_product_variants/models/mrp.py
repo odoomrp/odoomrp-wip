@@ -116,8 +116,13 @@ class MrpBom(models.Model):
 
         for bom_line_id in bom.bom_line_ids:
             if bom_line_id.date_start and \
+<<<<<<< HEAD
                     (bom_line_id.date_start > fields.Date.context_today(self))\
                     or bom_line_id.date_stop and \
+=======
+                    (bom_line_id.date_start > fields.Date.context_today(self)) or \
+                    bom_line_id.date_stop and \
+>>>>>>> d0a26d0ec68c03b081f64b74af36037c24dc5856
                     (bom_line_id.date_stop < fields.Date.context_today(self)):
                 continue
             # all bom_line_id variant values must be in the product
