@@ -5,7 +5,7 @@
             <field name="name">Production 2 production</field>
             <field name="model">mrp.production</field>
             <field name="inherit_id"
-                ref="mrp_mo_produce_summary.mrp_production_download_form" />
+                ref="mrp_dump.mrp_production_download_form" />
             <field name="arch" type="xml">
                 <group string="Pack" position="after">
                     <group string='Expected Production' colspan="4"
