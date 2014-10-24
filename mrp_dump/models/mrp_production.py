@@ -39,7 +39,7 @@ class DownloadOperation(models.Model):
     def _calculate_weight(self):
         self.fill = self.ul.ul_qty * self.qty
 
-    product = fields.Many2one('product.product', string='Product')
+    product = fields.Many2one('product.product', string='Product', required=True)
     operation = fields.Many2one('mrp.production')
     ref = fields.Many2one('stock.warehouse', string='Warehouse')
     qty = fields.Integer(string="QTY")
