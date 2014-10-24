@@ -29,7 +29,8 @@ class SaleOrder(models.Model):
 
         res = super(SaleOrder, self).action_ship_create()
         for pick in self.picking_ids:
-            if self.client_order_ref and '-' not in pick.origin:
-                    pick.origin = '-'.join([pick.origin,
-                                            self.client_order_ref])
+            if self.client_order_ref and \
+               self.client_order_ref not in pick.origin:
+                pick.origin = '-'.join([pick.origin,
+                                        self.client_order_ref])
         return res
