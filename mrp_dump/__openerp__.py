@@ -26,7 +26,11 @@
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Manufacturing",
     "description": """
-    Add required fields to download operation of the reactor
+    This module provides an association between the bulk product and
+    the way it must be packaged at the end of the bulk product manufacturing.
+
+    Particularly suitable for chemical industries and
+    others that produce liquid bottled/packed products.
     """,
     'data': ["views/mrp_operations.view.xml"],
     "installable": True,
