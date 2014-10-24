@@ -43,10 +43,7 @@ class StockProductionLot(orm.Model):
             else:
                 warrant_limit = (
                     create_date +
-                    relativedelta(months=int(context['sup_warrant']) +
-                                  relativedelta(
-                        days=int(31 * (context['sup_warrant'] -
-                                       int(context['sup_warrant']))))))
+                    relativedelta(months=context['sup_warrant']))
             if warrant_limit:
                 vals.update({'warrant_limit': warrant_limit})
         return super(StockProductionLot, self).create(cr, uid, vals,
@@ -60,6 +57,7 @@ class StockPackOperation(orm.Model):
     def create_and_assign_lot(self, cr, uid, id, name, context=None):
         if context is None:
             context = {}
+        ctx = context.copy()
         pack_oper = self.browse(cr, uid, id, context=context)
         if pack_oper.picking_id.location_id.usage == 'supplier':
             sup_obj = self.pool['product.supplierinfo']
@@ -70,7 +68,6 @@ class StockPackOperation(orm.Model):
                 context=context)
             sup = sup_obj.browse(cr, uid, suppinfo_id, context=context)
             sup_warrant = sup and sup[0].warrant_months
-            ctx = context.copy()
             ctx.update({'sup_warrant': sup_warrant})
         return super(StockPackOperation, self).create_and_assign_lot(
             cr, uid, id, name, context=ctx)
