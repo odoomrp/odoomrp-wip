@@ -64,4 +64,5 @@ class ProductProduct(models.Model):
                           attr_line.attribute.id)]).value_ids) > 1:
                     domain.append(('attribute_value_ids', '=',
                                    attr_line.value.id))
-        return self.search(domain, limit=1) or False
+            return self.search(domain, limit=1) or False
+        return False

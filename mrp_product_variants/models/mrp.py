@@ -276,13 +276,8 @@ class MrpProduction(models.Model):
     @api.onchange('product_attributes')
     def onchange_product_attributes(self):
         product_obj = self.env['product.product']
-        att_values_ids = [attr_line.value and attr_line.value.id
-                          or False
-                          for attr_line in self.product_attributes]
-        domain = [('product_tmpl_id', '=', self.product_template.id)]
-        for value in att_values_ids:
-            domain.append(('attribute_value_ids', '=', value))
-        self.product_id = product_obj.search(domain, limit=1)
+        self.product_id = product_obj._product_find(self.product_template,
+                                                    self.product_attributes)
 
     @api.multi
     def _action_compute_lines(self, properties=None):
@@ -354,8 +349,22 @@ class MrpProductionProductLineAttribute(models.Model):
     attribute = fields.Many2one(comodel_name='product.attribute',
                                 string='Attribute')
     value = fields.Many2one(comodel_name='product.attribute.value',
-                            domain="[('attribute_id', '=', attribute)]",
+                            domain="[('attribute_id', '=', attribute),"
+                            "('id', 'in', possible_values[0][2])]",
                             string='Value')
+    possible_values = fields.Many2many(
+        comodel_name='product.attribute.value',
+        compute='_get_possible_attribute_values')
+
+    @api.one
+    @api.depends('attribute')
+    def _get_possible_attribute_values(self):
+        attr_values = self.env['product.attribute.value']
+        template = self.product_line.product_template
+        for attr_line in template.attribute_line_ids:
+            if attr_line.attribute_id.id == self.attribute.id:
+                attr_values |= attr_line.value_ids
+        self.possible_values = attr_values.sorted()
 
 
 class MrpProductionProductLine(models.Model):
@@ -373,15 +382,18 @@ class MrpProductionProductLine(models.Model):
     @api.onchange('product_template')
     def onchange_product_template(self):
         if self.product_template:
-            self.product_uom = self.product_template.uom_id
             product_attributes = []
+            product_id = self.env['product.product']
             if not self.product_template.attribute_line_ids:
-                self.product_id = (
+                product_id = (
                     self.product_template.product_variant_ids and
                     self.product_template.product_variant_ids[0])
             for attribute in self.product_template.attribute_line_ids:
                 product_attributes.append({'attribute':
                                            attribute.attribute_id})
+            self.name = product_id.name or self.product_template.name
+            self.product_uom = self.product_template.uom_id
+            self.product_id = product_id
             self.product_attributes = product_attributes
 
     @api.one
