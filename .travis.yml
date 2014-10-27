@@ -15,6 +15,7 @@ install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - git clone https://github.com/pedrobaeza/banking ${HOME}/banking -b 8.0-sepa-migration
   - git clone https://github.com/OCA/purchase-workflow ${HOME}/purchase-workflow -b ${VERSION}
+  - git clone https://github.com/avanzosc/avanzosc ${HOME}/avanzosc
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly ${VERSION}
 
