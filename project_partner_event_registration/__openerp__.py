@@ -23,7 +23,7 @@
         "base",
         "project",
         "event",
-        "project_event",
+        "project_events",
     ],
     "author": "OdooMRP team",
     "contributors": [
