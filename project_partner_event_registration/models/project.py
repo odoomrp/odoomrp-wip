@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import api, models, fields
+from openerp import models, fields
 
 
 class ProjectProject(models.Model):

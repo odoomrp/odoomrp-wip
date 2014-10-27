@@ -29,7 +29,7 @@ class EventEvent(models.Model):
             if not registry_obj.search_count(
                     [('event_id', '=', self.id),
                      ('partner_id', '=', partner.id)]):
-                registry = registry_obj.create({
+                registry_obj.create({
                     'partner_id': partner.id,
                     'event_id': self.id,
                     'name': partner.name,
