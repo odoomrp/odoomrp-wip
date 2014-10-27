@@ -33,7 +33,7 @@ class SaleOrderLineAttribute(models.Model):
             if not (self.value.min_range <= self.custom_value and
                     self.value.max_range >= self.custom_value):
                 raise exceptions.Warning(
-                    _("Custom value from attribute '%s' must be between %s and"
+                    _("Custom value for attribute '%s' must be between %s and"
                       " %s.")
                     % (self.attribute.name, self.value.min_range,
                        self.value.max_range))
