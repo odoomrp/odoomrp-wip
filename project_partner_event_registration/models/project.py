@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -21,8 +20,8 @@ from openerp import api, models, fields
 
 
 class ProjectProject(models.Model):
-
     _inherit = "project.project"
+
     partners = fields.Many2many(comodel_name='res.partner',
                                 relation='projet_partner_rel',
                                 column1='project',

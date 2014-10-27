@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -18,18 +17,29 @@
 ##############################################################################
 
 {
-    "name": "Projet partner event registration",
+    "name": "Project partner event registration",
     "version": "1.0",
-    "depends": ["base", "event"],
+    "depends": [
+        "base",
+        "project",
+        "event",
+        "project_event",
+    ],
     "author": "OdooMRP team",
-    "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
-    "category": "category",
+    "contributors": [
+        "Mikel Arregi <mikelarregi@avanzosc.es>",
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+    ],
+    "website": "http://www.odoomrp.com",
+    "category": "Project management",
     "description": """
-    Adds many partners to project and posibility to add
-    those partners automaticaly to events of the project
+Adds many partners to project and the possibility to add those partners
+automatically to the events of the project
     """,
-    'data': ["views/project_view.xml",
-             "wizard/project_partner_events_view.xml"],
+    "data": [
+        "views/project_view.xml",
+        "views/event_view.xml",
+    ],
     "installable": True,
     "auto_install": False,
 }
