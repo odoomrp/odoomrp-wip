@@ -87,23 +87,20 @@ class QcTestLine(models.Model):
                  'max_allowed', 'min_variable', 'max_variable',
                  'actual_value_qt', 'uom_id', 'test_uom_id')
     def _compute_tolerance_status(self):
-        uom_obj = self.pool['product.uom']
         self.tolerance_status = 'noadmissible'
         self.success = False
         if (self.proof_type != 'qualitative' and self.test_template_line_id):
-            amount = uom_obj._compute_qty(
-                self._cr, self._uid, self.uom_id.id, self.actual_value_qt,
-                self.test_uom_id.id)
+            amount = self.actual_value_qt
             if self.min_value <= amount <= self.max_value:
                 self.success = True
                 self.tolerance_status = 'optimal'
             elif ((self.min_allowed <= amount < self.min_variable)
                   or (self.max_variable <= amount <= self.max_allowed)):
-                self.tolerance_status = 'tolerable'
+                self.tolerance_status = 'admissible'
                 self.success = True
             elif ((self.min_variable <= amount < self.min_value) or
                   (self.max_value < amount < self.max_variable)):
-                self.tolerance_status = 'admissible'
+                self.tolerance_status = 'tolerable'
                 self.success = True
 
     tolerance_status = fields.Selection(
