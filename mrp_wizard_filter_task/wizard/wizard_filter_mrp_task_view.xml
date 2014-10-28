@@ -7,13 +7,15 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Wizard filter MRP task">
-                    <separator string="Production" colspan="4"/>
-                    <field name="mrp_production" colspan="4"/>
-                    <separator string="Work Order" colspan="4"/>
-                    <field name="wk_order" colspan="4"/>
-                    <separator string="User" colspan="4"/>
-                    <field name="user" colspan="4"/>
-                    <separator colspan="4"/>
+                    <group string="Production">
+                        <field name="mrp_production" />
+                    </group>
+                    <group string="Work Order">
+                        <field name="wk_order" />
+                    </group>
+                    <group string="User">
+                        <field name="user" />
+                    </group>
                     <group colspan="4" col="6">
                         <button special="cancel" string="Cancel" icon="gtk-cancel"/>
                         <button name="mrp_task_open_window" string="Open Tasks" type="object" icon="gtk-ok"/>
@@ -23,7 +25,7 @@
         </record>
 
         <record id="action_wizard_filter_mrp_task" model="ir.actions.act_window">
-            <field name="name">Selecting tasks to impute</field>
+            <field name="name">Select tasks to impute</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">wizard.filter.mrp.task</field>
             <field name="view_type">form</field>
@@ -33,7 +35,7 @@
         </record>
 
         <menuitem
-            name="Selecting tasks to impute"
+            name="Select tasks to impute"
             parent="mrp.menu_mrp_manufacturing"
             action="action_wizard_filter_mrp_task"
             id="menu_wizard_filter_mrp_task" />
