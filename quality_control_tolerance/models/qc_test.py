@@ -26,9 +26,9 @@ class QcTestTemplateLine(models.Model):
     _inherit = 'qc.test.template.line'
 
     percen_permissible_tolerance = fields.Float(
-        string='% Optimal allowed tolerance', digits=(3, 2))
-    percen_variable_tolerance = fields.Float(
         string='% Variable tolerance', digits=(3, 2))
+    percen_variable_tolerance = fields.Float(
+        string='% Optimal allowed tolerance', digits=(3, 2))
 
 
 class QcTestLine(models.Model):
@@ -97,11 +97,9 @@ class QcTestLine(models.Model):
             elif ((self.min_allowed <= amount < self.min_variable)
                   or (self.max_variable <= amount <= self.max_allowed)):
                 self.tolerance_status = 'admissible'
-                self.success = True
             elif ((self.min_variable <= amount < self.min_value) or
                   (self.max_value < amount < self.max_variable)):
                 self.tolerance_status = 'tolerable'
-                self.success = True
 
     tolerance_status = fields.Selection(
         [('optimal', 'Optimal'),
@@ -117,3 +115,16 @@ class QcTestLine(models.Model):
                                 compute='_compute_min_variable')
     max_variable = fields.Float(string='Maximum variable', digits=(5, 2),
                                 compute='_compute_max_variable')
+    success = fields.Boolean(string="Success", select="1")
+
+    def onchange_actual_value_ql(self, cr, uid, ids, actual_value_ql,
+                                 valid_value_ids, context=None):
+        result = super(QcTestLine, self).onchange_actual_value_ql(
+            cr, uid, ids, actual_value_ql, valid_value_ids, context=context)
+        value = result.get('value')
+        if value.get('success'):
+            value.update({'tolerance_status': 'optimal'})
+        else:
+            value.update({'tolerance_status': 'noadmissible'})
+        result.update({'value':value})
+        return result
