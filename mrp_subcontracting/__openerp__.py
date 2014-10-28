@@ -28,6 +28,7 @@ operations.
     "depends": ['mrp',
                 ],
     "data": [
+             "views/mrp_subcontracting_view.xml",
              ],
     "installable": True
 }
