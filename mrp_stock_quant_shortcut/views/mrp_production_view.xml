@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="mrp.mrp_production_buttons">
+            <field name="name">mrp.production.buttons</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <div class="oe_title" position="after">
+                    <div class="oe_right oe_button_box" name="buttons">
+                    </div>
+                </div>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mrp_production_quant_shortcut_form_view">
+            <field name="name">mrp.production.quant.shortcut.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_buttons" />
+            <field name="arch" type="xml">
+                <div name="buttons" position="inside">
+                    <button class="oe_stat_button" name="action_open_quants"
+                        icon="fa-archive" type="object"
+                        groups="stock.group_locations" string="Quants">
+                    </button>
+                </div>
+            </field>
+        </record>
+
+    </data>
+</openerp>
