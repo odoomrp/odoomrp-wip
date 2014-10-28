@@ -61,15 +61,11 @@ class MrpBom(models.Model):
                                         context=context)
 
     @api.multi
-    def action_draft(self):
-        return self.write({'state': 'draft'})
-
-    @api.multi
-    def action_active(self):
+    def button_active(self):
         return self.write({'state': 'active'})
 
     @api.multi
-    def action_historical(self):
+    def button_historical(self):
         return self.write({'state': 'historical',
                            'historical_date': fields.Date.today()})
 
@@ -96,11 +92,9 @@ class MrpProduction(models.Model):
                       ('product_tmpl_id', '=', product_tmpl_id)
                       ]
             domain = domain + ['|', ('date_start', '=', False),
-                               ('date_start', '<=',
-                                fields.Date.context_today(self)),
+                               ('date_start', '<=', fields.Datetime.now()),
                                '|', ('date_stop', '=', False),
-                               ('date_stop', '>=',
-                                fields.Date.context_today(self))]
+                               ('date_stop', '>=', fields.Datetime.now())]
             bom_ids = bom_obj.search(cr, uid, domain, context=context)
             bom_id = 0
             min_seq = 0

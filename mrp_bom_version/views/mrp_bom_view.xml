@@ -21,8 +21,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/group" position="before">
                     <header>
-                        <button name="button_active" states="draft" string="In active" class="oe_highlight" />
-                        <button name="button_historical" states="active" string="Historical" class="oe_highlight"/>
+                        <button name="button_active" type="object" string="In active" attrs="{'invisible':[('state','!=','draft')]}" class="oe_highlight" />
+                        <button name="button_historical" type="object" string="Historical" attrs="{'invisible':[('state','!=','active')]}" class="oe_highlight" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,open,paid" />
                     </header>
                 </xpath>
