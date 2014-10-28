@@ -20,7 +20,7 @@
             <field name="arch" type="xml">
                 <div name="buttons" position="inside">
                     <button class="oe_stat_button" name="action_open_quants"
-                        icon="fa-building-o" type="object"
+                        icon="fa-archive" type="object"
                         groups="stock.group_locations" string="Quants">
                     </button>
                 </div>

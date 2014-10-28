@@ -17,25 +17,26 @@
 ##############################################################################
 
 {
-    "name": "Sale Stock Quant Shortcut",
+    "name": "Manufacturing Stock Quant Shortcut",
     "version": "1.0",
     "depends": [
-        "sale",
+        "mrp",
         "stock",
+        "stock_quants_shortcuts",
     ],
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
-    "category": "Warehouse Management",
+    "category": "Hidden/Dependency",
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
-This module adds smartbutton for accesing quants from sale orders
+This module adds smartbutton for accessing quants from production orders
     """,
     "data": [
-        "views/sale_order_view.xml",
+        "views/mrp_production_view.xml",
     ],
     "installable": True,
-    "auto_install": False,
+    "auto_install": True,
 }
