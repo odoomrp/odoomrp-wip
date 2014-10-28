@@ -38,5 +38,5 @@ This module adds smartbutton for accessing quants from purchase orders
         "views/purchase_order_view.xml",
     ],
     "installable": True,
-    "auto_install": False,
+    "auto_install": True,
 }

@@ -22,22 +22,19 @@ from openerp import models, api
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    def _get_products(self):
-        products = []
-        for production in self:
-            if production.state in ['in_production', 'done']:
-                products += [x.product_id.id for x in production.move_lines]
-            else:
-                products += [x.product_id.id for x in production.product_lines]
-        return products
-
     @api.multi
     def action_open_quants(self):
         template_obj = self.env['product.template']
-        products = self._get_products()
+        products = self.env['product.product']
+        if self.state in ['in_production', 'done']:
+            lines = self.move_lines
+        else:
+            lines = self.product_lines
+        for line in lines:
+            products |= line.product_id
         result = template_obj._get_act_window_dict('stock.product_open_quants')
         result['domain'] = "[('product_id','in',[" + ','.join(
-            map(str, products)) + "])]"
-        result['context'] = ("{'search_default_productgroup': 1, "
-                             "'search_default_internal_loc': 1}")
+            map(str, products.ids)) + "])]"
+        result['context'] = ("{'search_default_productgroup': 1,"
+                             " 'search_default_internal_loc': 1}")
         return result
