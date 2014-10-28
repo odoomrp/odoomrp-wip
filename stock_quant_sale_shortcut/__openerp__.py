@@ -31,7 +31,7 @@
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
-This module adds smartbutton to access quants from sale orders
+This module adds smartbutton for accesing quants from sale orders
     """,
     "data": [
         "views/sale_order_view.xml",

@@ -23,19 +23,14 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     @api.multi
-    def _get_products(self):
-        products = []
-        for sale in self:
-            products += [x.product_id.id for x in sale.order_line]
-        return products
-
-    @api.multi
     def action_open_quants(self):
         template_obj = self.env['product.template']
-        products = self._get_products()
+        products = self.env['product.product']
+        for line in self.order_line:
+            products |= line.product_id
         result = template_obj._get_act_window_dict('stock.product_open_quants')
         result['domain'] = "[('product_id','in',[" + ','.join(
-            map(str, products)) + "])]"
-        result['context'] = ("{'search_default_productgroup': 1, "
-                             "'search_default_internal_loc': 1}")
+            map(str, products.ids)) + "])]"
+        result['context'] = ("{'search_default_productgroup': 1,"
+                             " 'search_default_internal_loc': 1}")
         return result
