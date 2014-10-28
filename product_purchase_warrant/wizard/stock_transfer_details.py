@@ -17,5 +17,10 @@
 #
 ##############################################################################
 
-from . import models
-from . import wizard
+from openerp import fields, models
+
+
+class TransferDetailsItems(models.TransientModel):
+    _inherit = 'stock.transfer_details_items'
+
+    warrant = fields.Datetime(string='Warrant', related='lot_id.warrant_limit')
