@@ -17,25 +17,23 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-from datetime import datetime
+from openerp import fields, models, api
 from dateutil.relativedelta import relativedelta
 
 
-class StockProductionLot(orm.Model):
+class StockProductionLot(models.Model):
     _inherit = "stock.production.lot"
-    _columns = {
-        "warrant_limit": fields.datetime("Warranty")}
+    warrant_limit = fields.Datetime(string="Warranty")
 
-    def create(self, cr, uid, vals, context=None):
-        if context is None:
-            context = {}
+    @api.model
+    def create(self, vals):
         if vals.get('product_id'):
-            product = self.pool["product.product"].browse(
-                cr, uid, vals["product_id"], context=context)
-            create_date = ('create_date' in vals and
-                           vals['create_date'] or datetime.now())
-            if 'sup_warrant' not in context:
+            product = self.env["product.product"].browse(vals["product_id"])
+            create_date = (
+                'create_date' in vals and
+                vals['create_date'] or fields.Datetime.from_string(
+                    fields.Datetime.now()))
+            if 'sup_warrant' not in self.env.context:
                 warrant_limit = (
                     product.warranty and
                     (create_date +
@@ -43,14 +41,13 @@ class StockProductionLot(orm.Model):
             else:
                 warrant_limit = (
                     create_date +
-                    relativedelta(months=context['sup_warrant']))
+                    relativedelta(months=self.env.context['sup_warrant']))
             if warrant_limit:
                 vals.update({'warrant_limit': warrant_limit})
-        return super(StockProductionLot, self).create(cr, uid, vals,
-                                                      context=context)
+        return super(StockProductionLot, self).create(vals)
 
 
-class StockPackOperation(orm.Model):
+class StockPackOperation(models.Model):
 
     _inherit = "stock.pack.operation"
 
