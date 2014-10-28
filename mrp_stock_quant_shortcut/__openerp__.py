@@ -21,7 +21,6 @@
     "version": "1.0",
     "depends": [
         "mrp",
-        "stock",
         "stock_quants_shortcuts",
     ],
     "author": "OdooMRP team",
@@ -32,7 +31,7 @@
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
-This module adds smartbutton for accessing quants from production orders
+This module adds an smartbutton for accessing quants from production orders
     """,
     "data": [
         "views/mrp_production_view.xml",

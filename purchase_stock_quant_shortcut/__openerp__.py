@@ -21,7 +21,6 @@
     "version": "1.0",
     "depends": [
         "purchase",
-        "stock",
         "stock_quants_shortcuts",
     ],
     "author": "OdooMRP team",
@@ -32,7 +31,7 @@
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
-This module adds smartbutton for accessing quants from purchase orders
+This module adds an smartbutton for accessing quants from purchase orders
     """,
     "data": [
         "views/purchase_order_view.xml",
