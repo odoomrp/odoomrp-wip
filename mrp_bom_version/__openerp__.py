@@ -19,7 +19,7 @@
     "name": "MRP BoM Version",
     "version": "1.0",
     "author": "OdooMRP team",
-    "category": "MRP",
+    "category": "Manufacturing",
     "website": "http://www.odoomrp.com",
     "description": """
     This module performs the following:

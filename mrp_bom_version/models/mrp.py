@@ -16,8 +16,6 @@
 #
 ##############################################################################
 from openerp import models, fields, api, exceptions, _
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-import time
 
 
 class MrpBom(models.Model):
@@ -99,11 +97,10 @@ class MrpProduction(models.Model):
                       ]
             domain = domain + ['|', ('date_start', '=', False),
                                ('date_start', '<=',
-                                time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)),
+                                fields.Date.context_today(self)),
                                '|', ('date_stop', '=', False),
                                ('date_stop', '>=',
-                                time.strftime(
-                                    DEFAULT_SERVER_DATETIME_FORMAT))]
+                                fields.Date.context_today(self))]
             bom_ids = bom_obj.search(cr, uid, domain, context=context)
             bom_id = 0
             min_seq = 0
