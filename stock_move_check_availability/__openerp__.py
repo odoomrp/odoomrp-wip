@@ -6,7 +6,7 @@
     This module adds a button to check availability in stock moves.
     """,
     'author': 'OdooMRP team',
-    'website': 'http://www.avanzosc.com',
+    'website': 'http://www.avanzosc.es',
     "depends": ['stock'],
     "category": "Generic Modules",
     "data": ['views/stock_move_view.xml'
