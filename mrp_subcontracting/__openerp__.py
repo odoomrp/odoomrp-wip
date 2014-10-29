@@ -29,8 +29,8 @@ operations.
         'mrp',
         'mrp_operations_extension',
     ],
-    "data": ["views/mrp_subcontracting_view.xml",
-         "views/mrp_operations_view.xml",
-             ],
+    "data": ['views/mrp_subcontracting_view.xml',
+        'views/mrp_operations_view.xml',
+    ],
     "installable": True
 }
