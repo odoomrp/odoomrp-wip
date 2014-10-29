@@ -15,16 +15,11 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import models, fields, api, exceptions, _
+from openerp import models, api, exceptions, _
 
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
-
-    estim_standard_cost = fields.Float(string='Estimate Standard Cost')
-    estim_average_cost = fields.Float(string='Estimate Average Cost')
-    last_purchase_cost = fields.Float(string='Last Purchase Cost')
-    last_sale_price = fields.Float(string='Last Sale Price')
 
     @api.one
     @api.model
