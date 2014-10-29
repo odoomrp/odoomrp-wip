@@ -33,7 +33,7 @@
                     <attribute name="on_change"></attribute>
                 </field>
                 <tree string="Test Line" position="attributes">
-                    <attribute name="colors">red:tolerance_status in ('noadmissible');orange:tolerance_status in ('admissible');blue:tolerance_status in ('tolerable');green:tolerance_status in ('optimal')</attribute>
+                    <attribute name="colors">orange:tolerance_status in ('admissible');red:tolerance_status in ('noadmissible');blue:tolerance_status in ('tolerable');green:tolerance_status in ('optimal')</attribute>
                 </tree>
                 <field name="success" position="after">
                     <field name="min_allowed" invisible="1" />

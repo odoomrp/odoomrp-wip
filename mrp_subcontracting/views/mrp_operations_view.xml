@@ -4,7 +4,7 @@
     <record model="ir.ui.view" id="mrp_production_workcenter_subcontracting_form_view_inherit">
         <field name="name">mrp.production.workcenter.line.subcontracting.form</field>
         <field name="model">mrp.production.workcenter.line</field>
-        <field name="inherit_id" 
+        <field name="inherit_id"
         	ref="mrp_operations.mrp_production_workcenter_form_view_inherit"/>
         <field name="arch" type="xml">
 			<page string="Information" position="before">
@@ -15,8 +15,9 @@
 						<field name="in_picking_id"/>
 					</group>
 				</page>
-			</page>        
+			</page>
         </field>
     </record>
+
 </data>
 </openerp>

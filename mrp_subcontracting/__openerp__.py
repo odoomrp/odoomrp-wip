@@ -25,11 +25,12 @@
 The module implements the complete route for a subcontrating production
 operations.
     """,
-    "depends": ['mrp',
-                ],
-    "data": [
-             "views/mrp_subcontracting_view.xml",
-             "views/mrp_operations_view.xml",
+    "depends": [
+        'mrp',
+        'mrp_operations_extension',
+    ],
+    "data": ["views/mrp_subcontracting_view.xml",
+         "views/mrp_operations_view.xml",
              ],
     "installable": True
 }

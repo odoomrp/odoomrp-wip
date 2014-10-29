@@ -17,11 +17,9 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class ProductSupplierinfo(orm.Model):
+class ProductSupplierinfo(models.Model):
     _inherit = "product.supplierinfo"
-    _columns = {
-        'warrant_months': fields.integer("Warranty")
-    }
+    warrant_months = fields.Integer(string="Warranty (in months)")

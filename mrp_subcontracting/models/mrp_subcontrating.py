@@ -16,7 +16,8 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
+from openerp import models, fields, api
+
 
 class MrpRoutingWorkcenter(models.Model):
     _inherit = 'mrp.routing.workcenter'
@@ -24,18 +25,19 @@ class MrpRoutingWorkcenter(models.Model):
     external = fields.Boolean('External', help="Is Subcontract Operation")
     semifinished_id = fields.Many2one(
         'product.product', 'Semifinished Subcontracting',
-        domain=[('type','=','product'),
-#                 ('route_ids','in', ['ref(purchase.route_warehouse0_buy)',
-#                                     'ref(stock.route_warehouse0_mto)'])
+        domain=[('type', '=', 'product'),
+                #('route_ids','in', ['ref(purchase.route_warehouse0_buy)',
+                #                    'ref(stock.route_warehouse0_mto)'])
                 ])
     picking_type_id = fields.Many2one('stock.picking.type', 'Picking Type',
-                                      domain=[('code','=','outgoing')])
+                                      domain=[('code', '=', 'outgoing')])
     virtual_subcontracting_location_id = fields.Many2one('stock.location',
-                                    'Virtual Subcontrating Location')
+                                     'Virtual Subcontrating Location')
     out_subcontracting_location_id = fields.Many2one('stock.location',
                                     'Consumption Subcontrating Location')
     in_subcontracting_location_id = fields.Many2one('stock.location',
                                     'Destination Subcontrating Location')
+
 
 class MrpProductionWorkcenterLine(models.Model):
     _inherit = 'mrp.production.workcenter.line'
@@ -43,8 +45,6 @@ class MrpProductionWorkcenterLine(models.Model):
     sale_order_id = fields.Many2one('sale.order', 'Sale Order')
     out_picking_id = fields.Many2one('stock.picking', 'Out Picking')
     in_picking_id = fields.Many2one('stock.picking', 'In Picking')
-
-
 
 
 class MrpProduction(models.Model):
@@ -59,13 +59,16 @@ class MrpProduction(models.Model):
                     product = workcenter_line.semifinished_id
                     vals = {'name': '/',
                             'origin': self.name,
-#                             'group_id': fields.many2one('procurement.group', 'Procurement Group'),
-#                             'rule_id': fields.many2one('procurement.rule', 'Rule', track_visibility='onchange', help="Chosen rule for the procurement resolution. Usually chosen by the system but can be manually set by the procurement manager to force an unusual behavior."),
+                            #'group_id': fields.many2one('procurement.group'
+                            #'rule_id': fields.many2one('procurement.rule'
                             'product_id': product.id,
                             'product_qty': self.product_qty,
-                            'product_uom': product.uom_id and product.uom_id.id or False,
-#                             'product_uos_qty': fields.float('UoS Quantity', states={'confirmed': [('readonly', False)]}, readonly=True),
-#                             'product_uos': fields.many2one('product.uom', 'Product UoS', states={'confirmed': [('readonly', False)]}, readonly=True),
-                            'location_id': workcenter_line.in_subcontracting_location_id.id,
+                            'product_uom': product.uom_id and
+                                product.uom_id.id or False,
+                            #'product_uos_qty': fields.float('UoS Quantity'
+                            #'product_uos': fields.many2one('product.uom'
+                            'location_id':
+                                workcenter_line.in_subcontracting_location_id.id,
                             }
+                    self.env['procurement.order'].create(vals)
         return res

@@ -1,0 +1,69 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mrp_production_project_estimated_cost
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-29 11:40+0000\n"
+"PO-Revision-Date: 2014-10-29 12:43+0100\n"
+"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_project_estimated_cost
+#: model:ir.model,name:mrp_production_project_estimated_cost.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Línea analítica"
+
+#. module: mrp_production_project_estimated_cost
+#: field:account.analytic.line,estim_standard_cost:0
+msgid "Estimate Standard Cost"
+msgstr "Coste estandard estimado"
+
+#. module: mrp_production_project_estimated_cost
+#: view:account.analytic.line:mrp_production_project_estimated_cost.view_account_analytic_line_form_inh_estimatedcost
+msgid "General Accounting"
+msgstr "Contabilidad general"
+
+#. module: mrp_production_project_estimated_cost
+#: field:account.analytic.line,last_purchase_cost:0
+msgid "Last Purchase Cost"
+msgstr "Coste última compra"
+
+#. module: mrp_production_project_estimated_cost
+#: field:account.analytic.line,last_sale_price:0
+msgid "Last Sale Price"
+msgstr "Precio última venta"
+
+#. module: mrp_production_project_estimated_cost
+#: field:account.analytic.line,manual_standard_cost:0
+#: field:product.template,manual_standard_cost:0
+msgid "Manual Standard Cost"
+msgstr "Coste estandar manual"
+
+#. module: mrp_production_project_estimated_cost
+#: model:ir.model,name:mrp_production_project_estimated_cost.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Órden de producción"
+
+#. module: mrp_production_project_estimated_cost
+#: model:ir.model,name:mrp_production_project_estimated_cost.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: mrp_production_project_estimated_cost
+#: view:account.analytic.line:mrp_production_project_estimated_cost.view_account_analytic_line_form_inh_estimatedcost
+msgid "Production Information"
+msgstr "Production Information"
+
+#. module: mrp_production_project_estimated_cost
+#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:85
+#, python-format
+msgid "You must define Income account in the product \"%s\", or in the product category"
+msgstr "Debe de definir la cuenta de entrada en el producto \"%s\", o en la categoría del producto"
+
