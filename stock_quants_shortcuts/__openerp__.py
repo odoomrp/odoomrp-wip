@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -17,18 +16,24 @@
 #
 ##############################################################################
 {
-    "name": "Stock Quants Shortcut",
+    "name": "Stock Quants Shortcuts",
     "version": "1.0",
-    "depends": ["base", "stock", "purchase", "mrp"],
+    "depends": [
+        "stock",
+    ],
     "author": "OdooMRP team",
-    "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
-    "category": "quants",
+    "contributors": [
+        "Mikel Arregi <mikelarregi@avanzosc.es>",
+    ],
+    "website": "http://www.odoomrp.com",
+    "category": "Warehouse Management",
     "description": """
-    Adds shorcut buttons to quants on manufacturing orders and purchase order.
+This module will cause installing more modules:
+* sale_stock_quant_shortcut if sale module is installed
+* purchase_stock_quant_shortcut if purchase module is installed
+* mrp_stock_quant_shortcut if mrp module is installed
     """,
-    'data': ['views/purchase_order_view.xml',
-             'views/mrp_production_view.xml'
-             ],
+    'data': [],
     "installable": True,
     "auto_install": False,
 }

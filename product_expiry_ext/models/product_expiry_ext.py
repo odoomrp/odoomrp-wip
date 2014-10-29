@@ -16,73 +16,46 @@
 #
 ##############################################################################
 
-from datetime import datetime
-from openerp.osv import fields, orm
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from openerp import _
+from openerp import models, fields, api, exceptions, _
 
 
-class StockProductioLot(orm.Model):
+class StockProductioLot(models.Model):
     _inherit = 'stock.production.lot'
 
-    def _get_dates(self, cr, uid, lot, context=None):
-            removal_date = lot.removal_date and \
-                datetime.strptime(lot.removal_date,
-                                  DEFAULT_SERVER_DATETIME_FORMAT) or False
-            alert_date = lot.alert_date and \
-                datetime.strptime(lot.alert_date,
-                                  DEFAULT_SERVER_DATETIME_FORMAT) or False
-            life_date = lot.life_date and \
-                datetime.strptime(lot.life_date,
-                                  DEFAULT_SERVER_DATETIME_FORMAT) or False
-            use_date = lot.life_date and \
-                datetime.strptime(lot.use_date,
-                                  DEFAULT_SERVER_DATETIME_FORMAT) or False
-            return alert_date, removal_date, use_date, life_date
+    @api.one
+    @api.constrains('removal_date', 'alert_date', 'life_date', 'use_date')
+    def _check_dates(self):
+        dates = filter(lambda x: x, [self.alert_date, self.removal_date,
+                                     self.use_date, self.life_date])
+        sort_dates = list(dates)
+        sort_dates.sort()
+        if dates != sort_dates:
+            raise exceptions.Warning(
+                _('Dates must be: Alert Date < Removal Date < Best Before '
+                  'Date < Expiry Date'))
 
-    def _check_dates(self, cr, uid, ids, context=None):
-        lots = self.browse(cr, uid, ids, context=context)
-        for lot in lots:
-            dates = filter(lambda x: x, [lot.alert_date, lot.removal_date,
-                                         lot.use_date, lot.life_date])
-            sort_dates = list(dates)
-            sort_dates.sort()
-            if dates != sort_dates:
-                return False
-        return True
+    @api.one
+    @api.depends('removal_date', 'alert_date', 'life_date', 'use_date')
+    def _get_product_state(self):
+        now = fields.Datetime.now()
+        self.expiry_state = 'normal'
+        if self.life_date and self.life_date < now:
+            self.expiry_state = 'expired'
+        elif (self.alert_date and self.removal_date and
+                self.removal_date >= now > self.alert_date):
+            self.expiry_state = 'alert'
+        elif (self.removal_date and self.use_date and
+                self.use_date >= now > self.removal_date):
+            self.expiry_state = 'to_remove'
+        elif (self.use_date and self.life_date and
+                self.life_date >= now > self.use_date):
+            self.expiry_state = 'best_before'
 
-    def _get_product_state(self, cr, uid, ids, field_name, args,
-                           context=None):
-        res = {}
-        today = datetime.now()
-        for lot in self.browse(cr, uid, ids, context=context):
-            alert_date, removal_date, use_date, life_date = self._get_dates(
-                cr, uid, lot, context=context)
-            res[lot.id] = 'normal'
-            if life_date and life_date < today:
-                res[lot.id] = 'expired'
-            elif alert_date and removal_date and today > alert_date and \
-                    today <= removal_date:
-                res[lot.id] = 'alert'
-            elif removal_date and use_date and today > removal_date and \
-                    today <= use_date:
-                res[lot.id] = 'to_remove'
-            elif use_date and life_date and today > use_date and \
-                    today <= life_date:
-                res[lot.id] = 'best_before'
-        return res
-
-    _columns = {
-        'expiry_state': fields.function(
-            _get_product_state, type='selection',
-            selection=[('expired', 'Expired'),
-                       ('alert', 'In alert'),
-                       ('normal', 'Normal'),
-                       ('to_remove', 'To remove'),
-                       ('best_before', 'After the best before')],
-            string='Expiry state'),
-    }
-
-    _constraints = [(_check_dates, _('Dates must be: Alert Date < Removal Date'
-                    '< Best Before Date < Expiry Date'),
-                     ['alert_date', 'removal_date', 'use_date', 'life_date'])]
+    expiry_state = fields.Selection(
+        compute=_get_product_state,
+        selection=[('expired', 'Expired'),
+                   ('alert', 'In alert'),
+                   ('normal', 'Normal'),
+                   ('to_remove', 'To remove'),
+                   ('best_before', 'After the best before')],
+        string='Expiry state')
