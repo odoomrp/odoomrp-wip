@@ -15,7 +15,7 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import models, fields, api, exceptions, _
+from openerp import models, api, exceptions, _
 
 
 class MrpProduction(models.Model):

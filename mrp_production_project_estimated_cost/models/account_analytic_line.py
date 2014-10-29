@@ -28,8 +28,8 @@ class AccountAnalyticLine(models.Model):
 
     @api.one
     @api.depends('product_id')
-    def _estim_average_cost(self):
-        self.estim_average_cost = self.product_id.standard_price
+    def _manual_standard_cost(self):
+        self.manual_standard_cost = self.product_id.manual_standard_cost
 
     @api.one
     @api.depends('product_id')
@@ -48,8 +48,8 @@ class AccountAnalyticLine(models.Model):
     estim_standard_cost = fields.Float(
         string='Estimate Standard Cost', compute='_estim_standard_cost',
         store=True)
-    estim_average_cost = fields.Float(
-        string='Estimate Average Cost', compute='_estim_average_cost',
+    manual_standard_cost = fields.Float(
+        string='Manual Standard Cost', compute='_manual_standard_cost',
         store=True)
     last_purchase_cost = fields.Float(
         string='Last Purchase Cost', compute='_last_purchase_cost',

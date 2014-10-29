@@ -34,78 +34,82 @@
         1.3.- Last Purchase Cost of the product.
         1.4.- Last Sale Price of the product.
 
-    2.- Creates three analytical journals, are these:
-        2.1.- Estimated materials.
-        2.2.- Estimated operators.
-        2.3.- Estimated machines.
+    2.- In 'product.template' object, field have been added::
+        2.1.- Manual Standard Cost.
+
+    3.- Creates three analytical journals, are these:
+        3.1.- Estimated materials.
+        3.2.- Estimated operators.
+        3.3.- Estimated machines.
 
     When the production order is confirmed, the estimated allocation of
     materials, machinery operators and costs will be made.
 
-    3.- For the estimated imputation of materials, for each material to
+    4.- For the estimated imputation of materials, for each material to
         consume of the order, a line of analytical will be created with this
         values​​:
-        3.01.- Description: CodOF-CodOp-CodProduct
-        3.02.- Analytic Account/Project:.That of the production order.
-        3.03.- Analytic Journal: Estimated materials journal.
-        3.04.- User: User confirming the production order.
-        3.05.- Invoiceable: False.
-        3.06.- Date: Date of the imputation.
-        3.07.- Amount: Cero
-        3.08.- Product: Product to consume.
-        3.09.- Quantity: Amount of line material to consume in production
-                         order.
-        3.10.- General Account: Account associated with the product or
-                                category.
-        3.11.- Estimate Standard Cost: The value that show the product.
-        3.12.- Estimate Average Cost: The value that show the product.
-        3.13.- Last Purchase Cost: The value that show the product.
-        3.14.- Last Sale Price: The value that show the product.
-
-    4.- For estimated imputation of operators, for each operation, a line of
-        analytical will be created with this values​​:
         4.01.- Description: CodOF-CodOp-CodProduct
         4.02.- Analytic Account/Project:.That of the production order.
-        4.03.- Analytic Journal: Estimated operators journal.
+        4.03.- Analytic Journal: Estimated materials journal.
         4.04.- User: User confirming the production order.
         4.05.- Invoiceable: False.
         4.06.- Date: Date of the imputation.
         4.07.- Amount: Cero
-        4.08.- Product: Product associated with the machine in operation.
-        4.09.- Quantity: Amount of time required for the execution of the
-                         operation.
+        4.08.- Product: Product to consume.
+        4.09.- Quantity: Amount of line material to consume in production
+                         order.
         4.10.- General Account: Account associated with the product or
                                 category.
         4.11.- Estimate Standard Cost: The value that show the product.
-        4.12.- Estimate Average Cost: The value that show the product.
+        4.12.- Manual Standard Cost: The value that show the product.
         4.13.- Last Purchase Cost: The value that show the product.
         4.14.- Last Sale Price: The value that show the product.
 
-        The number of imputations of workers is equal to defined number of
-        operators in the operation
-
-    5.- For the estimated imputation of machines, for each operation on the
-        route associated, 2 imputations are made, per cost hour, and per cost
-        per cycle. will be created with this values​​:
-        5.01.- Description: CodOF-CodOp-H-Machinename or
-                            CodOF-CodOp-C-Machinename.
+    5.- For estimated imputation of operators, for each operation, a line of
+        analytical will be created with this values​​:
+        5.01.- Description: CodOF-CodOp-CodProduct
         5.02.- Analytic Account/Project:.That of the production order.
-        5.03.- Analytic Journal: Estimated machines journal.
+        5.03.- Analytic Journal: Estimated operators journal.
         5.04.- User: User confirming the production order.
         5.05.- Invoiceable: False.
         5.06.- Date: Date of the imputation.
         5.07.- Amount: Cero
         5.08.- Product: Product associated with the machine in operation.
-        5.09.- Quantity: Expected amount of time or cycles to perform the
+        5.09.- Quantity: Amount of time required for the execution of the
                          operation.
         5.10.- General Account: Account associated with the product or
                                 category.
         5.11.- Estimate Standard Cost: The value that show the product.
-        5.12.- Estimate Average Cost: The value that show the product.
+        5.12.- Manual Standard Cost: The value that show the product.
         5.13.- Last Purchase Cost: The value that show the product.
         5.14.- Last Sale Price: The value that show the product.
+
+        The number of imputations of workers is equal to defined number of
+        operators in the operation
+
+    6.- For the estimated imputation of machines, for each operation on the
+        route associated, 2 imputations are made, per cost hour, and per cost
+        per cycle. will be created with this values​​:
+        6.01.- Description: CodOF-CodOp-H-Machinename or
+                            CodOF-CodOp-C-Machinename.
+        6.02.- Analytic Account/Project:.That of the production order.
+        6.03.- Analytic Journal: Estimated machines journal.
+        6.04.- User: User confirming the production order.
+        6.05.- Invoiceable: False.
+        6.06.- Date: Date of the imputation.
+        6.07.- Amount: Cero
+        6.08.- Product: Product associated with the machine in operation.
+        6.09.- Quantity: Expected amount of time or cycles to perform the
+                         operation.
+        6.10.- General Account: Account associated with the product or
+                                category.
+        6.11.- Estimate Standard Cost: The value that show the product.
+        6.12.- Manual Standard Cost: The value that show the product.
+        6.13.- Last Purchase Cost: The value that show the product.
+        6.14.- Last Sale Price: The value that show the product.
     """,
-    "depends": ['analytic',
+    "depends": ['product',
+                'analytic',
                 'mrp',
                 'mrp_operations_extension',
                 'mrp_project_link',
@@ -113,6 +117,7 @@
                 ],
     "data": ['data/analytic_journal_data.xml',
              'views/account_analytic_line_view.xml',
+             'views/product_view.xml',
              ],
     "installable": True
 }

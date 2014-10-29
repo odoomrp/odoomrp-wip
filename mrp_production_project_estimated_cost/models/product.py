@@ -15,6 +15,13 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from . import account_analytic_line
-from . import mrp_production
-from . import product
+from openerp import models, fields
+import openerp.addons.decimal_precision as dp
+
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    manual_standard_cost = fields.Float(
+        string='Manual Standard Cost', digits=dp.get_precision('Product Price')
+        )
