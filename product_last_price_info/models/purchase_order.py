@@ -15,25 +15,21 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp.osv import orm
-import time
+from openerp import api, models, fields
 
 
-class PurchaseOrder(orm.Model):
+class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
-    def wkf_confirm_order(self, cr, uid, ids, context=None):
-        product_obj = self.pool['product.product']
-        res = super(PurchaseOrder, self).wkf_confirm_order(cr, uid, ids,
-                                                           context)
-        for o in self.browse(cr, uid, ids, context):
-            for line in o.order_line:
+    @api.multi
+    def wkf_approve_order(self):
+        res = super(PurchaseOrder, self).wkf_approve_order()
+        for po in self:
+            for line in po.order_line:
                 if line.product_id:
-                    vals = {'last_purchase_date':
-                            time.strftime('%Y-%m-%d %H:%M:%S'),
+                    vals = {'last_purchase_date': fields.Datetime.now(),
                             'last_supplier_id': line.order_id.partner_id.id,
                             'last_purchase_price': line.price_unit
                             }
-                    product_obj.write(cr, uid, [line.product_id.id], vals,
-                                      context)
+                    line.product_id.write(vals)
         return res

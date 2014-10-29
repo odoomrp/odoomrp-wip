@@ -15,24 +15,21 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp.osv import orm
-import time
+from openerp import api, models, fields
 
 
-class SaleOrder(orm.Model):
+class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    def action_wait(self, cr, uid, ids, context=None):
-        product_obj = self.pool['product.product']
-        res = super(SaleOrder, self).action_wait(cr, uid, ids, context)
-        for o in self.browse(cr, uid, ids, context):
-            for line in o.order_line:
+    @api.multi
+    def action_wait(self):
+        res = super(SaleOrder, self).action_wait()
+        for so in self:
+            for line in so.order_line:
                 if line.product_id:
-                    vals = {'last_sale_date':
-                            time.strftime('%Y-%m-%d %H:%M:%S'),
+                    vals = {'last_sale_date': fields.Datetime.now(),
                             'last_customer_id': line.order_id.partner_id.id,
                             'last_sale_price': line.price_unit
                             }
-                    product_obj.write(cr, uid, [line.product_id.id], vals,
-                                      context)
+                    line.product_id.write(vals)
         return res
