@@ -109,7 +109,6 @@
                 'mrp',
                 'mrp_operations_extension',
                 'mrp_project_link',
-                'product_last_price_info',
                 ],
     "data": ['data/analytic_journal_data.xml',
              'views/account_analytic_line_view.xml',
