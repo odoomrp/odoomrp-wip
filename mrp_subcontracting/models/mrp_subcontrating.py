@@ -59,14 +59,14 @@ class MrpProduction(models.Model):
                     product = workcenter_line.semifinished_id
                     vals = {'name': '/',
                             'origin': self.name,
-                            #'group_id': fields.many2one('procurement.group'
-                            #'rule_id': fields.many2one('procurement.rule'
+                            # 'group_id': fields.many2one('procurement.group'
+                            # 'rule_id': fields.many2one('procurement.rule'
                             'product_id': product.id,
                             'product_qty': self.product_qty,
                             'product_uom': product.uom_id and
                                 product.uom_id.id or False,
-                            #'product_uos_qty': fields.float('UoS Quantity'
-                            #'product_uos': fields.many2one('product.uom'
+                            # 'product_uos_qty': fields.float('UoS Quantity'
+                            # 'product_uos': fields.many2one('product.uom'
                             'location_id':
                                 workcenter_line.in_subcontracting_location_id.id,
                             }
