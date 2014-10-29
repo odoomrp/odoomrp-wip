@@ -26,6 +26,34 @@ class AccountAnalyticLine(models.Model):
     def _estim_standard_cost(self):
         self.estim_standard_cost = self.product_id.standard_price
 
+    @api.one
+    @api.depends('product_id')
+    def _estim_average_cost(self):
+        self.estim_average_cost = self.product_id.standard_price
+
+    @api.one
+    @api.depends('product_id')
+    def _last_purchase_cost(self):
+        self.last_purchase_cost = 0
+        if self.product_id:
+            self.last_purchase_cost = self.product_id.last_purchase_price
+
+    @api.one
+    @api.depends('product_id')
+    def _last_sale_price(self):
+        self.last_sale_price = 0
+        if self.product_id:
+            self.last_sale_price = self.product_id.last_sale_price
+
     estim_standard_cost = fields.Float(
         string='Estimate Standard Cost', compute='_estim_standard_cost',
+        store=True)
+    estim_average_cost = fields.Float(
+        string='Estimate Average Cost', compute='_estim_average_cost',
+        store=True)
+    last_purchase_cost = fields.Float(
+        string='Last Purchase Cost', compute='_last_purchase_cost',
+        store=True)
+    last_sale_price = fields.Float(
+        string='Last Sale Price', compute='_last_sale_price',
         store=True)

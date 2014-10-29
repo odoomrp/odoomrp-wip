@@ -7,8 +7,11 @@
             <field name="inherit_id" ref="account.view_account_analytic_line_form"/>
             <field name="arch" type="xml">
                 <group string="General Accounting" position="after">
-                    <group string="Production Information" colspan="4" >
+                    <group string="Production Information" colspan="4" col="8">
                         <field name="estim_standard_cost" colspan="2"/>
+                        <field name="estim_average_cost" colspan="2"/>
+                        <field name="last_purchase_cost" colspan="2"/>
+                        <field name="last_sale_price" colspan="2"/>
                     </group>
                 </group>
             </field>
@@ -20,6 +23,9 @@
             <field name="arch" type="xml">
                 <field name="journal_id" position="after">
                     <field name="estim_standard_cost" />
+                    <field name="estim_average_cost" />
+                    <field name="last_purchase_cost" />
+                    <field name="last_sale_price" />
                 </field>
             </field>
         </record>
