@@ -126,5 +126,5 @@ class QcTestLine(models.Model):
             value.update({'tolerance_status': 'optimal'})
         else:
             value.update({'tolerance_status': 'noadmissible'})
-        result.update({'value':value})
+        result.update({'value': value})
         return result
