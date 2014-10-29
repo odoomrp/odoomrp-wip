@@ -16,8 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
-
+from openerp import models, fields, api, _
 
 class MrpRoutingWorkcenter(models.Model):
     _inherit = 'mrp.routing.workcenter'
@@ -26,10 +25,11 @@ class MrpRoutingWorkcenter(models.Model):
     semifinished_id = fields.Many2one(
         'product.product', 'Semifinished Subcontracting',
         domain=[('type','=','product'),
-                ('route_ids','in', ['ref(purchase.route_warehouse0_buy)',
-                                    'ref(stock.route_warehouse0_mto)'])])
+#                 ('route_ids','in', ['ref(purchase.route_warehouse0_buy)',
+#                                     'ref(stock.route_warehouse0_mto)'])
+                ])
     picking_type_id = fields.Many2one('stock.picking.type', 'Picking Type',
-                                      domain[('code','=','outgoing')])
+                                      domain=[('code','=','outgoing')])
     virtual_subcontracting_location_id = fields.Many2one('stock.location',
                                     'Virtual Subcontrating Location')
     out_subcontracting_location_id = fields.Many2one('stock.location',
@@ -56,5 +56,16 @@ class MrpProduction(models.Model):
         if self.routing_id:
             for workcenter_line in self.routing_id.workcenter_lines:
                 if workcenter_line.external:
-                    pass
+                    product = workcenter_line.semifinished_id
+                    vals = {'name': '/',
+                            'origin': self.name,
+#                             'group_id': fields.many2one('procurement.group', 'Procurement Group'),
+#                             'rule_id': fields.many2one('procurement.rule', 'Rule', track_visibility='onchange', help="Chosen rule for the procurement resolution. Usually chosen by the system but can be manually set by the procurement manager to force an unusual behavior."),
+                            'product_id': product.id,
+                            'product_qty': self.product_qty,
+                            'product_uom': product.uom_id and product.uom_id.id or False,
+#                             'product_uos_qty': fields.float('UoS Quantity', states={'confirmed': [('readonly', False)]}, readonly=True),
+#                             'product_uos': fields.many2one('product.uom', 'Product UoS', states={'confirmed': [('readonly', False)]}, readonly=True),
+                            'location_id': workcenter_line.in_subcontracting_location_id.id,
+                            }
         return res
