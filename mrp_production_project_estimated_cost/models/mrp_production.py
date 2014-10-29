@@ -68,11 +68,8 @@ class MrpProduction(models.Model):
                             + line.workcenter_id.product_id.name)
                     vals = self._cath_information_estimated_cost(
                         journal, name,
-                        line.workcenter_id.product_id, line.hour)
-                    cont = 1
-                    while cont <= op_wc_line.op_number:
-                        analytic_line_obj.create(vals)
-                        cont += 1
+                        line.workcenter_id.product_id,  op_wc_line.op_number)
+                    analytic_line_obj.create(vals)
         return res
 
     def _cath_information_estimated_cost(self, journal, name, product_id, qty):
