@@ -40,7 +40,7 @@ class AccountAnalyticLine(models.Model):
     def _last_purchase_cost(self):
         self.last_purchase_cost = 0
         if self.product_id:
-            self.last_purchase_cost = self.product_id.last_purchase_cost
+            self.last_purchase_cost = self.product_id.last_purchase_price
 
     @api.one
     @api.depends('product_id')
