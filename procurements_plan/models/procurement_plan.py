@@ -88,15 +88,6 @@ class ProcurementPlan(models.Model):
                 ('id', 'not in', my_proc),
                 ('plan', '=', False)]
         procurements = proc_obj.search(cond)
-        for procurement in procurements:
-            if procurement.sale_line_id:
-                pickings = procurement.sale_line_id.order_id.picking_ids
-                for picking in pickings:
-                    for move in picking.move_lines:
-                        if move.state == 'confirmed':
-                            vals = {'state': 'cancel',
-                                    'origin_state': 'confirmed'}
-                            move.write(vals)
         if procurements:
             vals = {'state': 'cancel', 'origin_state': 'confirmed'}
             procurements.write(vals)
@@ -104,15 +95,6 @@ class ProcurementPlan(models.Model):
                 ('id', 'not in', my_proc),
                 ('plan', '=', False)]
         procurements = proc_obj.search(cond)
-        for procurement in procurements:
-            if procurement.sale_line_id:
-                pickings = procurement.sale_line_id.order_id.picking_ids
-                for picking in pickings:
-                    for move in picking.move_lines:
-                        if move.state == 'confirmed':
-                            vals = {'state': 'cancel',
-                                    'origin_state': 'confirmed'}
-                            move.write(vals)
         if procurements:
             vals = {'state': 'cancel', 'origin_state': 'running'}
             procurements.write(vals)
@@ -128,11 +110,6 @@ class ProcurementPlan(models.Model):
         if procurements:
             vals = {'state': 'running', 'origin_state': False}
             procurements.write(vals)
-        cond = [('origin_state', '=', 'confirmed')]
-        moves = move_obj.search(cond)
-        if moves:
-            vals = {'state': 'confirmed', 'origin_state': False}
-            moves.write(vals)
         return self.write({'state': 'done'})
 
     @api.multi
