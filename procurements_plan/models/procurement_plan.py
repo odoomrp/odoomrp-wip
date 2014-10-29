@@ -75,7 +75,6 @@ class ProcurementPlan(models.Model):
     @api.one
     def action_run(self):
         proc_obj = self.env['procurement.order']
-        move_obj = self.env['stock.move']
         comp_obj = self.env['procurement.order.compute.all']
         plan = self
         if not plan.procurement_ids:
