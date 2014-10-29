@@ -1,0 +1,15 @@
+<openerp>
+    <data>
+        <record id="view_move_form_inherit" model="ir.ui.view">
+            <field name="name">stock.move.form.inherit</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form" />
+            <field name="arch" type="xml">
+                <button name="action_confirm" position="after">
+                    <button name="action_assign" states="confirmed"
+                        string="Check Availability" type="object" class="oe_highlight" />
+                </button>
+            </field>
+        </record>
+    </data>
+</openerp>
