@@ -46,6 +46,26 @@ class MrpProductionWorkcenterLine(models.Model):
     out_picking_id = fields.Many2one('stock.picking', 'Out Picking')
     in_picking_id = fields.Many2one('stock.picking', 'In Picking')
 
+    @api.model
+    def create(self, vals):
+        wc_line = super(MrpProductionWorkcenterLine, self).create(vals)
+        if wc_line.routing_wc_line.external:
+            routing_wc = wc_line.routing_wc_line
+            vals = {'name': wc_line.name,
+                    'origin': wc_line.name,
+                    # 'group_id': fields.many2one('procurement.group'
+                    # 'rule_id': fields.many2one('procurement.rule'
+                    'product_id': routing_wc.semifinished_id.id,
+                    'product_qty': wc_line.qty,
+                    'product_uom': wc_line.uom.id,
+                    # 'product_uos_qty': fields.float('UoS Quantity'
+                    # 'product_uos': fields.many2one('product.uom'
+                    'location_id':
+                        routing_wc.in_subcontracting_location_id.id,
+                    }
+            self.env['procurement.order'].create(vals)
+        return wc_line
+
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
@@ -56,19 +76,5 @@ class MrpProduction(models.Model):
         if self.routing_id:
             for wc_line in self.routing_id.workcenter_lines:
                 if wc_line.external:
-                    product = wc_line.semifinished_id
-                    vals = {'name': '/',
-                            'origin': self.name,
-                            # 'group_id': fields.many2one('procurement.group'
-                            # 'rule_id': fields.many2one('procurement.rule'
-                            'product_id': product.id,
-                            'product_qty': self.product_qty,
-                            'product_uom': (product.uom_id and
-                                            product.uom_id.id or False),
-                            # 'product_uos_qty': fields.float('UoS Quantity'
-                            # 'product_uos': fields.many2one('product.uom'
-                            'location_id':
-                                wc_line.in_subcontracting_location_id.id,
-                            }
-                    self.env['procurement.order'].create(vals)
+                    pass
         return res
