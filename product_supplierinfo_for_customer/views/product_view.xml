@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <field name="name" position="attributes">
                     <attribute name="string">Partner</attribute>
-                    <attribute name="context">{}</attribute>
+                    <attribute name="context">{'select_type': type}</attribute>
                 </field>
                 <field name="product_name" position="attributes">
                     <attribute name="string">Partner Product Name</attribute>
