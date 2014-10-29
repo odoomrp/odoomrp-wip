@@ -26,9 +26,9 @@ class ResPartner(models.Model):
     def default_get(self, fields):
         res = super(ResPartner, self).default_get(fields)
         select_type = self.env.context.get('select_type', False)
-        if select_type and select_type == 'supplier':
+        if select_type:
             res.update({
-                'customer': False,
-                'supplier': True,
+                'customer': select_type == 'customer',
+                'supplier': select_type == 'supplier',
             })
         return res
