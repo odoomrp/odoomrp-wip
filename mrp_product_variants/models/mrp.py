@@ -157,6 +157,8 @@ class MrpBom(models.Model):
             #  otherwise explode further
             if (bom_line_id.type != "phantom" and
                     (not bom_id or self.browse(bom_id).type != "phantom")):
+                product_attributes = (
+                    bom_line_id.product_template._get_product_attributes())
                 result.append({
                     'name': (bom_line_id.product_id.name or
                              bom_line_id.product_template.name),
@@ -174,6 +176,8 @@ class MrpBom(models.Model):
                                         or False),
                     'product_uos': (bom_line_id.product_uos and
                                     bom_line_id.product_uos.id or False),
+                    # 'product_attributes': map(lambda x: (0, 0, x),
+                    #                           product_attributes),
                 })
             elif bom_id:
                 all_prod = [bom.product_tmpl_id.id] + (previous_products or [])
@@ -254,15 +258,12 @@ class MrpProduction(models.Model):
         self.ensure_one()
         if self.product_template:
             self.product_uom = self.product_template.uom_id
-            product_attributes = []
             if not self.product_template.attribute_line_ids:
                 self.product_id = (
                     self.product_template.product_variant_ids and
                     self.product_template.product_variant_ids[0])
-            for attribute in self.product_template.attribute_line_ids:
-                product_attributes.append({'attribute':
-                                           attribute.attribute_id})
-            self.product_attributes = product_attributes
+            self.product_attributes = (
+                self.product_template._get_product_attributes())
             self.bom_id = self.env['mrp.bom']._bom_find(
                 product_tmpl_id=self.product_template.id)
             self.routing_id = self.bom_id.routing_id
@@ -380,23 +381,21 @@ class MrpProductionProductLine(models.Model):
         inverse_name='product_line', string='Product attributes',
         copyable=True)
 
+
     @api.one
     @api.onchange('product_template')
     def onchange_product_template(self):
         if self.product_template:
-            product_attributes = []
             product_id = self.env['product.product']
             if not self.product_template.attribute_line_ids:
                 product_id = (
                     self.product_template.product_variant_ids and
                     self.product_template.product_variant_ids[0])
-            for attribute in self.product_template.attribute_line_ids:
-                product_attributes.append({'attribute':
-                                           attribute.attribute_id})
             self.name = product_id.name or self.product_template.name
             self.product_uom = self.product_template.uom_id
             self.product_id = product_id
-            self.product_attributes = product_attributes
+            self.product_attributes = (
+                self.product_template._get_product_attributes())
 
     @api.one
     @api.onchange('product_attributes')

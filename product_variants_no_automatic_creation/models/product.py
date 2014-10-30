@@ -39,6 +39,12 @@ class ProductTemplate(models.Model):
         " variants will be automatically generated and if empty it will"
         " check in the category.", required=True, default='no')
 
+    def _get_product_attributes(self):
+        product_attributes = []
+        for attribute in self.attribute_line_ids:
+            product_attributes.append({'attribute': attribute.attribute_id.id})
+        return product_attributes
+
     @api.multi
     def create_variant_ids(self):
         for tmpl in self:
@@ -52,6 +58,9 @@ class ProductTemplate(models.Model):
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
+
+    def _get_product_attributes_values(self):
+        return []
 
     def _product_find(self, product_template, product_attributes):
         domain = []
