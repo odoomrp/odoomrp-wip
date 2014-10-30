@@ -19,19 +19,9 @@
 from openerp import models, fields
 
 
-class Task(models.Model):
-    _inherit = "project.task"
+class StockMove(models.Model):
 
-    mrp_production_id = fields.Many2one('mrp.production',
-                                        string='Manufacturing Order')
-    mrp_sch_products = fields.One2many(
-        "mrp.production.product.line", 'task_id',
-        related='mrp_production_id.product_lines', store=False,
-        string='Scheduled Products')
-    wk_sch_products = fields.One2many(
-        "mrp.production.product.line", 'task_id',
-        related='wk_order.product_line', store=False,
-        string='Scheduled Products')
-    final_product = fields.Many2one('product.product',
-                                    string='Product to Produce', store=False,
-                                    related='mrp_production_id.product_id')
+    _inherit = 'stock.move'
+
+    main_project_id = fields.Many2one('project.project',
+                                      string="Main Project")

@@ -26,8 +26,9 @@
     "author": "OdooMRP team",
     "category": "Manufacturing",
     'data': [
-        "views/project_task_view.xml",
         "views/mrp_production_view.xml",
+        "views/procurement_order_view.xml",
+        "views/project_project_view.xml",
         "views/account_analytic_line_view.xml"
     ],
     'installable': True,
