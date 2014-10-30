@@ -10,13 +10,12 @@
                     expr="//field[@name='bom_line_ids']//field[@name='product_id']"
                     position="before">
                     <field name="product_template" />
-                    <!-- <field name="possible_values" invisible="1" /> -->
+                    <field name="possible_values" invisible="1" />
                 </xpath>
                 <xpath
                     expr="//field[@name='bom_line_ids']//field[@name='attribute_value_ids']"
                     position="attributes">
-                    <attribute name="options">{'no_create': True}
-                    </attribute>
+                    <attribute name="options">{'no_create': True}</attribute>
                 </xpath>
             </field>
         </record>
@@ -72,8 +71,7 @@
                 </field>
                 <field name="product_id" position="attributes">
                     <!-- <attribute name="invisible">1</attribute> -->
-                    <attribute name="string">Product Variants
-                    </attribute>
+                    <attribute name="string">Product Variants</attribute>
                 </field>
                 <notebook position="before">
                     <field name="product_attributes"
@@ -82,8 +80,7 @@
                         <tree create="0" delete="0" editable="1">
                             <field name="attribute" />
                             <field name="value" options="{'no_create': True}" />
-                            <!-- <field name="possible_values" invisible="1" 
-                                /> -->
+                            <field name="possible_values" invisible="1" />
                         </tree>
                     </field>
                 </notebook>
@@ -119,8 +116,7 @@
 
         <record model="ir.ui.view"
             id="mrp_production_product_line_extended_form_view">
-            <field name="name">mrp.production.product.line.extended.form
-            </field>
+            <field name="name">mrp.production.product.line.extended.form</field>
             <field name="model">mrp.production.product.line</field>
             <field name="inherit_id" ref="mrp.mrp_production_product_form_view" />
             <field name="arch" type="xml">
@@ -137,6 +133,7 @@
                         <tree create="0" delete="0" editable="1">
                             <field name="attribute" />
                             <field name="value" options="{'no_create': True}" />
+                            <field name="possible_values" invisible="1" />
                         </tree>
                     </field>
                 </xpath>
@@ -145,8 +142,7 @@
 
         <record model="ir.ui.view"
             id="mrp_production_product_line_extended_tree_view">
-            <field name="name">mrp.production.product.line.extended.tree
-            </field>
+            <field name="name">mrp.production.product.line.extended.tree</field>
             <field name="model">mrp.production.product.line</field>
             <field name="inherit_id" ref="mrp.mrp_production_product_tree_view" />
             <field name="arch" type="xml">

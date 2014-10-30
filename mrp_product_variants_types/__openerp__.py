@@ -2,8 +2,8 @@
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
@@ -11,35 +11,32 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
 
 {
-    "name": "MRP - Product variants",
+    "name": "MRP product variants types",
     "version": "1.0",
     "depends": [
-        "product",
-        "mrp",
-        "mrp_operations_extension",
-        "product_variants_no_automatic_creation",
-        "mrp_production_editable_scheduled_products",
+        "mrp_product_variants",
+        "product_attribute_types",
     ],
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
-    "category": "Custom Module",
+    "category": "Hidden/Dependency",
     "website": "http://www.odoomrp.com",
     "summary": "",
     "description": """
-Create custom product from a manufacturing order
+This module extends product variants on MRP. It adds the possibility of
+defining a custom value when the attribute is of range type.
     """,
     "data": [
-        "security/ir.model.access.csv",
         "views/mrp_view.xml",
-        "views/product_view.xml",
     ],
     "installable": True,
+    "auto_install": True,
 }

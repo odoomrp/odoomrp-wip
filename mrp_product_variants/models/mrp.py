@@ -16,21 +16,8 @@
 #
 ##############################################################################
 
-import time
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp import models, fields, api, exceptions, tools, _
 from openerp.addons.product import _common
-
-
-class MrpBomAttribute(models.Model):
-    _name = 'mrp.bom.attribute'
-
-    mrp_bom_line = fields.Many2one(comodel_name='mrp.bom.line', string='BoM')
-    attribute = fields.Many2one(comodel_name='product.attribute',
-                                string='Attribute')
-    value = fields.Many2one(comodel_name='product.attribute.value',
-                            domain="[('attribute_id', '=', attribute)]",
-                            string='Value')
 
 
 class MrpBomLine(models.Model):
@@ -39,10 +26,6 @@ class MrpBomLine(models.Model):
     product_id = fields.Many2one(required=False)
     product_template = fields.Many2one(comodel_name='product.template',
                                        string='Product')
-    product_attributes = fields.One2many(comodel_name='mrp.bom.attribute',
-                                         inverse_name='mrp_bom_line',
-                                         string='Product attributes',
-                                         copyable=True)
     attribute_value_ids = fields.Many2many(
         domain="[('id', 'in', possible_values[0][2])]")
     possible_values = fields.Many2many(
@@ -53,23 +36,21 @@ class MrpBomLine(models.Model):
     @api.depends('bom_id.product_tmpl_id',
                  'bom_id.product_tmpl_id.attribute_line_ids')
     def _get_possible_attribute_values(self):
-        self.possible_values = self.mapped(
-            'bom_id.product_tmpl_id.attribute_line_ids').sorted()
+        attr_values = self.env['product.attribute.value']
+        for attr_line in self.bom_id.product_tmpl_id.attribute_line_ids:
+            attr_values |= attr_line.value_ids
+        self.possible_values = attr_values.sorted()
 
     @api.one
     @api.onchange('product_id')
     def onchange_product_product(self):
-        self.product_template = self.product_id.product_tmpl_id
+        if not self.product_template:
+            self.product_template = self.product_id.product_tmpl_id
 
     @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
         if self.product_template:
-            product_attributes = []
-            for attribute in self.product_template.attribute_line_ids:
-                product_attributes.append({'attribute':
-                                           attribute.attribute_id})
-            self.product_attributes = product_attributes
             return {'domain': {'product_id': [('product_tmpl_id', '=',
                                                self.product_template.id)]}}
         return {'domain': {'product_id': []}}
@@ -137,12 +118,10 @@ class MrpBom(models.Model):
 
         for bom_line_id in bom.bom_line_ids:
             if bom_line_id.date_start and \
-                (bom_line_id.date_start >
-                 time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)) or \
-                bom_line_id.date_stop and \
-                (bom_line_id.date_stop <
-                 time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)):
-                    continue
+                    (bom_line_id.date_start > fields.Date.context_today(self))\
+                    or bom_line_id.date_stop and \
+                    (bom_line_id.date_stop < fields.Date.context_today(self)):
+                continue
             # all bom_line_id variant values must be in the product
             if bom_line_id.attribute_value_ids:
                 production_attr_values = []
@@ -178,6 +157,8 @@ class MrpBom(models.Model):
             #  otherwise explode further
             if (bom_line_id.type != "phantom" and
                     (not bom_id or self.browse(bom_id).type != "phantom")):
+                # product_attributes = (
+                #     bom_line_id.product_template._get_product_attributes())
                 result.append({
                     'name': (bom_line_id.product_id.name or
                              bom_line_id.product_template.name),
@@ -195,6 +176,8 @@ class MrpBom(models.Model):
                                         or False),
                     'product_uos': (bom_line_id.product_uos and
                                     bom_line_id.product_uos.id or False),
+                    # 'product_attributes': map(lambda x: (0, 0, x),
+                    #                           product_attributes),
                 })
             elif bom_id:
                 all_prod = [bom.product_tmpl_id.id] + (previous_products or [])
@@ -215,6 +198,8 @@ class MrpBom(models.Model):
                       ' but the product "%s" does not have any BoM defined.') %
                     (master_bom.name, bom_line_id.product_id.name_get()[0][1]))
 
+        self._get_workorder_operations(result2, level=level,
+                                       routing_id=routing_id)
         return result, result2
 
 
@@ -226,18 +211,23 @@ class MrpProductionAttribute(models.Model):
     attribute = fields.Many2one(comodel_name='product.attribute',
                                 string='Attribute')
     value = fields.Many2one(comodel_name='product.attribute.value',
-                            #  domain="[('attribute_id','=',attribute),"
-                            #  "('id','in',possible_values[0][2])]",
+                            domain="[('attribute_id', '=', attribute),"
+                            "('id', 'in', possible_values[0][2])]",
                             string='Value')
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
 
     @api.one
-    @api.depends('mrp_production.product_template')
+    @api.depends('attribute', 'mrp_production.product_template',
+                 'mrp_production.product_template.attribute_line_ids')
     def _get_possible_attribute_values(self):
-        self.possible_values = self.mapped(
-            'mrp_production.product_template.attribute_line_ids').sorted()
+        attr_values = self.env['product.attribute.value']
+        template = self.mrp_production.product_template
+        for attr_line in template.attribute_line_ids:
+            if attr_line.attribute_id.id == self.attribute.id:
+                attr_values |= attr_line.value_ids
+        self.possible_values = attr_values.sorted()
 
 
 class MrpProduction(models.Model):
@@ -268,15 +258,12 @@ class MrpProduction(models.Model):
         self.ensure_one()
         if self.product_template:
             self.product_uom = self.product_template.uom_id
-            product_attributes = []
             if not self.product_template.attribute_line_ids:
                 self.product_id = (
                     self.product_template.product_variant_ids and
                     self.product_template.product_variant_ids[0])
-            for attribute in self.product_template.attribute_line_ids:
-                product_attributes.append({'attribute':
-                                           attribute.attribute_id})
-            self.product_attributes = product_attributes
+            self.product_attributes = (
+                self.product_template._get_product_attributes())
             self.bom_id = self.env['mrp.bom']._bom_find(
                 product_tmpl_id=self.product_template.id)
             self.routing_id = self.bom_id.routing_id
@@ -292,13 +279,8 @@ class MrpProduction(models.Model):
     @api.onchange('product_attributes')
     def onchange_product_attributes(self):
         product_obj = self.env['product.product']
-        att_values_ids = [attr_line.value and attr_line.value.id
-                          or False
-                          for attr_line in self.product_attributes]
-        domain = [('product_tmpl_id', '=', self.product_template.id)]
-        for value in att_values_ids:
-            domain.append(('attribute_value_ids', '=', value))
-        self.product_id = product_obj.search(domain, limit=1)
+        self.product_id = product_obj._product_find(self.product_template,
+                                                    self.product_attributes)
 
     @api.multi
     def _action_compute_lines(self, properties=None):
@@ -358,6 +340,9 @@ class MrpProduction(models.Model):
             for line in results2:
                 line['production_id'] = production.id
                 workcenter_line_obj.create(line)
+
+            self._get_workorder_in_product_lines(self.workcenter_lines,
+                                                 self.product_lines)
         return results
 
 
@@ -370,8 +355,22 @@ class MrpProductionProductLineAttribute(models.Model):
     attribute = fields.Many2one(comodel_name='product.attribute',
                                 string='Attribute')
     value = fields.Many2one(comodel_name='product.attribute.value',
-                            domain="[('attribute_id', '=', attribute)]",
+                            domain="[('attribute_id', '=', attribute),"
+                            "('id', 'in', possible_values[0][2])]",
                             string='Value')
+    possible_values = fields.Many2many(
+        comodel_name='product.attribute.value',
+        compute='_get_possible_attribute_values')
+
+    @api.one
+    @api.depends('attribute')
+    def _get_possible_attribute_values(self):
+        attr_values = self.env['product.attribute.value']
+        template = self.product_line.product_template
+        for attr_line in template.attribute_line_ids:
+            if attr_line.attribute_id.id == self.attribute.id:
+                attr_values |= attr_line.value_ids
+        self.possible_values = attr_values.sorted()
 
 
 class MrpProductionProductLine(models.Model):
@@ -389,25 +388,20 @@ class MrpProductionProductLine(models.Model):
     @api.onchange('product_template')
     def onchange_product_template(self):
         if self.product_template:
-            self.product_uom = self.product_template.uom_id
-            product_attributes = []
+            product_id = self.env['product.product']
             if not self.product_template.attribute_line_ids:
-                self.product_id = (
+                product_id = (
                     self.product_template.product_variant_ids and
                     self.product_template.product_variant_ids[0])
-            for attribute in self.product_template.attribute_line_ids:
-                product_attributes.append({'attribute':
-                                           attribute.attribute_id})
-            self.product_attributes = product_attributes
+            self.name = product_id.name or self.product_template.name
+            self.product_uom = self.product_template.uom_id
+            self.product_id = product_id
+            self.product_attributes = (
+                self.product_template._get_product_attributes())
 
     @api.one
     @api.onchange('product_attributes')
     def onchange_product_attributes(self):
         product_obj = self.env['product.product']
-        att_values_ids = [attr_line.value and attr_line.value.id
-                          or False
-                          for attr_line in self.product_attributes]
-        domain = [('product_tmpl_id', '=', self.product_template.id)]
-        for value in att_values_ids:
-            domain.append(('attribute_value_ids', '=', value))
-        self.product_id = product_obj.search(domain, limit=1)
+        self.product_id = product_obj._product_find(self.product_template,
+                                                    self.product_attributes)

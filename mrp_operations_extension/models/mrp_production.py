@@ -29,19 +29,18 @@ class MrpProduction(models.Model):
     def _action_compute_lines(self, properties=None):
         res = super(MrpProduction,
                     self)._action_compute_lines(properties=properties)
-        workcenter_lines = self.workcenter_lines
-        product_lines = self.product_lines
+        self._get_workorder_in_product_lines(self.workcenter_lines,
+                                             self.product_lines)
+        return res
+
+    def _get_workorder_in_product_lines(self, workcenter_lines, product_lines):
         for p_line in product_lines:
-            mrp_bom = self.env['mrp.bom'].search([
-                ('routing_id', '=', self.routing_id.id),
-                ('product_tmpl_id', '=', self.product_id.product_tmpl_id.id)])
-            for bom_line in mrp_bom[0].bom_line_ids:
+            for bom_line in self.bom_id.bom_line_ids:
                 if bom_line.product_id.id == p_line.product_id.id:
                     for wc_line in workcenter_lines:
                         if wc_line.routing_wc_line.id == bom_line.operation.id:
                             p_line.work_order = wc_line.id
                             break
-        return res
 
     @api.multi
     def action_confirm(self):
@@ -71,7 +70,7 @@ class MrpProductionProductLine(models.Model):
                                  'Work Order')
 
 
-class mrp_production_workcenter_line(models.Model):
+class MrpProductionWorkcenterLine(models.Model):
     _inherit = 'mrp.production.workcenter.line'
 
     product_line = fields.One2many('mrp.production.product.line',
@@ -89,4 +88,4 @@ class mrp_production_workcenter_line(models.Model):
             work = workcenter_obj.browse(routing_wc_line_id)
             data.update({'do_production':
                          work.operation.do_production})
-        return super(mrp_production_workcenter_line, self).create(data)
+        return super(MrpProductionWorkcenterLine, self).create(data)
