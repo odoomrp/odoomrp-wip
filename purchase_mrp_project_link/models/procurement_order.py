@@ -16,12 +16,23 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 
-class PurchaseOrder(models.Model):
+class ProcurementOrder(models.Model):
 
-    _inherit = 'purchase.order'
+    _inherit = 'procurement.order'
 
-    general_project_id = fields.Many2one('project.project',
-                                         string="General Project")
+    @api.multi
+    def set_main_project(self):
+        procurement_obj = self.env['procurement.order']
+        mto_record = self.env.ref('stock.route_warehouse0_mto')
+        result = super(ProcurementOrder, self).set_main_project()
+        for record in self:
+            if mto_record in record.product_id.route_ids:
+                if record.main_project_id:
+                    main_project = record.main_project_id.id
+                    if record.purchase_id:
+                        purchase = record.purchase_id
+                        purchase.main_project_id = main_project
+        return result

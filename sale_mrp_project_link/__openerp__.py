@@ -16,12 +16,20 @@
 #
 ##############################################################################
 
-from openerp import models, fields
-
-
-class StockMove(models.Model):
-
-    _inherit = 'stock.move'
-
-    general_project_id = fields.Many2one('project.project',
-                                         string="General Project")
+{
+    "name": "Sale Mrp Project Link",
+    "version": "1.0",
+    "depends": ["mrp_project_link",
+                "sale"],
+    "author": "OdooMRP team",
+    "category": "",
+    "description": """
+            This module links sales, with a main project, when a product is
+            defined as "Make to Order".
+    """,
+    'data': ["views/sale_order_view.xml",
+             "views/project_project_view.xml"],
+    'demo': [],
+    'installable': True,
+    'auto_install': True,
+}

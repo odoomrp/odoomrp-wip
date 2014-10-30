@@ -16,26 +16,20 @@
 #
 ##############################################################################
 
-{
-    "name": "Mrp Sale Project Link",
-    "version": "1.0",
-    "depends": ["mrp_project_link",
-                "sale",
-                "stock",
-                "purchase"],
-    "author": "OdooMRP team",
-    "category": "",
-    "description": """
-            This module links sales, procurements, manufacturing and purchases
-            with a general project, when a product is defined as "Make to
-            Order".
-    """,
-    'data': ["views/sale_order_view.xml",
-             "views/purchase_order_view.xml",
-             "views/procurement_order_view.xml",
-             "views/mrp_production_view.xml",
-             "views/project_project_view.xml"],
-    'demo': [],
-    'installable': True,
-    'auto_install': False,
-}
+from openerp import models, fields, api
+
+
+class ProjectProject(models.Model):
+
+    _inherit = 'project.project'
+
+    @api.one
+    def _project_shortcut_count(self):
+        purchase_obj = self.env['purchase.order']
+        purchases = purchase_obj.search([('main_project_id', '=', self.id)])
+        result = super(ProjectProject, self)._project_shortcut_count()
+        self.purchase_count = len(purchases)
+        return result
+
+    purchase_count = fields.Integer(string='Purchase Count',
+                                    compute=_project_shortcut_count)

@@ -16,12 +16,6 @@
 #
 ##############################################################################
 
-from openerp import models, fields
-
-
-class SaleOrder(models.Model):
-
-    _inherit = "sale.order"
-
-    general_project_id = fields.Many2one('project.project',
-                                         string="General Project")
+from . import procurement_order
+from . import purchase_order
+from . import project_project

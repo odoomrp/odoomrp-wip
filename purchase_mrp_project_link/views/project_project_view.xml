@@ -1,0 +1,22 @@
+<openerp>
+    <data>
+
+    <record model="ir.ui.view" id="project_purchase_shortcut_form_view">
+        <field name="name">project.shortcuts.purchase.form</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <div name="buttons" position="inside">
+                <button class="oe_inline oe_stat_button"
+                        type="action"
+                        name="%(purchase_mrp_project_link.act_project_2_purchase_all)d"
+                        icon="fa-list">
+                        <field string="Purchases" name="purchase_count"
+                            widget="statinfo" />
+                </button>
+            </div>
+        </field>
+    </record>
+
+    </data>
+</openerp>
