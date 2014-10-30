@@ -1,0 +1,28 @@
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="purchase_order_general_project_form_view">
+            <field name="name">purchase.order.general.project.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="general_project_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="act_project_2_purchase_all" model="ir.actions.act_window">
+            <field name="name">Purchases</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{
+                'search_default_general_project_id': [active_id],
+                'default_general_project_id': active_id,
+                'active_test': False,
+                }
+            </field>
+            <field name="domain">[('general_project_id', '=', active_id)]</field>
+        </record>
+    </data>
+</openerp>

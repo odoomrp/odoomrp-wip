@@ -1,0 +1,83 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_mrp_project
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-30 08:36+0000\n"
+"PO-Revision-Date: 2014-10-30 09:37+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: sale_mrp_project
+#: field:procurement.order,general_project_id:0
+#: field:purchase.order,general_project_id:0
+#: field:sale.order,general_project_id:0
+#: field:stock.move,general_project_id:0
+msgid "General Project"
+msgstr ""
+
+#. module: sale_mrp_project
+#: view:project.project:sale_mrp_project.mrp_production_quant_shortcut_form_view
+msgid "Manufacturing"
+msgstr ""
+
+#. module: sale_mrp_project
+#: model:ir.model,name:sale_mrp_project.model_mrp_production
+msgid "Manufacturing Order"
+msgstr ""
+
+#. module: sale_mrp_project
+#: model:ir.actions.act_window,name:sale_mrp_project.act_project_2_production_all
+msgid "Manufacturing Orders"
+msgstr ""
+
+#. module: sale_mrp_project
+#: model:ir.model,name:sale_mrp_project.model_procurement_order
+msgid "Procurement"
+msgstr ""
+
+#. module: sale_mrp_project
+#: model:ir.actions.act_window,name:sale_mrp_project.act_project_2_procurement_all
+#: view:project.project:sale_mrp_project.mrp_production_quant_shortcut_form_view
+msgid "Procurements"
+msgstr ""
+
+#. module: sale_mrp_project
+#: model:ir.model,name:sale_mrp_project.model_project_project
+msgid "Project"
+msgstr ""
+
+#. module: sale_mrp_project
+#: model:ir.model,name:sale_mrp_project.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: sale_mrp_project
+#: model:ir.actions.act_window,name:sale_mrp_project.act_project_2_purchase_all
+#: view:project.project:sale_mrp_project.mrp_production_quant_shortcut_form_view
+msgid "Purchases"
+msgstr ""
+
+#. module: sale_mrp_project
+#: model:ir.actions.act_window,name:sale_mrp_project.act_project_2_sale_all
+#: view:project.project:sale_mrp_project.mrp_production_quant_shortcut_form_view
+msgid "Sales"
+msgstr ""
+
+#. module: sale_mrp_project
+#: model:ir.model,name:sale_mrp_project.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_mrp_project
+#: model:ir.model,name:sale_mrp_project.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
