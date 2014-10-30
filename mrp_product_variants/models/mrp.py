@@ -157,8 +157,8 @@ class MrpBom(models.Model):
             #  otherwise explode further
             if (bom_line_id.type != "phantom" and
                     (not bom_id or self.browse(bom_id).type != "phantom")):
-                product_attributes = (
-                    bom_line_id.product_template._get_product_attributes())
+#                 product_attributes = (
+#                     bom_line_id.product_template._get_product_attributes())
                 result.append({
                     'name': (bom_line_id.product_id.name or
                              bom_line_id.product_template.name),
@@ -176,8 +176,8 @@ class MrpBom(models.Model):
                                         or False),
                     'product_uos': (bom_line_id.product_uos and
                                     bom_line_id.product_uos.id or False),
-                    # 'product_attributes': map(lambda x: (0, 0, x),
-                    #                           product_attributes),
+#                     'product_attributes': map(lambda x: (0, 0, x),
+#                                               product_attributes),
                 })
             elif bom_id:
                 all_prod = [bom.product_tmpl_id.id] + (previous_products or [])
@@ -383,7 +383,6 @@ class MrpProductionProductLine(models.Model):
         comodel_name='mrp.production.product.line.attribute',
         inverse_name='product_line', string='Product attributes',
         copyable=True)
-
 
     @api.one
     @api.onchange('product_template')

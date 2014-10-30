@@ -29,7 +29,8 @@ class MrpProduction(models.Model):
     def _action_compute_lines(self, properties=None):
         res = super(MrpProduction,
                     self)._action_compute_lines(properties=properties)
-        self._get_workorder_in_product_lines(workcenter_lines, product_lines)
+        self._get_workorder_in_product_lines(self.workcenter_lines,
+                                             self.product_lines)
         return res
 
     def _get_workorder_in_product_lines(self, workcenter_lines, product_lines):
