@@ -15,45 +15,38 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import models, fields, api
+from openerp import models, fields
+import openerp.addons.decimal_precision as dp
 
 
 class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
 
-    @api.one
-    @api.depends('product_id')
-    def _estim_standard_cost(self):
-        self.estim_standard_cost = self.product_id.standard_price
-
-    @api.one
-    @api.depends('product_id')
-    def _manual_standard_cost(self):
-        self.manual_standard_cost = self.product_id.manual_standard_cost
-
-    @api.one
-    @api.depends('product_id')
-    def _last_purchase_cost(self):
-        self.last_purchase_cost = 0
-        if self.product_id:
-            self.last_purchase_cost = self.product_id.last_purchase_price
-
-    @api.one
-    @api.depends('product_id')
-    def _last_sale_price(self):
-        self.last_sale_price = 0
-        if self.product_id:
-            self.last_sale_price = self.product_id.last_sale_price
-
     estim_standard_cost = fields.Float(
-        string='Estimate Standard Cost', compute='_estim_standard_cost',
-        store=True)
-    manual_standard_cost = fields.Float(
-        string='Manual Standard Cost', compute='_manual_standard_cost',
-        store=True)
+        string='Estimate Standard Cost',
+        digits=dp.get_precision('Product Price'))
+    estim_average_cost = fields.Float(
+        string='Estimate Average Cost',
+        digits=dp.get_precision('Product Price'))
     last_purchase_cost = fields.Float(
-        string='Last Purchase Cost', compute='_last_purchase_cost',
-        store=True)
+        string='Last Purchase Cost',
+        digits=dp.get_precision('Product Price'))
     last_sale_price = fields.Float(
-        string='Last Sale Price', compute='_last_sale_price',
-        store=True)
+        string='Last Sale Price',
+        digits=dp.get_precision('Product Price'))
+
+    def on_change_unit_amount(self, cr, uid, id, prod_id, quantity, company_id,
+                              unit=False, journal_id=False, context=None):
+        product_obj = self.pool['product.product']
+        result = super(AccountAnalyticLine, self).on_change_unit_amount(
+            cr, uid, id, prod_id, quantity, company_id, unit=unit,
+            journal_id=journal_id, context=context)
+        if prod_id:
+            product = product_obj.browse(cr, uid, prod_id, context=context)
+            value = result.get('value')
+            value.update({'estim_standard_cost': product.manual_standard_cost,
+                          'estim_average_cost': product.standard_price,
+                          'last_purchase_cost': product.last_purchase_price,
+                          'last_sale_price': product.last_sale_price})
+            result.update({'value': value})
+        return result

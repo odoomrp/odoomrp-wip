@@ -9,7 +9,7 @@
                 <group string="General Accounting" position="after">
                     <group string="Production Information" colspan="4" col="8">
                         <field name="estim_standard_cost" colspan="2"/>
-                        <field name="manual_standard_cost" colspan="2"/>
+                        <field name="estim_average_cost" colspan="2"/>
                         <field name="last_purchase_cost" colspan="2"/>
                         <field name="last_sale_price" colspan="2"/>
                     </group>
@@ -23,7 +23,7 @@
             <field name="arch" type="xml">
                 <field name="journal_id" position="after">
                     <field name="estim_standard_cost" />
-                    <field name="manual_standard_cost" />
+                    <field name="estim_average_cost" />
                     <field name="last_purchase_cost" />
                     <field name="last_sale_price" />
                 </field>

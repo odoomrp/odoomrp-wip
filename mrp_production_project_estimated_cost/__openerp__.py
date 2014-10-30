@@ -60,8 +60,10 @@
                          order.
         4.10.- General Account: Account associated with the product or
                                 category.
-        4.11.- Estimate Standard Cost: The value that show the product.
-        4.12.- Manual Standard Cost: The value that show the product.
+        4.11.- Estimate Standard Cost: The value of Manual Standard Cost field,
+                                       that show the product.
+        4.12.- Estimate Average Cost: The value of Standard Cost field,
+                                      that show the product.
         4.13.- Last Purchase Cost: The value that show the product.
         4.14.- Last Sale Price: The value that show the product.
 
@@ -79,8 +81,10 @@
                          operation.
         5.10.- General Account: Account associated with the product or
                                 category.
-        5.11.- Estimate Standard Cost: The value that show the product.
-        5.12.- Manual Standard Cost: The value that show the product.
+        5.11.- Estimate Standard Cost: The value of Manual Standard Cost field,
+                                       that show the product.
+        5.12.- Estimate Average Cost: The value of Standard Cost field,
+                                      that show the product.
         5.13.- Last Purchase Cost: The value that show the product.
         5.14.- Last Sale Price: The value that show the product.
 
@@ -103,8 +107,10 @@
                          operation.
         6.10.- General Account: Account associated with the product or
                                 category.
-        6.11.- Estimate Standard Cost: The value that show the product.
-        6.12.- Manual Standard Cost: The value that show the product.
+        6.11.- Estimate Standard Cost: The value of Manual Standard Cost field,
+                                       that show the product.
+        6.12.- Estimate Average Cost: The value of Standard Cost field,
+                                      that show the product.
         6.13.- Last Purchase Cost: The value that show the product.
         6.14.- Last Sale Price: The value that show the product.
     """,
