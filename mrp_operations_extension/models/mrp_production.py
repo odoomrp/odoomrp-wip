@@ -71,7 +71,7 @@ class MrpProductionProductLine(models.Model):
                                  'Work Order')
 
 
-class mrp_production_workcenter_line(models.Model):
+class MrpProductionWorkcenterLine(models.Model):
     _inherit = 'mrp.production.workcenter.line'
 
     product_line = fields.One2many('mrp.production.product.line',
@@ -89,4 +89,4 @@ class mrp_production_workcenter_line(models.Model):
             work = workcenter_obj.browse(routing_wc_line_id)
             data.update({'do_production':
                          work.operation.do_production})
-        return super(mrp_production_workcenter_line, self).create(data)
+        return super(MrpProductionWorkcenterLine, self).create(data)

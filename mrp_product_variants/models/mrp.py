@@ -194,6 +194,7 @@ class MrpBom(models.Model):
                       ' but the product "%s" does not have any BoM defined.') %
                     (master_bom.name, bom_line_id.product_id.name_get()[0][1]))
 
+        self._funcion_a_rellamar(result2, level=level, routing_id=routing_id)
         return result, result2
 
 
