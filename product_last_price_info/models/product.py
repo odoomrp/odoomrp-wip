@@ -15,20 +15,20 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+
+from openerp import models, fields
 
 
-class ProductProduct(orm.Model):
+class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    _columns = {
-        'last_purchase_price': fields.float('Last purchase price',
-                                            readonly=True),
-        'last_purchase_date': fields.date('Last purchase date', readonly=True),
-        'last_supplier_id': fields.many2one('res.partner', 'Last Supplier',
-                                            readonly=True),
-        'last_sale_price': fields.float('Last sale price', readonly=True),
-        'last_sale_date': fields.date('Last sale date', readonly=True),
-        'last_customer_id': fields.many2one('res.partner', 'Last Customer',
-                                            readonly=True),
-    }
+    last_purchase_price = fields.Float(string='Last purchase price',
+                                       readonly=True)
+    last_purchase_date = fields.Date(string='Last purchase date',
+                                     readonly=True)
+    last_supplier_id = fields.Many2one('res.partner', string='Last Supplier',
+                                       readonly=True)
+    last_sale_price = fields.Float(string='Last sale price', readonly=True)
+    last_sale_date = fields.Date(string='Last sale date', readonly=True)
+    last_customer_id = fields.Many2one('res.partner', string='Last Customer',
+                                       readonly=True)
