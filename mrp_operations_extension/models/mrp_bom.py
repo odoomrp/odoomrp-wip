@@ -28,14 +28,13 @@ class MrpBom(models.Model):
     _inherit = 'mrp.bom'
 
     @api.model
-    def _bom_explode(self, bom, product, factor, properties=None,
-                     level=0, routing_id=False, previous_products=None,
+    def _bom_explode(self, bom, product, factor, properties=None, level=0,
+                     routing_id=False, previous_products=None,
                      master_bom=None):
-        res = super(MrpBom, self)._bom_explode(
-            self.env.cr, self.env.uid, bom, product, factor,
-            properties=None, level=0, routing_id=False,
-                                               previous_products=None,
-                                               master_bom=None,)
+        result, result2 = super(MrpBom, self)._bom_explode(
+            bom, product, factor, properties=properties, level=level,
+            routing_id=routing_id, previous_products=previous_products,
+            master_bom=master_bom)
         result2 = self._get_workorder_operations(result2, level=level,
                                                  routing_id=routing_id)
         return result, result2
