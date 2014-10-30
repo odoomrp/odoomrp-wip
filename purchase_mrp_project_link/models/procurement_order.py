@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, api
 
 
 class ProcurementOrder(models.Model):
@@ -25,7 +25,6 @@ class ProcurementOrder(models.Model):
 
     @api.multi
     def set_main_project(self):
-        procurement_obj = self.env['procurement.order']
         mto_record = self.env.ref('stock.route_warehouse0_mto')
         result = super(ProcurementOrder, self).set_main_project()
         for record in self:
