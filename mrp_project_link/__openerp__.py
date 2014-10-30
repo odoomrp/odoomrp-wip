@@ -21,7 +21,7 @@
     "version": "1.0",
     "depends": [
         "mrp_operations_project",
-        "account"
+        "analytic"
     ],
     "author": "OdooMRP team",
     "category": "Manufacturing",

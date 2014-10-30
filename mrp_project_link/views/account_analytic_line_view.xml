@@ -7,11 +7,11 @@
                 <field name="arch" type="xml">
                     <field name="date" position="after">
                         <field name="mrp_production_id"/>
-                        <field name="wk_order"/>
+                        <field name="workorder"/>
                     </field>
                     <filter string="User" position="after">
                         <filter string="Manufacturing" name="Manufacturing" context="{'group_by':'mrp_production_id'}"/>
-                        <filter string="Workorder" name="Workorder" context="{'group_by':'wk_order'}"/>
+                        <filter string="Workorder" name="Workorder" context="{'group_by':'workorder'}"/>
                     </filter> 
                 </field>
         </record>
@@ -22,7 +22,7 @@
                 <field name="arch" type="xml">
                     <field name="company_id" position="before">
                         <field name="mrp_production_id"/>
-                        <field name="wk_order"/>
+                        <field name="workorder"/>
                     </field>
                 </field>
         </record>
@@ -34,7 +34,7 @@
                     <group string="General Accounting" position="after">
                         <group string="MRP Data">
                             <field name="mrp_production_id" colspan="2"/>
-                            <field name="wk_order" colspan="2"/>
+                            <field name="workorder" colspan="2"/>
                         </group>
                     </group>
                 </field>

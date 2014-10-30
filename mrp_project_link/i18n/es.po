@@ -138,7 +138,7 @@ msgid "User"
 msgstr "Usuario"
 
 #. module: mrp_project_link
-#: field:account.analytic.line,wk_order:0
+#: field:account.analytic.line,workorder:0
 #: model:ir.model,name:mrp_project_link.model_mrp_production_workcenter_line
 msgid "Work Order"
 msgstr "Orden de trabajo"

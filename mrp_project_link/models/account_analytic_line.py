@@ -25,4 +25,4 @@ class AccountAnalyticLine(models.Model):
 
     mrp_production_id = fields.Many2one('mrp.production',
                                         string='Manufacturing Order')
-    wk_order = fields.Many2one('mrp.production.workcenter.line', 'Work Order')
+    workorder = fields.Many2one('mrp.production.workcenter.line', 'Work Order')
