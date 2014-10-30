@@ -72,23 +72,27 @@ class MrpProduction(models.Model):
                     analytic_line_obj.create(vals)
         return res
 
-    def _cath_information_estimated_cost(self, journal, name, product_id, qty):
+    def _cath_information_estimated_cost(self, journal, name, product, qty):
         analytic_line_obj = self.env['account.analytic.line']
-        general_account = (product_id.property_account_income or
-                           product_id.categ_id.property_account_income_categ
+        general_account = (product.property_account_income or
+                           product.categ_id.property_account_income_categ
                            or False)
         if not general_account:
             raise exceptions.Warning(
                 _('You must define Income account in the product "%s", or in'
-                  ' the product category') % (product_id.name))
+                  ' the product category') % (product.name))
         vals = {'name': name,
                 'account_id': self.analytic_account_id.id,
                 'journal_id': journal.id,
                 'user_id': self._uid,
                 'date': analytic_line_obj._get_default_date(),
-                'product_id': product_id.id,
+                'product_id': product.id,
                 'unit_amount': qty,
-                'product_uom_id': product_id.uom_id.id,
-                'general_account_id': general_account.id
+                'product_uom_id': product.uom_id.id,
+                'general_account_id': general_account.id,
+                'estim_standard_cost': product.manual_standard_cost,
+                'estim_average_cost': product.standard_price,
+                'last_purchase_cost': product.last_purchase_price,
+                'last_sale_price': product.last_sale_price,
                 }
         return vals

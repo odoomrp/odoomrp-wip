@@ -35,18 +35,6 @@ class AccountAnalyticLine(models.Model):
         string='Last Sale Price',
         digits=dp.get_precision('Product Price'))
 
-    @api.model
-    def create(self, data):
-        product_obj = self.env['product.product']
-        if data.get('product_id'):
-            product = product_obj.browse(data.get('product_id'))
-            data.update({'estim_standard_cost': product.manual_standard_cost,
-                         'estim_average_cost': product.standard_price,
-                         'last_purchase_cost': product.last_purchase_price,
-                         'last_sale_price': product.last_sale_price,
-                         })
-        return super(AccountAnalyticLine, self).create(data)
-
     def on_change_unit_amount(self, cr, uid, id, prod_id, quantity, company_id,
                               unit=False, journal_id=False, context=None):
         product_obj = self.pool['product.product']
