@@ -21,12 +21,14 @@
     "version": "1.0",
     "depends": [
         "mrp_operations_project",
+        "account"
     ],
     "author": "OdooMRP team",
     "category": "Manufacturing",
     'data': [
         "views/project_task_view.xml",
         "views/mrp_production_view.xml",
+        "views/account_analytic_line_view.xml"
     ],
     'installable': True,
     'auto_install': False,

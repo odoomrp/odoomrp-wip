@@ -16,6 +16,13 @@
 #
 ##############################################################################
 
-from . import project_task
-from . import mrp_production
-from . import account_analytic_line
+from openerp import models, fields
+
+
+class AccountAnalyticLine(models.Model):
+
+    _inherit = 'account.analytic.line'
+
+    mrp_production_id = fields.Many2one('mrp.production',
+                                        string='Manufacturing Order')
+    wk_order = fields.Many2one('mrp.production.workcenter.line', 'Work Order')

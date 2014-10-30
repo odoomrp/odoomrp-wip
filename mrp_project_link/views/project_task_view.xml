@@ -1,10 +1,35 @@
 <openerp>
     <data>
-
+        <record model="ir.ui.view" id="project_task_mrp_inh_search_view">
+                <field name="name">project.task.mrp.inh.search</field>
+                <field name="model">project.task</field>
+                <field name="inherit_id" ref="project.view_task_search_form"/>
+                <field name="arch" type="xml">
+                    <field name="name" position="after">
+                        <field name="mrp_production_id"/>
+                        <field name="wk_order"/>
+                    </field>
+                    <filter string="Stage" position="after">
+                        <filter string="Manufacturing" name="Manufacturing" context="{'group_by':'mrp_production_id'}"/>
+                        <filter string="Workorder" name="Workorder" context="{'group_by':'wk_order'}"/>
+                    </filter> 
+                </field>
+        </record>
+        <record model="ir.ui.view" id="project_task_mrp_inh_tree_view">
+                <field name="name">project.task.mrp.inh.tree</field>
+                <field name="model">project.task</field>
+                <field name="inherit_id" ref="project.view_task_tree2"/>
+                <field name="arch" type="xml">
+                    <field name="project_id" position="after">
+                        <field name="mrp_production_id"/>
+                        <field name="wk_order"/>
+                        <field name="final_product"/>
+                    </field>
+                </field>
+        </record>
         <record model="ir.ui.view" id="project_task_mrp_form_view">
                 <field name="name">project.task.mrp.inh.form</field>
                 <field name="model">project.task</field>
-                <field name="type">form</field>
                 <field name="inherit_id" ref="mrp_operations_project.view_task_form2_inherit"/>
                 <field name="arch" type="xml">
                     <field name="wk_order" position="replace"/>
@@ -23,19 +48,6 @@
                         </page>
                     </notebook>
                         
-                </field>
-        </record>
-
-        <record model="ir.ui.view" id="project_task_mrp_inh_search_view">
-                <field name="name">project.task.mrp.inh.search</field>
-                <field name="model">project.task</field>
-                <field name="type">form</field>
-                <field name="inherit_id" ref="project.view_task_search_form"/>
-                <field name="arch" type="xml">
-                    <field name="name" position="after">
-                        <field name="mrp_production_id"/>
-                        <field name="wk_order"/>
-                    </field>
                 </field>
         </record>
     </data>

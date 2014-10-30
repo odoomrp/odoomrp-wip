@@ -1,0 +1,43 @@
+<openerp>
+    <data>
+    <record model="ir.ui.view" id="account_analytic_line_mrp_search_view">
+                <field name="name">account.analytic.line.mrp.inh.search</field>
+                <field name="model">account.analytic.line</field>
+                <field name="inherit_id" ref="account.view_account_analytic_line_filter"/>
+                <field name="arch" type="xml">
+                    <field name="date" position="after">
+                        <field name="mrp_production_id"/>
+                        <field name="wk_order"/>
+                    </field>
+                    <filter string="User" position="after">
+                        <filter string="Manufacturing" name="Manufacturing" context="{'group_by':'mrp_production_id'}"/>
+                        <filter string="Workorder" name="Workorder" context="{'group_by':'wk_order'}"/>
+                    </filter> 
+                </field>
+        </record>
+        <record model="ir.ui.view" id="account_analytic_line_mrp_tree_view">
+                <field name="name">account.analytic.line.mrp.inh.tree</field>
+                <field name="model">account.analytic.line</field>
+                <field name="inherit_id" ref="account.view_account_analytic_line_tree"/>
+                <field name="arch" type="xml">
+                    <field name="company_id" position="before">
+                        <field name="mrp_production_id"/>
+                        <field name="wk_order"/>
+                    </field>
+                </field>
+        </record>
+        <record model="ir.ui.view" id="account_analytic_line_mrp_form_view">
+                <field name="name">account.analytic.line.mrp.inh.form</field>
+                <field name="model">account.analytic.line</field>
+                <field name="inherit_id" ref="account.view_account_analytic_line_form"/>
+                <field name="arch" type="xml">
+                    <group string="General Accounting" position="after">
+                        <group string="MRP Data">
+                            <field name="mrp_production_id" colspan="2"/>
+                            <field name="wk_order" colspan="2"/>
+                        </group>
+                    </group>
+                </field>
+        </record>
+    </data>
+</openerp>

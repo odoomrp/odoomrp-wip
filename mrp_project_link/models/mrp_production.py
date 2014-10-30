@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class MrpProduction(models.Model):
@@ -53,10 +53,10 @@ class MrpProduction(models.Model):
                            ('wk_order', '=', False)]
             tasks = task_obj.search(task_domain)
             if not tasks:
-                task_name = ("%s:: [%s]%s") % (record.name,
-                                               record.product_id.default_code,
-                                               record.product_id.name)
-                task_descr = ("""
+                task_name = _("%s:: [%s]%s") % (record.name,
+                                                record.product_id.default_code,
+                                                record.product_id.name)
+                task_descr = _("""
                 Manufacturing Order: %s
                 Product to Produce: [%s]%s
                 Quantity to Produce: %s
@@ -73,6 +73,8 @@ class MrpProduction(models.Model):
                     'project_id': project_id.id,
                     'description': task_descr
                 }
+                if 'code' in task_values.keys():
+                    task_values.pop('code')
                 task_obj.create(task_values)
         return super(MrpProduction, self).action_in_production()
 
@@ -88,7 +90,7 @@ class MrpProductionWorkcenterLine(models.Model):
             task_domain = [('mrp_production_id', '=', record.production_id.id),
                            ('wk_order', '=', False)]
             production_tasks = task_obj.search(task_domain)
-            task_descr = ("""
+            task_descr = _("""
             Manufacturing Order: %s
             Work Order: %s
             Workcenter: %s
@@ -108,11 +110,13 @@ class MrpProductionWorkcenterLine(models.Model):
             if record.routing_wc_line.operation:
                 count = record.routing_wc_line.operation.op_number
                 for i in range(count):
-                    task_name = ("%s:: WO%s-%s:: %s") % \
-                                (record.production_id.name,
-                                 str(record.sequence).zfill(3),
-                                 str(i).zfill(3), record.name)
+                    task_name = (_("%s:: WO%s-%s:: %s") %
+                                 (record.production_id.name,
+                                  str(record.sequence).zfill(3),
+                                  str(i).zfill(3), record.name))
                     task_values['name'] = task_name
+                    if 'code' in task_values.keys():
+                        task_values.pop('code')
                     task_obj.create(task_values)
         return res
 
