@@ -340,6 +340,9 @@ class MrpProduction(models.Model):
             for line in results2:
                 line['production_id'] = production.id
                 workcenter_line_obj.create(line)
+
+            self._get_workorder_in_product_lines(self.workcenter_lines,
+                                                 self.product_lines)
         return results
 
 
