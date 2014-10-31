@@ -30,13 +30,12 @@
     "contributors": [
         "Carlos Sánchez Cifuentes <csanchez@grupovermon.com>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
     ],
-    "category": "Custom Module",
+    "category": "Sales Management",
     "website": "http://www.odoomrp.com",
     "summary": "",
-    "description": """
-This module adds a button that recalculate the sale order prices.
-    """,
     "data": [
         "views/sale_order_view.xml",
     ],

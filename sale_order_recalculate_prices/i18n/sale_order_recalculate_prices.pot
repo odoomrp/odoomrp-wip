@@ -17,7 +17,7 @@ msgstr ""
 
 #. module: sale_order_recalculate_prices
 #: view:sale.order:0
-msgid "Recalculate prices"
+msgid "(Recalculate prices)"
 msgstr ""
 
 #. module: sale_order_recalculate_prices
