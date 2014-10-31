@@ -16,21 +16,14 @@
 #
 ##############################################################################
 
-{
-    "name": "MRP Project Link",
-    "version": "1.0",
-    "depends": [
-        "mrp_operations_project",
-        "analytic"
-    ],
-    "author": "OdooMRP team",
-    "category": "Manufacturing",
-    'data': [
-        "views/mrp_production_view.xml",
-        "views/procurement_order_view.xml",
-        "views/project_project_view.xml",
-        "views/account_analytic_line_view.xml"
-    ],
-    'installable': True,
-    'auto_install': False,
-}
+from openerp import models, fields
+
+
+class AccountAnalyticLine(models.Model):
+
+    _inherit = 'account.analytic.line'
+
+    mrp_production_id = fields.Many2one('mrp.production',
+                                        string='Manufacturing Order')
+    workorder = fields.Many2one('mrp.production.workcenter.line', 'Work Order')
+    task_id = fields.Many2one('project.task', 'Project Task')

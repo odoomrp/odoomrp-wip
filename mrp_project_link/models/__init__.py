@@ -16,5 +16,8 @@
 #
 ##############################################################################
 
-from . import project_task
+from . import stock_move
+from . import procurement_order
 from . import mrp_production
+from . import account_analytic_line
+from . import project_project

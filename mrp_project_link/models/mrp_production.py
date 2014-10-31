@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class MrpProduction(models.Model):
@@ -56,7 +56,7 @@ class MrpProduction(models.Model):
                 task_name = ("%s:: [%s]%s") % (record.name,
                                                record.product_id.default_code,
                                                record.product_id.name)
-                task_descr = ("""
+                task_descr = _("""
                 Manufacturing Order: %s
                 Product to Produce: [%s]%s
                 Quantity to Produce: %s
@@ -73,8 +73,28 @@ class MrpProduction(models.Model):
                     'project_id': project_id.id,
                     'description': task_descr
                 }
+                if 'code' in task_values.keys():
+                    task_values.pop('code')
                 task_obj.create(task_values)
         return super(MrpProduction, self).action_in_production()
+
+    @api.multi
+    def action_confirm(self):
+        procurement_obj = self.env['procurement.order']
+        mto_record = self.env.ref('stock.route_warehouse0_mto')
+        result = super(MrpProduction, self).action_confirm()
+        for record in self:
+            if record.project_id:
+                main_project = record.project_id.id
+                for move in record.move_lines:
+                    if mto_record in move.product_id.route_ids:
+                        move.main_project_id = main_project
+                        procurements = procurement_obj.search(
+                            [('move_dest_id', '=', move.id)])
+                        procurements.write({'main_project_id': main_project})
+                        procurements.refresh()
+                        procurements.set_main_project()
+        return result
 
 
 class MrpProductionWorkcenterLine(models.Model):
@@ -88,7 +108,7 @@ class MrpProductionWorkcenterLine(models.Model):
             task_domain = [('mrp_production_id', '=', record.production_id.id),
                            ('wk_order', '=', False)]
             production_tasks = task_obj.search(task_domain)
-            task_descr = ("""
+            task_descr = _("""
             Manufacturing Order: %s
             Work Order: %s
             Workcenter: %s
@@ -108,11 +128,13 @@ class MrpProductionWorkcenterLine(models.Model):
             if record.routing_wc_line.operation:
                 count = record.routing_wc_line.operation.op_number
                 for i in range(count):
-                    task_name = ("%s:: WO%s-%s:: %s") % \
-                                (record.production_id.name,
-                                 str(record.sequence).zfill(3),
-                                 str(i).zfill(3), record.name)
+                    task_name = (_("%s:: WO%s-%s:: %s") %
+                                 (record.production_id.name,
+                                  str(record.sequence).zfill(3),
+                                  str(i).zfill(3), record.name))
                     task_values['name'] = task_name
+                    if 'code' in task_values.keys():
+                        task_values.pop('code')
                     task_obj.create(task_values)
         return res
 

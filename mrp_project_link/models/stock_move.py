@@ -16,21 +16,12 @@
 #
 ##############################################################################
 
-{
-    "name": "MRP Project Link",
-    "version": "1.0",
-    "depends": [
-        "mrp_operations_project",
-        "analytic"
-    ],
-    "author": "OdooMRP team",
-    "category": "Manufacturing",
-    'data': [
-        "views/mrp_production_view.xml",
-        "views/procurement_order_view.xml",
-        "views/project_project_view.xml",
-        "views/account_analytic_line_view.xml"
-    ],
-    'installable': True,
-    'auto_install': False,
-}
+from openerp import models, fields
+
+
+class StockMove(models.Model):
+
+    _inherit = 'stock.move'
+
+    main_project_id = fields.Many2one('project.project',
+                                      string="Main Project")

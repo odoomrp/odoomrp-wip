@@ -16,7 +16,27 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
+
+
+class ProjectProject(models.Model):
+
+    _inherit = 'project.project'
+
+    @api.one
+    def _project_shortcut_count(self):
+        production_obj = self.env['mrp.production']
+        procurement_obj = self.env['procurement.order']
+        productions = production_obj.search([('project_id', '=', self.id)])
+        procurements = procurement_obj.search([('main_project_id', '=',
+                                                self.id)])
+        self.production_count = len(productions)
+        self.procurement_count = len(procurements)
+
+    production_count = fields.Integer(string='Manufacturing Count',
+                                      compute=_project_shortcut_count)
+    procurement_count = fields.Integer(string='Procurement Count',
+                                       compute=_project_shortcut_count)
 
 
 class Task(models.Model):
