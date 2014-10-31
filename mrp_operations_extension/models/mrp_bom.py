@@ -1,10 +1,5 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2008-2014 AvanzOSC (Daniel). All Rights Reserved
-#    Date: 10/07/2014
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -31,6 +26,7 @@ class MrpBom(models.Model):
     def _bom_explode(self, bom, product, factor, properties=None, level=0,
                      routing_id=False, previous_products=None,
                      master_bom=None):
+        routing_id = bom.routing_id.id or routing_id
         result, result2 = super(MrpBom, self)._bom_explode(
             bom, product, factor, properties=properties, level=level,
             routing_id=routing_id, previous_products=previous_products,

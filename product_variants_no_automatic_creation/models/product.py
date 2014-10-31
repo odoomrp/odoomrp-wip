@@ -60,7 +60,11 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     def _get_product_attributes_values(self):
-        return []
+        product_attributes = []
+        for attr_value in self.attribute_value_ids:
+            product_attributes.append({'attribute': attr_value.attribute_id.id,
+                                       'value': attr_value.id})
+        return product_attributes
 
     def _product_find(self, product_template, product_attributes):
         domain = []

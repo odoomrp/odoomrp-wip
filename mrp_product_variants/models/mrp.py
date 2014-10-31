@@ -249,7 +249,8 @@ class MrpProduction(models.Model):
         product_obj = self.pool['product.product']
         product = product_obj.browse(cr, uid, product_id, context=context)
         result['value'].update(
-            {'product_template': product.product_tmpl_id.id})
+            {'product_template': product.product_tmpl_id.id,
+             'product_attributes': product._get_product_attributes_values()})
         return result
 
     @api.multi
@@ -258,12 +259,14 @@ class MrpProduction(models.Model):
         self.ensure_one()
         if self.product_template:
             self.product_uom = self.product_template.uom_id
+            self.product_attributes = (
+                self.product_template._get_product_attributes())
             if not self.product_template.attribute_line_ids:
                 self.product_id = (
                     self.product_template.product_variant_ids and
                     self.product_template.product_variant_ids[0])
-            self.product_attributes = (
-                self.product_template._get_product_attributes())
+                self.product_attributes = (
+                    self.product_id._get_product_attributes_values())
             self.bom_id = self.env['mrp.bom']._bom_find(
                 product_tmpl_id=self.product_template.id)
             self.routing_id = self.bom_id.routing_id
@@ -345,6 +348,15 @@ class MrpProduction(models.Model):
                                                  self.product_lines)
         return results
 
+    def _get_workorder_in_product_lines(self, workcenter_lines, product_lines):
+        for p_line in product_lines:
+            for bom_line in self.bom_id.bom_line_ids:
+                if (bom_line.product_template == p_line.product_template and
+                        bom_line.product_id == p_line.product_id):
+                    for wc_line in workcenter_lines:
+                        if wc_line.routing_wc_line == bom_line.operation:
+                            p_line.work_order = wc_line
+                            break
 
 class MrpProductionProductLineAttribute(models.Model):
     _name = 'mrp.production.product.line.attribute'
@@ -393,11 +405,15 @@ class MrpProductionProductLine(models.Model):
                 product_id = (
                     self.product_template.product_variant_ids and
                     self.product_template.product_variant_ids[0])
+                product_attributes = (
+                    product_id._get_product_attributes_values())
+            else:
+                product_attributes = (
+                    self.product_template._get_product_attributes())
             self.name = product_id.name or self.product_template.name
             self.product_uom = self.product_template.uom_id
             self.product_id = product_id
-            self.product_attributes = (
-                self.product_template._get_product_attributes())
+            self.product_attributes = product_attributes
 
     @api.one
     @api.onchange('product_attributes')

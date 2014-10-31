@@ -65,10 +65,8 @@ class SaleOrderLine(models.Model):
                     line.product_template.product_variant_ids[0])
             else:
                 line.product_id = False
-                for attribute in line.product_template.attribute_line_ids:
-                    product_attributes.append({'attribute':
-                                               attribute.attribute_id})
-            line.product_attributes = product_attributes
+            line.product_attributes = (
+                self.product_template._get_product_attributes())
         return {'domain': {'product_id': [('product_tmpl_id', '=',
                                            self.product_template.id)]}}
 
