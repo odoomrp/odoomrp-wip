@@ -53,9 +53,9 @@ class MrpProduction(models.Model):
                            ('wk_order', '=', False)]
             tasks = task_obj.search(task_domain)
             if not tasks:
-                task_name = _("%s:: [%s]%s") % (record.name,
-                                                record.product_id.default_code,
-                                                record.product_id.name)
+                task_name = ("%s:: [%s]%s") % (record.name,
+                                               record.product_id.default_code,
+                                               record.product_id.name)
                 task_descr = _("""
                 Manufacturing Order: %s
                 Product to Produce: [%s]%s

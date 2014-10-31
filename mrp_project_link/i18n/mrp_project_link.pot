@@ -48,12 +48,6 @@ msgid "%s:: WO%s-%s:: %s"
 msgstr ""
 
 #. module: mrp_project_link
-#: code:addons/mrp_project_link/models/mrp_production.py:56
-#, python-format
-msgid "%s:: [%s]%s"
-msgstr ""
-
-#. module: mrp_project_link
 #: field:mrp.production,analytic_account_id:0
 msgid "Analytic Account"
 msgstr ""
