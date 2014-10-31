@@ -24,12 +24,11 @@ class ProjectProject(models.Model):
     _inherit = 'project.project'
 
     @api.one
-    def _project_shortcut_count(self):
+    def _project_purchase_shortcut_count(self):
         purchase_obj = self.env['purchase.order']
         purchases = purchase_obj.search([('main_project_id', '=', self.id)])
-        result = super(ProjectProject, self)._project_shortcut_count()
         self.purchase_count = len(purchases)
-        return result
+        return True
 
     purchase_count = fields.Integer(string='Purchase Count',
-                                    compute=_project_shortcut_count)
+                                    compute=_project_purchase_shortcut_count)
