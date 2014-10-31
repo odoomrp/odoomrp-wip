@@ -20,6 +20,30 @@
 from openerp import api, fields, models
 
 
+class MrpBom(models.Model):
+    
+    _inherit = "mrp.bom"
+    
+    def get_product_components(self, product_id=None, accumulated_qty=None):
+        all_components = []
+        bom_id = self._bom_find(product_id=product_id,
+                                   properties=[])
+        if not bom_id:
+            return False
+        bom = self.browse(bom_id)
+        if not bom.bom_line_ids or not bom.type=='normal':
+            return False
+        for line in bom.bom_line_ids:
+            qty=line.product_qty/bom.product_qty*accumulated_qty
+            components = self.get_product_components(
+                product_id=line.product_id.id, accumulated_qty=qty)
+            if not components:
+                all_components.append([line.product_id.id, qty])
+            else:
+                all_components.extend(components)
+        return all_components
+
+
 class MrpProduction(models.Model):
 
     _inherit = "mrp.production"
@@ -38,39 +62,62 @@ class MrpProduction(models.Model):
                     ids.append(mo.id)
         self.expected_production = [(6, 0, ids)]
 
+    def get_new_components_info(self, product_id, loc_id, loc_dest_id,
+                                uom_id, uos_id, qty):
+        move_obj=self.env['stock.move']
+        ul_move = move_obj.onchange_product_id(
+            prod_id=product_id,
+            loc_id=loc_id,
+            loc_dest_id=loc_dest_id)
+        ul_move['value'].update({
+            'product_id': product_id,
+            'product_uom': uom_id,
+            'product_uos': uos_id,
+            'product_qty': qty,
+            'product_uos_qty': move_obj.onchange_quantity(
+                product_id, qty, uom_id,
+                uos_id)['value']['product_uos_qty']})
+        return ul_move['value']
+
     @api.one
     def create_mo_from_download_operation(self):
         move_obj = self.env['stock.move']
+        bom_obj = self.env['mrp.bom']
+        prod_obj = self.env['product.product']
+        res=[]
         for op in self.pack:
-            ul_move = move_obj.onchange_product_id(
-                prod_id=op.ul.product.id,
-                loc_id=op.ul.product.property_stock_production.id,
-                loc_dest_id=op.ul.product.property_stock_inventory.id)
-            ul_move['value'].update({
-                'product_id': op.ul.product.id,
-                'location_id': op.ul.product.property_stock_production.id,
-                'loc_dest_id': op.ul.product.property_stock_inventory.id,
-                'product_uom_qty': op.ul.ul_qty,
-                'product_uos_qty': move_obj.onchange_quantity(
-                    op.ul.product.id, op.ul.ul_qty, op.ul.product.uom_id.id,
-                    op.ul.product.uos_id.id)['value']['product_uos_qty']})
-            ul_bulk = move_obj.onchange_product_id(
-                prod_id=self.product_id.id, loc_id=self.location_src_id.id,
-                loc_dest_id=self.location_dest_id.id)
-            ul_bulk['value'].update({
-                'product_id': self.product_id.id,
-                'location_id': self.product_id.property_stock_production.id,
-                'loc_dest_id': self.product_id.property_stock_inventory.id,
-                'product_uom_qty': op.fill,
-                'product_uos_qty': move_obj.onchange_quantity(
-                    self.product_id.id, op.fill, self.product_id.uom_id.id,
-                    self.product_id.uos_id.id)['value']['product_uos_qty']})
+            conts = bom_obj.get_product_components(
+                product_id=op.ul.product.id, accumulated_qty=op.ul.ul_qty)
+            if not conts:
+                value = self.get_new_components_info(
+                    op.ul.product.id,
+                    op.ul.product.property_stock_production.id,
+                    op.ul.product.property_stock_inventory.id,
+                    op.ul.product.uom_id.id, op.ul.product.uos_id.id, qty)
+                res.append(value)
+
+            else:
+                for cont in conts:
+                    product = prod_obj.browse(cont[0])
+                    qty = cont[1]
+                    value = self.get_new_components_info(
+                        product.id, product.property_stock_production.id,
+                        product.property_stock_inventory.id, product.uom_id.id,
+                        product.uos_id.id, qty)
+                    res.append(value)
+            bulk_value = self.get_new_components_info(
+                self.product_id.id,
+                self.location_src_id.id,
+                self.location_dest_id.id,
+                self.product_id.uom_id.id, self.product_id.uos_id.id, op.fill)
+            res.append(bulk_value)
             data = self.product_id_change(op.product.id, op.qty)
             data['value'].update({
                 'product_id': op.product.id,
                 'location_id': op.product.property_stock_production.id,
                 'loc_dest_id': op.product.property_stock_inventory.id,
                 'product_qty': op.qty,
-                'move_lines': [(0, 0, ul_move['value']),
-                               (0, 0, ul_bulk['value'])]})
-            self.create(data['value'])
+                'product_lines': map(lambda x: (0, 0, x), res),
+                                })
+            new_op = self.create(data['value'])
+            self.action_compute()
