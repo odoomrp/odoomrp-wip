@@ -39,7 +39,7 @@ class ProductTemplate(models.Model):
         " variants will be automatically generated and if empty it will"
         " check in the category.", required=True, default='no')
 
-    def _get_product_attributes(self):
+    def _get_product_attributes_dict(self):
         product_attributes = []
         for attribute in self.attribute_line_ids:
             product_attributes.append({'attribute': attribute.attribute_id.id})
@@ -59,7 +59,7 @@ class ProductTemplate(models.Model):
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    def _get_product_attributes_values(self):
+    def _get_product_attributes_values_dict(self):
         product_attributes = []
         for attr_value in self.attribute_value_ids:
             product_attributes.append({'attribute': attr_value.attribute_id.id,

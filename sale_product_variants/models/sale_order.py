@@ -58,7 +58,6 @@ class SaleOrderLine(models.Model):
     def onchange_product_template(self):
         for line in self:
             line.name = line.product_template.name
-            product_attributes = []
             if not line.product_template.attribute_line_ids:
                 line.product_id = (
                     line.product_template.product_variant_ids and
@@ -66,7 +65,7 @@ class SaleOrderLine(models.Model):
             else:
                 line.product_id = False
             line.product_attributes = (
-                self.product_template._get_product_attributes())
+                self.product_template._get_product_attributes_dict())
         return {'domain': {'product_id': [('product_tmpl_id', '=',
                                            self.product_template.id)]}}
 
