@@ -1,0 +1,22 @@
+<openerp>
+    <data>
+
+    <record model="ir.ui.view" id="project_sale_shortcut_form_view">
+        <field name="name">project.shortcuts.sale.form</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <div name="buttons" position="inside">
+                <button class="oe_inline oe_stat_button"
+                        type="action"
+                        name="%(sale_mrp_project_link.act_project_2_sale_all)d"
+                        icon="fa-list">
+                        <field string="Sales" name="sale_count"
+                            widget="statinfo" />
+                </button>
+            </div>
+        </field>
+    </record>
+
+    </data>
+</openerp>
