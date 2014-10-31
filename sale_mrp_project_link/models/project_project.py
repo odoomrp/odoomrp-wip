@@ -28,7 +28,6 @@ class ProjectProject(models.Model):
         sale_obj = self.env['sale.order']
         sales = sale_obj.search([('main_project_id', '=', self.id)])
         self.sale_count = len(sales)
-        return True
 
     sale_count = fields.Integer(string='Sale Count',
                                 compute=_project_sale_shortcut_count)

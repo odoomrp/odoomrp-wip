@@ -28,7 +28,6 @@ class ProjectProject(models.Model):
         purchase_obj = self.env['purchase.order']
         purchases = purchase_obj.search([('main_project_id', '=', self.id)])
         self.purchase_count = len(purchases)
-        return True
 
     purchase_count = fields.Integer(string='Purchase Count',
                                     compute=_project_purchase_shortcut_count)
