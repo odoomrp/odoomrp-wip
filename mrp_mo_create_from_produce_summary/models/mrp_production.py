@@ -21,20 +21,19 @@ from openerp import api, fields, models
 
 
 class MrpBom(models.Model):
-    
+
     _inherit = "mrp.bom"
-    
+
     def get_product_components(self, product_id=None, accumulated_qty=None):
         all_components = []
-        bom_id = self._bom_find(product_id=product_id,
-                                   properties=[])
+        bom_id = self._bom_find(product_id=product_id, properties=[])
         if not bom_id:
             return False
         bom = self.browse(bom_id)
-        if not bom.bom_line_ids or not bom.type=='normal':
+        if not bom.bom_line_ids or not bom.type == 'normal':
             return False
         for line in bom.bom_line_ids:
-            qty=line.product_qty/bom.product_qty*accumulated_qty
+            qty = line.product_qty/bom.product_qty*accumulated_qty
             components = self.get_product_components(
                 product_id=line.product_id.id, accumulated_qty=qty)
             if not components:
@@ -64,7 +63,7 @@ class MrpProduction(models.Model):
 
     def get_new_components_info(self, product_id, loc_id, loc_dest_id,
                                 uom_id, uos_id, qty):
-        move_obj=self.env['stock.move']
+        move_obj = self.env['stock.move']
         ul_move = move_obj.onchange_product_id(
             prod_id=product_id,
             loc_id=loc_id,
@@ -84,7 +83,7 @@ class MrpProduction(models.Model):
         move_obj = self.env['stock.move']
         bom_obj = self.env['mrp.bom']
         prod_obj = self.env['product.product']
-        res=[]
+        res = []
         for op in self.pack:
             conts = bom_obj.get_product_components(
                 product_id=op.ul.product.id, accumulated_qty=op.ul.ul_qty)
@@ -117,7 +116,6 @@ class MrpProduction(models.Model):
                 'location_id': op.product.property_stock_production.id,
                 'loc_dest_id': op.product.property_stock_inventory.id,
                 'product_qty': op.qty,
-                'product_lines': map(lambda x: (0, 0, x), res),
-                                })
+                'product_lines': map(lambda x: (0, 0, x), res)})
             new_op = self.create(data['value'])
             self.action_compute()
