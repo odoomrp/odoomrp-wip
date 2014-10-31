@@ -32,7 +32,6 @@ class ProjectProject(models.Model):
                                                 self.id)])
         self.production_count = len(productions)
         self.procurement_count = len(procurements)
-        return True
 
     production_count = fields.Integer(string='Manufacturing Count',
                                       compute=_project_shortcut_count)
