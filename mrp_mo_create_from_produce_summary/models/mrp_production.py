@@ -80,7 +80,6 @@ class MrpProduction(models.Model):
 
     @api.one
     def create_mo_from_download_operation(self):
-        move_obj = self.env['stock.move']
         bom_obj = self.env['mrp.bom']
         prod_obj = self.env['product.product']
         res = []
@@ -92,7 +91,8 @@ class MrpProduction(models.Model):
                     op.ul.product.id,
                     op.ul.product.property_stock_production.id,
                     op.ul.product.property_stock_inventory.id,
-                    op.ul.product.uom_id.id, op.ul.product.uos_id.id, qty)
+                    op.ul.product.uom_id.id, op.ul.product.uos_id.id,
+                    op.ul.ul_qty)
                 res.append(value)
 
             else:
@@ -115,7 +115,7 @@ class MrpProduction(models.Model):
                 'product_id': op.product.id,
                 'location_id': op.product.property_stock_production.id,
                 'loc_dest_id': op.product.property_stock_inventory.id,
-                'product_qty': op.qty,
-                'product_lines': map(lambda x: (0, 0, x), res)})
+                'product_qty': op.qty})
             new_op = self.create(data['value'])
-            self.action_compute()
+            new_op.action_compute()
+            new_op.write({'product_lines': map(lambda x: (0, 0, x), res)})
