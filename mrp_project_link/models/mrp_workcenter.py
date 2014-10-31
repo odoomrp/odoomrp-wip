@@ -1,5 +1,8 @@
+
 # -*- encoding: utf-8 -*-
 ##############################################################################
+#
+#    Daniel Campos (danielcampos@avanzosc.es) Date: 08/09/2014
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -16,9 +19,11 @@
 #
 ##############################################################################
 
-from . import stock_move
-from . import procurement_order
-from . import mrp_production
-from . import account_analytic_line
-from . import project_project
-from . import mrp_workcenter
+from openerp import models, fields
+
+
+class MrpWorkcenter(models.Model):
+    _inherit = 'mrp.workcenter'
+
+    operators = fields.Many2many('res.users', 'mrp_wc_operator_rel',
+                                 'workcenter_id', 'operator_id', 'Operators')
