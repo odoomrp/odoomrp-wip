@@ -32,6 +32,14 @@ class MrpProduction(models.Model):
             'mrp_production_project_estimated_cost.analytic_journal_estimated'
             '_materials', False)
         for line in self.product_lines:
+            if not line.work_order.routing_wc_line.operation:
+                raise exceptions.Warning(
+                    _('Routing WC line "%s", without operation.') %
+                    (line.work_order.routing_wc_line.name))
+            if not line.work_order.routing_wc_line.operation.code:
+                raise exceptions.Warning(
+                    _('Operation "%s", without code.') %
+                    (line.work_order.routing_wc_line.operation.name))
             name = (self.name + '-' +
                     line.work_order.routing_wc_line.operation.code)
             vals = self._cath_information_estimated_cost(
@@ -41,6 +49,20 @@ class MrpProduction(models.Model):
             'mrp_production_project_estimated_cost.analytic_journal_estimated'
             '_machines', False)
         for line in self.workcenter_lines:
+            if (line.workcenter_id.time_start and
+                    line.workcenter_id.pre_op_product):
+                name = (self.name + '-' + line.workcenter_id.name + ' Pre-operation')
+                vals = self._cath_information_estimated_cost(
+                    journal, name, line.workcenter_id.pre_op_product,
+                    line.workcenter_id.time_start)
+                analytic_line_obj.create(vals)
+            if (line.workcenter_id.time_stop and
+                    line.workcenter_id.post_op_product):
+                name = (self.name + '-' + line.workcenter_id.name + ' Post-operation')
+                vals = self._cath_information_estimated_cost(
+                    journal, name, line.workcenter_id.post_op_product,
+                    line.workcenter_id.time_stop)
+                analytic_line_obj.create(vals)
             if line.cycle and line.workcenter_id.product_id:
                 name = (self.name + '-' + line.routing_wc_line.operation.code
                         + '-C-' + line.workcenter_id.name)
