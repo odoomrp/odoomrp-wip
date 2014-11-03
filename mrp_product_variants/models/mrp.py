@@ -157,20 +157,21 @@ class MrpBom(models.Model):
             #  otherwise explode further
             if (bom_line_id.type != "phantom" and
                     (not bom_id or self.browse(bom_id).type != "phantom")):
-                product = bom_line_id.product_id
-                # if product:
-                #     product_attributes = (
-                #         product._get_product_attributes_values_dict())
-                # product_attributes = (
-                #     bom_line_id.product_template.
-                #         _get_product_attributes_dict())
+                if not bom_line_id.product_id:
+                    product_attributes = (
+                        bom_line_id.product_template.
+                        _get_product_attributes_dict())
+                else:
+                    product_attributes = (
+                        bom_line_id.product_id.
+                        _get_product_attributes_values_dict())
                 result.append({
-                    'name': (product.name or
+                    'name': (bom_line_id.product_id.name or
                              bom_line_id.product_template.name),
-                    'product_id': product.id,
+                    'product_id': bom_line_id.product_id.id,
                     'product_template': (
                         bom_line_id.product_template.id or
-                        product.product_tmpl_id.id),
+                        bom_line_id.product_id.product_tmpl_id.id),
                     'product_qty': quantity,
                     'product_uom': bom_line_id.product_uom.id,
                     'product_uos_qty': (bom_line_id.product_uos and
@@ -181,8 +182,8 @@ class MrpBom(models.Model):
                                         or False),
                     'product_uos': (bom_line_id.product_uos and
                                     bom_line_id.product_uos.id or False),
-                    # 'product_attributes': map(lambda x: (0, 0, x),
-                    #                           product_attributes),
+                    'product_attributes': map(lambda x: (0, 0, x),
+                                              product_attributes),
                 })
             elif bom_id:
                 all_prod = [bom.product_tmpl_id.id] + (previous_products or [])
@@ -357,7 +358,9 @@ class MrpProduction(models.Model):
     def _get_workorder_in_product_lines(self, workcenter_lines, product_lines):
         for p_line in product_lines:
             for bom_line in self.bom_id.bom_line_ids:
-                if (bom_line.product_template == p_line.product_template and
+                if ((bom_line.product_template == p_line.product_template or
+                     bom_line.product_id.product_tmpl_id ==
+                     p_line.product_template) and
                         bom_line.product_id == p_line.product_id):
                     for wc_line in workcenter_lines:
                         if wc_line.routing_wc_line == bom_line.operation:
@@ -369,7 +372,7 @@ class MrpProductionProductLineAttribute(models.Model):
     _name = 'mrp.production.product.line.attribute'
 
     product_line = fields.Many2one(
-        comodel_name='mrp.production.product.line.attribute',
+        comodel_name='mrp.production.product.line',
         string='Product line')
     attribute = fields.Many2one(comodel_name='product.attribute',
                                 string='Attribute')
@@ -380,6 +383,13 @@ class MrpProductionProductLineAttribute(models.Model):
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
+
+    def _get_parent_value(self):
+        if self.attribute.parent_inherited:
+            production = self.product_line.production_id
+            for attr_line in production.product_attributes:
+                if attr_line.attribute == self.attribute:
+                    self.value = attr_line.value
 
     @api.one
     @api.depends('attribute')
