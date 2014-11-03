@@ -51,14 +51,16 @@ class MrpProduction(models.Model):
         for line in self.workcenter_lines:
             if (line.workcenter_id.time_start and
                     line.workcenter_id.pre_op_product):
-                name = (self.name + '-' + line.workcenter_id.name + ' Pre-operation')
+                name = (self.name + '-' + line.workcenter_id.name +
+                        ' Pre-operation')
                 vals = self._cath_information_estimated_cost(
                     journal, name, line.workcenter_id.pre_op_product,
                     line.workcenter_id.time_start)
                 analytic_line_obj.create(vals)
             if (line.workcenter_id.time_stop and
                     line.workcenter_id.post_op_product):
-                name = (self.name + '-' + line.workcenter_id.name + ' Post-operation')
+                name = (self.name + '-' + line.workcenter_id.name +
+                        ' Post-operation')
                 vals = self._cath_information_estimated_cost(
                     journal, name, line.workcenter_id.post_op_product,
                     line.workcenter_id.time_stop)
@@ -103,6 +105,9 @@ class MrpProduction(models.Model):
             raise exceptions.Warning(
                 _('You must define Income account in the product "%s", or in'
                   ' the product category') % (product.name))
+        if not self.analytic_account_id:
+            raise exceptions.Warning(
+                _('You must define one Analytic Account for this OF'))
         vals = {'name': name,
                 'account_id': self.analytic_account_id.id,
                 'journal_id': journal.id,
