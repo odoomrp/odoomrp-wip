@@ -22,12 +22,6 @@ class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
     plan = fields.Many2one('procurement.plan', string='Plan')
-    origin_state = fields.Selection([('cancel', 'Cancelled'),
-                                     ('confirmed', 'Confirmed'),
-                                     ('exception', 'Exception'),
-                                     ('running', 'Running'),
-                                     ('done', 'Done')
-                                     ], string='Origin Status')
 
     @api.model
     def _prepare_orderpoint_procurement2(self, orderpoint, product_qty):

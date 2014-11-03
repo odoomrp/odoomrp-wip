@@ -83,32 +83,30 @@ class ProcurementPlan(models.Model):
         my_proc = []
         for proc in plan.procurement_ids:
             my_proc.append(proc.id)
+        procurements_confirmed = []
         cond = [('state', '=', 'confirmed'),
                 ('id', 'not in', my_proc),
                 ('plan', '=', False)]
         procurements = proc_obj.search(cond)
         if procurements:
-            vals = {'state': 'cancel', 'origin_state': 'confirmed'}
+            procurements_confirmed = procurements
+            vals = {'state': 'cancel'}
             procurements.write(vals)
+        procurements_running = []
         cond = [('state', '=', 'running'),
                 ('id', 'not in', my_proc),
                 ('plan', '=', False)]
         procurements = proc_obj.search(cond)
         if procurements:
-            vals = {'state': 'cancel', 'origin_state': 'running'}
+            procurements_running = procurements
+            vals = {'state': 'cancel'}
             procurements.write(vals)
         self.env.cr.commit()
         comp_obj.with_context(plan=plan.id)._procure_calculation_all()
-        cond = [('origin_state', '=', 'confirmed')]
-        procurements = proc_obj.search(cond)
-        if procurements:
-            vals = {'state': 'confirmed', 'origin_state': False}
-            procurements.write(vals)
-        cond = [('origin_state', '=', 'running')]
-        procurements = proc_obj.search(cond)
-        if procurements:
-            vals = {'state': 'running', 'origin_state': False}
-            procurements.write(vals)
+        if procurements_confirmed:
+            procurements_confirmed.write({'state': 'confirmed'})
+        if procurements_running:
+            procurements_running.write({'state': 'confirmed'})
         return self.write({'state': 'done'})
 
     @api.multi

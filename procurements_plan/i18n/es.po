@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-21 09:11+0000\n"
-"PO-Revision-Date: 2014-10-21 11:20+0100\n"
+"POT-Creation-Date: 2014-11-03 14:42+0000\n"
+"PO-Revision-Date: 2014-11-03 15:43+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,20 +16,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: procurements_plan
-#: selection:stock.move,origin_state:0
-msgid "Available"
-msgstr "Disponible"
-
-#. module: procurements_plan
 #: view:procurement.plan:procurements_plan.procurement_plan_form_view
 #: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
 msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: procurements_plan
-#: selection:procurement.order,origin_state:0
 #: selection:procurement.plan,state:0
-#: selection:stock.move,origin_state:0
 msgid "Cancelled"
 msgstr "Cancelado"
 
@@ -37,11 +30,6 @@ msgstr "Cancelado"
 #: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
 msgid "Compute all procurements with plan in the background."
 msgstr "Calcular todos los abastecimientos con plan en segundo plano."
-
-#. module: procurements_plan
-#: selection:procurement.order,origin_state:0
-msgid "Confirmed"
-msgstr "Confirmado"
 
 #. module: procurements_plan
 #: field:procurement.plan,create_uid:0
@@ -61,9 +49,7 @@ msgid "Description"
 msgstr "Descripción"
 
 #. module: procurements_plan
-#: selection:procurement.order,origin_state:0
 #: selection:procurement.plan,state:0
-#: selection:stock.move,origin_state:0
 msgid "Done"
 msgstr "Realizado"
 
@@ -73,15 +59,10 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: procurements_plan
-#: code:addons/procurements_plan/models/procurement_plan.py:83
+#: code:addons/procurements_plan/models/procurement_plan.py:81
 #, python-format
 msgid "Error!"
 msgstr "Error!"
-
-#. module: procurements_plan
-#: selection:procurement.order,origin_state:0
-msgid "Exception"
-msgstr "Excepción"
 
 #. module: procurements_plan
 #: field:procurement.plan,from_date:0
@@ -117,21 +98,10 @@ msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: procurements_plan
-#: selection:stock.move,origin_state:0
-msgid "New"
-msgstr "Nuevo"
-
-#. module: procurements_plan
-#: code:addons/procurements_plan/models/procurement_plan.py:84
+#: code:addons/procurements_plan/models/procurement_plan.py:82
 #, python-format
 msgid "No procurements to treat"
 msgstr "No hay abastecimientos para tratar"
-
-#. module: procurements_plan
-#: field:procurement.order,origin_state:0
-#: field:stock.move,origin_state:0
-msgid "Origin Status"
-msgstr "Estado origen"
 
 #. module: procurements_plan
 #: view:procurement.order:procurements_plan.procurement_form_view_inh_withplan
@@ -224,11 +194,6 @@ msgid "Run Schedulers With Plan"
 msgstr "Ejecutar abastecimientos con plan"
 
 #. module: procurements_plan
-#: selection:procurement.order,origin_state:0
-msgid "Running"
-msgstr "Ejecutándose"
-
-#. module: procurements_plan
 #: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
 msgid "Scheduler Parameters With Plan"
 msgstr "Párametros programados con plan"
@@ -254,11 +219,6 @@ msgid "Status"
 msgstr "Estatus"
 
 #. module: procurements_plan
-#: model:ir.model,name:procurements_plan.model_stock_move
-msgid "Stock Move"
-msgstr "Movimiento de existencias"
-
-#. module: procurements_plan
 #: view:purchase.order:procurements_plan.view_purchase_order_filter_inh_withplan
 #: view:purchase.order:procurements_plan.view_request_for_quotation_filter_inh_withplan
 msgid "Supplier"
@@ -268,16 +228,6 @@ msgstr "Proveedor"
 #: view:procurement.plan:procurements_plan.procurement_plan_form_view
 msgid "Unit of Measure"
 msgstr "Unidad de medida"
-
-#. module: procurements_plan
-#: selection:stock.move,origin_state:0
-msgid "Waiting Another Move"
-msgstr "Esperando otro movimiento"
-
-#. module: procurements_plan
-#: selection:stock.move,origin_state:0
-msgid "Waiting Availability"
-msgstr "Esperando disponibilidad"
 
 #. module: procurements_plan
 #: view:procurement.plan:procurements_plan.procurement_plan_form_view
