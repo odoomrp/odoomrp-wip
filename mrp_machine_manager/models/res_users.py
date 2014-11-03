@@ -25,6 +25,5 @@ from openerp import models, fields
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    workcenters = fields.Many2many('mrp.workcenter', 'mrp_wc_operator_rel',
-                                   'operator_id', 'workcenter_id',
-                                   'Work centers')
+    machines = fields.Many2many('machinery', 'machine_user_rel', 'user_id',
+                                'machine_id', 'Machines')

@@ -2,8 +2,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Daniel Campos (danielcampos@avanzosc.es) Date: 08/09/2014
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -22,9 +20,9 @@
 from openerp import models, fields
 
 
-class MrpMachineModel(models.Model):
-    _name = 'mrp.machine.model'
-    _description = 'MRP Machine model'
+class MachineModel(models.Model):
+    _name = 'machine.model'
+    _description = 'Machine model'
 
     name = fields.Char('Name')
-    type = fields.Char('Type')
+    model_type = fields.Char('Type')
