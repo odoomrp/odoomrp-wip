@@ -2,8 +2,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Daniel Campos (danielcampos@avanzosc.es) Date: 08/09/2014
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -20,11 +18,11 @@
 ##############################################################################
 
 
-from openerp import models, fields
+from openerp import models, fields, _
 
 
-class MrpMachinery(models.Model):
-    _name = "mrp.machinery"
+class Machinery(models.Model):
+    _name = "machinery"
     _description = "Holds records of Machines"
 
     def _def_company(self):
@@ -33,8 +31,7 @@ class MrpMachinery(models.Model):
     name = fields.Char('Machine Name', required=True)
     company = fields.Many2one('res.company', 'Company', required=True,
                               default=_def_company)
-    assetacc = fields.Many2one('account.account', string='Asset Account',
-                               domain=[('user_type.code', '=', 'asset')])
+    assetacc = fields.Many2one('account.account', string='Asset Account')
     depracc = fields.Many2one('account.account', string='Depreciation Account')
     year = fields.Char('Year')
     model = fields.Char('Model')
@@ -42,7 +39,7 @@ class MrpMachinery(models.Model):
     serial_char = fields.Char('Product Serial #')
     serial = fields.Many2one('stock.production.lot', string='Product Serial #',
                              domain="[('product_id', '=', product)]")
-    model_type = fields.Many2one('mrp.machine.model', 'Type')
+    model_type = fields.Many2one('machine.model', 'Type')
     status = fields.Selection([('active', 'Active'), ('inactive', 'InActive'),
                                ('outofservice', 'Out of Service')],
                               'Status', required=True, default='active')
@@ -89,3 +86,18 @@ class MrpMachinery(models.Model):
     mac = fields.Char('MAC Address')
     insurance = fields.Char('Insurance Name')
     policy = fields.Char('Machine policy')
+    users = fields.One2many('machinery.users', 'machine', 'Machine Users')
+
+
+class MachineryUsers(models.Model):
+    _name = 'machinery.users'
+
+    m_user = fields.Many2one('res.users', 'User')
+    machine = fields.Many2one('machinery', 'Machine')
+    start_date = fields.Date('Homologation Start Date')
+    end_date = fields.Date('Homologation End Date')
+
+    _sql_constraints = [
+        ('uniq_machine_user', 'unique(machine, m_user)',
+         _('User already defined for the machine'))
+    ]

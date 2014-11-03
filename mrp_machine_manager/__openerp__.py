@@ -2,8 +2,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Daniel Campos (danielcampos@avanzosc.es) Date: 08/09/2014
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -20,19 +18,18 @@
 ##############################################################################
 
 {
-    'name': 'MRP Machine Manager',
+    'name': 'Machine Manager',
     'version': '1.0',
-    'category': 'MRP',
-    'description': """The module is a vertical for Machinery management.
-    - Links new machinery object with Work Centers""",
+    'description': """This module is a vertical for Machinery management.""",
     'author': 'OdooMRP team',
-    'website': 'http://www.avanzosc.com',
-    "depends": ['mrp'],
-    "category": "Manufacturing",
+    'website': 'http://www.odoomrp.com',
+    "depends": ['stock', 'account'],
+    "category": "Generic Modules",
     "data": ['views/machinery_view.xml',
              'views/machine_model_view.xml',
-             'views/mrp_workcenter_view.xml',
+             'views/machinery_users_view.xml',
              'views/product_view.xml',
+             'security/machinery_security.xml',
              'security/ir.model.access.csv',
              ],
     "installable": True

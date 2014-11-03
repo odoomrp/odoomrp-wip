@@ -11,7 +11,7 @@
 
         <record id="machines_form" model="ir.ui.view">
             <field name="name">machines.form</field>
-            <field name="model">mrp.machinery</field>
+            <field name="model">machinery</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Machines">
@@ -31,18 +31,34 @@
                     <notebook colspan="4">
                         <page string="Additional Details">
                            <group>
-                                <separator string="Manufacture Details"
-                                colspan="4" />
-                                <field name="year" />
-                                <field name="model" />
-                                <field name="model_type" />
-                                <separator string="Current Details"
+                                <group>
+                                    <separator string="Manufacture Details"
                                     colspan="4" />
-                                <field name="status" />
-                                <field name="ownership" />
-                                <field name="mac" />
-                                <field name="phone" />
-                                <field name="ambit" />
+                                    <field name="year" />
+                                    <field name="model" />
+                                    <field name="model_type" />
+                                </group>
+                                <group>
+                                    <separator string="Current Details"
+                                        colspan="4" />
+                                    <field name="status" />
+                                    <field name="ownership" />
+                                    <field name="mac" />
+                                    <field name="phone" />
+                                    <field name="ambit" />
+                                </group>
+                                <group>
+                                    <separator string="Extra Information"
+                                        colspan="4" />
+                                    <field name="card" />
+                                    <field name="cardexp" />
+                                </group>
+                                <group>
+                                    <separator string="Insurance"
+                                        colspan="4" />
+                                    <field name="insurance" />
+                                    <field name="policy" />
+                                </group>
                             </group>
                         </page>
                         <page string="Financial Details">
@@ -71,6 +87,9 @@
                             <field name="warrexpcy" />
                         </group>
                         </page>
+                        <page string="Machine Users">
+                            <field name="users"/>
+                        </page>
                         <page string="Maintenance">
                             <group>
                             <separator string="Preventive Maintenance"
@@ -81,22 +100,6 @@
                             <field name="bdate" />
                             </group>
                         </page>
-                        <page string="Extra Information">
-                        <group>
-                            <group>
-                                <separator string="Extra Information"
-                                    colspan="4" />
-                                <field name="card" />
-                                <field name="cardexp" />
-                            </group>
-                            <group>
-                                <separator string="Insurance"
-                                    colspan="4" />
-                                <field name="insurance" />
-                                <field name="policy" />
-                            </group>
-                        </group>
-                        </page>
                     </notebook>
                 </form>
             </field>
@@ -104,7 +107,7 @@
 
         <record id="machine_tree" model="ir.ui.view">
             <field name="name">machine.tree</field>
-            <field name="model">mrp.machinery</field>
+            <field name="model">machinery</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Machines">
@@ -120,7 +123,7 @@
 
         <record id="machine_form_act" model="ir.actions.act_window">
             <field name="name">Machines</field>
-            <field name="res_model">mrp.machinery</field>
+            <field name="res_model">machinery</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
