@@ -384,6 +384,7 @@ class MrpProductionProductLineAttribute(models.Model):
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
 
+    @api.one
     def _get_parent_value(self):
         if self.attribute.parent_inherited:
             production = self.product_line.production_id
@@ -427,6 +428,12 @@ class MrpProductionProductLine(models.Model):
             else:
                 product_attributes = (
                     self.product_template._get_product_attributes_dict())
+                for attr in product_attributes:
+                    if self.env['product.attribute'].browse(
+                            attr['attribute']).parent_inherited:
+                        for attr_line in self.production_id.product_attributes:
+                            if attr_line.attribute.id == attr['attribute']:
+                                attr.update({'value': attr_line.value.id})
             self.name = product_id.name or self.product_template.name
             self.product_uom = self.product_template.uom_id
             self.product_id = product_id
