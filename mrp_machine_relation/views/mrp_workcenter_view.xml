@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="mrp_workcenter_form_view_inh" model="ir.ui.view">
+            <field name="name">mrp.workcenter.view.inh</field>
+            <field name="model">mrp.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
+            <field name="arch" type="xml">
+                <field name="code" position="after">
+                    <field name="machine" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
