@@ -1,4 +1,5 @@
 Links on project tasks to manufacturing orders (MO) and workorders(WO)
+Links Workcenters and Operators.
 
 Features:
 ---------
