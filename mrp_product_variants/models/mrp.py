@@ -157,16 +157,20 @@ class MrpBom(models.Model):
             #  otherwise explode further
             if (bom_line_id.type != "phantom" and
                     (not bom_id or self.browse(bom_id).type != "phantom")):
+                product = bom_line_id.product_id
+                # if product:
+                #     product_attributes = (
+                #         product._get_product_attributes_values_dict())
                 # product_attributes = (
                 #     bom_line_id.product_template.
                 #         _get_product_attributes_dict())
                 result.append({
-                    'name': (bom_line_id.product_id.name or
+                    'name': (product.name or
                              bom_line_id.product_template.name),
-                    'product_id': bom_line_id.product_id.id,
+                    'product_id': product.id,
                     'product_template': (
                         bom_line_id.product_template.id or
-                        bom_line_id.product_id.product_tmpl_id.id),
+                        product.product_tmpl_id.id),
                     'product_qty': quantity,
                     'product_uom': bom_line_id.product_uom.id,
                     'product_uos_qty': (bom_line_id.product_uos and
