@@ -18,4 +18,3 @@
 from . import procurement
 from . import purchase_order
 from . import procurement_plan
-from . import stock_move
