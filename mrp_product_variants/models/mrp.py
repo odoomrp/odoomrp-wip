@@ -160,7 +160,8 @@ class MrpBom(models.Model):
                 if not bom_line_id.product_id:
                     product_attributes = (
                         bom_line_id.product_template.
-                        _get_product_attributes_dict())
+                        _get_product_attributes_inherit_dict(
+                            production.product_attributes))
                 else:
                     product_attributes = (
                         bom_line_id.product_id.
@@ -427,13 +428,8 @@ class MrpProductionProductLine(models.Model):
                     product_id._get_product_attributes_values_dict())
             else:
                 product_attributes = (
-                    self.product_template._get_product_attributes_dict())
-                for attr in product_attributes:
-                    if self.env['product.attribute'].browse(
-                            attr['attribute']).parent_inherited:
-                        for attr_line in self.production_id.product_attributes:
-                            if attr_line.attribute.id == attr['attribute']:
-                                attr.update({'value': attr_line.value.id})
+                    self.product_template._get_product_attributes_inherit_dict(
+                        self.production_id.product_attributes))
             self.name = product_id.name or self.product_template.name
             self.product_uom = self.product_template.uom_id
             self.product_id = product_id

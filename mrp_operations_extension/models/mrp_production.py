@@ -62,6 +62,12 @@ class MrpProduction(models.Model):
         self._get_workorder_in_move_lines(self.product_lines, self.move_lines)
         return res
 
+    @api.multi
+    def action_compute(self, properties=None):
+        res = super(MrpProduction, self).action_compute(properties=properties)
+        self._get_workorder_in_move_lines(self.product_lines, self.move_lines)
+        return res
+
 
 class MrpProductionProductLine(models.Model):
     _inherit = 'mrp.production.product.line'
