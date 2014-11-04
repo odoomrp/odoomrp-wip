@@ -1,6 +1,6 @@
 
 {
-    'name': 'Import Inventory from CSV',
+    'name': 'Stock Inventory Import from CSV file',
     'version': "1.0",
     'category': "Generic Modules",
     'description': """
