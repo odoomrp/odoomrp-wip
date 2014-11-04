@@ -162,14 +162,17 @@ class MrpBom(models.Model):
                         bom_line_id.product_template.
                         _get_product_attributes_inherit_dict(
                             production.product_attributes))
+                    product = self.env['product.product']._product_find(
+                        bom_line_id.product_template, product_attributes)
                 else:
+                    product = bom_line_id.product_id
                     product_attributes = (
                         bom_line_id.product_id.
                         _get_product_attributes_values_dict())
                 result.append({
                     'name': (bom_line_id.product_id.name or
                              bom_line_id.product_template.name),
-                    'product_id': bom_line_id.product_id.id,
+                    'product_id': product and product.id,
                     'product_template': (
                         bom_line_id.product_template.id or
                         bom_line_id.product_id.product_tmpl_id.id),
@@ -362,7 +365,8 @@ class MrpProduction(models.Model):
                 if ((bom_line.product_template == p_line.product_template or
                      bom_line.product_id.product_tmpl_id ==
                      p_line.product_template) and
-                        bom_line.product_id == p_line.product_id):
+                        (not bom_line.product_id or
+                         bom_line.product_id == p_line.product_id)):
                     for wc_line in workcenter_lines:
                         if wc_line.routing_wc_line == bom_line.operation:
                             p_line.work_order = wc_line

@@ -71,11 +71,17 @@ class ProductProduct(models.Model):
         if product_template:
             domain.append(('product_tmpl_id', '=', product_template.id))
             for attr_line in product_attributes:
+                if isinstance(attr_line, dict):
+                    attribute_id = attr_line.get('attribute')
+                    value_id = attr_line.get('value')
+                else:
+                    attribute_id = attr_line.attribute.id
+                    value_id = attr_line.value.id
                 if len(product_template.attribute_line_ids.search(
                         [('product_tmpl_id', '=', product_template.id),
                          ('attribute_id', '=',
-                          attr_line.attribute.id)]).value_ids) > 1:
+                          attribute_id)]).value_ids) > 1:
                     domain.append(('attribute_value_ids', '=',
-                                   attr_line.value.id))
+                                   value_id))
             return self.search(domain, limit=1) or False
         return False
