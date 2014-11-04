@@ -39,7 +39,7 @@ class ProductTemplate(models.Model):
         " variants will be automatically generated and if empty it will"
         " check in the category.", required=True, default='no')
 
-    def _get_product_attributes(self):
+    def _get_product_attributes_dict(self):
         product_attributes = []
         for attribute in self.attribute_line_ids:
             product_attributes.append({'attribute': attribute.attribute_id.id})
@@ -59,19 +59,29 @@ class ProductTemplate(models.Model):
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    def _get_product_attributes_values(self):
-        return []
+    def _get_product_attributes_values_dict(self):
+        product_attributes = []
+        for attr_value in self.attribute_value_ids:
+            product_attributes.append({'attribute': attr_value.attribute_id.id,
+                                       'value': attr_value.id})
+        return product_attributes
 
     def _product_find(self, product_template, product_attributes):
         domain = []
         if product_template:
             domain.append(('product_tmpl_id', '=', product_template.id))
             for attr_line in product_attributes:
+                if isinstance(attr_line, dict):
+                    attribute_id = attr_line.get('attribute')
+                    value_id = attr_line.get('value')
+                else:
+                    attribute_id = attr_line.attribute.id
+                    value_id = attr_line.value.id
                 if len(product_template.attribute_line_ids.search(
                         [('product_tmpl_id', '=', product_template.id),
                          ('attribute_id', '=',
-                          attr_line.attribute.id)]).value_ids) > 1:
+                          attribute_id)]).value_ids) > 1:
                     domain.append(('attribute_value_ids', '=',
-                                   attr_line.value.id))
+                                   value_id))
             return self.search(domain, limit=1) or False
         return False

@@ -1,8 +1,5 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
-#
-#    Daniel Campos (danielcampos@avanzosc.es) Date: 28/08/2014
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -42,6 +39,12 @@ class MrpProduction(models.Model):
                             p_line.work_order = wc_line.id
                             break
 
+    def _get_workorder_in_move_lines(self, product_lines, move_lines):
+        for move_line in move_lines:
+            for product_line in product_lines:
+                if product_line.product_id.id == move_line.product_id.id:
+                    move_line.work_order = product_line.work_order.id
+
     @api.multi
     def action_confirm(self):
         produce = False
@@ -56,10 +59,13 @@ class MrpProduction(models.Model):
                                           '"Move produced quantity to stock"'
                                           'field'))
         res = super(MrpProduction, self).action_confirm()
-        for move_line in self.move_lines:
-            for product_line in self.product_lines:
-                if product_line.product_id.id == move_line.product_id.id:
-                    move_line.work_order = product_line.work_order.id
+        self._get_workorder_in_move_lines(self.product_lines, self.move_lines)
+        return res
+
+    @api.multi
+    def action_compute(self, properties=None):
+        res = super(MrpProduction, self).action_compute(properties=properties)
+        self._get_workorder_in_move_lines(self.product_lines, self.move_lines)
         return res
 
 

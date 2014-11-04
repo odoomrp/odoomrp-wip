@@ -157,12 +157,22 @@ class MrpBom(models.Model):
             #  otherwise explode further
             if (bom_line_id.type != "phantom" and
                     (not bom_id or self.browse(bom_id).type != "phantom")):
-                # product_attributes = (
-                #     bom_line_id.product_template._get_product_attributes())
+                if not bom_line_id.product_id:
+                    product_attributes = (
+                        bom_line_id.product_template.
+                        _get_product_attributes_inherit_dict(
+                            production.product_attributes))
+                    product = self.env['product.product']._product_find(
+                        bom_line_id.product_template, product_attributes)
+                else:
+                    product = bom_line_id.product_id
+                    product_attributes = (
+                        bom_line_id.product_id.
+                        _get_product_attributes_values_dict())
                 result.append({
                     'name': (bom_line_id.product_id.name or
                              bom_line_id.product_template.name),
-                    'product_id': bom_line_id.product_id.id,
+                    'product_id': product and product.id,
                     'product_template': (
                         bom_line_id.product_template.id or
                         bom_line_id.product_id.product_tmpl_id.id),
@@ -176,8 +186,8 @@ class MrpBom(models.Model):
                                         or False),
                     'product_uos': (bom_line_id.product_uos and
                                     bom_line_id.product_uos.id or False),
-                    # 'product_attributes': map(lambda x: (0, 0, x),
-                    #                           product_attributes),
+                    'product_attributes': map(lambda x: (0, 0, x),
+                                              product_attributes),
                 })
             elif bom_id:
                 all_prod = [bom.product_tmpl_id.id] + (previous_products or [])
@@ -249,7 +259,9 @@ class MrpProduction(models.Model):
         product_obj = self.pool['product.product']
         product = product_obj.browse(cr, uid, product_id, context=context)
         result['value'].update(
-            {'product_template': product.product_tmpl_id.id})
+            {'product_template': product.product_tmpl_id.id,
+             'product_attributes': (
+                 product._get_product_attributes_values_dict())})
         return result
 
     @api.multi
@@ -258,12 +270,14 @@ class MrpProduction(models.Model):
         self.ensure_one()
         if self.product_template:
             self.product_uom = self.product_template.uom_id
+            self.product_attributes = (
+                self.product_template._get_product_attributes_dict())
             if not self.product_template.attribute_line_ids:
                 self.product_id = (
                     self.product_template.product_variant_ids and
                     self.product_template.product_variant_ids[0])
-            self.product_attributes = (
-                self.product_template._get_product_attributes())
+                self.product_attributes = (
+                    self.product_id._get_product_attributes_values_dict())
             self.bom_id = self.env['mrp.bom']._bom_find(
                 product_tmpl_id=self.product_template.id)
             self.routing_id = self.bom_id.routing_id
@@ -345,12 +359,25 @@ class MrpProduction(models.Model):
                                                  self.product_lines)
         return results
 
+    def _get_workorder_in_product_lines(self, workcenter_lines, product_lines):
+        for p_line in product_lines:
+            for bom_line in self.bom_id.bom_line_ids:
+                if ((bom_line.product_template == p_line.product_template or
+                     bom_line.product_id.product_tmpl_id ==
+                     p_line.product_template) and
+                        (not bom_line.product_id or
+                         bom_line.product_id == p_line.product_id)):
+                    for wc_line in workcenter_lines:
+                        if wc_line.routing_wc_line == bom_line.operation:
+                            p_line.work_order = wc_line
+                            break
+
 
 class MrpProductionProductLineAttribute(models.Model):
     _name = 'mrp.production.product.line.attribute'
 
     product_line = fields.Many2one(
-        comodel_name='mrp.production.product.line.attribute',
+        comodel_name='mrp.production.product.line',
         string='Product line')
     attribute = fields.Many2one(comodel_name='product.attribute',
                                 string='Attribute')
@@ -361,6 +388,14 @@ class MrpProductionProductLineAttribute(models.Model):
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
+
+    @api.one
+    def _get_parent_value(self):
+        if self.attribute.parent_inherited:
+            production = self.product_line.production_id
+            for attr_line in production.product_attributes:
+                if attr_line.attribute == self.attribute:
+                    self.value = attr_line.value
 
     @api.one
     @api.depends('attribute')
@@ -393,11 +428,16 @@ class MrpProductionProductLine(models.Model):
                 product_id = (
                     self.product_template.product_variant_ids and
                     self.product_template.product_variant_ids[0])
+                product_attributes = (
+                    product_id._get_product_attributes_values_dict())
+            else:
+                product_attributes = (
+                    self.product_template._get_product_attributes_inherit_dict(
+                        self.production_id.product_attributes))
             self.name = product_id.name or self.product_template.name
             self.product_uom = self.product_template.uom_id
             self.product_id = product_id
-            self.product_attributes = (
-                self.product_template._get_product_attributes())
+            self.product_attributes = product_attributes
 
     @api.one
     @api.onchange('product_attributes')

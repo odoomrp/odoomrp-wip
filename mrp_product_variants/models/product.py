@@ -23,3 +23,17 @@ class ProductAttribute(models.Model):
     _inherit = 'product.attribute'
 
     parent_inherited = fields.Boolean('Inherits from parent')
+
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    def _get_product_attributes_inherit_dict(self, product_attribute_list):
+        product_attributes = self._get_product_attributes_dict()
+        for attr in product_attributes:
+            if self.env['product.attribute'].browse(
+                    attr['attribute']).parent_inherited:
+                for attr_line in product_attribute_list:
+                    if attr_line.attribute.id == attr['attribute']:
+                        attr.update({'value': attr_line.value.id})
+        return product_attributes

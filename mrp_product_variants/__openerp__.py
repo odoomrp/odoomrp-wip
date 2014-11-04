@@ -32,10 +32,7 @@
     ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
-    "summary": "",
-    "description": """
-Create custom product from a manufacturing order
-    """,
+    "summary": "Customized product in manufacturing",
     "data": [
         "security/ir.model.access.csv",
         "views/mrp_view.xml",
