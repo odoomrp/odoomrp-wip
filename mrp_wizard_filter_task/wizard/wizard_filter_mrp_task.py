@@ -29,7 +29,7 @@ class WizardFilterMrpTask(models.TransientModel):
     user = fields.Many2one("res.users", string="User")
 
     def onchange_mrp_production(self, cr, uid, ids, production_id,
-                               context=None):
+                                context=None):
         production_obj = self.pool['mrp.production']
         wc_ids = []
         if production_id:
