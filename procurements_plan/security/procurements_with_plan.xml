@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="1">
+
+	 <record id="group_procurement_plan" model="res.groups">
+        <field name="name">Procurement Plan</field>
+    </record>
+    
+</data>
+</openerp>

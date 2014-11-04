@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="wkf_procurement_plan" model="workflow">
+            <field name="name">procurement.plan.basic</field> 
+            <field name="osv">procurement.plan</field>
+            <field name="on_create">True</field>
+        </record>
+        <record id="act_draft" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_procurement_plan"/>
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+            <field name="kind">function</field>
+            <field name="action">action_draft()</field>
+        </record>
+        <record id="act_run" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_procurement_plan"/>
+            <field name="name">done</field>
+            <field name="kind">function</field>
+            <field name="action">action_run()</field>
+        </record>
+        <record id="act_canceled" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_procurement_plan"/>
+            <field name="name">canceled</field>
+            <field name="kind">function</field>
+            <field name="action">action_cancel()</field>
+        </record>
+        <record id="trans_draft_done" model="workflow.transition">
+            <field name="act_from" ref="act_draft"/>
+            <field name="act_to" ref="act_run"/>
+            <field name="signal">button_run</field>
+        </record>
+        <record id="trans_draft_canceled" model="workflow.transition">
+            <field name="act_from" ref="act_draft"/>
+            <field name="act_to" ref="act_canceled"/>
+            <field name="signal">button_canceled</field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="purchase_order_tree_inh_withplan" >
+            <field name="name">purchase.order.tree.inh.withplan</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="name" position="before">
+                        <field name="plan" />
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_order_form_inh_withplan" >
+            <field name="name">purchase.order.form.inh.withplan</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <notebook position="before">
+                        <group>
+                            <field name="plan" />
+                        </group>
+                    </notebook>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_request_for_quotation_filter_inh_withplan" >
+            <field name="name">view.request.for.quotation.filter.inh.withplan</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.view_request_for_quotation_filter"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="name" position="before">
+                        <field name="plan" />
+                    </field>
+                    <filter string="Supplier" position="before">
+                        <filter string="Plan" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'plan'}"/>
+                    </filter>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_purchase_order_filter_inh_withplan" >
+            <field name="name">view.purchase.order.filter.inh.withplan</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="name" position="before">
+                        <field name="plan" />
+                    </field>
+                    <filter string="Supplier" position="before">
+                        <filter string="Plan" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'plan'}"/>
+                    </filter>
+                </data>
+            </field>
+        </record>
+        
+
+    </data>
+</openerp>
