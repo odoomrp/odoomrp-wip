@@ -28,6 +28,21 @@ class WizardFilterMrpTask(models.TransientModel):
         "mrp.production.workcenter.line", string="Work Order")
     user = fields.Many2one("res.users", string="User")
 
+    def onchange_mrp_production(self, cr, uid, ids, production_id,
+                                context=None):
+        production_obj = self.pool['mrp.production']
+        wc_ids = []
+        if production_id:
+            production = production_obj.browse(cr, uid, production_id,
+                                               context=context)
+            for wc_line in production.workcenter_lines:
+                wc_ids.append(wc_line.id)
+        if wc_ids:
+            domain_wk_order = [('id', 'in', wc_ids)]
+            return {'domain': {'wk_order': domain_wk_order}}
+        else:
+            return {'domain': {'wk_order': False}}
+
     def mrp_task_open_window(self, cr, uid, ids, context=None):
         mod_obj = self.pool['ir.model.data']
         act_obj = self.pool['ir.actions.act_window']
@@ -49,8 +64,8 @@ class WizardFilterMrpTask(models.TransientModel):
             domain.append(('wk_order', '=', data.wk_order.id))
             result_context.update({'wk_order': data.wk_order.id})
         if data.user:
-            domain.append(('user', '=', data.user.id))
-            result_context.update({'user': data.user.id})
+            domain.append(('user_id', '=', data.user.id))
+            result_context.update({'user_id': data.user.id})
         result['domain'] = domain
         result['context'] = str(result_context)
         return result

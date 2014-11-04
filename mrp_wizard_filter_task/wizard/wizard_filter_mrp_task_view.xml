@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <form string="Wizard filter MRP task">
                     <group string="Production">
-                        <field name="mrp_production" />
+                        <field name="mrp_production" on_change="onchange_mrp_production(mrp_production)"/>
                     </group>
                     <group string="Work Order">
                         <field name="wk_order" />
