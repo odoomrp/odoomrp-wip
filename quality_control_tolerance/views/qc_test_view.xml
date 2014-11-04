@@ -19,6 +19,9 @@
                     <field name="max_variable" invisible="1" />
                     <field name="test_template_line_id" invisible="1" />
                 </field>
+                <field name="success" position="attributes">
+                    <attribute name="attrs">{'readonly' : [('tolerance_status', 'in', ['optimal', 'noadmissible'])]}</attribute>
+                </field>
             </field>
         </record>
         <record id="qc_test_line_tree_view_inh_tolerancepercen" model="ir.ui.view">
@@ -41,6 +44,9 @@
                     <field name="min_variable" invisible="1" />
                     <field name="max_variable" invisible="1" />
                     <field name="test_template_line_id" invisible="1" />
+                </field>
+                <field name="success" position="attributes">
+                    <attribute name="attrs">{'readonly' : [('tolerance_status', 'in', ['optimal', 'noadmissible'])]}</attribute>
                 </field>
             </field>
         </record>
