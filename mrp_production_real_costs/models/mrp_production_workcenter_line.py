@@ -16,33 +16,8 @@
 #
 ##############################################################################
 
-from openerp import models, api
+from openerp import models
 from datetime import datetime
-
-
-class MrpProduction(models.Model):
-
-    _inherit = 'mrp.production'
-
-    @api.multi
-    def action_production_end(self):
-        analytic_line_obj = self.env['account.analytic.line']
-        for record in self:
-            analytic_lines = analytic_line_obj.search([('mrp_production_id',
-                                                        '=', record.id)])
-            production_total_cost = 0.0
-            for line in analytic_lines:
-                production_total_cost += abs(line.amount)
-            product = record.product_id
-            if product.cost_method == 'average':
-                new_product_qty = record.product_qty
-                old_product_qty = (product.qty_available - new_product_qty)
-                old_product_cost = product.standard_price
-                new_product_cost = (old_product_qty * old_product_cost +
-                                    production_total_cost) / (old_product_qty +
-                                                              new_product_qty)
-                product.standard_price = new_product_cost
-        return super(MrpProduction, self).action_production_end()
 
 
 class MrpProductionWorkcenterLine(models.Model):

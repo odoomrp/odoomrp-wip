@@ -16,23 +16,6 @@
 #
 ##############################################################################
 
-{
-    "name": "Mrp Real Costs",
-    "version": "1.0",
-    "depends": ["analytic",
-                "project_timesheet",
-                "mrp_project_link",
-                "mrp_operations_time_control",
-                "mrp_production_project_estimated_cost"],
-    "author": "OdooMRP team",
-    "category": "MRP",
-    "description": """
-        With this module when you confirm one production order, analytical
-        notes are automatically generated with the real costs of the production
-        order.
-        """,
-    'data': [],
-    'demo': [],
-    'installable': True,
-    'auto_install': False,
-}
+from . import stock_move
+from . import mrp_production_workcenter_line
+from . import project_task_work

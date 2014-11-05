@@ -82,3 +82,30 @@ class StockMove(models.Model):
                                      }
                     analytic_line_obj.create(analytic_vals)
         return result
+
+    @api.multi
+    def product_price_update_before_done(self):
+        analytic_line_obj = self.env['account.analytic.line']
+        super(StockMove, self).product_price_update_before_done()
+        for move in self:
+            # adapt standard price on production final moves if the
+            # product cost_method is 'average'
+            if (move.production_id) and (move.product_id.cost_method ==
+                                         'average'):
+                analytic_lines = analytic_line_obj.search(
+                    [('mrp_production_id', '=', move.production_id.id)])
+                production_total_cost = 0.0
+                for line in analytic_lines:
+                    production_total_cost -= (line.amount)
+                product = move.product_id
+                product_avail = product.qty_available
+                if product_avail <= 0:
+                    new_std_price = production_total_cost / move.product_qty
+                else:
+                    amount_unit = product.standard_price
+                    new_std_price = (((amount_unit * product_avail) +
+                                     (production_total_cost)) /
+                                     (product_avail + move.product_qty))
+                # Write the standard price, as SUPERUSER_ID because a warehouse
+                # manager may not have the right to write on products
+                product.sudo().write({'standard_price': new_std_price})
