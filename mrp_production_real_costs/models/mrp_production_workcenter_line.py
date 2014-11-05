@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models
+from openerp import models, api
 from datetime import datetime
 
 
