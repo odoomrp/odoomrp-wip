@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="machines_form_inherit" model="ir.ui.view">
+            <field name="name">machines.form.inherit</field>
+            <field name="model">machinery</field>
+            <field name="inherit_id" ref="machine_manager.machines_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//separator[@string='Financial Details']" position="after">
+                    <field name="asset"/>
+                </xpath>
+                <field name="deprecperc" position="attributes">
+                   <attribute name="invisible">True</attribute>
+                </field>
+                <field name="deprecperiod" position="attributes">
+                   <attribute name="invisible">True</attribute>
+                </field>
+                <field name="assetacc" position="attributes">
+                   <attribute name="readonly">True</attribute>
+                </field>
+                <field name="depracc" position="attributes">
+                   <attribute name="readonly">True</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
