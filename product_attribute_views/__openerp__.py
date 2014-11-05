@@ -25,17 +25,12 @@
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
     ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
     "summary": "",
-    "description": """
-This module provide :
-
-* A menu item to access attribute lines
-* Views for attribute lines
-
-    """,
     "data": [
         "views/product_attribute_line_view.xml",
     ],

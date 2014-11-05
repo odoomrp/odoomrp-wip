@@ -20,19 +20,18 @@
     "name": "Product attribute lines views for types",
     "version": "1.0",
     "depends": [
-        "product_attribute_line_view",
+        "product_attribute_views",
         "product_attribute_types",
     ],
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
     ],
     "category": "Dependency/Hidden",
     "website": "http://www.odoomrp.com",
     "summary": "",
-    "description": """
-    This module provide :
-    """,
     "data": [
         "views/product_attribute_line_view.xml",
     ],

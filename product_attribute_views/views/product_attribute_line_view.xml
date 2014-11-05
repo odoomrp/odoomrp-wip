@@ -65,7 +65,7 @@
                     <field name="attribute_id" />
                     <separator />
                     <group expand="0" string="Group By">
-                        <filter string="Product" domain="[]" context="{'group_by':'product_tmpl_id'}"/>
+                        <filter string="Product Template" domain="[]" context="{'group_by':'product_tmpl_id'}"/>
                         <filter string="Attribute" domain="[]" context="{'group_by':'attribute_id'}"/>
                     </group>
                 </search>
