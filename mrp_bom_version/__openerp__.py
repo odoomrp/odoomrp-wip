@@ -41,7 +41,8 @@
     """,
     "depends": ['mrp',
                 ],
-    "data": ['data/mrp_bom_data.xml',
+    "data": ['data/ir_rule.xml',
+             'data/mrp_bom_data.xml',
              'views/mrp_bom_view.xml',
              ],
     "installable": True

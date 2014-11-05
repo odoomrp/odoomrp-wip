@@ -21,6 +21,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/group" position="before">
                     <header>
+                        <button name="button_active" type="object" string="In active" attrs="{'invisible':[('state','!=',False)]}" class="oe_highlight" />
                         <button name="button_active" type="object" string="In active" attrs="{'invisible':[('state','!=','draft')]}" class="oe_highlight" />
                         <button name="button_historical" type="object" string="Historical" attrs="{'invisible':[('state','!=','active')]}" class="oe_highlight" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,open,paid" />
@@ -35,54 +36,54 @@
                 <field name="product_tmpl_id" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
                 </field>
-                <field name="product_id" position="attributes">
+                <xpath expr="//form/group/group/field[@name='product_id']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
-                <field name="product_qty" position="attributes">
+                </xpath>
+                <xpath expr="//form/group/group/div/field[@name='product_qty']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
-                <field name="product_uom" position="attributes">
+                </xpath>
+                <xpath expr="//form/group/group/div/field[@name='product_uom']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
+                </xpath>
                 <field name="routing_id" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '!=', 'draft')]}</attribute>
                 </field>
-                <field name="name" position="attributes">
+                <xpath expr="//form/group/group/field[@name='name']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
-                <field name="code" position="attributes">
+                </xpath>
+                <xpath expr="//form/group/group/field[@name='code']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
-                <field name="type" position="attributes">
+                </xpath>
+                <xpath expr="//form/group/group/field[@name='type']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
+                </xpath>
                 <field name="company_id" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
                 </field>
                 <field name="bom_line_ids" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '!=', 'draft')]}</attribute>
                 </field>
-                <field name="position" position="attributes">
+                <xpath expr="//page[@string='Properties']/group/group/field[@name='position']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
-                <field name="sequence" position="attributes">
+                </xpath>
+                <xpath expr="//page[@string='Properties']/group/group/field[@name='sequence']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
-                <field name="active" position="attributes">
+                </xpath>
+                <xpath expr="//page[@string='Properties']/group/group/field[@name='active']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
-                <field name="date_start" position="attributes">
+                </xpath>
+                <xpath expr="//page[@string='Properties']/group/group/field[@name='date_start']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
-                <field name="date_stop" position="attributes">
+                </xpath>
+                <xpath expr="//page[@string='Properties']/group/group/field[@name='date_stop']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
-                <field name="product_rounding" position="attributes">
+                </xpath>
+                <xpath expr="//page[@string='Properties']/group/group/field[@name='product_rounding']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
-                <field name="product_efficiency" position="attributes">
+                </xpath>
+                <xpath expr="//page[@string='Properties']/group/group/field[@name='product_efficiency']" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
-                </field>
+                </xpath>
                 <field name="property_ids" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
                 </field>
