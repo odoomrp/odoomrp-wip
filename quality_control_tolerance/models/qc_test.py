@@ -91,15 +91,26 @@ class QcTestLine(models.Model):
         self.success = False
         if (self.proof_type != 'qualitative' and self.test_template_line_id):
             amount = self.actual_value_qt
+            found = False
             if self.min_value <= amount <= self.max_value:
+                found = True
                 self.success = True
                 self.tolerance_status = 'optimal'
-            elif ((self.min_allowed <= amount < self.min_variable)
-                  or (self.max_variable <= amount <= self.max_allowed)):
-                self.tolerance_status = 'admissible'
-            elif ((self.min_variable <= amount < self.min_value) or
-                  (self.max_value < amount < self.max_variable)):
-                self.tolerance_status = 'tolerable'
+            elif (self.min_allowed != 0 and self.min_variable != 0 and
+                  self.max_allowed != 0 and self.max_variable != 0):
+                if ((self.min_allowed <= amount < self.min_variable) or
+                        (self.max_variable <= amount <= self.max_allowed)):
+                    found = True
+                    self.tolerance_status = 'admissible'
+            elif self.min_allowed != 0 and self.max_allowed != 0:
+                if ((self.min_allowed <= amount < self.min_value) or
+                        (self.max_value <= amount <= self.max_allowed)):
+                    found = True
+                    self.tolerance_status = 'admissible'
+            if not found and self.min_variable != 0 and self.max_variable != 0:
+                if ((self.min_variable <= amount < self.min_value) or
+                        (self.max_value < amount < self.max_variable)):
+                    self.tolerance_status = 'tolerable'
 
     tolerance_status = fields.Selection(
         [('optimal', 'Optimal'),
