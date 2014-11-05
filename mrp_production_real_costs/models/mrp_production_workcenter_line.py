@@ -24,37 +24,39 @@ class MrpProductionWorkcenterLine(models.Model):
 
     _inherit = 'mrp.production.workcenter.line'
 
+    @api.multi
     def _create_analytic_line(self):
+        self.ensure_one()
         analytic_line_obj = self.env['account.analytic.line']
         task_obj = self.env['project.task']
-        hour_uom = self.env.ref('product.product_uom_hour', False)
-        operation_line = self.operation_time_lines[-1]
-        quantity = operation_line.uptime
-        production = self.production_id
-        workcenter = self.workcenter_id
-        product = workcenter.product_id
-        journal_id = workcenter.costs_journal_id.id or False
-        analytic_account_id = production.analytic_account_id.id or False
-        task_id = False
-        if production:
-            task = task_obj.search([('mrp_production_id', '=', production.id),
-                                    ('wk_order', '=', False)])
-            if task:
-                task_id = task[0].id
-        name = ((production.name or '') + '-' +
-                (self.routing_wc_line.operation.code or '') + '-' +
-                (product.default_code or ''))
-        general_account = workcenter.costs_general_account_id.id or False
-        price = workcenter.costs_hour
-        if price > 0.0:
+        if self.workcenter_id.costs_hour > 0.0:
+            hour_uom = self.env.ref('product.product_uom_hour', False)
+            operation_line = self.operation_time_lines[-1]
+            production = self.production_id
+            workcenter = self.workcenter_id
+            product = workcenter.product_id
+            journal_id = workcenter.costs_journal_id.id or False
+            analytic_account_id = production.analytic_account_id.id or False
+            task_id = False
+            if production:
+                task = task_obj.search([('mrp_production_id', '=',
+                                         production.id),
+                                        ('wk_order', '=', False)])
+                if task:
+                    task_id = task[0].id
+            name = ((production.name or '') + '-' +
+                    (self.routing_wc_line.operation.code or '') + '-' +
+                    (product.default_code or ''))
+            general_account = workcenter.costs_general_account_id.id or False
+            price = workcenter.costs_hour
             analytic_vals = {'name': name,
                              'ref': name,
                              'date': datetime.now().strftime('%Y-%m-%d'),
                              'user_id': self.env.uid,
                              'product_id': product.id,
                              'product_uom_id': hour_uom.id,
-                             'amount': -(price * quantity),
-                             'unit_amount': quantity,
+                             'amount': -(price * operation_line.uptime),
+                             'unit_amount': operation_line.uptime,
                              'journal_id': journal_id,
                              'account_id': analytic_account_id,
                              'general_account_id': general_account,
@@ -65,11 +67,13 @@ class MrpProductionWorkcenterLine(models.Model):
             analytic_line = analytic_line_obj.create(analytic_vals)
             return analytic_line
 
+    @api.multi
     def action_pause(self):
         result = super(MrpProductionWorkcenterLine, self).action_pause()
         self._create_analytic_line()
         return result
 
+    @api.multi
     def action_done(self):
         result = super(MrpProductionWorkcenterLine, self).action_done()
         self._create_analytic_line()

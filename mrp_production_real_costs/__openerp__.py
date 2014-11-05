@@ -28,9 +28,14 @@
     "author": "OdooMRP team",
     "category": "MRP",
     "description": """
-        With this module when you confirm one production order, analytical
-        lines are automatically generated with the real costs of the production
-        order.
+        - This module allows to control the real cost of a production order,
+        creating lines in the analytic account defined in the order that is
+        created by the module mrp_project_link.
+
+        - Updates product standard price when a production orders final product
+        is done.
+            (Product stock * Product standard price + Production real cost) /
+            (Product stock + Final product quantity)
         """,
     'data': [],
     'demo': [],

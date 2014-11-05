@@ -35,34 +35,35 @@ class StockMove(models.Model):
             restrict_lot_id=restrict_lot_id,
             restrict_partner_id=restrict_partner_id, consumed_for=consumed_for)
         for record in self:
-            if record.production_id or record.raw_material_production_id:
-                product = record.product_id
-                journal_id = self.env.ref(
-                    'mrp_production_project_estimated_cost.analytic_journal'
-                    '_estimated_materials', False)
-                production_id = False
-                analytic_account_id = False
-                task_id = False
-                if record.production_id:
-                    production = record.production_id
-                elif record.raw_material_production_id:
-                    production = record.raw_material_production_id
-                if production:
-                    production_id = production.id
-                    analytic_account_id = production.analytic_account_id.id
-                    task = task_obj.search(
-                        [('mrp_production_id', '=', production_id),
-                         ('wk_order', '=', False)])
-                    if task:
-                        task_id = task[0].id
-                name = ((production.name or '') + '-' +
-                        (record.work_order.routing_wc_line.operation.code or
-                         '') + '-' + (product.default_code or ''))
-                general_account = (
-                    product.property_account_income.id or
-                    product.categ_id.property_account_income_categ.id or False)
-                price = record.product_id.standard_price
-                if price > 0.0:
+            price = record.product_id.standard_price
+            if price > 0.0:
+                if record.production_id or record.raw_material_production_id:
+                    product = record.product_id
+                    journal_id = self.env.ref(
+                        'mrp_production_project_estimated_cost.analytic_'
+                        'journal_estimated_materials', False)
+                    production_id = False
+                    analytic_account_id = False
+                    task_id = False
+                    if record.production_id:
+                        production = record.production_id
+                    elif record.raw_material_production_id:
+                        production = record.raw_material_production_id
+                    if production:
+                        production_id = production.id
+                        analytic_account_id = production.analytic_account_id.id
+                        task = task_obj.search(
+                            [('mrp_production_id', '=', production_id),
+                             ('wk_order', '=', False)])
+                        if task:
+                            task_id = task[0].id
+                    name = ((production.name or '') + '-' +
+                            (record.work_order.routing_wc_line.operation.code
+                             or '') + '-' + (product.default_code or ''))
+                    general_account = (
+                        product.property_account_income.id or
+                        product.categ_id.property_account_income_categ.id or
+                        False)
                     date = datetime.now().strftime('%Y-%m-%d')
                     uom_id = record.product_id.uom_id.id
                     analytic_vals = {'name': name,
@@ -94,18 +95,13 @@ class StockMove(models.Model):
                                          'average'):
                 analytic_lines = analytic_line_obj.search(
                     [('mrp_production_id', '=', move.production_id.id)])
-                production_total_cost = 0.0
-                for line in analytic_lines:
-                    production_total_cost -= (line.amount)
+                prod_total_cost = [-line.amount for line in analytic_lines]
                 product = move.product_id
                 product_avail = product.qty_available
-                if product_avail <= 0:
-                    new_std_price = production_total_cost / move.product_qty
-                else:
-                    amount_unit = product.standard_price
-                    new_std_price = (((amount_unit * product_avail) +
-                                     (production_total_cost)) /
-                                     (product_avail + move.product_qty))
+                amount_unit = product.standard_price
+                new_std_price = ((amount_unit * product_avail +
+                                  prod_total_cost) / (product_avail >= 0.0 or
+                                                      0.0 + move.product_qty))
                 # Write the standard price, as SUPERUSER_ID because a warehouse
                 # manager may not have the right to write on products
                 product.sudo().write({'standard_price': new_std_price})
