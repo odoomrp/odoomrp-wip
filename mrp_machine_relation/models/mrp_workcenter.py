@@ -28,14 +28,17 @@ class MrpWorkcenter(models.Model):
     @api.one
     @api.onchange('machine')
     def onchange_operation(self):
-        if self.machine:
-            if self.machine.users:
-                today = fields.Date.context_today(self)
-                user_lst = []
-                for user in self.machine.users:
-                    if not user.start_date and not user.end_date:
-                        user_lst.append(user.m_user.id)
-                    elif user.start_date < today and user.end_date >= today:
-                        user_lst.append(user.m_user.id)
-                if user_lst:
-                    self.operators = user_lst
+        if self.machine and self.machine.users:
+            today = fields.Date.context_today(self)
+            user_lst = []
+            for user in self.machine.users:
+                if not user.start_date and not user.end_date:
+                    user_lst.append(user.m_user.id)
+                elif user.start_date < today and user.end_date >= today:
+                    user_lst.append(user.m_user.id)
+                elif user.start_date < today and not user.end_date:
+                    user_lst.append(user.m_user.id)
+                elif not user.start_date and user.end_date >= today:
+                    user_lst.append(user.m_user.id)
+            if user_lst:
+                self.operators = user_lst
