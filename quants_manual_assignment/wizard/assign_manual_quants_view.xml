@@ -17,20 +17,6 @@
                                 <field name="selected" />
                             </form>
                         </field>
-<!--                         <button name="assign_quant" string="Assign"
-                            type="object" class="oe_highlight" colspan="4"/> -->
-<!--                         <field name='unassign_lines' colspan="4">
-                            <tree>
-                                <field name="quant" />
-                                <button name="unassign_quant"
-                                    string="unassign" type="object" />
-                            </tree>
-                            <form>
-                                <field name="quant" />
-                                <button name="unassign_quant"
-                                    string="unassign" type="object" />
-                            </form>
-                        </field> -->
                     </group>
                     <footer>
                         <button name="assign_quants" type="object"
@@ -49,3 +35,4 @@
 
     </data>
 </openerp>
+
