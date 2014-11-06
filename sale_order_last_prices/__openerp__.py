@@ -1,6 +1,7 @@
 
 # -*- encoding: utf-8 -*-
 ##############################################################################
+#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -16,5 +17,16 @@
 #
 ##############################################################################
 
-from . import sale_order
-from . import purchase_order
+{
+    "name": "Sale Order Last Prices",
+    "version": "1.0",
+    "description": """
+    This module allows to know the product last prices in a sale order.
+    """,
+    'author': 'OdooMRP team',
+    'website': "http://www.odoomrp.com",
+    "depends": ['sale'],
+    "category": "Custom Modules",
+    "data": ['views/sale_order_view.xml'],
+    "installable": True
+}

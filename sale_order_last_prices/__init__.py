@@ -1,7 +1,6 @@
 
 # -*- encoding: utf-8 -*-
 ##############################################################################
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -17,18 +16,4 @@
 #
 ##############################################################################
 
-{
-    "name": "Product Last Prices",
-    "version": "1.0",
-    "description": """
-    This module allows to know the product last prices in a sale/purchase
-    order.
-    """,
-    'author': 'OdooMRP team',
-    'website': "http://www.odoomrp.com",
-    "depends": ['purchase', 'sale'],
-    "category": "Custom Modules",
-    "data": ['views/sale_order_view.xml',
-             'views/purchase_order_view.xml'],
-    "installable": True
-}
+from . import models
