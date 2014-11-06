@@ -94,16 +94,16 @@ class QcTestLine(models.Model):
             if self.min_value <= amount <= self.max_value:
                 self.success = True
                 self.tolerance_status = 'optimal'
-            elif (self.min_allowed != 0 and self.min_variable != 0 and
-                  self.max_allowed != 0 and self.max_variable != 0):
+            elif (self.min_allowed and self.min_variable and
+                  self.max_allowed and self.max_variable):
                 if ((self.min_allowed <= amount < self.min_variable) or
                         (self.max_variable <= amount <= self.max_allowed)):
                     self.tolerance_status = 'admissible'
-            elif self.min_allowed != 0 and self.max_allowed != 0:
+            elif self.min_allowed and self.max_allowed:
                 if ((self.min_allowed <= amount < self.min_value) or
                         (self.max_value <= amount <= self.max_allowed)):
                     self.tolerance_status = 'admissible'
-            elif self.min_variable != 0 and self.max_variable != 0:
+            elif self.min_variable and self.max_variable:
                 if ((self.min_variable <= amount < self.min_value) or
                         (self.max_value < amount < self.max_variable)):
                     self.tolerance_status = 'tolerable'
