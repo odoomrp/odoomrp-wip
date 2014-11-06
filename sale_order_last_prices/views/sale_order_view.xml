@@ -1,17 +1,6 @@
 <?xml version="1.0"?>
 <openerp>
 <data>
-        <record model="ir.ui.view" id="sale.sale_order_buttons">
-            <field name="name">sale.order.buttons</field>
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form" />
-            <field name="arch" type="xml">
-                <h1 position="after">
-                    <div class="oe_right oe_button_box" name="buttons">
-                    </div>
-                </h1>
-            </field>
-        </record>
 
     <!-- Add sale product prices button in sale order form. -->
     <record id="view_sale_product_prices_form" model="ir.ui.view">
@@ -19,10 +8,10 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.sale_order_buttons"/>
         <field name="arch" type="xml">
-            <div name="buttons" position="inside">
-                <button name="action_sale_product_prices" string="Product Prices" icon="fa-money"
-                    class="oe_stat_button"  type="object"/>
-            </div>
+            <xpath expr="//tree/field[@name='price_subtotal']" position="after">
+                <button name="action_sale_product_prices" string="Product Prices" icon="gtk-dialog-question"
+                help="Last Prices" type="object"/>
+            </xpath>
         </field>
     </record>
     <record id="last_sale_product_prices_view" model="ir.ui.view">
@@ -32,7 +21,6 @@
            <field name="arch" type="xml">
                 <tree string="Last Product Prices">
                     <field name="order_id"/>
-                    <field name="name"/>
                     <field name="product_id"/>
                     <field name="product_uom_qty"/>
                     <field name="price_unit"/>

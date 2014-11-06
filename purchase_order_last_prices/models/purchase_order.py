@@ -20,21 +20,17 @@
 from openerp import models, api
 
 
-class PurchaseOrder(models.Model):
-    _inherit = 'purchase.order'
+class PurchaseOrderLine(models.Model):
+    _inherit = 'purchase.order.line'
 
     @api.multi
     def action_purchase_product_prices(self):
-        purchase_line_obj = self.env['purchase.order.line']
         id2 = self.env.ref(
             'purchase_order_last_prices.last_purchase_product_prices_view')
-        purchase_line_lst = []
-        for order_line in self.order_line:
-            purchase_line = purchase_line_obj.search(
-                [('order_id', '!=', self.id),
-                 ('product_id', '=', order_line.product_id.id)],
-                order='create_date DESC', limit=1)
-            purchase_line_lst.append(purchase_line.id)
+        purchase_lines = self.search(
+            [('order_id', '!=', self.order_id.id),
+             ('product_id', '=', self.product_id.id)],
+            order='create_date DESC')
         return {
             'view_type': 'tree',
             'view_mode': 'tree',
@@ -43,6 +39,5 @@ class PurchaseOrder(models.Model):
             'view_id': False,
             'type': 'ir.actions.act_window',
             'target': 'new',
-            'domain': "[('id','in',["+','.join(map(str,
-                                                   purchase_line_lst))+"])]",
+            'domain': "[('id','in',["+','.join(map(str, purchase_lines.ids))+"])]",
             }
