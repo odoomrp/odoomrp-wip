@@ -25,12 +25,9 @@ class SaleOrder(models.Model):
 
     @api.multi
     def action_sale_product_prices(self):
-        data_obj = self.env['ir.model.data']
         sale_line_obj = self.env['sale.order.line']
-        id2 = data_obj._get_id('product_last_prices',
-                               'last_sale_product_prices_view')
-        if id2:
-            id2 = data_obj.browse(id2).res_id
+        id2 = self.env.ref(
+            'sale_order_last_prices.last_sale_product_prices_view')
         sale_line_lst = []
         for order_line in self.order_line:
             sale_line = sale_line_obj.search(
@@ -42,7 +39,7 @@ class SaleOrder(models.Model):
             'view_type': 'tree',
             'view_mode': 'tree',
             'res_model': 'sale.order.line',
-            'views': [(id2, 'tree')],
+            'views': [(id2.id, 'tree')],
             'view_id': False,
             'type': 'ir.actions.act_window',
             'target': 'new',
