@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+    <!-- Add sale product prices button in sale order form. -->
+    <record id="view_sale_product_prices_form" model="ir.ui.view">
+        <field name="name">view.sale.product.prices.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='price_subtotal']" position="after">
+                <button name="action_sale_product_prices" string="Product Prices" icon="gtk-dialog-question"
+                help="Last Prices" type="object"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="last_sale_product_prices_view" model="ir.ui.view">
+           <field name="name">last.product.prices.view</field>
+           <field name="model">sale.order.line</field>
+            <field name="priority" eval="40"/>
+           <field name="arch" type="xml">
+                <tree string="Last Product Prices">
+                    <field name="order_id"/>
+                    <field name="product_id"/>
+                    <field name="product_uom_qty"/>
+                    <field name="price_unit"/>
+                    <field name="price_subtotal"/>
+                </tree>
+           </field>
+      </record>
+</data>
+</openerp>
