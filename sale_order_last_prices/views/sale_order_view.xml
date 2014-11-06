@@ -6,7 +6,7 @@
     <record id="view_sale_product_prices_form" model="ir.ui.view">
         <field name="name">view.sale.product.prices.form</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.sale_order_buttons"/>
+        <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//tree/field[@name='price_subtotal']" position="after">
                 <button name="action_sale_product_prices" string="Product Prices" icon="gtk-dialog-question"

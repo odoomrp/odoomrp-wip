@@ -39,5 +39,6 @@ class PurchaseOrderLine(models.Model):
             'view_id': False,
             'type': 'ir.actions.act_window',
             'target': 'new',
-            'domain': "[('id','in',["+','.join(map(str, purchase_lines.ids))+"])]",
+            'domain': "[('id','in',["+','.join(map(str,
+                                                   purchase_lines.ids))+"])]",
             }
