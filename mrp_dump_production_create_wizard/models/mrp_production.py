@@ -94,7 +94,6 @@ class MrpProduction(models.Model):
                     op.ul.product.uom_id.id, op.ul.product.uos_id.id,
                     op.ul.ul_qty)
                 res.append(value)
-
             else:
                 for cont in conts:
                     product = prod_obj.browse(cont[0])

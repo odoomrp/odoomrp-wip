@@ -24,7 +24,8 @@
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Manufacturing",
     "description": """
-    Create manufacturing order from produced summary
+    Extension of mrp_dump module that adds possibility to create manufacturing
+    orders from bulk package lines
     """,
     'data': ["views/mrp_production2production_view.xml"],
     "installable": True,
