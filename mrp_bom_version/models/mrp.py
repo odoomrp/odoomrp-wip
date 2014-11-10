@@ -28,7 +28,6 @@ class MrpBom(models.Model):
         },
     }
 
-    review = fields.Integer(string='Review')
     historical_date = fields.Date(string='Historical Date', readonly=True)
     state = fields.Selection([('draft', 'Draft'),
                               ('active', 'Active'),
@@ -37,9 +36,9 @@ class MrpBom(models.Model):
                              default='draft', copy=False)
 
     @api.one
-    @api.constrains('review')
-    def check_mrp_bom_version(self):
-        domain = [('id', '!=', self.id), ('review', '=', self.review)]
+    @api.constrains('sequence')
+    def check_mrp_bom_sequence(self):
+        domain = [('id', '!=', self.id), ('sequence', '=', self.sequence)]
         if self.product_tmpl_id:
             domain.append(('product_tmpl_id', '=', self.product_tmpl_id.id))
         else:
@@ -51,12 +50,16 @@ class MrpBom(models.Model):
         found = self.search(domain)
         if found:
             raise exceptions.Warning(
-                _('The version number must be unique'))
+                _('The sequence must be unique'))
 
     def copy(self, cr, uid, id, default=None, context=None):
         if default is None:
             default = {}
-        default.update({'review': 0})
+        bom_ids = self.search(cr, uid, [], order='sequence desc',
+                              context=context)
+        bom = self.browse(cr, uid, bom_ids[0], context=context)
+        maxseq = bom.sequence + 1
+        default.update({'sequence': maxseq})
         return super(MrpBom, self).copy(cr, uid, id, default=default,
                                         context=context)
 
