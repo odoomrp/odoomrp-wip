@@ -8,7 +8,7 @@
                 <tree string="MRP BoMs">
                     <field name="name"/>
                     <field name="active" />
-                    <field name="review" />
+                    <field name="sequence" />
                     <field name="state" />
                     <field name="historical_date"/>
                 </tree>
@@ -28,8 +28,7 @@
                     </header>
                 </xpath>
                 <field name="company_id" position="after">
-                    <group colspan="2" col="4">
-                        <field name="review" attrs="{'readonly':[('state', '=', 'historical')]}" />
+                    <group colspan="2" >
                         <field name="historical_date" />
                     </group>
                 </field>
