@@ -63,7 +63,7 @@ class ProcurementOrder(models.Model):
         return True
 
     @api.multi
-    def run(self):
+    def run(self, autocommit=False):
         mto_record = self.env.ref('stock.route_warehouse0_mto')
         for record in self:
             if mto_record in record.product_id.route_ids:
@@ -74,6 +74,6 @@ class ProcurementOrder(models.Model):
                     main_project = record.move_dest_id.main_project_id.id
                 if main_project:
                     record.main_project_id = main_project
-        res = super(ProcurementOrder, self).run()
+        res = super(ProcurementOrder, self).run(autocommit=autocommit)
         self.set_main_project()
         return res
