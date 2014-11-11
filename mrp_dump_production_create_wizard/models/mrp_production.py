@@ -17,7 +17,7 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models, exceptions
+from openerp import api, fields, models, exceptions, _
 
 
 class MrpBom(models.Model):
