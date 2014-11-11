@@ -34,5 +34,5 @@ msgstr "Orden de trabajo"
 #: code:addons/mrp_production_real_costs/models/mrp_production_workcenter_line.py:59
 #, python-format
 msgid "You must define a general account for this Workcenter: [%s] %s"
-msgstr "Es necesario que defina una cuenta contable general para este centro de producción: [%s] %s"
+msgstr "Es necesario que defina una cuenta contable para este centro de producción: [%s] %s"
 
