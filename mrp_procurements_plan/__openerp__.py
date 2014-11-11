@@ -33,11 +33,10 @@
     """,
     "depends": ['procurements_plan',
                 'mrp',
-                'stock',
+                'stock'
                 ],
     "data": ['views/mrp_production_view.xml',
              'views/procurement_plan_view.xml',
-             'views/purchase_order_view.xml',
              ],
     "installable": True
 }
