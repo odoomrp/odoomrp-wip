@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="mrp_routing_form_view_inh_mrproutingworkcenter">
+            <field name="name">mrp.routing.form.view.inh.rproutingworkcenter</field>
+            <field name="model">mrp.routing</field>
+            <field name="inherit_id" ref="mrp.mrp_routing_form_view" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="workcenter" required="1" />
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="mrp_workcenter_view_inh_mrproutingworkcenter">
+            <field name="name">mrp.workcenter.view.inh.rproutingworkcenter</field>
+            <field name="model">mrp.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
+            <field name="arch" type="xml">
+                <field name="capacity_per_cycle" position="before">
+                    <field name="capacity_per_cycle" />
+                </field>
+            </field>
+        </record>
+        <record id="mrp_production_form_view_inh_mrproutingworkcenter" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.inh.mrproutingworkcenter</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <field name="product_qty" position="attributes">
+                    <attribute name="on_change">product_qty_change_mrp_production(product_qty, routing_id)</attribute>
+                </field>
+                <field name="origin" position="after">
+                    <field name="allowed_routings" invisible="1"/>
+                </field>
+                <field name="routing_id" position="attributes">
+                    <attribute name="domain">[('id', 'in', allowed_routings[0][2])]</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
