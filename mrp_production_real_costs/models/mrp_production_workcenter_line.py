@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, api
+from openerp import models, api, exceptions, _
 from datetime import datetime
 
 
@@ -36,6 +36,10 @@ class MrpProductionWorkcenterLine(models.Model):
             workcenter = self.workcenter_id
             product = workcenter.product_id
             journal_id = workcenter.costs_journal_id.id or False
+            if not journal_id:
+                journal_id = self.env.ref(
+                    'mrp_production_project_estimated_cost.analytic_journal'
+                    '_estimated_machines', False)
             analytic_account_id = production.analytic_account_id.id or False
             task_id = False
             if production:
@@ -47,7 +51,15 @@ class MrpProductionWorkcenterLine(models.Model):
             name = ((production.name or '') + '-' +
                     (self.routing_wc_line.operation.code or '') + '-' +
                     (product.default_code or ''))
-            general_account = workcenter.costs_general_account_id.id or False
+            general_account = (workcenter.costs_general_account_id.id or
+                               product.property_account_income or
+                               product.categ_id.property_account_income_categ
+                               or False)
+            if not general_account:
+                raise exceptions.Warning(_("You must define a general account"
+                                           " for this Workcenter: [%s] %s") %
+                                         (workcenter.code or '',
+                                          workcenter.name or ''))
             price = workcenter.costs_hour
             analytic_vals = {'name': name,
                              'ref': name,
