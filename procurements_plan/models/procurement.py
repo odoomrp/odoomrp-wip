@@ -40,7 +40,7 @@ class ProcurementOrder(models.Model):
 
     def create_procurement_purchase_order(self, cr, uid, procurement, po_vals,
                                           line_vals, context=None):
-        purchase_obj = self.env['purchase.order']
+        purchase_obj = self.pool['purchase.order']
         pur = super(ProcurementOrder, self).create_procurement_purchase_order(
             cr, uid, procurement, po_vals, line_vals, context=context)
         if procurement.plan:
