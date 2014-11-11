@@ -42,22 +42,22 @@ class MrpProduction(models.Model):
     def _compute_allowed_routings(self):
         lines = self.env['mrp.routing']
         self.allowed_routings = lines
-        if self.bom_id and self.bom_id.routing_ids:
-            for routing in self.bom_id.routing_ids:
-                lines += routing
-            self.allowed_routings = lines
+        for routing in self.bom_id.routing_ids:
+            lines |= routing
+        self.allowed_routings = lines
 
     allowed_routings = fields.Many2many(
         'mrp.routing', string='Permited Routings',
         compute='_compute_allowed_routings')
 
-    def product_qty_change_mrp_production(self, cr, uid, ids, product_qty=0,
-                                          routing_id=False, context=None):
+    @api.multi
+    def product_qty_change_mrp_production(self, product_qty=0,
+                                          routing_id=False):
         result = {}
         result['value'] = {}
-        routing_obj = self.pool['mrp.routing']
+        routing_obj = self.env['mrp.routing']
         if product_qty and routing_id:
-            routing = routing_obj.browse(cr, uid, routing_id, context=context)
+            routing = routing_obj.browse(routing_id)
             if (product_qty < routing.workcenter.capacity_per_cycle_min or
                     product_qty > routing.workcenter.capacity_per_cycle):
                 warning = {
