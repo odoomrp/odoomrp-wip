@@ -146,9 +146,12 @@ class MrpBom(models.Model):
                                bom_line_id.product_efficiency,
                                bom_line_id.product_rounding)
             if not bom_line_id.product_id:
-                bom_id = self._bom_find(
-                    product_tmpl_id=bom_line_id.product_template.id,
-                    properties=properties)
+                if not bom_line_id.type != "phantom":
+                    bom_id = self._bom_find(
+                        product_tmpl_id=bom_line_id.product_template.id,
+                        properties=properties)
+                else:
+                    bom_id = False
             else:
                 bom_id = self._bom_find(product_id=bom_line_id.product_id.id,
                                         properties=properties)
@@ -203,10 +206,14 @@ class MrpBom(models.Model):
                 result = result + res[0]
                 result2 = result2 + res[1]
             else:
+                if not bom_line_id.product_id:
+                    name = bom_line_id.product_template.name_get()[0][1]
+                else:
+                    name = bom_line_id.product_id.name_get()[0][1]
                 raise exceptions.Warning(
                     _('Invalid Action! BoM "%s" contains a phantom BoM line'
                       ' but the product "%s" does not have any BoM defined.') %
-                    (master_bom.name, bom_line_id.product_id.name_get()[0][1]))
+                    (master_bom.name, name))
 
         self._get_workorder_operations(result2, level=level,
                                        routing_id=routing_id)
@@ -362,11 +369,11 @@ class MrpProduction(models.Model):
     def _get_workorder_in_product_lines(self, workcenter_lines, product_lines):
         for p_line in product_lines:
             for bom_line in self.bom_id.bom_line_ids:
-                if ((bom_line.product_template == p_line.product_template or
-                     bom_line.product_id.product_tmpl_id ==
-                     p_line.product_template) and
+                if ((bom_line.product_template.id == p_line.product_template.id
+                        or bom_line.product_id.product_tmpl_id.id ==
+                        p_line.product_template.id) and
                         (not bom_line.product_id or
-                         bom_line.product_id == p_line.product_id)):
+                         bom_line.product_id.id == p_line.product_id.id)):
                     for wc_line in workcenter_lines:
                         if wc_line.routing_wc_line == bom_line.operation:
                             p_line.work_order = wc_line
