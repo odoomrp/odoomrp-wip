@@ -39,16 +39,16 @@ class MrpProduction(models.Model):
 
     @api.one
     @api.depends('bom_id', 'bom_id.routing_ids')
-    def _compute_allowed_routings(self):
+    def _compute_permited_routings(self):
         lines = self.env['mrp.routing']
-        self.allowed_routings = lines
+        self.permited_routings = lines
         for routing in self.bom_id.routing_ids:
             lines |= routing
-        self.allowed_routings = lines
+        self.permited_routings = lines
 
-    allowed_routings = fields.Many2many(
+    permited_routings = fields.Many2many(
         'mrp.routing', string='Permited Routings',
-        compute='_compute_allowed_routings')
+        compute='_compute_permited_routings')
 
     @api.multi
     def product_qty_change_mrp_production(self, product_qty=0,
