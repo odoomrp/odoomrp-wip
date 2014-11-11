@@ -36,14 +36,16 @@
                 <xpath
                     expr="//field[@name='order_line']/form//label[@for='name']"
                     position="before">
-                    <label for="product_attributes" />
+                    <label for="product_attributes"
+                        attrs="{'invisible':[('product_attributes','=',[])]}" />
                     <field name="product_attributes"
                         attrs="{'invisible':[('product_attributes','=',[])]}"
                         options="{'no_create': True, 'no_delete': True}">
                         <tree create="0" delete="0" editable="1">
                             <field name="attribute" />
-                            <field name="possible_values" invisible="True"/>
+                            <field name="possible_values" invisible="True" />
                             <field name="value" />
+                            <field name="price_extra" />
                         </tree>
                     </field>
                 </xpath>
@@ -69,6 +71,7 @@
                         <tree create="0" delete="0" editable="1">
                             <field name="attribute" />
                             <field name="value" />
+                            <field name="price_extra" />
                         </tree>
                     </field>
                 </field>

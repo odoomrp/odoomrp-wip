@@ -17,10 +17,36 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
+from openerp.addons import decimal_precision as dp
 
 
 class ProductAttributeValueSaleLine(models.Model):
     _name = 'sale.order.line.attribute'
+
+    @api.one
+    @api.depends('value', 'sale_line.product_template')
+    def _get_price_extra(self):
+        price_extra = 0.0
+        for price in self.value.price_ids:
+            if price.product_tmpl_id.id == self.sale_line.product_template.id:
+                price_extra = price.price_extra
+        self.price_extra = price_extra
+
+    @api.one
+    @api.depends('price_extra')
+    def _set_price_extra(self):
+        p_obj = self.env['product.attribute.price']
+        p_ids = p_obj.search([('value_id', '=', self.value.id),
+                              ('product_tmpl_id', '=',
+                               self.sale_line.product_template.id)])
+        if p_ids:
+            p_ids.write({'price_extra': self.price_extra})
+        else:
+            p_obj.create({
+                'product_tmpl_id': self.sale_line.product_template.id,
+                'value_id': self.value.id,
+                'price_extra': self.price_extra,
+            })
 
     @api.one
     @api.depends('attribute', 'sale_line.product_template',
@@ -42,6 +68,12 @@ class ProductAttributeValueSaleLine(models.Model):
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
+    price_extra = fields.Float(
+        compute='_get_price_extra', inverse='_set_price_extra',
+        string='Attribute Price Extra',
+        digits=dp.get_precision('Product Price'),
+        help="Price Extra: Extra price for the variant with this attribute"
+        " value on sale price. eg. 200 price extra, 1000 + 200 = 1200.")
 
 
 class SaleOrderLine(models.Model):
@@ -74,12 +106,17 @@ class SaleOrderLine(models.Model):
     def onchange_product_attributes(self):
         product_obj = self.env['product.product']
         description = self.product_template.name
+        price_extra = 0.0
         for attr_line in self.product_attributes:
             if attr_line.value:
                 description += _('\n%s: %s') % (attr_line.attribute.name,
                                                 attr_line.value.name)
+                price_extra += attr_line.price_extra
+
         self.product_id = product_obj._product_find(self.product_template,
                                                     self.product_attributes)
+        if not self.product_id:
+            self.price_unit = self.product_template.list_price + price_extra
         self.name = description
 
     @api.multi
