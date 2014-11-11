@@ -87,13 +87,14 @@ class MrpProduction(models.Model):
             conts = bom_obj.get_product_components(
                 product_id=op.ul.product.id, accumulated_qty=op.ul.ul_qty)
             if not conts:
-                value = self.get_new_components_info(
-                    op.ul.product.id,
-                    op.ul.product.property_stock_production.id,
-                    op.ul.product.property_stock_inventory.id,
-                    op.ul.product.uom_id.id, op.ul.product.uos_id.id,
-                    op.ul.ul_qty)
-                res.append(value)
+                if op.ul.product:
+                    value = self.get_new_components_info(
+                        op.ul.product.id,
+                        op.ul.product.property_stock_production.id,
+                        op.ul.product.property_stock_inventory.id,
+                        op.ul.product.uom_id.id, op.ul.product.uos_id.id,
+                        op.ul.ul_qty)
+                    res.append(value)
             else:
                 for cont in conts:
                     product = prod_obj.browse(cont[0])
