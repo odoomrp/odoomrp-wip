@@ -17,7 +17,7 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models
+from openerp import api, fields, models, exceptions
 
 
 class MrpBom(models.Model):
@@ -84,6 +84,13 @@ class MrpProduction(models.Model):
         prod_obj = self.env['product.product']
         res = []
         for op in self.pack:
+            if op.processed:
+                continue
+            if not op.ul.product:
+                raise exceptions.Warning(
+                    _('Creation Error'),
+                    _('At least one logistic unit does not have'
+                      ' associated a product'))
             conts = bom_obj.get_product_components(
                 product_id=op.ul.product.id, accumulated_qty=op.ul.ul_qty)
             if not conts:
@@ -117,4 +124,13 @@ class MrpProduction(models.Model):
                 'product_qty': op.qty})
             new_op = self.create(data['value'])
             new_op.action_compute()
-            new_op.write({'product_lines': map(lambda x: (0, 0, x), res)})
+            new_op.write({'product_lines': map(lambda x: (0, 0, x), res),
+                          'production': self.id})
+            op.processed = True
+
+
+class DownloadOperation(models.Model):
+
+    _inherit = "download.operation"
+
+    processed = fields.Boolean(string='Processed')
