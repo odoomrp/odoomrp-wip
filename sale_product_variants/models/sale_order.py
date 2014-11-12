@@ -33,22 +33,6 @@ class ProductAttributeValueSaleLine(models.Model):
         self.price_extra = price_extra
 
     @api.one
-    @api.depends('price_extra')
-    def _set_price_extra(self):
-        p_obj = self.env['product.attribute.price']
-        p_ids = p_obj.search([('value_id', '=', self.value.id),
-                              ('product_tmpl_id', '=',
-                               self.sale_line.product_template.id)])
-        if p_ids:
-            p_ids.write({'price_extra': self.price_extra})
-        else:
-            p_obj.create({
-                'product_tmpl_id': self.sale_line.product_template.id,
-                'value_id': self.value.id,
-                'price_extra': self.price_extra,
-            })
-
-    @api.one
     @api.depends('attribute', 'sale_line.product_template',
                  'sale_line.product_template.attribute_line_ids')
     def _get_possible_attribute_values(self):
@@ -69,8 +53,7 @@ class ProductAttributeValueSaleLine(models.Model):
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
     price_extra = fields.Float(
-        compute='_get_price_extra', inverse='_set_price_extra',
-        string='Attribute Price Extra',
+        compute='_get_price_extra', string='Attribute Price Extra',
         digits=dp.get_precision('Product Price'),
         help="Price Extra: Extra price for the variant with this attribute"
         " value on sale price. eg. 200 price extra, 1000 + 200 = 1200.")
@@ -111,13 +94,10 @@ class SaleOrderLine(models.Model):
             if attr_line.value:
                 description += _('\n%s: %s') % (attr_line.attribute.name,
                                                 attr_line.value.name)
-                price_extra += attr_line.price_extra
-
         self.product_id = product_obj._product_find(self.product_template,
                                                     self.product_attributes)
-        if not self.product_id:
-            self.price_unit = self.product_template.list_price + price_extra
         self.name = description
+        self.button_recalculate_price_unit()
 
     @api.multi
     def action_duplicate(self):
@@ -151,3 +131,12 @@ class SaleOrderLine(models.Model):
                          'attribute_value_ids': [(6, 0, att_values_ids)]})
                 line.write({'product_id': product.id})
         super(SaleOrderLine, self).button_confirm()
+
+    @api.multi
+    def button_recalculate_price_unit(self):
+        self.ensure_one()
+        if not self.product_id:
+            price_extra = 0.0
+            for attr_line in self.product_attributes:
+                price_extra += attr_line.price_extra
+            self.price_unit = self.product_template.list_price + price_extra

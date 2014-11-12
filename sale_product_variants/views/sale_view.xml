@@ -34,6 +34,13 @@
                     <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath
+                    expr="//field[@name='order_line']//form//field[@name='price_unit']"
+                    position="after">
+                    <button name="button_recalculate_price_unit"
+                        states="draft" string="(update)" type="object"
+                        class="oe_edit_only oe_link" colspan="2" />
+                </xpath>
+                <xpath
                     expr="//field[@name='order_line']/form//label[@for='name']"
                     position="before">
                     <label for="product_attributes"
@@ -45,7 +52,7 @@
                             <field name="attribute" />
                             <field name="possible_values" invisible="True" />
                             <field name="value" />
-                            <field name="price_extra" />
+                            <field name="price_extra" readonly="True" />
                         </tree>
                     </field>
                 </xpath>
@@ -71,7 +78,7 @@
                         <tree create="0" delete="0" editable="1">
                             <field name="attribute" />
                             <field name="value" />
-                            <field name="price_extra" />
+                            <field name="price_extra" readonly="True" />
                         </tree>
                     </field>
                 </field>
