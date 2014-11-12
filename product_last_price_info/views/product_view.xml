@@ -1,30 +1,38 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
+        <record model="ir.ui.view" id="product.product_last_info_page">
+            <field name="name">product.form.view.inh.lastinfopage</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Last Price Info"/>
+                </notebook>
+            </field>
+        </record>
 
         <record id="product_form_view_inh_lastpurchasesaleinfo" model="ir.ui.view">
             <field name="name">product.form.view.inh.lastpurchasesaleinfo</field>
             <field name="model">product.product</field>
             <field name="mode">primary</field>
             <field eval="7" name="priority" />
-            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="inherit_id" ref="product.product_last_info_page" />
             <field name="arch" type="xml">
                 <data>
-                    <page string="Procurements" position="after">
-                        <page string="Last Price Info">
-                            <group>
-                                <group name="last_purchase_info">
-                                    <field name="last_supplier_id" />
-                                    <field name="last_purchase_date" />
-                                    <field name="last_purchase_price" />
-                                </group>
-                                <group name="last_sale_info">
-                                    <field name="last_customer_id" />
-                                    <field name="last_sale_date" />
-                                    <field name="last_sale_price" />
-                                </group>
+                    <page string="Last Price Info" position="inside">
+                        <group>
+                            <group name="last_purchase_info">
+                                <field name="last_supplier_id" />
+                                <field name="last_purchase_date" />
+                                <field name="last_purchase_price" />
                             </group>
-                        </page>
+                            <group name="last_sale_info">
+                                <field name="last_customer_id" />
+                                <field name="last_sale_date" />
+                                <field name="last_sale_price" />
+                            </group>
+                        </group>
                     </page>
                 </data>
             </field>

@@ -25,16 +25,8 @@ class MrpProduction(models.Model):
 
     @api.multi
     def action_production_end(self):
-        analytic_line_obj = self.env['account.analytic.line']
+        self.ensure_one()
         result = super(MrpProduction, self).action_production_end()
-        for record in self:
-            product = record.product_id
-            analytic_lines = analytic_line_obj.search(
-                [('mrp_production_id', '=', record.id)])
-            total_cost = 0.0
-            if analytic_lines:
-                total_cost = sum([-line.amount for line in analytic_lines])
-            product.last_mrp_date = record.date_finished
-            print total_cost
-            product.last_mrp_cost = total_cost
+        product = self.product_id
+        product.last_mrp_id = self.id
         return result

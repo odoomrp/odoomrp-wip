@@ -20,7 +20,7 @@
     "name": "Product Last Mrp Info",
     "version": "1.0",
     "depends": ["mrp_production_real_costs",
-                "product_last_price_info"],
+                "product"],
     "author": "OdooMRP team",
     "category": "Product",
     "website": "www.odoomrp.com",
