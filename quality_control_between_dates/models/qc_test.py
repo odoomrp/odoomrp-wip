@@ -37,7 +37,7 @@ class QcTestTemplateLine(models.Model):
     def _check_line_validities(self):
         domain = [('id', '!=', self.id),
                   ('proof_id', '=', self.proof_id.id),
-                  ('test_template_id', '=', self.test_template_id)]
+                  ('test_template_id', '=', self.test_template_id.id)]
         if self.date_start:
             domain.append('|')
             domain.append(('date_end', '>=', self.date_start))
@@ -59,7 +59,7 @@ class QcTest(models.Model):
                             context=None):
         new_data = []
         tmpl_line_obj = self.pool['qc.test.template.line']
-        now = fields.Date.context_today(self)
+        now = fields.Date.today()
         data = super(QcTest, self)._prepare_test_lines(
             cr, uid, test, force_fill=force_fill, context=context)
         for line_dict in data:
