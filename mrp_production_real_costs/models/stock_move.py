@@ -95,7 +95,8 @@ class StockMove(models.Model):
                                          'average'):
                 analytic_lines = analytic_line_obj.search(
                     [('mrp_production_id', '=', move.production_id.id)])
-                prod_total_cost = [-line.amount for line in analytic_lines]
+                prod_total_cost = sum([-line.amount for line in
+                                       analytic_lines])
                 product = move.product_id
                 product_avail = product.qty_available
                 amount_unit = product.standard_price
