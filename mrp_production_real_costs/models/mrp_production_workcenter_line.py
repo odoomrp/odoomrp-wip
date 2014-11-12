@@ -51,11 +51,11 @@ class MrpProductionWorkcenterLine(models.Model):
             name = ((production.name or '') + '-' +
                     (self.routing_wc_line.operation.code or '') + '-' +
                     (product.default_code or ''))
-            general_account = (workcenter.costs_general_account_id.id or
-                               product.property_account_income or
-                               product.categ_id.property_account_income_categ
-                               or False)
-            if not general_account:
+            general_acc = (workcenter.costs_general_account_id.id or
+                           product.property_account_income.id or
+                           product.categ_id.property_account_income_categ.id
+                           or False)
+            if not general_acc:
                 raise exceptions.Warning(_("You must define a general account"
                                            " for this Workcenter: [%s] %s") %
                                          (workcenter.code or '',
@@ -71,7 +71,7 @@ class MrpProductionWorkcenterLine(models.Model):
                              'unit_amount': operation_line.uptime,
                              'journal_id': journal_id,
                              'account_id': analytic_account_id,
-                             'general_account_id': general_account,
+                             'general_account_id': general_acc,
                              'task_id': task_id,
                              'mrp_production_id': production.id or False,
                              'workorder': self.id,
