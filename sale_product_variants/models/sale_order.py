@@ -89,7 +89,6 @@ class SaleOrderLine(models.Model):
     def onchange_product_attributes(self):
         product_obj = self.env['product.product']
         description = self.product_template.name
-        price_extra = 0.0
         for attr_line in self.product_attributes:
             if attr_line.value:
                 description += _('\n%s: %s') % (attr_line.attribute.name,
