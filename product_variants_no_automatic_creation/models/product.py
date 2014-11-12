@@ -55,6 +55,22 @@ class ProductTemplate(models.Model):
             else:
                 return True
 
+    @api.multi
+    def action_open_attribute_prices(self):
+        price_obj = self.env['product.attribute.price']
+        for line in self.attribute_line_ids:
+            for value in line.value_ids:
+                prices = price_obj.search([('product_tmpl_id', '=', self.id),
+                                           ('value_id', '=', value.id)])
+                if not prices:
+                    price_obj.create({
+                        'product_tmpl_id': self.id,
+                        'value_id': value.id,
+                    })
+        result = self._get_act_window_dict(
+            'product_variants_no_automatic_creation.attribute_price_action')
+        return result
+
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
@@ -85,3 +101,10 @@ class ProductProduct(models.Model):
                                    value_id))
             return self.search(domain, limit=1) or False
         return False
+
+
+class ProductAttributePrice(models.Model):
+    _inherit = 'product.attribute.price'
+
+    attribute = fields.Many2one(comodel_name='product.attribute',
+                                related='value_id.attribute_id')
