@@ -66,14 +66,13 @@ class ProcurementPlan(models.Model):
                 ('state', '=', 'confirmed')]
         procurements = proc_obj.search(cond)
         my_procurements = []
-        for procurement in procurements:
-            if not procurement.move_dest_id:
-                my_procurements.append(procurement)
-            elif procurement.move_dest_id.procure_method == 'make_to_order':
-                my_procurements.append(procurement)
+        for procu in procurements:
+            if (not procu.move_dest_id or
+                    procu.move_dest_id.procure_method == 'make_to_order'):
+                my_procurements.append(procu)
         if my_procurements:
             for procurement in my_procurements:
-                procurement.write({'plan': self.id})
+                procurement.plan = self.id
         return True
 
     @api.multi

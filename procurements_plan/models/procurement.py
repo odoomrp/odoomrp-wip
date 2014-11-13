@@ -49,14 +49,10 @@ class ProcurementOrder(models.Model):
         return pur
 
     def button_remove_plan(self, cr, uid, ids, context=None):
-        print '*** ESTOY EN MI BOTON'
-        print '*** self: ' + str(self)
-        print '*** ids.: ' + str(ids)
         data_obj = self.pool['ir.model.data']
         procurement = self.browse(cr, uid, ids[0], context=context)
         plan_id = procurement.plan.id
         self.write(cr, uid, ids[0], {'plan': False}, context=context)
-        print '*** plan_id: ' + str(plan_id)
         dummy, view_id = data_obj.get_object_reference(
             cr, uid, 'procurements_plan', 'procurement_plan_form_view')
         return {'name': _("Procurement Plan"),
