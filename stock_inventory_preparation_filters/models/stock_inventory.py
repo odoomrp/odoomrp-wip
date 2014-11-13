@@ -50,19 +50,19 @@ class StockInventory(orm.Model):
 
     def _get_available_filters(self, cr, uid, context=None):
         """This function will return the list of filter allowed according to
-        the options checked in 'Settings\Warehouse'.
+        the options checked in 'Settings/Warehouse'.
 
         :return: list of tuple
         """
-        res_filter = super(StockInventory, self)._get_available_filters(
+        res_filters = super(StockInventory, self)._get_available_filters(
             cr, uid, context=context)
-        res_filter.append(('categories', _('Selected Categories')))
-        res_filter.append(('products', _('Selected Products')))
-        for filter in res_filter:
-            if filter[0] == 'lot':
-                res_filter.append(('lots', _('Selected Lots')))
-        res_filter.append(('empty', _('Empty list')))
-        return res_filter
+        res_filters.append(('categories', _('Selected Categories')))
+        res_filters.append(('products', _('Selected Products')))
+        for res_filter in res_filters:
+            if res_filter[0] == 'lot':
+                res_filters.append(('lots', _('Selected Lots')))
+        res_filters.append(('empty', _('Empty list')))
+        return res_filters
 
     _columns = {
         'filter': fields.selection(_get_available_filters, 'Selection Filter',

@@ -51,11 +51,11 @@ class StockPackOperation(models.Model):
 
     _inherit = "stock.pack.operation"
 
-    def create_and_assign_lot(self, cr, uid, id, name, context=None):
+    def create_and_assign_lot(self, cr, uid, pack_oper_id, name, context=None):
         if context is None:
             context = {}
         ctx = context.copy()
-        pack_oper = self.browse(cr, uid, id, context=context)
+        pack_oper = self.browse(cr, uid, pack_oper_id, context=context)
         if pack_oper.picking_id.location_id.usage == 'supplier':
             sup_obj = self.pool['product.supplierinfo']
             suppinfo_id = sup_obj.search(
@@ -67,4 +67,4 @@ class StockPackOperation(models.Model):
             sup_warrant = sup and sup[0].warrant_months
             ctx.update({'sup_warrant': sup_warrant})
         return super(StockPackOperation, self).create_and_assign_lot(
-            cr, uid, id, name, context=ctx)
+            cr, uid, pack_oper_id, name, context=ctx)
