@@ -22,7 +22,7 @@ msgstr "Último cliente"
 
 #. module: product_last_price_info
 #: view:product.product:product_last_price_info.product_form_view_inh_lastpurchasesaleinfo
-msgid "Last Purchase/Sale Info"
+msgid "Last Price Info"
 msgstr "Información último precio"
 
 #. module: product_last_price_info
@@ -61,9 +61,19 @@ msgid "Product"
 msgstr "Producto"
 
 #. module: product_last_price_info
+#: view:product.product:product_last_price_info.product_form_view_inh_lastpurchasesaleinfo
+msgid "Purchase"
+msgstr "Compras"
+
+#. module: product_last_price_info
 #: model:ir.model,name:product_last_price_info.model_purchase_order
 msgid "Purchase Order"
 msgstr "Pedido de compra"
+
+#. module: product_last_price_info
+#: view:product.product:product_last_price_info.product_form_view_inh_lastpurchasesaleinfo
+msgid "Sale"
+msgstr "Ventas"
 
 #. module: product_last_price_info
 #: model:ir.model,name:product_last_price_info.model_sale_order

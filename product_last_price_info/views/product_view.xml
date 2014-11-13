@@ -22,12 +22,12 @@
                 <data>
                     <page string="Last Price Info" position="inside">
                         <group>
-                            <group name="last_purchase_info">
+                            <group string="Purchase" name="last_purchase_info">
                                 <field name="last_supplier_id" />
                                 <field name="last_purchase_date" />
                                 <field name="last_purchase_price" />
                             </group>
-                            <group name="last_sale_info">
+                            <group string="Sale" name="last_sale_info">
                                 <field name="last_customer_id" />
                                 <field name="last_sale_date" />
                                 <field name="last_sale_price" />

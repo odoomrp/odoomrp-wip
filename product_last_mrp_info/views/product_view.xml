@@ -19,7 +19,7 @@
             <field name="arch" type="xml">
                 <data>
                     <page string="Last Price Info" position="inside">
-                        <group>
+                        <group string="Manufacturing" name="last_manufacturing_info">
                             <field name="last_mrp_id"/>
                             <field name="last_mrp_cost"/>
                             <field name="last_mrp_date"/>

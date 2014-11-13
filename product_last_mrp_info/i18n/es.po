@@ -31,6 +31,11 @@ msgid "Last manufacturing order cost"
 msgstr "Coste de última orden de fabricación"
 
 #. module: product_last_mrp_info
+#: view:product.product:product_last_mrp_info.product_form_view_inh_lastmrpinfo
+msgid "Manufacturing"
+msgstr "Fabricación"
+
+#. module: product_last_mrp_info
 #: model:ir.model,name:product_last_mrp_info.model_mrp_production
 msgid "Manufacturing Order"
 msgstr "Orden de fabricación"
