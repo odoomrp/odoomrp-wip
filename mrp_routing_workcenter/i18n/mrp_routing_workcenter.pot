@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-11 11:07+0000\n"
-"PO-Revision-Date: 2014-11-11 11:07+0000\n"
+"POT-Creation-Date: 2014-11-13 08:30+0000\n"
+"PO-Revision-Date: 2014-11-13 08:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgid "Manufacturing Order"
 msgstr ""
 
 #. module: mrp_routing_workcenter
-#: code:addons/mrp_routing_workcenter/models/mrp.py:65
+#: code:addons/mrp_routing_workcenter/models/mrp.py:37
 #, python-format
 msgid "Product QTY < Capacity per cycle minimun, or > Capacity per cycle maximun"
 msgstr ""
@@ -42,19 +42,15 @@ msgid "Routing"
 msgstr ""
 
 #. module: mrp_routing_workcenter
-#: code:addons/mrp_routing_workcenter/models/mrp.py:64
+#: code:addons/mrp_routing_workcenter/models/mrp.py:36
 #, python-format
 msgid "Warning!"
 msgstr ""
 
 #. module: mrp_routing_workcenter
 #: model:ir.model,name:mrp_routing_workcenter.model_mrp_workcenter
+#: field:mrp.routing,workcenter:0
 msgid "Work Center"
-msgstr ""
-
-#. module: mrp_routing_workcenter
-#: view:mrp.production:mrp_routing_workcenter.mrp_production_form_view_inh_mrproutingworkcenter
-msgid "[('id', 'in', allowed_routings[0][2])]"
 msgstr ""
 
 #. module: mrp_routing_workcenter
