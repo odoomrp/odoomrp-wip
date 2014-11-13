@@ -24,10 +24,6 @@ class MrpBom(models.Model):
     def onchange_product_tmpl_id(self, cr, uid, ids, product_tmpl_id,
                                  product_qty=0, context=None):
         template_obj = self.pool['product.template']
-        """ Changes UoM and name if product_id changes.
-        @param product_id: Changed product_id
-        @return:  Dictionary of changed values
-        """
         res = super(MrpBom, self).onchange_product_tmpl_id(
             cr, uid, ids, product_tmpl_id=product_tmpl_id,
             product_qty=product_qty, context=context)
@@ -36,8 +32,7 @@ class MrpBom(models.Model):
             template = template_obj.browse(cr, uid, product_tmpl_id,
                                            context=context)
             if not template.attribute_value_ids:
-                value.update({'code': template.default_code,
-                              })
+                value.update({'code': template.default_code})
                 res.update({'value': value})
         return res
 
