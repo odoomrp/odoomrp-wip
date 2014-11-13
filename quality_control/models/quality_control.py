@@ -496,7 +496,8 @@ class QcTest(orm.Model):
                                      context=context)
             test_lines = self._prepare_test_lines(
                 cr, uid, test, force_fill=force_fill, context=context)
-            test_obj.write(cr, uid, test_id, {'test_line_ids': test_lines}, context)
+            test_obj.write(cr, uid, test_id, {'test_line_ids': test_lines},
+                           context=context)
 
     def _prepare_test_lines(self, cr, uid, test, force_fill=False,
                             context=None):
