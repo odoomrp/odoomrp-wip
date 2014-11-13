@@ -29,8 +29,8 @@ class MrpProduction(models.Model):
         if self.state == 'draft':
             return res
         journal = self.env.ref(
-            'mrp_production_project_estimated_cost.analytic_journal_estimated'
-            '_materials', False)
+            'mrp_production_project_estimated_cost.analytic_journal_materials',
+            False)
         for line in self.product_lines:
             if not line.work_order.routing_wc_line.operation:
                 raise exceptions.Warning(
@@ -46,8 +46,8 @@ class MrpProduction(models.Model):
                 journal, name, line.product_id, line.product_qty)
             analytic_line_obj.create(vals)
         journal = self.env.ref(
-            'mrp_production_project_estimated_cost.analytic_journal_estimated'
-            '_machines', False)
+            'mrp_production_project_estimated_cost.analytic_journal_machines',
+            False)
         for line in self.workcenter_lines:
             if (line.workcenter_id.time_start and
                     line.workcenter_id.pre_op_product):
@@ -86,7 +86,7 @@ class MrpProduction(models.Model):
                         op_wc_line.op_number > 0):
                     journal = self.env.ref(
                         'mrp_production_project_estimated_cost.analytic_'
-                        'journal_estimated_operators', False)
+                        'journal_operators', False)
                     name = (self.name + '-' +
                             line.routing_wc_line.operation.code
                             + line.workcenter_id.product_id.name)

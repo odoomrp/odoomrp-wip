@@ -40,7 +40,7 @@ class AccountAnalyticLine(models.Model):
                               context=None):
         product_obj = self.pool['product.product']
         result = super(AccountAnalyticLine, self).on_change_unit_amount(
-            cr, uid, id, prod_id, quantity, company_id, unit=unit,
+            cr, uid, ids, prod_id, quantity, company_id, unit=unit,
             journal_id=journal_id, context=context)
         if prod_id:
             product = product_obj.browse(cr, uid, prod_id, context=context)
