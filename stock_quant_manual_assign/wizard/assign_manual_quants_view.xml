@@ -11,10 +11,12 @@
                             <tree editable="top" delete="0" create="0">
                                 <field name="quant" />
                                 <field name="selected" />
+                                <field name="qty"/>
                             </tree>
                             <form>
                                 <field name="quant" />
                                 <field name="selected" />
+                                <field name="qty"/>
                             </form>
                         </field>
                     </group>
