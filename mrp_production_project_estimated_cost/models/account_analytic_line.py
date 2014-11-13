@@ -35,12 +35,11 @@ class AccountAnalyticLine(models.Model):
         string='Last Sale Price',
         digits=dp.get_precision('Product Price'))
 
-    def on_change_unit_amount(self, cr, uid, line_id, prod_id, quantity,
-                              company_id, unit=False, journal_id=False,
-                              context=None):
+    def on_change_unit_amount(self, cr, uid, id, prod_id, quantity, company_id,
+                              unit=False, journal_id=False, context=None):
         product_obj = self.pool['product.product']
         result = super(AccountAnalyticLine, self).on_change_unit_amount(
-            cr, uid, line_id, prod_id, quantity, company_id, unit=unit,
+            cr, uid, id, prod_id, quantity, company_id, unit=unit,
             journal_id=journal_id, context=context)
         if prod_id:
             product = product_obj.browse(cr, uid, prod_id, context=context)
