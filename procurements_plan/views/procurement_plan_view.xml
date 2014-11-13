@@ -70,6 +70,7 @@
                                     <field name="product_qty"/>
                                     <field name="product_uom" string="Unit of Measure"/>
                                     <field name="state"/>
+                                    <button name="button_remove_plan" string="Remove Plan" states="confirmed" type="object" icon="gtk-cancel"/>
                                 </tree>
                             </field>
                         </page>

@@ -15,7 +15,7 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class ProcurementOrder(models.Model):
@@ -47,3 +47,26 @@ class ProcurementOrder(models.Model):
             vals = {'plan': procurement.plan.id}
             purchase_obj.write(cr, uid, [pur], vals, context=context)
         return pur
+
+    def button_remove_plan(self, cr, uid, ids, context=None):
+        print '*** ESTOY EN MI BOTON'
+        print '*** self: ' + str(self)
+        print '*** ids.: ' + str(ids)
+        data_obj = self.pool['ir.model.data']
+        procurement = self.browse(cr, uid, ids[0], context=context)
+        plan_id = procurement.plan.id
+        self.write(cr, uid, ids[0], {'plan': False}, context=context)
+        print '*** plan_id: ' + str(plan_id)
+        dummy, view_id = data_obj.get_object_reference(
+            cr, uid, 'procurements_plan', 'procurement_plan_form_view')
+        return {'name': _("Procurement Plan"),
+                'view_mode': 'form',
+                'view_id': view_id,
+                'view_type': 'form',
+                'res_model': 'procurement.plan',
+                'res_id': plan_id,
+                'type': 'ir.actions.act_window',
+                'nodestroy': False,
+                'target': 'current',
+                'domain': '[]',
+                }
