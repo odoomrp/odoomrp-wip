@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, api, exceptions, _
+from openerp import models, api
 from datetime import datetime
 
 
@@ -53,13 +53,7 @@ class MrpProductionWorkcenterLine(models.Model):
                     (product.default_code or ''))
             general_acc = (workcenter.costs_general_account_id.id or
                            product.property_account_expense.id or
-                           product.categ_id.property_account_expense_categ.id
-                           or False)
-            if not general_acc:
-                raise exceptions.Warning(_("You must define a general account"
-                                           " for this Workcenter: [%s] %s") %
-                                         (workcenter.code or '',
-                                          workcenter.name or ''))
+                           product.categ_id.property_account_expense_categ.id)
             price = workcenter.costs_hour
             analytic_vals = {'name': name,
                              'ref': name,
