@@ -18,7 +18,7 @@
 ##############################################################################
 
 {
-    "name": "Stock Move Price",
+    "name": "Stock move purchase price",
     "version": "1.0",
     "depends": ["base", "stock", "purchase"],
     "author": "OdooMRP team",
