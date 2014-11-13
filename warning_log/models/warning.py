@@ -88,12 +88,12 @@ class PurchaseOrder(orm.Model):
 class AccountInvoice(orm.Model):
     _inherit = 'account.invoice'
 
-    def onchange_partner_id(self, cr, uid, ids, type, partner_id,
+    def onchange_partner_id(self, cr, uid, ids, invoice_type, partner_id,
                             date_invoice=False, payment_term=False,
                             partner_bank_id=False, company_id=False,
                             context=None):
         vals = super(AccountInvoice, self).onchange_partner_id(
-            cr, uid, ids, type, partner_id, date_invoice=date_invoice,
+            cr, uid, ids, invoice_type, partner_id, date_invoice=date_invoice,
             payment_term=payment_term, partner_bank_id=partner_bank_id,
             company_id=company_id, context=context)
         self.pool['warning.log'].create_warning_log(
