@@ -52,8 +52,8 @@ class WizardFilterMrpTask(models.TransientModel):
         result = mod_obj.get_object_reference(
             cr, uid, 'mrp_wizard_filter_task',
             'action_project_task_filter_tree2')
-        id = result and result[1] or False
-        result = act_obj.read(cr, uid, [id], context=context)[0]
+        res_id = result and result[1] or False
+        result = act_obj.read(cr, uid, [res_id], context=context)[0]
         data = self.browse(cr, uid, ids, context=context)
         domain = []
         if data.mrp_production:
