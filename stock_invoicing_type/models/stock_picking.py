@@ -35,7 +35,7 @@ class StockPicking(models.Model):
         return result
 
     def action_invoice_create(self, cr, uid, ids, journal_id, group=False,
-                              type='out_invoice', context=None):
+                              invoice_type='out_invoice', context=None):
         sale_journal_type = self.pool['sale_journal.invoice.type']
         grouped_type = sale_journal_type.search(cr, uid,
                                                 [('invoicing_method', '=',
@@ -50,10 +50,10 @@ class StockPicking(models.Model):
         result = []
         if group_picking_lst:
             result += super(StockPicking, self).action_invoice_create(
-                cr, uid, group_picking_lst, journal_id, group=True, type=type,
-                context=context)
+                cr, uid, group_picking_lst, journal_id, group=True,
+                invoice_type=invoice_type, context=context)
         if ids:
             result += super(StockPicking, self).action_invoice_create(
-                cr, uid, ids, journal_id, group=False, type=type,
-                context=context)
+                cr, uid, ids, journal_id, group=False,
+                invoice_type=invoice_type, context=context)
         return result
