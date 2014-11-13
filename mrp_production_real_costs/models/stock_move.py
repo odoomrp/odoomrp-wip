@@ -61,8 +61,8 @@ class StockMove(models.Model):
                             (record.work_order.routing_wc_line.operation.code
                              or '') + '-' + (product.default_code or ''))
                     general_account = (
-                        product.property_account_income.id or
-                        product.categ_id.property_account_income_categ.id or
+                        product.property_account_expense.id or
+                        product.categ_id.property_account_expense_categ.id or
                         False)
                     date = datetime.now().strftime('%Y-%m-%d')
                     uom_id = record.product_id.uom_id.id

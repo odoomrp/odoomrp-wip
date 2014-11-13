@@ -52,8 +52,8 @@ class MrpProductionWorkcenterLine(models.Model):
                     (self.routing_wc_line.operation.code or '') + '-' +
                     (product.default_code or ''))
             general_acc = (workcenter.costs_general_account_id.id or
-                           product.property_account_income.id or
-                           product.categ_id.property_account_income_categ.id
+                           product.property_account_expense.id or
+                           product.categ_id.property_account_expense_categ.id
                            or False)
             if not general_acc:
                 raise exceptions.Warning(_("You must define a general account"
