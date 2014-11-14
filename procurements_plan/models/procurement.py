@@ -15,7 +15,7 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class ProcurementOrder(models.Model):
@@ -46,7 +46,8 @@ class ProcurementOrder(models.Model):
         plan_id = self.plan.id
         self.plan.write({'procurement_ids': [[3, self.id]]})
         dummy, view_id = data_obj.get_object_reference(
-            cr, uid, 'procurements_plan', 'procurement_plan_form_view')
+            self._cr, self._uid, 'procurements_plan',
+            'procurement_plan_form_view')
         return {'name': _("Procurement Plan"),
                 'view_mode': 'form',
                 'view_id': view_id,
