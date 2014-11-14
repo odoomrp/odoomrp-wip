@@ -36,9 +36,10 @@
                 <xpath
                     expr="//field[@name='order_line']//form//field[@name='price_unit']"
                     position="after">
-                    <button name="button_recalculate_price_unit"
+                    <button name="update_price_unit"
                         states="draft" string="(update)" type="object"
-                        class="oe_edit_only oe_link" colspan="2" />
+                        class="oe_edit_only oe_link" colspan="2" 
+                        attrs="{'invisible':[('product_id','!=',False)]}"/>
                 </xpath>
                 <xpath
                     expr="//field[@name='order_line']/form//label[@for='name']"
