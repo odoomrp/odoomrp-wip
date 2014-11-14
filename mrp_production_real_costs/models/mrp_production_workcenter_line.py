@@ -28,6 +28,7 @@ class MrpProductionWorkcenterLine(models.Model):
     def _create_analytic_line(self):
         self.ensure_one()
         analytic_line_obj = self.env['account.analytic.line']
+        property_obj = self.env['ir.property']
         task_obj = self.env['project.task']
         if self.workcenter_id.costs_hour > 0.0:
             hour_uom = self.env.ref('product.product_uom_hour', False)
@@ -53,7 +54,10 @@ class MrpProductionWorkcenterLine(models.Model):
                     (product.default_code or ''))
             general_acc = (workcenter.costs_general_account_id.id or
                            product.property_account_expense.id or
-                           product.categ_id.property_account_expense_categ.id)
+                           product.categ_id.property_account_expense_categ.id
+                           or
+                           property_obj.get('property_account_expense_categ',
+                                            'product.category'))
             price = workcenter.costs_hour
             analytic_vals = {'name': name,
                              'ref': name,

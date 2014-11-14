@@ -29,6 +29,7 @@ class StockMove(models.Model):
                        restrict_lot_id=False, restrict_partner_id=False,
                        consumed_for=False):
         task_obj = self.env['project.task']
+        property_obj = self.env['ir.property']
         analytic_line_obj = self.env['account.analytic.line']
         result = super(StockMove, self).action_consume(
             product_qty, location_id=location_id,
@@ -63,7 +64,8 @@ class StockMove(models.Model):
                     general_account = (
                         product.property_account_expense.id or
                         product.categ_id.property_account_expense_categ.id or
-                        False)
+                        property_obj.get('property_account_expense_categ',
+                                         'product.category'))
                     date = datetime.now().strftime('%Y-%m-%d')
                     uom_id = record.product_id.uom_id.id
                     analytic_vals = {'name': name,
