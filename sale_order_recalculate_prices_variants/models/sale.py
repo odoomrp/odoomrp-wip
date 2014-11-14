@@ -26,16 +26,6 @@ class SaleOrder(models.Model):
     def recalculate_prices(self):
         for record in self:
             for line in record.order_line:
-                if line.product_id:
-                    res = line.product_id_change(
-                        record.pricelist_id.id, line.product_id.id,
-                        line.product_uom_qty, False, line.product_uos_qty,
-                        False, line.name, record.partner_id.id, False,
-                        True, record.date_order, False,
-                        record.fiscal_position.id, False,
-                        context=self.env.context)
-                    line.write(res['value'])
-                #  TODO: Si no tiene product_id debe recalcular el precio según
-                #        el template, y tener en cuenta también los atributos
-                #        y los valores de estos
-        return True
+                if line.product_template and not line.product_id:
+                    line.update_price_unit()
+        super(SaleOrder, self).recalculate_prices()
