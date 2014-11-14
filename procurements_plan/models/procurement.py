@@ -15,21 +15,13 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import models, fields, api, _
+from openerp import models, fields, api
 
 
 class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
     plan = fields.Many2one('procurement.plan', string='Plan')
-
-    @api.model
-    def _prepare_orderpoint_procurement2(self, orderpoint, product_qty):
-        result = super(ProcurementOrder, self)._prepare_orderpoint_procurement(
-            orderpoint, product_qty)
-        if 'plan' in self.env.context:
-            result.update({'plan': self.env.context.get('plan')})
-        return result
 
     @api.model
     def create(self, data):
@@ -48,11 +40,11 @@ class ProcurementOrder(models.Model):
             purchase_obj.write(cr, uid, [pur], vals, context=context)
         return pur
 
-    def button_remove_plan(self, cr, uid, ids, context=None):
+    @api.multi
+    def button_remove_plan(self):
         data_obj = self.pool['ir.model.data']
-        procurement = self.browse(cr, uid, ids[0], context=context)
-        plan_id = procurement.plan.id
-        self.write(cr, uid, ids[0], {'plan': False}, context=context)
+        plan_id = self.plan.id
+        self.plan.write({'procurement_ids': [[3, self.id]]})
         dummy, view_id = data_obj.get_object_reference(
             cr, uid, 'procurements_plan', 'procurement_plan_form_view')
         return {'name': _("Procurement Plan"),

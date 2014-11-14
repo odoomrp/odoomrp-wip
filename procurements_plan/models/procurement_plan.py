@@ -120,10 +120,7 @@ class ProcurementPlan(models.Model):
             if procurement.state != 'running':
                 with_errors = True
                 break
-        if not with_errors:
-            return self.write({'state': 'done'})
-        else:
-            return self.write({'state': 'draft'})
+        self.state = 'done' if not with_errors else 'draft'
 
     @api.multi
     def action_cancel(self):
