@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
+from openerp import models, fields, api, exceptions, _
 from openerp.addons import decimal_precision as dp
 
 
@@ -79,10 +79,11 @@ class SaleOrderLine(models.Model):
                 self.product_template.product_variant_ids[0])
         else:
             self.product_id = False
-            self.price_unit = self.order_id.pricelist_id.with_context({
+            self.price_unit = self.order_id.pricelist_id.with_context(
+                {
                     'uom': self.product_uom.id,
                     'date': self.order_id.date_order,
-                    }).template_price_get(
+                }).template_price_get(
                 self.product_template.id, self.product_uom_qty or 1.0,
                 self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
         self.product_attributes = (
@@ -128,6 +129,10 @@ class SaleOrderLine(models.Model):
                                   for attr_line in line.product_attributes]
                 domain = [('product_tmpl_id', '=', line.product_template.id)]
                 for value in att_values_ids:
+                    if not value:
+                        raise exceptions.Warning(
+                            _("You can not confirm before configuring all"
+                              " attribute values."))
                     domain.append(('attribute_value_ids', '=', value))
                 product = product_obj.search(domain)
                 if not product:
@@ -144,10 +149,11 @@ class SaleOrderLine(models.Model):
             price_extra = 0.0
             for attr_line in self.product_attributes:
                 price_extra += attr_line.price_extra
-            self.price_unit = self.order_id.pricelist_id.with_context({
+            self.price_unit = self.order_id.pricelist_id.with_context(
+                {
                     'uom': self.product_uom.id,
                     'date': self.order_id.date_order,
                     'price_extra': price_extra,
-                    }).template_price_get(
+                }).template_price_get(
                 self.product_template.id, self.product_uom_qty or 1.0,
                 self.order_id.partner_id.id)[self.order_id.pricelist_id.id]

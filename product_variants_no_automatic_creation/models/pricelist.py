@@ -17,7 +17,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, exceptions, _
-import time
+
 
 class ProductPricelist(models.Model):
     _inherit = 'product.pricelist'
@@ -32,8 +32,6 @@ class ProductPricelist(models.Model):
         price_extra = context.get('price_extra')
 
         products = map(lambda x: x[0], products_by_qty_by_partner)
-        currency_obj = self.env['res.currency']
-        product_obj = self.env['product.template']
         product_uom_obj = self.env['product.uom']
         price_type_obj = self.env['product.price.type']
 
@@ -66,17 +64,15 @@ class ProductPricelist(models.Model):
             'SELECT i.id '
             'FROM product_pricelist_item AS i '
             'WHERE (product_tmpl_id IS NULL OR product_tmpl_id = any(%s)) '
-                'AND (product_id IS NULL) '
-                'AND ((categ_id IS NULL) OR (categ_id = any(%s))) '
-                'AND (price_version_id = %s) '
+            'AND (product_id IS NULL) '
+            'AND ((categ_id IS NULL) OR (categ_id = any(%s))) '
+            'AND (price_version_id = %s) '
             'ORDER BY sequence, min_quantity desc',
             (prod_tmpl_ids, categ_ids, version.id))
-        
         item_ids = [x[0] for x in cr.fetchall()]
         items = self.env['product.pricelist.item'].browse(item_ids)
 
         price_types = {}
-
         results = {}
         for product, qty, partner in products_by_qty_by_partner:
             uom_price_already_computed = False
@@ -84,7 +80,7 @@ class ProductPricelist(models.Model):
             price = False
             rule_id = False
             for rule in items:
-                if rule.min_quantity and qty<rule.min_quantity:
+                if rule.min_quantity and qty < rule.min_quantity:
                     continue
                 if (rule.product_tmpl_id and
                         product.id != rule.product_tmpl_id.id):
@@ -106,7 +102,6 @@ class ProductPricelist(models.Model):
                         price_tmp = self._price_get_multi(
                             rule.base_pricelist_id,
                             [(product, qty, False)])[product.id]
-                        ptype_src = rule.base_pricelist_id.currency_id.id
                         uom_price_already_computed = True
                         price = pricelist.currency_id.compute(
                             price_tmp, pricelist.currency_id, round=False)
