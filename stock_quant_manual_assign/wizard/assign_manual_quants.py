@@ -22,7 +22,6 @@ from openerp import fields, models, api, exceptions, _
 
 class AssignManualQuants(models.TransientModel):
     _name = 'assign.manual.quants'
-    _rec_name = 'quants_lines'
 
     @api.one
     @api.constrains('quants_lines')
@@ -35,9 +34,9 @@ class AssignManualQuants(models.TransientModel):
         if total_qty > move.product_uom_qty:
             raise exceptions.Warning(_('Error'), _('Quantity is excessive'))
 
+    name = fields.Char(string='Name')
     quants_lines = fields.One2many('assign.manual.quants.lines',
                                    'assign_wizard', string='Quants')
-
     @api.multi
     @api.model
     def assign_quants(self):
