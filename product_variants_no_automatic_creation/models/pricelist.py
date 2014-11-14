@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, tools, api, exceptions, _
 
 
 class ProductPricelist(models.Model):
