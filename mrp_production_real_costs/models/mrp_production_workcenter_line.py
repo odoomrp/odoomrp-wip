@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, api, exceptions, _
+from openerp import models, api
 from datetime import datetime
 
 
@@ -28,6 +28,7 @@ class MrpProductionWorkcenterLine(models.Model):
     def _create_analytic_line(self):
         self.ensure_one()
         analytic_line_obj = self.env['account.analytic.line']
+        property_obj = self.env['ir.property']
         task_obj = self.env['project.task']
         if self.workcenter_id.costs_hour > 0.0:
             hour_uom = self.env.ref('product.product_uom_hour', False)
@@ -51,15 +52,12 @@ class MrpProductionWorkcenterLine(models.Model):
             name = ((production.name or '') + '-' +
                     (self.routing_wc_line.operation.code or '') + '-' +
                     (product.default_code or ''))
-            general_account = (workcenter.costs_general_account_id.id or
-                               product.property_account_income or
-                               product.categ_id.property_account_income_categ
-                               or False)
-            if not general_account:
-                raise exceptions.Warning(_("You must define a general account"
-                                           " for this Workcenter: [%s] %s") %
-                                         (workcenter.code or '',
-                                          workcenter.name or ''))
+            general_acc = (workcenter.costs_general_account_id.id or
+                           product.property_account_expense.id or
+                           product.categ_id.property_account_expense_categ.id
+                           or
+                           property_obj.get('property_account_expense_categ',
+                                            'product.category'))
             price = workcenter.costs_hour
             analytic_vals = {'name': name,
                              'ref': name,
@@ -71,7 +69,7 @@ class MrpProductionWorkcenterLine(models.Model):
                              'unit_amount': operation_line.uptime,
                              'journal_id': journal_id,
                              'account_id': analytic_account_id,
-                             'general_account_id': general_account,
+                             'general_account_id': general_acc,
                              'task_id': task_id,
                              'mrp_production_id': production.id or False,
                              'workorder': self.id,
