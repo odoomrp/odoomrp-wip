@@ -43,7 +43,8 @@ class MrpProduction(models.Model):
             name = (self.name + '-' +
                     line.work_order.routing_wc_line.operation.code)
             vals = self._cath_information_estimated_cost(
-                journal, name, line.product_id, line.product_qty)
+                journal, name, self.id, line.work_order.id, line.product_id,
+                line.product_qty)
             analytic_line_obj.create(vals)
         journal = self.env.ref(
             'mrp_production_project_estimated_cost.analytic_journal_machines',
@@ -54,7 +55,8 @@ class MrpProduction(models.Model):
                 name = (self.name + '-' + line.workcenter_id.name +
                         ' Pre-operation')
                 vals = self._cath_information_estimated_cost(
-                    journal, name, line.workcenter_id.pre_op_product,
+                    journal, name, self.id, line.id,
+                    line.workcenter_id.pre_op_product,
                     line.workcenter_id.time_start)
                 analytic_line_obj.create(vals)
             if (line.workcenter_id.time_stop and
@@ -62,22 +64,23 @@ class MrpProduction(models.Model):
                 name = (self.name + '-' + line.workcenter_id.name +
                         ' Post-operation')
                 vals = self._cath_information_estimated_cost(
-                    journal, name, line.workcenter_id.post_op_product,
+                    journal, name, self.id, line.id,
+                    line.workcenter_id.post_op_product,
                     line.workcenter_id.time_stop)
                 analytic_line_obj.create(vals)
             if line.cycle and line.workcenter_id.product_id:
                 name = (self.name + '-' + line.routing_wc_line.operation.code
                         + '-C-' + line.workcenter_id.name)
                 vals = self._cath_information_estimated_cost(
-                    journal, name, line.workcenter_id.product_id,
-                    line.cycle)
+                    journal, name, self.id, line.id,
+                    line.workcenter_id.product_id, line.cycle)
                 analytic_line_obj.create(vals)
             if line.hour and line.workcenter_id.product_id:
                 name = (self.name + '-' + line.routing_wc_line.operation.code
                         + '-H-' + line.workcenter_id.name)
                 vals = self._cath_information_estimated_cost(
-                    journal, name, line.workcenter_id.product_id,
-                    line.hour)
+                    journal, name, self.id, line.id,
+                    line.workcenter_id.product_id, line.hour)
                 analytic_line_obj.create(vals)
             for op_wc_line in line.routing_wc_line.op_wc_lines:
                 if (op_wc_line.workcenter.id ==
@@ -91,12 +94,13 @@ class MrpProduction(models.Model):
                             line.routing_wc_line.operation.code
                             + line.workcenter_id.product_id.name)
                     vals = self._cath_information_estimated_cost(
-                        journal, name,
+                        journal, name, self.id, line.id,
                         line.workcenter_id.product_id,  op_wc_line.op_number)
                     analytic_line_obj.create(vals)
         return res
 
-    def _cath_information_estimated_cost(self, journal, name, product, qty):
+    def _cath_information_estimated_cost(self, journal, name, production_id,
+                                         workorder_id, product, qty):
         analytic_line_obj = self.env['account.analytic.line']
         general_account = (product.property_account_income or
                            product.categ_id.property_account_income_categ
@@ -109,6 +113,8 @@ class MrpProduction(models.Model):
             raise exceptions.Warning(
                 _('You must define one Analytic Account for this OF'))
         vals = {'name': name,
+                'mrp_production_id': production_id,
+                'workorder': workorder_id,
                 'account_id': self.analytic_account_id.id,
                 'journal_id': journal.id,
                 'user_id': self._uid,
