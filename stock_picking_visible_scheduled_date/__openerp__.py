@@ -16,7 +16,7 @@
 #
 ##############################################################################
 {
-    "name": "Scheduled Date In Picking Tree",
+    "name": "Stock Picking Visible Scheduled Date",
     "version": "1.0",
     "author": "OdooMRP team",
     "contributors": [
