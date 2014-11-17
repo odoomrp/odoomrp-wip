@@ -103,7 +103,8 @@ class SaleOrderLine(models.Model):
         self.product_id = product_obj._product_find(self.product_template,
                                                     self.product_attributes)
         self.name = description
-        self.update_price_unit()
+        if self.product_template:
+            self.update_price_unit()
 
     @api.multi
     def action_duplicate(self):
