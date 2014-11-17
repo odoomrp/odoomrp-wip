@@ -39,28 +39,22 @@ class MrpProduction(models.Model):
                     if (line.product_id.id == production.product_id.id and
                             line.restrict_lot_id):
                         lot_id = line.restric_lot_id.id
+                        break
                 if not lot_id:
-                    code = (production.manual_production_lot, production.name)
+                    code = ("%s%s" %
+                            (production.manual_production_lot or '',
+                             production.name))
                     if production.concatenate_lots_components:
-                        lot_datas = {}
+                        lot_ids = set()
                         for line in wiz.consume_lines:
                             if line.lot_id:
-                                lot_datas = self._find_component_lot(
-                                    cr, uid, lot_datas, line.lot_id,
-                                    context=context)
+                                lot_ids.add(line.lot_id.id)
                         for line in production.move_lines2:
                             if line.restrict_lot_id:
-                                lot_datas = self._find_component_lot(
-                                    cr, uid, lot_datas, line.restrict_lot_id,
-                                    context=context)
-                        lots_components = ''
-                        for data in lot_datas:
-                            datos_array = lot_datas[data]
-                            lot_id = datos_array['lot_id']
-                            lot = lot_obj.browse(cr, uid, lot_id,
-                                                 context=context)
-                            lots_components += '-' + lot.name
-                        code += lots_components
+                                lot_ids.add(line.restrict_lot_id.id)
+                        for lot in lot_obj.browse(cr, uid, lot_ids,
+                                                  context=context):
+                            code += '-%s' % lot.name
                     vals = {'name': code,
                             'product_id': production.product_id.id}
                     lot_id = lot_obj.create(cr, uid, vals, context=context)
@@ -70,15 +64,3 @@ class MrpProduction(models.Model):
         return super(MrpProduction, self).action_produce(
             cr, uid, production_id, production_qty, production_mode, wiz=wiz,
             context=context)
-
-    def find_component_lot(self, cr, uid, lot_datas, lot, context=None):
-        found = False
-        for data in lot_datas:
-            datos_array = lot_datas[data]
-            lot_id = datos_array['lot_id']
-            if lot_id == lot.id:
-                found = True
-        if not found:
-            my_vals = {'lot_id': lot.id}
-            lot_datas[(lot.id)] = (my_vals)
-        return lot_datas
