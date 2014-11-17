@@ -28,7 +28,3 @@ class ProductProduct(models.Model):
                                      readonly=True)
     last_supplier_id = fields.Many2one('res.partner', string='Last Supplier',
                                        readonly=True)
-    last_sale_price = fields.Float(string='Last sale price', readonly=True)
-    last_sale_date = fields.Date(string='Last sale date', readonly=True)
-    last_customer_id = fields.Many2one('res.partner', string='Last Customer',
-                                       readonly=True)
