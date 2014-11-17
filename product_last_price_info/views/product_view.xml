@@ -12,25 +12,5 @@
             </field>
         </record>
 
-        <record id="product_form_view_inh_lastpurchasesaleinfo" model="ir.ui.view">
-            <field name="name">product.form.view.inh.lastpurchasesaleinfo</field>
-            <field name="model">product.product</field>
-            <field name="mode">primary</field>
-            <field eval="7" name="priority" />
-            <field name="inherit_id" ref="product.product_last_info_page" />
-            <field name="arch" type="xml">
-                <data>
-                    <page string="Last Price Info" position="inside">
-                        <group>
-                            <group string="Purchase" name="last_purchase_info">
-                                <field name="last_supplier_id" />
-                                <field name="last_purchase_date" />
-                                <field name="last_purchase_price" />
-                            </group>
-                        </group>
-                    </page>
-                </data>
-            </field>
-        </record>
     </data>
 </openerp>

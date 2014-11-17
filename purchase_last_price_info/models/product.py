@@ -22,16 +22,16 @@ from openerp import models, fields
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    def _get_last_sale(self):
+    def _get_last_purchase(self):
         """
-        Get last sale price, last sale date and last customer
+        Get last purchase price, last purchase date and last customer
         """
-        sale_line_obj = self.env['sale.order.line']
+        purchase_line_obj = self.env['purchase.order.line']
         for product in self:
             last_date = False
             last_price = False
-            last_customer = False
-            lines = sale_line_obj.search(
+            last_seller = False
+            lines = purchase_line_obj.search(
                 [('product_id', '=', product.id),
                  ('state', 'in', ['confirmed', 'done'])])
             if lines:
@@ -39,16 +39,16 @@ class ProductProduct(models.Model):
                                    reverse=True)
                 last_date = old_lines[0].order_id.date_order
                 last_price = old_lines[0].price_unit
-                last_customer = old_lines[0].order_id.partner_id
+                last_seller = old_lines[0].order_id.partner_id
 
-            product.last_sale_date = last_date
-            product.last_sale_price = last_price
-            product.last_customer = last_customer
+            product.last_purchase_date = last_date
+            product.last_purchase_price = last_price
+            product.last_seller = last_seller
 
-    last_sale_price = fields.Float(
-        string='Last Sale Price', compute=_get_last_sale)
-    last_sale_date = fields.Date(
-        string='Last Sale Date', compute=_get_last_sale)
-    last_customer = fields.Many2one(
-        comodel_name='res.partner', string='Last Customer',
-        compute=_get_last_sale)
+    last_purchase_price = fields.Float(
+        string='Last Purchase Price', compute=_get_last_purchase)
+    last_purchase_date = fields.Date(
+        string='Last Purchase Date', compute=_get_last_purchase)
+    last_seller = fields.Many2one(
+        comodel_name='res.partner', string='Last Seller',
+        compute=_get_last_purchase)
