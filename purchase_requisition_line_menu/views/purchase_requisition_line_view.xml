@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    <record model="ir.ui.view" id="purchase_requisition_line_tree_view">
+        <field name="name">purchase.requisition.line.tree.view</field>
+        <field name="model">purchase.requisition.line</field>
+        <field name="arch" type="xml">
+            <tree string="Products" >
+                <field name="requisition_id" />
+                <field name="product_id" />
+                <field name="product_qty"/>
+                <field name="product_uom_id" groups="product.group_uom"/>
+                <field name="schedule_date"/>
+                <field name="account_analytic_id" groups="purchase.group_analytic_accounting"/>
+            </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="purchase_requisition_line_form_view">
+        <field name="name">purchase.requisition.line.form.view</field>
+        <field name="model">purchase.requisition.line</field>
+        <field name="arch" type="xml">
+            <form string="Products">
+                <group>
+                    <field name="requisition_id" />
+                    <field name="product_id" on_change="onchange_product_id(product_id,product_uom_id,parent.account_analytic_id,account_analytic_id,parent.schedule_date,schedule_date)"/>
+                    <field name="product_qty"/>
+                    <field name="product_uom_id" groups="product.group_uom"/>
+                    <field name="schedule_date"/>
+                    <field name="account_analytic_id" groups="purchase.group_analytic_accounting"/>
+                    <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                </group>
+            </form>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="purchase_requisition_line_filter_view">
+            <field name="name">purchase.requisition.line.filter.view</field>
+            <field name="model">purchase.requisition.line</field>
+            <field name="arch" type="xml">
+                <search string="Search Purchase Requisition Line">
+                    <field name="requisition_id" />
+                    <field name="product_id" />
+                    <group expand="0" string="Group By">
+                        <filter string="Requisition" icon="terp-personal" domain="[]" context="{'group_by':'requisition_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_purchase_requisition_line">
+            <field name="name">Purchase Requisition Line</field>
+            <field name="res_model">purchase.requisition.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="purchase_requisition_line_menu_view" name="Purchase Requisition Lines"
+            parent="purchase.menu_procurement_management" action="action_purchase_requisition_line" 
+            sequence="20"/>
+    </data>
+</openerp>
