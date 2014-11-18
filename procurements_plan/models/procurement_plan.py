@@ -58,14 +58,21 @@ class ProcurementPlan(models.Model):
 
     @api.one
     def action_import(self):
+        self.procurement_ids = []
         proc_obj = self.env['procurement.order']
         cond = [('date_planned', '>=', self.from_date),
                 ('date_planned', '<=', self.to_date),
                 ('plan', '=', False),
-                ('state', 'in', ('running', 'confirmed'))]
+                ('state', '=', 'confirmed')]
         procurements = proc_obj.search(cond)
-        if procurements:
-            procurements.write({'plan': self.id})
+        my_procurements = []
+        for procu in procurements:
+            if (not procu.move_dest_id or
+                    procu.move_dest_id.procure_method == 'make_to_order'):
+                my_procurements.append(procu)
+        if my_procurements:
+            for procurement in my_procurements:
+                procurement.plan = self.id
         return True
 
     @api.multi
@@ -101,13 +108,17 @@ class ProcurementPlan(models.Model):
             procurements_running = procurements
             vals = {'state': 'cancel'}
             procurements.write(vals)
-        self.env.cr.commit()
+        # self.env.cr.commit()
         comp_obj.with_context(plan=plan.id)._procure_calculation_all()
         if procurements_confirmed:
             procurements_confirmed.write({'state': 'confirmed'})
         if procurements_running:
             procurements_running.write({'state': 'confirmed'})
-        return self.write({'state': 'done'})
+        plan = self.browse(self.id)
+        if any([x.state != 'running' for x in plan.procurement_ids]):
+            self.state = 'draft'
+        else:
+            self.state = 'done'
 
     @api.multi
     def action_cancel(self):

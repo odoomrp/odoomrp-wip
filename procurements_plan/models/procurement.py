@@ -24,14 +24,6 @@ class ProcurementOrder(models.Model):
     plan = fields.Many2one('procurement.plan', string='Plan')
 
     @api.model
-    def _prepare_orderpoint_procurement2(self, orderpoint, product_qty):
-        result = super(ProcurementOrder, self)._prepare_orderpoint_procurement(
-            orderpoint, product_qty)
-        if 'plan' in self.env.context:
-            result.update({'plan': self.env.context.get('plan')})
-        return result
-
-    @api.model
     def create(self, data):
         if 'plan' in self.env.context and 'plan' not in data:
             data.update({'plan': self.env.context.get('plan')})
@@ -47,3 +39,15 @@ class ProcurementOrder(models.Model):
             vals = {'plan': procurement.plan.id}
             purchase_obj.write(cr, uid, [pur], vals, context=context)
         return pur
+
+    @api.multi
+    def button_remove_plan(self):
+        template_obj = self.env['product.template']
+        result = template_obj._get_act_window_dict(
+            'procurements_plan.action_procurement_plan')
+        result['domain'] = "[('id', '=', " + str(self.plan.id) + ")]"
+        result['res_id'] = self.plan.id
+        result['view_mode'] = 'form'
+        result['views'] = []
+        self.plan.write({'procurement_ids': [[3, self.id]]})
+        return result
