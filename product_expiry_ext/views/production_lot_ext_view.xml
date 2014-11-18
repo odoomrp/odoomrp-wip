@@ -10,7 +10,7 @@
                 <xpath expr="//tree" position="attributes">
                     <attribute name="colors">orange:expiry_state in
                         'best_before'; blue:expiry_state in 'alert';
-                        yellow:expiry_state in 'to_remove';
+                        gold:expiry_state in 'to_remove';
                         green:expiry_state in 'normal';
                         red:expiry_state
                         in 'expired'
