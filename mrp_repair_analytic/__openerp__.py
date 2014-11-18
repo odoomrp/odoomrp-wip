@@ -26,7 +26,7 @@
 
     1.- It creates a new field 'Analytic Account' in the object MRP Repair.
 
-    2.- It creates a new filed 'User' in the operations, and components of
+    2.- It creates a new field 'User' in the operations, and components of
         the repair order.
 
     When the repair order is confirmed, for each line of operations, and
