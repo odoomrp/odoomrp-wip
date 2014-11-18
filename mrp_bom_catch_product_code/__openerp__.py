@@ -31,6 +31,7 @@
 
    """,
     "depends": ['mrp',
+                'product_variant_default_code',
                 ],
     "data": [],
     "installable": True
