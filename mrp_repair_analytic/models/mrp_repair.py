@@ -32,15 +32,13 @@ class MrpRepair(models.Model):
         result = super(MrpRepair, self).action_repair_end()
         factor = factor_obj.search([('factor', '=', 0)], limit=1)
         for line in self.fees_lines:
-            if line.to_invoice:
-                vals = self._catch_repair_line_information_for_analytic(
-                    line, factor)
-                analytic_line_obj.create(vals)
+            vals = self._catch_repair_line_information_for_analytic(
+                line, factor)
+            analytic_line_obj.create(vals)
         for line in self.operations:
-            if line.to_invoice:
-                vals = self._catch_repair_line_information_for_analytic(
-                    line, factor)
-                analytic_line_obj.create(vals)
+            vals = self._catch_repair_line_information_for_analytic(
+                line, factor)
+            analytic_line_obj.create(vals)
         return result
 
     def _catch_repair_line_information_for_analytic(self, line, factor):
@@ -58,7 +56,7 @@ class MrpRepair(models.Model):
                 'product_id': line.product_id.id,
                 'unit_amount': line.product_uom_qty,
                 'product_uom_id': line.product_uom.id,
-                'amount': line.price_subtotal,
+                'amount': line.product_id.standard_price,
                 'to_invoice': factor.id
                 }
         if self.analytic_account:
