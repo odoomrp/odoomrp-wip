@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+      <menuitem name="Templates" id="purchase.menu_procurement_partner_contact_form" action="purchase.product_normal_action_puchased"
+          parent="purchase.menu_procurement_management_product" sequence="8"/>
+
+      <menuitem id="menu_products" action="product.product_normal_action_sell" name="Products"
+      parent="purchase.menu_procurement_management_product" groups="base.group_no_one" sequence="9"/>
+    </data>
+</openerp>
