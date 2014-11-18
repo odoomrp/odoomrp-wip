@@ -115,12 +115,10 @@ class ProcurementPlan(models.Model):
         if procurements_running:
             procurements_running.write({'state': 'confirmed'})
         plan = self.browse(self.id)
-        with_errors = False
-        for procurement in plan.procurement_ids:
-            if procurement.state != 'running':
-                with_errors = True
-                break
-        self.state = 'done' if not with_errors else 'draft'
+        if any([x.state != 'running' for x in plan.procurement_ids]):
+            self.state = 'draft'
+        else:
+            self.state = 'done'
 
     @api.multi
     def action_cancel(self):
