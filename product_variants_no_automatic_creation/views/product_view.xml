@@ -37,9 +37,9 @@
             <field name="name">product.attribute.price.tree</field>
             <field name="model">product.attribute.price</field>
             <field name="arch" type="xml">
-                <tree string="Variant Values">
-                    <field name="attribute" />
-                    <field name="value_id" />
+                <tree string="Variant Values" editable="bottom" nodelete="1" nocreate="1">
+                    <field name="attribute" readonly="1" />
+                    <field name="value_id" readonly="1" />
                     <field name="price_extra" />
                 </tree>
             </field>
