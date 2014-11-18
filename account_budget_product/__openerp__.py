@@ -19,21 +19,20 @@
 {
     "name": 'Account Budget Product',
     "version": '1.0',
-    "depends": ['base',
-                'account_budget',
-                'l10n_es',
-                'product',
+    "depends": ['account_budget',
                 'stock'],
-    "author": 'AvanzOSC',
+    "author": 'OdooMRP team',
     "category": 'Analytic / Financial reporting',
     "description": """
-        This module extends account_budget structure.
-            * New postgres table to relate products, with partners and budgets.
+        * This module extends account_budget structure to obtain a more 
+        detailed budget information.
+        Creates a new object to structure the budget lines by products or
+        by product category.
+        * New wizard to create procurements for products in budget lines.
                 """,
-    "init_xml": [],
-    "update_xml": ['views/crossovered_budget_lines_view.xml',
+    "data": ['views/crossovered_budget_lines_view.xml',
                    ],
-    "demo_xml": [],
+    "demo": [],
     "installable": True,
-    "active": False,
+    "auto_install": False,
 }

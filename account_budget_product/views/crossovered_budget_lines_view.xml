@@ -185,10 +185,15 @@
                 <field name="priority" eval="10"/>
                 <field name="arch" type="xml">
                     <form string="Crossovered Budget Line">
-                    	<group colspan="4" col="6">
+                        <header>
+                            <button name="load_product_accounts" type="object" string="Load Accounts" class="oe_highlight"/>
+                            <button name="dividir_trimestres" string="Split" type="object" attrs="{'invisible':[('is_trimestral','=',False)]}"/>
+                            <button name="copiar_trimestres" string="Copy" type="object" attrs="{'invisible':[('is_trimestral','=',False)]}"/>
+                            <button name="create_procurements" type="object" string="Create all procurements"/>
+                        </header>
+                    	<group colspan="4" col="4">
 	                        <field name="crossovered_budget_id" select="1"/>
 	                        <field name="general_budget_id" select="1"/>
-	                        <button name="load_product_accounts" string="Load Accounts" type="object"/>
 	                    </group>
                         <group colspan="4" col="6">
                             <field name="analytic_account_id" select="1"/>
@@ -204,18 +209,11 @@
 	                        <field name="practical_amount"/>
 	                        <field name="general_amount"/>
                         </group>
-                        <group colspan="4" col="6">
+                        <group colspan="4" col="4">
                             <field name="warehouse_id" required="1" colspan="4"/>
-                            <button name="create_procurements" type="object"
-                                string="Create all procurements"/>
                         </group>
                         <field name="product_budget_ids" nolabel="1" colspan="4"/>
                         <field name="is_trimestral" invisible="1"/>
-		              	<group colspan="3" col="4" attrs="{'invisible':[('is_trimestral','=',False)]}">
-		          			<separator colspan="4" string="The date range is greater than one month"/>
-		          			<button name="dividir_trimestres" string="Split" type="object" icon="gtk-split"/>
-		          			<button name="copiar_trimestres" string="Copy" type="object" icon="gtk-copy"/>
-		              	</group>
                     </form>
                 </field>
         </record>

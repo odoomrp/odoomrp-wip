@@ -190,6 +190,11 @@ class CrossoveredBudgetLines(models.Model):
     date_from = fields.Date(required=False)
     date_to = fields.Date(required=False)
 
+    _sql_constraints = [('date_range_uniq',
+                         'unique(crossovered_budget_id, date_from, date_to)',
+                         'Can not match the lines on the same date range!')
+                        ]
+
     @api.multi
     def name_get(self):
         res = []
