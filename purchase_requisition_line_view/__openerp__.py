@@ -16,7 +16,7 @@
 #
 ##############################################################################
 {
-    "name": "Purchase Requisition Line Menu",
+    "name": "Purchase Requisition Line View",
     "version": "1.0",
     "author": "OdooMRP team",
     "contributors": [
@@ -24,12 +24,6 @@
         ],
     "category": "Purchase",
     "website": "http://www.odoomrp.com",
-    "description": """
-    This module creates the new menu option 'Purchase Requisition Lines'.
-
-    The "Purchase Requisition" field is displayed in the product line, and
-    you can search by product, and requistion.
-    """,
     "depends": ['purchase',
                 'purchase_requisition',
                 ],
