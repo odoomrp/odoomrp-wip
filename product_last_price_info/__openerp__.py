@@ -21,16 +21,11 @@
     "author": "OdooMRP team",
     "category": "Product",
     "website": "www.odoomrp.com",
-    "description": """
-    This module adds new calculate fields in product:
-        'last_purchase_price'
-        'last_purchase_date'
-        'last_supplier_id
-        'last_sale_price'
-        'last_sale_date'
-        'last_customer_id
-    """,
-    "depends": ['product', 'sale', 'purchase', ],
-    "data": ['views/product_view.xml', ],
+    "depends": [
+        'product',
+    ],
+    "data": [
+        'views/product_view.xml',
+    ],
     "installable": True
 }
