@@ -41,4 +41,3 @@ class MrpBom(models.Model):
             product = product_obj.browse(values.get('product_id'))
             values['code'] = product.default_code
         return super(MrpBom, self).write(values)
-
