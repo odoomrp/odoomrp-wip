@@ -15,7 +15,7 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import models, fields, api, _
+from openerp import models, fields, api
 
 
 class ProcurementOrder(models.Model):
@@ -42,20 +42,12 @@ class ProcurementOrder(models.Model):
 
     @api.multi
     def button_remove_plan(self):
-        data_obj = self.pool['ir.model.data']
-        plan_id = self.plan.id
+        template_obj = self.env['product.template']
+        result = template_obj._get_act_window_dict(
+            'procurements_plan.action_procurement_plan')
+        result['domain'] = "[('id', '=', " + str(self.plan.id) + ")]"
+        result['res_id'] = self.plan.id
+        result['view_mode'] = 'form'
+        result['views'] = []
         self.plan.write({'procurement_ids': [[3, self.id]]})
-        dummy, view_id = data_obj.get_object_reference(
-            self._cr, self._uid, 'procurements_plan',
-            'procurement_plan_form_view')
-        return {'name': _("Procurement Plan"),
-                'view_mode': 'form',
-                'view_id': view_id,
-                'view_type': 'form',
-                'res_model': 'procurement.plan',
-                'res_id': plan_id,
-                'type': 'ir.actions.act_window',
-                'nodestroy': False,
-                'target': 'current',
-                'domain': '[]',
-                }
+        return result
