@@ -21,21 +21,23 @@ from openerp import models, api
 class MrpBom(models.Model):
     _inherit = 'mrp.bom'
 
-    def onchange_product_tmpl_id(self, cr, uid, ids, product_tmpl_id,
-                                 product_qty=0, context=None):
-        template_obj = self.pool['product.template']
-        res = super(MrpBom, self).onchange_product_tmpl_id(
-            cr, uid, ids, product_tmpl_id=product_tmpl_id,
-            product_qty=product_qty, context=context)
-        if res.get('value') and product_tmpl_id:
-            value = res.get('value')
-            template = template_obj.browse(cr, uid, product_tmpl_id,
-                                           context=context)
-            if not template.attribute_value_ids:
-                value.update({'code': template.default_code})
-                res.update({'value': value})
-        return res
+    @api.model
+    def create(self, values):
+        bom = super(MrpBom, self).create(values)
+        if bom.product_tmpl_id:
+            bom.code = bom.product_tmpl_id.default_prefix
+        elif bom.product_id:
+            bom.code = bom.product_id.default_code
+        return bom
 
-    @api.onchange('product_id')
-    def onchange_product_id(self):
-        self.code = self.product_id.default_code
+    @api.one
+    def write(self, values):
+        product_obj = self.env['product.product']
+        template_obj = self.env['product.template']
+        if values.get('product_tmpl_id'):
+            product_tmpl = template_obj.browse(values.get('product_tmpl_id'))
+            values['code'] = product_tmpl.default_prefix
+        elif values.get('product_id'):
+            product = product_obj.browse(values.get('product_id'))
+            values['code'] = product.default_code
+        return super(MrpBom, self).write(values)
