@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+                <record model="ir.ui.view" id="stock_picking_wave_ext_form_view">
+                <field name="name">stock.picking.wave</field>
+                <field name="model">stock.picking.wave</field>
+                <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_form"/>
+                <field name="arch" type="xml">
+                        <button name="done" position="attributes">
+                            <attribute name="confirm">if you continue the values of the pickings may not be changed.
+                            Press cancel and transfer each pickig individualy to determine custom values of the pickings</attribute>
+                        </button>
+                        <button name="action_cancel" position="after">
+                            <button name="do_enter_transfer_details" states="assigned,partially_available" string="Transfer" groups="stock.group_stock_user" type="object" class="oe_highlight"/>
+                        </button>
+                </field>
+            </record>
+    
+    </data>
+</openerp>
