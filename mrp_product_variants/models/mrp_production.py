@@ -62,12 +62,13 @@ class MrpProduction(models.Model):
                           context=None):
         result = super(MrpProduction, self).product_id_change(
             cr, uid, ids, product_id, product_qty=product_qty, context=context)
-        product_obj = self.pool['product.product']
-        product = product_obj.browse(cr, uid, product_id, context=context)
-        result['value'].update(
-            {'product_template': product.product_tmpl_id.id,
-             'product_attributes': (
-                 product._get_product_attributes_values_dict())})
+        if product_id:
+            product_obj = self.pool['product.product']
+            product = product_obj.browse(cr, uid, product_id, context=context)
+            result['value'].update(
+                {'product_template': product.product_tmpl_id.id,
+                 'product_attributes': (
+                     product._get_product_attributes_values_dict())})
         return result
 
     @api.multi
