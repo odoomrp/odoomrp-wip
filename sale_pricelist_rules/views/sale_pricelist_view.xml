@@ -8,6 +8,9 @@
             <field name="res_model">product.pricelist.item</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="context">
+                {'search_default_pricelist_type_id':1}
+            </field>
         </record>
 
         <menuitem id="sale_pricelist_items_mi" action="sale_pricelist_items_action" name="Pricelist Items"
