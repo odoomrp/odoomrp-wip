@@ -53,17 +53,16 @@ class AssignManualQuants(models.TransientModel):
             self.env.cr, self.env.uid, quants, move, context=self.env.context)
         return {}
 
-    def default_get(self, cr, uid, var_fields, context=None):
-        move = self.pool['stock.move'].browse(
-            cr, uid, context['active_id'], context=context)
-        available_quants_ids = self.pool['stock.quant'].search(
-            cr, uid, [
-                '|', ('location_id', '=', move.location_id.id),
-                ('location_id', 'in', move.location_id.child_ids.ids),
-                ('product_id', '=', move.product_id.id),
-                ('qty', '>', 0),
-                ('reservation_id', '=', False)], context=context)
-        available_quants = [{'quant': x} for x in available_quants_ids]
+    @api.model
+    def default_get(self, var_fields):
+        move = self.env['stock.move'].browse(self.env.context['active_id'])
+        available_quants_ids = self.env['stock.quant'].search(
+            ['|', ('location_id', '=', move.location_id.id),
+             ('location_id', 'in', move.location_id.child_ids.ids),
+             ('product_id', '=', move.product_id.id),
+             ('qty', '>', 0),
+             ('reservation_id', '=', False)])
+        available_quants = [{'quant': x.id} for x in available_quants_ids]
         available_quants.extend(
             {'quant': x.id,
              'selected': True,
