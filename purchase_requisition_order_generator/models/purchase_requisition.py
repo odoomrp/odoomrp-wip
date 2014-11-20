@@ -66,3 +66,14 @@ class PurchaseRequisition(models.Model):
                             _logger.info(_('Supplier: %s - Product: %s') %
                                          (supplier.name, product.name))
         return True
+
+    @api.multi
+    def open_purchase_lines(self):
+        template_obj = self.env['product.template']
+        result = template_obj._get_act_window_dict(
+            'purchase_requisition_order_generator.action_open_purchase_line_'
+            'from_purreqordergenerator')
+        po_line_ids = [po_line.id for po_line in self.po_line_ids]
+        result['domain'] = "[('id', 'in', " + str(po_line_ids) + ")]"
+        print '*** result: ' + str(result)
+        return result
