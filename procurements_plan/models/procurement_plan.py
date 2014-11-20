@@ -68,7 +68,7 @@ class ProcurementPlan(models.Model):
         my_procurements = []
         for procu in procurements:
             if (not procu.move_dest_id or
-                    procu.move_dest_id.procure_method == 'make_to_order'):
+                    procu.move_dest_id.procure_method == 'make_to_stock'):
                 my_procurements.append(procu)
         if my_procurements:
             for procurement in my_procurements:
