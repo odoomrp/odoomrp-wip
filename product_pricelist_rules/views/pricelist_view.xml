@@ -93,5 +93,19 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="pricelist_form_view">
+            <field name="name">product.pricelist.form</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view" />
+            <field name="arch" type="xml">
+                <field name="version_id" position="attributes">
+                    <attribute name="context">{'type':type,'default_pricelist_id':id}</attribute>
+                </field>
+                <field name="items_id" position="attributes">
+                    <attribute name="context">{'type':type,'default_price_version_id':id}</attribute>
+                </field>
+            </field>
+        </record>
+
     </data>
 </openerp>

@@ -54,6 +54,12 @@ class PricelistItem(models.Model):
          'Second discount must be lower than 100%.'),
     ]
 
+    price_version_id = fields.Many2one()
+
+    @api.onchange('price_version_id')
+    def onchange_price_version(self):
+        self.pricelist = self.price_version_id.pricelist_id
+
     @api.one
     def _item_formula(self):
         self.item_formula = (_('Base price * (1 + %s) + %s') %
