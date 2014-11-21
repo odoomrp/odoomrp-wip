@@ -1,0 +1,112 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_budget_product
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-18 15:12+0000\n"
+"PO-Revision-Date: 2014-11-18 16:18+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: sale_budget_product
+#: model:ir.model,name:sale_budget_product.model_crossovered_budget
+#: field:load.sales.on.budget,budget_id:0
+msgid "Budget"
+msgstr "Presupuesto"
+
+#. module: sale_budget_product
+#: view:load.sales.on.budget:sale_budget_product.load_sales_on_budget_budget_form_view
+#: view:load.sales.on.budget:sale_budget_product.load_sales_on_budget_sale_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,product_categ_id:0
+msgid "Category"
+msgstr "Categoría"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,date_from:0
+msgid "Date from"
+msgstr "Fecha desde"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,date_to:0
+msgid "Date to"
+msgstr "Fecha hasta"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: sale_budget_product
+#: view:load.sales.on.budget:sale_budget_product.load_sales_on_budget_budget_form_view
+#: view:load.sales.on.budget:sale_budget_product.load_sales_on_budget_sale_form_view
+msgid "Load"
+msgstr "Cargar"
+
+#. module: sale_budget_product
+#: view:crossovered.budget:sale_budget_product.crossovered_budget_load_sales_view
+#: view:load.sales.on.budget:sale_budget_product.load_sales_on_budget_budget_form_view
+#: view:load.sales.on.budget:sale_budget_product.load_sales_on_budget_sale_form_view
+msgid "Load Sales"
+msgstr "Cargar ventas"
+
+#. module: sale_budget_product
+#: view:sale.order:sale_budget_product.sale_load_budget_form_view
+msgid "Load on budget"
+msgstr "Cargar en el presupuesto"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,partner_id:0
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,product_id:0
+msgid "Product"
+msgstr "Producto"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,sale_id:0
+msgid "Sale"
+msgstr "Venta"
+
+#. module: sale_budget_product
+#: model:ir.model,name:sale_budget_product.model_sale_order
+msgid "Sales Order"
+msgstr "Pedidos de venta"
+
+#. module: sale_budget_product
+#: field:load.sales.on.budget,product_tmpl_id:0
+msgid "Template"
+msgstr "Plantilla"
+
