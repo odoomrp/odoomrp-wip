@@ -74,5 +74,5 @@ class PurchaseRequisition(models.Model):
             'purchase_requisition_order_generator.action_open_purchase_line_'
             'from_purreqordergenerator')
         po_line_ids = [po_line.id for po_line in self.po_line_ids]
-        result['domain'] = "[('id', 'in', " + str(po_line_ids) + ")]"
+        result['domain'] = "[('id', 'in', " + po_line_ids + ")]"
         return result

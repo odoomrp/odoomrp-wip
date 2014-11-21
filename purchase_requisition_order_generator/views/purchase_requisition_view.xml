@@ -17,20 +17,7 @@
                  </button>
                 <field name="purchase_ids" position="after">
                     <separator string="Purchase Lines" />
-                    <field name="po_line_ids" nolabel="1" >
-                        <tree string="Purchase Order Lines" create="false" colors="blue:state == 'confirmed';gray:state == 'cancel'">
-                            <field name="name"/>
-                            <field name="partner_id" string="Supplier" />
-                            <field name="product_id"/>
-                            <field name="price_unit"/>
-                            <field name="product_qty"/>
-                            <field name="quantity_bid"/>
-                            <field name="product_uom" groups="product.group_uom"/>
-                            <field name="price_subtotal"/>
-                            <field name="state" invisible="1"/>
-                            <field name="invoiced" invisible="1"/>
-                        </tree>
-                    </field>
+                    <field name="po_line_ids" nolabel="1" />
                 </field>
             </field>
         </record>
@@ -46,6 +33,9 @@
                 <field name="product_id" position="after">
                     <field name="date_planned" />
                 </field>
+                <button name="action_draft" position="replace" />
+                <button name="action_confirm" position="replace" />
+                <button string="Change Quantity" position="replace"/>
             </field>
         </record>
         <record id="purchase_order_line_tree_purreqordergenerator" model="ir.ui.view">
