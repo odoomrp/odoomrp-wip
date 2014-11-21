@@ -75,5 +75,4 @@ class PurchaseRequisition(models.Model):
             'from_purreqordergenerator')
         po_line_ids = [po_line.id for po_line in self.po_line_ids]
         result['domain'] = "[('id', 'in', " + str(po_line_ids) + ")]"
-        print '*** result: ' + str(result)
         return result
