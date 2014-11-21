@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_purchase_requisition_form_inh_displayorderline">
+            <field name="name">view.purchase.requisition.form.inh.displayorderline</field>
+            <field name="model">purchase.requisition</field>
+            <field name="inherit_id"
+                ref="purchase_requisition.view_purchase_requisition_form" />
+            <field name="arch" type="xml">
+                 <button name="open_rfq" position="before">
+                    <button name="open_purchase_lines" type="object" string="Purchase Lines" attrs="{'invisible': [('state', 'in', ('draft'))]}"/>
+                 </button>
+                <field name="purchase_ids" position="after">
+                    <separator string="Purchase Lines" />
+                    <field name="po_line_ids" nolabel="1" />
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="purchase_order_line_form_inh_displayorderline">
+            <field name="name">purchase.order.line.form.inh.displayorderline</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id"
+                ref="purchase_requisition.purchase_order_line_tree_tender" />
+            <field name="arch" type="xml">
+                <field name="partner_id" position="before">
+                    <field name="order_id" />
+                </field>
+                <field name="product_id" position="after">
+                    <field name="date_planned" />
+                </field>
+                <button name="action_draft" position="replace" />
+                <button name="action_confirm" position="replace" />
+            </field>
+        </record>
+        <record id="purchase_order_line_tree_displayorderline" model="ir.ui.view">
+            <field name="name">purchase.order.line.tree.displayorderline</field>
+            <field name="model">purchase.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="Purchase Order Lines"  editable="bottom">
+                    <field name="order_id" readonly="1"/>
+                    <field name="name" readonly="1"/>
+                    <field name="partner_id" string="Supplier" readonly="1"/>
+                    <field name="product_id" readonly="1"/>
+                    <field name="price_unit"/>
+                    <field name="product_qty"/>
+                    <field name="product_uom" groups="product.group_uom" readonly="1"/>
+                    <field name="price_subtotal" readonly="1"/>
+                    <field name="date_planned"  widget="date" width="135"/>
+                    <field name="state" invisible="1"/>
+                    <field name="invoiced" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_open_purchase_line_from_displayorderline">
+            <field name="name">Purchase order Line</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="purchase_order_line_tree_displayorderline"/>
+        </record>
+    </data>
+</openerp>
