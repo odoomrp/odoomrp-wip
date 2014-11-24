@@ -52,17 +52,17 @@ class MrpProduction(models.Model):
                                           )
     production = fields.Many2one('mrp.production', string='Production')
 
-    @api.one
-    def bring_expected_production(self):
-        ids = []
-        for line in self.move_lines:
-            for mo in self.search([('product_id', '=', line.product_id.id)]):
-                if mo.state in ['draft', 'confirmed']:
-                    ids.append(mo.id)
-        self.expected_production = [(6, 0, ids)]
+#    @api.one
+#    def bring_expected_production(self):
+#        ids = []
+#        for line in self.move_lines:
+#            for mo in self.search([('product_id', '=', line.product_id.id)]):
+#                if mo.state in ['draft', 'confirmed']:
+#                    ids.append(mo.id)
+#        self.expected_production = [(6, 0, ids)]
 
     def get_new_components_info(self, product_id, loc_id, loc_dest_id,
-                                uom_id, uos_id, qty):
+                                uom_id, uos_id, qty, workorder):
         move_obj = self.env['stock.move']
         ul_move = move_obj.onchange_product_id(
             prod_id=product_id,
@@ -73,6 +73,7 @@ class MrpProduction(models.Model):
             'product_uom': uom_id,
             'product_uos': uos_id,
             'product_qty': qty,
+            'work_order': workorder,
             'product_uos_qty': move_obj.onchange_quantity(
                 product_id, qty, uom_id,
                 uos_id)['value']['product_uos_qty']})
@@ -82,50 +83,44 @@ class MrpProduction(models.Model):
     def create_mo_from_download_operation(self):
         bom_obj = self.env['mrp.bom']
         prod_obj = self.env['product.product']
-        res = []
         for op in self.pack:
-            if op.processed:
+            res = []
+            if op.processed or op.qty == 0:
                 continue
-            if not op.ul.product:
-                raise exceptions.Warning(
-                    _('Creation Error'),
-                    _('At least one logistic unit does not have'
-                      ' associated a product'))
-            conts = bom_obj.get_product_components(
-                product_id=op.ul.product.id, accumulated_qty=op.ul.ul_qty)
-            if not conts:
-                value = self.get_new_components_info(
-                    op.ul.product.id,
-                    op.ul.product.property_stock_production.id,
-                    op.ul.product.property_stock_inventory.id,
-                    op.ul.product.uom_id.id, op.ul.product.uos_id.id,
-                    op.ul.ul_qty)
-                res.append(value)
-            else:
-                for cont in conts:
-                    product = prod_obj.browse(cont[0])
-                    qty = cont[1]
-                    value = self.get_new_components_info(
-                        product.id, product.property_stock_production.id,
-                        product.property_stock_inventory.id, product.uom_id.id,
-                        product.uos_id.id, qty)
-                    res.append(value)
-            bulk_value = self.get_new_components_info(
-                self.product_id.id,
-                self.location_src_id.id,
-                self.location_dest_id.id,
-                self.product_id.uom_id.id, self.product_id.uos_id.id, op.fill)
-            res.append(bulk_value)
-            data = self.product_id_change(op.product.id, op.qty)
+            final_product_qty = op.fill if op.product.uom_id.id ==\
+                self.product_id.uom_id.id else op.qty
+            data = self.product_id_change(op.product.id, final_product_qty)
             data['value'].update({
                 'product_id': op.product.id,
                 'location_id': op.product.property_stock_production.id,
                 'loc_dest_id': op.product.property_stock_inventory.id,
-                'product_qty': op.qty})
+                'product_qty': final_product_qty})
             new_op = self.create(data['value'])
             new_op.action_compute()
+            workorder =\
+                new_op.workcenter_lines and new_op.workcenter_lines[0].id
+            for attr_value in op.product.attribute_value_ids:
+                if attr_value.pack_product:
+                    value = self.get_new_components_info(
+                        attr_value.pack_product.id,
+                        attr_value.pack_product.property_stock_production.id,
+                        attr_value.pack_product.property_stock_inventory.id,
+                        attr_value.pack_product.uom_id.id,
+                        attr_value.pack_product.uos_id.id,
+                        op.qty, workorder)
+                res.append(value)
+            bulk_value = self.get_new_components_info(
+                self.product_id.id,
+                self.location_src_id.id,
+                self.location_dest_id.id,
+                self.product_id.uom_id.id, self.product_id.uos_id.id, op.fill,
+                workorder)
+            for line in new_op.product_lines:
+                if bulk_value['product_id'] == line.product_id.id:
+                    self.write({'product_lines': [(1, line.id, bulk_value)]})
             new_op.write({'product_lines': map(lambda x: (0, 0, x), res),
-                          'production': self.id})
+                          'production': self.id,
+                          'origin': self.name})
             op.processed = True
 
 

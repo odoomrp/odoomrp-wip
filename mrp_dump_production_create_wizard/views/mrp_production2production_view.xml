@@ -9,9 +9,9 @@
                 <group string="Pack" position="after">
                     <group string='Expected Production' colspan="4"
                         col="4">
-                        <button name="bring_expected_production"
+                        <!-- <button name="bring_expected_production"
                             string="Bring related manufacturing orders"
-                            type="object" colspan="2" />
+                            type="object" colspan="2" /> -->
                         <field name="expected_production" nolabel="1"
                             colspan="4">
                             <tree>
