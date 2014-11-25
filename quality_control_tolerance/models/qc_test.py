@@ -96,9 +96,12 @@ class QcTestLine(models.Model):
                 self.tolerance_status = 'optimal'
             elif (self.min_allowed and self.min_variable and
                   self.max_allowed and self.max_variable):
-                if ((self.min_allowed <= amount < self.min_variable) or
-                        (self.max_variable <= amount <= self.max_allowed)):
+                if ((self.min_variable <= amount < self.min_allowed) or
+                        (self.max_allowed <= amount <= self.max_variable)):
                     self.tolerance_status = 'admissible'
+                elif ((self.min_variable <= amount < self.min_value) or
+                        (self.max_value < amount < self.max_variable)):
+                    self.tolerance_status = 'tolerable'
             elif self.min_allowed and self.max_allowed:
                 if ((self.min_allowed <= amount < self.min_value) or
                         (self.max_value <= amount <= self.max_allowed)):
@@ -107,6 +110,12 @@ class QcTestLine(models.Model):
                 if ((self.min_variable <= amount < self.min_value) or
                         (self.max_value < amount < self.max_variable)):
                     self.tolerance_status = 'tolerable'
+        elif (self.proof_type == 'qualitative' and self.test_template_line_id):
+            for valid_value in self.valid_value_ids:
+                if (self.actual_value_ql.id == valid_value.id and
+                        valid_value.ok):
+                    self.tolerance_status = 'optimal'
+                    break
 
     tolerance_status = fields.Selection(
         [('optimal', 'Optimal'),
