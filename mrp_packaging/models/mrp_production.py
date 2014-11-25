@@ -48,8 +48,6 @@ class MrpProduction(models.Model):
 
     @api.one
     def create_mo_from_download_operation(self):
-        bom_obj = self.env['mrp.bom']
-        prod_obj = self.env['product.product']
         for op in self.pack:
             res = []
             add_product = []
