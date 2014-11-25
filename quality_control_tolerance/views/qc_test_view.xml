@@ -38,11 +38,13 @@
                 <tree string="Test Line" position="attributes">
                     <attribute name="colors">orange:tolerance_status in ('admissible');red:tolerance_status in ('noadmissible');blue:tolerance_status in ('tolerable');green:tolerance_status in ('optimal')</attribute>
                 </tree>
-                <field name="success" position="after">
-                    <field name="min_allowed" invisible="1" />
-                    <field name="max_allowed" invisible="1" />
-                    <field name="min_variable" invisible="1" />
-                    <field name="max_variable" invisible="1" />
+                <field name="min_value" position="before">
+                    <field name="min_variable" />
+                    <field name="min_allowed" />
+                </field>
+                <field name="max_value" position="after">
+                    <field name="max_allowed" />
+                    <field name="max_variable" />
                     <field name="test_template_line_id" invisible="1" />
                 </field>
                 <field name="success" position="attributes">
