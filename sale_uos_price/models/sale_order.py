@@ -25,7 +25,7 @@ class SaleOrderLine(models.Model):
 
     price_unit_uos = fields.Float(
         string='UoS Unit Price', readonly=True,
-        digits_compute=dp.get_precision('Product Price'),
+        digits=dp.get_precision('Product Price'),
         states={'draft': [('readonly', False)]})
 
     @api.onchange('price_unit')

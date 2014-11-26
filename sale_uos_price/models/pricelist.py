@@ -35,7 +35,7 @@ class ProductPricelistItem(models.Model):
 
     price_surcharge_uos = fields.Float(
         string='Price Surcharge',
-        digits_compute=dp.get_precision('Product Price'),
+        digits=dp.get_precision('Product Price'),
         help='Specify the fixed amount to add or substract (if negative) to'
         ' the amount calculated with the discount.')
     uos_id = fields.Many2one(
