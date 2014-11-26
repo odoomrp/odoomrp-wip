@@ -1,0 +1,94 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mrp_production_capacity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-26 10:40+0000\n"
+"PO-Revision-Date: 2014-11-26 11:43+0100\n"
+"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_capacity
+#: field:mrp.workcenter,capacity_per_cycle_min:0
+msgid "Capacity per Cycle Min."
+msgstr "Capacidad por ciclo mínima."
+
+#. module: mrp_production_capacity
+#: help:mrp.workcenter,capacity_per_cycle_min:0
+msgid "Capacity per cycle minimum."
+msgstr "Capacidad por ciclo máxima"
+
+#. module: mrp_production_capacity
+#: field:mrp.routing.workcenter,limited_production_capacity:0
+msgid "Limited Production Capacity"
+msgstr "Limita capacidad fabricación"
+
+#. module: mrp_production_capacity
+#: model:ir.model,name:mrp_production_capacity.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Órden de producción"
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/models/mrp.py:72
+#: code:addons/mrp_production_capacity/models/mrp.py:121
+#, python-format
+msgid "Product QTY  < Capacity per cycleminimun"
+msgstr "Cantidad producto a producir  < capacidad mínima por ciclo"
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/models/mrp.py:66
+#: code:addons/mrp_production_capacity/models/mrp.py:114
+#, python-format
+msgid "Product QTY  > Capacity per cyclemaximun"
+msgstr "Cantidad producto a producir  > capacidad máxima por ciclo"
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/models/mrp.py:58
+#: code:addons/mrp_production_capacity/models/mrp.py:105
+#, python-format
+msgid "Product QTY < Capacity per cycle minimun, or > Capacity per cycle maximun"
+msgstr "Capacidad producto a producir < capacidad mínima, or > capacidad máxima por ciclo"
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/models/mrp.py:57
+#: code:addons/mrp_production_capacity/models/mrp.py:65
+#: code:addons/mrp_production_capacity/models/mrp.py:71
+#: code:addons/mrp_production_capacity/models/mrp.py:104
+#: code:addons/mrp_production_capacity/models/mrp.py:113
+#: code:addons/mrp_production_capacity/models/mrp.py:120
+#, python-format
+msgid "Warning!"
+msgstr "Atención!"
+
+#. module: mrp_production_capacity
+#: model:ir.model,name:mrp_production_capacity.model_mrp_workcenter
+msgid "Work Center"
+msgstr "Centro de producción"
+
+#. module: mrp_production_capacity
+#: model:ir.model,name:mrp_production_capacity.model_mrp_routing_workcenter
+msgid "Work Center Usage"
+msgstr "Utilización del centro de producción"
+
+#. module: mrp_production_capacity
+#: model:ir.model,name:mrp_production_capacity.model_mrp_production_workcenter_line
+msgid "Work Order"
+msgstr "Orden de trabajo"
+
+#. module: mrp_production_capacity
+#: view:mrp.production:mrp_production_capacity.mrp_production_form_view_inh_prodcapacity
+msgid "product_qty_change_production_capacity(product_qty, routing_id)"
+msgstr "product_qty_change_production_capacity(product_qty, routing_id)"
+
+#. module: mrp_production_capacity
+#: view:mrp.production:mrp_production_capacity.mrp_production_form_view_inh_prodcapacity
+msgid "workcenter_change_production_capacity(parent.product_qty, workcenter_id)"
+msgstr "workcenter_change_production_capacity(parent.product_qty, workcenter_id)"
+
