@@ -20,6 +20,7 @@
     "name": "Sale - UoS unit price",
     "version": "1.0",
     "depends": [
+        "product",
         "sale",
         "sale_stock",
     ],
@@ -34,6 +35,7 @@
     "summary": "",
     "data": [
         "views/sale_view.xml",
+        "views/pricelist_view.xml",
     ],
     "installable": True,
     "auto_install": False,
