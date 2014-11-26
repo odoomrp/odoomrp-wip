@@ -23,6 +23,7 @@ from openerp.addons import decimal_precision as dp
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    price_unit = fields.Float()
     price_unit_uos = fields.Float(
         string='UoS Unit Price', readonly=True,
         digits=dp.get_precision('Product Price'),
