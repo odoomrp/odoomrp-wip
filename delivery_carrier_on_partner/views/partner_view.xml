@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="res_partner_extended_form_view">
+            <field name="name">res.partner.extended.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="delivery.view_partner_property_form" />
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Deliveries">
+                        <group>
+                            <group>
+                                <field name="property_mandatory_carrier" />
+                                <field name="banned_carrier_ids" />
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</openerp>

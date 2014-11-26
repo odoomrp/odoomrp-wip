@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="sale_order_extended_form_view">
+            <field name="name">sale.order.extended.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="delivery.view_order_withcarrier_form" />
+            <field name="arch" type="xml">
+                <field name="carrier_id" position="after">
+                    <field name="property_mandatory_carrier"
+                        invisible="1" />
+                </field>
+                <field name="carrier_id" position="attributes">
+                    <attribute name="attrs">{'readonly':[('property_mandatory_carrier','!=',False)]}</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
