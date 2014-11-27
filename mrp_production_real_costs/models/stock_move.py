@@ -42,7 +42,7 @@ class StockMove(models.Model):
                     product = record.product_id
                     journal_id = self.env.ref(
                         'mrp_production_project_estimated_cost.analytic_'
-                        'journal_estimated_materials', False)
+                        'journal_materials', False)
                     production_id = False
                     analytic_account_id = False
                     task_id = False
@@ -82,6 +82,8 @@ class StockMove(models.Model):
                                      'task_id': task_id,
                                      'mrp_production_id': production_id,
                                      'workorder': record.work_order.id,
+                                     'estim_average_cost': 0.0,
+                                     'estim_standard_cost': 0.0
                                      }
                     analytic_line_obj.create(analytic_vals)
         return result

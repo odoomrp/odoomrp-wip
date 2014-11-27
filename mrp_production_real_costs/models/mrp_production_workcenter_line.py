@@ -39,8 +39,8 @@ class MrpProductionWorkcenterLine(models.Model):
             journal_id = workcenter.costs_journal_id.id or False
             if not journal_id:
                 journal_id = self.env.ref(
-                    'mrp_production_project_estimated_cost.analytic_journal'
-                    '_estimated_machines', False)
+                    'mrp_production_project_estimated_cost.analytic_journal_'
+                    'machines', False)
             analytic_account_id = production.analytic_account_id.id or False
             task_id = False
             if production:
@@ -73,6 +73,8 @@ class MrpProductionWorkcenterLine(models.Model):
                              'task_id': task_id,
                              'mrp_production_id': production.id or False,
                              'workorder': self.id,
+                             'estim_average_cost': 0.0,
+                             'estim_standard_cost': 0.0
                              }
             analytic_line = analytic_line_obj.create(analytic_vals)
             return analytic_line
