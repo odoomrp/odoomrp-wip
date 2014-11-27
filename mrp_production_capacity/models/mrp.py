@@ -17,6 +17,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
+import sys
 
 
 class MrpWorkcenter(models.Model):
@@ -48,8 +49,10 @@ class MrpProduction(models.Model):
             routing = routing_obj.browse(routing_id)
             for line in routing.workcenter_lines:
                 if line.limited_production_capacity:
-                    capacity_min = line.workcenter_id.capacity_per_cycle_min
-                    capacity_max = line.workcenter_id.capacity_per_cycle
+                    capacity_min = (line.workcenter_id.capacity_per_cycle_min
+                                    or sys.float_info.min)
+                    capacity_max = (line.workcenter_id.capacity_per_cycle or
+                                    sys.float_info.max)
                     if capacity_min and capacity_max:
                         if (product_qty < capacity_min or
                                 product_qty > capacity_max):
@@ -60,19 +63,6 @@ class MrpProduction(models.Model):
                                              ' cycle maximun')
                             }
                             result['warning'] = warning
-                    elif capacity_max and product_qty > capacity_max:
-                        warning = {
-                            'title': _('Warning!'),
-                            'message': _('Product QTY  > Capacity per cycle'
-                                         'maximun'),
-                        }
-                    elif capacity_min and product_qty < capacity_min:
-                        warning = {
-                            'title': _('Warning!'),
-                            'message': _('Product QTY  < Capacity per cycle'
-                                         'minimun'),
-                        }
-                        result['warning'] = warning
         return result
 
     @api.one
@@ -96,10 +86,13 @@ class MrpProductionWorkcenterLine(models.Model):
         workcenter_obj = self.env['mrp.workcenter']
         if product_qty and workcenter_id:
             workcenter = workcenter_obj.browse(workcenter_id)
-            if (workcenter.capacity_per_cycle and
-                    workcenter.capacity_per_cycle_min):
-                if (product_qty < workcenter.capacity_per_cycle_min or
-                        product_qty > workcenter.capacity_per_cycle):
+            capacity_min = (workcenter.capacity_per_cycle_min or
+                            sys.float_info.min)
+            capacity_max = (workcenter.capacity_per_cycle or
+                            sys.float_info.max)
+            if capacity_min and capacity_max:
+                if (product_qty < capacity_min or
+                        product_qty > capacity_max):
                     warning = {
                         'title': _('Warning!'),
                         'message': _('Product QTY < Capacity per cycle'
@@ -107,19 +100,4 @@ class MrpProductionWorkcenterLine(models.Model):
                                      ' cycle maximun')
                     }
                     result['warning'] = warning
-            elif (workcenter.capacity_per_cycle and
-                    product_qty > workcenter.capacity_per_cycle):
-                warning = {
-                    'title': _('Warning!'),
-                    'message': _('Product QTY  > Capacity per cycle'
-                                 'maximun'),
-                }
-            elif (workcenter.capacity_per_cycle_min and
-                  product_qty < workcenter.capacity_per_cycle_min):
-                warning = {
-                    'title': _('Warning!'),
-                    'message': _('Product QTY  < Capacity per cycle'
-                                 'minimun'),
-                }
-                result['warning'] = warning
         return result
