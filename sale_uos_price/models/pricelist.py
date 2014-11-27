@@ -34,16 +34,16 @@ class ProductPricelistItem(models.Model):
             self.uos_id = False
 
     price_surcharge_uos = fields.Float(
-        string='Price Surcharge',
+        string='Price Surcharge for UoS',
         digits=dp.get_precision('Product Price'),
         help='Specify the fixed amount to add or substract (if negative) to'
         ' the amount calculated with the discount.')
     uos_id = fields.Many2one(
         comodel_name='product.uom', string='Unit of Sale',
-        compute=_get_uos_id)
+        compute=_get_uos_id, readonly=True)
 
     @api.onchange('price_surcharge')
-    def onchange_price_unit(self):
+    def onchange_price_surcharge(self):
         if self.product_id:
             self.price_surcharge_uos = (
                 self.price_surcharge / self.product_id.uos_coeff)
@@ -52,7 +52,7 @@ class ProductPricelistItem(models.Model):
                 self.price_surcharge / self.product_tmpl_id.uos_coeff)
 
     @api.onchange('price_surcharge_uos')
-    def onchange_price_unit_uos(self):
+    def onchange_price_surcharge_uos(self):
         if self.product_id:
             self.price_surcharge = (
                 self.price_surcharge_uos * self.product_id.uos_coeff)

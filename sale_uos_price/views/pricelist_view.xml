@@ -8,11 +8,11 @@
             <field name="inherit_id" ref="product.product_pricelist_item_form_view" />
             <field name="arch" type="xml">
                 <field name="price_surcharge" position="after">
-                    <group attrs="{'invisible': [('uos_id','=',False)]}" col="3">
+                    <group attrs="{'invisible': [('uos_id','=',False)]}" col="4">
                         <label string=" Price Surcharge for UoS: ( " />
-                        <field name="price_surcharge_uos" nolabel="1" />
+                        <field name="uos_id" nolabel="1"/>
                         <label string=" ) " />
-                        <field name="uos_id" invisible="1" />
+                        <field name="price_surcharge_uos" nolabel="1" />
                     </group>
                 </field>
             </field>
