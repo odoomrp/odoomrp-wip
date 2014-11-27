@@ -24,11 +24,7 @@ class MrpProduction(models.Model):
 
     _inherit = "mrp.production"
 
-    pack = fields.One2many('download.operation', 'operation')
-    claim = fields.Many2one('crm.claim')
-    download_user = fields.Many2one('res.users')
-    sample = fields.Many2many('mrp.sample')
-    sample_taken = fields.Boolean('Samples Taken')
+    pack = fields.One2many('packaging.operation', 'operation')
     expected_production = fields.One2many('mrp.production', 'production',
                                           string='Expected Production',
                                           )
@@ -47,7 +43,7 @@ class MrpProduction(models.Model):
         self.write({'pack': pack_lines})
 
     @api.one
-    def create_mo_from_download_operation(self):
+    def create_mo_from_packaging_operation(self):
         for op in self.pack:
             res = []
             add_product = []
@@ -66,7 +62,8 @@ class MrpProduction(models.Model):
             workorder =\
                 new_op.workcenter_lines and new_op.workcenter_lines[0].id
             for attr_value in op.product.attribute_value_ids:
-                if attr_value.linked_product:
+                if (attr_value.attribute_id.type == 'raw_material' and
+                        attr_value.linked_product):
                     value = self.get_new_components_info(
                         attr_value.linked_product.id,
                         attr_value.linked_product.property_stock_production.id,
@@ -74,13 +71,12 @@ class MrpProduction(models.Model):
                         attr_value.linked_product.uom_id.id,
                         attr_value.linked_product.uos_id.id,
                         op.qty, workorder)
-                res.append(value)
+                    res.append(value)
             bulk_value = self.get_new_components_info(
                 self.product_id.id,
                 self.location_src_id.id,
                 self.location_dest_id.id,
-                self.product_id.uom_id.id, self.product_id.uos_id.id, op.fill,
-                workorder)
+                self.product_uom.id, self.product_uos.id, op.fill, workorder)
             for line in new_op.product_lines:
                 if bulk_value['product_id'] == line.product_id.id:
                     new_op.write({'product_lines': [(1, line.id, bulk_value)]})
@@ -98,28 +94,30 @@ class MrpProduction(models.Model):
             op.processed = True
 
 
-class DownloadOperation(models.Model):
-    _name = "download.operation"
+class PackagingOperation(models.Model):
+    _name = "packaging.operation"
     _rec_name = 'product'
 
     @api.one
     def _calculate_weight(self):
-        numeric_value = 1
+        raw_qty = 1
         for value in self.product.attribute_value_ids:
             if value.linked_product:
-                numeric_value = value.numeric_value
+                raw_qty = value.raw_qty
                 break
-        self.fill = numeric_value * self.qty
+        self.fill = raw_qty * self.qty
 
     product = fields.Many2one('product.product', string='Product',
-                              required=True)
+                              required=True,
+                              help="Product that is going to be manufactured")
     operation = fields.Many2one('mrp.production')
-    qty = fields.Integer(string="QTY")
-    fill = fields.Float(string="Fill", compute=_calculate_weight)
+    qty = fields.Integer(string="QTY",
+                         help="Product Quantity. It will be the new "
+                         "manufacturing order quantity "
+                         "if dump uom is equal to product uom")
+    fill = fields.Float(string="Fill", compute=_calculate_weight,
+                        help="Product linked raw material value *"
+                        "Product Quantity. It will be the new manufacturing "
+                        "order quantity "
+                        "if dump uom is not equal to product uom")
     processed = fields.Boolean(string='Processed')
-
-
-class MrpSample(models.Model):
-    _name = 'mrp.sample'
-
-    name = fields.Char(string='Name')
