@@ -82,6 +82,8 @@ class StockMove(models.Model):
                                      'task_id': task_id,
                                      'mrp_production_id': production_id,
                                      'workorder': record.work_order.id,
+                                     'estim_average_cost': 0.0,
+                                     'estim_standard_cost': 0.0
                                      }
                     analytic_line_obj.create(analytic_vals)
         return result
