@@ -129,6 +129,7 @@ class MrpProductionWorkcenterLine(models.Model):
     def create_quality_test(self):
         test_obj = self.env['qc.test']
         vals = {'workcenter_line_id': self.id,
+                'production_id': self.production_id.id,
                 'test_template_id': self.qtemplate_id.id,
                 }
         if self.qtemplate_id.object_id:
@@ -153,6 +154,8 @@ class MrpProductionWorkcenterLine(models.Model):
             for test in self.test_ids:
                 if test.state not in ('success', 'failed', 'canceled'):
                     raise except_orm(_('Finalization Operation Error!'),
-                                     _("The Operation has quality test without"
-                                       "QUALITY SUCCESS state"))
+                                     _("There are quality tests in draft or"
+                                       " approval pending state for this"
+                                       " operation. Please finish or cancel "
+                                       "them."))
         return super(MrpProductionWorkcenterLine, self).action_done()
