@@ -42,7 +42,7 @@ class StockMove(models.Model):
                     product = record.product_id
                     journal_id = self.env.ref(
                         'mrp_production_project_estimated_cost.analytic_'
-                        'journal_estimated_materials', False)
+                        'journal_materials', False)
                     production_id = False
                     analytic_account_id = False
                     task_id = False
