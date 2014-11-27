@@ -9,6 +9,7 @@
                 <field name="arch" type="xml">
                         <field name="numeric_value" position="after">
                             <field name="linked_product"/>
+                            <field name="raw_qty" attrs="{'required':[('attr_type','=','raw_material')]}"/>
                     </field>
                 </field>
         </record>
