@@ -94,15 +94,33 @@ class SaleOrderLine(models.Model):
          _('Second discount must be lower than 100%.')),
     ]
 
-#     @api.model
-#     def default_get(self, fields_list):
-#         res = super(SaleOrderLine, self).default_get(fields_list)
-#         item_obj = self.env['product.pricelist.item']
-#         context = self.env.context.copy()
-#         if context.get('pricelist_id'):
-#             item_id = item_obj.get_best_pricelist_item(context['pricelist_id'])
-#             res.update({'item_id': item_id})
-#         return res
+    def default_get(self, cr, uid, fields_list, context=None):
+        res = super(SaleOrderLine, self).default_get(cr, uid, fields_list,
+                                                     context=context)
+        item_obj = self.pool['product.pricelist.item']
+        if context.get('pricelist_id'):
+            item_id = item_obj.get_best_pricelist_item(
+                cr, uid, context['pricelist_id'], context=context)
+            res.update({'item_id': item_id})
+        return res
+
+    @api.multi
+    def product_id_change(
+            self, pricelist, product, qty=0, uom=False, qty_uos=0, uos=False,
+            name='', partner_id=False, lang=False, update_tax=True,
+            date_order=False, packaging=False, fiscal_position=False,
+            flag=False):
+        res = super(SaleOrderLine, self).product_id_change(
+            pricelist, product, qty=qty, uom=uom, qty_uos=qty_uos, uos=uos,
+            name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
+            date_order=date_order, packaging=packaging,
+            fiscal_position=fiscal_position, flag=flag)
+        if product:
+            item_obj = self.env['product.pricelist.item']
+            item_id = item_obj.get_best_pricelist_item(
+                pricelist, product_id=product, qty=qty)
+            res['value'].update({'item_id': item_id})
+        return res
 
     @api.one
     @api.onchange('item_id')
@@ -116,15 +134,14 @@ class SaleOrderLine(models.Model):
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    def _amount_line_tax(self, cr, uid, line, context=None):
+    @api.model
+    def _amount_line_tax(self, line):
         val = 0.0
-        tax_obj = self.pool['account.tax']
-        line_obj = self.pool['sale.order.line']
-        new_price_subtotal = line_obj._calc_price_subtotal(cr, uid, line)
-        qty = line_obj._calc_qty(cr, uid, line)
-        for c in tax_obj.compute_all(cr, uid, line.tax_id, new_price_subtotal,
-                                     qty, line.product_id,
-                                     line.order_id.partner_id)['taxes']:
+        new_price_subtotal = line._calc_price_subtotal()
+        qty = line._calc_qty()
+        for c in line.tax_id.compute_all(new_price_subtotal,
+                                         qty, line.product_id,
+                                         line.order_id.partner_id)['taxes']:
             val += c.get('amount', 0.0)
         return val
 

@@ -22,6 +22,7 @@
     "depends": [
         "sale",
         "account",
+        "product",
         "product_pricelist_rules",
     ],
     "author": "OdooMRP team",
