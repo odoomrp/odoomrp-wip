@@ -62,15 +62,14 @@ class MrpProduction(models.Model):
             workorder =\
                 new_op.workcenter_lines and new_op.workcenter_lines[0].id
             for attr_value in op.product.attribute_value_ids:
-                if (attr_value.attribute_id.type == 'raw_material' and
-                        attr_value.linked_product):
+                if attr_value.linked_product:
                     value = self.get_new_components_info(
                         attr_value.linked_product.id,
                         attr_value.linked_product.property_stock_production.id,
                         attr_value.linked_product.property_stock_inventory.id,
                         attr_value.linked_product.uom_id.id,
                         attr_value.linked_product.uos_id.id,
-                        op.qty, workorder)
+                        attr_value.linked_product.raw_qty * op.qty, workorder)
                     res.append(value)
             bulk_value = self.get_new_components_info(
                 self.product_id.id,
