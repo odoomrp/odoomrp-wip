@@ -29,12 +29,12 @@
                 <xpath
                     expr="//page//group[@string='Products to Consume']//field[@name='product_id']"
                     position="after">
-                    <field name="scheduled_lot" />
+                    <field name="restrict_lot_id" />
                 </xpath>
                 <xpath
                     expr="//page//group[@string='Consumed Products']//field[@name='product_id']"
                     position="after">
-                    <field name="scheduled_lot" />
+                    <field name="restrict_lot_id" />
                 </xpath>
             </field>
         </record>

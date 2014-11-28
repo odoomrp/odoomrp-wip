@@ -27,7 +27,7 @@ class MrpProduction(models.Model):
         for move_line in move_lines:
             for product_line in product_lines:
                 if product_line.product_id.id == move_line.product_id.id:
-                    move_line.scheduled_lot = product_line.lot.id
+                    move_line.restrict_lot_id = product_line.lot.id
 
     @api.multi
     def action_confirm(self):
@@ -40,10 +40,7 @@ class MrpProduction(models.Model):
                      ('location_id', '=', self.location_src_id.id)])
                 if aval_quant_lst:
                     quantity = line.product_qty
-                    available_qty = 0
-                    for aval_lot in aval_quant_lst:
-                        if aval_lot.qty > 0:
-                            available_qty += aval_lot.qty
+                    available_qty = sum([x.qty for x in aval_quant_lst])
                     if quantity >= available_qty:
                         available = False
                         break
@@ -61,4 +58,4 @@ class MrpProduction(models.Model):
 class MrpProductionProductLine(models.Model):
     _inherit = 'mrp.production.product.line'
 
-    lot = fields.Many2one('stock.production.lot', 'Lot')
+    lot = fields.Many2one('stock.production.lot', 'Reserved Lot')
