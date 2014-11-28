@@ -20,7 +20,7 @@
 {
     "name": "Linked Products to Manufacturing Order",
     "version": "1.0",
-    "depends": ["base", "mrp","website_sale", "product_attribute_types"],
+    "depends": ["base", "mrp", "website_sale", "product_attribute_types"],
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Manufacturing",

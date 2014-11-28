@@ -20,15 +20,9 @@
 from openerp import fields, models
 
 
-class ProductAttribute(models.Model):
-    _inherit = "product.attribute"
-
-    type = fields.Selection(selection_add=[("raw_material", "Raw Material")])
-
 class ProductAttributeValue(models.Model):
     _inherit = "product.attribute.value"
 
     linked_product = fields.Many2one('product.product',
                                      string='Raw Product')
     raw_qty = fields.Float(string='Raw Product QTY', default=1.)
-    attr_type = fields.Selection(related="attribute_id.type")

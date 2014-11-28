@@ -49,16 +49,17 @@ class MrpProduction(models.Model):
         workorder =\
             self.workcenter_lines and self.workcenter_lines[0].id
         for attr_value in self.product_id.attribute_value_ids:
-            if (attr_value.attribute_id.type == 'raw_material' and
-                attr_value.linked_product and
-                attr_value.linked_product.id not in self.product_lines.ids):
+            if (attr_value.linked_product and
+                    attr_value.linked_product.id not in
+                    self.product_lines.ids):
                 value = self.get_new_components_info(
                     attr_value.linked_product.id,
                     attr_value.linked_product.property_stock_production.id,
                     attr_value.linked_product.property_stock_inventory.id,
                     attr_value.linked_product.uom_id.id,
                     attr_value.linked_product.uos_id.id,
-                    self.product_qty, workorder)
+                    self.product_qty * attr_value.linked_product.raw_qty,
+                    workorder)
             res.append(value)
         self.write({'product_lines': map(lambda x: (0, 0, x), res)})
         return result
