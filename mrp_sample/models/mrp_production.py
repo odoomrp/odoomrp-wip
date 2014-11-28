@@ -16,13 +16,13 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import api, fields, models
+from openerp import fields, models
 
 
 class MrpProduction(models.Model):
 
     _inherit = "mrp.production"
-    
+
     sample = fields.Many2many('mrp.sample')
     sample_taken = fields.Boolean('Samples Taken')
     claim = fields.Many2one('crm.claim')

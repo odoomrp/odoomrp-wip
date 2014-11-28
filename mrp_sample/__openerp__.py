@@ -19,7 +19,7 @@
 {
     "name": "MRP Sample",
     "version": "1.0",
-    "depends": ["base", "mrp", "crm_claim"],
+    "depends": ["base", "mrp", "crm_claim", "mrp_packaging"],
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Manufacturing",
