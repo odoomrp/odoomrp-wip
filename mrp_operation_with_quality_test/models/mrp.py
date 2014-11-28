@@ -65,12 +65,23 @@ class MrpRoutingOperation(models.Model):
 class MrpProductionWorkcenterLine(models.Model):
     _inherit = 'mrp.production.workcenter.line'
 
+    @api.one
+    @api.onchange('test_ids')
+    def _count_tests(self):
+        self.op_test = 0
+        created = 0
+        for test in self.test_ids:
+            created += 1
+        self.ope_tests = created
+
     required_test = fields.Boolean(string='Required Test')
     qtemplate_id = fields.Many2one('qc.test.template', string='Test Template')
     test_ids = fields.One2many('qc.test', 'workcenter_line_id',
                                string='Quality Tests')
     analytic_journal_id = fields.Many2one('account.analytic.journal',
                                           string='Analytic Journal')
+    ope_tests = fields.Integer(string="OP Tests", compute=_count_tests,
+                               multi="op_test_count")
 
     @api.model
     def create(self, data):

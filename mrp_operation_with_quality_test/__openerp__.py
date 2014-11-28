@@ -41,6 +41,7 @@ This module performs the following:
     """,
     "depends": [
         'mrp',
+        'mrp_operations',
         'mrp_operations_extension',
         'quality_control',
         'account',
