@@ -40,8 +40,8 @@ class QcTestWizard(orm.TransientModel):
     _name = 'qc.test.set.template.wizard'
 
     def _default_test_template_id(self, cr, uid, context=None):
-        id = context.get('active_id', False)
-        test = self.pool['qc.test'].browse(cr, uid, id, context=context)
+        test = self.pool['qc.test'].browse(
+            cr, uid, context.get('active_id', False), context=context)
         cond = [('object_id', '=', test.object_id.id)]
         ids = self.pool['qc.test.template'].search(cr, uid, cond,
                                                    context=context)
