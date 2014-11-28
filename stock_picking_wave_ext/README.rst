@@ -1,1 +1,0 @@
-Picking wave module complementary
