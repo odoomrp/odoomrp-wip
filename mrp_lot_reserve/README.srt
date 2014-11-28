@@ -1,5 +1,5 @@
 
-mrp_scheduled_lot
+mrp_lot_reserve
 ===========
 This module allows to add a lot to the scheduled products in a manufacturing
 order.

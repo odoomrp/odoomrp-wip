@@ -17,7 +17,7 @@
 #
 ##############################################################################
 {
-    'name': 'MRP Scheduled Lot',
+    'name': 'MRP Lot Reserve',
     'version': "1.0",
     "category": "Manufacturing",
     'author': 'OdooMRP team',
