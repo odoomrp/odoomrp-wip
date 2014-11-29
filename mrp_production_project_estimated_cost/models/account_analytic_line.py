@@ -34,20 +34,3 @@ class AccountAnalyticLine(models.Model):
     last_sale_price = fields.Float(
         string='Last Sale Price',
         digits=dp.get_precision('Product Price'))
-
-    def on_change_unit_amount(self, cr, uid, ids, prod_id, quantity,
-                              company_id, unit=False, journal_id=False,
-                              context=None):
-        product_obj = self.pool['product.product']
-        result = super(AccountAnalyticLine, self).on_change_unit_amount(
-            cr, uid, ids, prod_id, quantity, company_id, unit=unit,
-            journal_id=journal_id, context=context)
-        if prod_id:
-            product = product_obj.browse(cr, uid, prod_id, context=context)
-            value = result.get('value')
-            value.update({'estim_standard_cost': product.manual_standard_cost,
-                          'estim_average_cost': product.standard_price,
-                          'last_purchase_cost': product.last_purchase_price,
-                          'last_sale_price': product.last_sale_price})
-            result.update({'value': value})
-        return result
