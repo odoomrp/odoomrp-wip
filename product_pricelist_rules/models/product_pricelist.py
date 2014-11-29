@@ -18,7 +18,6 @@
 
 from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
-import time
 
 
 class PricelistOffer(models.Model):
@@ -35,14 +34,16 @@ class PricelistItem(models.Model):
     pricelist = fields.Many2one(comodel_name='product.pricelist',
                                 related='price_version_id.pricelist_id',
                                 string='Pricelist', store=True)
-    offer = fields.Many2one(comodel_name='product.pricelist.item.offer',
-                            string='Offer')
+    pricelist_type = fields.Selection(
+        string='Pricelist Type', related='pricelist.type', store=True)
+    offer = fields.Many2one(
+        comodel_name='product.pricelist.item.offer', string='Offer')
     discount = fields.Float('Discount %',
                             digits=dp.get_precision('Product Price'))
     discount2 = fields.Float('Discount 2 %',
                              digits=dp.get_precision('Product Price'))
-    product_ul = fields.Many2one(comodel_name='product.ul',
-                                 string='Logistic Unit')
+    product_ul = fields.Many2one(
+        comodel_name='product.ul', string='Logistic Unit')
     item_formula = fields.Char(compute='_item_formula')
 
     _sql_constraints = [
@@ -52,34 +53,72 @@ class PricelistItem(models.Model):
          'Second discount must be lower than 100%.'),
     ]
 
+    price_version_id = fields.Many2one()
+
+    @api.onchange('price_version_id')
+    def onchange_price_version(self):
+        self.pricelist = self.price_version_id.pricelist_id
+
     @api.one
     def _item_formula(self):
         self.item_formula = (_('Base price * (1 + %s) + %s') %
-                             (self.price_discount, self.price_discount))
+                             (self.price_discount, self.price_surcharge))
 
     @api.model
-    def domain_by_pricelist(self, pricelist_id):
+    def domain_by_pricelist(self, pricelist_id, product_id=False,
+                            product_tmpl_id=False, categ_id=False, qty=0):
         vers_obj = self.env['product.pricelist.version']
-        today = time.strftime('%Y-%m-%d')
+        today = fields.Date.context_today(self)
         vers_ids = vers_obj.search([('pricelist_id', '=', pricelist_id),
                                     '|', ('date_start', '=', False),
                                     ('date_start', '<=', today),
                                     '|', ('date_end', '=', False),
                                     ('date_end', '>=', today)])
-        item_ids = self.search([('price_version_id', 'in', vers_ids.ids)],
-                               order='sequence')
+        domain = [('price_version_id', 'in', vers_ids.ids),
+                  '&', ('min_quantity', '<=', qty)]
+        if product_id:
+            product_obj = self.env['product.product']
+            product = product_obj.browse(product_id)
+            domain.extend([
+                '|', ('product_id', '=', product_id),
+                '|', '&', ('product_id', '=', False),
+                ('product_tmpl_id', '=', product.product_tmpl_id.id),
+                '|', '&', ('product_id', '=', False),
+                '&', ('product_tmpl_id', '=', False),
+                ('categ_id', '=', product.categ_id.id),
+            ])
+        elif product_tmpl_id:
+            template_obj = self.env['product.template']
+            template = template_obj.browse(product_tmpl_id)
+            domain.extend([
+                '|', '&', ('product_id', '=', False),
+                ('product_tmpl_id', '=', template.id),
+                '|', '&', ('product_id', '=', False),
+                '&', ('product_tmpl_id', '=', False),
+                ('categ_id', '=', template.categ_id.id),
+            ])
+        domain.extend(['&', ('product_id', '=', False),
+                       '&', ('product_tmpl_id', '=', False),
+                       ('categ_id', '=', False)])
+        item_ids = self.search(domain,
+                               order='min_quantity desc,sequence asc')
         for item in item_ids:
             if item.base == -1:
                 item_ids.remove(item)
                 new_item_ids = self.domain_by_pricelist(
-                    item.base_pricelist_id)
+                    item.base_pricelist_id, product_id=product_id,
+                    product_tmpl_id=product_tmpl_id, categ_id=categ_id,
+                    qty=qty)
                 item_ids += new_item_ids
         return item_ids.ids
 
     @api.model
-    def get_best_pricelist_item(self, pricelist_id):
+    def get_best_pricelist_item(self, pricelist_id, product_id=False,
+                                product_tmpl_id=False, categ_id=False, qty=0):
         pricelist_item_id = False
-        pricelist_item_ids = self.domain_by_pricelist(pricelist_id)
+        pricelist_item_ids = self.domain_by_pricelist(
+            pricelist_id, product_id=product_id,
+            product_tmpl_id=product_tmpl_id, categ_id=categ_id, qty=qty)
         if pricelist_item_ids:
             pricelist_item_id = pricelist_item_ids[0]
         return pricelist_item_id

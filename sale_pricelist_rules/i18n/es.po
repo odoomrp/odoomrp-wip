@@ -1,0 +1,120 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_pricelist_rules
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-20 11:04+0000\n"
+"PO-Revision-Date: 2014-11-20 11:04+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line.subtotal,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line.subtotal,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line,discount2:0
+msgid "Discount (%)"
+msgstr "Descuento (%)"
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line.subtotal,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line.subtotal,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line.subtotal,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line.subtotal,line_id:0
+msgid "Line"
+msgstr "Línea"
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line,offer_id:0
+msgid "Offer"
+msgstr "Oferta"
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line,item_id:0
+#: field:sale.order.line.subtotal,item_id:0
+msgid "Pricelist Item"
+msgstr "Elemento de la tarifa"
+
+#. module: sale_pricelist_rules
+#: model:ir.actions.act_window,name:sale_pricelist_rules.sale_pricelist_item_offers_action
+#: model:ir.ui.menu,name:sale_pricelist_rules.sale_pricelist_item_offers_mi
+msgid "Pricelist Item Offers"
+msgstr "Ofertas de elemento de la tarifa"
+
+#. module: sale_pricelist_rules
+#: model:ir.actions.act_window,name:sale_pricelist_rules.sale_pricelist_items_action
+#: model:ir.ui.menu,name:sale_pricelist_rules.sale_pricelist_items_mi
+msgid "Pricelist Items"
+msgstr "Elementos de la tarifa"
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line.subtotal,sale_id:0
+msgid "Sale Order"
+msgstr "Pedido de venta"
+
+#. module: sale_pricelist_rules
+#: model:ir.model,name:sale_pricelist_rules.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: sale_pricelist_rules
+#: model:ir.model,name:sale_pricelist_rules.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea pedido de venta"
+
+#. module: sale_pricelist_rules
+#: sql_constraint:sale.order.line:0
+msgid "Second discount must be lower than 100%."
+msgstr "El segundo descuento debe ser menor al 100%."
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line.subtotal,subtotal:0
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#. module: sale_pricelist_rules
+#: field:sale.order.line,subtotal_ids:0
+msgid "Subtotals by pricelist"
+msgstr "Subtotales por tarifa"
+
+#. module: sale_pricelist_rules
+#: field:sale.order,subtotal_ids:0
+msgid "Subtotals per line by pricelist"
+msgstr "Subtotales por línea por tarifa"
+
+#. module: sale_pricelist_rules
+#: view:sale.order.line.subtotal:sale_pricelist_rules.sale_subtotal_tree
+msgid "Subtotals per pricelist"
+msgstr "Subtotal por tarifa"
+
+#. module: sale_pricelist_rules
+#: view:sale.order:sale_pricelist_rules.sale_order_form_view_ext
+msgid "{'pricelist_id':pricelist_id}"
+msgstr "{'pricelist_id':pricelist_id}"
+

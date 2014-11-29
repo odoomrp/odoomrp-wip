@@ -26,6 +26,7 @@
             <field name="arch" type="xml">
                 <field name="name" position="before">
                     <field name="pricelist" />
+                    <field name="pricelist_type" invisible="1" />
                     <field name="price_version_id" />
                 </field>
                 <field name="min_quantity" position="after">
@@ -53,6 +54,7 @@
                     <field name="base" />
                     <group expand="0" string="Group by...">
                         <filter string="Pricelist" name="pricelist_id" domain="[]" context="{'group_by' : 'pricelist'}"/>
+                        <filter string="Pricelist Type" name="pricelist_type_id" domain="[]" context="{'group_by' : 'pricelist_type'}" />
                         <filter string="Pricelist Version" name="version_id" domain="[]" context="{'group_by' : 'price_version_id'}"/>
                         <separator />
                         <filter string="Product" name="product_id" domain="[]" context="{'group_by' : 'product_id'}"/>
@@ -88,6 +90,20 @@
                     <field name="paid_qty" />
                     <field name="free_qty" />
                 </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pricelist_form_view">
+            <field name="name">product.pricelist.form</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view" />
+            <field name="arch" type="xml">
+                <field name="version_id" position="attributes">
+                    <attribute name="context">{'type':type,'default_pricelist_id':id}</attribute>
+                </field>
+                <field name="items_id" position="attributes">
+                    <attribute name="context">{'type':type,'default_price_version_id':id}</attribute>
+                </field>
             </field>
         </record>
 

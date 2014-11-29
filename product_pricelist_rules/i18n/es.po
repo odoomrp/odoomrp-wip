@@ -6,14 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-22 14:09+0000\n"
-"PO-Revision-Date: 2014-09-22 14:09+0000\n"
+"POT-Creation-Date: 2014-11-20 11:02+0000\n"
+"PO-Revision-Date: 2014-11-20 11:02+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: product_pricelist_rules
+#: code:addons/product_pricelist_rules/models/product_pricelist.py:57
+#: code:addons/product_pricelist_rules/models/product_pricelist.py:59
+#, python-format
+msgid "Base price * (1 + %s) + %s"
+msgstr "Precio base * (1 + %s) + %s"
 
 #. module: product_pricelist_rules
 #: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
@@ -28,7 +35,7 @@ msgstr "Creado por"
 #. module: product_pricelist_rules
 #: field:product.pricelist.item.offer,create_date:0
 msgid "Created on"
-msgstr "Creado el"
+msgstr "Creado en"
 
 #. module: product_pricelist_rules
 #: field:product.pricelist.item,discount:0
@@ -63,15 +70,20 @@ msgstr "ID"
 #. module: product_pricelist_rules
 #: field:product.pricelist.item.offer,write_uid:0
 msgid "Last Updated by"
-msgstr "Modificado por"
+msgstr "Última actualización de"
 
 #. module: product_pricelist_rules
 #: field:product.pricelist.item.offer,write_date:0
 msgid "Last Updated on"
-msgstr "Modificado el"
+msgstr "Última actualización en"
 
 #. module: product_pricelist_rules
-#: field:product.pricelist.item,offer_id:0
+#: field:product.pricelist.item,product_ul:0
+msgid "Logistic Unit"
+msgstr "Unidad logística"
+
+#. module: product_pricelist_rules
+#: field:product.pricelist.item,offer:0
 #: view:product.pricelist.item.offer:product_pricelist_rules.pricelist_item_offer_form_view
 #: view:product.pricelist.item.offer:product_pricelist_rules.pricelist_item_offer_tree_view
 msgid "Offer"
@@ -89,9 +101,15 @@ msgstr "Cantidad a pagar"
 
 #. module: product_pricelist_rules
 #: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
-#: field:product.pricelist.item,pricelist_id:0
+#: field:product.pricelist.item,pricelist:0
 msgid "Pricelist"
 msgstr "Tarifa"
+
+#. module: product_pricelist_rules
+#: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
+#: field:product.pricelist.item,pricelist_type:0
+msgid "Pricelist Type"
+msgstr "Tipo de tarifa"
 
 #. module: product_pricelist_rules
 #: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
@@ -121,5 +139,5 @@ msgstr "Plantilla de producto"
 #. module: product_pricelist_rules
 #: sql_constraint:product.pricelist.item:0
 msgid "Second discount must be lower than 100%."
-msgstr "El segundo descuento debe ser menor que el 100%."
+msgstr "El segundo descuento debe ser menor al 100%."
 
