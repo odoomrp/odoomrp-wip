@@ -17,4 +17,5 @@
 ##############################################################################
 
 from . import product
-from . import mrp
+from . import mrp_bom
+from . import mrp_production
