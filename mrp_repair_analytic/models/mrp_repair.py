@@ -45,7 +45,7 @@ class MrpRepair(models.Model):
         analytic_line_obj = self.env['account.analytic.line']
         name = self.name
         if line.product_id.default_code:
-            name += ' - ' + self.default_code
+            name += ' - ' + line.product_id.default_code
         categ_id = line.product_id.categ_id
         general_account = (line.product_id.property_account_income or
                            categ_id.property_account_income_categ or
