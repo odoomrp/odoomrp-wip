@@ -8,9 +8,9 @@
             <field name="arch" type="xml">
                 <field name="ref" position="after">
                     <field name="ref_customer"
-                        attrs="{'invisible': [('customer', '=', False)]}" />
-                    <field name="ref_supplier"
                         attrs="{'invisible': [('supplier', '=', False)]}" />
+                    <field name="ref_supplier"
+                        attrs="{'invisible': [('customer', '=', False)]}" />
                 </field>
             </field>
         </record>
