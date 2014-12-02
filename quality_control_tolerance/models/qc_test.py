@@ -15,11 +15,8 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+
 from openerp import models, fields, api
-
-
-class QcTest(models.Model):
-    _inherit = 'qc.test'
 
 
 class QcTestTemplateLine(models.Model):
@@ -36,51 +33,30 @@ class QcTestLine(models.Model):
 
     @api.one
     @api.depends('proof_type', 'test_template_line_id', 'min_value',
+                 'max_value',
                  'test_template_line_id.percen_permissible_tolerance')
-    def _compute_min_allowed(self):
+    def _compute_min_max_allowed_variable(self):
         self.min_allowed = 0.0
-        if (self.proof_type != 'qualitative' and self.test_template_line_id
-                and self.min_value):
-            per = self.test_template_line_id.percen_permissible_tolerance
-            if per:
-                self.min_allowed = (self.min_value - self.min_value * per /
-                                    100)
-
-    @api.one
-    @api.depends('proof_type', 'test_template_line_id', 'max_value',
-                 'test_template_line_id.percen_permissible_tolerance')
-    def _compute_max_allowed(self):
         self.max_allowed = 0.0
-        if (self.proof_type != 'qualitative' and self.test_template_line_id and
-                self.max_value):
-            per = self.test_template_line_id.percen_permissible_tolerance
-            if per:
-                self.max_allowed = (self.max_value + self.max_value * per /
-                                    100)
-
-    @api.one
-    @api.depends('proof_type', 'test_template_line_id', 'min_value',
-                 'test_template_line_id.percen_variable_tolerance')
-    def _compute_min_variable(self):
         self.min_variable = 0.0
-        if (self.proof_type != 'qualitative' and self.test_template_line_id and
-                self.min_value):
-            per = self.test_template_line_id.percen_variable_tolerance
-            if per:
-                self.min_variable = (self.min_value - self.min_value * per
-                                     / 100)
-
-    @api.one
-    @api.depends('proof_type', 'test_template_line_id', 'max_value',
-                 'test_template_line_id.percen_variable_tolerance')
-    def _compute_max_variable(self):
         self.max_variable = 0.0
-        if (self.proof_type != 'qualitative' and self.test_template_line_id and
-                self.max_value):
-            per = self.test_template_line_id.percen_variable_tolerance
-            if per:
-                self.max_variable = (self.max_value + self.max_value * per
-                                     / 100)
+        if (self.proof_type != 'qualitative' and self.test_template_line_id):
+            perm = self.test_template_line_id.percen_permissible_tolerance
+            var = self.test_template_line_id.percen_variable_tolerance
+            if self.min_value:
+                if perm:
+                    self.min_allowed = (
+                        self.min_value - self.min_value * perm / 100)
+                if var:
+                    self.min_variable = (
+                        self.min_value - self.min_value * var / 100)
+            if self.max_value:
+                if perm:
+                    self.max_allowed = (
+                        self.max_value + self.max_value * perm / 100)
+                if var:
+                    self.max_variable = (
+                        self.max_value + self.max_value * var / 100)
 
     @api.one
     @api.depends('test_id.state', 'min_value', 'max_value', 'min_allowed',
@@ -124,13 +100,13 @@ class QcTestLine(models.Model):
          ('noadmissible', 'Not Admissible'),
          ], string='Tolerance Status', compute='_compute_tolerance_status')
     min_allowed = fields.Float(string='Minimum allowed', digits=(5, 2),
-                               compute='_compute_min_allowed')
+                               compute='_compute_min_max_allowed_variable')
     max_allowed = fields.Float(string='Maximum allowed', digits=(5, 2),
-                               compute='_compute_max_allowed')
+                               compute='_compute_min_max_allowed_variable')
     min_variable = fields.Float(string='Minimum variable', digits=(5, 2),
-                                compute='_compute_min_variable')
+                                compute='_compute_min_max_allowed_variable')
     max_variable = fields.Float(string='Maximum variable', digits=(5, 2),
-                                compute='_compute_max_variable')
+                                compute='_compute_min_max_allowed_variable')
     success = fields.Boolean(string="Success", select="1")
 
     def onchange_actual_value_ql(self, cr, uid, ids, actual_value_ql,

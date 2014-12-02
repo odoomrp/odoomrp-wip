@@ -48,7 +48,7 @@
                     <field name="test_template_line_id" invisible="1" />
                 </field>
                 <field name="success" position="attributes">
-                    <attribute name="attrs">{'readonly' : [('tolerance_status', 'in', ['optimal', 'noadmissible'])]}</attribute>
+                    <attribute name="invisible">1</attribute>
                 </field>
             </field>
         </record>
