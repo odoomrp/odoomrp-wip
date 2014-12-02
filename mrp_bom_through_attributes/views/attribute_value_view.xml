@@ -8,8 +8,8 @@
                 <field name="inherit_id" ref="product_attribute_types.product_attribute_value_extended_tree_view"/>
                 <field name="arch" type="xml">
                         <field name="numeric_value" position="after">
-                            <field name="linked_product"/>
-                            <field name="raw_qty"/>
+                            <field name="raw_product"/>
+                            <field name="raw_qty" attrs="{'required': [('raw_product','!=', False)]}"/>
                     </field>
                 </field>
         </record>

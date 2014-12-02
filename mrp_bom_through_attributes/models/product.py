@@ -23,6 +23,6 @@ from openerp import fields, models
 class ProductAttributeValue(models.Model):
     _inherit = "product.attribute.value"
 
-    linked_product = fields.Many2one('product.product',
+    raw_product = fields.Many2one('product.product',
                                      string='Raw Product')
     raw_qty = fields.Float(string='Raw Product QTY', default=1.)

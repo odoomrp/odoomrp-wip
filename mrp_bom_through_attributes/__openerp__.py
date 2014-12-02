@@ -18,13 +18,14 @@
 ##############################################################################
 
 {
-    "name": "Linked Products to Manufacturing Order",
+    "name": "Raw Materials to Manufacturing Order Through Attributes",
     "version": "1.0",
     "depends": ["base", "mrp", "website_sale", "product_attribute_types"],
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Manufacturing",
-    'data': ["views/attribute_value_view.xml"],
+    'data': ["views/attribute_value_view.xml",
+             "views/mrp_production_view.xml"],
     "installable": True,
     "auto_install": False,
 }
