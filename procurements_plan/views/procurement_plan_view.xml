@@ -42,9 +42,9 @@
                 <form string="Procurement Plan">
                 <header>
                     <button name="action_import" type='object' string='Import Procurements' attrs="{'invisible':[('state','&lt;&gt;','draft')]}" />
-                    <button name="button_run" states="draft" string="Run" class="oe_highlight" />
-                    <button name="button_canceled" states="draft" string="Cancel" class="oe_highlight"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,done,canceled" readonly="1"/>
+                    <button name="button_run" states="draft" type="object" string="Run" class="oe_highlight" />
+                    <button name="button_cancel" states="draft"  type="object" string="Cancel" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" type="object" statusbar_visible="draft,done,canceled" readonly="1"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
