@@ -66,7 +66,7 @@ class SaleOrderLine(models.Model):
                                        string='Product Template')
     product_attributes = fields.One2many(
         comodel_name='sale.order.line.attribute', inverse_name='sale_line',
-        string='Product attributes', copyable=True)
+        string='Product attributes', copy=True)
 
     @api.multi
     @api.onchange('product_template')

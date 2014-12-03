@@ -55,7 +55,7 @@ class MrpProduction(models.Model):
                                        states={'draft': [('readonly', False)]})
     product_attributes = fields.One2many(
         comodel_name='mrp.production.attribute', inverse_name='mrp_production',
-        string='Product attributes', copyable=True, readonly=True,
+        string='Product attributes', copy=True, readonly=True,
         states={'draft': [('readonly', False)]},)
 
     def product_id_change(self, cr, uid, ids, product_id, product_qty=0,
@@ -271,7 +271,7 @@ class MrpProductionProductLine(models.Model):
     product_attributes = fields.One2many(
         comodel_name='mrp.production.product.line.attribute',
         inverse_name='product_line', string='Product attributes',
-        copyable=True)
+        copy=True)
 
     @api.one
     @api.onchange('product_template')
