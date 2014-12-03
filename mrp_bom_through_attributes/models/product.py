@@ -24,5 +24,5 @@ class ProductAttributeValue(models.Model):
     _inherit = "product.attribute.value"
 
     raw_product = fields.Many2one('product.product',
-                                     string='Raw Product')
+                                  string='Raw Product')
     raw_qty = fields.Float(string='Raw Product QTY', default=1.)
