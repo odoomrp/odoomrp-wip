@@ -27,6 +27,6 @@ class RunSchedulerWithPlan(models.Model):
     @api.multi
     def procure_calculation_plan(self):
         for wiz in self:
-            plan = wiz.plan.button_run()
+            wiz.plan.button_run()
         return {'type': 'ir.actions.act_window_close'}
 
