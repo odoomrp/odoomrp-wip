@@ -39,7 +39,7 @@ class PurchaseOrderLine(models.Model):
     product_attributes = fields.One2many('purchase.order.line.attribute',
                                          'purchase_line',
                                          string='Product attributes',
-                                         copyable=True)
+                                         copy=True)
 
     @api.multi
     @api.onchange('product_template')
