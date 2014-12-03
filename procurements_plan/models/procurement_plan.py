@@ -62,8 +62,7 @@ class ProcurementPlan(models.Model):
         proc_obj = self.env['procurement.order']
         cond = [('date_planned', '>=', self.from_date),
                 ('date_planned', '<=', self.to_date),
-                ('plan', '=', False),
-                ('state', '=', 'confirmed')]
+                ('plan', '=', False)]
         procurements = proc_obj.search(cond)
         my_procurements = []
         for procu in procurements:
@@ -80,48 +79,17 @@ class ProcurementPlan(models.Model):
         return self.write({'state': 'draft'})
 
     @api.one
-    def action_run(self):
-        proc_obj = self.env['procurement.order']
-        comp_obj = self.env['procurement.order.compute.all']
-        plan = self
-        if not plan.procurement_ids:
+    def button_run(self):
+        if not self.procurement_ids:
             raise except_orm(_('Error!'),
                              _("No procurements to treat"))
-        my_proc = []
-        for proc in plan.procurement_ids:
-            my_proc.append(proc.id)
-        procurements_confirmed = []
-        cond = [('state', '=', 'confirmed'),
-                ('id', 'not in', my_proc),
-                ('plan', '=', False)]
-        procurements = proc_obj.search(cond)
-        if procurements:
-            procurements_confirmed = procurements
-            vals = {'state': 'cancel'}
-            procurements.write(vals)
-        procurements_running = []
-        cond = [('state', '=', 'running'),
-                ('id', 'not in', my_proc),
-                ('plan', '=', False)]
-        procurements = proc_obj.search(cond)
-        if procurements:
-            procurements_running = procurements
-            vals = {'state': 'cancel'}
-            procurements.write(vals)
-        # self.env.cr.commit()
-        comp_obj.with_context(plan=plan.id)._procure_calculation_all()
-        if procurements_confirmed:
-            procurements_confirmed.write({'state': 'confirmed'})
-        if procurements_running:
-            procurements_running.write({'state': 'confirmed'})
-        plan = self.browse(self.id)
-        if any([x.state != 'running' for x in plan.procurement_ids]):
-            self.state = 'draft'
-        else:
-            self.state = 'done'
+        for proc in self.procurement_ids:
+            proc.run()
+            proc.check()
+        self.action_import()
 
     @api.multi
-    def action_cancel(self):
+    def button_cancel(self):
         for proc in self:
             if proc.procurement_ids:
                 proc.procurement_ids.write({'plan': False})

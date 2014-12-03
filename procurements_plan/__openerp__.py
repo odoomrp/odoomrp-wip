@@ -51,8 +51,7 @@
                 'sale',
                 'sale_stock'
                 ],
-    "data": ['data/workflow.xml',
-             'data/sequence.xml',
+    "data": ['data/sequence.xml',
              'security/procurements_with_plan.xml',
              'security/ir.model.access.csv',
              'wizard/run_scheduler_with_plan_view.xml',
