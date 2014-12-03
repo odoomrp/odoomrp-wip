@@ -15,21 +15,18 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp.osv import orm, fields
-from openerp import workflow
+from openerp import models, fields, api
 
 
-class RunSchedulerWithPlan(orm.TransientModel):
+class RunSchedulerWithPlan(models.Model):
     _name = 'run.scheduler.with.plan'
     _description = 'Run Scheduler With Plan'
 
-    _columns = {
-        'plan': fields.many2one('procurement.plan', 'Plan', required=True)
-    }
+    plan = fields.Many2one('procurement.plan', string='Plan', required=True)
 
-    def procure_calculation_plan(self, cr, uid, ids, context=None):
-        for wiz in self.browse(cr, uid, ids, context):
-            plan = wiz.plan.id
-            workflow.trg_validate(uid, 'procurement.plan', plan,
-                                  'button_run', cr)
+    @api.multi
+    def procure_calculation_plan(self):
+        for wiz in self:
+            plan = wiz.plan.button_run()
         return {'type': 'ir.actions.act_window_close'}
+
