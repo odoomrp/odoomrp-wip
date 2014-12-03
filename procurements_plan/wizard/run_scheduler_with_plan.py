@@ -29,4 +29,3 @@ class RunSchedulerWithPlan(models.Model):
         for wiz in self:
             wiz.plan.button_run()
         return {'type': 'ir.actions.act_window_close'}
-
