@@ -61,8 +61,9 @@ class MrpProduction(models.Model):
         return res
 
     @api.one
-    def action_compute(self):
-        result = super(MrpProduction, self).action_compute()
+    def action_compute(self, properties=None):
+        result = super(MrpProduction, self).action_compute(
+            properties=properties)
         res = self.get_raw_products_data()
         self.write({'product_lines': map(lambda x: (0, 0, x), res)})
         return result
