@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
+from openerp import models, fields, api
 
 
 class ProductAttributeValuePurchaseLine(models.Model):
@@ -95,12 +95,12 @@ class PurchaseOrderLine(models.Model):
                              'product_template': product.product_tmpl_id.id})
         return res
 
-    @api.one
+    @api.multi
     def action_duplicate(self):
+        self.ensure_one()
         self.copy()
         # Force reload of payment order view as a workaround for lp:1155525
         return {
-            'name': _('Purchase order'),
             'context': self.env.context,
             'view_type': 'form',
             'view_mode': 'form,tree',
