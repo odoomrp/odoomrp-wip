@@ -11,33 +11,37 @@
                     <page string="Download">
                         <group>
                             <group string="Pack" colspan="4" col="4">
-                                <field name="pack" nolabel="1" colspan="4"
-                                    col="4">
-                                    <tree string="Pack">
-                                        <field name="product" />
-                                        <field name="ref" />
+                                <button name="get_dump_packages"
+                                    string="Get packages" type="object"
+                                    colspan="2" />
+                                <field name="pack" nolabel="1"
+                                    colspan="4" col="4">
+                                    <tree string="Pack" editable="top"
+                                        create="0">
+                                        <field name="product"
+                                            readonly="1" />
                                         <field name="qty" />
-                                        <field name="fill" />
-                                        <field name="lot" />
-                                        <field name="ul" />
+                                        <field name="fill"
+                                            readonly="1" />
+                                        <!-- <field name="lot" /> -->
                                     </tree>
                                     <form string="Pack">
                                         <group>
                                             <field name="product" />
-                                            <field name="ref" />
                                             <field name="qty" />
                                             <field name="fill" />
-                                            <field name="lot"
-                                                domain="[('product_id','=',product)]" />
-                                            <field name="ul" domain="[('type','=','unit')]"/>
+                                            <!-- <field name="lot" domain="[('product_id','=',product)]" 
+                                                /> -->
+
                                         </group>
                                     </form>
                                 </field>
                             </group>
 
-                            <group string="Sample" colspan="4" col="4">
-                                <field name="sample" nolabel="1" colspan="4"
-                                    col="4" />
+                            <group string="Sample" colspan="4"
+                                col="4">
+                                <field name="sample" nolabel="1"
+                                    colspan="4" col="4" />
                             </group>
                             <field name="sample_taken" />
                             <group colspan="4" col="4">

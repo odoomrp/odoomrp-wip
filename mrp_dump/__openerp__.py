@@ -30,9 +30,10 @@
     the way it must be packaged at the end of the bulk product manufacturing.
 
     Particularly suitable for chemical industries and
-    others that produce liquid bottled/packed products.
+    others that produce liquid finished products.
     """,
-    'data': ["views/mrp_operations.view.xml"],
+    'data': ["views/mrp_operations.view.xml",
+             "views/attribute_value_view.xml"],
     "installable": True,
     "auto_install": False,
 }

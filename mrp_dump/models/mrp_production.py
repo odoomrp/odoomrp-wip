@@ -29,7 +29,18 @@ class MrpProduction(models.Model):
     download_user = fields.Many2one('res.users')
     sample = fields.Many2many('mrp.sample')
     sample_taken = fields.Boolean('Samples Taken')
-
+    
+    @api.one
+    def get_dump_packages(self):
+        pack_lines = []
+        lines = self.env['mrp.bom.line'].search([('product_id', '=',
+                                                  self.product_id.id)])
+        for line in lines:
+            pack_line = map(
+                lambda x: (0, 0, {'product': x}),
+                line.bom_id.product_tmpl_id.product_variant_ids.ids)
+            pack_lines.extend(pack_line)
+        self.write({'pack':pack_lines})
 
 class DownloadOperation(models.Model):
     _name = "download.operation"
@@ -37,16 +48,19 @@ class DownloadOperation(models.Model):
 
     @api.one
     def _calculate_weight(self):
-        self.fill = self.ul.ul_qty * self.qty
+        numeric_value=1
+        for value in self.product.attribute_value_ids:
+            if value.pack_product:
+                numeric_value = value.numeric_value
+                break
+        self.fill = numeric_value * self.qty
 
     product = fields.Many2one('product.product', string='Product',
                               required=True)
     operation = fields.Many2one('mrp.production')
-    ref = fields.Many2one('stock.warehouse', string='Warehouse')
     qty = fields.Integer(string="QTY")
     fill = fields.Float(string="Fill", compute=_calculate_weight)
-    lot = fields.Many2one('stock.production.lot')
-    ul = fields.Many2one('product.ul', string='Ul')
+    #lot = fields.Many2one('stock.production.lot')
 
 
 class MrpSample(models.Model):
