@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_saleorder_proforma" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//div[@class='page']/h2" position="replace">
+                <h2>
+                    <span
+                        t-if="o.state not in ['draft','sent'] and o.proforma == False">Order N° </span>
+                    <span
+                        t-if="o.state in ['draft','sent'] and o.proforma == False">Quotation N° </span>
+                    <span t-if="o.proforma == True">Proforma Nº </span>
+                    <span t-field="o.name" />
+                </h2>
+            </xpath>
+        </template>
+    </data>
+</openerp>
