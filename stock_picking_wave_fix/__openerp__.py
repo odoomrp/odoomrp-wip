@@ -17,7 +17,7 @@
 #
 ##############################################################################
 {
-    "name": "Stock Picking Wave Extension",
+    "name": "Stock Picking Wave Fix",
     "version": "1.0",
     "depends": ["base", "stock_picking_wave"],
     "author": "OdooMRP team",
