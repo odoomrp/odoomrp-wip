@@ -40,9 +40,10 @@ class MrpProduction(models.Model):
                 raise exceptions.Warning(
                     _('Operation "%s", without code.') %
                     (line.work_order.routing_wc_line.operation.name))
-            name = (self.name + '-' +
-                    line.work_order.routing_wc_line.operation.code)
-            vals = self._cath_information_estimated_cost(
+            name = _('%s-%s' %
+                     (self.name,
+                      line.work_order.routing_wc_line.operation.code))
+            vals = self._catch_information_estimated_cost(
                 journal, name, self.id, line.work_order.id, line.product_id,
                 line.product_qty)
             analytic_line_obj.create(vals)
@@ -52,33 +53,35 @@ class MrpProduction(models.Model):
         for line in self.workcenter_lines:
             if (line.workcenter_id.time_start and
                     line.workcenter_id.pre_op_product):
-                name = (self.name + '-' + line.workcenter_id.name +
-                        ' Pre-operation')
-                vals = self._cath_information_estimated_cost(
+                name = (_('%s-%s Pre-operation') %
+                        (self.name, line.workcenter_id.name))
+                vals = self._catch_information_estimated_cost(
                     journal, name, self.id, line.id,
                     line.workcenter_id.pre_op_product,
                     line.workcenter_id.time_start)
                 analytic_line_obj.create(vals)
             if (line.workcenter_id.time_stop and
                     line.workcenter_id.post_op_product):
-                name = (self.name + '-' + line.workcenter_id.name +
-                        ' Post-operation')
-                vals = self._cath_information_estimated_cost(
+                name = (_('%s-%s Post-operation') %
+                        (self.name, line.workcenter_id.name))
+                vals = self._catch_information_estimated_cost(
                     journal, name, self.id, line.id,
                     line.workcenter_id.post_op_product,
                     line.workcenter_id.time_stop)
                 analytic_line_obj.create(vals)
             if line.cycle and line.workcenter_id.product_id:
-                name = (self.name + '-' + line.routing_wc_line.operation.code
-                        + '-C-' + line.workcenter_id.name)
-                vals = self._cath_information_estimated_cost(
+                name = (_('%s-%s-C-%s') %
+                        (self.name, line.routing_wc_line.operation.code,
+                         line.workcenter_id.name))
+                vals = self._catch_information_estimated_cost(
                     journal, name, self.id, line.id,
                     line.workcenter_id.product_id, line.cycle)
                 analytic_line_obj.create(vals)
             if line.hour and line.workcenter_id.product_id:
-                name = (self.name + '-' + line.routing_wc_line.operation.code
-                        + '-H-' + line.workcenter_id.name)
-                vals = self._cath_information_estimated_cost(
+                name = (_('%s-%s-H-%s') %
+                        (self.name, line.routing_wc_line.operation.code,
+                         line.workcenter_id.name))
+                vals = self._catch_information_estimated_cost(
                     journal, name, self.id, line.id,
                     line.workcenter_id.product_id, line.hour)
                 analytic_line_obj.create(vals)
@@ -90,17 +93,17 @@ class MrpProduction(models.Model):
                     journal = self.env.ref(
                         'mrp_production_project_estimated_cost.analytic_'
                         'journal_operators', False)
-                    name = (self.name + '-' +
-                            line.routing_wc_line.operation.code
-                            + line.workcenter_id.product_id.name)
-                    vals = self._cath_information_estimated_cost(
+                    name = (_('%s-%s-%s') %
+                            (self.name, line.routing_wc_line.operation.code,
+                             line.workcenter_id.product_id.name))
+                    vals = self._catch_information_estimated_cost(
                         journal, name, self.id, line.id,
                         line.workcenter_id.product_id,  op_wc_line.op_number)
                     analytic_line_obj.create(vals)
         return res
 
-    def _cath_information_estimated_cost(self, journal, name, production_id,
-                                         workorder_id, product, qty):
+    def _catch_information_estimated_cost(self, journal, name, production_id,
+                                          workorder_id, product, qty):
         analytic_line_obj = self.env['account.analytic.line']
         general_account = (product.property_account_income or
                            product.categ_id.property_account_income_categ
@@ -111,21 +114,22 @@ class MrpProduction(models.Model):
                   ' the product category') % (product.name))
         if not self.analytic_account_id:
             raise exceptions.Warning(
-                _('You must define one Analytic Account for this OF'))
-        vals = {'name': name,
-                'mrp_production_id': production_id,
-                'workorder': workorder_id,
-                'account_id': self.analytic_account_id.id,
-                'journal_id': journal.id,
-                'user_id': self._uid,
-                'date': analytic_line_obj._get_default_date(),
-                'product_id': product.id,
-                'unit_amount': qty,
-                'product_uom_id': product.uom_id.id,
-                'general_account_id': general_account.id,
-                'estim_standard_cost': product.manual_standard_cost,
-                'estim_average_cost': product.standard_price,
-                'last_purchase_cost': product.last_purchase_price,
-                'last_sale_price': product.last_sale_price,
-                }
+                _('You must define one Analytic Account for this MO'))
+        vals = {
+            'name': name,
+            'mrp_production_id': production_id,
+            'workorder': workorder_id,
+            'account_id': self.analytic_account_id.id,
+            'journal_id': journal.id,
+            'user_id': self._uid,
+            'date': analytic_line_obj._get_default_date(),
+            'product_id': product.id,
+            'unit_amount': qty,
+            'product_uom_id': product.uom_id.id,
+            'general_account_id': general_account.id,
+            'estim_standard_cost': product.manual_standard_cost,
+            'estim_average_cost': product.standard_price,
+            'last_purchase_cost': product.last_purchase_price,
+            'last_sale_price': product.last_sale_price,
+        }
         return vals
