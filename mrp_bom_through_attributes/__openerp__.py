@@ -20,7 +20,7 @@
 {
     "name": "Raw Materials to Manufacturing Order Through Attributes",
     "version": "1.0",
-    "depends": ["base", "mrp", "website_sale", "product_attribute_types"],
+    "depends": ["base", "mrp", "product_attribute_types"],
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Manufacturing",
