@@ -16,15 +16,5 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-{
-    'name': 'MRP Product Addition',
-    'version': "1.0",
-    'category': "Generic Modules",
-    'author': 'OdooMRP team',
-    'contributors': ["Daniel Campos <danielcampos@avanzosc.es>"],
-    'website': "http://www.odoomrp.com",
-    'depends': ["mrp_operations_extension"],
-    'data': ["wizard/addition_wizard_view.xml",
-             "views/mrp_production_view.xml"],
-    'installable': True,
-}
+
+from . import wizard

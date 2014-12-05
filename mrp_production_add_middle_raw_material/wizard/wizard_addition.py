@@ -30,26 +30,17 @@ class WizProductionProductLine(models.TransientModel):
         required=True)
     production_id = fields.Many2one(
         'mrp.production', 'Production Order', select=True,
-        default=lambda self: self.env.context.get('production_id', False))
-    work_order = fields.Many2one('mrp.production.workcenter.line',
-                                 'Work Order')
+        default=lambda self: self.env.context.get('active_id', False))
 
     @api.multi
     def add_product(self):
         production_obj = self.env['mrp.production']
-        st_move_obj = self.env['stock.move']
         mppl_obj = self.env['mrp.production.product.line']
         values = {'product_id': self.product_id.id,
+                  'product_uom': self.product_id.product_tmpl_id.uom_id.id,
                   'product_qty': self.product_qty,
                   'production_id': self.production_id.id,
-                  'work_order': self.work_order.id,
                   'name': self.product_id.name}
-        result = production_obj.product_id_change(
-            product_id=self.product_id.id,
-            product_qty=self.product_qty, context=self.env.context)
-        values.update(result['value'])
         line = mppl_obj.create(values)
-        consume_id = production_obj._make_production_consume_line(line)
-        consume = st_move_obj.browse(consume_id)
-        consume.work_order = self.work_order.id
+        production_obj._make_production_consume_line(line)
         return True

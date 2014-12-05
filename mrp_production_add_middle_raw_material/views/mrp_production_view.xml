@@ -8,7 +8,11 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[@string='Consumed Products']" position="inside">
                 <group col="2" colspan="2">
-                    <button name="action_addition" type="object" states="confirmed,ready,in_production" string="Add Product" class="oe_highlight"/>
+                    <button name="%(action_addition)d"
+                            type="action"
+                            states="confirmed,ready,in_production"
+                            string="Add extra raw material"
+                            class="oe_highlight"/>
                 </group>
                 </xpath>
             </field>

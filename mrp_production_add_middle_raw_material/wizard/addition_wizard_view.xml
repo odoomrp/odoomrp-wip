@@ -9,18 +9,20 @@
                 <form>
                     <group colspan="4" col="4">
                         <separator string="Add Product" colspan="4"/>
-<!--                         <field name="name" colspan="2"/> -->
                         <field name="product_id" colspan="2"/>
                         <field name="product_qty" colspan="2"/>
-                        <field name="production_id" invisible="context.get('production_id')" colspan="2"/>
-                        <field name="work_order" domain="[('production_id','=', production_id)]" colspan="2"/>
+                        <field name="production_id" colspan="2"
+                               invisible="context.get('active_id')"/>
                     </group>
                     <footer>
-                        <button class="oe_highlight" name="add_product"
-                            string="Add" type="object" />
+                        <button class="oe_highlight" 
+                                name="add_product"
+                                string="Add"
+                                type="object" />
                         or
-                        <button class="oe_link" special="cancel"
-                            string="Cancel" />
+                        <button class="oe_link" 
+                                special="cancel"
+                                string="Cancel" />
                     </footer>
                 </form>
             </field>
