@@ -48,8 +48,9 @@ class MrpProduction(models.Model):
                     available = False
         if not available:
             raise exceptions.Warning(
-                _('No Lot Available'), _('There is no product available for '
-                                         'lot: %s') % line.lot.name)
+                _('No Lot Available'), _('There is no lot %s available for'
+                                         ' product: %s') % (line.lot.name,
+                                                            line.name))
         res = super(MrpProduction, self).action_confirm()
         self._get_lot_in_move_lines(self.product_lines, self.move_lines)
         return res
