@@ -17,7 +17,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
 import openerp.addons.decimal_precision as dp
 
 
@@ -42,5 +42,9 @@ class WizProductionProductLine(models.TransientModel):
                   'production_id': self.production_id.id,
                   'name': self.product_id.name}
         line = mppl_obj.create(values)
-        production_obj._make_production_consume_line(line)
+        if self.product_qty > 0:
+            production_obj._make_production_consume_line(line)
+        else:
+            raise exceptions.Warning(
+                _('Warning'), _('Please provide a positive quantity to add'))
         return True
