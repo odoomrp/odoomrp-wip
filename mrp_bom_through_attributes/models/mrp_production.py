@@ -75,8 +75,7 @@ class MrpProduction(models.Model):
     @api.one
     @api.onchange('product_id')
     def onchange_bring_raw_products(self):
-        res = self.get_raw_products_data()
-        self.raw_products = res
+        self.raw_products = self.get_raw_products_data()
 
 
 class MrpProductionProductLine(models.Model):
