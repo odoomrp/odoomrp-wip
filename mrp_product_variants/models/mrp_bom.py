@@ -79,6 +79,7 @@ class MrpBom(models.Model):
         @return: result: List of dictionaries containing product details.
                  result2: List of dictionaries containing Work Center details.
         """
+        routing_id = bom.routing_id.id or routing_id
         uom_obj = self.env["product.uom"]
         routing_obj = self.env['mrp.routing']
         master_bom = master_bom or bom

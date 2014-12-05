@@ -125,7 +125,7 @@ class MrpProduction(models.Model):
             bom_id = production.bom_id.id
             if not bom_point:
                 if not production.product_id:
-                    bom_obj._bom_find(
+                    bom_id = bom_obj._bom_find(
                         product_tmpl_id=production.product_template.id,
                         properties=properties)
                 else:
@@ -162,11 +162,14 @@ class MrpProduction(models.Model):
                 line['production_id'] = production.id
                 workcenter_line_obj.create(line)
 
+            self._compute_planned_workcenter()
             self._get_workorder_in_product_lines(self.workcenter_lines,
-                                                 self.product_lines)
+                                                 self.product_lines,
+                                                 properties=properties)
         return results
 
-    def _get_workorder_in_product_lines(self, workcenter_lines, product_lines):
+    def _get_workorder_in_product_lines(self, workcenter_lines, product_lines,
+                                        properties=None):
         for p_line in product_lines:
             for bom_line in self.bom_id.bom_line_ids:
                 if ((bom_line.product_template.id == p_line.product_template.id
@@ -178,6 +181,29 @@ class MrpProduction(models.Model):
                         if wc_line.routing_wc_line == bom_line.operation:
                             p_line.work_order = wc_line
                             break
+                elif bom_line.type == 'phantom':
+                    bom_obj = self.env['mrp.bom']
+                    if not bom_line.product_id:
+                        bom_id = bom_obj._bom_find(
+                            product_tmpl_id=bom_line.product_template.id,
+                            properties=properties)
+                    else:
+                        bom_id = bom_obj._bom_find(
+                            product_id=bom_line.product_id.id,
+                            properties=properties)
+                    for bom_line2 in bom_obj.browse(bom_id).bom_line_ids:
+                        if ((bom_line2.product_template.id ==
+                                p_line.product_template.id
+                                or bom_line2.product_id.product_tmpl_id.id ==
+                                p_line.product_template.id) and
+                                (not bom_line2.product_id or
+                                 bom_line2.product_id.id ==
+                                 p_line.product_id.id)):
+                            for wc_line in workcenter_lines:
+                                if (wc_line.routing_wc_line.id ==
+                                        bom_line2.operation.id):
+                                    p_line.work_order = wc_line.id
+                                    break
 
     def action_confirm(self):
         super(MrpProduction, self).action_confirm()
