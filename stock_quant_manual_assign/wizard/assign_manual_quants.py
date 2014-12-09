@@ -23,20 +23,30 @@ from openerp import fields, models, api, exceptions, _
 class AssignManualQuants(models.TransientModel):
     _name = 'assign.manual.quants'
 
-    @api.one
-    @api.constrains('quants_lines')
-    def check_qty(self):
+    def lines_qty(self):
         total_qty = 0
         for line in self.quants_lines:
             if line.selected:
                 total_qty += line.qty
+        return total_qty
+
+    @api.one
+    @api.constrains('quants_lines')
+    def check_qty(self):
+        total_qty = self.lines_qty()
         move = self.env['stock.move'].browse(self.env.context['active_id'])
         if total_qty > move.product_uom_qty:
             raise exceptions.Warning(_('Error'),
                                      _('Quantity is higher'
                                        ' than the needed one'))
 
+    @api.depends('quants_lines')
+    def get_move_qty(self):
+        move = self.env['stock.move'].browse(self.env.context['active_id'])
+        self.move_qty = move.product_uom_qty - self.lines_qty()
+
     name = fields.Char(string='Name')
+    move_qty = fields.Float(string="Remaining qty", compute="get_move_qty")
     quants_lines = fields.One2many('assign.manual.quants.lines',
                                    'assign_wizard', string='Quants')
 
@@ -79,6 +89,8 @@ class AssignManualQuantsLines(models.TransientModel):
     def onchange_selected(self):
             if not self.selected:
                 self.qty = False
+            if self.selected and self.qty == 0:
+                self.qty = self.quant.qty
 
     assign_wizard = fields.Many2one('assign.manual.quants', string='Move',
                                     required=True)
