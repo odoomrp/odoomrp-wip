@@ -17,7 +17,7 @@
 #
 ##############################################################################
 {
-    'name': 'MRP Production addition Work Order',
+    'name': 'MRP Production addition operations',
     'version': "1.0",
     'category': "Generic Modules",
     'author': 'OdooMRP team',
