@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -17,11 +16,10 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models
+from openerp import api, fields, models, exceptions, _
 
 
 class MrpProduction(models.Model):
-
     _inherit = "mrp.production"
 
     pack = fields.One2many('packaging.operation', 'operation')
@@ -33,8 +31,9 @@ class MrpProduction(models.Model):
     @api.one
     def get_dump_packages(self):
         pack_lines = []
-        lines = self.env['mrp.bom.line'].search([('product_id', '=',
-                                                  self.product_id.id)])
+        lines = self.env['mrp.bom.line'].search(
+            ['|', ('product_template', '=', self.product_template.id),
+             ('product_id', '=', self.product_id.id)])
         for line in lines:
             pack_line = map(
                 lambda x: (0, 0, {'product': x}),
@@ -44,6 +43,15 @@ class MrpProduction(models.Model):
 
     @api.one
     def create_mo_from_packaging_operation(self):
+        if self.move_created_ids:
+            raise exceptions.Warning(
+                _("You can't pack a product before it is manufactured"))
+        total = 0.0
+        for line in self.pack:
+            total += line.fill
+        if total > self.product_qty:
+            raise exceptions.Warning(
+                _("You can not pack more quantity than you have manufactured"))
         for op in self.pack:
             res = []
             add_product = []
@@ -52,10 +60,14 @@ class MrpProduction(models.Model):
             final_product_qty = op.fill if op.product.uom_id.id ==\
                 self.product_id.uom_id.id else op.qty
             data = self.product_id_change(op.product.id, final_product_qty)
+            if 'product_attributes' in data['value']:
+                product_attributes = map(
+                    lambda x: (0, 0, x),
+                    data['value']['product_attributes'])
+                data['value'].update({
+                    'product_attributes': product_attributes})
             data['value'].update({
                 'product_id': op.product.id,
-                'location_id': op.product.property_stock_production.id,
-                'loc_dest_id': op.product.property_stock_inventory.id,
                 'product_qty': final_product_qty})
             new_op = self.create(data['value'])
             new_op.action_compute()
@@ -72,26 +84,23 @@ class MrpProduction(models.Model):
                         raw_product.uos_id.id,
                         op.qty, workorder)
                     res.append(value)
-            bulk_value = self.get_new_components_info(
-                self.product_id.id,
-                self.location_src_id.id,
-                self.location_dest_id.id,
-                self.product_uom.id, self.product_uos.id, op.fill, workorder)
             for line in new_op.product_lines:
-                if bulk_value['product_id'] == line.product_id.id:
-                    new_op.write({'product_lines': [(1, line.id, bulk_value)]})
+                if self.product_id.product_tmpl_id == line.product_template:
+                    new_op.write({'product_lines':
+                                  [(1, line.id,
+                                    {'product_id': self.product_id.id})]})
                     continue
                 for link_product in res:
                     if link_product['product_id'] == line.product_id.id:
                         new_op.write({'product_lines': [(1, line.id,
                                                          link_product)]})
-                        break
-                    add_product.append(link_product)
+                    else:
+                        add_product.append(link_product)
             new_op.write({'product_lines': map(lambda x: (0, 0, x),
                                                add_product),
                           'production': self.id,
                           'origin': self.name})
-            op.processed = True
+            op.packing_production = new_op
 
 
 class PackagingOperation(models.Model):
@@ -99,6 +108,7 @@ class PackagingOperation(models.Model):
     _rec_name = 'product'
 
     @api.one
+    @api.depends('product', 'qty')
     def _calculate_weight(self):
         raw_qty = 1
         for value in self.product.attribute_value_ids:
@@ -107,17 +117,30 @@ class PackagingOperation(models.Model):
                 break
         self.fill = raw_qty * self.qty
 
-    product = fields.Many2one('product.product', string='Product',
-                              required=True,
-                              help="Product that is going to be manufactured")
+    @api.one
+    @api.depends('packing_production')
+    def _is_processed(self):
+        if self.packing_production and\
+                self.packing_production.state not in ('cancel'):
+            self.processed = True
+        else:
+            self.processed = False
+
+    product = fields.Many2one(
+        comodel_name='product.product', string='Product', required=True,
+        help="Product that is going to be manufactured")
     operation = fields.Many2one('mrp.production')
-    qty = fields.Integer(string="QTY",
-                         help="Product Quantity. It will be the new "
-                         "manufacturing order quantity "
-                         "if dump uom is equal to product uom")
-    fill = fields.Float(string="Fill", compute=_calculate_weight,
-                        help="Product linked raw material value *"
-                        "Product Quantity. It will be the new manufacturing "
-                        "order quantity "
-                        "if dump uom is not equal to product uom")
-    processed = fields.Boolean(string='Processed')
+    qty = fields.Integer(
+        string="Qty", help="Product Quantity. It will be the new manufacturing"
+        " order quantity if dump uom is equal to product uom")
+    fill = fields.Float(
+        string="Fill", compute=_calculate_weight,
+        help="Product linked Raw Material value * Product Quantity. It will be"
+        " the new manufacturing order quantity if dump UoM is not equal to"
+        " product UoM")
+    packing_production = fields.Many2one(
+        comodel_name='mrp.production', string='Packing manufacturing order')
+    processed = fields.Boolean(
+        string='Processed', compute=_is_processed)
+    packing_state = fields.Selection(
+        string='Packing MO State', related='packing_production.state')
