@@ -8,6 +8,8 @@
                 <button name="action_confirm" position="after">
                     <button name="action_assign" states="confirmed"
                         string="Check Availability" type="object" class="oe_highlight" />
+                    <button name="do_unreserve" attrs="{'invisible': [('quant_reserved_exist', '=', False)]}
+                        string="Do Unreserve" type="object" class="oe_highlight" />
                 </button>
             </field>
         </record>
