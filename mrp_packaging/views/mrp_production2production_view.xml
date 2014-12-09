@@ -52,12 +52,12 @@
                                         <field name='state' />
                                         <button name="button_confirm"
                                             states="draft" string="Confirm Production"
-                                            class="oe_highlight" />
+                                            class="oe_highlight" icon="gtk-apply"/>
                                         <button
                                             name="%(mrp.act_mrp_product_produce)d"
                                             states="ready,in_production"
                                             string="Produce" type="action"
-                                            class="oe_highlight" />
+                                            class="oe_highlight" icon="gtk-media-play"/>
                                         <button name="action_assign"
                                             states="confirmed,picking_except"
                                             string="Check Availability"
@@ -69,10 +69,10 @@
                                             states="ready" string="Mark as Started" />
                                         <button name="button_cancel"
                                             states="draft,ready,in_production"
-                                            string="Cancel Production" />
+                                            string="Cancel Production" icon="gtk-cancel"/>
                                         <button name="action_cancel"
                                             type="object" states="confirmed"
-                                            string="Cancel Production" />
+                                            string="Cancel Production" icon="gtk-cancel"/>
                                     </tree>
                                 </field>
                             </group>

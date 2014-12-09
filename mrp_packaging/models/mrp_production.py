@@ -33,8 +33,9 @@ class MrpProduction(models.Model):
     @api.one
     def get_dump_packages(self):
         pack_lines = []
-        lines = self.env['mrp.bom.line'].search([('product_id', '=',
-                                                  self.product_id.id)])
+        lines = self.env['mrp.bom.line'].search(
+            ['|', ('product_template', '=', self.product_template.id),
+             ('product_id', '=', self.product_id.id)])
         for line in lines:
             pack_line = map(
                 lambda x: (0, 0, {'product': x}),
@@ -52,11 +53,13 @@ class MrpProduction(models.Model):
             final_product_qty = op.fill if op.product.uom_id.id ==\
                 self.product_id.uom_id.id else op.qty
             data = self.product_id_change(op.product.id, final_product_qty)
+            product_attributes = map(
+                lambda x: (0, 0, x),
+                data['value']['product_attributes'])
             data['value'].update({
                 'product_id': op.product.id,
-                'location_id': op.product.property_stock_production.id,
-                'loc_dest_id': op.product.property_stock_inventory.id,
-                'product_qty': final_product_qty})
+                'product_qty': final_product_qty,
+                'product_attributes': product_attributes})
             new_op = self.create(data['value'])
             new_op.action_compute()
             workorder =\
@@ -72,21 +75,18 @@ class MrpProduction(models.Model):
                         raw_product.uos_id.id,
                         op.qty, workorder)
                     res.append(value)
-            bulk_value = self.get_new_components_info(
-                self.product_id.id,
-                self.location_src_id.id,
-                self.location_dest_id.id,
-                self.product_uom.id, self.product_uos.id, op.fill, workorder)
             for line in new_op.product_lines:
-                if bulk_value['product_id'] == line.product_id.id:
-                    new_op.write({'product_lines': [(1, line.id, bulk_value)]})
+                if self.product_id.product_tmpl_id == line.product_template:
+                    new_op.write({'product_lines':
+                                  [(1, line.id,
+                                    {'product_id': self.product_id.id})]})
                     continue
                 for link_product in res:
                     if link_product['product_id'] == line.product_id.id:
                         new_op.write({'product_lines': [(1, line.id,
                                                          link_product)]})
-                        break
-                    add_product.append(link_product)
+                    else:
+                        add_product.append(link_product)
             new_op.write({'product_lines': map(lambda x: (0, 0, x),
                                                add_product),
                           'production': self.id,
