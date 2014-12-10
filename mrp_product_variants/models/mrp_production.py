@@ -228,7 +228,8 @@ class MrpProduction(models.Model):
                     {'product_tmpl_id': production.product_template.id,
                      'attribute_value_ids': [(6, 0, att_values_ids)]})
             production.product_id = product
-        super(MrpProduction, self)._make_production_produce_line(production)
+        return super(MrpProduction,
+                     self)._make_production_produce_line(production)
 
     @api.model
     def _make_production_consume_line(self, line):
@@ -250,7 +251,7 @@ class MrpProduction(models.Model):
                     {'product_tmpl_id': line.product_template.id,
                      'attribute_value_ids': [(6, 0, att_values_ids)]})
             line.product_id = product
-        super(MrpProduction, self)._make_production_consume_line(line)
+        return super(MrpProduction, self)._make_production_consume_line(line)
 
 
 class MrpProductionProductLineAttribute(models.Model):
