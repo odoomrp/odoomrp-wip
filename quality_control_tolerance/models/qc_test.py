@@ -18,7 +18,8 @@ class QcTestQuestion(models.Model):
 
     @api.onchange('tolerance_below')
     def onchange_tolerance_below(self):
-        self.tolerance_percent_below = 100 * self.min_value - self.tolerance_below / self.min_value
+        self.tolerance_percent_below = (100 * self.min_value -
+                                        self.tolerance_below / self.min_value)
 
     @api.onchange('tolerance_percent_below')
     def onchange_tolerance_percent_below(self):

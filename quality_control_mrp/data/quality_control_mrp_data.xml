@@ -7,5 +7,10 @@
             <field name="company_id"></field>
         </record>
 
+        <record id="req_link_mrp_production" model="res.request.link">
+            <field name="name">Manufacturing Order</field>
+            <field name="object">mrp.production</field>
+        </record>
+
     </data>
 </openerp>

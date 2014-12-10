@@ -17,23 +17,4 @@
 #
 ##############################################################################
 
-{
-    'name': 'Machine Manager',
-    'version': '1.0',
-    'author': 'OdooMRP team',
-    'contributors': ["Daniel Campos <danielcampos@avanzosc.es>",
-                     "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-                     "Ana Juaristi <ajuaristio@gmail.com>"],
-    'website': 'http://www.odoomrp.com',
-    "depends": ['stock', 'account'],
-    "category": "Generic Modules",
-    "data": ['views/machinery_view.xml',
-             'views/machine_model_view.xml',
-             'views/machinery_users_view.xml',
-             'views/product_view.xml',
-             'security/machinery_security.xml',
-             'security/ir.model.access.csv',
-             ],
-    "installable": True,
-    "application": True
-}
+from . import mrp_production

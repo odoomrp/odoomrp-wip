@@ -84,4 +84,3 @@ class QcInspectionLine(models.Model):
                                 compute='_compute_min_max_allowed_variable')
     max_variable = fields.Float(string='Maximum variable', digits=(5, 2),
                                 compute='_compute_min_max_allowed_variable')
-
