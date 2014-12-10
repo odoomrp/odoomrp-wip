@@ -24,8 +24,7 @@ class MrpProduction(models.Model):
 
     pack = fields.One2many('packaging.operation', 'operation')
     expected_production = fields.One2many('mrp.production', 'production',
-                                          string='Expected Production',
-                                          )
+                                          string='Expected Production')
     production = fields.Many2one('mrp.production', string='Production')
 
     @api.one
@@ -46,9 +45,7 @@ class MrpProduction(models.Model):
         if self.move_created_ids:
             raise exceptions.Warning(
                 _("You can't pack a product before it is manufactured"))
-        total = 0.0
-        for line in self.pack:
-            total += line.fill
+        total = sum([x.fill for x in self.pack])
         if total > self.product_qty:
             raise exceptions.Warning(
                 _("You can not pack more quantity than you have manufactured"))
@@ -86,9 +83,13 @@ class MrpProduction(models.Model):
                     res.append(value)
             for line in new_op.product_lines:
                 if self.product_id.product_tmpl_id == line.product_template:
-                    new_op.write({'product_lines':
-                                  [(1, line.id,
-                                    {'product_id': self.product_id.id})]})
+                    if new_op.product_id.track_all or\
+                            new_op.product_id.track_production:
+                        for move in self.move_created_ids2:
+                            if move.product_id == self.product_id:
+                                line.lot = move.restrict_lot_id
+                    line.product_id = self.product_id
+                    new_op.manual_production_lot = line.lot.name
                     continue
                 for link_product in res:
                     if link_product['product_id'] == line.product_id.id:
@@ -120,11 +121,8 @@ class PackagingOperation(models.Model):
     @api.one
     @api.depends('packing_production')
     def _is_processed(self):
-        if self.packing_production and\
-                self.packing_production.state not in ('cancel'):
-            self.processed = True
-        else:
-            self.processed = False
+        self.processed = (self.packing_production and
+                          self.packing_production.state != 'cancel')
 
     product = fields.Many2one(
         comodel_name='product.product', string='Product', required=True,

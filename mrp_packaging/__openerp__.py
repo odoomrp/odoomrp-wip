@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -23,7 +22,8 @@
     "depends": [
         "base",
         "mrp_product_variants",
-        "mrp_bom_through_attributes"
+        "mrp_bom_through_attributes",
+        "mrp_lot_reserve",
     ],
     "author": "OdooMRP team",
     "contributors": [
