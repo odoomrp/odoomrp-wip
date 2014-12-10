@@ -22,10 +22,10 @@ from openerp.exceptions import except_orm
 class MrpRoutingOperation(models.Model):
     _inherit = 'mrp.routing.operation'
 
-    required_test = fields.Boolean(string='Required Test')
-    qtemplate_id = fields.Many2one('qc.test.template', string='Test Template')
+    required_test = fields.Boolean(string='Required test')
+    qtemplate_id = fields.Many2one('qc.test', string='Test')
     analytic_journal_id = fields.Many2one('account.analytic.journal',
-                                          string='Analytic Journal')
+                                          string='Analytic journal')
 
     @api.model
     def create(self, data):
@@ -66,8 +66,8 @@ class MrpProductionWorkcenterLine(models.Model):
     _inherit = 'mrp.production.workcenter.line'
 
     required_test = fields.Boolean(string='Required Test')
-    qtemplate_id = fields.Many2one('qc.test.template', string='Test Template')
-    test_ids = fields.One2many('qc.test', 'workcenter_line_id',
+    qtemplate_id = fields.Many2one('qc.test', string='Test')
+    test_ids = fields.One2many('qc.inspection', 'workcenter_line_id',
                                string='Quality Tests')
     analytic_journal_id = fields.Many2one('account.analytic.journal',
                                           string='Analytic Journal')
@@ -127,10 +127,10 @@ class MrpProductionWorkcenterLine(models.Model):
     @api.one
     @api.model
     def create_quality_test(self):
-        test_obj = self.env['qc.test']
+        test_obj = self.env['qc.inspection']
         vals = {'workcenter_line_id': self.id,
                 'production_id': self.production_id.id,
-                'test_template_id': self.qtemplate_id.id,
+                'test': self.qtemplate_id.id,
                 }
         if self.qtemplate_id.object_id:
             vals.update({'object_id': self.qtemplate_id.object_id.id})

@@ -1,80 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="qc_test_line_form_view_inh_tolerancepercen" model="ir.ui.view">
-            <field name="name">qc.test.line.form.view.inh.tolerancepercen</field>
-            <field name="model">qc.test.line</field>
-            <field name="inherit_id" ref="quality_control.qc_test_line_form_view"/>
+
+        <record model="ir.ui.view" id="qc_test_form_view_tolerance">
+            <field name="name">qc.test.form.tolerance</field>
+            <field name="model">qc.test</field>
+            <field name="inherit_id" ref="quality_control.qc_test_form_view" />
             <field name="arch" type="xml">
-                <field name="success" position="before">
-                    <field name="tolerance_status" />
-                </field>
-                <field name="actual_value_qt" position="attributes">
-                    <attribute name="on_change"></attribute>
-                </field>
-                <field name="success" position="after">
-                    <field name="min_allowed" invisible="1" />
-                    <field name="max_allowed" invisible="1" />
-                    <field name="min_variable" invisible="1" />
-                    <field name="max_variable" invisible="1" />
-                    <field name="test_template_line_id" invisible="1" />
-                </field>
-                <field name="success" position="attributes">
-                    <attribute name="attrs">{'readonly' : [('tolerance_status', 'in', ['optimal', 'noadmissible'])]}</attribute>
-                </field>
-            </field>
-        </record>
-        <record id="qc_test_line_tree_view_inh_tolerancepercen" model="ir.ui.view">
-            <field name="name">qc.test.line.tree.view.inh.tolerancepercen</field>
-            <field name="model">qc.test.line</field>
-            <field name="inherit_id" ref="quality_control.qc_test_line_tree_view"/>
-            <field name="arch" type="xml">
-                <field name="success" position="before">
-                    <field name="tolerance_status" />
-                </field>
-                <field name="actual_value_qt" position="attributes">
-                    <attribute name="on_change"></attribute>
-                </field>
-                <tree string="Test Line" position="attributes">
-                    <attribute name="colors">orange:tolerance_status in ('admissible');red:tolerance_status in ('noadmissible');blue:tolerance_status in ('tolerable');green:tolerance_status in ('optimal')</attribute>
-                </tree>
-                <field name="min_value" position="before">
-                    <field name="min_variable" />
-                    <field name="min_allowed" />
-                </field>
-                <field name="max_value" position="after">
-                    <field name="max_allowed" />
-                    <field name="max_variable" />
-                    <field name="test_template_line_id" invisible="1" />
-                </field>
-                <field name="success" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </field>
-            </field>
-        </record>
-        <record id="qc_test_template_line_form_view_inh_tolerancepercen" model="ir.ui.view">
-            <field name="name">qc.test.template.line.form_view.inh.tolerancepercen</field>
-            <field name="model">qc.test.template.line</field>
-            <field name="inherit_id" ref="quality_control.qc_test_template_line_form_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='valid_value_ids']/../.." position="before">
-                    <group colspan="4" attrs="{'invisible':[('type','=','qualitative')]}">
-                        <field name="percen_permissible_tolerance" />
-                        <field name="percen_variable_tolerance" />
-                    </group>
+                <xpath expr="//field[@name='test_lines']//field[@name='min_value']" position="before" >
+                    <field name="tolerance_below" />
+                    <field name="tolerance_percent_below" />
+                </xpath>
+                <xpath expr="//field[@name='test_lines']//field[@name='max_value']" position="after" >
+                    <field name="tolerance_above" />
+                    <field name="tolerance_percent_above" />
                 </xpath>
             </field>
         </record>
-        <record id="qc_test_template_line_tree_view_inh_tolerancepercen" model="ir.ui.view">
-            <field name="name">qc.test.template.line.tree_view.inh.tolerancepercen</field>
-            <field name="model">qc.test.template.line</field>
-            <field name="inherit_id" ref="quality_control.qc_test_template_line_tree_view"/>
+
+        <record model="ir.ui.view" id="qc_test_question_form_view_tolerance">
+            <field name="name">qc.test.question.form.tolerance</field>
+            <field name="model">qc.test.question</field>
+            <field name="inherit_id" ref="quality_control.qc_test_question_form_view" />
             <field name="arch" type="xml">
-                <field name="max_value" position="after">
-                    <field name="percen_permissible_tolerance" />
-                    <field name="percen_variable_tolerance" />
-                </field>
+                <group name="quantitative" position="after">
+                    <group name="tolerance"
+                           colspan="4"
+                           col="4"
+                           attrs="{'invisible': [('type', '!=', 'quantitative')]}">
+                        <field name="same_tolerance" />
+                        <newline />
+                        <field name="tolerance_below" />
+                        <field name="tolerance_above"
+                               attrs="{'readonly': [('same_tolerance', '=', True)]}"/>
+                        <field name="tolerance_percent_below" />
+                        <field name="tolerance_percent_above"
+                               attrs="{'readonly': [('same_tolerance', '=', True)]}" />
+                    </group>
+                </group>
             </field>
         </record>
+
     </data>
 </openerp>

@@ -19,7 +19,7 @@ from openerp import models, fields
 
 
 class QcTest(models.Model):
-    _inherit = 'qc.test'
+    _inherit = 'qc.inspection'
 
     workcenter_line_id = fields.Many2one(
         'mrp.production.workcenter.line', string='Operation', index=True)

@@ -6,28 +6,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-06 13:24+0000\n"
-"PO-Revision-Date: 2014-10-06 15:28+0100\n"
-"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"POT-Creation-Date: 2014-12-07 12:08+0000\n"
+"PO-Revision-Date: 2014-12-07 12:08+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: quality_control_between_dates
-#: field:qc.test.template.line,validity_end_date:0
-msgid "Validity End Date"
-msgstr "Fecha fin validez"
+#: model:ir.model,name:quality_control_between_dates.model_qc_inspection
+msgid "Email Thread"
+msgstr "Hilo de mensajes"
 
 #. module: quality_control_between_dates
-#: field:qc.test.template.line,validity_start_date:0
-msgid "Validity Start Date"
-msgstr "Fecha inicio validez"
+#: model:ir.model,name:quality_control_between_dates.model_qc_test_question
+msgid "Quality control question"
+msgstr "Pregunta del control de calidad"
 
 #. module: quality_control_between_dates
-#: code:addons/quality_control_between_dates/models/qc_test.py:50
+#: field:qc.test.question,date_stop:0
+msgid "Validity end date"
+msgstr "Fecha fin de validez"
+
+#. module: quality_control_between_dates
+#: field:qc.test.question,date_start:0
+msgid "Validity start date"
+msgstr "Fecha inicio de validez"
+
+#. module: quality_control_between_dates
+#: code:addons/quality_control_between_dates/models/qc_test.py:19
+#, python-format
+msgid "Validity start date cannot be greater than end date."
+msgstr "La fecha de inicio de validez no puede ser mayor que la fecha de fin."
+
+#. module: quality_control_between_dates
+#: code:addons/quality_control_between_dates/models/qc_test.py:38
 #, python-format
 msgid "You cannot have 2 lines of the same question that overlap!"
-msgstr "No puede tener dos líneas de la misma pregunta que se superpongan."
+msgstr "No puede tener dos líneas de la misma pregunta que solapen."
 
