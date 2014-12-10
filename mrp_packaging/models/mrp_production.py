@@ -63,9 +63,11 @@ class MrpProduction(models.Model):
                     data['value']['product_attributes'])
                 data['value'].update({
                     'product_attributes': product_attributes})
+            name = self.env['ir.sequence'].get('mrp.production.packaging')
             data['value'].update({
                 'product_id': op.product.id,
-                'product_qty': final_product_qty})
+                'product_qty': final_product_qty,
+                'name': name})
             new_op = self.create(data['value'])
             new_op.action_compute()
             workorder =\
@@ -101,7 +103,7 @@ class MrpProduction(models.Model):
                                                add_product),
                           'production': self.id,
                           'origin': self.name})
-            op.packing_production = new_op
+            op.packaging_production = new_op
 
 
 class PackagingOperation(models.Model):
@@ -119,10 +121,10 @@ class PackagingOperation(models.Model):
         self.fill = raw_qty * self.qty
 
     @api.one
-    @api.depends('packing_production')
+    @api.depends('packaging_production')
     def _is_processed(self):
-        self.processed = (self.packing_production and
-                          self.packing_production.state != 'cancel')
+        self.processed = (self.packaging_production and
+                          self.packaging_production.state != 'cancel')
 
     product = fields.Many2one(
         comodel_name='product.product', string='Product', required=True,
@@ -136,9 +138,9 @@ class PackagingOperation(models.Model):
         help="Product linked Raw Material value * Product Quantity. It will be"
         " the new manufacturing order quantity if dump UoM is not equal to"
         " product UoM")
-    packing_production = fields.Many2one(
+    packaging_production = fields.Many2one(
         comodel_name='mrp.production', string='Packing manufacturing order')
     processed = fields.Boolean(
-        string='Processed', compute=_is_processed)
+        string='Processed', compute='_is_processed')
     packing_state = fields.Selection(
-        string='Packing MO State', related='packing_production.state')
+        string='Packing MO State', related='packaging_production.state')

@@ -34,6 +34,7 @@
     ],
     "category": "Manufacturing",
     'data': [
+        "data/mrp_packaging_data.xml",
         "views/mrp_production2production_view.xml",
     ],
     "installable": True,
