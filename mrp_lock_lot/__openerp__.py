@@ -20,25 +20,16 @@
     "version": "1.0",
     "author": "OdooMRP team",
     "contributors": [
+        "Ana Juaristi <ajuaristio@gmail.com>",
+        "Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>",
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
         ],
     "category": "Manufacturing",
     "website": "http://www.odoomrp.com",
-    "description": """
-    This module performs the following:
-
-    1.- Add a check 'locked Lot' field in table serial numbers. By default, the
-       lots will be created in "locked" state. The check or not the lot will be
-       done manually by the user.
-
-    2.- Changes in manufacturing, and delivery orders, to selecting the locked
-        bundles is prevented.
-    """,
     "depends": ['stock',
                 'mrp',
                 ],
     "data": ['views/mrp_view.xml',
-             'views/stock_transfer_details_view.xml',
              ],
     "installable": True
 }

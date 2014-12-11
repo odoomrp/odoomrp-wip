@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-26 16:21+0000\n"
-"PO-Revision-Date: 2014-11-26 17:22+0100\n"
+"POT-Creation-Date: 2014-12-11 14:02+0000\n"
+"PO-Revision-Date: 2014-12-11 15:03+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,38 +17,17 @@ msgstr ""
 
 #. module: mrp_lock_lot
 #: view:stock.production.lot:mrp_lock_lot.search_product_lot_filter_inh_locklot
-#: field:stock.production.lot,locked:0
-msgid "Locked"
-msgstr "Bloqueado"
+#: field:stock.production.lot,active:0
+msgid "Active"
+msgstr "Activo"
 
 #. module: mrp_lock_lot
 #: model:ir.model,name:mrp_lock_lot.model_stock_production_lot
 msgid "Lot/Serial"
-msgstr "Lote/Serie"
-
-#. module: mrp_lock_lot
-#: model:ir.model,name:mrp_lock_lot.model_stock_picking
-msgid "Picking List"
-msgstr "Albarán"
-
-#. module: mrp_lock_lot
-#: model:ir.model,name:mrp_lock_lot.model_stock_transfer_details
-msgid "Picking wizard"
-msgstr "Picking wizard"
+msgstr "Lote/Nº de serie"
 
 #. module: mrp_lock_lot
 #: view:stock.production.lot:mrp_lock_lot.search_product_lot_filter_inh_locklot
 msgid "Product"
 msgstr "Producto"
-
-#. module: mrp_lock_lot
-#: view:mrp.product.produce:mrp_lock_lot.view_mrp_product_produce_wizard_inh_locklot
-#: view:stock.move.consume:mrp_lock_lot.view_stock_move_consume_wizard_inh_locklot
-msgid "[('product_id','=',product_id),('locked','=',False)]"
-msgstr "[('product_id','=',product_id),('locked','=',False)]"
-
-#. module: mrp_lock_lot
-#: view:stock.transfer_details:mrp_lock_lot.view_stock_enter_transfer_details_inh_locklot
-msgid "[('product_id','=?',product_id),('locked','=',False)]"
-msgstr "[('product_id','=?',product_id),('locked','=',False)]"
 

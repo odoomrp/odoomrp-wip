@@ -21,4 +21,4 @@ from openerp import models, fields
 class StockProductionLot(models.Model):
     _inherit = 'stock.production.lot'
 
-    locked = fields.Boolean(string='Locked', default=True)
+    active = fields.Boolean(string='Active', default=False)

@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
+        <record id="stock.action_production_lot_form" model="ir.actions.act_window">
+            <field name="name">Serial Numbers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.production.lot</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="stock.view_production_lot_tree"/>
+            <field name="search_view_id" ref="stock.search_product_lot_filter"/>
+            <field name="context">{}</field>
+            <field name="domain">['|',('active','=',True), ('active','=', False)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a serial number.
+              </p><p>
+                This is the list of all the production lots you recorded. When
+                you select a lot, you can get the 
+                traceability of the products contained in lot. By default, the
+                list is filtered on the serial numbers that are available in
+                your warehouse but you can uncheck the 'Available' button to
+                get all the lots you produced, received or delivered to
+                customers.
+              </p>
+            </field>
+        </record>
         <record id="view_production_lot_form_inh_locklot" model="ir.ui.view">
             <field name="name">view.production.lot.form.inh.locklot</field>
             <field name="model">stock.production.lot</field>
             <field name="inherit_id" ref="stock.view_production_lot_form"/>
             <field name="arch" type="xml">
                 <field name="ref" position="after">
-                    <field name="locked" />
+                    <field name="active" />
                 </field>
             </field>
         </record>
@@ -17,7 +40,7 @@
             <field name="inherit_id" ref="stock.view_production_lot_tree"/>
             <field name="arch" type="xml">
                 <field name="create_date" position="after">
-                    <field name="locked" />
+                    <field name="active" />
                 </field>
             </field>
         </record>
@@ -27,34 +50,11 @@
             <field name="inherit_id" ref="stock.search_product_lot_filter"/>
             <field name="arch" type="xml">
                 <field name="name" position="before">
-                    <field name="locked" />
+                    <field name="active" />
                 </field>
                 <filter string="Product" position="before">
-                    <filter string="Locked" domain="[]" context="{'group_by':'locked'}"/>
+                    <filter string="Active" domain="[]" context="{'group_by':'active'}"/>
                 </filter>
-            </field>
-        </record>
-        <record id="view_stock_move_consume_wizard_inh_locklot" model="ir.ui.view">
-            <field name="name">view.stock.move.consume.wizard.inh.locklot</field>
-            <field name="model">stock.move.consume</field>
-            <field name="inherit_id" ref="mrp.view_stock_move_consume_wizard"/>
-            <field name="arch" type="xml">
-                <field name="restrict_lot_id" position="attributes">
-                    <attribute name="domain">[('product_id','=',product_id),('locked','=',False)]</attribute>
-                </field>
-            </field>
-        </record>
-        <record id="view_mrp_product_produce_wizard_inh_locklot" model="ir.ui.view">
-            <field name="name">view.mrp.product.produce.wizard.inh.locklot</field>
-            <field name="model">mrp.product.produce</field>
-            <field name="inherit_id" ref="mrp.view_mrp_product_produce_wizard"/>
-            <field name="arch" type="xml">
-                <xpath expr="//group[@string='Produce']/field[@name='lot_id']" position="attributes">
-                    <attribute name="domain">[('product_id','=',product_id),('locked','=',False)]</attribute>
-                </xpath>
-                <xpath expr="//tree[@string='Consume Lines']/field[@name='lot_id']" position="attributes">
-                    <attribute name="domain">[('product_id','=',product_id),('locked','=',False)]</attribute>
-                </xpath>
             </field>
         </record>
     </data>
