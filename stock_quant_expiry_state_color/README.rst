@@ -1,0 +1,1 @@
+Quant lines are colored based on the expiry state of their lot
