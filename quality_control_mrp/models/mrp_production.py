@@ -48,7 +48,7 @@ class MrpProduction(models.Model):
             for move in self.move_created_ids2:
                 qc_trigger = self.env.ref('quality_control_mrp.qc_trigger_mrp')
                 tests = set()
-                for model in ['qc.trigger.product_line',
+                for model in ['qc.trigger.product_category_line',
                               'qc.trigger.product_template_line',
                               'qc.trigger.product_line']:
                     tests = tests.union(self.env[model].get_test_for_product(

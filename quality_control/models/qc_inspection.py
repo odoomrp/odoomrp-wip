@@ -87,13 +87,14 @@ class QcInspection(models.Model):
 
     @api.multi
     def unlink(self):
-        if self.auto_generated:
-            raise exceptions.Warning(
-                _("You cannot remove an auto-generated inspection"))
-        if self.state != 'draft':
-            raise exceptions.Warning(
-                _("You cannot remove an inspection that it's not in draft "
-                  "state"))
+        for inspection in self:
+            if inspection.auto_generated:
+                raise exceptions.Warning(
+                    _("You cannot remove an auto-generated inspection"))
+            if inspection.state != 'draft':
+                raise exceptions.Warning(
+                    _("You cannot remove an inspection that it's not in draft "
+                      "state"))
         return super(QcInspection, self).unlink()
 
     @api.multi
