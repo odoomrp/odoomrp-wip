@@ -14,6 +14,16 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="product_cost_price_form_view">
+            <field name="name">product.cost_price.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <field name="standard_price" position="after">
+                    <field name="cost_price" />
+                </field>
+            </field>
+        </record>
 
     </data>
 </openerp>

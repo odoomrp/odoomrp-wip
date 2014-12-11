@@ -16,6 +16,25 @@
 #
 ##############################################################################
 
-from . import product_price
-from . import product_product
-from . import product_template
+{
+    "name": "Product Cost Price History",
+    "version": "1.0",
+    "depends": [
+        "product",
+        "product_price_history",
+    ],
+    "author": "OdooMRP team",
+    "website": "http://www.odoomrp.com",
+    "contributors": [
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>"
+    ],
+    "category": "Custom Module",
+    "summary": "",
+    "data": [
+        "views/product_view.xml",
+    ],
+    "installable": True,
+    "auto_install": False,
+}

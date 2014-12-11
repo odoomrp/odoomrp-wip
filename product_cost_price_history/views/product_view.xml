@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="product_cost_price_form_view">
+            <field name="name">product.cost_price.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <field name="standard_price" position="after">
+                    <field name="cost_price" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_price_history_extended_tree_view">
+            <field name="name">product.price.history.extended.tree</field>
+            <field name="model">product.price.history</field>
+            <field name="inherit_id" ref="product_price_history.view_product_price_history_from_product" />
+            <field name="arch" type="xml">
+                <field name="product_template_id" position="after">
+                    <field name="product" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_price_history_extended_search_view">
+            <field name="name">product.price.history.extended.search</field>
+            <field name="model">product.price.history</field>
+            <field name="inherit_id" ref="product_price_history.view_product_price_history_filter" />
+            <field name="arch" type="xml">
+                <field name="product_template_id">
+                    <field name="product" />
+                </field>
+                <filter name="group_product_id" position="after">
+                    <filter string="Product Variant" name="group_product"
+                        domain="[]" context="{'group_by':'product'}" />
+                </filter>
+            </field>
+        </record>
+    
+    </data>
+</openerp>

@@ -12,7 +12,9 @@
                     <field name="company_id" groups="base.group_multi_company"
                         invisible="1" />
                     <field name="product_template_id" />
+                    <field name="product" />
                     <field name="cost" />
+                    <field name="cost_type" invisible="1" />
                 </tree>
             </field>
         </record>
@@ -23,13 +25,18 @@
             <field name="arch" type="xml">
                 <search string="Search Prices History">
                     <field name="product_template_id" />
+                    <field name="product" />
                     <field name="company_id" groups="base.group_multi_company" />
                     <group expand="0" string="Group By...">
                         <filter string="Date" name="group_date"
                             icon="terp-go-month" domain="[]"
                             context="{'group_by':'datetime'}" />
-                        <filter string="Product" name="group_product_id"
+                        <filter string="Product" name="group_product_template_id"
                             domain="[]" context="{'group_by':'product_template_id'}" />
+                        <filter string="Product Variant" name="group_product_id"
+                            domain="[]" context="{'group_by':'product'}" />
+                        <filter string="Cost Type" name="group_cost_type"
+                            domain="[]" context="{'group_by':'cost_type'}" />
                         <filter string="Company" domain="[]"
                             name="group_company_id" context="{'group_by':'company_id'}"
                             groups="base.group_multi_company" />
@@ -45,7 +52,7 @@
             <field name="view_type">form</field>
             <field name="view_id" ref="view_product_price_history_from_product" />
             <field name="search_view_id" ref="view_product_price_history_filter" />
-            <field name="context">{'search_default_group_product_id':1,'group_by':[]}
+            <field name="context">{'search_default_group_product_template_id':1,'group_by':[]}
             </field>
         </record>
 

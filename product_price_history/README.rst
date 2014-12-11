@@ -3,7 +3,7 @@ Product Price History
 
 This module allows you to:
 
-* Record various prices of a same product for different companies. This
+* Record various prices of the same product for different companies. This
   way, every company can have its own costs (average or standard) and
   sale prices.
 * Historize the prices in a way that you'll then be able to retrieve the
