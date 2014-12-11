@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 16:35+0000\n"
-"PO-Revision-Date: 2014-11-20 17:36+0100\n"
-"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"POT-Creation-Date: 2014-12-11 15:11+0000\n"
+"PO-Revision-Date: 2014-12-11 15:11+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: purchase_requisition_order_generator
+#: model:ir.model,name:purchase_requisition_order_generator.model_bid_line_qty
+msgid "Change Bid line quantity"
+msgstr "Cambiar cantidad licitada"
 
 #. module: purchase_requisition_order_generator
 #: view:purchase.requisition:purchase_requisition_order_generator.view_purchase_requisition_form_ext
@@ -21,31 +26,14 @@ msgid "Purchase Lines"
 msgstr "Líneas de compra"
 
 #. module: purchase_requisition_order_generator
-#: view:purchase.order.line:purchase_requisition_order_generator.purchase_order_line_tree_purreqordergenerator
-#: view:purchase.requisition:purchase_requisition_order_generator.view_purchase_requisition_form_ext
-msgid "Purchase Order Lines"
-msgstr "Líneas pedido de compra"
-
-#. module: purchase_requisition_order_generator
 #: model:ir.model,name:purchase_requisition_order_generator.model_purchase_requisition
 msgid "Purchase Requisition"
 msgstr "Solicitud de compra"
 
 #. module: purchase_requisition_order_generator
-#: model:ir.actions.act_window,name:purchase_requisition_order_generator.action_open_purchase_line_from_purreqordergenerator
-msgid "Purchase order Line"
-msgstr "Línea de pedido de compra"
-
-#. module: purchase_requisition_order_generator
 #: view:purchase.requisition:purchase_requisition_order_generator.view_purchase_requisition_form_ext
 msgid "Request Quotations"
 msgstr "Solicitar presupuestos"
-
-#. module: purchase_requisition_order_generator
-#: view:purchase.order.line:purchase_requisition_order_generator.purchase_order_line_tree_purreqordergenerator
-#: view:purchase.requisition:purchase_requisition_order_generator.view_purchase_requisition_form_ext
-msgid "Supplier"
-msgstr "Proveedor"
 
 #. module: purchase_requisition_order_generator
 #: code:addons/purchase_requisition_order_generator/models/purchase_requisition.py:66

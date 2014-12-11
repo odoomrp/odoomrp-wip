@@ -16,5 +16,4 @@
 #
 ##############################################################################
 
-from . import models
-from . import wizard
+from . import bid_line_qty
