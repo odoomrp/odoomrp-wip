@@ -22,7 +22,6 @@
     "depends": [
         "product",
         "mrp",
-        "mrp_operations",
         "mrp_operations_extension",
         "product_variants_no_automatic_creation",
         "mrp_production_editable_scheduled_products",
