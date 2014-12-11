@@ -4,7 +4,7 @@
             <record id="view_create_product_production_inherit" model="ir.ui.view">
             <field name="name">view.create.product.production.inherit</field>
             <field name="model">wiz.production.product.line</field>
-            <field name="inherit_id" ref="mrp_production_add_middle_raw_material.view_create_product_production" />
+            <field name="inherit_id" ref="mrp_production_add_middle_stuff.view_create_product_production" />
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <field name="production_id" position="after">

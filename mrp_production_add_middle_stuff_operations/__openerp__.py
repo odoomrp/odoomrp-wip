@@ -17,7 +17,7 @@
 #
 ##############################################################################
 {
-    'name': 'MRP Production addition operations',
+    'name': 'MRP Production add middle stuff operations',
     'version': "1.0",
     'category': "Generic Modules",
     'author': 'OdooMRP team',
@@ -26,7 +26,7 @@
                      "Ana Juaristi <ajuaristio@gmail.com>"],
     'website': "http://www.odoomrp.com",
     'depends': ["mrp_operations_extension",
-                "mrp_production_add_middle_raw_material"],
+                "mrp_production_add_middle_stuff"],
     'data': ["wizard/addition_wizard_view.xml"],
     'installable': True,
     'auto_install': True,

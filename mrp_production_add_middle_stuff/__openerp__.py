@@ -17,7 +17,7 @@
 #
 ##############################################################################
 {
-    'name': 'MRP Production add middle raw material',
+    'name': 'MRP Production add middle stuff',
     'version': "1.0",
     'category': "Generic Modules",
     'author': 'OdooMRP team',
