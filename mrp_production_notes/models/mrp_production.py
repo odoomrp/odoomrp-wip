@@ -16,12 +16,10 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class MrpProduction(orm.Model):
+class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    _columns = {
-        'notes': fields.html('Notes'),
-    }
+    notes = fields.Html()
