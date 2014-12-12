@@ -11,46 +11,27 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
 
 {
-    "name": "MRP Operations Extension",
+    "name": "MRP - Product variants with MRP operations",
     "version": "1.0",
-    "category": "Manufacturing",
-    "data": [
-         "wizard/mrp_workorder_produce_view.xml",
-         "views/mrp_workcenter_view.xml",
-         "views/mrp_routing_operation_view.xml",
-         "views/mrp_production_view.xml",
-         "views/mrp_bom_view.xml",
-         "views/mrp_routing_workcenter_view.xml",
-         "security/ir.model.access.csv"
-    ],
+    "depends": [
+        "mrp_product_variants",
+        "mrp_operations_extension"],
     "author": "OdooMRP team",
     "website": "http://www.odoomrp.com",
     "contributors": [
-        "Daniel Campos <danielcampos@avanzosc.es>",
-        "Mikel Arregi <mikelarregi@avanzosc.es>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <ajuaristio@gmail.com>",
     ],
-    "depends": [
-        "mrp_operations",
-        "mrp",
-        "stock",
-    ],
-    "data": [
-        "wizard/mrp_workorder_produce_view.xml",
-        "views/mrp_workcenter_view.xml",
-        "views/mrp_routing_operation_view.xml",
-        "views/mrp_production_view.xml",
-        "views/mrp_bom_view.xml",
-        "views/mrp_routing_workcenter_view.xml",
-        "security/ir.model.access.csv",
-    ],
-    "installable": True
+    "category": "Custom Module",
+    "summary": "",
+    "data": [],
+    "installable": True,
+    "auto_install": True,
 }

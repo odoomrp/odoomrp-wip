@@ -63,6 +63,17 @@ class MrpBom(models.Model):
     def _bom_explode(self, bom, product, factor, properties=None, level=0,
                      routing_id=False, previous_products=None,
                      master_bom=None, production=None):
+        result, result2 = self._bom_explode_variants(
+            bom, product, factor, properties=properties, level=level,
+            routing_id=routing_id, previous_products=previous_products,
+            master_bom=master_bom, production=production)
+        return result, result2
+
+    @api.model
+    def _bom_explode_variants(
+            self, bom, product, factor, properties=None, level=0,
+            routing_id=False, previous_products=None, master_bom=None,
+            production=None):
         """ Finds Products and Work Centers for related BoM for manufacturing
         order.
         @param bom: BoM of particular product template.
@@ -203,7 +214,8 @@ class MrpBom(models.Model):
                 res = self._bom_explode(
                     bom2, bom_line_id.product_id, quantity2,
                     properties=properties, level=level + 10,
-                    previous_products=all_prod, master_bom=master_bom)
+                    previous_products=all_prod, master_bom=master_bom,
+                    production=production)
                 result = result + res[0]
                 result2 = result2 + res[1]
             else:
@@ -215,7 +227,4 @@ class MrpBom(models.Model):
                     _('Invalid Action! BoM "%s" contains a phantom BoM line'
                       ' but the product "%s" does not have any BoM defined.') %
                     (master_bom.name, name))
-
-        self._get_workorder_operations(result2, level=level,
-                                       routing_id=routing_id)
         return result, result2

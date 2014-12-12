@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="mrp.mrp_production_product_tree_view" />
             <field name="arch" type="xml">
                 <field name="product_id" position="after">
-                    <field name="work_order" />
+                    <field name="work_order" groups="mrp.group_mrp_routings" />
                 </field>
             </field>
         </record>
@@ -19,7 +19,7 @@
             <field name="inherit_id" ref="mrp.mrp_production_product_form_view" />
             <field name="arch" type="xml">
                 <field name="product_id" position="after">
-                    <field name="work_order" />
+                    <field name="work_order" groups="mrp.group_mrp_routings" />
                 </field>
             </field>
         </record>
@@ -32,22 +32,22 @@
                 <xpath
                     expr="//page//group[@string='Products to Consume']//field[@name='product_id']"
                     position="after">
-                    <field name="work_order" />
+                    <field name="work_order" groups="mrp.group_mrp_routings" />
                 </xpath>
                 <xpath
                     expr="//page//group[@string='Consumed Products']//field[@name='product_id']"
                     position="after">
-                    <field name="work_order" />
+                    <field name="work_order" groups="mrp.group_mrp_routings" />
                 </xpath>
                 <xpath
                     expr="//page//group[@string='Products to Produce']//field[@name='product_id']"
                     position="after">
-                    <field name="work_order" />
+                    <field name="work_order" groups="mrp.group_mrp_routings" />
                 </xpath>
                 <xpath
                     expr="//page//group[@string='Produced Products']//field[@name='product_id']"
                     position="after">
-                    <field name="work_order" />
+                    <field name="work_order" groups="mrp.group_mrp_routings" />
                 </xpath>
                 <xpath
                     expr="//field[@name='workcenter_lines']/form//field[@name='name']"
