@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="purchase_forecast_procurement_form_view">
+            <field name="name">purchase.forecast.procurement.form</field>
+            <field name="model">sale.forecast.procurement</field>
+            <field name="inherit_id" ref="procurement_sale_forecast.sale_forecast_procurement_form_view"/>
+            <field name="arch" type="xml">
+                <button name="load_sales_on_forecast" position="after">
+                     <button name="load_purchases_on_forecast" type="object"
+                     string="Load purchases" groups="purchase.group_purchase_manager"/>
+                </button>
+            </field>
+        </record>
+    </data>
+</openerp>
