@@ -1,0 +1,161 @@
+# -*- encoding: utf-8 -*-
+##############################################################################
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see http://www.gnu.org/licenses/.
+#
+##############################################################################
+
+from openerp import models, fields, api
+import openerp.addons.decimal_precision as dp
+from datetime import datetime
+
+
+class SaleForecastProcurement(models.Model):
+    _name = 'sale.forecast.procurement'
+
+    name = fields.Char(strind='Name', required=True)
+    partner_id = fields.Many2one('res.partner', string='Partner')
+    date_from = fields.Date(string='Date From', required=True)
+    date_to = fields.Date(string='Date To', required=True)
+    forecast_lines = fields.One2many('sale.forecast.procurement.line',
+                                     'forecast_id', string="Forecast Lines")
+    warehouse_id = fields.Many2one('stock.warehouse', string="Warehouse")
+
+    @api.multi
+    def create_procurements(self):
+        procurement_obj = self.env['procurement.order']
+        procure_lst = []
+        for record in self:
+            for product_line in record.forecast_lines:
+                if product_line.product_id:
+                    procure_id = procurement_obj.create({
+                        'name': ('MPS: ' + record.name +
+                                 ' (' + record.date_from + '.' + record.date_to
+                                 + ') ' + record.warehouse_id.name),
+                        'date_planned': datetime.today(),
+                        'product_id': product_line.product_id.id,
+                        'product_qty': product_line.qty,
+                        'product_uom': product_line.product_id.uom_id.id,
+                        'location_id': record.warehouse_id.lot_stock_id.id,
+                        'company_id': record.warehouse_id.company_id.id,
+                        'warehouse_id': record.warehouse_id.id,
+                    })
+                    procure_id.signal_workflow('button_confirm')
+                    procure_lst.append(procure_id.id)
+        return {
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'procurement.order',
+            'res_ids': procure_lst,
+            'domain': [('id', 'in', procure_lst)],
+            'type': 'ir.actions.act_window',
+            }
+
+    @api.multi
+    def load_sales_on_forecast(self):
+        self.ensure_one()
+        load_wiz_obj = self.env['load.sales.on.forecast']
+        load_wiz_view = self.env.ref('procurement_sale_forecast.load_sales_on_'
+                                     'forecast_forecast_form_view')
+        load_wiz_vals = {'forecast_id': self.id,
+                         'date_from': self.date_from,
+                         'date_to': self.date_to,
+                         'partner_id': self.partner_id.id}
+        wiz_id = load_wiz_obj.create(load_wiz_vals)
+        return {
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'load.sales.on.forecast',
+            'views': [(load_wiz_view.id, 'form')],
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'res_id': wiz_id.id
+            }
+
+
+class SaleForecastProcurementLine(models.Model):
+    _name = 'sale.forecast.procurement.line'
+
+    @api.one
+    @api.depends('unit_price', 'qty')
+    def _get_subtotal(self):
+        self.subtotal = self.unit_price * self.qty
+
+    @api.one
+    @api.onchange('product_id')
+    def onchange_product(self):
+        if self.product_id:
+            self.unit_price = self.product_id.list_price
+
+    product_id = fields.Many2one('product.product', 'Product')
+    product_category_id = fields.Many2one('product.category',
+                                          'Product Category')
+    qty = fields.Float('Quantity', default=1,
+                       digits_compute=dp.get_precision('Product Unit of'
+                                                       ' Measure'))
+    unit_price = fields.Float('Unit Price',
+                              digits_compute=dp.get_precision('Product Price'))
+    subtotal = fields.Float('Subtotal', compute=_get_subtotal,
+                            digits_compute=dp.get_precision('Product Price'))
+    partner_id = fields.Many2one("res.partner", string="Partner",
+                                 related="forecast_id.partner_id")
+    date_from = fields.Date(string="Date from",
+                            related="forecast_id.date_from")
+    date_to = fields.Date(string="Date to", related="forecast_id.date_to")
+    forecast_id = fields.Many2one('sale.forecast.procurement', 'Forecast')
+
+    @api.multi
+    def request_procurement(self):
+        self.ensure_one()
+        value_dict = {'product_id': self.product_id.id,
+                      'uom_id': self.product_id.uom_id.id,
+                      'date_planned': datetime.today(),
+                      'qty': self.qty,
+                      'warehouse_id': self.forecast_id.warehouse_id.id
+                      }
+        res_id = self.env['make.procurement'].create(value_dict)
+        return {'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'make.procurement',
+                'res_id': res_id.id,
+                'view_id': False,
+                'type': 'ir.actions.act_window',
+                'target': 'new',
+                }
+
+
+class SaleOrder(models.Model):
+
+    _inherit = 'sale.order'
+
+    @api.multi
+    def load_lines_on_forecast(self):
+        self.ensure_one()
+        load_wiz_obj = self.env['load.sales.on.forecast']
+        load_wiz_view = self.env.ref('procurement_sale_forecast.load_sales_on_'
+                                     'forecast_sale_form_view')
+        load_wiz_vals = {'sale_id': self.id,
+                         'date_from': self.date_order,
+                         'date_to': self.date_order,
+                         'partner_id': self.partner_id.id}
+        wiz_id = load_wiz_obj.create(load_wiz_vals)
+        return {
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'load.sales.on.forecast',
+            'views': [(load_wiz_view.id, 'form')],
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'res_id': wiz_id.id
+            }

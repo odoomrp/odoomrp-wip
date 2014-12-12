@@ -1,0 +1,5 @@
+access_procurement_sale_forecast,procurement.sale.forecast user,model_procurement_sale_forecast,base.group_user,1,0,0,0
+access_procurement_sale_forecast_sale_manager,procurement.sale.forecast manager,model_procurement_sale_forecast,base.group_sale_manager,1,1,1,1
+access_procurement_sale_forecast_line,procurement.sale.forecast.line user,model_procurement_sale_forecast_line,base.group_user,1,0,0,0
+access_procurement_sale_forecast_sale_line_manager,procurement.sale.forecast.line manager,model_procurement_sale_forecast_line,base.group_sale_manager,1,1,1,1
+access_load_sales_on_forecast_manager,load.sales.on.forecast manager,model_load_sales_on_forecast,base.group_sale_manager,1,1,1,1

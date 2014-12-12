@@ -1,0 +1,260 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* procurement_sale_forecast
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-12 11:27+0000\n"
+"PO-Revision-Date: 2014-12-12 12:35+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: procurement_sale_forecast
+#: view:load.sales.on.forecast:procurement_sale_forecast.load_sales_on_forecast_forecast_form_view
+#: view:load.sales.on.forecast:procurement_sale_forecast.load_sales_on_forecast_sale_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,product_categ_id:0
+msgid "Category"
+msgstr "Categoría"
+
+#. module: procurement_sale_forecast
+#: view:sale.forecast.procurement:procurement_sale_forecast.sale_forecast_procurement_form_view
+msgid "Create Procurements"
+msgstr "Crear abastecimientos"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,create_uid:0
+#: field:sale.forecast.procurement,create_uid:0
+#: field:sale.forecast.procurement.line,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,create_date:0
+#: field:sale.forecast.procurement,create_date:0
+#: field:sale.forecast.procurement.line,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: procurement_sale_forecast
+#: field:sale.forecast.procurement,date_from:0
+msgid "Date From"
+msgstr "Fecha desde"
+
+#. module: procurement_sale_forecast
+#: field:sale.forecast.procurement,date_to:0
+msgid "Date To"
+msgstr "Fecha hasta"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,date_from:0
+#: view:sale.forecast.procurement:procurement_sale_forecast.sale_forecast_procurement_search_view
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_search_view
+msgid "Date from"
+msgstr "Fecha desde"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,date_to:0
+msgid "Date to"
+msgstr "Fecha hasta"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,forecast_id:0
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_search_view
+#: field:sale.forecast.procurement.line,forecast_id:0
+msgid "Forecast"
+msgstr "Previsión"
+
+#. module: procurement_sale_forecast
+#: field:sale.forecast.procurement,forecast_lines:0
+msgid "Forecast Lines"
+msgstr "Líneas de previsión"
+
+#. module: procurement_sale_forecast
+#: view:sale.forecast.procurement:procurement_sale_forecast.sale_forecast_procurement_search_view
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_search_view
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,id:0
+#: field:sale.forecast.procurement,id:0
+#: field:sale.forecast.procurement.line,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,write_uid:0
+#: field:sale.forecast.procurement,write_uid:0
+#: field:sale.forecast.procurement.line,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,write_date:0
+#: field:sale.forecast.procurement,write_date:0
+#: field:sale.forecast.procurement.line,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: procurement_sale_forecast
+#: view:sale.forecast.procurement:procurement_sale_forecast.sale_forecast_procurement_form_view
+msgid "Lines"
+msgstr "Líneas"
+
+#. module: procurement_sale_forecast
+#: view:load.sales.on.forecast:procurement_sale_forecast.load_sales_on_forecast_forecast_form_view
+#: view:load.sales.on.forecast:procurement_sale_forecast.load_sales_on_forecast_sale_form_view
+msgid "Load"
+msgstr "Cargar"
+
+#. module: procurement_sale_forecast
+#: view:load.sales.on.forecast:procurement_sale_forecast.load_sales_on_forecast_forecast_form_view
+#: view:load.sales.on.forecast:procurement_sale_forecast.load_sales_on_forecast_sale_form_view
+#: view:sale.forecast.procurement:procurement_sale_forecast.sale_forecast_procurement_form_view
+msgid "Load Sales"
+msgstr "Cargar ventas"
+
+#. module: procurement_sale_forecast
+#: view:sale.order:procurement_sale_forecast.sale_load_forecast_form_view
+msgid "Load on forecast"
+msgstr "Cargar en la previsión"
+
+#. module: procurement_sale_forecast
+#: field:sale.forecast.procurement,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,partner_id:0
+#: field:procurement.order,partner_id:0
+#: view:sale.forecast.procurement:procurement_sale_forecast.sale_forecast_procurement_search_view
+#: field:sale.forecast.procurement,partner_id:0
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_search_view
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: procurement_sale_forecast
+#: model:ir.model,name:procurement_sale_forecast.model_procurement_order
+msgid "Procurement"
+msgstr "Abastecimiento"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,product_id:0
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_search_view
+#: field:sale.forecast.procurement.line,product_id:0
+msgid "Product"
+msgstr "ProductoProducto"
+
+#. module: procurement_sale_forecast
+#: field:sale.forecast.procurement.line,product_category_id:0
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: procurement_sale_forecast
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_search_view
+msgid "Product category"
+msgstr "Categoría de producto"
+
+#. module: procurement_sale_forecast
+#: field:sale.forecast.procurement.line,qty:0
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,sale_id:0
+msgid "Sale"
+msgstr "Venta"
+
+#. module: procurement_sale_forecast
+#: view:sale.forecast.procurement:procurement_sale_forecast.sale_forecast_procurement_form_view
+#: view:sale.forecast.procurement:procurement_sale_forecast.sale_forecast_procurement_tree_view
+msgid "Sale Forecast"
+msgstr "Previsión de venta"
+
+#. module: procurement_sale_forecast
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_form_view
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_tree_editable_view
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_tree_view
+msgid "Sale Forecast Line"
+msgstr "Línea de previsión de venta"
+
+#. module: procurement_sale_forecast
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_search_view
+msgid "Sale Forecast Line Search"
+msgstr "Búsqueda de línea de previsión de venta"
+
+#. module: procurement_sale_forecast
+#: view:sale.forecast.procurement:procurement_sale_forecast.sale_forecast_procurement_search_view
+msgid "Sale Forecast Search"
+msgstr "Búsqueda de previsión de venta"
+
+#. module: procurement_sale_forecast
+#: model:ir.actions.act_window,name:procurement_sale_forecast.action_view_stock_sale_forecast_form
+msgid "Sales Forecast"
+msgstr "Previsión de ventas"
+
+#. module: procurement_sale_forecast
+#: model:ir.actions.act_window,name:procurement_sale_forecast.action_view_stock_sale_forecast_line_form
+#: model:ir.ui.menu,name:procurement_sale_forecast.menu_stock_sale_forecast_lines
+msgid "Sales Forecast Lines"
+msgstr "Líneas de previsión de ventas"
+
+#. module: procurement_sale_forecast
+#: model:ir.ui.menu,name:procurement_sale_forecast.menu_stock_sale_forecast
+#: model:ir.ui.menu,name:procurement_sale_forecast.menu_stock_sale_forecast_all
+msgid "Sales Forecasts"
+msgstr "Previsiones de ventas"
+
+#. module: procurement_sale_forecast
+#: model:ir.model,name:procurement_sale_forecast.model_sale_order
+msgid "Sales Order"
+msgstr "Pedidos de venta"
+
+#. module: procurement_sale_forecast
+#: field:load.sales.on.forecast,product_tmpl_id:0
+msgid "Template"
+msgstr "Plantilla"
+
+#. module: procurement_sale_forecast
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_tree_editable_view
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_tree_view
+msgid "Total"
+msgstr "Total"
+
+#. module: procurement_sale_forecast
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_tree_editable_view
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_tree_view
+msgid "Total Qty"
+msgstr "Cantidad total"
+
+#. module: procurement_sale_forecast
+#: field:sale.forecast.procurement.line,unit_price:0
+msgid "Unit Price"
+msgstr "Precio unidad"
+
+#. module: procurement_sale_forecast
+#: field:sale.forecast.procurement,warehouse_id:0
+msgid "Warehouse"
+msgstr "Almacén"
+
+#. module: procurement_sale_forecast
+#: view:load.sales.on.forecast:procurement_sale_forecast.load_sales_on_forecast_forecast_form_view
+#: view:load.sales.on.forecast:procurement_sale_forecast.load_sales_on_forecast_sale_form_view
+msgid "or"
+msgstr "o"
+
+#. module: procurement_sale_forecast
+#: view:sale.forecast.procurement.line:procurement_sale_forecast.sale_forecast_procurement_line_tree_editable_view
+msgid "⇒ Request Procurement"
+msgstr "⇒ Solicitar abastecimiento"
+
