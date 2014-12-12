@@ -33,22 +33,22 @@ class PurchaseOrder(models.Model):
         result = super(PurchaseOrder, self).wkf_confirm_order()
         picking = False
         if self.mrp_operation:
-            picking_type = self.mrp_operation.routing_wc_line.picking_type_id
-            if picking_type.default_location_src_id.usage == 'internal':
-                for move in self.mrp_operation.production_id.move_lines:
-                    if move.work_order.id == self.mrp_operation.id:
-                        if not picking:
-                            vals = {'origin': self.mrp_operation.name,
-                                    'picking_type_id': picking_type.id,
-                                    'invoice_state': 'none',
-                                    'mrp_production':
-                                    self.mrp_operation.production_id.id
-                                    }
-                            picking = picking_obj.create(vals)
-                            vals = {'out_picking': picking.id}
-                            self.mrp_operation.write(vals)
-                        vals = {'picking_id': picking.id}
-                        move.write(vals)
+            for move in self.mrp_operation.production_id.move_lines:
+                if (move.work_order.id == self.mrp_operation.id and
+                        move.location_id.usage == 'internal'):
+                    if not picking:
+                        wc_line = self.mrp_operation.routing_wc_line
+                        vals = {'origin': self.mrp_operation.name,
+                                'picking_type_id': wc_line.picking_type_id.id,
+                                'invoice_state': 'none',
+                                'mrp_production':
+                                self.mrp_operation.production_id.id
+                                }
+                        picking = picking_obj.create(vals)
+                        vals = {'out_picking': picking.id}
+                        self.mrp_operation.write(vals)
+                    vals = {'picking_id': picking.id}
+                    move.write(vals)
         return result
 
     @api.one
