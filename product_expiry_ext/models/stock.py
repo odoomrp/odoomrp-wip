@@ -59,3 +59,11 @@ class StockProductioLot(models.Model):
                    ('to_remove', 'To remove'),
                    ('best_before', 'After the best before')],
         string='Expiry state')
+
+
+class StockQuant(models.Model):
+
+    _inherit = "stock.quant"
+
+    expiry_state = fields.Selection(string="Expiry State", store=True,
+                                    related="lot_id.expiry_state")

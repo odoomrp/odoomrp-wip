@@ -23,22 +23,20 @@
     "author": "OdooMRP team",
     "contributors": [
         "Juan Ignacio Úbeda <juanignacioubeda@avanzosc.es>",
+        "Pedro Manuel Baeza Romero <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi Olalde <ajuaristio@gmail.com>",
+        "Mikel Arregi <mikelarregi@avanzosc.es>"
     ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
     "complexity": "normal",
     "summary": "",
     "description": """
-This module color lines in list of production lots based on expiration dates:
 
-* Normal : Green color
-* In alert : Blue color
-* To remove : Yellow color
-* After the 'Best Before' : Orange color
-* Expired : Red color
     """,
     "images": [],
     "data": ["views/production_lot_ext_view.xml",
+             "views/stock_quant_view.xml",
              "wizard/stock_transfer_details_view.xml"],
     "qweb": [],
     "demo": [],
