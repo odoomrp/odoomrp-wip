@@ -65,5 +65,5 @@ class StockQuant(models.Model):
 
     _inherit = "stock.quant"
 
-    expiry_state = fields.Selection(string="Expiry State", store=True,
+    expiry_state = fields.Selection(string="Expiry State",
                                     related="lot_id.expiry_state")
