@@ -122,6 +122,6 @@ class LoadSalesOnForecast(models.TransientModel):
                                       'qty': prod_vals['qty'],
                                       'unit_price': (prod_vals['amount'] /
                                                      prod_vals['qty'])
-                                       }
+                                      }
                 forecast_line_obj.create(forecast_line_vals)
         return True
