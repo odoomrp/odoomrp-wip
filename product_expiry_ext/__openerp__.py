@@ -31,9 +31,6 @@
     "website": "http://www.odoomrp.com",
     "complexity": "normal",
     "summary": "",
-    "description": """
-
-    """,
     "images": [],
     "data": ["views/production_lot_ext_view.xml",
              "views/stock_quant_view.xml",
