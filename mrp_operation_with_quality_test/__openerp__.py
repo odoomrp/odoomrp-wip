@@ -22,23 +22,6 @@
     "author": "OdooMRP team",
     "category": "Manufacturing",
     "website": "http://www.odoomrp.com",
-    "description": """
-This module performs the following:
-    1.- In Operation create 3 new fiels:
-        1.1.- required_test: Indicates whether the operation has a template of
-              quality test.
-        1.2.- qtemplate_id: ID of template quality test.
-        1.3.- analytic_journal_id: ID of analytic journal
-
-    2.- In workorder of productión, create this:
-        2.1.- required_test: Indicates whether the operation has a template of
-              quality test.
-        2.2.- qtemplate_id: ID of template quality test.
-        2.3.- analytic_journal_id: ID of analytic journal
-        2.4.- A button por create test from template.
-        2.5.- When you init de workorder, automatically create one test from
-              template.
-    """,
     "depends": [
         'mrp',
         'mrp_operations_extension',

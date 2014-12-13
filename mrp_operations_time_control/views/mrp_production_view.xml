@@ -2,7 +2,6 @@
 <openerp>
     <data>
 
-
         <record model="ir.ui.view" id="mrp_production_operation_time_form_view">
             <field name="name">mrp.production.operation.time.form
             </field>
