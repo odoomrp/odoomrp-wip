@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+    <record model="ir.ui.view" id="mrp_production_workcenter_subcontracting_form_view_inherit">
+        <field name="name">mrp.production.workcenter.line.subcontracting.form</field>
+        <field name="model">mrp.production.workcenter.line</field>
+        <field name="inherit_id" ref="mrp_operations.mrp_production_workcenter_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <field name="sequence" position="after">
+                <field name="external" invisible="1"/>
+            </field>
+            <page string="Information" position="after">
+                <page string="Subcontracting" attrs="{'invisible': [('external', '=', False)]}">
+                    <group>
+                        <field name="purchase_order"/>
+                        <field name="out_picking"/>
+                        <field name="procurement_order" />
+                        <field name="in_picking"/>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="mrp_production_workcenter_tree_view_inh_subcontracting">
+        <field name="name">mrp.production.workcenter.tree.view.inh.subcontracting</field>
+        <field name="model">mrp.production.workcenter.line</field>
+        <field name="inherit_id" ref="mrp_operations.mrp_production_workcenter_tree_view_inherit"/>
+        <field name="arch" type="xml">
+            <field name="production_id" position="after">
+                <field name="external" />
+            </field>
+        </field>
+    </record>
+</data>
+</openerp>

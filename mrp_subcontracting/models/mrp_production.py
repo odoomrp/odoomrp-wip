@@ -18,32 +18,6 @@
 from openerp import models, fields, api, exceptions, _
 
 
-class MrpRoutingWorkcenter(models.Model):
-    _inherit = 'mrp.routing.workcenter'
-
-    external = fields.Boolean('External', help="Is Subcontract Operation")
-    semifinished_id = fields.Many2one(
-        'product.product', 'Semifinished Subcontracting',
-        domain=[('type', '=', 'product'),
-                # ('route_ids','in', ['ref(purchase.route_warehouse0_buy)',
-                #                    'ref(stock.route_warehouse0_mto)'])
-                ])
-    picking_type_id = fields.Many2one('stock.picking.type', 'Picking Type',
-                                      domain=[('code', '=', 'outgoing')])
-
-
-class MrpProductionWorkcenterLine(models.Model):
-    _inherit = 'mrp.production.workcenter.line'
-
-    external = fields.Boolean(related='routing_wc_line.external', store=True,
-                              readonly=True, copy=False)
-    purchase_order = fields.Many2one('purchase.order', 'Purchase Order')
-    out_picking = fields.Many2one('stock.picking', 'Out Picking')
-    in_picking = fields.Many2one('stock.picking', 'In Picking')
-    procurement_order = fields.Many2one('procurement.order',
-                                        'Procurement Order')
-
-
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
@@ -52,29 +26,22 @@ class MrpProduction(models.Model):
         purchase_obj = self.env['purchase.order']
         cond = [('mrp_production', '=', self.id)]
         purchases = purchase_obj.search(cond)
-        cont = 0
-        for purchase in purchases:
-            cont += 1
-        self.created_purchases = cont
+        self.created_purchases = len(purchases)
 
     def _created_outpickings(self):
         picking_obj = self.env['stock.picking']
         cond = [('mrp_production', '=', self.id)]
         pickings = picking_obj.search(cond)
-        cont = 0
-        for picking in pickings:
-            if picking.picking_type_id.code == 'outgoing':
-                cont += 1
+        cont = len([picking for picking in pickings if
+                    picking.picking_type_id.code == 'outgoing'])
         self.created_outpickings = cont
 
     def _created_inpickings(self):
         picking_obj = self.env['stock.picking']
         cond = [('mrp_production', '=', self.id)]
         pickings = picking_obj.search(cond)
-        cont = 0
-        for picking in pickings:
-            if picking.picking_type_id.code == 'incoming':
-                cont += 1
+        cont = len([picking for picking in pickings if
+                    picking.picking_type_id.code == 'incoming'])
         self.created_inpickings = cont
 
     created_purchases = fields.Integer(
@@ -145,3 +112,15 @@ class MrpProduction(models.Model):
         vals_workorder = {'procurement_order': procurement.id}
         move.work_order.update(vals_workorder)
         return True
+
+
+class MrpProductionWorkcenterLine(models.Model):
+    _inherit = 'mrp.production.workcenter.line'
+
+    external = fields.Boolean(related='routing_wc_line.external', store=True,
+                              readonly=True, copy=True)
+    purchase_order = fields.Many2one('purchase.order', 'Purchase Order')
+    out_picking = fields.Many2one('stock.picking', 'Out Picking')
+    in_picking = fields.Many2one('stock.picking', 'In Picking')
+    procurement_order = fields.Many2one('procurement.order',
+                                        'Procurement Order')

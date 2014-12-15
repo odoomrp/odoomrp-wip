@@ -34,9 +34,9 @@ class ProcurementOrder(models.Model):
                 if (procurement.mrp_operation and
                     (not purchase_line.order_id.mrp_operation or
                      procurement.mrp_operation.id !=
-                     purchase_line.order_id.mrp_operation.id)):
-                    purchase_line.order_id.update(
-                        {'mrp_operation': procurement.mrp_operation.id})
-                    procurement.mrp_operation.update(
-                        {'purchase_order': purchase_line.order_id.id})
+                        purchase_line.order_id.mrp_operation.id)):
+                    purchase_line.order_id.mrp_operation = (
+                        procurement.mrp_operation.id)
+                    procurement.mrp_operation.purchase_order = (
+                        purchase_line.order_id.id)
         return res

@@ -15,30 +15,16 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-{
-    "name": "MRP Subcontracting",
-    "version": "1.0",
-    "author": "OdooMRP team",
-    "contributors": [
-        "Incaser Informatica S.L.",
-        "Ana Juaristi <ajuaristio@gmail.com>",
-        "Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>",
-        "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
-        ],
-    "category": "Manufacturing",
-    "website": "http://www.odoomrp.com",
-    "depends": ['stock',
-                'purchase',
-                'mrp',
-                'mrp_operations',
-                'mrp_operations_extension',
-                ],
-    "data": [
-        'views/mrp_routing_workcenter_view.xml',
-        'views/mrp_production_view.xml',
-        'views/mrp_production_workcenter_line_view.xml',
-        'views/purchase_order_view.xml',
-        'views/stock_picking_view.xml',
-    ],
-    "installable": True
-}
+from openerp import models, fields
+
+
+class MrpRoutingWorkcenter(models.Model):
+    _inherit = 'mrp.routing.workcenter'
+
+    external = fields.Boolean('External', help="Is Subcontract Operation")
+    semifinished_id = fields.Many2one(
+        'product.product', 'Semifinished Subcontracting',
+        domain=[('type', '=', 'product'),
+                ])
+    picking_type_id = fields.Many2one('stock.picking.type', 'Picking Type',
+                                      domain=[('code', '=', 'outgoing')])

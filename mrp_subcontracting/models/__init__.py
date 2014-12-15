@@ -18,4 +18,5 @@
 from . import purchase_order
 from . import stock_picking
 from . import procurement_order
-from . import mrp_subcontrating
+from . import mrp_production
+from . import mrp_routing_workcenter

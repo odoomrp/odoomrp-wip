@@ -58,8 +58,6 @@ class PurchaseOrder(models.Model):
         if self.mrp_operation:
             cond = [('origin', '=', self.name)]
             picking = picking_obj.search(cond, limit=1)
-            vals = {'in_picking': picking.id}
-            self.mrp_operation.write(vals)
-            vals = {'mrp_production': self.mrp_operation.production_id.id}
-            picking.update(vals)
+            self.mrp_operation.in_picking = picking.id
+            picking.mrp_production = self.mrp_operation.production_id.id
         return result

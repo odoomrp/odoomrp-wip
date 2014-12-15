@@ -1,2 +1,4 @@
-    The module implements the complete route for a subcontrating production
-    operations.
+MRP Subcontracting
+==================
+The module implements the complete route for subcontrating production
+operations.
