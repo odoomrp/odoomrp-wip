@@ -42,7 +42,7 @@ class QcTestTemplateCategory(models.Model):
         compute="_get_complete_name", string='Full name')
     child_ids = fields.One2many(
         comodel_name='qc.test.category', inverse_name='parent_id',
-        string='Child categories'),
+        string='Child categories')
     active = fields.Boolean(
         string='Active', default=True,
         help="This field allows you to hide the category without removing it.")
