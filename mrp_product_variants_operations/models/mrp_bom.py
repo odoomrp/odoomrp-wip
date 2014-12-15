@@ -23,6 +23,16 @@ class MrpBom(models.Model):
     _inherit = 'mrp.bom'
 
     @api.model
+    def _bom_explode(
+            self, bom, product, factor, properties=None, level=0,
+            routing_id=False, previous_products=None, master_bom=None,
+            production=None):
+        return self._bom_explode_variants(
+            bom, product, factor, properties=properties, level=level,
+            routing_id=routing_id, previous_products=previous_products,
+            master_bom=master_bom, production=production)
+
+    @api.model
     def _bom_explode_variants(
             self, bom, product, factor, properties=None, level=0,
             routing_id=False, previous_products=None, master_bom=None,
