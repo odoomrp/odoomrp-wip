@@ -23,8 +23,13 @@
                 "purchase"],
     "author": "OdooMRP team",
     "category": "MPS",
+    "contributors": [
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Ainara Galdona <ainaragaldona@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <anajuaristi@avanzosc.es>",
+    ],
     "website": "http://www.odoomrp.com",
-    "complexity": "normal",
     "description": """
     """,
     'data': ["wizard/purchase_forecast_load_view.xml",

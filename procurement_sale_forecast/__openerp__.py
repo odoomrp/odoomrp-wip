@@ -28,10 +28,12 @@
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Ainara Galdona <ainaragaldona@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <anajuaristi@avanzosc.es>",
     ],
     "category": "MPS",
     "website": "http://www.odoomrp.com",
-    "complexity": "normal",
     "summary": "Sale forecast",
     "description": """
     """,
