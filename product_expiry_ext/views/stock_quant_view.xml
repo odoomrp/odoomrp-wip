@@ -10,11 +10,12 @@
                     <field name="expiry_state"/>
                 </xpath>
                 <xpath expr="//tree" position="attributes">
-                    <attribute name="colors">orange:expiry_state
-                        in 'best_before'; blue:expiry_state in
-                        'alert'; gold:expiry_state in
-                        'to_remove'; green:expiry_state in
-                        'normal'; red:expiry_state in 'expired'
+                    <attribute name="colors">
+                        orange: expiry_state == 'best_before';
+                        blue: expiry_state == 'alert';
+                        gold: expiry_state == 'to_remove';
+                        green: expiry_state == 'normal';
+                        red: expiry_state == 'expired'
                     </attribute>
                 </xpath>
             </field>
