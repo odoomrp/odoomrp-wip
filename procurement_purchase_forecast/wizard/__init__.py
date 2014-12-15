@@ -16,4 +16,4 @@
 #
 ##############################################################################
 
-from . import load_purchases_on_forecast
+from . import purchase_forecast_load

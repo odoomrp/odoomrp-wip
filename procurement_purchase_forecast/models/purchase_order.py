@@ -24,12 +24,11 @@ class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
     @api.multi
-    def load_lines_on_forecast(self):
+    def load_lines_to_forecast(self):
         self.ensure_one()
-        load_wiz_obj = self.env['load.purchases.on.forecast']
-        load_wiz_view = self.env.ref('procurement_purchase_forecast.load_'
-                                     'purchases_on_forecast_purchase_form_'
-                                     'view')
+        load_wiz_obj = self.env['purchase.forecast.load']
+        load_wiz_view = self.env.ref('procurement_purchase_forecast.purchase_'
+                                     'forecast_load_purchase_form_view')
         load_wiz_vals = {'purchase_id': self.id,
                          'date_from': self.date_order,
                          'date_to': self.date_order,
@@ -38,7 +37,7 @@ class PurchaseOrder(models.Model):
         return {
             'view_type': 'form',
             'view_mode': 'form',
-            'res_model': 'load.purchases.on.forecast',
+            'res_model': 'purchase.forecast.load',
             'views': [(load_wiz_view.id, 'form')],
             'type': 'ir.actions.act_window',
             'target': 'new',

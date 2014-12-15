@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="load_purchases_on_forecast_purchase_form_view">
-            <field name="name">load.purchases.on.forecast.purchase.form</field>
-            <field name="model">load.purchases.on.forecast</field>
+        <record model="ir.ui.view" id="purchase_forecast_load_purchase_form_view">
+            <field name="name">purchase.forecast.load.purchase.form</field>
+            <field name="model">purchase.forecast.load</field>
             <field name="arch" type="xml">
                 <form string="Load Purchases">
                     <group colspan="4" col="4">
                         <field name="partner_id" select="1" colspan="4"
                         context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}"
-                        domain="[('supplier','=',True)]"
-                        required="1" readonly="1"/>
+                        domain="[('supplier','=',True)]" readonly="1"/>
                         <field name="purchase_id" readonly="1"/>
                         <field name="forecast_id" required="1"/>
                         <field name="date_from" select="1" required="1"
                         readonly="1"/>
                         <field name="date_to" select="1" required="1"
                         readonly="1"/>
+                        <field name="factor"/>
+                        <newline/>
                         <field name="product_categ_id" select="1"/>
                         <field name="product_tmpl_id" select="1"/>
                         <field name="product_id" select="1" colspan="4"/>
@@ -31,20 +32,21 @@
                 </form>
             </field>
         </record>
-        <record model="ir.ui.view" id="load_purchases_on_forecast_forecast_form_view">
-            <field name="name">load.purchases.on.forecast.forecast.form</field>
-            <field name="model">load.purchases.on.forecast</field>
+        <record model="ir.ui.view" id="purchase_forecast_load_forecast_form_view">
+            <field name="name">purchase.forecast.load.forecast.form</field>
+            <field name="model">purchase.forecast.load</field>
             <field name="arch" type="xml">
                 <form string="Load Purchases">
                     <group colspan="4" col="4">
                         <field name="partner_id" select="1" colspan="4"
                         context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}"
-                        domain="[('supplier','=',True)]"
-                        required="1"/>
+                        domain="[('supplier','=',True)]"/>
                         <field name="purchase_id"/>
                         <field name="forecast_id" required="1" readonly="1"/>
                         <field name="date_from" select="1" required="1"/>
                         <field name="date_to" select="1" required="1"/>
+                        <field name="factor"/>
+                        <newline/>
                         <field name="product_categ_id" select="1"/>
                         <field name="product_tmpl_id" select="1"/>
                         <field name="product_id" select="1" colspan="4"/>

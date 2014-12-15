@@ -26,10 +26,8 @@
     "website": "http://www.odoomrp.com",
     "complexity": "normal",
     "description": """
-        - New wizard on purchase orders and forecast to load purchase lines on
-        forecast.
     """,
-    'data': ["wizard/load_purchases_on_forecast_view.xml",
+    'data': ["wizard/purchase_forecast_load_view.xml",
              "views/procurement_sale_forecast_view.xml",
              "views/purchase_order_view.xml"],
     'demo': [],

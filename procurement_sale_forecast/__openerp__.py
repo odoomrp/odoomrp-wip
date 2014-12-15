@@ -34,14 +34,10 @@
     "complexity": "normal",
     "summary": "Sale forecast",
     "description": """
-This module allows to create a sale forecast
-- New object to define a forecast by day, partner and products.
-- New wizard to create procurements for products in forecast lines.
-- New wizard on sale orders and budgets to load sale lines on budget.
     """,
     "data": [
         "views/sale_view.xml",
-        "wizard/load_sales_on_forecast_view.xml",
+        "wizard/sale_forecast_load_view.xml",
     ],
     "installable": True,
     "auto_install": False,

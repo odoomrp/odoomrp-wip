@@ -19,19 +19,17 @@
 from openerp import models, api
 
 
-class SaleForecastProcurement(models.Model):
+class ProcurementSaleForecast(models.Model):
 
-    _inherit = 'sale.forecast.procurement'
+    _inherit = 'procurement.sale.forecast'
 
     @api.multi
-    def load_purchases_on_forecast(self):
+    def load_purchases_to_forecast(self):
         self.ensure_one()
-        load_wiz_obj = self.env['load.purchases.on.forecast']
-        load_wiz_view = self.env.ref('procurement_purchase_forecast.load_'
-                                     'purchases_on_forecast_forecast_form_'
-                                     'view')
+        load_wiz_obj = self.env['purchase.forecast.load']
+        load_wiz_view = self.env.ref('procurement_purchase_forecast.purchase_'
+                                     'forecast_load_forecast_form_view')
         load_wiz_vals = {'forecast_id': self.id,
-                         'partner_id': self.partner_id.id,
                          'date_from': self.date_from,
                          'date_to': self.date_to
                          }
@@ -39,7 +37,7 @@ class SaleForecastProcurement(models.Model):
         return {
             'view_type': 'form',
             'view_mode': 'form',
-            'res_model': 'load.purchases.on.forecast',
+            'res_model': 'purchase.forecast.load',
             'views': [(load_wiz_view.id, 'form')],
             'type': 'ir.actions.act_window',
             'target': 'new',

@@ -11,10 +11,26 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
-#    You should have received a copy of the GNU Affero General Public License
+#    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
 
-from . import sale_forecast_load
-from . import make_procurement
+from openerp import models, api
+
+
+class MakeProcurement(models.TransientModel):
+
+    _inherit = 'make.procurement'
+
+    @api.multi
+    def make_procurement(self):
+        result = super(MakeProcurement, self).make_procurement()
+        forecast_line_obj = self.env['procurement.sale.forecast.line']
+        context = self.env.context
+        if context.get('active_model') == 'procurement.sale.forecast.line':
+            forecast_line_id = context['active_id']
+            procurement_id = result['res_id']
+            forecast_line = forecast_line_obj.browse(forecast_line_id)
+            forecast_line.procurement_id = procurement_id
+        return result

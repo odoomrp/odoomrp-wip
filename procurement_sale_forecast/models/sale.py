@@ -21,16 +21,26 @@ import openerp.addons.decimal_precision as dp
 from datetime import datetime
 
 
-class SaleForecastProcurement(models.Model):
-    _name = 'sale.forecast.procurement'
+class ProcurementSaleForecast(models.Model):
+    _name = 'procurement.sale.forecast'
+
+    @api.one
+    @api.depends('forecast_lines.procurement_id')
+    def _get_procurement_count(self):
+        procurement_lst = []
+        for line in self.forecast_lines:
+            if line.procurement_id:
+                procurement_lst.append(line.procurement_id.id)
+        self.procurement_count = len(procurement_lst)
 
     name = fields.Char(strind='Name', required=True)
-    partner_id = fields.Many2one('res.partner', string='Partner')
     date_from = fields.Date(string='Date From', required=True)
     date_to = fields.Date(string='Date To', required=True)
-    forecast_lines = fields.One2many('sale.forecast.procurement.line',
+    forecast_lines = fields.One2many('procurement.sale.forecast.line',
                                      'forecast_id', string="Forecast Lines")
     warehouse_id = fields.Many2one('stock.warehouse', string="Warehouse")
+    procurement_count = fields.Integer(string="Procurement Count",
+                                       compute=_get_procurement_count)
 
     @api.multi
     def create_procurements(self):
@@ -53,6 +63,7 @@ class SaleForecastProcurement(models.Model):
                     })
                     procure_id.signal_workflow('button_confirm')
                     procure_lst.append(procure_id.id)
+                    product_line.procurement_id = procure_id.id
         return {
             'view_type': 'form',
             'view_mode': 'tree,form',
@@ -63,29 +74,45 @@ class SaleForecastProcurement(models.Model):
             }
 
     @api.multi
-    def load_sales_on_forecast(self):
+    def load_sales_to_forecast(self):
         self.ensure_one()
-        load_wiz_obj = self.env['load.sales.on.forecast']
-        load_wiz_view = self.env.ref('procurement_sale_forecast.load_sales_on_'
-                                     'forecast_forecast_form_view')
+        load_wiz_obj = self.env['sale.forecast.load']
+        load_wiz_view = self.env.ref('procurement_sale_forecast.sale_forecast_'
+                                     'load_forecast_form_view')
         load_wiz_vals = {'forecast_id': self.id,
                          'date_from': self.date_from,
-                         'date_to': self.date_to,
-                         'partner_id': self.partner_id.id}
+                         'date_to': self.date_to}
         wiz_id = load_wiz_obj.create(load_wiz_vals)
         return {
             'view_type': 'form',
             'view_mode': 'form',
-            'res_model': 'load.sales.on.forecast',
+            'res_model': 'sale.forecast.load',
             'views': [(load_wiz_view.id, 'form')],
             'type': 'ir.actions.act_window',
             'target': 'new',
             'res_id': wiz_id.id
             }
 
+    @api.multi
+    def show_all_forecast_procurements(self):
+        procurement_list = []
+        for record in self:
+            for line in record.forecast_lines:
+                if line.procurement_id:
+                    procurement_list.append(line.procurement_id.id)
+        return {
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'procurement.order',
+            'res_ids': procurement_list,
+            'domain': [('id', 'in', procurement_list)],
+            'type': 'ir.actions.act_window',
+            }
 
-class SaleForecastProcurementLine(models.Model):
-    _name = 'sale.forecast.procurement.line'
+
+class ProcurementSaleForecastLine(models.Model):
+
+    _name = 'procurement.sale.forecast.line'
 
     @api.one
     @api.depends('unit_price', 'qty')
@@ -98,22 +125,24 @@ class SaleForecastProcurementLine(models.Model):
         if self.product_id:
             self.unit_price = self.product_id.list_price
 
-    product_id = fields.Many2one('product.product', 'Product')
+    product_id = fields.Many2one('product.product', string='Product')
     product_category_id = fields.Many2one('product.category',
-                                          'Product Category')
+                                          string='Product Category')
     qty = fields.Float('Quantity', default=1,
                        digits_compute=dp.get_precision('Product Unit of'
                                                        ' Measure'))
     unit_price = fields.Float('Unit Price',
                               digits_compute=dp.get_precision('Product Price'))
-    subtotal = fields.Float('Subtotal', compute=_get_subtotal,
+    subtotal = fields.Float('Subtotal', compute=_get_subtotal, store=True,
                             digits_compute=dp.get_precision('Product Price'))
-    partner_id = fields.Many2one("res.partner", string="Partner",
-                                 related="forecast_id.partner_id")
-    date_from = fields.Date(string="Date from",
+    partner_id = fields.Many2one("res.partner", string="Partner")
+    date_from = fields.Date(string="Date from", store=True,
                             related="forecast_id.date_from")
-    date_to = fields.Date(string="Date to", related="forecast_id.date_to")
-    forecast_id = fields.Many2one('sale.forecast.procurement', 'Forecast')
+    date_to = fields.Date(string="Date to", related="forecast_id.date_to",
+                          store=True)
+    forecast_id = fields.Many2one('procurement.sale.forecast',
+                                  string='Forecast')
+    procurement_id = fields.Many2one('procurement.order', string="Procurement")
 
     @api.multi
     def request_procurement(self):
@@ -140,11 +169,11 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     @api.multi
-    def load_lines_on_forecast(self):
+    def load_lines_to_forecast(self):
         self.ensure_one()
-        load_wiz_obj = self.env['load.sales.on.forecast']
-        load_wiz_view = self.env.ref('procurement_sale_forecast.load_sales_on_'
-                                     'forecast_sale_form_view')
+        load_wiz_obj = self.env['sale.forecast.load']
+        load_wiz_view = self.env.ref('procurement_sale_forecast.sale_forecast_'
+                                     'load_sale_form_view')
         load_wiz_vals = {'sale_id': self.id,
                          'date_from': self.date_order,
                          'date_to': self.date_order,
@@ -153,7 +182,7 @@ class SaleOrder(models.Model):
         return {
             'view_type': 'form',
             'view_mode': 'form',
-            'res_model': 'load.sales.on.forecast',
+            'res_model': 'sale.forecast.load',
             'views': [(load_wiz_view.id, 'form')],
             'type': 'ir.actions.act_window',
             'target': 'new',
