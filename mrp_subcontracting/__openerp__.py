@@ -37,8 +37,6 @@
         'views/mrp_routing_workcenter_view.xml',
         'views/mrp_production_view.xml',
         'views/mrp_production_workcenter_line_view.xml',
-        'views/purchase_order_view.xml',
-        'views/stock_picking_view.xml',
     ],
     "installable": True
 }
