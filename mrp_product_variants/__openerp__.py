@@ -22,13 +22,14 @@
     "depends": [
         "product",
         "mrp",
-        "mrp_operations_extension",
         "product_variants_no_automatic_creation",
         "mrp_production_editable_scheduled_products",
     ],
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
     ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",

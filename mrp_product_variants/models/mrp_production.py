@@ -105,6 +105,11 @@ class MrpProduction(models.Model):
 
     @api.multi
     def _action_compute_lines(self, properties=None):
+        results = self._action_compute_lines_variants(properties=properties)
+        return results
+
+    @api.multi
+    def _action_compute_lines_variants(self, properties=None):
         """ Compute product_lines and workcenter_lines from BoM structure
         @return: product_lines
         """
@@ -125,7 +130,7 @@ class MrpProduction(models.Model):
             bom_id = production.bom_id.id
             if not bom_point:
                 if not production.product_id:
-                    bom_obj._bom_find(
+                    bom_id = bom_obj._bom_find(
                         product_tmpl_id=production.product_template.id,
                         properties=properties)
                 else:
@@ -161,26 +166,7 @@ class MrpProduction(models.Model):
             for line in results2:
                 line['production_id'] = production.id
                 workcenter_line_obj.create(line)
-
-            self._get_workorder_in_product_lines(self.workcenter_lines,
-                                                 self.product_lines)
         return results
-
-    def _get_workorder_in_product_lines(self, workcenter_lines, product_lines):
-        for p_line in product_lines:
-            for bom_line in self.bom_id.bom_line_ids:
-                if ((bom_line.product_template.id == p_line.product_template.id
-                        or bom_line.product_id.product_tmpl_id.id ==
-                        p_line.product_template.id) and
-                        (not bom_line.product_id or
-                         bom_line.product_id.id == p_line.product_id.id)):
-                    for wc_line in workcenter_lines:
-                        if wc_line.routing_wc_line == bom_line.operation:
-                            p_line.work_order = wc_line
-                            break
-
-    def action_confirm(self):
-        super(MrpProduction, self).action_confirm()
 
     @api.model
     def _make_production_produce_line(self, production):
@@ -202,7 +188,8 @@ class MrpProduction(models.Model):
                     {'product_tmpl_id': production.product_template.id,
                      'attribute_value_ids': [(6, 0, att_values_ids)]})
             production.product_id = product
-        super(MrpProduction, self)._make_production_produce_line(production)
+        return super(MrpProduction,
+                     self)._make_production_produce_line(production)
 
     @api.model
     def _make_production_consume_line(self, line):
@@ -224,7 +211,7 @@ class MrpProduction(models.Model):
                     {'product_tmpl_id': line.product_template.id,
                      'attribute_value_ids': [(6, 0, att_values_ids)]})
             line.product_id = product
-        super(MrpProduction, self)._make_production_consume_line(line)
+        return super(MrpProduction, self)._make_production_consume_line(line)
 
 
 class MrpProductionProductLineAttribute(models.Model):
