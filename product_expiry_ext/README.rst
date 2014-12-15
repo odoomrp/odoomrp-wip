@@ -1,4 +1,4 @@
-This module provide color lines in list of production lots and quants based on lots expiration dates:
+This module provides color lines in list of production lots and quants based on lots expiration dates:
 
 * Normal : Green color
 * In alert : Blue color
