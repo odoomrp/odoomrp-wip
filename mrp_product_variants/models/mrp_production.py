@@ -105,8 +105,8 @@ class MrpProduction(models.Model):
 
     @api.multi
     def _action_compute_lines(self, properties=None):
-        results, results2 = self._action_compute_lines_variants(properties=properties)
-        return results, results2
+        results = self._action_compute_lines_variants(properties=properties)
+        return results
 
     @api.multi
     def _action_compute_lines_variants(self, properties=None):
@@ -166,7 +166,7 @@ class MrpProduction(models.Model):
             for line in results2:
                 line['production_id'] = production.id
                 workcenter_line_obj.create(line)
-        return results, results2
+        return results
 
     @api.model
     def _make_production_produce_line(self, production):
