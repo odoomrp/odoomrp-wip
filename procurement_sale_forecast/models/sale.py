@@ -48,7 +48,7 @@ class ProcurementSaleForecast(models.Model):
         procure_lst = []
         for record in self:
             for product_line in record.forecast_lines:
-                if product_line.product_id:
+                if product_line.product_id and not product_line.procurement_id:
                     procure_id = procurement_obj.create({
                         'name': ('MPS: ' + record.name +
                                  ' (' + record.date_from + '.' + record.date_to
