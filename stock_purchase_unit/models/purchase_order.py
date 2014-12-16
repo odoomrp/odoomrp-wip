@@ -16,27 +16,22 @@
 #
 ##############################################################################
 
-{
-    "name": "Unit of Purchase",
-    "version": "1.0",
-    "summary": "Purchase secondary unit",
-    "depends": [
-        "product",
-        "purchase",
-    ],
-    "author": "OdooMRP team",
-    "website": "http://www.odoomrp.com",
-    "contributors": [
-        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
-        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-        "Ana Juaristi <ajuaristio@gmail.com>"
-    ],
-    "category": "Purchase Management",
-    "data": [
-        "data/product_data.xml",
-        "views/product_view.xml",
-        "views/purchase_view.xml",
-        "views/pricelist_view.xml",
-    ],
-    "installable": True,
-}
+from openerp import models, api
+
+
+class PurchaseOrder(models.Model):
+    _inherit = 'purchase.order'
+
+    @api.model
+    def _prepare_order_line_move(self, order, order_line, picking_id,
+                                 group_id):
+        res = super(PurchaseOrder, self)._prepare_order_line_move(
+            order, order_line, picking_id, group_id)
+        for vals in res:
+            qty = vals['product_uom_qty']
+            if order_line.product_uop:
+                qty *= self.product_id.uop_coeff
+            vals.update({'product_uop': (order_line.product_uop.id or
+                                         order_line.product_uom.id),
+                         'product_uop_qty': qty})
+        return res

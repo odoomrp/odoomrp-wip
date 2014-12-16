@@ -16,27 +16,5 @@
 #
 ##############################################################################
 
-{
-    "name": "Unit of Purchase",
-    "version": "1.0",
-    "summary": "Purchase secondary unit",
-    "depends": [
-        "product",
-        "purchase",
-    ],
-    "author": "OdooMRP team",
-    "website": "http://www.odoomrp.com",
-    "contributors": [
-        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
-        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-        "Ana Juaristi <ajuaristio@gmail.com>"
-    ],
-    "category": "Purchase Management",
-    "data": [
-        "data/product_data.xml",
-        "views/product_view.xml",
-        "views/purchase_view.xml",
-        "views/pricelist_view.xml",
-    ],
-    "installable": True,
-}
+from . import stock_move
+from . import purchase_order

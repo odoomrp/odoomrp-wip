@@ -17,26 +17,22 @@
 ##############################################################################
 
 {
-    "name": "Unit of Purchase",
+    "name": "Stock - Purchase secondary unit in stock moves",
     "version": "1.0",
-    "summary": "Purchase secondary unit",
     "depends": [
-        "product",
-        "purchase",
+        "stock",
+        "purchase_secondary_unit",
     ],
     "author": "OdooMRP team",
     "website": "http://www.odoomrp.com",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-        "Ana Juaristi <ajuaristio@gmail.com>"
+        "Ana Juaristi <ajuaristio@gmail.com>",
     ],
-    "category": "Purchase Management",
+    "category": "Custom Module",
     "data": [
-        "data/product_data.xml",
-        "views/product_view.xml",
-        "views/purchase_view.xml",
-        "views/pricelist_view.xml",
+        "views/stock_move_view.xml",
     ],
     "installable": True,
 }
