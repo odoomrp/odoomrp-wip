@@ -99,7 +99,7 @@ class AssignManualQuantsLines(models.TransientModel):
                     self.qty = remaining_qty
 
     assign_wizard = fields.Many2one('assign.manual.quants', string='Move',
-                                    required=True)
+                                    required=True, ondelete="cascade")
     quant = fields.Many2one('stock.quant', string="Quant", required=True)
     qty = fields.Float(string='QTY')
     selected = fields.Boolean(string="Select")
