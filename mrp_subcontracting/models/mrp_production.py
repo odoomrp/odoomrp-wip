@@ -57,61 +57,45 @@ class MrpProduction(models.Model):
     @api.one
     def action_confirm(self):
         user_obj = self.env['res.users']
-        rule_obj = self.env['procurement.rule']
         warehouse_obj = self.env['stock.warehouse']
         res = super(MrpProduction, self).action_confirm()
         user = user_obj.browse(self._uid)
         cond = [('company_id', '=', user.company_id.id)]
         warehouse = False
-        for workcenter in self.routing_id.workcenter_lines:
-            if workcenter.external:
-                created_procurement = False
+        for move in self.move_lines:
+            if move.work_order.routing_wc_line.external:
+                ptype = move.work_order.routing_wc_line.picking_type_id
+                move.location_id = ptype.default_location_src_id.id
+                move.location_dest_id = ptype.default_location_dest_id.id
+        for wc_line in self.workcenter_lines:
+            if wc_line.external:
                 if not warehouse:
-                    cond = [('company_id', '=', user.company_id.id)]
+                    cond = [('lot_stock_id', '=', self.location_dest_id.id)]
                     warehouse = warehouse_obj.search(cond, limit=1)
                     if not warehouse:
                         raise exceptions.Warning(
                             _('Production Confirmation Error'),
                             _('Company warehouse not found'))
-                    cond = [('warehouse_id', '=', warehouse.id),
-                            ('action', '=', 'buy')]
-                    rule = rule_obj.search(cond, limit=1)
-                    if not rule:
-                        raise exceptions.Warning(
-                            _('Production Confirmation Error'),
-                            _('Rule for procurement order not found'))
-                for move in self.move_lines:
-                    if (move.work_order.routing_wc_line.id == workcenter.id and
-                            not created_procurement):
-                        created_procurement = True
-                        self._create_external_procurement(move, warehouse,
-                                                          rule)
+                wc_line.procurement_order = (
+                    self._create_external_procurement(wc_line, warehouse))
         return res
 
-    def _create_external_procurement(self, move, warehouse, rule):
+    def _create_external_procurement(self, wc_line, warehouse):
         procurement_obj = self.env['procurement.order']
-        wc_line = move.work_order.routing_wc_line
-        ptype = wc_line.picking_type_id
-        move.update({'location_id':
-                     ptype.default_location_src_id.id,
-                     'location_dest_id':
-                     ptype.default_location_dest_id.id})
-        vals = {'name': move.work_order.name,
-                'origin': move.work_order.name,
-                'product_id': wc_line.semifinished_id.id,
+        vals = {'name': wc_line.name,
+                'origin': wc_line.name,
+                'product_id': wc_line.routing_wc_line.semifinished_id.id,
                 'product_qty': self.product_qty,
-                'product_uom': wc_line.semifinished_id.uom_id.id,
-                'location_id': ptype.default_location_src_id.id,
+                'product_uom':
+                wc_line.routing_wc_line.semifinished_id.uom_id.id,
+                'location_id': self.location_dest_id.id,
                 'production_id': self.id,
                 'warehouse_id': warehouse.id,
-                'rule_id': rule.id,
-                'mrp_operation': move.work_order.id,
+                'mrp_operation': wc_line.id,
                 }
         procurement = procurement_obj.create(vals)
         procurement.run()
-        vals_workorder = {'procurement_order': procurement.id}
-        move.work_order.update(vals_workorder)
-        return True
+        return procurement.id
 
 
 class MrpProductionWorkcenterLine(models.Model):

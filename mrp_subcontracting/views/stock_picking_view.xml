@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+    <record id="action_outpickings_per_production" model="ir.actions.act_window">
+        <field name="name">Out Pickings</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('mrp_production','=',active_id),('picking_type_id.code','=','outgoing')]
+        </field>
+    </record>
+    <record id="action_inpickings_per_production" model="ir.actions.act_window">
+        <field name="name">In Pickings</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('mrp_production','=',active_id),('picking_type_id.code','=','incoming')]
+        </field>
+    </record>
+</data>
+</openerp>

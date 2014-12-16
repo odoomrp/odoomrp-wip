@@ -34,8 +34,7 @@ class PurchaseOrder(models.Model):
         picking = False
         if self.mrp_operation:
             for move in self.mrp_operation.production_id.move_lines:
-                if (move.work_order.id == self.mrp_operation.id and
-                        move.location_id.usage == 'internal'):
+                if move.work_order.id == self.mrp_operation.id:
                     if not picking:
                         wc_line = self.mrp_operation.routing_wc_line
                         vals = {'origin': self.mrp_operation.name,
