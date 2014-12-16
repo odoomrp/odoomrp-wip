@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="mrp.mrp_production_product_tree_view" />
             <field name="arch" type="xml">
                 <field name="product_id" position="after">
-                    <field name="lot" domain="[('product_id','=', product_id)]"/>
+                    <field name="lot" groups="stock.group_production_lot" domain="[('product_id','=', product_id)]"/>
                 </field>
             </field>
         </record>
@@ -17,7 +17,7 @@
             <field name="inherit_id" ref="mrp.mrp_production_product_form_view" />
             <field name="arch" type="xml">
                 <field name="product_id" position="after">
-                    <field name="lot" domain="[('product_id','=', product_id)]"/>
+                    <field name="lot" groups="stock.group_production_lot" domain="[('product_id','=', product_id)]"/>
                 </field>
             </field>
         </record>
