@@ -23,8 +23,32 @@ from openerp import models, fields, api
 class WizProductionProductLine(models.TransientModel):
     _inherit = 'wiz.production.product.line'
 
+    def _def_production_id(self):
+        if 'active_model' in self.env.context:
+            if self.env.context['active_model'] == 'mrp.production':
+                return self.env.context.get('active_id')
+            elif self.env.context['active_model'] == (
+                    'mrp.production.workcenter.line'):
+                mpwl_obj = self.env['mrp.production.workcenter.line']
+                active_id = self.env.context.get('active_id', False)
+                if active_id:
+                    mpwl = mpwl_obj.browse(active_id)
+                    return mpwl.production_id.id
+        return False
+
+    def _def_work_order_id(self):
+        if 'active_model' in self.env.context and (
+                self.env.context['active_model'] ==
+                'mrp.production.workcenter.line'):
+            return self.env.context.get('active_id', False)
+        return False
+
     work_order = fields.Many2one('mrp.production.workcenter.line',
-                                 'Work Order')
+                                 'Work Order',
+                                 default=_def_work_order_id)
+    production_id = fields.Many2one(
+        'mrp.production', 'Production Order', select=True,
+        default=_def_production_id)
 
     @api.multi
     def add_product(self):
@@ -36,11 +60,12 @@ class WizProductionProductLine(models.TransientModel):
                                     self.production_id.id),
                                    ('product_id', '=', self.product_id.id),
                                    ('product_qty', '=', self.product_qty),
-                                   ('state', '=', 'draft')])
+                                   ('state', '=', 'draft')], order='id DESC')
         # LF mrp.production.product.line
         mppl = mppl_obj.search([('production_id', '=', self.production_id.id),
                                 ('product_id', '=', self.product_id.id),
-                                ('product_qty', '=', self.product_qty)])
+                                ('product_qty', '=', self.product_qty)],
+                               order='id DESC')
         if move and mppl:
             move[0].work_order = self.work_order.id
             mppl[0].work_order = self.work_order.id
