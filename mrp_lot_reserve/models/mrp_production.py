@@ -37,14 +37,13 @@ class MrpProduction(models.Model):
         @param quantity: Quantity expected
         """
         quant_obj = self.env['stock.quant']
-        available = False
         aval_quant_lst = quant_obj.search([('lot_id', '=', lot_id),
                                            ('location_id', '=', location_id)])
         if aval_quant_lst:
             available_qty = sum([x.qty for x in aval_quant_lst])
             if available_qty >= quantity:
-                available = True
-        return available
+                return True
+        return False
 
     @api.multi
     def action_confirm(self):
