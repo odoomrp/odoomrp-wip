@@ -4,8 +4,9 @@ python:
   - "2.7"
 
 env:
-  - VERSION="8.0" ODOO_REPO="odoo/odoo" EXCLUDE="sale_order_types"
-  - VERSION="8.0" ODOO_REPO="OCA/OCB" EXCLUDE="sale_order_types"
+  - VERSION="8.0" LINT_CHECK="1"
+  - VERSION="8.0" ODOO_REPO="odoo/odoo" OPTIONS="--test-commit" LINT_CHECK="0"
+  - VERSION="8.0" ODOO_REPO="OCA/OCB" OPTIONS="--test-commit" LINT_CHECK="0"
 
 virtualenv:
   system_site_packages: true
@@ -16,10 +17,10 @@ install:
   - git clone https://github.com/OCA/banking ${HOME}/banking -b ${VERSION}
   - git clone https://github.com/OCA/purchase-workflow ${HOME}/purchase-workflow -b ${VERSION}
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
-  - travis_install_nightly ${VERSION}
+  - travis_install_nightly
 
 script:
-  - travis_run_tests ${VERSION}
+  - travis_run_tests
 
 after_success:
   coveralls
