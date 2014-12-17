@@ -27,18 +27,13 @@ class WizProductionProductLine(models.TransientModel):
 
     @api.multi
     def add_product(self):
-        quant_obj = self.env['stock.quant']
         st_move_obj = self.env['stock.move']
+        production_obj = self.env['mrp.production']
         mppl_obj = self.env['mrp.production.product.line']
         if self.lot:
-            available = False
-            aval_quant_lst = quant_obj.search(
-                [('lot_id', '=', self.lot.id),
-                 ('location_id', '=', self.production_id.location_src_id.id)])
-            if aval_quant_lst:
-                available_qty = sum([x.qty for x in aval_quant_lst])
-                if available_qty >= self.product_qty:
-                    available = True
+            available = production_obj._check_lot_quantity(
+                self.lot.id, self.production_id.location_src_id.id,
+                self.product_qty)
             if not available:
                 raise exceptions.Warning(
                     _('No Lot Available'), _('There is no lot %s available for'

@@ -29,28 +29,35 @@ class MrpProduction(models.Model):
                 if product_line.product_id.id == move_line.product_id.id:
                     move_line.restrict_lot_id = product_line.lot.id
 
+    def _check_lot_quantity(self, lot_id, location_id, quantity):
+        """ Returns if there is enough product quantity for a lot in a
+        defined location.
+        @param lot_id: Lot id to check
+        @param location_id: Location id to check
+        @param quantity: Quantity expected
+        """
+        quant_obj = self.env['stock.quant']
+        available = False
+        aval_quant_lst = quant_obj.search([('lot_id', '=', lot_id),
+                                           ('location_id', '=', location_id)])
+        if aval_quant_lst:
+            available_qty = sum([x.qty for x in aval_quant_lst])
+            if available_qty >= quantity:
+                available = True
+        return available
+
     @api.multi
     def action_confirm(self):
-        quant_obj = self.env['stock.quant']
-        available = True
         for line in self.product_lines:
-            if line.lot and available:
-                aval_quant_lst = quant_obj.search(
-                    [('lot_id', '=', line.lot.id),
-                     ('location_id', '=', self.location_src_id.id)])
-                if aval_quant_lst:
-                    quantity = line.product_qty
-                    available_qty = sum([x.qty for x in aval_quant_lst])
-                    if quantity >= available_qty:
-                        available = False
-                        break
-                else:
-                    available = False
-        if not available:
-            raise exceptions.Warning(
-                _('No Lot Available'), _('There is no lot %s available for'
-                                         ' product: %s') % (line.lot.name,
-                                                            line.name))
+            if line.lot:
+                available = self._check_lot_quantity(line.lot.id,
+                                                     self.location_src_id.id,
+                                                     line.product_qty)
+                if not available:
+                    raise exceptions.Warning(
+                        _('No Lot Available'),
+                        _('There is no lot %s available for product: %s') %
+                        (line.lot.name, line.name))
         res = super(MrpProduction, self).action_confirm()
         self._get_lot_in_move_lines(self.product_lines, self.move_lines)
         return res
