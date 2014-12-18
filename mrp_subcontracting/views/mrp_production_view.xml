@@ -1,58 +1,77 @@
 <?xml version="1.0"?>
 <openerp>
-<data>
-    <record id="mrp_production_form_view_inh_subcontracting" model="ir.ui.view">
-        <field name="name">mrp.production.form.view.inh.subcontracting</field>
-        <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
-        <field name="arch" type="xml">
-            <xpath
-                expr="//field[@name='workcenter_lines']/form//field[@name='sequence']"
-                position="after">
-                <field name="external" invisible="1"/>
-            </xpath>
-            <xpath
-                expr="//field[@name='workcenter_lines']/tree//field[@name='workcenter_id']"
-                position="before">
-                <field name="external" />
-            </xpath>
-            <div class="oe_title" position="after">
-                <div class="oe_right oe_button_box" name="buttons_subcontracting">
+    <data>
+
+        <record model="ir.ui.view" id="mrp.mrp_production_buttons">
+            <field name="name">mrp.production.buttons</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <div class="oe_title" position="after">
+                    <div class="oe_right oe_button_box" name="buttons">
+                    </div>
+                </div>
+            </field>
+        </record>
+
+        <record id="mrp_production_form_view_inh_subcontracting"
+            model="ir.ui.view">
+            <field name="name">mrp.production.form.view.inh.subcontracting</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_buttons" />
+            <field name="arch" type="xml">
+                <xpath
+                    expr="//field[@name='workcenter_lines']/form//field[@name='sequence']"
+                    position="after">
+                    <field name="external" invisible="1" />
+                </xpath>
+                <xpath
+                    expr="//field[@name='workcenter_lines']/tree//field[@name='workcenter_id']"
+                    position="before">
+                    <field name="external" />
+                </xpath>
+                <div name="buttons" position="inside">
                     <button class="oe_inline oe_stat_button"
                         type="action" name="%(action_purchases_per_production)d"
                         icon="fa-list">
-                        <field name="created_purchases" widget="statinfo" />
+                        <field name="created_purchases"
+                            widget="statinfo" />
                     </button>
                     <button class="oe_inline oe_stat_button"
                         type="action" name="%(action_outpickings_per_production)d"
                         icon="fa-list">
-                        <field name="created_outpickings" widget="statinfo" />
+                        <field name="created_outpickings"
+                            widget="statinfo" />
                     </button>
                     <button class="oe_inline oe_stat_button"
                         type="action" name="%(action_inpickings_per_production)d"
                         icon="fa-list">
-                        <field name="created_inpickings" widget="statinfo" />
+                        <field name="created_inpickings"
+                            widget="statinfo" />
                     </button>
                 </div>
-            </div>
-        </field>
-    </record>
-    <record id="mrp_production_form_view2_inh_subcontracting" model="ir.ui.view">
-        <field name="name">mrp.production.form.view2.inh.subcontracting</field>
-        <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp_operations_extension.mrp_production_form_view_inh" />
-        <field name="arch" type="xml">
-            <page string="Information" position="after">
-                <page string="Subcontracting" attrs="{'invisible': [('external', '=', False)]}">
-                    <group>
-                        <field name="purchase_order"/>
-                        <field name="out_picking"/>
-                        <field name="procurement_order" />
-                        <field name="in_picking"/>
-                    </group>
+            </field>
+        </record>
+
+        <record id="mrp_production_form_view2_inh_subcontracting"
+            model="ir.ui.view">
+            <field name="name">mrp.production.form.view2.inh.subcontracting</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id"
+                ref="mrp_operations_extension.mrp_production_form_view_inh" />
+            <field name="arch" type="xml">
+                <page string="Information" position="after">
+                    <page string="Subcontracting"
+                        attrs="{'invisible': [('external', '=', False)]}">
+                        <group>
+                            <field name="purchase_order" />
+                            <field name="out_picking" />
+                            <field name="procurement_order" />
+                            <field name="in_picking" />
+                        </group>
+                    </page>
                 </page>
-            </page>
-        </field>
-    </record>
-</data>
+            </field>
+        </record>
+    </data>
 </openerp>
