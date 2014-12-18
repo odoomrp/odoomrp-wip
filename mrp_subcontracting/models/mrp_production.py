@@ -15,6 +15,7 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+
 from openerp import models, fields, api, exceptions, _
 
 
@@ -28,6 +29,7 @@ class MrpProduction(models.Model):
         purchases = purchase_obj.search(cond)
         self.created_purchases = len(purchases)
 
+    @api.one
     def _created_outpickings(self):
         picking_obj = self.env['stock.picking']
         cond = [('mrp_production', '=', self.id)]
@@ -36,6 +38,7 @@ class MrpProduction(models.Model):
                     picking.picking_type_id.code == 'outgoing'])
         self.created_outpickings = cont
 
+    @api.one
     def _created_inpickings(self):
         picking_obj = self.env['stock.picking']
         cond = [('mrp_production', '=', self.id)]
