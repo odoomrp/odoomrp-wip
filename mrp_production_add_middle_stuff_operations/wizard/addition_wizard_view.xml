@@ -12,6 +12,20 @@
                 </field>
             </field>
         </record>
-
+        <record model="ir.ui.view" id="workcenter_line_inh_form_view">
+            <field name="name">Work centre line inh</field>
+            <field name="model">mrp.production.workcenter.line</field>
+            <field name="inherit_id"
+                ref="mrp_operations.mrp_production_workcenter_form_view_inherit" />
+            <field name="arch" type="xml">
+                <button name="button_cancel" position="after">
+                    <button name="%(mrp_production_add_middle_stuff.action_addition)d"
+                            type="action"
+                            states="draft,startworking,pause"
+                            string="Add extra raw material"
+                            class="oe_highlight"/>
+                </button>
+            </field>
+        </record>
     </data>
 </openerp>

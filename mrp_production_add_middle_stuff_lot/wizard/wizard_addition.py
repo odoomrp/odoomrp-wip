@@ -25,6 +25,14 @@ class WizProductionProductLine(models.TransientModel):
 
     lot = fields.Many2one('stock.production.lot', 'Reserved Lot')
 
+    def _prepare_product_addition(self, product, product_qty, production):
+        addition_vals = super(
+            WizProductionProductLine, self)._prepare_product_addition(
+                product, product_qty, production)
+        if self.lot:
+            addition_vals['lot'] = self.lot.id
+        return addition_vals
+
     @api.multi
     def add_product(self):
         production_obj = self.env['mrp.production']
