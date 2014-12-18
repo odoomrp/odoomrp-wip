@@ -27,9 +27,7 @@ class WizProductionProductLine(models.TransientModel):
 
     @api.multi
     def add_product(self):
-        st_move_obj = self.env['stock.move']
         production_obj = self.env['mrp.production']
-        mppl_obj = self.env['mrp.production.product.line']
         if self.lot:
             available = production_obj._check_lot_quantity(
                 self.lot.id, self.production_id.location_src_id.id,
@@ -39,19 +37,4 @@ class WizProductionProductLine(models.TransientModel):
                     _('No Lot Available'), _('There is no lot %s available for'
                                              ' product') % (self.lot.name))
         res = super(WizProductionProductLine, self).add_product()
-        if self.lot:
-            # LF stock.move
-            move = st_move_obj.search(
-                [('raw_material_production_id', '=', self.production_id.id),
-                 ('product_id', '=', self.product_id.id),
-                 ('product_qty', '=', self.product_qty),
-                 ('state', '=', 'draft')], order='id DESC')
-            # LF mrp.production.product.line
-            mppl = mppl_obj.search(
-                [('production_id', '=', self.production_id.id),
-                 ('product_id', '=', self.product_id.id),
-                 ('product_qty', '=', self.product_qty)], order='id DESC')
-            if move and mppl:
-                move[0].restrict_lot_id = self.lot.id
-                mppl[0].lot = self.lot.id
         return res
