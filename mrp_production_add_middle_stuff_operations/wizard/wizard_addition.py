@@ -17,7 +17,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields
 
 
 class WizProductionProductLine(models.TransientModel):
@@ -50,23 +50,10 @@ class WizProductionProductLine(models.TransientModel):
         'mrp.production', 'Production Order', select=True,
         default=_def_production_id)
 
-    @api.multi
-    def add_product(self):
-        res = super(WizProductionProductLine, self).add_product()
-        st_move_obj = self.env['stock.move']
-        mppl_obj = self.env['mrp.production.product.line']
-        # LF stock.move
-        move = st_move_obj.search([('raw_material_production_id', '=',
-                                    self.production_id.id),
-                                   ('product_id', '=', self.product_id.id),
-                                   ('product_qty', '=', self.product_qty),
-                                   ('state', '=', 'draft')], order='id DESC')
-        # LF mrp.production.product.line
-        mppl = mppl_obj.search([('production_id', '=', self.production_id.id),
-                                ('product_id', '=', self.product_id.id),
-                                ('product_qty', '=', self.product_qty)],
-                               order='id DESC')
-        if move and mppl:
-            move[0].work_order = self.work_order.id
-            mppl[0].work_order = self.work_order.id
-        return res
+    def _prepare_product_addition(self, product, product_qty, production):
+        addition_vals = super(
+            WizProductionProductLine, self)._prepare_product_addition(
+                product, product_qty, production)
+        if self.work_order:
+            addition_vals['work_order'] = self.work_order.id
+        return addition_vals
