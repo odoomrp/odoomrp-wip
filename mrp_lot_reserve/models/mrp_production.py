@@ -23,11 +23,14 @@ from openerp import models, fields, api, exceptions, _
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    def _get_lot_in_move_lines(self, product_lines, move_lines):
-        for move_line in move_lines:
-            for product_line in product_lines:
-                if product_line.product_id.id == move_line.product_id.id:
-                    move_line.restrict_lot_id = product_line.lot.id
+    @api.model
+    def _make_production_consume_line(self, line):
+        res = super(MrpProduction, self)._make_production_consume_line(line)
+        if line.lot and res:
+            st_move_obj = self.env['stock.move']
+            move = st_move_obj.browse(res)
+            move.restrict_lot_id = line.lot.id
+        return res
 
     def _check_lot_quantity(self, lot_id, location_id, quantity):
         """ Returns if there is enough product quantity for a lot in a
@@ -58,7 +61,6 @@ class MrpProduction(models.Model):
                         _('There is no lot %s available for product: %s') %
                         (line.lot.name, line.name))
         res = super(MrpProduction, self).action_confirm()
-        self._get_lot_in_move_lines(self.product_lines, self.move_lines)
         return res
 
 
