@@ -38,8 +38,8 @@
     "description": """
     """,
     "data": [
-        "views/sale_view.xml",
         "wizard/sale_forecast_load_view.xml",
+        "views/sale_view.xml",
     ],
     "installable": True,
     "auto_install": False,

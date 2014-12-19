@@ -73,25 +73,6 @@ class ProcurementSaleForecast(models.Model):
             'type': 'ir.actions.act_window',
             }
 
-    @api.multi
-    def load_sales_to_forecast(self):
-        self.ensure_one()
-        load_wiz_obj = self.env['sale.forecast.load']
-        load_wiz_view = self.env.ref('procurement_sale_forecast.sale_forecast_'
-                                     'load_forecast_form_view')
-        load_wiz_vals = {'forecast_id': self.id,
-                         'date_from': self.date_from,
-                         'date_to': self.date_to}
-        wiz_id = load_wiz_obj.create(load_wiz_vals)
-        return {
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'sale.forecast.load',
-            'views': [(load_wiz_view.id, 'form')],
-            'type': 'ir.actions.act_window',
-            'target': 'new',
-            'res_id': wiz_id.id
-            }
 
     @api.multi
     def show_all_forecast_procurements(self):
@@ -162,29 +143,3 @@ class ProcurementSaleForecastLine(models.Model):
                 'type': 'ir.actions.act_window',
                 'target': 'new',
                 }
-
-
-class SaleOrder(models.Model):
-
-    _inherit = 'sale.order'
-
-    @api.multi
-    def load_lines_to_forecast(self):
-        self.ensure_one()
-        load_wiz_obj = self.env['sale.forecast.load']
-        load_wiz_view = self.env.ref('procurement_sale_forecast.sale_forecast_'
-                                     'load_sale_form_view')
-        load_wiz_vals = {'sale_id': self.id,
-                         'date_from': self.date_order,
-                         'date_to': self.date_order,
-                         'partner_id': self.partner_id.id}
-        wiz_id = load_wiz_obj.create(load_wiz_vals)
-        return {
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'sale.forecast.load',
-            'views': [(load_wiz_view.id, 'form')],
-            'type': 'ir.actions.act_window',
-            'target': 'new',
-            'res_id': wiz_id.id
-            }

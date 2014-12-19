@@ -24,11 +24,28 @@ class SaleForecastLoad(models.TransientModel):
 
     _name = 'sale.forecast.load'
 
-    partner_id = fields.Many2one("res.partner", string="Partner")
-    date_from = fields.Date(string="Date from")
-    date_to = fields.Date(string="Date to")
-    sale_id = fields.Many2one("sale.order", "Sale")
-    forecast_id = fields.Many2one("procurement.sale.forecast", "Forecast")
+    @api.one
+    def _get_default_values(self):
+        model = self.env.context.get('active_model', False)
+        record = self.env[model].browse(self.env.context.get('active_id'))
+        if model == 'sale.order':
+            self.date_to = record.date_order
+            self.date_from = record.date_order
+            self.sale_id = record.id
+            self.partner_id = record.partner_id.id
+        elif model == 'procurement.sale.forecast':
+            self.forecast_id = record.id
+            self.date_to = record.date_to
+            self.date_from = record.date_from
+
+    partner_id = fields.Many2one("res.partner", string="Partner",
+                                 default=_get_default_values)
+    date_from = fields.Date(string="Date from", default=_get_default_values)
+    date_to = fields.Date(string="Date to", default=_get_default_values)
+    sale_id = fields.Many2one("sale.order", "Sale",
+                              default=_get_default_values)
+    forecast_id = fields.Many2one("procurement.sale.forecast", "Forecast",
+                                  default=_get_default_values)
     product_categ_id = fields.Many2one("product.category", string="Category")
     product_tmpl_id = fields.Many2one("product.template", string="Template")
     product_id = fields.Many2one("product.product", string="Product")
@@ -40,6 +57,12 @@ class SaleForecastLoad(models.TransientModel):
             self.partner_id = self.sale_id.partner_id.id
             self.date_from = self.sale_id.date_order
             self.date_to = self.sale_id.date_order
+
+    @api.onchange('forecast_id')
+    def forecast_onchange(self):
+        if self.forecast_id:
+            self.date_from = self.forecast_id.date_from
+            self.date_to = self.forecast_id.date_to
 
     @api.multi
     def match_sales_forecast(self, date_lst, sales, factor):
