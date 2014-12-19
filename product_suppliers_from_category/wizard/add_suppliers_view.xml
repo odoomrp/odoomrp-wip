@@ -6,7 +6,7 @@
             <field name="model">add.suppliers</field>
             <field name="arch" type="xml">
                 <form string="form_string">
-                    <group>
+                    <group string="Adds suppliers assigned to the category of the product">
                     <field name="remove_others" />
                     </group>
                     <footer>
