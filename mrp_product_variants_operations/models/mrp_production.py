@@ -35,37 +35,30 @@ class MrpProduction(models.Model):
     def _get_workorder_in_product_lines(self, workcenter_lines, product_lines,
                                         properties=None):
         for p_line in product_lines:
-            for bom_line in self.bom_id.bom_line_ids:
-                if ((bom_line.product_template.id == p_line.product_template.id
-                        or bom_line.product_id.product_tmpl_id.id ==
-                        p_line.product_template.id) and
-                        (not bom_line.product_id or
-                         bom_line.product_id.id == p_line.product_id.id)):
-                    for wc_line in workcenter_lines:
-                        if wc_line.routing_wc_line == bom_line.operation:
-                            p_line.work_order = wc_line
-                            break
-                    continue
-                elif bom_line.type == 'phantom':
-                    bom_obj = self.env['mrp.bom']
-                    if not bom_line.product_id:
-                        bom_id = bom_obj._bom_find(
-                            product_tmpl_id=bom_line.product_template.id,
-                            properties=properties)
-                    else:
-                        bom_id = bom_obj._bom_find(
-                            product_id=bom_line.product_id.id,
-                            properties=properties)
-                    for bom_line2 in bom_obj.browse(bom_id).bom_line_ids:
-                        if ((bom_line2.product_template.id ==
-                                p_line.product_template.id
-                                or bom_line2.product_id.product_tmpl_id.id ==
-                                p_line.product_template.id) and
-                                (not bom_line2.product_id or
-                                 bom_line2.product_id.id ==
-                                 p_line.product_id.id)):
-                            for wc_line in workcenter_lines:
-                                if (wc_line.routing_wc_line.id ==
-                                        bom_line2.operation.id):
-                                    p_line.work_order = wc_line
-                                    break
+            self._set_workorder(self.bom_id, p_line, workcenter_lines,
+                                properties=properties)
+
+    def _set_workorder(self, bom, p_line, workcenter_lines, properties=None):
+        for bom_line in bom.bom_line_ids:
+            if ((bom_line.product_template.id == p_line.product_template.id
+                    or bom_line.product_id.product_tmpl_id.id ==
+                    p_line.product_template.id) and
+                    (not bom_line.product_id or
+                     bom_line.product_id.id == p_line.product_id.id)):
+                for wc_line in workcenter_lines:
+                    if wc_line.routing_wc_line == bom_line.operation:
+                        p_line.work_order = wc_line
+                        break
+                continue
+            elif bom_line.type == 'phantom':
+                bom_obj = self.env['mrp.bom']
+                if not bom_line.product_id:
+                    bom_id = bom_obj._bom_find(
+                        product_tmpl_id=bom_line.product_template.id,
+                        properties=properties)
+                else:
+                    bom_id = bom_obj._bom_find(
+                        product_id=bom_line.product_id.id,
+                        properties=properties)
+                self._set_workorder(bom_obj.browse(bom_id), p_line,
+                                    workcenter_lines, properties=properties)
