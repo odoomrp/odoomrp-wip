@@ -22,11 +22,11 @@
     "version": "1.0",
     "depends": ["base", "product"],
     "author": "OdooMRP team",
-    "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
-    "category": "category",
-    "description": """
-    Link product category suppliers with products
-    """,
+    "contributors": [
+            "Pedro Manuel Baeza Romero <pedro.baeza@serviciosbaeza.com>",
+            "Ana Juaristi Olalde <ajuaristio@gmail.com>",
+            "Mikel Arregi <mikelarregi@avanzosc.es>"],
+    "category": "Product",
     'data': ["wizard/add_suppliers_view.xml",
              "views/product_view.xml"],
     "installable": True,
