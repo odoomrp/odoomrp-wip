@@ -20,7 +20,7 @@
 #
 ##############################################################################
 {
-    "name": "Quality control - Tolerances in quantitative ranges",
+    "name": "Quality control - Tolerances in questions",
     "version": "1.0",
     "author": "OdooMRP team",
     "category": "Quality control",
@@ -30,6 +30,7 @@
     ],
     "data": [
         'views/qc_test_view.xml',
+        'views/qc_inspection_view.xml',
     ],
     "installable": True,
 }

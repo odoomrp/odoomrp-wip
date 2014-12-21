@@ -6,37 +6,67 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-22 15:33+0000\n"
-"PO-Revision-Date: 2014-10-22 17:35+0100\n"
-"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"POT-Creation-Date: 2014-12-21 20:05+0000\n"
+"PO-Revision-Date: 2014-12-21 20:05+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: quality_control_tolerance
-#: field:qc.test.template.line,percen_permissible_tolerance:0
-msgid "% Optimal allowed tolerance"
-msgstr "% Tolerancia óptima permitida"
+#: field:qc.inspection.line,tolerance_percent_above:0
+#: field:qc.test.question,tolerance_percent_above:0
+msgid "% tolerance (above)"
+msgstr "% tolerancia (por encima)"
 
 #. module: quality_control_tolerance
-#: field:qc.test.template.line,percen_variable_tolerance:0
-msgid "% Variable tolerance"
-msgstr "% Tolerancia variable"
+#: field:qc.inspection.line,tolerance_percent_below:0
+#: field:qc.test.question,tolerance_percent_below:0
+msgid "% tolerance (below)"
+msgstr "% tolerancia (por debajo)"
 
 #. module: quality_control_tolerance
-#: view:qc.test.line:quality_control_tolerance.qc_test_line_tree_view_inh_tolerancepercen
-msgid "Test Line"
-msgstr "Línea de test"
+#: code:addons/quality_control_tolerance/models/qc_inspection.py:63
+#, python-format
+msgid "%s (tolerable)"
+msgstr "%s (tolerable)"
 
 #. module: quality_control_tolerance
-#: model:ir.model,name:quality_control_tolerance.model_qc_test_template_line
-msgid "Test Template Line"
-msgstr "Línea de plantilla de test"
+#: selection:qc.test.question.value,tolerance_status:0
+msgid "Not tolerable"
+msgstr "No tolerable"
 
 #. module: quality_control_tolerance
-#: view:qc.test.line:quality_control_tolerance.qc_test_line_tree_view_inh_tolerancepercen
-msgid "red:tolerance_status in ('noadmissible');orange:tolerance_status in ('admissible');blue:tolerance_status in ('tolerable');green:tolerance_status in ('optimal')"
-msgstr "red:tolerance_status in ('noadmissible');orange:tolerance_status in ('admissible');blue:tolerance_status in ('tolerable');green:tolerance_status in ('optimal')"
+#: selection:qc.test.question.value,tolerance_status:0
+msgid "Optimal"
+msgstr "Óptima"
+
+#. module: quality_control_tolerance
+#: field:qc.test.question,same_tolerance:0
+msgid "Same tolerance above/below"
+msgstr "Misma tolerancia por encima/por debajo"
+
+#. module: quality_control_tolerance
+#: selection:qc.test.question.value,tolerance_status:0
+msgid "Tolerable"
+msgstr "Tolerable"
+
+#. module: quality_control_tolerance
+#: field:qc.inspection.line,tolerance_above:0
+#: field:qc.test.question,tolerance_above:0
+msgid "Tolerance (above)"
+msgstr "Tolerancia (por encima)"
+
+#. module: quality_control_tolerance
+#: field:qc.inspection.line,tolerance_below:0
+#: field:qc.test.question,tolerance_below:0
+msgid "Tolerance (below)"
+msgstr "Tolerancia (por debajo)"
+
+#. module: quality_control_tolerance
+#: field:qc.test.question.value,tolerance_status:0
+msgid "Tolerance status"
+msgstr "Estado de tolerancia"
 

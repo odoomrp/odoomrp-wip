@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-22 15:32+0000\n"
-"PO-Revision-Date: 2014-10-22 15:32+0000\n"
+"POT-Creation-Date: 2014-12-21 20:05+0000\n"
+"PO-Revision-Date: 2014-12-21 20:05+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,27 +16,57 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: quality_control_tolerance
-#: field:qc.test.template.line,percen_permissible_tolerance:0
-msgid "% Optimal allowed tolerance"
+#: field:qc.inspection.line,tolerance_percent_above:0
+#: field:qc.test.question,tolerance_percent_above:0
+msgid "% tolerance (above)"
 msgstr ""
 
 #. module: quality_control_tolerance
-#: field:qc.test.template.line,percen_variable_tolerance:0
-msgid "% Variable tolerance"
+#: field:qc.inspection.line,tolerance_percent_below:0
+#: field:qc.test.question,tolerance_percent_below:0
+msgid "% tolerance (below)"
 msgstr ""
 
 #. module: quality_control_tolerance
-#: view:qc.test.line:quality_control_tolerance.qc_test_line_tree_view_inh_tolerancepercen
-msgid "Test Line"
+#: code:addons/quality_control_tolerance/models/qc_inspection.py:63
+#, python-format
+msgid "%s (tolerable)"
 msgstr ""
 
 #. module: quality_control_tolerance
-#: model:ir.model,name:quality_control_tolerance.model_qc_test_template_line
-msgid "Test Template Line"
+#: selection:qc.test.question.value,tolerance_status:0
+msgid "Not tolerable"
 msgstr ""
 
 #. module: quality_control_tolerance
-#: view:qc.test.line:quality_control_tolerance.qc_test_line_tree_view_inh_tolerancepercen
-msgid "red:tolerance_status in ('noadmissible');orange:tolerance_status in ('admissible');blue:tolerance_status in ('tolerable');green:tolerance_status in ('optimal')"
+#: selection:qc.test.question.value,tolerance_status:0
+msgid "Optimal"
+msgstr ""
+
+#. module: quality_control_tolerance
+#: field:qc.test.question,same_tolerance:0
+msgid "Same tolerance above/below"
+msgstr ""
+
+#. module: quality_control_tolerance
+#: selection:qc.test.question.value,tolerance_status:0
+msgid "Tolerable"
+msgstr ""
+
+#. module: quality_control_tolerance
+#: field:qc.inspection.line,tolerance_above:0
+#: field:qc.test.question,tolerance_above:0
+msgid "Tolerance (above)"
+msgstr ""
+
+#. module: quality_control_tolerance
+#: field:qc.inspection.line,tolerance_below:0
+#: field:qc.test.question,tolerance_below:0
+msgid "Tolerance (below)"
+msgstr ""
+
+#. module: quality_control_tolerance
+#: field:qc.test.question.value,tolerance_status:0
+msgid "Tolerance status"
 msgstr ""
 

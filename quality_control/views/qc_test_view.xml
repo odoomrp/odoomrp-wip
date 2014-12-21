@@ -88,17 +88,29 @@
                             </tree>
                         </field>
                     </group>
-                    <group name="quantitative"
-                           colspan="4"
-                           col="6"
-                           attrs="{'invisible': [('type', '!=', 'quantitative')]}">
-                        <field name="min_value"
-                               attrs="{'required': [('type',' =', 'quantitative')]}" />
-                        <field name="max_value"
-                               attrs="{'required': [('type', '=', 'quantitative')]}" />
-                        <field name="uom_id"
-                               attrs="{'required': [('type', '=', 'quantitative')]}" />
-                    </group>
+                    <div name="quantitative"
+                         align="center"
+                         attrs="{'invisible': [('type', '!=', 'quantitative')]}" >
+                        <span style="font-weight: bold; font-size: 18pt"
+                              name="quantitative-interval" >
+                            <field name="min_value"
+                                   class="oe_inline"
+                                   nolabel="1"
+                                   attrs="{'required': [('type',' =', 'quantitative')]}" />
+                            <span> - </span>
+                            <field name="max_value"
+                                   class="oe_inline"
+                                   nolabel="1"
+                                   attrs="{'required': [('type', '=', 'quantitative')]}" />
+                        </span>
+                        <span style="font-weight: bold; font-size: 18pt"
+                              name="quantitative-uom" >
+                            <field name="uom_id"
+                                   class="oe_inline"
+                                   nolabel="1"
+                                   attrs="{'required': [('type', '=', 'quantitative')]}" />
+                        </span>
+                    </div>
                     <field name="notes" />
                 </form>
             </field>

@@ -23,21 +23,30 @@
             <field name="model">qc.test.question</field>
             <field name="inherit_id" ref="quality_control.qc_test_question_form_view" />
             <field name="arch" type="xml">
-                <group name="quantitative" position="after">
-                    <group name="tolerance"
-                           colspan="4"
-                           col="4"
-                           attrs="{'invisible': [('type', '!=', 'quantitative')]}">
-                        <field name="same_tolerance" />
-                        <newline />
-                        <field name="tolerance_below" />
-                        <field name="tolerance_above"
-                               attrs="{'readonly': [('same_tolerance', '=', True)]}"/>
-                        <field name="tolerance_percent_below" />
-                        <field name="tolerance_percent_above"
-                               attrs="{'readonly': [('same_tolerance', '=', True)]}" />
+                <span name="quantitative-interval" position="before">
+                    <label for="same_tolerance" />
+                    <field name="same_tolerance" />
+                    <br/>
+                </span>
+                <div name="quantitative" position="after">
+                    <group>
+                        <group>
+                            <field name="tolerance_percent_below"
+                                   attrs="{'required': [('type',' =', 'quantitative')]}" />
+                            <field name="tolerance_below"
+                                   attrs="{'required': [('type',' =', 'quantitative')]}" />
+                        </group>
+                        <group>
+                            <field name="tolerance_percent_above"
+                                   attrs="{'readonly': [('same_tolerance', '=', True)], 'required': [('type',' =', 'quantitative')]}" />
+                            <field name="tolerance_above"
+                                   attrs="{'readonly': [('same_tolerance', '=', True)], 'required': [('type',' =', 'quantitative')]}"/>
+                        </group>
                     </group>
-                </group>
+                </div>
+                <xpath expr="//field[@name='ql_values']/tree//field[@name='ok']" position="after">
+                    <field name="tolerance_status"/>
+                </xpath>
             </field>
         </record>
 
