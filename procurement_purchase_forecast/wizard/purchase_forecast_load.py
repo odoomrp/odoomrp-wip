@@ -130,7 +130,6 @@ class PurchaseForecastLoad(models.TransientModel):
         date_end = datetime.strptime(forecast.date_to, date_format)
         month_count = ((date_end.year - date_start.year) * 12 + date_end.month
                        - date_start.month)
-        print month_count
         first_date = datetime(date_start.year, date_start.month, 1)
         date_list.append(datetime.strftime(first_date, date_format))
         while month_count > 0:
@@ -179,7 +178,6 @@ class PurchaseForecastLoad(models.TransientModel):
         date_end = datetime.strptime(self.date_to, date_format)
         month_count = ((date_end.year - date_start.year) * 12 + date_end.month
                        - date_start.month + 1)
-        print month_count
         result = self.match_purchases_forecast(purchase_lines, self.factor)
         for date in date_list:
             for partner in result.keys():
