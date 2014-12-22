@@ -28,19 +28,16 @@
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Daniel Campos <danielcampos@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
     ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
     "complexity": "normal",
     "summary": "",
-    "description": """
-This module allows to apply *product_pricelist_rules* extended features to
-sale order lines and gets the best pricelist rule automatically.
-
-**Warning**: This module requires *product_pricelist_rules* that is
-incompatible with *product_visible_discount*
-    """,
     "data": [
+        "views/product_view.xml",
         "views/sale_pricelist_view.xml",
         "views/sale_view.xml",
         "security/ir.model.access.csv",

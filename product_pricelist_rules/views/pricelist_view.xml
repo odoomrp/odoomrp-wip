@@ -33,6 +33,7 @@
                     <field name="discount" />
                     <field name="discount2" />
                     <field name="offer" />
+                    <field name="price_surcharge"/>
                 </field>
                 <field name="base" position="after">
                     <field name="item_formula" />
