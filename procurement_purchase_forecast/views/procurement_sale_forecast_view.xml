@@ -6,8 +6,8 @@
             <field name="model">procurement.sale.forecast</field>
             <field name="inherit_id" ref="procurement_sale_forecast.procurement_sale_forecast_form_view"/>
             <field name="arch" type="xml">
-                <button string="Load Sales" position="after">
-                     <button name="load_purchases_to_forecast" type="object"
+                <button name="%(procurement_sale_forecast.action_sale_forecast_load_view)d" position="after">
+                     <button name="%(action_purchase_forecast_load_view)d" type="action"
                      string="Load purchases" groups="purchase.group_purchase_manager"/>
                 </button>
             </field>

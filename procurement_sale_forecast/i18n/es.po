@@ -46,6 +46,12 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: procurement_sale_forecast
+#: view:procurement.sale.forecast.line:procurement_sale_forecast.procurement_sale_forecast_line_search_view
+#: field:procurement.sale.forecast.line,date:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: procurement_sale_forecast
 #: field:procurement.sale.forecast,date_from:0
 msgid "Date From"
 msgstr "Fecha desde"
@@ -68,6 +74,12 @@ msgstr "Fecha desde"
 #: field:sale.forecast.load,date_to:0
 msgid "Date to"
 msgstr "Fecha hasta"
+
+#. module: procurement_sale_forecast
+#: code:addons/procurement_sale_forecast/models/sale.py:48
+#, python-format
+msgid "Error! Date to must be lower than date from."
+msgstr "¡Error! La fecha inicio debe ser menor que la fecha fin."
 
 #. module: procurement_sale_forecast
 #: field:sale.forecast.load,factor:0
@@ -274,6 +286,11 @@ msgstr "Almacén"
 #: view:sale.forecast.load:procurement_sale_forecast.sale_forecast_load_sale_form_view
 msgid "or"
 msgstr "o"
+
+#. module: procurement_sale_forecast
+#: model:ir.actions.act_window,name:procurement_sale_forecast.action_sale_forecast_load_view
+msgid "sale.forecast.load"
+msgstr "Carga de ventas en prevision"
 
 #. module: procurement_sale_forecast
 #: view:procurement.sale.forecast.line:procurement_sale_forecast.procurement_sale_forecast_line_tree_editable_view

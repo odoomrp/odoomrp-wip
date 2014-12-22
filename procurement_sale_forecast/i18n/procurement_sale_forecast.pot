@@ -46,6 +46,12 @@ msgid "Created on"
 msgstr ""
 
 #. module: procurement_sale_forecast
+#: view:procurement.sale.forecast.line:procurement_sale_forecast.procurement_sale_forecast_line_search_view
+#: field:procurement.sale.forecast.line,date:0
+msgid "Date"
+msgstr ""
+
+#. module: procurement_sale_forecast
 #: field:procurement.sale.forecast,date_from:0
 msgid "Date From"
 msgstr ""
@@ -67,6 +73,12 @@ msgstr ""
 #: field:procurement.sale.forecast.line,date_to:0
 #: field:sale.forecast.load,date_to:0
 msgid "Date to"
+msgstr ""
+
+#. module: procurement_sale_forecast
+#: code:addons/procurement_sale_forecast/models/sale.py:48
+#, python-format
+msgid "Error! Date to must be lower than date from."
 msgstr ""
 
 #. module: procurement_sale_forecast
@@ -273,6 +285,11 @@ msgstr ""
 #: view:sale.forecast.load:procurement_sale_forecast.sale_forecast_load_forecast_form_view
 #: view:sale.forecast.load:procurement_sale_forecast.sale_forecast_load_sale_form_view
 msgid "or"
+msgstr ""
+
+#. module: procurement_sale_forecast
+#: model:ir.actions.act_window,name:procurement_sale_forecast.action_sale_forecast_load_view
+msgid "sale.forecast.load"
 msgstr ""
 
 #. module: procurement_sale_forecast

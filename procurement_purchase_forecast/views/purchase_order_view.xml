@@ -8,8 +8,8 @@
                 <field name="inherit_id" ref="purchase.purchase_order_form"/>
                 <field name="arch" type="xml">
                     <button name="purchase_approve" position="after">
-                        <button name="load_lines_to_forecast" string="Load to forecast"
-                        type="object" groups="purchase.group_purchase_manager"/>
+                        <button name="%(action_purchase_forecast_load_view)d" string="Load to forecast"
+                        type="action" groups="purchase.group_purchase_manager"/>
                     </button>
                 </field>
             </record>

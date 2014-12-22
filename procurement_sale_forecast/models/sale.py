@@ -16,9 +16,8 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
 import openerp.addons.decimal_precision as dp
-from datetime import datetime
 
 
 class ProcurementSaleForecast(models.Model):
@@ -42,6 +41,13 @@ class ProcurementSaleForecast(models.Model):
     procurement_count = fields.Integer(string="Procurement Count",
                                        compute=_get_procurement_count)
 
+    @api.one
+    @api.constrains('date_from', 'date_to')
+    def check_dates(self):
+        if self.date_from >= self.date_to:
+            raise exceptions.Warning(_('Error! Date to must be lower '
+                                       'than date from.'))
+
     @api.multi
     def create_procurements(self):
         procurement_obj = self.env['procurement.order']
@@ -53,7 +59,7 @@ class ProcurementSaleForecast(models.Model):
                         'name': ('MPS: ' + record.name +
                                  ' (' + record.date_from + '.' + record.date_to
                                  + ') ' + record.warehouse_id.name),
-                        'date_planned': datetime.today(),
+                        'date_planned': product_line.date,
                         'product_id': product_line.product_id.id,
                         'product_qty': product_line.qty,
                         'product_uom': product_line.product_id.uom_id.id,
@@ -72,7 +78,6 @@ class ProcurementSaleForecast(models.Model):
             'domain': [('id', 'in', procure_lst)],
             'type': 'ir.actions.act_window',
             }
-
 
     @api.multi
     def show_all_forecast_procurements(self):
@@ -124,13 +129,16 @@ class ProcurementSaleForecastLine(models.Model):
     forecast_id = fields.Many2one('procurement.sale.forecast',
                                   string='Forecast')
     procurement_id = fields.Many2one('procurement.order', string="Procurement")
+    date = fields.Date("Date", required=True)
+
+    _order = 'date asc'
 
     @api.multi
     def request_procurement(self):
         self.ensure_one()
         value_dict = {'product_id': self.product_id.id,
                       'uom_id': self.product_id.uom_id.id,
-                      'date_planned': datetime.today(),
+                      'date_planned': self.date,
                       'qty': self.qty,
                       'warehouse_id': self.forecast_id.warehouse_id.id
                       }
