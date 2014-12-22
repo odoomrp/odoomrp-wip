@@ -41,12 +41,8 @@ class ProductProduct(models.Model):
 
     @api.multi
     def show_pricelists(self):
-        self.with_context(
-            {'search_default_pricelist_type_id': 1}).browse(self.ids)
-        return {
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'product.pricelist.item',
-            'domain': [('product_id', '=', self.id)],
-            'type': 'ir.actions.act_window',
-            }
+        res = super(self.product_tmpl_id.__class__,
+                    self.product_tmpl_id).show_pricelists()
+        if res:
+            res['domain'] = [('product_id', '=', self.id)]
+        return res
