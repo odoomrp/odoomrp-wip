@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="sale_forecast_load_form_view">
+            <field name="name">sale.forecast.load.sale.form</field>
+            <field name="model">sale.forecast.load</field>
+            <field name="arch" type="xml">
+                <form string="Load Sales">
+                    <group colspan="4" col="4">
+                        <field name="partner_id" select="1" colspan="4"
+                        domain="[('customer','=',True)]"
+                        context="{'search_default_customer':1, 'show_address': 1}"/>
+                        <field name="sale_id"/>
+                        <field name="forecast_id" required="1"/>
+                        <field name="date_from" select="1" required="1"/>
+                        <field name="date_to" select="1" required="1"/>
+                        <field name="factor"/>
+                        <newline/>
+                        <field name="product_categ_id" select="1"/>
+                        <field name="product_tmpl_id" select="1"/>
+                        <field name="product_id" select="1" colspan="4"/>
+                    </group>
+                    <footer>
+                        <button name="load_sales" type="object" 
+                        string="Load" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link"
+                        special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_sale_forecast_load_view">
+            <field name="name">sale.forecast.load</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.forecast.load</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="sale_forecast_load_form_view"/>
+        </record>
+    </data>
+</openerp>

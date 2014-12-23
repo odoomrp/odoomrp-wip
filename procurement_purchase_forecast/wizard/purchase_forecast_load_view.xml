@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="purchase_forecast_load_form_view">
+            <field name="name">purchase.forecast.load.form</field>
+            <field name="model">purchase.forecast.load</field>
+            <field name="arch" type="xml">
+                <form string="Load Purchases">
+                    <group colspan="4" col="4">
+                        <field name="partner_id" select="1" colspan="4"
+                        context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}"
+                        domain="[('supplier','=',True)]"/>
+                        <field name="purchase_id"/>
+                        <field name="forecast_id" required="1"/>
+                        <field name="date_from" select="1" required="1"/>
+                        <field name="date_to" select="1" required="1"/>
+                        <field name="factor"/>
+                        <newline/>
+                        <field name="product_categ_id" select="1"/>
+                        <field name="product_tmpl_id" select="1"/>
+                        <field name="product_id" select="1" colspan="4"/>
+                    </group>
+                    <footer>
+                        <button name="load_purchases" type="object" 
+                        string="Load" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link"
+                        special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_purchase_forecast_load_view">
+            <field name="name">purchase.forecast.load</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.forecast.load</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="purchase_forecast_load_form_view"/>
+        </record>
+    </data>
+</openerp>
