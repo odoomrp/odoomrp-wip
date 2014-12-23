@@ -35,8 +35,6 @@
     "category": "MPS",
     "website": "http://www.odoomrp.com",
     "summary": "Sale forecast",
-    "description": """
-    """,
     "data": ["security/ir.model.access.csv",
              "wizard/sale_forecast_load_view.xml",
              "views/sale_view.xml",

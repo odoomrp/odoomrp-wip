@@ -22,5 +22,5 @@ from openerp import models, fields
 class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
-    partner_id = fields.Many2one('res.partner', string="Partner",
+    partner_id = fields.Many2one('res.partner', string="Partner", store=True,
                                  related='group_id.partner_id')
