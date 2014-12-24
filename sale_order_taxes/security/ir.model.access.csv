@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_sale_tax_sale","access_sale_tax_sale","sale_order_taxes.model_sale_order_tax",base.group_sale_salesman,1,1,1,1
+"access_sale_tax_account","access_sale_tax_account","sale_order_taxes.model_sale_order_tax",account.group_account_user,1,1,0,0

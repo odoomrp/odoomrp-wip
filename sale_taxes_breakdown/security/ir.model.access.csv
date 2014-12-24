@@ -1,5 +1,0 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_sale_tax_breakdown_sale","access_sale_tax_breakdown_sale","sale_taxes_breakdown.model_sale_order_tax_breakdown",base.group_sale_salesman,1,1,1,1
-"access_sale_tax_breakdown_account","access_sale_tax_breakdown_account","sale_taxes_breakdown.model_sale_order_tax_breakdown",account.group_account_user,1,1,0,0
-"access_stock_picking_tax_breakdown_user","access_stock_picking_tax_breakdown_user","sale_taxes_breakdown.model_stock_picking_tax_breakdown",base.group_sale_salesman,1,1,1,1
-"access_stock_picking_tax_breakdown_account","access_stock_picking_tax_breakdown_account","sale_taxes_breakdown.model_stock_picking_tax_breakdown",account.group_account_user,1,1,1,1

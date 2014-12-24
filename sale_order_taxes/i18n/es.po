@@ -1,0 +1,78 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_order_taxes
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-24 20:34+0000\n"
+"PO-Revision-Date: 2014-12-24 20:34+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,amount:0
+msgid "Amount"
+msgstr "Importe"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,base:0
+msgid "Base"
+msgstr "Base"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: sale_order_taxes
+#: help:sale.order.tax,sequence:0
+msgid "Gives the sequence order when displaying a list of order tax."
+msgstr "Da el orden de secuencia cuando se muestra la lista de impuestos del pedido"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,order:0
+msgid "Sale Order"
+msgstr "Pedido de venta"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,sequence:0
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,name:0
+msgid "Tax Description"
+msgstr "Descripción impuesto"
+
+#. module: sale_order_taxes
+#: view:sale.order:sale_order_taxes.sale-order_form_view
+#: field:sale.order,taxes:0
+msgid "Taxes"
+msgstr "Impuestos"
+

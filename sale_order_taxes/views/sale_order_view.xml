@@ -7,19 +7,17 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
-                <xpath expr="//form//notebook" position="inside">
-                    <page string="Taxes Breakdown">
-                        <field name="taxes" colspan="4"
-                            nolabel="1" >
+                <notebook position="inside">
+                    <page string="Taxes">
+                        <field name="taxes" nolabel="1" >
                             <tree>
-                                <field name="tax" />
-                                <field name="untaxed_amount" />
-                                <field name="taxation_amount" />
-                                <field name="total_amount" />
+                                <field name="name" />
+                                <field name="base" />
+                                <field name="amount" />
                             </tree>
                         </field>
                     </page>
-                </xpath>
+                </notebook>
             </field>
         </record>
     </data>

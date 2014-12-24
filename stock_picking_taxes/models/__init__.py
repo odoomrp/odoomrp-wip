@@ -16,23 +16,4 @@
 #
 ##############################################################################
 
-{
-    "name": "Sale Taxes Breakdown",
-    "version": "1.0",
-    "depends": [
-        "sale",
-        "stock",
-    ],
-    "author": "OdooMRP team",
-    "category": "Sales Management",
-    "website": "http://www.odoomrp.com",
-    "description": """
-This module breaks down sale taxes in sale.order and stock.picking
-    """,
-    "data": [
-        "security/ir.model.access.csv",
-        "views/sale_order_view.xml",
-        "views/stock_picking_view.xml",
-    ],
-    "installable": True,
-}
+from . import stock_picking
