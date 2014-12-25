@@ -21,6 +21,7 @@
     "version": "1.0",
     "depends": [
         "sale",
+        "account",
     ],
     "author": "OdooMRP team",
     "category": "Sales Management",

@@ -91,7 +91,7 @@ class StockPicking(models.Model):
                     'tax_code_id': tax['tax_code_id'],
                 }
                 key = (val['tax_code_id'], val['base_code_id'])
-                if not key in tax_grouped:
+                if key not in tax_grouped:
                     tax_grouped[key] = val
                 else:
                     tax_grouped[key]['base'] += val['base']

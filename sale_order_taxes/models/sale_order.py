@@ -22,10 +22,11 @@ import openerp.addons.decimal_precision as dp
 
 class SaleOrderTax(models.Model):
     _name = 'sale.order.tax'
+    _table = 'sale_order_tax2'
     _order = 'sequence'
 
-    order = fields.Many2one('sale.order', string='Sale Order',
-                            ondelete='cascade')
+    sale_order = fields.Many2one(comodel_name='sale.order',
+                                 string='Sale Order', ondelete='cascade')
     name = fields.Char(string='Tax Description', required=True)
     base = fields.Float(string='Base', digits=dp.get_precision('Account'))
     amount = fields.Float(string='Amount', digits=dp.get_precision('Account'))
@@ -37,7 +38,8 @@ class SaleOrderTax(models.Model):
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    taxes = fields.One2many('sale.order.tax', 'order', string='Taxes')
+    taxes = fields.One2many(comodel_name='sale.order.tax',
+                            inverse_name='sale_order', string='Taxes')
 
     @api.multi
     def compute(self, order):
@@ -61,7 +63,7 @@ class SaleOrder(models.Model):
                     'tax_code_id': tax['tax_code_id'],
                 }
                 key = (val['tax_code_id'], val['base_code_id'])
-                if not key in tax_grouped:
+                if key not in tax_grouped:
                     tax_grouped[key] = val
                 else:
                     tax_grouped[key]['base'] += val['base']

@@ -21,6 +21,8 @@
     "version": "1.0",
     "depends": [
         "stock",
+        "sale_stock",
+        "account",
     ],
     "author": "OdooMRP team",
     "category": "Warehouse management",
