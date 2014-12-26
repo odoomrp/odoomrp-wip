@@ -21,7 +21,7 @@ class QcTest(models.Model):
         string='Name', required=True, translate=True, select=True)
     test_lines = fields.One2many(
         comodel_name='qc.test.question', inverse_name='test',
-        string='Questions')
+        string='Questions', copy=True)
     object_id = fields.Reference(
         string='Reference object', selection=_links_get,)
     fill_correct_values = fields.Boolean(
@@ -75,7 +75,7 @@ class QcTestQuestion(models.Model):
          ('quantitative', 'Quantitative')], string='Type', required=True)
     ql_values = fields.One2many(
         comodel_name='qc.test.question.value', inverse_name="test_line",
-        string='Qualitative values')
+        string='Qualitative values', copy=True)
     notes = fields.Text(string='Notes')
     min_value = fields.Float(string='Min', digits=(16, 5))
     max_value = fields.Float(string='Max', digits=(15, 5))
