@@ -74,16 +74,19 @@ class SaleOrderLine(models.Model):
             name='', partner_id=False, lang=False, update_tax=True,
             date_order=False, packaging=False, fiscal_position=False,
             flag=False):
+        product_obj = self.env['product.product']
         res = super(SaleOrderLine, self).product_id_change(
             pricelist, product, qty=qty, uom=uom, qty_uos=qty_uos, uos=uos,
             name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
             date_order=date_order, packaging=packaging,
             fiscal_position=fiscal_position, flag=flag)
-        if name and name != res['value']['name']:
-            if 'value' in res and 'name' in res['value']:
-                res['value'].update({'name': (('%s\n--\n%s') %
-                                              (res['value']['name'],
-                                               name)) })
+        if product_obj.browse(product).attribute_value_ids:
+            if name:
+                if 'value' in res and 'name' in res['value']:
+                    if name != res['value']['name']:
+                        res['value'].update({'name': (('%s\n--\n%s') %
+                                                      (res['value']['name'],
+                                                       name))})
         return res
 
     @api.multi
