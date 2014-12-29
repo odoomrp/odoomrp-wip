@@ -24,7 +24,4 @@ class ProductCategory(models.Model):
 
     _inherit = 'product.category'
 
-    suppliers = fields.Many2many(comodel_name='res.partner',
-                                 relation='product_category_partner_rel',
-                                 column1='category',
-                                 column2='partner')
+    suppliers = fields.Many2many('res.partner')

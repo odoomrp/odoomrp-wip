@@ -33,12 +33,11 @@ class AddSuppliers(models.TransientModel):
         prod_obj = self.env[self.env.context['active_model']]
         prod = prod_obj.browse(self.env.context.get('active_ids'))
         if self.remove_others:
-            prod.write({'seller_ids': [[5]]})
-            for supplier in prod.categ_id.suppliers:
+            for supplier in prod.seller_ids:
+                if supplier.name not in prod.categ_id.suppliers:
+                    prod.write({'seller_ids': [(2, supplier.id)]})
+        exist_supp = [x.name for x in prod.seller_ids]
+        for supplier in prod.categ_id.suppliers:
+            if supplier not in exist_supp:
                 new_supps.append((0, 0, {'name': supplier.id}))
-        else:
-            exist_supp = [x.name for x in prod.seller_ids]
-            for supplier in prod.categ_id.suppliers:
-                if supplier not in exist_supp:
-                    new_supps.append((0, 0, {'name': supplier.id}))
         prod.write({'seller_ids': new_supps})
