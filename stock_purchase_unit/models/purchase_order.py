@@ -28,10 +28,8 @@ class PurchaseOrder(models.Model):
         res = super(PurchaseOrder, self)._prepare_order_line_move(
             order, order_line, picking_id, group_id)
         for vals in res:
-            qty = vals['product_uom_qty']
-            if order_line.product_uop:
-                qty *= self.product_id.uop_coeff
             vals.update({'product_uop': (order_line.product_uop.id or
                                          order_line.product_uom.id),
-                         'product_uop_qty': qty})
+                         'product_uop_qty': (order_line.product_uop_qty or
+                                             order_line.product_qty)})
         return res
