@@ -16,14 +16,11 @@
                                 <field name="pack" nolabel="1"
                                     colspan="4" col="4">
                                     <tree string="Pack" editable="top"
-                                        create="0" fonts="bold:processed==False"
-                                        colors="blue:packing_state in ('draft','confirmed');gray:packing_state in ('done','cancel')" >
+                                        create="0">
                                         <field name="product"
                                             readonly="1" />
                                         <field name="qty" />
-                                        <field name="fill" sum="Total Qty"/>
-                                        <field name="processed" invisible="1" />
-                                        <field name="packing_state" invisible="1" />
+                                        <field name="fill" />
                                     </tree>
                                     <form string="Pack">
                                         <group>
@@ -36,12 +33,12 @@
                                 <button
                                     name="create_mo_from_packaging_operation"
                                     string="Create Pack Manufacturing Orders"
-                                    type="object" colspan="2" states="done"/>
+                                    type="object" colspan="2" />
                             </group>
                             <group string='Expected Production'
                                 colspan="4" col="4">
                                 <field name="expected_production"
-                                    nolabel="1" colspan="4" domain="[('state','!=','cancel')]">
+                                    nolabel="1" colspan="4">
                                     <tree>
                                         <field name='name' />
                                         <field name='date_planned' />
@@ -55,12 +52,12 @@
                                         <field name='state' />
                                         <button name="button_confirm"
                                             states="draft" string="Confirm Production"
-                                            class="oe_highlight" icon="gtk-apply"/>
+                                            class="oe_highlight" />
                                         <button
                                             name="%(mrp.act_mrp_product_produce)d"
                                             states="ready,in_production"
                                             string="Produce" type="action"
-                                            class="oe_highlight" icon="gtk-media-play"/>
+                                            class="oe_highlight" />
                                         <button name="action_assign"
                                             states="confirmed,picking_except"
                                             string="Check Availability"
@@ -72,10 +69,10 @@
                                             states="ready" string="Mark as Started" />
                                         <button name="button_cancel"
                                             states="draft,ready,in_production"
-                                            string="Cancel Production" icon="gtk-cancel"/>
+                                            string="Cancel Production" />
                                         <button name="action_cancel"
                                             type="object" states="confirmed"
-                                            string="Cancel Production" icon="gtk-cancel"/>
+                                            string="Cancel Production" />
                                     </tree>
                                 </field>
                             </group>

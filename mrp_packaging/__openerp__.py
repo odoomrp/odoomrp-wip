@@ -1,3 +1,4 @@
+
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -19,24 +20,11 @@
 {
     "name": "Manufacturing order from packaging summary",
     "version": "1.0",
-    "depends": [
-        "base",
-        "mrp_product_variants",
-        "mrp_bom_through_attributes",
-        "mrp_lot_reserve",
-    ],
+    "depends": ["base", "mrp_bom_through_attributes"],
     "author": "OdooMRP team",
-    "contributors": [
-        "Mikel Arregi <mikelarregi@avanzosc.es>",
-        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
-        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-        "Ana Juaristi <ajuaristio@gmail.com>",
-    ],
+    "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Manufacturing",
-    'data': [
-        "data/mrp_packaging_data.xml",
-        "views/mrp_production2production_view.xml",
-    ],
+    'data': ["views/mrp_production2production_view.xml"],
     "installable": True,
     "auto_install": False,
 }
