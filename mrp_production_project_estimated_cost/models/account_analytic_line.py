@@ -28,9 +28,3 @@ class AccountAnalyticLine(models.Model):
     estim_average_cost = fields.Float(
         string='Estimate Average Cost',
         digits=dp.get_precision('Product Price'))
-    last_purchase_cost = fields.Float(
-        string='Last Purchase Cost',
-        digits=dp.get_precision('Product Price'))
-    last_sale_price = fields.Float(
-        string='Last Sale Price',
-        digits=dp.get_precision('Product Price'))
