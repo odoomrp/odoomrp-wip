@@ -69,6 +69,25 @@ class SaleOrderLine(models.Model):
         string='Product attributes', copy=True)
 
     @api.multi
+    def product_id_change(
+            self, pricelist, product, qty=0, uom=False, qty_uos=0, uos=False,
+            name='', partner_id=False, lang=False, update_tax=True,
+            date_order=False, packaging=False, fiscal_position=False,
+            flag=False):
+        product_obj = self.env['product.product']
+        res = super(SaleOrderLine, self).product_id_change(
+            pricelist, product, qty=qty, uom=uom, qty_uos=qty_uos, uos=uos,
+            name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
+            date_order=date_order, packaging=packaging,
+            fiscal_position=fiscal_position, flag=flag)
+        if (product_obj.browse(product).attribute_value_ids and name and
+                'value' in res and 'name' in res['value'] and
+                name != res['value']['name']):
+            res['value'].update({'name': (('%s\n--\n%s') %
+                                          (res['value']['name'], name))})
+        return res
+
+    @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
         self.ensure_one()
