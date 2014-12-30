@@ -26,29 +26,15 @@ class MrpProduction(models.Model):
     analytic_account_id = fields.Many2one(
         "account.analytic.account", string="Analytic Account")
 
+    @api.one
+    @api.onchange('project_id')
+    def onchange_project_id(self):
+        self.analytic_account_id = self.project_id.analytic_account_id
+
     @api.multi
     def action_in_production(self):
         task_obj = self.env['project.task']
-        project_obj = self.env['project.project']
         for record in self:
-            project_id = False
-            if record.project_id:
-                project_id = record.project_id
-            else:
-                project_domain = [('analytic_account_id', '=',
-                                   record.analytic_account_id.id)]
-                projects = project_obj.search(project_domain)
-                if projects:
-                    project_id = projects[0]
-                else:
-                    analytic_account = record.analytic_account_id.id
-                    proj_vals = {
-                        'use_tasks': True,
-                        'analytic_account_id': analytic_account,
-                        'user_id': record.user_id.id,
-                    }
-                    project_id = project_obj.create(proj_vals)
-                record.project_id = project_id.id
             task_domain = [('mrp_production_id', '=', record.id),
                            ('wk_order', '=', False)]
             tasks = task_obj.search(task_domain)
@@ -70,7 +56,7 @@ class MrpProduction(models.Model):
                     'user_id': record.user_id.id,
                     'reviewer_id': record.user_id.id,
                     'name': task_name,
-                    'project_id': project_id.id,
+                    'project_id': record.project_id.id,
                     'description': task_descr
                 }
                 if 'code' in task_values.keys():

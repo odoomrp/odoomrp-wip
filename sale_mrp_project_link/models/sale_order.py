@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class SaleOrder(models.Model):
@@ -25,3 +25,8 @@ class SaleOrder(models.Model):
 
     main_project_id = fields.Many2one('project.project',
                                       string="Main Project")
+
+    @api.one
+    @api.onchange('main_project_id')
+    def onchange_project_id(self):
+        self.project_id = self.main_project_id.analytic_account_id

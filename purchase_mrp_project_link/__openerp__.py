@@ -17,19 +17,19 @@
 ##############################################################################
 
 {
-    "name": "Mrp Purchase Project Link",
+    "name": "Purchase - MRP Project Link",
+    "summary": "Project on purchase order for production",
     "version": "1.0",
-    "depends": ["mrp_project_link",
-                "purchase"],
+    "depends": [
+        "mrp_project_link",
+        "purchase",
+    ],
     "author": "OdooMRP team",
-    "category": "",
-    "description": """
-            This module links purchases with a main project, when a product is
-            defined as "Make to Order".
-    """,
-    'data': ["views/purchase_order_view.xml",
-             "views/project_project_view.xml"],
-    'demo': [],
-    'installable': True,
-    'auto_install': True,
+    "category": "Hidden/Dependency",
+    "data": [
+        "views/purchase_order_view.xml",
+        "views/project_project_view.xml",
+    ],
+    "installable": True,
+    "auto_install": True,
 }

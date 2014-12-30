@@ -18,6 +18,7 @@
 
 {
     "name": "MRP Project Link",
+    "summary": "Project for production",
     "version": "1.0",
     "depends": [
         "mrp_operations_project",
