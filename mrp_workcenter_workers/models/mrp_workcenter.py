@@ -35,7 +35,7 @@ class MrpWorkcenter(models.Model):
     operators = fields.Many2many('res.users', 'mrp_wc_operator_rel',
                                  'workcenter_id', 'operator_id', 'Operators')
     op_number = fields.Integer(
-        string='Number of Operators', compute=_operators_number_avg_cost)
+        string='# Operators', compute=_operators_number_avg_cost)
     op_avg_cost = fields.Float(
         string='Operator average cost', compute=_operators_number_avg_cost,
         digits=dp.get_precision('Product Price'))

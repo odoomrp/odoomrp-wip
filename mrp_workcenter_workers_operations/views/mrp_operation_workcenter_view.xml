@@ -11,7 +11,6 @@
                 <xpath
                     expr="//field[@name='op_wc_lines']/tree//field[@name='time_cycle']"
                     position="after">
-                    <field name="op_number" />
                     <field name="op_avg_cost" />
                 </xpath>
             </field>
