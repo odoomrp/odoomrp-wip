@@ -5,6 +5,5 @@
             <field name="name">Manufacturing Operators</field>
             <field name="category_id" ref="base.module_category_hidden" />
         </record>
-
     </data>
 </openerp>

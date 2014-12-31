@@ -23,6 +23,5 @@ class MrpConfigSettings(models.TransientModel):
     _inherit = 'mrp.config.settings'
 
     group_mrp_workers = fields.Boolean(
-        string='Manage operators ',
-        implied_group='mrp_operations_extension.group_mrp_workers',
+        string='Manage operators ', implied_group='mrp_operations_extension.group_mrp_workers',
         help='')
