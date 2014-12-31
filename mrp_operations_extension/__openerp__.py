@@ -21,6 +21,7 @@
     "version": "1.0",
     "category": "Manufacturing",
     "data": [
+        "security/mrp_operations_extension_security.xml",
         "wizard/mrp_workorder_produce_view.xml",
         "views/mrp_workcenter_view.xml",
         "views/mrp_routing_operation_view.xml",

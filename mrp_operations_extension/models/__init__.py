@@ -22,3 +22,4 @@ from . import mrp_bom
 from . import mrp_workcenter
 from . import mrp_routing_operation
 from . import stock_move
+from . import res_config
