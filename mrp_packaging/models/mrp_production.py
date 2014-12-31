@@ -33,11 +33,15 @@ class MrpProduction(models.Model):
         lines = self.env['mrp.bom.line'].search(
             ['|', ('product_template', '=', self.product_template.id),
              ('product_id', '=', self.product_id.id)])
+        exist_prod = [x.product.id for x in self.pack]
         for line in lines:
-            pack_line = map(
-                lambda x: (0, 0, {'product': x}),
-                line.bom_id.product_tmpl_id.product_variant_ids.ids)
-            pack_lines.extend(pack_line)
+            if line not in exist_prod:
+                packs = filter(
+                    lambda x: x not in exist_prod,
+                    line.bom_id.product_tmpl_id.product_variant_ids.ids)
+                pack_line = map(
+                    lambda x: (0, 0, {'product': x}), packs)
+                pack_lines.extend(pack_line)
         self.write({'pack': pack_lines})
 
     @api.one
@@ -63,7 +67,7 @@ class MrpProduction(models.Model):
             raise exceptions.Warning(
                 _("You can not pack more quantity than you have manufactured"))
         for op in self.pack:
-            res = []
+            linked_raw_products = []
             add_product = []
             if op.processed or op.qty == 0:
                 continue
@@ -97,8 +101,10 @@ class MrpProduction(models.Model):
                         raw_product.uom_id.id,
                         raw_product.uos_id.id,
                         op.qty, workorder)
-                    res.append(value)
+                    linked_raw_products.append(value)
+            prod_line_ids = []
             for line in new_op.product_lines:
+                prod_line_ids.append(line.product_id.id)
                 if self.product_id.product_tmpl_id == line.product_template:
                     if new_op.product_id.track_all or\
                             new_op.product_id.track_production:
@@ -108,12 +114,12 @@ class MrpProduction(models.Model):
                     line.product_id = self.product_id
                     new_op.manual_production_lot = line.lot.name
                     continue
-                for link_product in res:
-                    if link_product['product_id'] == line.product_id.id:
-                        new_op.write({'product_lines': [(1, line.id,
-                                                         link_product)]})
-                    else:
-                        add_product.append(link_product)
+            for link_product in linked_raw_products:
+                if link_product['product_id'] in prod_line_ids:
+                    new_op.write({'product_lines': [(1, line.id,
+                                                     link_product)]})
+                else:
+                    add_product.append(link_product)
             new_op.write({'product_lines': map(lambda x: (0, 0, x),
                                                add_product),
                           'production': self.id,
