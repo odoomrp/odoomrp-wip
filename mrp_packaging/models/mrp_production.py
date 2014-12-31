@@ -41,6 +41,19 @@ class MrpProduction(models.Model):
         self.write({'pack': pack_lines})
 
     @api.one
+    def recalcule_bom_qtys(self, bom_qty):
+        products = dict((x.product_id.id, x.product_qty)
+                        for x in self.bom_id.bom_line_ids)
+        product_ids = products.keys()
+        for line in self.product_lines:
+            if line.product_id.id in product_ids:
+                self.write(
+                    {'product_lines':
+                        [(1, line.id,
+                          {'product_qty':
+                           products[line.product_id.id] * bom_qty})]})
+
+    @api.one
     def create_mo_from_packaging_operation(self):
         if self.move_created_ids:
             raise exceptions.Warning(
@@ -54,8 +67,8 @@ class MrpProduction(models.Model):
             add_product = []
             if op.processed or op.qty == 0:
                 continue
-            final_product_qty = op.fill if op.product.uom_id.id ==\
-                self.product_id.uom_id.id else op.qty
+            equal_uom = op.product.uom_id.id == self.product_id.uom_id.id
+            final_product_qty = equal_uom and op.fill or op.qty
             data = self.product_id_change(op.product.id, final_product_qty)
             if 'product_attributes' in data['value']:
                 product_attributes = map(
@@ -70,6 +83,8 @@ class MrpProduction(models.Model):
                 'name': name})
             new_op = self.create(data['value'])
             new_op.action_compute()
+            if equal_uom:
+                new_op.recalcule_bom_qtys(op.qty)
             workorder =\
                 new_op.workcenter_lines and new_op.workcenter_lines[0].id
             for attr_value in op.product.attribute_value_ids:
