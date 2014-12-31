@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="mrp_workcenter_operators_form_view">
+            <field name="name">mrp.workcenter.operators.form</field>
+            <field name="model">mrp.workcenter</field>
+            <field name="inherit_id" ref="mrp_workcenter_workers.mrp_workcenter_form_view_inh" />
+            <field name="arch" type="xml">
+                <field name="operators" position="before">
+                    <group colspan="4">
+                        <field name="op_number" />
+                        <field name="op_avg_cost" />
+                        <field name="op_avg_cost_manual" />
+                    </group>
+                </field>
+            </field>
+        </record>
+    
+    </data>
+</openerp>

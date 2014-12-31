@@ -34,7 +34,7 @@ class MrpOperationWorkcenter(models.Model):
                               help="Time in hours for the setup.")
     time_stop = fields.Float('Time after prod.',
                              help="Time in hours for the cleaning.")
-    op_number = fields.Integer('Número de Persona', default='0')
+#     op_number = fields.Integer('Número de Persona', default='0')
     default = fields.Boolean('Default')
 
     @api.one
@@ -60,7 +60,7 @@ class MrpRoutingOperation(models.Model):
     workcenters = fields.Many2many(
         'mrp.workcenter', 'mrp_operation_workcenter_rel', 'operation',
         'workcenter', 'Work centers')
-    op_number = fields.Integer('Número de Persona', default='0')
+#     op_number = fields.Integer('Número de Persona', default='0')
     do_production = fields.Boolean(
         string='Move Final Product to Stock')
     picking_type_id = fields.Many2one(
