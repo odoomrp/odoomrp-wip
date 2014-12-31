@@ -23,7 +23,6 @@ from openerp.addons import decimal_precision as dp
 class MrpOperationWorkcenter(models.Model):
     _inherit = 'mrp.operation.workcenter'
 
-    #op_number = fields.Integer(string='')
     op_avg_cost = fields.Float(
         string='Operator Average Cost',
         digits=dp.get_precision('Product Price'))

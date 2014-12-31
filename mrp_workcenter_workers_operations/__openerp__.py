@@ -34,7 +34,6 @@
     ],
     "data": [
         "views/mrp_operation_workcenter_view.xml",
-        #"views/mrp_workcenter_view.xml",
     ],
     "installable": True,
     "auto_install": True,
