@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -46,7 +45,7 @@ class MrpProduction(models.Model):
         products = dict((x.product_id.id, x.product_qty)
                         for x in self.bom_id.bom_line_ids)
         product_ids = products.keys()
-        for line in new_op.product_lines:
+        for line in self.product_lines:
             if line.product_id.id in product_ids:
                 self.write(
                     {'product_lines':
