@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -18,16 +17,23 @@
 ##############################################################################
 
 {
-    'name': 'MRP Workcenter Workers',
-    'version': "1.0",
-    'category': "Generic Modules",
-    'description': """
-    This modules links Workcenters and workers.
-    """,
-    'author': 'OdooMRP team',
-    'contributors': ["Daniel Campos <danielcampos@avanzosc.es>"],
-    'website': "http://www.odoomrp.com",
-    'depends': ["mrp"],
-    'data': ["views/mrp_workcenter_view.xml"],
-    'installable': True,
+    "name": "MRP Workcenter Workers",
+    "summary": "Operators on workcenters",
+    "version": "1.0",
+    "category": "Manufacturing",
+    "author": "OdooMRP team",
+    "website": "http://www.odoomrp.com",
+    "contributors": [
+        "Daniel Campos <danielcampos@avanzosc.es>",
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
+    ],
+    "depends": [
+        "mrp",
+    ],
+    "data": [
+        "views/mrp_workcenter_view.xml",
+    ],
+    "installable": True,
 }

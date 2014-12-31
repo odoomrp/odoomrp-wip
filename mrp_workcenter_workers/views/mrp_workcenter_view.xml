@@ -8,6 +8,11 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[@string='General Information']" position="after">
                     <page string="Operators">
+                        <group colspan="4">
+                            <field name="op_number" />
+                            <field name="op_avg_cost" />
+                            <field name="op_avg_cost_manual" />
+                        </group>
                         <field name="operators" />
                     </page>
                 </xpath>

@@ -17,17 +17,21 @@
 ##############################################################################
 
 from openerp import models, fields, api
+from openerp.addons import decimal_precision as dp
 
 
 class MrpOperationWorkcenter(models.Model):
     _inherit = 'mrp.operation.workcenter'
 
-    op_number = fields.Integer(string='')
-    op_avg_cost = fields.Float()
+    #op_number = fields.Integer(string='')
+    op_avg_cost = fields.Float(
+        string='Operator Average Cost',
+        digits=dp.get_precision('Product Price'))
 
     @api.one
     @api.onchange('workcenter')
     def onchange_workcenter(self):
+        super(MrpOperationWorkcenter, self).onchange_workcenter()
         if self.workcenter:
             self.op_number = self.workcenter.op_number
             self.op_avg_cost = self.workcenter.op_avg_cost

@@ -23,7 +23,8 @@
                     <newline/>
                 </field>
                 <field name="workcenter_id" position="after">
-                    <field name="op_wc_lines" colspan="4">
+                    <label for="op_wc_lines" colspan="4" />
+                    <field name="op_wc_lines" colspan="4" nolabel="1">
                         <tree editable="bottom">
                             <field name="workcenter"/>
                             <field name="time_efficiency" />
@@ -31,7 +32,7 @@
                             <field name="time_start" widget="float_time" />
                             <field name="time_stop" widget="float_time" />
                             <field name="time_cycle" widget="float_time"/>
-                            <!-- <field name="op_number"/> -->
+                            <field name="op_number"/>
                             <field name="default"/>
                         </tree>
                         <form string="Workcenter Info Lines">
@@ -42,7 +43,7 @@
                                 <field name="time_cycle" widget="float_time"/>
                                 <field name="time_start" widget="float_time" />
                                 <field name="time_stop" widget="float_time" />
-                                <!-- <field name="op_number"/> -->
+                                <field name="op_number"/>
                                 <field name="default"/>
                             </group>
                         </form>

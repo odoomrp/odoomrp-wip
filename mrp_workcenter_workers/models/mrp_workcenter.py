@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -17,11 +16,29 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
+from openerp.addons import decimal_precision as dp
 
 
 class MrpWorkcenter(models.Model):
     _inherit = 'mrp.workcenter'
 
+    @api.one
+    @api.depends('operators')
+    def _operators_number_avg_cost(self):
+        self.op_number = len(self.operators)
+        op_avg_cost = 0.0
+        for operator in self.operators:
+            op_avg_cost += operator.employee_ids[0].product_id.standard_price
+        self.op_avg_cost = op_avg_cost
+
     operators = fields.Many2many('res.users', 'mrp_wc_operator_rel',
                                  'workcenter_id', 'operator_id', 'Operators')
+    op_number = fields.Integer(
+        string='Number of Operators', compute=_operators_number_avg_cost)
+    op_avg_cost = fields.Float(
+        string='Operator average cost', compute=_operators_number_avg_cost,
+        digits=dp.get_precision('Product Price'))
+    op_avg_cost_manual = fields.Float(
+        string='Operator average cost (manual)',
+        digits=dp.get_precision('Product Price'))

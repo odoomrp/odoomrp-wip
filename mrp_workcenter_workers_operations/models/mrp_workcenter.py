@@ -35,9 +35,9 @@ class MrpWorkcenter(models.Model):
     op_number = fields.Integer(string='Number of Operators',
                                compute=_operators_number_avg_cost)
     op_avg_cost = fields.Float(
-        string='Operator average cost',
+        string='Operator Average Cost',
         digits=dp.get_precision('Product Price'),
         compute=_operators_number_avg_cost)
     op_avg_cost_manual = fields.Float(
-        string='Operator average cost (manual)',
+        string='Operator Average Cost (manual)',
         digits=dp.get_precision('Product Price'))
