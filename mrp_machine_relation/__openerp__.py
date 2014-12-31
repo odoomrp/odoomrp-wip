@@ -18,18 +18,21 @@
 ##############################################################################
 
 {
-    'name': 'MRP Machine Relation',
-    'version': "1.0",
+    "name": "MRP Machine Relation",
+    "version": "1.0",
     "category": "Manufacturing",
-    'description': """
+    "description": """
     This modules links mrp.workcenters and machines. Also adds the machine
     users to the workcenter operators.
     """,
-    'author': 'OdooMRP team',
-    'contributors': ["Daniel Campos <danielcampos@avanzosc.es>"],
-    'website': "http://www.odoomrp.com",
-    'depends': ["mrp_workcenter_workers", "machine_manager"],
-    'data': ["views/mrp_workcenter_view.xml"],
-    'installable': True,
-    'auto_install': True,
+    "author": "OdooMRP team",
+    "contributors": ["Daniel Campos <danielcampos@avanzosc.es>"],
+    "website": "http://www.odoomrp.com",
+    "depends": [
+        "mrp_operations_extension",
+        "machine_manager",
+    ],
+    "data": ["views/mrp_workcenter_view.xml"],
+    "installable": True,
+    "auto_install": True,
 }

@@ -11,7 +11,6 @@
                         <group colspan="4">
                             <field name="op_number" />
                             <field name="op_avg_cost" />
-                            <field name="op_avg_cost_manual" />
                         </group>
                         <field name="operators" />
                     </page>

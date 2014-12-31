@@ -17,6 +17,7 @@
 ##############################################################################
 
 from openerp import models, fields, api
+from openerp.addons import decimal_precision as dp
 
 
 class MrpOperationWorkcenter(models.Model):
@@ -35,6 +36,9 @@ class MrpOperationWorkcenter(models.Model):
     time_stop = fields.Float('Time after prod.',
                              help="Time in hours for the cleaning.")
     op_number = fields.Integer('# Operators', default='0')
+    op_avg_cost = fields.Float(
+        string='Operator Average Cost',
+        digits=dp.get_precision('Product Price'))
     default = fields.Boolean('Default')
 
     @api.one
@@ -46,6 +50,8 @@ class MrpOperationWorkcenter(models.Model):
             self.time_cycle = self.workcenter.time_cycle
             self.time_start = self.workcenter.time_start
             self.time_stop = self.workcenter.time_stop
+            self.op_number = self.workcenter.op_number
+            self.op_avg_cost = self.workcenter.op_avg_cost
             self.default = False
 
 

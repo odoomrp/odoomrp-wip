@@ -35,5 +35,5 @@
     "data": [
         "views/mrp_workcenter_view.xml",
     ],
-    "installable": True,
+    "installable": False,
 }

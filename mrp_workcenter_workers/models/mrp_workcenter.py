@@ -30,15 +30,12 @@ class MrpWorkcenter(models.Model):
         op_avg_cost = 0.0
         for operator in self.operators:
             op_avg_cost += operator.employee_ids[0].product_id.standard_price
-        self.op_avg_cost = op_avg_cost
+        self.op_avg_cost = op_avg_cost / (self.op_number or 1)
 
     operators = fields.Many2many('res.users', 'mrp_wc_operator_rel',
                                  'workcenter_id', 'operator_id', 'Operators')
     op_number = fields.Integer(
         string='# Operators', compute=_operators_number_avg_cost)
     op_avg_cost = fields.Float(
-        string='Operator average cost', compute=_operators_number_avg_cost,
-        digits=dp.get_precision('Product Price'))
-    op_avg_cost_manual = fields.Float(
-        string='Operator average cost (manual)',
+        string='Operator average cost',
         digits=dp.get_precision('Product Price'))

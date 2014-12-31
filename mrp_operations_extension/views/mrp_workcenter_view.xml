@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-
         <record id="mrp_workcenter_form_view_inh" model="ir.ui.view">
-            <field name="name">mrp.workcenter.tree.inh</field>
+            <field name="name">mrp.workcenter.form.inh</field>
             <field name="model">mrp.workcenter</field>
             <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
             <field name="arch" type="xml">
@@ -14,6 +13,13 @@
                     <field name="post_op_product"/>
                 </field>
                 <xpath expr="//page[@string='General Information']" position="after">
+                    <page string="Operators">
+                        <group colspan="4">
+                            <field name="op_number" />
+                            <field name="op_avg_cost" />
+                        </group>
+                        <field name="operators" />
+                    </page>
                     <page string="Routing Operations">
                         <field name="rt_operations" nolabel="1"/>
                     </page>
