@@ -17,47 +17,36 @@ msgstr ""
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
-msgid "No"
+msgid "Don't create them automatically"
 msgstr ""
 
 #. module: product_variants_no_automatic_creation
 #: field:product.category,no_create_variants:0
+msgid "Don't create variants automatically"
+msgstr ""
+
+#. module: product_variants_no_automatic_creation
 #: field:product.template,no_create_variants:0
-msgid "No automatic variants"
-msgstr ""
-
-#. module: product_variants_no_automatic_creation
-#: model:ir.model,name:product_variants_no_automatic_creation.model_product_product
-msgid "Product"
-msgstr ""
-
-#. module: product_variants_no_automatic_creation
-#: model:ir.model,name:product_variants_no_automatic_creation.model_product_category
-msgid "Product Category"
-msgstr ""
-
-#. module: product_variants_no_automatic_creation
-#: model:ir.model,name:product_variants_no_automatic_creation.model_product_template
-msgid "Product Template"
+msgid "Variant creation"
 msgstr ""
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
-msgid "Take the category value"
+msgid "Use the category value"
 msgstr ""
 
 #. module: product_variants_no_automatic_creation
 #: help:product.category,no_create_variants:0
-msgid "This check disables the automatic creation of product variants."
+msgid "This check disables the automatic creation of product variants for all the products of this category."
 msgstr ""
 
 #. module: product_variants_no_automatic_creation
 #: help:product.template,no_create_variants:0
-msgid "This selection disables the automatic creation of product variants. If 'yes' it will not create the variants, if 'no' variants will be automatically generated and if empty it will check in the category."
+msgid "This selection defines if variants for all attribute combinations are going to be created automatically at saving time."
 msgstr ""
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
-msgid "Yes"
+msgid "Create them automatically"
 msgstr ""
 

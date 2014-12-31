@@ -17,47 +17,35 @@ msgstr ""
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
-msgid "No"
-msgstr "No"
+msgid "Don't create them automatically"
+msgstr "No crearlas automáticamente"
 
 #. module: product_variants_no_automatic_creation
 #: field:product.category,no_create_variants:0
+msgid "Don't create variants automatically"
+msgstr "No crear variantes automáticamente"
+
 #: field:product.template,no_create_variants:0
-msgid "No automatic variants"
-msgstr "No automatic variants"
-
-#. module: product_variants_no_automatic_creation
-#: model:ir.model,name:product_variants_no_automatic_creation.model_product_product
-msgid "Product"
-msgstr "Producto"
-
-#. module: product_variants_no_automatic_creation
-#: model:ir.model,name:product_variants_no_automatic_creation.model_product_category
-msgid "Product Category"
-msgstr "Categoría de producto"
-
-#. module: product_variants_no_automatic_creation
-#: model:ir.model,name:product_variants_no_automatic_creation.model_product_template
-msgid "Product Template"
-msgstr "Plantilla de producto"
+msgid "Variant creation"
+msgstr "Creación de variantes"
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
-msgid "Take the category value"
-msgstr "Take the category value"
+msgid "User the category value"
+msgstr "Usar el valor de la categoría"
 
 #. module: product_variants_no_automatic_creation
 #: help:product.category,no_create_variants:0
-msgid "This check disables the automatic creation of product variants."
-msgstr "This check disables the automatic creation of product variants."
+msgid "This check disables the automatic creation of product variants for all the products of this category."
+msgstr "Esta casilla deshabilita la creación automática de las variantes de producto para todos los productos de esta categoría."
 
 #. module: product_variants_no_automatic_creation
 #: help:product.template,no_create_variants:0
-msgid "This selection disables the automatic creation of product variants. If 'yes' it will not create the variants, if 'no' variants will be automatically generated and if empty it will check in the category."
-msgstr "This selection disables the automatic creation of product variants. If 'yes' it will not create the variants, if 'no' variants will be automatically generated and if empty it will check in the category."
+msgid "This selection defines if variants for all attribute combinations are going to be created automatically at saving time."
+msgstr "Esta selección define si se crearán automáticamente las variantes para todas las combincaciones de attributos a la hora de guardar."
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
-msgid "Yes"
-msgstr "Si"
+msgid "Create them automatically"
+msgstr "Crearlas automáticamente"
 

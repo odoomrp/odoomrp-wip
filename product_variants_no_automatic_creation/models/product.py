@@ -22,22 +22,23 @@ from openerp import models, fields, api
 class ProductCategory(models.Model):
     _inherit = 'product.category'
 
-    no_create_variants = fields.Boolean(string='No automatic variants',
-                                        help='This check disables the'
-                                        ' automatic creation of product'
-                                        ' variants.')
+    no_create_variants = fields.Boolean(
+        string="Don't create variants automatically",
+        help='This check disables the automatic creation of product variants '
+             'for all the products of this category.', default=True)
 
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     no_create_variants = fields.Selection(
-        [('yes', 'Yes'), ('no', 'No'), ('empty', 'Take the category value')],
-        string='No automatic variants',
-        help="This selection disables the automatic creation of product"
-        " variants. If 'yes' it will not create the variants, if 'no'"
-        " variants will be automatically generated and if empty it will"
-        " check in the category.", required=True, default='no')
+        [('yes', 'Create them automatically'),
+         ('no', "Don't create them automatically"),
+         ('empty', 'Use the category value')],
+        string='Variant creation', required=True, default='empty',
+        help="This selection defines if variants for all attribute "
+             "combinations are going to be created automatically at saving "
+             "time.")
 
     def _get_product_attributes_dict(self):
         product_attributes = []
