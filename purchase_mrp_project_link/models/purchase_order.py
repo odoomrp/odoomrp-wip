@@ -16,11 +16,16 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class PurchaseOrder(models.Model):
-
     _inherit = 'purchase.order'
 
     main_project_id = fields.Many2one('project.project', string="Main Project")
+
+    @api.one
+    @api.onchange('main_project_id')
+    def onchange_project_id(self):
+        for line in self.order_line:
+            line.account_analytic_id = self.main_project_id.analytic_account_id

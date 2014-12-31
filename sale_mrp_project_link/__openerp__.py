@@ -17,19 +17,20 @@
 ##############################################################################
 
 {
-    "name": "Sale Mrp Project Link",
+    "name": "Sale - MRP Project Link",
+    "summary": "Project on sale order for production",
     "version": "1.0",
-    "depends": ["mrp_project_link",
-                "sale"],
+    "depends": [
+        "mrp_project_link",
+        "sale",
+    ],
     "author": "OdooMRP team",
-    "category": "",
-    "description": """
-            This module links sales, with a main project, when a product is
-            defined as "Make to Order".
-    """,
-    'data': ["views/sale_order_view.xml",
-             "views/project_project_view.xml"],
-    'demo': [],
-    'installable': True,
-    'auto_install': True,
+    "website": "http://www.odoomrp.com",
+    "category": "Hidden/Dependency",
+    "data": [
+        "views/sale_order_view.xml",
+        "views/project_project_view.xml",
+    ],
+    "installable": True,
+    "auto_install": True,
 }

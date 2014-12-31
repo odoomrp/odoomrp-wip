@@ -4,10 +4,27 @@
         <record model="ir.ui.view" id="purchase_order_main_project_form_view">
             <field name="name">purchase.order.main.project.form</field>
             <field name="model">purchase.order</field>
-            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
             <field name="arch" type="xml">
                 <field name="journal_id" position="after">
-                    <field name="main_project_id"/>
+                    <field name="main_project_id" />
+                </field>
+                <xpath
+                    expr="//field[@name='order_line']//field[@name='account_analytic_id']"
+                    position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view"
+            id="purchase_order_line_analytic_disabled_form_view">
+            <field name="name">purchase.order.line.analytic.disabled.form</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_order_line_form" />
+            <field name="arch" type="xml">
+                <field name="account_analytic_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
                 </field>
             </field>
         </record>
@@ -22,7 +39,8 @@
                 'active_test': False,
                 }
             </field>
-            <field name="domain">[('main_project_id', '=', active_id)]</field>
+            <field name="domain">[('main_project_id', '=', active_id)]
+            </field>
         </record>
     </data>
 </openerp>

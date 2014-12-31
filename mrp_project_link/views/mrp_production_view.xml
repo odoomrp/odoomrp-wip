@@ -1,19 +1,22 @@
 <openerp>
     <data>
         <record model="ir.ui.view" id="mrp_production_project_form_view">
-             <field name="name">mrp.production.project.inh.form</field>
-             <field name="model">mrp.production</field>
-             <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
-             <field name="arch" type="xml">
-                <xpath expr="//field[@name='location_src_id']/.." position="after">
+            <field name="name">mrp.production.project.inh.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_src_id']/.."
+                    position="after">
                     <group>
-                        <field name="analytic_account_id" required="1"/>
-                        <field name="project_id"/>
+                        <field name="analytic_account_id"
+                            invisible="1" />
+                        <field name="project_id" required="1" />
                     </group>
                 </xpath>
-             </field>
-         </record>
-    <record id="act_project_2_production_all" model="ir.actions.act_window">
+            </field>
+        </record>
+
+        <record id="act_project_2_production_all" model="ir.actions.act_window">
             <field name="name">Manufacturing Orders</field>
             <field name="res_model">mrp.production</field>
             <field name="view_mode">tree,form</field>
@@ -24,6 +27,6 @@
                 }
             </field>
             <field name="domain">[('project_id', '=', active_id)]</field>
-    </record>
+        </record>
     </data>
 </openerp>
