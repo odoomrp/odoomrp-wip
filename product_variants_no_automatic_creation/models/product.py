@@ -32,8 +32,8 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     no_create_variants = fields.Selection(
-        [('yes', 'Create them automatically'),
-         ('no', "Don't create them automatically"),
+        [('yes', "Don't create them automatically"),
+         ('no', "Create them automatically"),
          ('empty', 'Use the category value')],
         string='Variant creation', required=True, default='empty',
         help="This selection defines if variants for all attribute "
