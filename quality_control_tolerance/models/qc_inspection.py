@@ -17,6 +17,8 @@ class QcInspection(models.Model):
         res['tolerance_above'] = line.tolerance_above
         res['tolerance_percent_below'] = line.tolerance_percent_below
         res['tolerance_percent_above'] = line.tolerance_percent_above
+        res['min_value_below'] = line.min_value_below
+        res['max_value_above'] = line.max_value_above
         return res
 
 
@@ -53,7 +55,8 @@ class QcInspectionLine(models.Model):
     @api.one
     @api.depends('possible_ql_values', 'min_value', 'max_value', 'test_uom_id',
                  'question_type', 'tolerance_below', 'tolerance_above',
-                 'tolerance_percent_below', 'tolerance_percent_above')
+                 'tolerance_percent_below', 'tolerance_percent_above',
+                 'min_value_below', 'max_value_above')
     def get_valid_values(self):
         if self.question_type == 'qualitative':
             super(QcInspectionLine, self).get_valid_values()
@@ -70,6 +73,13 @@ class QcInspectionLine(models.Model):
             if self.env.ref("product.group_uom") in self.env.user.groups_id:
                 self.valid_values += " %s" % self.test_uom_id.name
 
+    @api.one
+    @api.depends('min_value', 'max_value', 'tolerance_below',
+                 'tolerance_above')
+    def _min_max_values_tolerance(self):
+        self.min_value_below = self.min_value - self.tolerance_below
+        self.max_value_above = self.max_value + self.tolerance_above
+
     tolerance_status = fields.Selection(
         [('optimal', 'Optimal'),
          ('tolerable', 'Tolerable'),
@@ -81,3 +91,7 @@ class QcInspectionLine(models.Model):
                                            digits=(3, 2))
     tolerance_percent_above = fields.Float(string='% tolerance (above)',
                                            digits=(3, 2))
+    min_value_below = fields.Float(
+        string='Min (tolerance applied)', compute='_min_max_values_tolerance')
+    max_value_above = fields.Float(
+        string='Max (tolerance applied)', compute='_min_max_values_tolerance')
