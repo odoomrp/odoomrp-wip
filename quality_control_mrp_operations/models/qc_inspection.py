@@ -15,5 +15,12 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from . import mrp
-from . import qc_test
+
+from openerp import models, fields
+
+
+class QcInspection(models.Model):
+    _inherit = 'qc.inspection'
+
+    workcenter_line_id = fields.Many2one(
+        'mrp.production.workcenter.line', string='Operation', index=True)

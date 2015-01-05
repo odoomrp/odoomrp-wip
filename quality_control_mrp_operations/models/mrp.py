@@ -15,6 +15,7 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+
 from openerp import models, fields, api, _
 from openerp.exceptions import except_orm
 
@@ -24,8 +25,6 @@ class MrpRoutingOperation(models.Model):
 
     required_test = fields.Boolean(string='Required test')
     qtemplate_id = fields.Many2one('qc.test', string='Test')
-    analytic_journal_id = fields.Many2one('account.analytic.journal',
-                                          string='Analytic journal')
 
     @api.model
     def create(self, data):
@@ -65,12 +64,17 @@ class MrpRoutingOperation(models.Model):
 class MrpProductionWorkcenterLine(models.Model):
     _inherit = 'mrp.production.workcenter.line'
 
+    @api.one
+    @api.onchange('test_ids')
+    def _count_tests(self):
+        self.ope_test = len(self.test_ids)
+
     required_test = fields.Boolean(string='Required Test')
     qtemplate_id = fields.Many2one('qc.test', string='Test')
     test_ids = fields.One2many('qc.inspection', 'workcenter_line_id',
                                string='Quality Tests')
-    analytic_journal_id = fields.Many2one('account.analytic.journal',
-                                          string='Analytic Journal')
+    ope_tests = fields.Integer(string="Created inspections",
+                               compute='_count_tests')
 
     @api.model
     def create(self, data):
@@ -101,9 +105,6 @@ class MrpProductionWorkcenterLine(models.Model):
                 if work.operation.qtemplate_id:
                     data.update({'qtemplate_id':
                                  work.operation.qtemplate_id.id})
-                if work.operation.analytic_journal_id:
-                    data.update({'analytic_journal_id':
-                                 work.operation.analytic_journal_id.id})
         return super(MrpProductionWorkcenterLine, self).create(data)
 
     @api.one
@@ -128,10 +129,11 @@ class MrpProductionWorkcenterLine(models.Model):
     @api.model
     def create_quality_test(self):
         test_obj = self.env['qc.inspection']
-        vals = {'workcenter_line_id': self.id,
-                'production_id': self.production_id.id,
-                'test': self.qtemplate_id.id,
-                }
+        vals = {
+            'workcenter_line_id': self.id,
+            'production_id': self.production_id.id,
+            'test': self.qtemplate_id.id,
+        }
         if self.qtemplate_id.object_id:
             vals.update({'object_id': self.qtemplate_id.object_id.id})
         test = test_obj.create(vals)

@@ -15,11 +15,26 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import models, fields
 
-
-class QcTest(models.Model):
-    _inherit = 'qc.inspection'
-
-    workcenter_line_id = fields.Many2one(
-        'mrp.production.workcenter.line', string='Operation', index=True)
+{
+    "name": "Quality Control - MRP operations",
+    "version": "1.0",
+    "category": "Quality control",
+    "author": "OdooMRP team",
+    "website": "http://www.odoomrp.com",
+    "contributors": [
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>"
+    ],
+    "depends": [
+        "mrp_operations_extension",
+        "quality_control",
+    ],
+    "data": [
+        "views/mrp_routing_operation_view.xml",
+        "views/mrp_production_workcenter_line_view.xml",
+    ],
+    "installable": True,
+    "auto_install": False,
+}
