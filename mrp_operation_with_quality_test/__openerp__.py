@@ -24,6 +24,7 @@
     "website": "http://www.odoomrp.com",
     "depends": [
         'mrp',
+        'mrp_operations',
         'mrp_operations_extension',
         'quality_control',
         'account',
