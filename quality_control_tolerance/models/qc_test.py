@@ -15,6 +15,17 @@ class QcTestQuestion(models.Model):
     tolerance_percent_above = fields.Float(string='% tolerance (above)',
                                            digits=(3, 2))
     same_tolerance = fields.Boolean('Same tolerance above/below', default=True)
+    min_value_below = fields.Float(
+        string='Min (tolerance applied)', compute='_min_max_values_tolerance')
+    max_value_above = fields.Float(
+        string='Max (tolerance applied)', compute='_min_max_values_tolerance')
+
+    @api.one
+    @api.depends('min_value', 'max_value', 'tolerance_below',
+                 'tolerance_above')
+    def _min_max_values_tolerance(self):
+        self.min_value_below = self.min_value - self.tolerance_below
+        self.max_value_above = self.max_value + self.tolerance_above
 
     @api.one
     @api.onchange('min_value', 'max_value')

@@ -55,6 +55,18 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="qc_inspection_line_form_stock_view">
+            <field name="name">qc.inspection.line.form.stock</field>
+            <field name="model">qc.inspection.line</field>
+            <field name="inherit_id" ref="quality_control.qc_inspection_line_form_view"/>
+            <field name="arch" type="xml">
+                <field name="product" position="after">
+                    <field name="picking" />
+                    <field name="lot" />
+                </field>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="qc_inspection_line_search_stock_view">
             <field name="name">qc.inspection.line.search.stock</field>
             <field name="model">qc.inspection.line</field>
