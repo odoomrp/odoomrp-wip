@@ -17,20 +17,24 @@
 ##############################################################################
 
 {
-    "name": "MRP Operation with Quality Test",
+    "name": "Quality Control - MRP operations",
     "version": "1.0",
+    "category": "Quality control",
     "author": "OdooMRP team",
-    "category": "Manufacturing",
     "website": "http://www.odoomrp.com",
+    "contributors": [
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>"
+    ],
     "depends": [
-        "mrp",
         "mrp_operations_extension",
         "quality_control",
-        "account",
     ],
     "data": [
         "views/mrp_routing_operation_view.xml",
         "views/mrp_production_workcenter_line_view.xml",
     ],
-    "installable": True
+    "installable": True,
+    "auto_install": False,
 }
