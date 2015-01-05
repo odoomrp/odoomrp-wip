@@ -15,10 +15,11 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+
 from openerp import models, fields
 
 
-class QcTest(models.Model):
+class QcInspection(models.Model):
     _inherit = 'qc.inspection'
 
     workcenter_line_id = fields.Many2one(

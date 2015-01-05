@@ -47,6 +47,9 @@
             <field name="model">qc.inspection</field>
             <field name="inherit_id" ref="quality_control.qc_inspection_form_view"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='inspection_lines']/tree" position="attributes">
+                    <attribute name="colors">red: tolerance_status=='not_tolerable'; orange: tolerance_status=='tolerable'</attribute>
+                </xpath>
                 <xpath expr="//field[@name='inspection_lines']/tree//field[@name='success']" position="after">
                     <field name="tolerance_status"/>
                 </xpath>

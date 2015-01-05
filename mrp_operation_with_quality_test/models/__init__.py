@@ -15,5 +15,6 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+
 from . import mrp
-from . import qc_test
+from . import qc_inspection
