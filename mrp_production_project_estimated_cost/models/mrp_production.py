@@ -42,17 +42,17 @@ class MrpProduction(models.Model):
             False)
         for line in self.workcenter_lines:
             workcenter = line.workcenter_id
-            for op_workcenter in line.op_wc_lines:
-                if workcenter == line.op_wc_lines.workcenter:
-                    time_start = line.op_wc_lines.time_start
-                    time_stop = line.op_wc_lines.time_stop
-                    op_number = line.op_wc_lines.op_number
-                    op_avg_cost = line.op_wc_lines.op_avg_cost
-                else:
-                    time_start = workcenter.time_start
-                    time_stop = workcenter.time_stop
-                    op_number = workcenter.op_number
-                    op_avg_cost = workcenter.op_avg_cost
+            time_start = workcenter.time_start
+            time_stop = workcenter.time_stop
+            op_number = workcenter.op_number
+            op_avg_cost = workcenter.op_avg_cost
+            for op_workcenter in line.routing_wc_line.op_wc_lines:
+                if workcenter == op_workcenter.workcenter:
+                    time_start = op_workcenter.time_start
+                    time_stop = op_workcenter.time_stop
+                    op_number = op_workcenter.op_number
+                    op_avg_cost = op_workcenter.op_avg_cost
+                    break
             if (time_start and workcenter.pre_op_product):
                 name = (_('%s-%s Pre-operation') %
                         (self.name, workcenter.name))
@@ -88,33 +88,18 @@ class MrpProduction(models.Model):
                     workcenter.product_id, line.hour)
                 analytic_line_obj.create(vals)
             if op_number > 0:
-                journal = self.env.ref(
+                journal_wk = self.env.ref(
                     'mrp_production_project_estimated_cost.analytic_journal_'
                     'operators', False)
                 name = (_('%s-%s-%s') %
                         (self.name, line.routing_wc_line.operation.code,
                          workcenter.product_id.name))
                 vals = self._catch_information_estimated_cost(
-                    journal, name, self, line, False, 0)
+                    journal_wk, name, self, line, workcenter.product_id, 0)
                 vals.update({
                     'estim_average_cost': op_number * op_avg_cost,
                 })
                 analytic_line_obj.create(vals)
-#             for op_wc_line in line.routing_wc_line.op_wc_lines:
-#                 if (op_wc_line.workcenter.id ==
-#                     workcenter.id and
-#                     workcenter.product_id and
-#                         op_wc_line.op_number > 0):
-#                     journal = self.env.ref(
-#                         'mrp_production_project_estimated_cost.analytic_'
-#                         'journal_operators', False)
-#                     name = (_('%s-%s-%s') %
-#                             (self.name, line.routing_wc_line.operation.code,
-#                              workcenter.product_id.name))
-#                     vals = self._catch_information_estimated_cost(
-#                         journal, name, self, line,
-#                         workcenter.product_id, op_wc_line.op_number)
-#                     analytic_line_obj.create(vals)
         return res
 
     def _catch_information_estimated_cost(self, journal, name, production,
