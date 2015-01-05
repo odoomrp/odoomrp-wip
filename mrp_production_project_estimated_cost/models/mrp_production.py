@@ -42,59 +42,63 @@ class MrpProduction(models.Model):
             False)
         for line in self.workcenter_lines:
             workcenter = line.workcenter_id
-            if (workcenter.time_start and
-                    workcenter.pre_op_product):
+            for op_workcenter in line.routing_wc_line.op_wc_lines:
+                if line.workcenter_id == op_workcenter.workcenter:
+                    workcenter = op_workcenter
+                    break
+            time_start = workcenter.time_start
+            time_stop = workcenter.time_stop
+            op_number = workcenter.op_number
+            op_avg_cost = workcenter.op_avg_cost
+            if (time_start and line.workcenter_id.pre_op_product):
                 name = (_('%s-%s Pre-operation') %
-                        (self.name, workcenter.name))
+                        (self.name, line.workcenter_id.name))
                 vals = self._catch_information_estimated_cost(
                     journal, name, self, line,
-                    workcenter.pre_op_product,
-                    workcenter.time_start)
+                    line.workcenter_id.pre_op_product, time_start)
                 vals.update({'amount':
-                             workcenter.pre_op_product.standard_price})
+                             line.workcenter_id.pre_op_product.standard_price})
                 analytic_line_obj.create(vals)
-            if (workcenter.time_stop and
-                    workcenter.post_op_product):
+            if (time_stop and line.workcenter_id.post_op_product):
                 name = (_('%s-%s Post-operation') %
-                        (self.name, workcenter.name))
+                        (self.name, line.workcenter_id.name))
                 vals = self._catch_information_estimated_cost(
                     journal, name, self, line,
-                    workcenter.post_op_product,
-                    workcenter.time_stop)
-                vals.update({'amount':
-                             workcenter.post_op_product.standard_price})
+                    line.workcenter_id.post_op_product, time_stop)
+                vals.update(
+                    {'amount':
+                     line.workcenter_id.post_op_product.standard_price})
                 analytic_line_obj.create(vals)
-            if line.cycle and workcenter.product_id:
+            if line.cycle and line.workcenter_id.product_id:
                 name = (_('%s-%s-C-%s') %
                         (self.name, line.routing_wc_line.operation.code,
-                         workcenter.name))
+                         line.workcenter_id.name))
                 vals = self._catch_information_estimated_cost(
                     journal, name, self, line,
-                    workcenter.product_id, line.cycle)
+                    line.workcenter_id.product_id, line.cycle)
                 analytic_line_obj.create(vals)
-            if line.hour and workcenter.product_id:
+            if line.hour and line.workcenter_id.product_id:
                 name = (_('%s-%s-H-%s') %
                         (self.name, line.routing_wc_line.operation.code,
-                         workcenter.name))
+                         line.workcenter_id.name))
                 vals = self._catch_information_estimated_cost(
                     journal, name, self, line,
-                    workcenter.product_id, line.hour)
+                    line.workcenter_id.product_id, line.hour)
                 analytic_line_obj.create(vals)
-            for op_wc_line in line.routing_wc_line.op_wc_lines:
-                if (op_wc_line.workcenter.id ==
-                    workcenter.id and
-                    workcenter.product_id and
-                        op_wc_line.op_number > 0):
-                    journal = self.env.ref(
-                        'mrp_production_project_estimated_cost.analytic_'
-                        'journal_operators', False)
-                    name = (_('%s-%s-%s') %
-                            (self.name, line.routing_wc_line.operation.code,
-                             workcenter.product_id.name))
-                    vals = self._catch_information_estimated_cost(
-                        journal, name, self, line,
-                        workcenter.product_id, op_wc_line.op_number)
-                    analytic_line_obj.create(vals)
+            if op_number > 0:
+                journal_wk = self.env.ref(
+                    'mrp_production_project_estimated_cost.analytic_journal_'
+                    'operators', False)
+                name = (_('%s-%s-%s') %
+                        (self.name, line.routing_wc_line.operation.code,
+                         line.workcenter_id.product_id.name))
+                vals = self._catch_information_estimated_cost(
+                    journal_wk, name, self, line,
+                    line.workcenter_id.product_id, 0)
+                vals.update({
+                    'estim_average_cost': op_number * op_avg_cost,
+                })
+                analytic_line_obj.create(vals)
         return res
 
     def _catch_information_estimated_cost(self, journal, name, production,
@@ -109,7 +113,8 @@ class MrpProduction(models.Model):
                   ' the product category') % (product.name))
         if not self.analytic_account_id:
             raise exceptions.Warning(
-                _('You must define one Analytic Account for this MO'))
+                _('You must define one Analytic Account for this MO: %s') %
+                (production.name))
         vals = {
             'name': name,
             'mrp_production_id': production.id,
