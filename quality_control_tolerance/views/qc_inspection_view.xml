@@ -7,6 +7,9 @@
             <field name="model">qc.inspection.line</field>
             <field name="inherit_id" ref="quality_control.qc_inspection_line_tree_view"/>
             <field name="arch" type="xml">
+                <tree position="attributes">
+                    <attribute name="colors">red: tolerance_status=='not_tolerable'; orange: tolerance_status=='tolerable'</attribute>
+                </tree>
                 <field name="success" position="after">
                     <field name="tolerance_status"/>
                 </field>

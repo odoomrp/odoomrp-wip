@@ -23,24 +23,24 @@
             <field name="model">qc.test.question</field>
             <field name="inherit_id" ref="quality_control.qc_test_question_form_view" />
             <field name="arch" type="xml">
-                <span name="quantitative-interval" position="before">
+                <h1 name="quantitative-data" position="before">
                     <label for="same_tolerance" />
                     <field name="same_tolerance" />
                     <br/>
-                </span>
+                </h1>
                 <div name="quantitative" position="after">
-                    <group>
+                    <group attrs="{'invisible': [('type', '!=', 'quantitative')]}">
                         <group>
                             <field name="tolerance_percent_below"
-                                   attrs="{'required': [('type',' =', 'quantitative')]}" />
+                                   attrs="{'required': [('type', '=', 'quantitative')]}" />
                             <field name="tolerance_below"
-                                   attrs="{'required': [('type',' =', 'quantitative')]}" />
+                                   attrs="{'required': [('type', '=', 'quantitative')]}" />
                         </group>
                         <group>
                             <field name="tolerance_percent_above"
-                                   attrs="{'readonly': [('same_tolerance', '=', True)], 'required': [('type',' =', 'quantitative')]}" />
+                                   attrs="{'readonly': [('same_tolerance', '=', True)], 'required': [('type', '=', 'quantitative')]}" />
                             <field name="tolerance_above"
-                                   attrs="{'readonly': [('same_tolerance', '=', True)], 'required': [('type',' =', 'quantitative')]}"/>
+                                   attrs="{'readonly': [('same_tolerance', '=', True)], 'required': [('type', '=', 'quantitative')]}"/>
                         </group>
                     </group>
                 </div>
