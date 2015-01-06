@@ -8,10 +8,12 @@
             <field name="inherit_id" ref="quality_control.qc_test_form_view" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='test_lines']//field[@name='min_value']" position="before" >
-                    <field name="min_value_below" />
+                    <field name="tolerance_below" />
+                    <field name="tolerance_percent_below" />
                 </xpath>
                 <xpath expr="//field[@name='test_lines']//field[@name='max_value']" position="after" >
-                    <field name="max_value_above" />
+                    <field name="tolerance_above" />
+                    <field name="tolerance_percent_above" />
                 </xpath>
             </field>
         </record>
@@ -33,14 +35,12 @@
                                    attrs="{'required': [('type', '=', 'quantitative')]}" />
                             <field name="tolerance_below"
                                    attrs="{'required': [('type', '=', 'quantitative')]}" />
-                            <field name="min_value_below" />
                         </group>
                         <group>
                             <field name="tolerance_percent_above"
                                    attrs="{'readonly': [('same_tolerance', '=', True)], 'required': [('type', '=', 'quantitative')]}" />
                             <field name="tolerance_above"
                                    attrs="{'readonly': [('same_tolerance', '=', True)], 'required': [('type', '=', 'quantitative')]}"/>
-                            <field name="max_value_above" />
                         </group>
                     </group>
                 </div>
