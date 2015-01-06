@@ -16,32 +16,6 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="qc_inspection_line_form_view_tolerance">
-            <field name="name">qc.inspection.line.form.tolerance</field>
-            <field name="model">qc.inspection.line</field>
-            <field name="inherit_id" ref="quality_control.qc_inspection_line_form_view" />
-            <field name="arch" type="xml">
-                <field name="valid_values" position="before">
-                    <label for="tolerance_below"
-                        attrs="{'invisible': [('question_type', '=', 'qualitative')]}" />
-                    <div attrs="{'invisible': [('question_type', '=', 'qualitative')]}">
-                        <field name="tolerance_below" class="oe_inline" /> 
-                        (<field name="tolerance_percent_below" class="oe_inline" /> %)
-                    </div>
-                    <label for="tolerance_above"
-                        attrs="{'invisible': [('question_type', '=', 'qualitative')]}" />
-                    <div attrs="{'invisible': [('question_type', '=', 'qualitative')]}">
-                        <field name="tolerance_above" class="oe_inline" /> 
-                        (<field name="tolerance_percent_above" class="oe_inline" /> %)
-                    </div>
-                </field>
-                <field name="valid_values" position="after">
-                    <field name="tolerance_status"
-                        attrs="{'invisible': [('question_type', '=', 'qualitative')]}" />
-                </field>
-            </field>
-        </record>
-
         <record model="ir.ui.view" id="qc_inspection_form_view_tolerance">
             <field name="name">qc.inspection.form.tolerance</field>
             <field name="model">qc.inspection</field>

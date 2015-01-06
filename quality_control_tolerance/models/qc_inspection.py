@@ -66,10 +66,10 @@ class QcInspectionLine(models.Model):
                 [_("%s (tolerable)") % x.name for x in self.possible_ql_values
                  if not x.ok and x.tolerance_status == 'tolerable'])
         elif self.question_type == 'quantitative':
-            self.valid_values = "(%s) %s-%s (%s)" % (
-                self.min_value_below,
+            self.valid_values = "(-%s/%s%%) %s-%s (+%s/%s%%)" % (
+                self.tolerance_below, self.tolerance_percent_below,
                 self.min_value, self.max_value,
-                self.max_value_above)
+                self.tolerance_above, self.tolerance_percent_above)
             if self.env.ref("product.group_uom") in self.env.user.groups_id:
                 self.valid_values += " %s" % self.test_uom_id.name
 
