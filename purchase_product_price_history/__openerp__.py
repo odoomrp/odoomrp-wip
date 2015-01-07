@@ -32,9 +32,6 @@
     ],
     "category": "Hidden/Dependecy",
     "summary": "",
-    "description": """
-    This module provide :
-    """,
     "data": [
         "views/product_view.xml",
     ],

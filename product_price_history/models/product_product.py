@@ -46,7 +46,7 @@ class ProductProduct(models.Model):
     @api.model
     def create(self, values):
         product = super(ProductProduct, self).create(values)
-        product._set_cost_price(values.get('cost_price', 0.0))
+        product._set_cost_price(product.cost_price)
         return product
 
     @api.multi

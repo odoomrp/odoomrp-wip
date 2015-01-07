@@ -17,9 +17,7 @@
 ##############################################################################
 
 import logging
-import time
 from openerp import models, fields, api
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 # All field name of product that will be historize
 PRODUCT_FIELD_HISTORIZE = ['standard_price', 'cost_price']
@@ -60,7 +58,7 @@ class ProductPriceHistory(models.Model):
         if field_names is None:
             field_names = PRODUCT_FIELD_HISTORIZE
         if not datetime:
-            datetime = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+            datetime = fields.Datetime.now()
         if not company_id:
             company_id = (self.env.context.get('company_id', False) or
                           self.env.user.company_id.id)
