@@ -8,12 +8,23 @@ from openerp import models, fields, api
 class QcTestQuestion(models.Model):
     _inherit = 'qc.test.question'
 
+    @api.one
+    @api.depends('min_value', 'max_value',
+                 'tolerance_below', 'tolerance_above')
+    def _tolerable_values(self):
+        self.min_value_below = self.min_value - self.tolerance_below
+        self.max_value_above = self.max_value + self.tolerance_above
+
     tolerance_below = fields.Float(string='Tolerance (below)')
     tolerance_above = fields.Float(string='Tolerance (above)')
     tolerance_percent_below = fields.Float(string='% tolerance (below)',
                                            digits=(3, 2))
     tolerance_percent_above = fields.Float(string='% tolerance (above)',
                                            digits=(3, 2))
+    min_value_below = fields.Float(
+        string='Min. tolerable', compute='_tolerable_values')
+    max_value_above = fields.Float(
+        string='Max. tolerable', compute='_tolerable_values')
     same_tolerance = fields.Boolean('Same tolerance above/below', default=True)
 
     @api.one
