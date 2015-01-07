@@ -28,6 +28,10 @@ class MrpBom(models.Model):
         },
     }
 
+    active = fields.Boolean(
+        readonly=True, default=False, copy=False,
+        help="If the active field is set to False, it will allow you to hide"
+             " the bills of material without removing it.")
     historical_date = fields.Date(string='Historical Date', readonly=True)
     state = fields.Selection([('draft', 'Draft'),
                               ('active', 'Active'),
@@ -61,11 +65,13 @@ class MrpBom(models.Model):
 
     @api.multi
     def button_active(self):
-        return self.write({'state': 'active'})
+        return self.write({'active': True,
+                           'state': 'active'})
 
     @api.multi
     def button_historical(self):
-        return self.write({'state': 'historical',
+        return self.write({'active': False,
+                           'state': 'historical',
                            'historical_date': fields.Date.today()})
 
 

@@ -92,6 +92,9 @@
                 <field name="message_ids" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
                 </field>
+                <field name="active" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
             </field>
         </record>
         <record id="view_mrp_bom_filter_inh_version" model="ir.ui.view">
