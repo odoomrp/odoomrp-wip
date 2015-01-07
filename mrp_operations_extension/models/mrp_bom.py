@@ -58,4 +58,5 @@ class MrpBom(models.Model):
 class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
 
-    operation = fields.Many2one('mrp.routing.workcenter', 'Consumed')
+    operation = fields.Many2one(
+        comodel_name='mrp.routing.workcenter', string='Consumed in')
