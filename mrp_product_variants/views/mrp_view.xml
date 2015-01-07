@@ -13,6 +13,11 @@
                     <field name="possible_values" invisible="1" />
                 </xpath>
                 <xpath
+                    expr="//field[@name='bom_line_ids']//field[@name='product_id']"
+                    position="attributes">
+                    <attribute name="string">Variant</attribute>
+                </xpath>
+                <xpath
                     expr="//field[@name='bom_line_ids']//field[@name='attribute_value_ids']"
                     position="attributes">
                     <attribute name="options">{'no_create': True}</attribute>
@@ -30,7 +35,7 @@
                             <field name="sequence" widget="handle" />
                             <field name="type" />
                             <field name="product_template" />
-                            <field name="product_id" />
+                            <field name="product_id" string="Variant"/>
                             <field name="product_rounding" />
                             <field name="product_efficiency" />
                             <label for="product_qty" />
