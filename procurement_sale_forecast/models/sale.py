@@ -32,7 +32,7 @@ class ProcurementSaleForecast(models.Model):
                 procurement_lst.append(line.procurement_id.id)
         self.procurement_count = len(procurement_lst)
 
-    name = fields.Char(strind='Name', required=True)
+    name = fields.Char(string='Name', required=True)
     date_from = fields.Date(string='Date From', required=True)
     date_to = fields.Date(string='Date To', required=True)
     forecast_lines = fields.One2many('procurement.sale.forecast.line',
