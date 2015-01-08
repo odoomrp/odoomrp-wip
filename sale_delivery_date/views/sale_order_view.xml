@@ -27,5 +27,32 @@
                 </field>
             </field>
         </record>
+        <record model="ir.ui.view" id="view_quotation_tree_inh_delivery_date">
+            <field name="name">view_quotation_tree.inh.delivery.date</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <field name="date_order" position="after">
+                    <field name="delivery_date" />
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_sales_order_filter_inh_delivery_date">
+            <field name="name">view.sales.order.filter.inh.delivery.date</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter" />
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="delivery_date" string="Delivery Day" interval="day" />
+                    <field name="delivery_date" string="Delivery Week" interval="week" />
+                    <field name="delivery_date" />
+                </field>
+                <filter string="Order Month" position="before">
+                    <filter string="Delivery Month" domain="[]" context="{'group_by':'delivery_date'}"/>
+                    <filter string="Delivery Week" context="{'group_by':'delivery_date:week'}" />
+                    <filter string="Delivery Day" context="{'group_by':'delivery_date:day'}" />
+                </filter>
+            </field>
+        </record>
     </data>
 </openerp>

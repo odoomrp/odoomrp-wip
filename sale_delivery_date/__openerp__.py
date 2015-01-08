@@ -29,14 +29,6 @@
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
     "summary": "Delivery date on sale orders",
-    "description": """
-This module creates:
-    * a field 'delivery_date' on sale.order
-    * a field 'delivery_date' on sale.order.line whose default is sale.order's
-      'delivery_date'
-
-    TODO: Take this into account for the procurements...
-    """,
     "data": [
         "views/sale_order_view.xml",
     ],
