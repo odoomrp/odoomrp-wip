@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_stock_enter_transfer_details" model="ir.ui.view">
+            <field name="name">Enter transfer details</field>
+            <field name="model">stock.quant.package.move</field>
+            <field name="arch" type="xml">
+                <form string="Transfer details" version="7">
+                    <group string="Packages To Move" groups="stock.group_tracking_lot">
+                        <div class="oe_grey">
+                            The source package will be moved
+                            entirely. If you specify a destination
+                            package, the source package will be put in
+                            the destination package.
+                        </div>
+                    </group>
+                    <group groups="stock.group_tracking_lot">
+                        <field name="pack_move_items"
+                            nolabel="1">
+                            <tree editable="bottom">
+                                <field name="quant" />
+                                <field name="source_pkg" required="True" />
+                                <field name="source_loc" />
+                                <field name="dest_loc" />
+                                <field name="dest_pkg" />
+<!--                                 <button name="put_in_pack"
+                                    string="Pack" type="object" icon="terp-product"
+                                    attrs="{'invisible': [('result_package_id', '!=', False)]}" /> -->
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="do_detailed_transfer"
+                            string="_Apply" type="object" class="oe_highlight" />
+                        or
+                        <button string="_Cancel" class="oe_link"
+                            special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Move Stock Quant Packages" groups="stock.group_tracking_lot"
+            res_model="stock.quant.package.move" src_model="stock.quant"
+            view_mode="form" target="new" key2="client_action_multi" id="action_move_packages" />
+    </data>
+</openerp>
