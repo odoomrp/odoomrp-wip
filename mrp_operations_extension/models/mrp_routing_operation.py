@@ -42,6 +42,15 @@ class MrpOperationWorkcenter(models.Model):
     default = fields.Boolean('Default')
 
     @api.one
+    @api.constrains('workcenter', 'routing_workcenter', 'default')
+    def _unique_default_for_routing(self):
+        if self.default:
+            self.routing_workcenter.workcenter_id = self.workcenter
+            for line in self.routing_workcenter.op_wc_lines:
+                if line != self:
+                    line.default = False
+
+    @api.one
     @api.onchange('workcenter')
     def onchange_workcenter(self):
         if self.workcenter:

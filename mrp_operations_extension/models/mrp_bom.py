@@ -54,6 +54,12 @@ class MrpBom(models.Model):
                 work_order['routing_wc_line'] = routing_line_id
         return result2
 
+    @api.one
+    @api.onchange('routing_id')
+    def onchange_routing_id(self):
+        for line in self.bom_line_ids:
+            line.operation = False
+
 
 class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
