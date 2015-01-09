@@ -25,7 +25,7 @@ class MrpBom(models.Model):
     def create(self, values):
         bom = super(MrpBom, self).create(values)
         if bom.product_tmpl_id:
-            bom.code = bom.product_tmpl_id.default_prefix
+            bom.code = bom.product_tmpl_id.reference_mask
         elif bom.product_id:
             bom.code = bom.product_id.default_code
         return bom
@@ -36,7 +36,7 @@ class MrpBom(models.Model):
         template_obj = self.env['product.template']
         if values.get('product_tmpl_id'):
             product_tmpl = template_obj.browse(values.get('product_tmpl_id'))
-            values['code'] = product_tmpl.default_prefix
+            values['code'] = product_tmpl.reference_mask
         elif values.get('product_id'):
             product = product_obj.browse(values.get('product_id'))
             values['code'] = product.default_code
