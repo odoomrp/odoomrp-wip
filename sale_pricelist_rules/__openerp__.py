@@ -32,7 +32,7 @@
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <ajuaristio@gmail.com>",
     ],
-    "category": "Custom Module",
+    "category": "Hidden/Dependency",
     "website": "http://www.odoomrp.com",
     "complexity": "normal",
     "summary": "",

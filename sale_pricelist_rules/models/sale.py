@@ -18,6 +18,7 @@
 
 from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
+from lxml import etree
 
 
 class SaleOrderLineSubtotal(models.Model):
@@ -133,6 +134,28 @@ class SaleOrderLine(models.Model):
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
+
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
+                        context=None, toolbar=False, submenu=False):
+        res = super(SaleOrder, self).fields_view_get(
+            cr, uid, view_id=view_id, view_type=view_type, context=context,
+            toolbar=toolbar, submenu=submenu)
+        if view_type == 'form':
+            eview = etree.fromstring(res['arch'])
+
+            def _check_rec(eview):
+                if eview.attrib.get('name', '') == 'order_line':
+                    context = eview.attrib.get(
+                        'context',
+                        '{}').replace("}", ",'pricelist_id':pricelist_id}")
+                    eview.set('context', context)
+                for child in eview:
+                    _check_rec(child)
+                return True
+
+            _check_rec(eview)
+            res['arch'] = etree.tostring(eview)
+        return res
 
     @api.model
     def _amount_line_tax(self, line):
