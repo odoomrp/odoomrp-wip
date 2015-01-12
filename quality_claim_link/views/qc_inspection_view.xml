@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="qc_inspection_tree_view_inh_claimlink" model="ir.ui.view">
+            <field name="name">qc.inspection.tree.view.inh.claimlink</field>
+            <field name="model">qc.inspection</field>
+            <field name="inherit_id" ref="quality_control.qc_inspection_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="product" position="after">
+                    <field name="automatic_claims" />
+                </field>
+            </field>
+        </record>
+        <record id="qc_inspection_form_view_inh_claimlink" model="ir.ui.view">
+            <field name="name">qc.inspection.form.view.inh.claimlink</field>
+            <field name="model">qc.inspection</field>
+            <field name="inherit_id" ref="quality_control.qc_inspection_form_view"/>
+            <field name="arch" type="xml">
+                <field name="auto_generated" position="after">
+                    <field name="automatic_claims" />
+                </field>
+                <page string="Notes" position="after">
+                    <page string="Claims" >
+                        <group>
+                            <field name="claims" nolabel="1" />
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+    </data>
+</openerp>
+
