@@ -42,15 +42,6 @@ class MrpOperationWorkcenter(models.Model):
     default = fields.Boolean('Default')
 
     @api.one
-    @api.constrains('workcenter', 'routing_workcenter', 'default')
-    def _unique_default_for_routing(self):
-        if self.default:
-            self.routing_workcenter.workcenter_id = self.workcenter
-            for line in self.routing_workcenter.op_wc_lines:
-                if line != self:
-                    line.default = False
-
-    @api.one
     @api.onchange('workcenter')
     def onchange_workcenter(self):
         if self.workcenter:
@@ -62,6 +53,29 @@ class MrpOperationWorkcenter(models.Model):
             self.op_number = self.workcenter.op_number
             self.op_avg_cost = self.workcenter.op_avg_cost
             self.default = False
+
+    @api.model
+    def create(self, vals):
+        res = super(MrpOperationWorkcenter, self).create(vals)
+        if vals.get('default', False):
+            routing_obj = self.env['mrp.routing.workcenter']
+            routing = routing_obj.browse(vals.get('routing_workcenter', False))
+            routing.workcenter_id = vals.get('workcenter', False)
+            for line in routing.op_wc_lines:
+                if line != res:
+                    line.default = False
+        return res
+
+    @api.multi
+    def write(self, vals):
+        res = super(MrpOperationWorkcenter, self).write(vals)
+        for record in self:
+            if vals.get('default', False):
+                record.routing_workcenter.workcenter_id = record.workcenter
+                for line in record.routing_workcenter.op_wc_lines:
+                    if line != record:
+                        line.default = False
+        return res
 
 
 class MrpRoutingOperation(models.Model):
