@@ -2,7 +2,7 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api, _
 
 
 class QcInspection(models.Model):
@@ -28,7 +28,7 @@ class QcInspection(models.Model):
 
     def make_claim_from_inspection(self):
         crm_claim_obj = self.env['crm.claim']
-        crm_claim = crm_claim_obj.create({
+        crm_claim_obj.create({
             'name': _('Quality test %s for product %s unsurpassed') % (
                 self.name, self.object_id.name),
             'date': fields.Datetime.now(),
