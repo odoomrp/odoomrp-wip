@@ -36,7 +36,6 @@ class SaleOrder(models.Model):
                         line.product_uom_qty, False, line.product_uos_qty,
                         False, line.name, record.partner_id.id, False,
                         True, record.date_order, False,
-                        record.fiscal_position.id, False,
-                        context=self.env.context)
+                        record.fiscal_position.id, False)
                     line.write(res['value'])
         return True
