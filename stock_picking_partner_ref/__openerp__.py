@@ -28,7 +28,7 @@
     This module provide :
     Adds partner reference on backorders of sale orders
     """,
-    'data': [],
+    'data': ["views/stock_picking_view.xml"],
     "installable": True,
     "auto_install": False,
 }

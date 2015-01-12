@@ -17,4 +17,4 @@
 #
 ##############################################################################
 
-from . import sale_order
+from . import sale_order, stock_picking

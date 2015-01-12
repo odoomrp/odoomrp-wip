@@ -31,6 +31,6 @@ class SaleOrder(models.Model):
         for pick in self.picking_ids:
             if self.client_order_ref and \
                self.client_order_ref not in pick.origin:
-                pick.origin = '-'.join([pick.origin,
-                                        self.client_order_ref])
+                pick.origin_partner_ref = '-'.join([pick.origin,
+                                                    self.client_order_ref])
         return res
