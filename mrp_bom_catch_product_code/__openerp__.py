@@ -15,24 +15,16 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+
 {
     "name": "MRP Bom Catch Product Code",
     "version": "1.0",
     "author": "OdooMRP team",
-    "category": "MRP",
+    "category": "Manufacturing",
     "website": "http://www.odoomrp.com",
-    "description": """
-    This module performs the following:
-
-    1.- When the product template is selected, the internal code is brought to
-        the reference in BoM list.
-    2.- When the product is selected, the internal code is brought to the
-        reference in BoM list.
-
-   """,
-    "depends": ['mrp',
-                'product_variant_default_code',
-                ],
-    "data": [],
+    "depends": [
+        "mrp",
+        "product_variant_default_code",
+    ],
     "installable": True
 }
