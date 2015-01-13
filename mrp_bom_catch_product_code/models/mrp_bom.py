@@ -36,3 +36,30 @@ class MrpBom(models.Model):
     def onchange_product_id(self):
         if self.product_id:
             self.code = self.product_id.default_code
+
+    @api.model
+    def create(self, values):
+        if values.get('product_id'):
+            product = self.env['product.product'].browse(
+                values.get('product_id'))
+            values['code'] = ('%s%s') % (values.get('code', ''),
+                                         product.default_code or '')
+        elif values.get('product_tmpl_id'):
+            product = self.env['product.template'].browse(
+                values.get('product_tmpl_id'))
+            values['code'] = ('%s%s') % (values.get('code', ''),
+                                         product.default_code or '')
+        return super(MrpBom, self).create(values)
+
+    @api.one
+    def write(self, values):
+        product_obj = self.env['product.product']
+        template_obj = self.env['product.template']
+        if 'code' in values and not values.get('code'):
+            product = (product_obj.browse(values.get('product_id'))
+                       or self.product_id)
+            if not product:
+                product = (template_obj.browse(values.get('product_tmpl_id'))
+                           or self.product_tmpl_id)
+            values['code'] = product.default_code or ''
+        return super(MrpBom, self).write(values)
