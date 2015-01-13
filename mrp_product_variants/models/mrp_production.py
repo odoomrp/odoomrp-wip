@@ -72,6 +72,14 @@ class MrpProduction(models.Model):
         return result
 
     @api.multi
+    def bom_id_change(self, bom_id):
+        res = super(MrpProduction, self).bom_id_change(bom_id)
+        if bom_id:
+            bom = self.env['mrp.bom'].browse(bom_id)
+            res['value']['product_id'] = bom.product_id.id
+        return res
+
+    @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
         self.ensure_one()
