@@ -31,7 +31,7 @@ class QcInspection(models.Model):
 
     def make_claim_from_inspection_line(self, line, categ):
         crm_claim_obj = self.env['crm.claim']
-        crm_claim_obj.create({
+        claim_id = crm_claim_obj.create({
             'name': _('Quality test %s for product %s unsurpassed, in test'
                       ' line %s')
             % (self.name, self.object_id.name, line.name),
@@ -39,3 +39,4 @@ class QcInspection(models.Model):
             'ref': '%s,%s' % (self.object_id._model, self.object_id.id),
             'inspection_id': self.id,
             'categ_id': categ.id})
+        return claim_id
