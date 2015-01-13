@@ -13,26 +13,20 @@ class QcInspection(models.Model):
         category_obj = self.env['crm.case.categ']
         nc_category_search = [('name', '=', 'NC')]
         idi_category_search = [('name', '=', 'IDI')]
+        nc_categ = category_obj.search(nc_category_search, limit=1)
+        if not nc_categ:
+            raise exceptions.Warning(
+                _("NC crm case category NOT FOUND"))
+        idi_categ = category_obj.search(idi_category_search, limit=1)
+        if not idi_categ:
+            raise exceptions.Warning(
+                _("IDI crm case category NOT FOUND"))
         super(QcInspection, self).action_approve()
-        idi_categ = False
-        nc_categ = False
         for inspection in self:
             for line in inspection.inspection_lines:
                 if line.tolerance_status == 'not_tolerable':
-                    if not nc_categ:
-                        nc_categ = category_obj.search(nc_category_search,
-                                                       limit=1)
-                        if not nc_categ:
-                            raise exceptions.Warning(
-                                _("NC crm case category NOT FOUND"))
                     inspection.make_claim_from_inspection_line(line, nc_categ)
                 elif line.tolerance_status == 'not_tolerable':
-                    if not idi_categ:
-                        idi_categ = category_obj.search(idi_category_search,
-                                                        limit=1)
-                        if not idi_categ:
-                            raise exceptions.Warning(
-                                _("IDI crm case category NOT FOUND"))
                     inspection.make_claim_from_inspection_line(line, idi_categ)
 
     def make_claim_from_inspection_line(self, line, categ):
