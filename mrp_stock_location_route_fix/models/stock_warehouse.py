@@ -16,33 +16,13 @@
 #
 ##############################################################################
 
-from openerp import models, exceptions, _
+from openerp import models, api
 
 
 class StockWarehouse(models.Model):
     _inherit = 'stock.warehouse'
 
-    def _get_manufacture_pull_rule(self, cr, uid, warehouse, context=None):
-        route_obj = self.pool['stock.location.route']
-        data_obj = self.pool['ir.model.data']
-        try:
-            manufacture_route_id = data_obj.get_object_reference(
-                cr, uid, 'mrp', 'route_warehouse0_manufacture')[1]
-        except:
-            manufacture_route_id = route_obj.search(
-                cr, uid, [('name', 'like', 'Manufacture')], context=context)
-            manufacture_route_id = (manufacture_route_id and
-                                    manufacture_route_id[0] or False)
-        if not manufacture_route_id:
-            raise exceptions.except_orm(
-                _('Error!'), _('Can\'t find any generic Manufacture route.'))
-        return {
-            'name': self._format_routename(cr, uid, warehouse,
-                                           _(' Manufacture'), context=context),
-            'location_id': warehouse.lot_stock_id.id,
-            'route_id': manufacture_route_id,
-            'action': 'manufacture',
-            'picking_type_id': warehouse.int_type_id.id,
-            'propagate': False, 
-            'warehouse_id': warehouse.id,
-        }
+    @api.model
+    def _get_manufacture_pull_rule(self, warehouse):
+        return super(StockWarehouse, self).with_context(
+            lang='en_US')._get_manufacture_pull_rule(warehouse)
