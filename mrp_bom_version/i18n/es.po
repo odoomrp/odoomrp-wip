@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-10 09:13+0000\n"
-"PO-Revision-Date: 2014-11-10 10:14+0100\n"
+"POT-Creation-Date: 2015-01-14 09:43+0000\n"
+"PO-Revision-Date: 2015-01-14 10:45+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,10 +16,15 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_form_view_inh_version
+msgid "Activate"
+msgstr "Activar"
+
+#. module: mrp_bom_version
 #: view:mrp.bom:mrp_bom_version.view_mrp_bom_filter_inh_version
 #: selection:mrp.bom,state:0
 msgid "Active"
-msgstr "Activo"
+msgstr "Activa"
 
 #. module: mrp_bom_version
 #: model:ir.model,name:mrp_bom_version.model_mrp_bom
@@ -43,15 +48,10 @@ msgid "Historical Date"
 msgstr "Fecha historificación"
 
 #. module: mrp_bom_version
-#: view:mrp.bom:mrp_bom_version.mrp_bom_form_view_inh_version
-msgid "In active"
-msgstr "En activo"
-
-#. module: mrp_bom_version
 #: model:mail.message.subtype,description:mrp_bom_version.mt_active
 #: model:mail.message.subtype,name:mrp_bom_version.mt_active
 msgid "MRP BoM Active"
-msgstr "MRP BoM Active"
+msgstr "MRP LdM activa"
 
 #. module: mrp_bom_version
 #: view:mrp.bom:mrp_bom_version.mrp_bom_tree_view

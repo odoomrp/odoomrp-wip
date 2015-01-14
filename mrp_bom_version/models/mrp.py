@@ -33,6 +33,7 @@ class MrpBom(models.Model):
         maxseq = bom.sequence + 1
         return maxseq
 
+    active = fields.Boolean('Active', default=False)
     historical_date = fields.Date(string='Historical Date', readonly=True)
     state = fields.Selection([('draft', 'Draft'),
                               ('active', 'Active'),
@@ -51,13 +52,22 @@ class MrpBom(models.Model):
             raise exceptions.Warning(
                 _('The sequence must be unique'))
 
+    @api.one
+    def copy(self, default=None):
+        bom = self.search([], order='sequence desc', limit=1)
+        maxseq = bom.sequence + 1
+        default.update({'sequence': maxseq})
+        return super(MrpBom, self).copy(default=default)
+
     @api.multi
-    def button_active(self):
-        return self.write({'state': 'active'})
+    def button_activate(self):
+        return self.write({'active': True,
+                           'state': 'active'})
 
     @api.multi
     def button_historical(self):
-        return self.write({'state': 'historical',
+        return self.write({'active': False,
+                           'state': 'historical',
                            'historical_date': fields.Date.today()})
 
 
