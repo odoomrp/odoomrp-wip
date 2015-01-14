@@ -44,21 +44,6 @@ class MrpBomLine(models.Model):
     product_uom = fields.Many2one(
         domain="[('category_id', '=', product_uom_category)]")
 
-    @api.multi
-    def onchange_uom(self, product_id, product_uom):
-        res = super(MrpBomLine, self).onchange_uom(product_id, product_uom)
-        if not product_id and (self.product_template and product_uom):
-            product = self.product_template
-            uom = self.env['product.uom'].browse(product_uom)
-            if uom.category_id.id != product.uom_id.category_id.id:
-                res['warning'] = {
-                    'title': _('Warning'),
-                    'message': _('The Product Unit of Measure you chose has a'
-                                 ' different category than in the product'
-                                 ' form.')}
-                res['value'].update({'product_uom': product.uom_id.id})
-        return res
-
     @api.one
     @api.depends('bom_id.product_tmpl_id',
                  'bom_id.product_tmpl_id.attribute_line_ids')
