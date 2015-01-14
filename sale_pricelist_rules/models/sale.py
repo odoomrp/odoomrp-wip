@@ -121,6 +121,8 @@ class SaleOrderLine(models.Model):
             item_id = item_obj.get_best_pricelist_item(
                 pricelist, product_id=product, qty=qty)
             res['value'].update({'item_id': item_id})
+            res['value']['price_unit'] = item_obj.browse(
+                item_id).price_get(product, qty, partner_id, uom)[0]
         return res
 
     @api.one
@@ -130,6 +132,10 @@ class SaleOrderLine(models.Model):
             self.discount = self.item_id.discount
             self.discount2 = self.item_id.discount2
             self.offer_id = self.item_id.offer.id
+            if self.product_id:
+                self.price_unit = self.item_id.price_get(
+                    self.product_id.id, self.product_uom_qty,
+                    self.order_id.partner_id.id, self.product_id.uom_id.id)[0]
 
 
 class SaleOrder(models.Model):
@@ -167,6 +173,12 @@ class SaleOrder(models.Model):
                                          line.order_id.partner_id)['taxes']:
             val += c.get('amount', 0.0)
         return val
+
+    @api.multi
+    def onchange_pricelist_id(self, pricelist_id, order_lines, context=None):
+        res = super(SaleOrder, self).onchange_pricelist_id(
+            pricelist_id, order_lines)
+        return res
 
     subtotal_ids = fields.One2many(
         comodel_name='sale.order.line.subtotal', inverse_name='sale_id',

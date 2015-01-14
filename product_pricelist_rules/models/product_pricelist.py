@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
+from openerp import models, fields, api, tools, _
 import openerp.addons.decimal_precision as dp
 
 
@@ -122,3 +122,50 @@ class PricelistItem(models.Model):
         if pricelist_item_ids:
             pricelist_item_id = pricelist_item_ids[0]
         return pricelist_item_id
+
+    @api.one
+    def price_get(self, product_id, qty, partner_id, uom_id):
+        currency_obj = self.env['res.currency']
+        product_obj = self.env['product.product']
+        price_type_obj = self.env['product.price.type']
+        product = product_obj.browse(product_id)
+        qty_uom_id = uom_id or product.uom_id.id
+        price_types = {}
+        if self.base == -1:
+            print "Otra tarifa"
+        elif self.base == -2:
+            print "Precios de proveedor"
+        else:
+            if self.base not in price_types:
+                price_types[self.base] = price_type_obj.browse(int(self.base))
+            price_type = price_types[self.base]
+            # price_get returns the price in the context UoM, i.e.
+            # qty_uom_id
+            price_uom_id = qty_uom_id
+            price = price_type.currency_id.compute(
+                product.product_tmpl_id._price_get(
+                    product, price_type.field)[product.id],
+                self.pricelist.currency_id,
+                round=False)
+        if price is not False:
+            price_limit = price
+            price = price * (1.0+(self.price_discount or 0.0))
+            if self.price_round:
+                price = tools.float_round(
+                    price, precision_rounding=self.price_round)
+            convert_to_price_uom = (
+                lambda price: product.uom_id._compute_price(
+                    price, price_uom_id))
+            if self.price_surcharge:
+                price_surcharge = convert_to_price_uom(self.price_surcharge)
+                price += price_surcharge
+            if self.price_min_margin:
+                price_min_margin = convert_to_price_uom(self.price_min_margin)
+                price = max(price, price_limit + price_min_margin)
+            if self.price_max_margin:
+                price_max_margin = convert_to_price_uom(self.price_max_margin)
+                price = min(price, price_limit + price_max_margin)
+        # Final price conversion to target UoM
+        uom_obj = self.env['product.uom']
+        price = uom_obj._compute_price(price_uom_id, price, qty_uom_id)
+        return price
