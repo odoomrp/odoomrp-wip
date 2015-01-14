@@ -21,8 +21,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/group" position="before">
                     <header>
-                        <button name="button_active" type="object" string="In active" attrs="{'invisible':[('state','!=',False)]}" class="oe_highlight" />
-                        <button name="button_active" type="object" string="In active" attrs="{'invisible':[('state','!=','draft')]}" class="oe_highlight" />
+                        <button name="button_activate" type="object" string="Activate" attrs="{'invisible':[('state','!=',False)]}" class="oe_highlight" />
+                        <button name="button_activate" type="object" string="Activate" attrs="{'invisible':[('state','!=','draft')]}" class="oe_highlight" />
                         <button name="button_historical" type="object" string="Historical" attrs="{'invisible':[('state','!=','active')]}" class="oe_highlight" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,open,paid" />
                     </header>
@@ -91,6 +91,9 @@
                 </field>
                 <field name="message_ids" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
+                </field>
+                <field name="active" position="attributes">
+                    <attribute name="readonly">1</attribute>
                 </field>
             </field>
         </record>

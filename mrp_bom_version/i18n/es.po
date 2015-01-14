@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-10 09:13+0000\n"
-"PO-Revision-Date: 2014-11-10 10:14+0100\n"
+"POT-Creation-Date: 2015-01-14 09:25+0000\n"
+"PO-Revision-Date: 2015-01-14 10:27+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_form_view_inh_version
+msgid "Activate"
+msgstr "Activar"
 
 #. module: mrp_bom_version
 #: view:mrp.bom:mrp_bom_version.view_mrp_bom_filter_inh_version
@@ -43,15 +48,10 @@ msgid "Historical Date"
 msgstr "Fecha historificación"
 
 #. module: mrp_bom_version
-#: view:mrp.bom:mrp_bom_version.mrp_bom_form_view_inh_version
-msgid "In active"
-msgstr "En activo"
-
-#. module: mrp_bom_version
 #: model:mail.message.subtype,description:mrp_bom_version.mt_active
 #: model:mail.message.subtype,name:mrp_bom_version.mt_active
 msgid "MRP BoM Active"
-msgstr "MRP BoM Active"
+msgstr "MRP LdM activa"
 
 #. module: mrp_bom_version
 #: view:mrp.bom:mrp_bom_version.mrp_bom_tree_view
@@ -79,7 +79,7 @@ msgid "Status"
 msgstr "Estatus"
 
 #. module: mrp_bom_version
-#: code:addons/mrp_bom_version/models/mrp.py:53
+#: code:addons/mrp_bom_version/models/mrp.py:52
 #, python-format
 msgid "The sequence must be unique"
 msgstr "La secuencia debe ser única."
