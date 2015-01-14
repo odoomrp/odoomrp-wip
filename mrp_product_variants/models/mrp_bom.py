@@ -33,6 +33,18 @@ class MrpBomLine(models.Model):
         compute='_get_possible_attribute_values')
 
     @api.one
+    @api.depends('product_id', 'product_template')
+    def _get_product_category(self):
+        self.product_uom_category = (self.product_id.uom_id.category_id or
+                                     self.product_template.uom_id.category_id)
+
+    product_uom_category = fields.Many2one(
+        comodel_name='product.uom.categ', string='UoM category',
+        compute="_get_product_category")
+    product_uom = fields.Many2one(
+        domain="[('category_id', '=', product_uom_category)]")
+
+    @api.one
     @api.depends('bom_id.product_tmpl_id',
                  'bom_id.product_tmpl_id.attribute_line_ids')
     def _get_possible_attribute_values(self):
@@ -41,16 +53,21 @@ class MrpBomLine(models.Model):
             attr_values |= attr_line.value_ids
         self.possible_values = attr_values.sorted()
 
-    @api.one
-    @api.onchange('product_id')
-    def onchange_product_product(self):
-        if not self.product_template:
-            self.product_template = self.product_id.product_tmpl_id
+    @api.multi
+    def onchange_product_id(self, product_id, product_qty=0):
+        res = super(MrpBomLine, self).onchange_product_id(
+            product_id, product_qty=product_qty)
+        if product_id:
+            product = self.env['product.product'].browse(product_id)
+            res['value']['product_template'] = product.product_tmpl_id.id
+        return res
 
     @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
         if self.product_template:
+            self.product_uom = (self.product_id.uom_id or
+                                self.product_template.uom_id)
             return {'domain': {'product_id': [('product_tmpl_id', '=',
                                                self.product_template.id)]}}
         return {'domain': {'product_id': []}}

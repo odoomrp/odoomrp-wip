@@ -11,6 +11,7 @@
                     position="before">
                     <field name="product_template" />
                     <field name="possible_values" invisible="1" />
+                    <field name="product_uom_category" invisible="1" />
                 </xpath>
                 <xpath
                     expr="//field[@name='bom_line_ids']//field[@name='product_id']"
@@ -38,6 +39,7 @@
                             <field name="product_id" string="Variant"/>
                             <field name="product_rounding" />
                             <field name="product_efficiency" />
+                            <field name="product_uom_category" invisible="1" />
                             <label for="product_qty" />
                             <div>
                                 <field name="product_qty" class="oe_inline" />
