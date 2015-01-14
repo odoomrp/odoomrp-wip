@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class MrpBom(models.Model):
@@ -53,6 +53,22 @@ class MrpBom(models.Model):
             if 'routing_wc_line' not in work_order:
                 work_order['routing_wc_line'] = routing_line_id
         return result2
+
+    @api.multi
+    @api.onchange('routing_id')
+    def onchange_routing_id(self):
+        for line in self.bom_line_ids:
+            line.operation = (self.routing_id.workcenter_lines and
+                              self.routing_id.workcenter_lines[0])
+        if self.routing_id:
+            return {'warning': {
+                    'title': _('Changing Routing'),
+                    'message': _("Changing routing will cause to change the"
+                                 " operation in which each component will be"
+                                 " consumed, by default it is set the first"
+                                 " one of the routing")
+                    }}
+        return {}
 
 
 class MrpBomLine(models.Model):
