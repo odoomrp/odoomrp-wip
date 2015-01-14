@@ -15,29 +15,51 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+
 from openerp import models, api
 
 
 class MrpBom(models.Model):
     _inherit = 'mrp.bom'
 
+    @api.multi
+    def onchange_product_tmpl_id(self, product_tmpl_id, product_qty=0):
+        res = super(MrpBom, self).onchange_product_tmpl_id(
+            product_tmpl_id, product_qty=product_qty)
+        if product_tmpl_id:
+            product_tmpl = self.env['product.template'].browse(product_tmpl_id)
+            res['value'].update({'code': product_tmpl.default_code})
+        return res
+
+    @api.one
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        if self.product_id:
+            self.code = self.product_id.default_code
+
     @api.model
     def create(self, values):
-        bom = super(MrpBom, self).create(values)
-        if bom.product_tmpl_id:
-            bom.code = bom.product_tmpl_id.reference_mask
-        elif bom.product_id:
-            bom.code = bom.product_id.default_code
-        return bom
+        if values.get('product_id'):
+            product = self.env['product.product'].browse(
+                values.get('product_id'))
+            values['code'] = ('%s%s') % (values.get('code', ''),
+                                         product.default_code or '')
+        elif values.get('product_tmpl_id'):
+            product = self.env['product.template'].browse(
+                values.get('product_tmpl_id'))
+            values['code'] = ('%s%s') % (values.get('code', ''),
+                                         product.default_code or '')
+        return super(MrpBom, self).create(values)
 
     @api.one
     def write(self, values):
         product_obj = self.env['product.product']
         template_obj = self.env['product.template']
-        if values.get('product_tmpl_id'):
-            product_tmpl = template_obj.browse(values.get('product_tmpl_id'))
-            values['code'] = product_tmpl.reference_mask
-        elif values.get('product_id'):
-            product = product_obj.browse(values.get('product_id'))
-            values['code'] = product.default_code
+        if 'code' in values and not values.get('code'):
+            product = (product_obj.browse(values.get('product_id'))
+                       or self.product_id)
+            if not product:
+                product = (template_obj.browse(values.get('product_tmpl_id'))
+                           or self.product_tmpl_id)
+            values['code'] = product.default_code or ''
         return super(MrpBom, self).write(values)
