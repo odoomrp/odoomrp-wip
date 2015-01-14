@@ -178,6 +178,15 @@ class SaleOrder(models.Model):
     def onchange_pricelist_id(self, pricelist_id, order_lines, context=None):
         res = super(SaleOrder, self).onchange_pricelist_id(
             pricelist_id, order_lines)
+        if pricelist_id:
+            item_obj = self.env['product.pricelist.item']
+            for line in order_lines:
+                item = item_obj.get_best_pricelist_item(
+                    pricelist_id,
+                    product_id=('product_id' in line[2] and
+                                line[2]['product_id']),
+                    qty=('product_uom_qty' in line[2] and
+                         line[2]['product_uom_qty']))
         return res
 
     subtotal_ids = fields.One2many(
