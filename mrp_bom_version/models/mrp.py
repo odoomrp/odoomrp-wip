@@ -33,6 +33,7 @@ class MrpBom(models.Model):
         maxseq = bom.sequence + 1
         return maxseq
 
+    active = fields.Boolean('Active', default=False)
     historical_date = fields.Date(string='Historical Date', readonly=True)
     state = fields.Selection([('draft', 'Draft'),
                               ('active', 'Active'),
