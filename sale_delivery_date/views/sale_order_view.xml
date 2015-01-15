@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="sale_order_delivery_date_form_view">
-            <field name="name">sale.order.delivery.date.form</field>
+        <record model="ir.ui.view" id="view_sales_order_filter_inh_delivery_date">
+            <field name="name">view.sales.order.filter.inh.delivery.date</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="inherit_id" ref="sale.view_sales_order_filter" />
             <field name="arch" type="xml">
-                <field name="date_order" position="after">
-                    <field name="delivery_date" />
+                <field name="name" position="before">
+                    <field name="requested_date" string="Requested Day" interval="day" />
+                    <field name="requested_date" string="Requested Week" interval="week" />
+                    <field name="requested_date" />
+                    <separator orientation="vertical"/>
+                    <field name="commitment_date" string="Commitment Day" interval="day" />
+                    <field name="commitment_date" string="Commitment Week" interval="week" />
+                    <field name="commitment_date" />
+                    <separator orientation="vertical"/>
+                    <field name="effective_date" string="Effective Day" interval="day" />
+                    <field name="effective_date" string="Effective Week" interval="week" />
+                    <field name="effective_date" />
                 </field>
-                <field name="order_line" position="attributes">
-                    <attribute name="context">{'default_delivery_date':delivery_date}</attribute>
-                </field>
-                <xpath expr="//field[@name='order_line']/form//field[@name='tax_id']" position="after">
-                    <field name="delivery_date" />
-                </xpath>
-            </field>
-        </record>
-        <record model="ir.ui.view" id="view_order_tree_inh_delivery_date">
-            <field name="name">view.order.tree.inh.delivery.date</field>
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_tree"/>
-            <field name="arch" type="xml">
-                <field name="date_order" position="after">
-                    <field name="delivery_date" />
-                </field>
+                <filter string="Order Month" position="before">
+                    <filter string="Requested Month" domain="[]" context="{'group_by':'requested_date'}"/>
+                    <filter string="Requested Week" context="{'group_by':'requested_date:week'}" />
+                    <filter string="Requested Day" context="{'group_by':'requested_date:day'}" />
+                    <separator orientation="vertical"/>
+                    <filter string="Commitment Month" domain="[]" context="{'group_by':'commitment_date'}"/>
+                    <filter string="Commitment Week" context="{'group_by':'commitment_date:week'}" />
+                    <filter string="Commitment Day" context="{'group_by':'commitment_date:day'}" />
+                    <separator orientation="vertical"/>
+                    <filter string="Effective Month" domain="[]" context="{'group_by':'effective_date'}"/>
+                    <filter string="Effective Week" context="{'group_by':'effective_date:week'}" />
+                    <filter string="Effective Day" context="{'group_by':'effective_date:day'}" />
+                </filter>
             </field>
         </record>
     </data>

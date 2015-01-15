@@ -1,0 +1,82 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_delivery_date
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-09 09:58+0000\n"
+"PO-Revision-Date: 2015-01-09 11:03+0100\n"
+"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: sale_delivery_date
+#: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
+msgid "Commitment Day"
+msgstr "Día compromiso"
+
+#. module: sale_delivery_date
+#: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
+msgid "Commitment Month"
+msgstr "Mes compromiso"
+
+#. module: sale_delivery_date
+#: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
+msgid "Commitment Week"
+msgstr "Semana compromiso"
+
+#. module: sale_delivery_date
+#: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
+msgid "Effective Day"
+msgstr "Día efectivo"
+
+#. module: sale_delivery_date
+#: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
+msgid "Effective Month"
+msgstr "Mes efectivo"
+
+#. module: sale_delivery_date
+#: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
+msgid "Effective Week"
+msgstr "Semana efectiva"
+
+#. module: sale_delivery_date
+#: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
+msgid "Order Month"
+msgstr "Mes del pedido"
+
+#. module: sale_delivery_date
+#: field:sale.order.line,price_reduce:0
+msgid "Price Reduce"
+msgstr "Reducir precio"
+
+#. module: sale_delivery_date
+#: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
+msgid "Requested Day"
+msgstr "Día solicitud"
+
+#. module: sale_delivery_date
+#: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
+msgid "Requested Month"
+msgstr "Mes solicitud"
+
+#. module: sale_delivery_date
+#: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
+msgid "Requested Week"
+msgstr "Semana solicitud"
+
+#. module: sale_delivery_date
+#: model:ir.model,name:sale_delivery_date.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: sale_delivery_date
+#: model:ir.model,name:sale_delivery_date.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea pedido de venta"
+
