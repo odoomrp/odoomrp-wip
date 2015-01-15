@@ -28,23 +28,23 @@ class MrpRepair(models.Model):
     @api.model
     def action_repair_end(self):
         analytic_line_obj = self.env['account.analytic.line']
-        journal_obj = self.env['account.analytic.journal']
-        journal = journal_obj.search([('code', '=', 'MAT')], limit=1)
-        if not journal:
-            raise exceptions.Warning(
-                _('Error!: Materials journal not found'))
-        if not self.analytic_account:
-            raise exceptions.Warning(
-                _('Error!: You must define analytic account'))
+
         result = super(MrpRepair, self).action_repair_end()
-        for line in self.fees_lines:
-            vals = self._catch_repair_line_information_for_analytic(
-                line, journal)
-            analytic_line_obj.create(vals)
-        for line in self.operations:
-            vals = self._catch_repair_line_information_for_analytic(
-                line, journal)
-            analytic_line_obj.create(vals)
+        if self.analytic_account:
+            journal = self.env.ref(
+                'mrp_production_project_estimated_cost.analytic_journal_'
+                'materials', False)
+            if not journal:
+                raise exceptions.Warning(
+                    _('Error!: Materials journal not found'))
+            for line in self.fees_lines:
+                vals = self._catch_repair_line_information_for_analytic(
+                    line, journal)
+                analytic_line_obj.create(vals)
+            for line in self.operations:
+                vals = self._catch_repair_line_information_for_analytic(
+                    line, journal)
+                analytic_line_obj.create(vals)
         return result
 
     def _catch_repair_line_information_for_analytic(self, line, journal):
@@ -64,10 +64,9 @@ class MrpRepair(models.Model):
                 'unit_amount': line.product_uom_qty,
                 'product_uom_id': line.product_uom.id,
                 'amount': amount,
-                'journal_id': journal.id
+                'journal_id': journal.id,
+                'account_id': self.analytic_account.id
                 }
-        if self.analytic_account:
-            vals.update({'account_id': self.analytic_account.id})
         if general_account:
             vals.update({'general_account_id': general_account.id})
         return vals
