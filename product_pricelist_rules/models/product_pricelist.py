@@ -100,17 +100,18 @@ class PricelistItem(models.Model):
         domain.extend(['&', ('product_id', '=', False),
                        '&', ('product_tmpl_id', '=', False),
                        ('categ_id', '=', False)])
-        item_ids = self.search(domain,
+        items = self.search(domain,
                                order='min_quantity desc,sequence asc')
-        for item in item_ids:
+        item_ids = items.ids
+        for item in items:
             if item.base == -1:
-                item_ids.remove(item)
+                item_ids.remove(item.id)
                 new_item_ids = self.domain_by_pricelist(
-                    item.base_pricelist_id, product_id=product_id,
+                    item.base_pricelist_id.id, product_id=product_id,
                     product_tmpl_id=product_tmpl_id, categ_id=categ_id,
                     qty=qty)
                 item_ids += new_item_ids
-        return item_ids.ids
+        return item_ids
 
     @api.model
     def get_best_pricelist_item(self, pricelist_id, product_id=False,
@@ -129,12 +130,34 @@ class PricelistItem(models.Model):
         product_obj = self.env['product.product']
         price_type_obj = self.env['product.price.type']
         product = product_obj.browse(product_id)
+        price = False
         qty_uom_id = uom_id or product.uom_id.id
         price_types = {}
         if self.base == -1:
-            print "Otra tarifa"
+            # TODO: "Otra tarifa"
+            if self.base_pricelist_id:
+                price_tmp = self._price_get_multi(cr, uid,
+                        self.base_pricelist_id, [(product,
+                        qty, False)], context=context)[product.id]
+                ptype_src = self.base_pricelist_id.currency_id.id
+                price_uom_id = qty_uom_id
+                price = currency_obj.compute(cr, uid,
+                        ptype_src, pricelist.currency_id.id,
+                        price_tmp, round=False,
+                        context=context)
         elif self.base == -2:
-            print "Precios de proveedor"
+            seller = False
+            for seller_id in product.seller_ids:
+                if (not partner_id) or (seller_id.name.id != partner_id):
+                    continue
+                seller = seller_id
+            if not seller and product.seller_ids:
+                seller = product.seller_ids[0]
+            if seller:
+                qty_in_seller_uom = qty
+                for line in seller.pricelist_ids:
+                    if line.min_quantity <= qty_in_seller_uom:
+                        price = line.price
         else:
             if self.base not in price_types:
                 price_types[self.base] = price_type_obj.browse(int(self.base))

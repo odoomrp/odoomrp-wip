@@ -116,13 +116,16 @@ class SaleOrderLine(models.Model):
             name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
             date_order=date_order, packaging=packaging,
             fiscal_position=fiscal_position, flag=flag)
+        item_obj = self.env['product.pricelist.item']
         if product:
-            item_obj = self.env['product.pricelist.item']
             item_id = item_obj.get_best_pricelist_item(
                 pricelist, product_id=product, qty=qty)
             res['value'].update({'item_id': item_id})
             res['value']['price_unit'] = item_obj.browse(
                 item_id).price_get(product, qty, partner_id, uom)[0]
+        res['domain']['item_id'] = (
+            [('id', 'in', item_obj.domain_by_pricelist(
+                pricelist, product_id=product, qty=qty))])
         return res
 
     @api.one
