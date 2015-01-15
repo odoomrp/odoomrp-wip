@@ -15,7 +15,7 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
 
 
 class MrpRepair(models.Model):
@@ -28,20 +28,26 @@ class MrpRepair(models.Model):
     @api.model
     def action_repair_end(self):
         analytic_line_obj = self.env['account.analytic.line']
-        factor_obj = self.env['hr_timesheet_invoice.factor']
+        journal_obj = self.env['account.analytic.journal']
+        journal = journal_obj.search([('code', '=', 'MAT')], limit=1)
+        if not journal:
+            raise exceptions.Warning(
+                _('Error!: Materials journal not found'))
+        if not self.analytic_account:
+            raise exceptions.Warning(
+                _('Error!: You must define analytic account'))
         result = super(MrpRepair, self).action_repair_end()
-        factor = factor_obj.search([('factor', '=', 0)], limit=1)
         for line in self.fees_lines:
             vals = self._catch_repair_line_information_for_analytic(
-                line, factor)
+                line, journal)
             analytic_line_obj.create(vals)
         for line in self.operations:
             vals = self._catch_repair_line_information_for_analytic(
-                line, factor)
+                line, journal)
             analytic_line_obj.create(vals)
         return result
 
-    def _catch_repair_line_information_for_analytic(self, line, factor):
+    def _catch_repair_line_information_for_analytic(self, line, journal):
         analytic_line_obj = self.env['account.analytic.line']
         name = self.name
         if line.product_id.default_code:
@@ -50,14 +56,15 @@ class MrpRepair(models.Model):
         general_account = (line.product_id.property_account_income or
                            categ_id.property_account_income_categ or
                            False)
+        amount = line.product_id.standard_price * line.product_uom_qty * -1
         vals = {'name': name,
                 'user_id': line.user_id.id,
                 'date': analytic_line_obj._get_default_date(),
                 'product_id': line.product_id.id,
                 'unit_amount': line.product_uom_qty,
                 'product_uom_id': line.product_uom.id,
-                'amount': line.product_id.standard_price,
-                'to_invoice': factor.id
+                'amount': amount,
+                'journal_id': journal.id
                 }
         if self.analytic_account:
             vals.update({'account_id': self.analytic_account.id})
