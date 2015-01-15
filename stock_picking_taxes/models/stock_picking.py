@@ -76,8 +76,9 @@ class StockPicking(models.Model):
         currency = order.currency_id.with_context(
             date=order.date_order or fields.Date.context_today(order))
         for move in picking.move_lines:
-            taxes = move.procurement_id.sale_line_id.tax_id.compute_all(
-                move.price_unit, move.product_qty, move.product_id,
+            sale_line = move.procurement_id.sale_line_id.tax_id
+            taxes = sale_line.tax_id.compute_all(
+                sale_line.price_unit, move.product_qty, move.product_id,
                 picking.partner_id)['taxes']
             for tax in taxes:
                 val = {
