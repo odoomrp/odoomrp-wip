@@ -68,6 +68,20 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="mrp_bom_line_extended_tree_form">
+            <field name="name">mrp.bom.line.tree</field>
+            <field name="model">mrp.bom.line</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="attributes">
+                    <attribute name="string">Variant</attribute>
+                </field>
+                <field name="product_id" position="before">
+                    <field name="product_template" />
+                </field>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="mrp_production_extended_form_view">
             <field name="name">mrp.production.extended.form</field>
             <field name="model">mrp.production</field>
