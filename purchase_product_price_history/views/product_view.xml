@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <menuitem id="product_price_history.menu_product_price_history"
+            parent="purchase.menu_procurement_management_product"
+            action="product_price_history.action_product_price_history"
+            sequence="1000" />
+    </data>
+</openerp>

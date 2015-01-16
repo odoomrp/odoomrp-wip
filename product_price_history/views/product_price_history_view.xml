@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_product_price_history_from_product"
+            model="ir.ui.view">
+            <field name="name">product.price.history.tree</field>
+            <field name="model">product.price.history</field>
+            <field name="arch" type="xml">
+                <tree string="Historic Prices" create="false">
+                    <field name="datetime" />
+                    <field name="company_id" groups="base.group_multi_company"
+                        invisible="1" />
+                    <field name="product_template_id" />
+                    <field name="product" />
+                    <field name="cost" />
+                    <field name="cost_type" invisible="1" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_price_history_filter" model="ir.ui.view">
+            <field name="name">product.price.history.filter</field>
+            <field name="model">product.price.history</field>
+            <field name="arch" type="xml">
+                <search string="Search Prices History">
+                    <field name="product_template_id" />
+                    <field name="product" />
+                    <field name="company_id" groups="base.group_multi_company" />
+                    <group expand="0" string="Group By...">
+                        <filter string="Date" name="group_date"
+                            icon="terp-go-month" domain="[]"
+                            context="{'group_by':'datetime'}" />
+                        <filter string="Product" name="group_product_template_id"
+                            domain="[]" context="{'group_by':'product_template_id'}" />
+                        <filter string="Product Variant" name="group_product_id"
+                            domain="[]" context="{'group_by':'product'}" />
+                        <filter string="Cost Type" name="group_cost_type"
+                            domain="[]" context="{'group_by':'cost_type'}" />
+                        <filter string="Company" domain="[]"
+                            name="group_company_id" context="{'group_by':'company_id'}"
+                            groups="base.group_multi_company" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_price_history" model="ir.actions.act_window">
+            <field name="name">Prices History</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.price.history</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_product_price_history_from_product" />
+            <field name="search_view_id" ref="view_product_price_history_filter" />
+            <field name="context">{'search_default_group_product_template_id':1,'group_by':[]}
+            </field>
+        </record>
+
+        <record id="action_product_price_history" model="ir.actions.act_window">
+            <field name="name">Price history by product</field>
+            <field name="res_model">product.price.history</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_product_price_history_filter" />
+        </record>
+
+        <menuitem id="menu_product_price_history" parent="base.menu_product"
+            action="action_product_price_history" sequence="1000" />
+    </data>
+</openerp>
