@@ -17,11 +17,15 @@
 #
 ##############################################################################
 
-from openerp import models, api
+from openerp import models, api, fields
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
+
+    sale_data = fields.Datetime(
+        comodel_name='sale.order', string='Sale Date',
+        related='order_id.date_order', store=True)
 
     @api.multi
     def action_sale_product_prices(self):
