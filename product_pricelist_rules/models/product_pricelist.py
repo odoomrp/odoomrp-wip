@@ -57,7 +57,8 @@ class PricelistItem(models.Model):
 
     @api.onchange('price_version_id')
     def onchange_price_version(self):
-        self.pricelist = self.price_version_id.pricelist_id
+        self.pricelist = (self.price_version_id.pricelist_id or
+                          self.env.context.get('default_pricelist'))
 
     @api.one
     def _item_formula(self):
@@ -125,7 +126,6 @@ class PricelistItem(models.Model):
 
     @api.one
     def price_get(self, product_id, qty, partner_id, uom_id):
-        currency_obj = self.env['res.currency']
         product_obj = self.env['product.product']
         price_type_obj = self.env['product.price.type']
         product = product_obj.browse(product_id)

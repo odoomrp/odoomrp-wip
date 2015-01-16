@@ -99,11 +99,19 @@
             <field name="model">product.pricelist</field>
             <field name="inherit_id" ref="product.product_pricelist_view" />
             <field name="arch" type="xml">
-                <field name="version_id" position="attributes">
-                    <attribute name="context">{'type':type,'default_pricelist_id':id}</attribute>
-                </field>
                 <field name="items_id" position="attributes">
-                    <attribute name="context">{'type':type,'default_price_version_id':id}</attribute>
+                    <attribute name="context">{'type':type,'default_pricelist':parent.id,'default_price_version_id':id}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pricelist_form_version_view">
+            <field name="name">product.pricelist.version.form</field>
+            <field name="model">product.pricelist.version</field>
+            <field name="inherit_id" ref="product.product_pricelist_version_form_view" />
+            <field name="arch" type="xml">
+                <field name="items_id" position="attributes">
+                    <attribute name="context">{'default_pricelist':pricelist_id,'default_price_version_id':id}</attribute>
                 </field>
             </field>
         </record>

@@ -99,9 +99,10 @@ class SaleOrderLine(models.Model):
                  'order_id.pricelist_id')
     def _get_possible_items(self):
         item_obj = self.env['product.pricelist.item']
-        self.possible_item_ids = item_obj.domain_by_pricelist(
+        item_ids = item_obj.domain_by_pricelist(
             self.order_id.pricelist_id.id, product_id=self.product_id.id,
             product_tmpl_id=self.product_template.id, qty=self.product_uom_qty)
+        self.possible_item_ids = [(6, 0, item_ids)]
 
     _sql_constraints = [
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
@@ -194,7 +195,7 @@ class SaleOrder(models.Model):
         if pricelist_id:
             item_obj = self.env['product.pricelist.item']
             for line in order_lines:
-                item = item_obj.get_best_pricelist_item(
+                line.item_id = item_obj.get_best_pricelist_item(
                     pricelist_id,
                     product_id=('product_id' in line[2] and
                                 line[2]['product_id']),

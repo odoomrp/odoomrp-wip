@@ -7,9 +7,6 @@
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
                 <data>
-                    <field name="order_line" position="attributes">
-                        <attribute name="context">{'pricelist_id':pricelist_id}</attribute>
-                    </field>
                     <xpath
                         expr="//field[@name='order_line']/form//div[@name='discount']"
                         position="after">
