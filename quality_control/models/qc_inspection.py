@@ -142,8 +142,12 @@ class QcInspection(models.Model):
 
     @api.multi
     def set_test(self, test, force_fill=False):
-        self.write({'test': test.id})
         for inspection in self:
+            header = self._prepare_inspection_header(
+                inspection.object_id, test)
+            del header['status']  # don't change current status
+            del header['auto_generated']  # don't change auto_generated flag
+            inspection.write(header)
             self.inspection_lines.unlink()
             inspection.inspection_lines = inspection._prepare_inspection_lines(
                 test, force_fill=force_fill)
