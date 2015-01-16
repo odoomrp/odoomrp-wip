@@ -100,8 +100,7 @@ class PricelistItem(models.Model):
         domain.extend(['&', ('product_id', '=', False),
                        '&', ('product_tmpl_id', '=', False),
                        ('categ_id', '=', False)])
-        items = self.search(domain,
-                               order='min_quantity desc,sequence asc')
+        items = self.search(domain, order='min_quantity desc,sequence asc')
         item_ids = items.ids
         for item in items:
             if item.base == -1:
@@ -134,17 +133,14 @@ class PricelistItem(models.Model):
         qty_uom_id = uom_id or product.uom_id.id
         price_types = {}
         if self.base == -1:
-            # TODO: "Otra tarifa"
             if self.base_pricelist_id:
-                price_tmp = self._price_get_multi(cr, uid,
-                        self.base_pricelist_id, [(product,
-                        qty, False)], context=context)[product.id]
-                ptype_src = self.base_pricelist_id.currency_id.id
+                price_tmp = self.base_pricelist_id._price_get_multi(
+                    self.base_pricelist_id,
+                    [(product, qty, False)])[product.id]
+                ptype_src = self.base_pricelist_id.currency_id
                 price_uom_id = qty_uom_id
-                price = currency_obj.compute(cr, uid,
-                        ptype_src, pricelist.currency_id.id,
-                        price_tmp, round=False,
-                        context=context)
+                price = ptype_src.compute(
+                    price_tmp, self.pricelist.currency_id, round=False)
         elif self.base == -2:
             seller = False
             for seller_id in product.seller_ids:

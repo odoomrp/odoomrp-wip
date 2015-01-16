@@ -82,13 +82,26 @@ class SaleOrderLine(models.Model):
     offer_id = fields.Many2one(
         comodel_name='product.pricelist.item.offer', string='Offer')
     item_id = fields.Many2one(
-        comodel_name='product.pricelist.item', string='Pricelist Item')
+        comodel_name='product.pricelist.item', string='Pricelist Item',
+        domain="[('id', 'in', possible_item_ids[0][2])]")
+    possible_item_ids = fields.Many2many(
+        comodel_name='product.pricelist.item',
+        compute='_get_possible_items')
     subtotal_ids = fields.One2many(
         comodel_name='sale.order.line.subtotal', inverse_name='line_id',
         string='Subtotals by pricelist')
     price_subtotal = fields.Float(
         string='Subtotal', digits=dp.get_precision('Account'),
         compute=_amount_line)
+
+    @api.one
+    @api.depends('product_id', 'product_uom_qty',
+                 'order_id.pricelist_id')
+    def _get_possible_items(self):
+        item_obj = self.env['product.pricelist.item']
+        self.possible_item_ids = item_obj.domain_by_pricelist(
+            self.order_id.pricelist_id.id, product_id=self.product_id.id,
+            product_tmpl_id=self.product_template.id, qty=self.product_uom_qty)
 
     _sql_constraints = [
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
@@ -123,9 +136,6 @@ class SaleOrderLine(models.Model):
             res['value'].update({'item_id': item_id})
             res['value']['price_unit'] = item_obj.browse(
                 item_id).price_get(product, qty, partner_id, uom)[0]
-        res['domain']['item_id'] = (
-            [('id', 'in', item_obj.domain_by_pricelist(
-                pricelist, product_id=product, qty=qty))])
         return res
 
     @api.one
