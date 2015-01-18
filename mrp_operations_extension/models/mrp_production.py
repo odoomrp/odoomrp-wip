@@ -68,15 +68,6 @@ class MrpProduction(models.Model):
             move.work_order = line.work_order.id
         return res
 
-    #@api.multi
-    #def action_compute(self, properties=None):
-        #res = super(MrpProduction, self).action_compute(properties=properties)
-        #if not any([x.do_production for x in self.workcenter_lines]):
-            #raise exceptions.Warning(
-                #_('At least one operation must have checked "Move produced '
-                  #'quantity to stock" field'))
-        #return res
-
 
 class MrpProductionProductLine(models.Model):
     _inherit = 'mrp.production.product.line'
@@ -93,4 +84,3 @@ class MrpProductionWorkcenterLine(models.Model):
     routing_wc_line = fields.Many2one('mrp.routing.workcenter',
                                       string='Routing WC Line')
     do_production = fields.Boolean(string='Produce here')
-
