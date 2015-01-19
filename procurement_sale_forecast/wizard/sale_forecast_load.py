@@ -103,7 +103,7 @@ class SaleForecastLoad(models.TransientModel):
         for sale in sales:
             forecast = self.forecast_id.id
             product = sale.product_id.id
-            partner = sale.order_id.partner_id.id
+            partner = self.partner_id.id
             forecast_lines = forecast_line_obj.search(
                 [('product_id', '=', product),
                  ('partner_id', '=', partner),

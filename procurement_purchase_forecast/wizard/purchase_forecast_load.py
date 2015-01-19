@@ -102,7 +102,7 @@ class PurchaseForecastLoad(models.TransientModel):
         res = {}
         for purchase in purchases:
             forecast = self.forecast_id.id
-            partner = purchase.order_id.partner_id.id
+            partner = self.partner_id.id
             product = purchase.product_id.id
             forecast_lines = forecast_line_obj.search(
                 [('product_id', '=', product),
