@@ -37,7 +37,6 @@
     "complexity": "normal",
     "summary": "",
     "data": [
-        "views/product_view.xml",
         "views/sale_pricelist_view.xml",
         "views/sale_view.xml",
         "security/ir.model.access.csv",
