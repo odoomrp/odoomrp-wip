@@ -18,6 +18,7 @@
 
 from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
+from lxml import etree
 
 
 class PurchaseOrderLineSubtotal(models.Model):
@@ -75,9 +76,19 @@ class PurchaseOrderLine(models.Model):
         cur = self.order_id.pricelist_id.currency_id
         self.price_subtotal = cur.round(taxes['total'])
 
+    @api.one
+    @api.depends('product_id', 'product_qty',
+                 'order_id.pricelist_id')
+    def _get_possible_items(self):
+        item_obj = self.env['product.pricelist.item']
+        item_ids = item_obj.domain_by_pricelist(
+            self.order_id.pricelist_id.id, product_id=self.product_id.id,
+            qty=self.product_qty)
+        self.possible_item_ids = [(6, 0, item_ids)]
+
     discount2 = fields.Float(
         string='Discount (%)', digits=dp.get_precision('Discount'),
-        readonly=True, states={'draft': [('readonly', False)]}, default=0.0)
+        default=0.0)
     offer_id = fields.Many2one(
         comodel_name='product.pricelist.item.offer', string='Offer')
     item_id = fields.Many2one(
@@ -91,17 +102,7 @@ class PurchaseOrderLine(models.Model):
         string='Subtotals by pricelist')
     price_subtotal = fields.Float(
         string='Subtotal', digits=dp.get_precision('Account'),
-        compute=_amount_line)
-
-    @api.one
-    @api.depends('product_id', 'product_qty',
-                 'order_id.pricelist_id')
-    def _get_possible_items(self):
-        item_obj = self.env['product.pricelist.item']
-        item_ids = item_obj.domain_by_pricelist(
-            self.order_id.pricelist_id.id, product_id=self.product_id.id,
-            product_tmpl_id=self.product_template.id, qty=self.product_qty)
-        self.possible_item_ids = [(6, 0, item_ids)]
+        compute='_amount_line')
 
     _sql_constraints = [
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
@@ -128,13 +129,13 @@ class PurchaseOrderLine(models.Model):
             date_order=date_order, fiscal_position_id=fiscal_position_id,
             date_planned=date_planned, name=name, price_unit=price_unit,
             state=state)
-#         item_obj = self.env['product.pricelist.item']
-#         if product:
-#             item_id = item_obj.get_best_pricelist_item(
-#                 pricelist, product_id=product, qty=qty)
-#             res['value'].update({'item_id': item_id})
-#             res['value']['price_unit'] = item_obj.browse(
-#                 item_id).price_get(product, qty, partner_id, uom)[0]
+        if product_id:
+            item_obj = self.env['product.pricelist.item']
+            item_id = item_obj.get_best_pricelist_item(
+                pricelist_id, product_id=product_id, qty=qty)
+            res['value'].update({'item_id': item_id})
+            res['value']['price_unit'] = item_obj.browse(
+                item_id).price_get(product_id, qty, partner_id, uom_id)[0]
         return res
 
     @api.one
@@ -146,12 +147,35 @@ class PurchaseOrderLine(models.Model):
             self.offer_id = self.item_id.offer.id
             if self.product_id:
                 self.price_unit = self.item_id.price_get(
-                    self.product_id.id, self.product_uom_qty,
+                    self.product_id.id, self.product_qty,
                     self.order_id.partner_id.id, self.product_id.uom_id.id)[0]
 
 
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
+
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
+                        context=None, toolbar=False, submenu=False):
+        res = super(PurchaseOrder, self).fields_view_get(
+            cr, uid, view_id=view_id, view_type=view_type, context=context,
+            toolbar=toolbar, submenu=submenu)
+        if view_type == 'form':
+            eview = etree.fromstring(res['arch'])
+
+            def _check_rec(eview):
+                if eview.attrib.get('name', '') == 'order_line':
+                    context = eview.attrib.get(
+                        'context', '{}').replace(
+                        '}', ",'pricelist_id':pricelist_id}").replace(
+                        '{,', '{')
+                    eview.set('context', context)
+                for child in eview:
+                    _check_rec(child)
+                return True
+
+            _check_rec(eview)
+            res['arch'] = etree.tostring(eview)
+        return res
 
     @api.model
     def _amount_line_tax(self, line):
@@ -163,6 +187,18 @@ class PurchaseOrder(models.Model):
                                          line.order_id.partner_id)['taxes']:
             val += c.get('amount', 0.0)
         return val
+
+    @api.multi
+    def onchange_pricelist(self, pricelist_id, context=None):
+        res = super(PurchaseOrder, self).onchange_pricelist(
+            pricelist_id)
+        if pricelist_id:
+            item_obj = self.env['product.pricelist.item']
+            for line in self.order_line:
+                line.item_id = item_obj.get_best_pricelist_item(
+                    pricelist_id, product_id=line.product_id,
+                    qty=line.product_uom_qty)
+        return res
 
     subtotal_ids = fields.One2many(
         comodel_name='purchase.order.line.subtotal',

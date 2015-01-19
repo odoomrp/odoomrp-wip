@@ -8,7 +8,7 @@
                 <field name="arch" type="xml">
                     <div name="buttons" position="inside">
                         <button class="oe_inline oe_stat_button" name="show_pricelists" type="object"
-                            icon="fa-money" string="Pricelists" >
+                            icon="fa-money" string="Pricelists Rules" >
                         </button>
                    </div>
             </field>

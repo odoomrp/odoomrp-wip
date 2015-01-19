@@ -136,5 +136,38 @@
             </field>
         </record>
 
+        <record id="pricelist_items_action" model="ir.actions.act_window">
+            <field name="name">Pricelist Items</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.pricelist.item</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">
+                {'search_default_pricelist_type_id':1}
+            </field>
+        </record>
+
+        <record id="pricelist_items_action_form_view" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="pricelist_items_action" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="pricelist_item_form_view_ext2" />
+            <field name="sequence" eval="15" />
+        </record>
+
+        <record id="pricelist_items_action_tree_view" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="pricelist_items_action" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="pricelist_item_tree_view_ext2" />
+            <field name="sequence" eval="5" />
+        </record>
+
+        <record id="pricelist_item_offers_action" model="ir.actions.act_window">
+            <field name="name">Pricelist Item Offers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.pricelist.item.offer</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
     </data>
 </openerp>

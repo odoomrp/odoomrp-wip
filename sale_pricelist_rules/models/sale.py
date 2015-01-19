@@ -18,6 +18,7 @@
 
 from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
+from lxml import etree
 
 
 class SaleOrderLineSubtotal(models.Model):
@@ -48,7 +49,7 @@ class SaleOrderLineSubtotal(models.Model):
         ondelete='cascade')
     subtotal = fields.Float(
         string='Subtotal', digits=dp.get_precision('Account'),
-        compute=_calculate_subtotal)
+        compute='_calculate_subtotal')
 
 
 class SaleOrderLine(models.Model):
@@ -75,6 +76,16 @@ class SaleOrderLine(models.Model):
         cur = self.order_id.pricelist_id.currency_id
         self.price_subtotal = cur.round(taxes['total'])
 
+    @api.one
+    @api.depends('product_id', 'product_uom_qty',
+                 'order_id.pricelist_id')
+    def _get_possible_items(self):
+        item_obj = self.env['product.pricelist.item']
+        item_ids = item_obj.domain_by_pricelist(
+            self.order_id.pricelist_id.id, product_id=self.product_id.id,
+            qty=self.product_uom_qty)
+        self.possible_item_ids = [(6, 0, item_ids)]
+
     discount2 = fields.Float(
         string='Discount (%)', digits=dp.get_precision('Discount'),
         readonly=True, states={'draft': [('readonly', False)]}, default=0.0)
@@ -91,17 +102,7 @@ class SaleOrderLine(models.Model):
         string='Subtotals by pricelist')
     price_subtotal = fields.Float(
         string='Subtotal', digits=dp.get_precision('Account'),
-        compute=_amount_line)
-
-    @api.one
-    @api.depends('product_id', 'product_uom_qty',
-                 'order_id.pricelist_id')
-    def _get_possible_items(self):
-        item_obj = self.env['product.pricelist.item']
-        item_ids = item_obj.domain_by_pricelist(
-            self.order_id.pricelist_id.id, product_id=self.product_id.id,
-            product_tmpl_id=self.product_template.id, qty=self.product_uom_qty)
-        self.possible_item_ids = [(6, 0, item_ids)]
+        compute='_amount_line')
 
     _sql_constraints = [
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
@@ -154,6 +155,29 @@ class SaleOrderLine(models.Model):
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
+                        context=None, toolbar=False, submenu=False):
+        res = super(SaleOrder, self).fields_view_get(
+            cr, uid, view_id=view_id, view_type=view_type, context=context,
+            toolbar=toolbar, submenu=submenu)
+        if view_type == 'form':
+            eview = etree.fromstring(res['arch'])
+
+            def _check_rec(eview):
+                if eview.attrib.get('name', '') == 'order_line':
+                    context = eview.attrib.get(
+                        'context', '{}').replace(
+                        '}', ",'pricelist_id':pricelist_id}").replace(
+                        '{,', '{')
+                    eview.set('context', context)
+                for child in eview:
+                    _check_rec(child)
+                return True
+
+            _check_rec(eview)
+            res['arch'] = etree.tostring(eview)
+        return res
+
     @api.model
     def _amount_line_tax(self, line):
         val = 0.0
@@ -171,13 +195,10 @@ class SaleOrder(models.Model):
             pricelist_id, order_lines)
         if pricelist_id:
             item_obj = self.env['product.pricelist.item']
-            for line in order_lines:
+            for line in self.order_line:
                 line.item_id = item_obj.get_best_pricelist_item(
-                    pricelist_id,
-                    product_id=('product_id' in line[2] and
-                                line[2]['product_id']),
-                    qty=('product_uom_qty' in line[2] and
-                         line[2]['product_uom_qty']))
+                    pricelist_id, product_id=line.product_id,
+                    qty=line.product_uom_qty)
         return res
 
     subtotal_ids = fields.One2many(
