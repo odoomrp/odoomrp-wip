@@ -65,7 +65,7 @@ class QcInspection(models.Model):
                         crm_claim_obj.create(vals)
                     elif line.tolerance_status == 'tolerable':
                         vals = inspection.init_claim_vals_line(line)
-                        vals['categ_id': idi_categ.id]
+                        vals['categ_id'] = idi_categ.id
                         crm_claim_obj.create(vals)
 
     def init_claim_vals(self):
