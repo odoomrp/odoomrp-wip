@@ -6,15 +6,24 @@
             <field name="model">product.pricelist.item</field>
             <field name="inherit_id" ref="product.product_pricelist_item_form_view" />
             <field name="arch" type="xml">
-                <field name="product_id" position="before">
-                    <field name="pricelist" />
-                    <field name="price_version_id" />
-                </field>
                 <field name="price_max_margin" position="after">
                     <newline />
                     <field name="discount" />
                     <field name="discount2" />
                     <field name="offer" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pricelist_item_form_view_ext2">
+            <field name="name">product.pricelist.item.form.ext</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="pricelist_item_form_view_ext" />
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <field name="product_id" position="before">
+                    <field name="pricelist" />
+                    <field name="price_version_id" />
                 </field>
             </field>
         </record>
@@ -25,9 +34,7 @@
             <field name="inherit_id" ref="product.product_pricelist_item_tree_view" />
             <field name="arch" type="xml">
                 <field name="name" position="before">
-                    <field name="pricelist" />
                     <field name="pricelist_type" invisible="1" />
-                    <field name="price_version_id" />
                 </field>
                 <field name="min_quantity" position="after">
                     <field name="discount" />
@@ -37,6 +44,19 @@
                 </field>
                 <field name="base" position="after">
                     <field name="item_formula" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pricelist_item_tree_view_ext2">
+            <field name="name">product.pricelist.item.tree.ext</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="pricelist_item_tree_view_ext" />
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="pricelist" />
+                    <field name="price_version_id" />
                 </field>
             </field>
         </record>
@@ -100,7 +120,7 @@
             <field name="inherit_id" ref="product.product_pricelist_view" />
             <field name="arch" type="xml">
                 <field name="items_id" position="attributes">
-                    <attribute name="context">{'type':type,'default_pricelist':parent.id,'default_price_version_id':id}</attribute>
+                    <attribute name="context">{'type':type,'form_view_ref':'product.product_pricelist_item_form_view','tree_view_ref':'product.product_pricelist_item_tree_view'}</attribute>
                 </field>
             </field>
         </record>
@@ -111,7 +131,7 @@
             <field name="inherit_id" ref="product.product_pricelist_version_form_view" />
             <field name="arch" type="xml">
                 <field name="items_id" position="attributes">
-                    <attribute name="context">{'default_pricelist':pricelist_id,'default_price_version_id':id}</attribute>
+                    <attribute name="context">{'form_view_ref':'product.product_pricelist_item_form_view','tree_view_ref':'product.product_pricelist_item_tree_view'}</attribute>
                 </field>
             </field>
         </record>
