@@ -8,7 +8,13 @@
             <field name="arch" type="xml">
                 <data>
                     <field name="date_planned" position="before">
+                        <field name="name"/>
                         <field name="plan" />
+                    </field>
+                    <field name="state" position="after">
+                        <field name="rule_id"/>
+                        <field name="purchase_id"/>
+                        <field name="production_id"/>
                     </field>
                 </data>
             </field>
@@ -35,11 +41,25 @@
             <field name="inherit_id" ref="procurement.view_procurement_filter"/>
             <field name="arch" type="xml">
                 <data>
-                    <field name="origin" position="before">
+                    <field name="product_id" position="after">
                         <field name="plan" />
+                        <field name="origin" />
+                        <field name="location_id" />
+                        <field name="rule_id" />
+                        <field name="purchase_id" />
+                        <field name="production_id" />
                     </field>
-                    <filter string="Product" position="before">
+                    <field name="state" position="after">
+                        <filter string="Plan" domain="[('plan', '!=', False)]"/>
+                        <filter string="Purchase" domain="[('purchase_id', '!=', False)]"/>
+                        <filter string="Production" domain="[('production_id', '!=' ,False)]"/>
+                    </field>
+                    <filter string="Status" position="after">
                         <filter string="Plan" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'plan'}"/>
+                        <filter string="Origin" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'origin'}"/>
+                        <filter string="Location" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'location_id'}"/>
+                        <filter string="Rule" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'rule_id'}"/>
+                        <filter string="Production" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'production_id'}"/>
                     </filter>
                 </data>
             </field>
