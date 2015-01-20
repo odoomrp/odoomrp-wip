@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -28,7 +25,6 @@ class ProcurementCompute(models.TransientModel):
     @api.multi
     def procure_calculation(self):
         config_param_obj = self.env['ir.config_parameter']
-        for record in self:
-            config_param_obj.create({'key': 'procurement.order',
-                                     'value': 'no_confirm'})
+        config_param_obj.create({'key': 'procurement.order',
+                                 'value': 'no_confirm'})
         return super(ProcurementCompute, self).procure_calculation()
