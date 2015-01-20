@@ -21,9 +21,12 @@
     "version": "1.0",
     "depends": ["stock"],
     "author": "OdooMRP team",
-    "category": "MRP",
-    'data': [],
-    'demo': [],
+    "contributors": [
+        "Ainara Galdona <ainaragaldona@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <anajuaristi@avanzosc.es>",
+    ],
+    "category": "Procurement",
     'installable': True,
     'auto_install': False,
 }
