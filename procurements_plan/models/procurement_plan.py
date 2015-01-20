@@ -58,20 +58,12 @@ class ProcurementPlan(models.Model):
 
     @api.one
     def action_import(self):
-        self.procurement_ids = []
         proc_obj = self.env['procurement.order']
         cond = [('date_planned', '>=', self.from_date),
                 ('date_planned', '<=', self.to_date),
                 ('plan', '=', False)]
         procurements = proc_obj.search(cond)
-        my_procurements = []
-        for procu in procurements:
-            if (not procu.move_dest_id or
-                    procu.move_dest_id.procure_method == 'make_to_stock'):
-                my_procurements.append(procu)
-        if my_procurements:
-            for procurement in my_procurements:
-                procurement.plan = self.id
+        procurements.write({'plan': self.id})
         return True
 
     @api.multi
