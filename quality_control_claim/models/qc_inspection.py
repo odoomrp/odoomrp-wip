@@ -49,8 +49,7 @@ class QcInspection(models.Model):
             elif inspection.automatic_claims_by_line:
                 for line in inspection.inspection_lines:
                     if not line.success:
-                        vals = inspection.init_claim_vals_line(line)
-                        crm_claim_obj.create(vals)
+                        inspection.create_claim_by_line(line)
 
     def init_claim_vals(self):
         vals = {'date': fields.Datetime.now(),
@@ -58,9 +57,11 @@ class QcInspection(models.Model):
                 }
         return vals
 
-    def init_claim_vals_line(self, line):
+    def create_claim_by_line(self, line):
+        crm_claim_obj = self.env['crm.claim']
         vals = self.init_claim_vals()
         vals['name'] = _('Quality test %s for product %s unsurpassed, in test'
                          ' line %s') % (self.name,
                                         self.object_id.name, line.name)
-        return vals
+        claim = crm_claim_obj.create(vals)
+        return claim
