@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-19 15:16+0000\n"
-"PO-Revision-Date: 2015-01-19 15:16+0000\n"
+"POT-Creation-Date: 2015-01-20 09:49+0000\n"
+"PO-Revision-Date: 2015-01-20 09:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,11 +28,6 @@ msgid "Automatic Claims by line"
 msgstr ""
 
 #. module: quality_control_claim
-#: model:res.request.link,name:quality_control_claim.req_link_claim
-msgid "Claim"
-msgstr ""
-
-#. module: quality_control_claim
 #: model:ir.actions.act_window,name:quality_control_claim.action_claims_per_inspection
 msgid "Claims"
 msgstr ""
@@ -43,20 +38,9 @@ msgid "Email Thread"
 msgstr ""
 
 #. module: quality_control_claim
-#: model:crm.case.categ,name:quality_control_claim.crm_case_categ_idi
-msgid "IDI"
-msgstr ""
-
-#. module: quality_control_claim
-#: code:addons/quality_control_claim/models/qc_inspection.py:51
-#, python-format
-msgid "IDI crm case category NOT FOUND"
-msgstr ""
-
-#. module: quality_control_claim
 #: help:qc.inspection,automatic_claims_by_line:0
 #: help:qc.test,automatic_claims_by_line:0
-msgid "If you want to create one claim per quality test line, when the quality test line status is 'Tolerable' or 'Not Tolerable'."
+msgid "If you want to create one claim per quality test line, when the quality test line status is 'No ok'."
 msgstr ""
 
 #. module: quality_control_claim
@@ -66,29 +50,18 @@ msgid "If you want to create one claim when the quality test status is 'Quality 
 msgstr ""
 
 #. module: quality_control_claim
-#: model:crm.case.categ,name:quality_control_claim.crm_case_categ_nc
-msgid "NC"
-msgstr ""
-
-#. module: quality_control_claim
-#: code:addons/quality_control_claim/models/qc_inspection.py:47
-#, python-format
-msgid "NC crm case category NOT FOUND"
-msgstr ""
-
-#. module: quality_control_claim
 #: model:ir.model,name:quality_control_claim.model_qc_test
 msgid "Quality control test"
 msgstr ""
 
 #. module: quality_control_claim
-#: code:addons/quality_control_claim/models/qc_inspection.py:56
+#: code:addons/quality_control_claim/models/qc_inspection.py:45
 #, python-format
 msgid "Quality test %s for product %s unsurpassed"
 msgstr ""
 
 #. module: quality_control_claim
-#: code:addons/quality_control_claim/models/qc_inspection.py:79
+#: code:addons/quality_control_claim/models/qc_inspection.py:63
 #, python-format
 msgid "Quality test %s for product %s unsurpassed, in test line %s"
 msgstr ""

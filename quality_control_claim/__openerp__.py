@@ -34,10 +34,8 @@
     "depends": [
         'quality_control',
         'crm_claim',
-        'quality_control_tolerance',
     ],
     "data": [
-        'data/crm_case_categ_data.xml',
         'views/qc_test_view.xml',
         'views/qc_inspection_view.xml',
     ],

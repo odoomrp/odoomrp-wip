@@ -15,4 +15,4 @@ class QcTest(models.Model):
     automatic_claims_by_line = fields.Boolean(
         'Automatic Claims by line', default=False,
         help="If you want to create one claim per quality test line, when the"
-             " quality test line status is 'Tolerable' or 'Not Tolerable'.")
+             " quality test line status is 'No ok'.")

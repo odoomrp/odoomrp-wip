@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-19 15:16+0000\n"
-"PO-Revision-Date: 2015-01-19 16:20+0100\n"
+"POT-Creation-Date: 2015-01-20 09:50+0000\n"
+"PO-Revision-Date: 2015-01-20 10:52+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,11 +28,6 @@ msgid "Automatic Claims by line"
 msgstr "Reclamaciones automáticas por línea de test"
 
 #. module: quality_control_claim
-#: model:res.request.link,name:quality_control_claim.req_link_claim
-msgid "Claim"
-msgstr "Reclamación"
-
-#. module: quality_control_claim
 #: model:ir.actions.act_window,name:quality_control_claim.action_claims_per_inspection
 msgid "Claims"
 msgstr "Reclamaciones"
@@ -40,24 +35,13 @@ msgstr "Reclamaciones"
 #. module: quality_control_claim
 #: model:ir.model,name:quality_control_claim.model_qc_inspection
 msgid "Email Thread"
-msgstr "Hilo de mensajes"
-
-#. module: quality_control_claim
-#: model:crm.case.categ,name:quality_control_claim.crm_case_categ_idi
-msgid "IDI"
-msgstr "IDI"
-
-#. module: quality_control_claim
-#: code:addons/quality_control_claim/models/qc_inspection.py:51
-#, python-format
-msgid "IDI crm case category NOT FOUND"
-msgstr "Categoría de reclamación IDI no encontrada."
+msgstr "Inspeción creada"
 
 #. module: quality_control_claim
 #: help:qc.inspection,automatic_claims_by_line:0
 #: help:qc.test,automatic_claims_by_line:0
-msgid "If you want to create one claim per quality test line, when the quality test line status is 'Tolerable' or 'Not Tolerable'."
-msgstr "Si quiere crea una reclamación por línea de test de caldiad, cuando el estado de la línea de test de calidad es 'Tolerable', o 'No tolerable'."
+msgid "If you want to create one claim per quality test line, when the quality test line status is 'No ok'."
+msgstr "Si quiere crear una reclamación por línea de test de calidad, cuando el estado de la lína de test de calidad sea 'No ok'."
 
 #. module: quality_control_claim
 #: help:qc.inspection,automatic_claims:0
@@ -66,29 +50,18 @@ msgid "If you want to create one claim when the quality test status is 'Quality 
 msgstr "Si quiere crear una reclamación cuando el estado del test de calidad es 'Calidad fallida'."
 
 #. module: quality_control_claim
-#: model:crm.case.categ,name:quality_control_claim.crm_case_categ_nc
-msgid "NC"
-msgstr "NC"
-
-#. module: quality_control_claim
-#: code:addons/quality_control_claim/models/qc_inspection.py:47
-#, python-format
-msgid "NC crm case category NOT FOUND"
-msgstr "Categoría de reclamación NC no encontrada."
-
-#. module: quality_control_claim
 #: model:ir.model,name:quality_control_claim.model_qc_test
 msgid "Quality control test"
 msgstr "Test del control de calidad"
 
 #. module: quality_control_claim
-#: code:addons/quality_control_claim/models/qc_inspection.py:56
+#: code:addons/quality_control_claim/models/qc_inspection.py:45
 #, python-format
 msgid "Quality test %s for product %s unsurpassed"
 msgstr "Test de calidad %s para el producto %s no superado"
 
 #. module: quality_control_claim
-#: code:addons/quality_control_claim/models/qc_inspection.py:79
+#: code:addons/quality_control_claim/models/qc_inspection.py:63
 #, python-format
 msgid "Quality test %s for product %s unsurpassed, in test line %s"
 msgstr "Test de calidad %s para el producto %s no superado, en línea de test %s"

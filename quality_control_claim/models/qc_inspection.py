@@ -22,7 +22,7 @@ class QcInspection(models.Model):
     automatic_claims_by_line = fields.Boolean(
         'Automatic Claims by line', default=False,
         help="If you want to create one claim per quality test line, when the"
-             " quality test line status is 'Tolerable' or 'Not Tolerable'.")
+             " quality test line status is 'No ok'.")
     claims = fields.Integer(string="Created claims",
                             compute='_count_claims', store=False)
 
@@ -38,17 +38,6 @@ class QcInspection(models.Model):
     @api.multi
     def action_approve(self):
         crm_claim_obj = self.env['crm.claim']
-        category_obj = self.env['crm.case.categ']
-        nc_category_search = [('name', '=', 'NC')]
-        idi_category_search = [('name', '=', 'IDI')]
-        nc_categ = category_obj.search(nc_category_search, limit=1)
-        if not nc_categ:
-            raise exceptions.Warning(
-                _("NC crm case category NOT FOUND"))
-        idi_categ = category_obj.search(idi_category_search, limit=1)
-        if not idi_categ:
-            raise exceptions.Warning(
-                _("IDI crm case category NOT FOUND"))
         super(QcInspection, self).action_approve()
         for inspection in self:
             if inspection.state == 'failed' and inspection.automatic_claims:
@@ -57,15 +46,10 @@ class QcInspection(models.Model):
                                  ' unsurpassed') % (self.name,
                                                     self.object_id.name)
                 crm_claim_obj.create(vals)
-            if inspection.automatic_claims_by_line:
+            elif inspection.automatic_claims_by_line:
                 for line in inspection.inspection_lines:
-                    if line.tolerance_status == 'not_tolerable':
+                    if not line.success:
                         vals = inspection.init_claim_vals_line(line)
-                        vals['categ_id'] = nc_categ.id
-                        crm_claim_obj.create(vals)
-                    elif line.tolerance_status == 'tolerable':
-                        vals = inspection.init_claim_vals_line(line)
-                        vals['categ_id'] = idi_categ.id
                         crm_claim_obj.create(vals)
 
     def init_claim_vals(self):
