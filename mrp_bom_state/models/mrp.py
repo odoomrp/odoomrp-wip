@@ -1,19 +1,6 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
 from openerp import models, fields, api, exceptions, _
 
@@ -34,6 +21,7 @@ class MrpBom(models.Model):
         return maxseq
 
     active = fields.Boolean('Active', default=False)
+    allow_re_edit = fields.Boolean('Allow re-edit the BoM list', default=True)
     historical_date = fields.Date(string='Historical Date', readonly=True)
     state = fields.Selection([('draft', 'Draft'),
                               ('active', 'Active'),
@@ -60,15 +48,45 @@ class MrpBom(models.Model):
         return super(MrpBom, self).copy(default=default)
 
     @api.multi
+    def button_draft(self):
+        self.ensure_one()
+        if not self.allow_re_edit:
+            raise exceptions.Warning(_('not allowed to re-edit the BoM'))
+        self.state = 'draft'
+
+    @api.multi
     def button_activate(self):
-        return self.write({'active': True,
-                           'state': 'active'})
+        self.ensure_one()
+        if self.routing_id:
+            return self.write({'active': True,
+                               'state': 'active'})
+        context = self.env.context.copy()
+        context['active_id'] = self.id
+        context['active_ids'] = [self.id]
+        context['active_model'] = 'mrp.bom'
+        return {'name': _('Confirm activation'),
+                'type': 'ir.actions.act_window',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'wiz.confirm.activation',
+                'target': 'new',
+                'context': context,
+                }
 
     @api.multi
     def button_historical(self):
-        return self.write({'active': False,
-                           'state': 'historical',
-                           'historical_date': fields.Date.today()})
+        context = self.env.context.copy()
+        context['active_id'] = self.id
+        context['active_ids'] = [self.id]
+        context['active_model'] = 'mrp.bom'
+        return {'name': _('Confirm historification'),
+                'type': 'ir.actions.act_window',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'wiz.confirm.historification',
+                'target': 'new',
+                'context': context,
+                }
 
 
 class MrpProduction(models.Model):
