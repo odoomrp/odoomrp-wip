@@ -58,17 +58,33 @@ class MrpProduction(models.Model):
         string='Product attributes', copy=True, readonly=True,
         states={'draft': [('readonly', False)]},)
 
-    def product_id_change(self, cr, uid, ids, product_id, product_qty=0,
-                          context=None):
+    @api.multi
+    def product_id_change(self, product_id, product_qty=0):
         result = super(MrpProduction, self).product_id_change(
-            cr, uid, ids, product_id, product_qty=product_qty, context=context)
+            product_id, product_qty=product_qty)
+        if 'value' in result:
+            if 'bom_id' in result['value'] and not result['value']['bom_id']:
+                del result['value']['bom_id']
+            if ('routing_id' in result['value'] and
+                    not result['value']['routing_id']):
+                del result['value']['routing_id']
         if product_id:
-            product_obj = self.pool['product.product']
-            product = product_obj.browse(cr, uid, product_id, context=context)
+            bom_obj = self.env['mrp.bom']
+            product = self.env['product.product'].browse(product_id)
+            bom_id = bom_obj._bom_find(product_id=product_id, properties=[])
+            routing_id = False
+            if not bom_id:
+                bom_id = bom_obj._bom_find(
+                    product_id=product.product_tmpl_id.id, properties=[])
+            if bom_id:
+                bom_point = bom_obj.browse(bom_id)
+                routing_id = bom_point.routing_id.id or False
             result['value'].update(
                 {'product_template': product.product_tmpl_id.id,
                  'product_attributes': (
-                     product._get_product_attributes_values_dict())})
+                     product._get_product_attributes_values_dict()),
+                 'bom_id': bom_id,
+                 'routing_id': routing_id})
         return result
 
     @api.multi
@@ -77,6 +93,9 @@ class MrpProduction(models.Model):
         if bom_id:
             bom = self.env['mrp.bom'].browse(bom_id)
             res['value']['product_id'] = bom.product_id.id
+            if 'domain' not in res:
+                res['domain'] = {}
+            res['domain']['routing_id'] = [('id', '=', bom.routing_id.id)]
         return res
 
     @api.multi
@@ -85,12 +104,15 @@ class MrpProduction(models.Model):
         self.ensure_one()
         if self.product_template:
             self.product_uom = self.product_template.uom_id
-            self.product_attributes = (
-                self.product_template._get_product_attributes_dict())
-            if not self.product_template.attribute_line_ids:
+            if (not self.product_template.attribute_line_ids and
+                    not self.product_id):
                 self.product_id = (
                     self.product_template.product_variant_ids and
                     self.product_template.product_variant_ids[0])
+            if not self.product_id:
+                self.product_attributes = (
+                    self.product_template._get_product_attributes_dict())
+            else:
                 self.product_attributes = (
                     self.product_id._get_product_attributes_values_dict())
             self.bom_id = self.env['mrp.bom']._bom_find(
@@ -178,6 +200,9 @@ class MrpProduction(models.Model):
 
     @api.model
     def _make_production_produce_line(self, production):
+        if not production.product_template and not production.product_id:
+            raise exceptions.Warning(
+                _("You can not confirm without product or variant defined."))
         if not production.product_id:
             product_obj = self.env['product.product']
             att_values_ids = [attr_line.value and attr_line.value.id

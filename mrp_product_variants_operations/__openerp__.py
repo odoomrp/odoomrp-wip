@@ -21,7 +21,8 @@
     "version": "1.0",
     "depends": [
         "mrp_product_variants",
-        "mrp_operations_extension"],
+        "mrp_operations_extension",
+    ],
     "author": "OdooMRP team",
     "website": "http://www.odoomrp.com",
     "contributors": [

@@ -39,6 +39,7 @@ class MrpProduction(models.Model):
                                 properties=properties)
 
     def _set_workorder(self, bom, p_line, workcenter_lines, properties=None):
+        phantom_op = self.env.context.get('phantom_op', False)
         for bom_line in bom.bom_line_ids:
             if ((bom_line.product_template.id == p_line.product_template.id
                     or bom_line.product_id.product_tmpl_id.id ==
@@ -46,7 +47,8 @@ class MrpProduction(models.Model):
                     (not bom_line.product_id or
                      bom_line.product_id.id == p_line.product_id.id)):
                 for wc_line in workcenter_lines:
-                    if wc_line.routing_wc_line == bom_line.operation:
+                    if wc_line.routing_wc_line == (phantom_op or
+                                                   bom_line.operation):
                         p_line.work_order = wc_line
                         break
                 continue
@@ -60,5 +62,8 @@ class MrpProduction(models.Model):
                     bom_id = bom_obj._bom_find(
                         product_id=bom_line.product_id.id,
                         properties=properties)
-                self._set_workorder(bom_obj.browse(bom_id), p_line,
-                                    workcenter_lines, properties=properties)
+                if not phantom_op:
+                    phantom_op = bom_line.operation
+                self.with_context(phantom_op=phantom_op)._set_workorder(
+                    bom_obj.browse(bom_id), p_line,  workcenter_lines,
+                    properties=properties)
