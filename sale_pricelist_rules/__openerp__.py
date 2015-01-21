@@ -40,6 +40,7 @@
         "views/sale_pricelist_view.xml",
         "views/sale_view.xml",
         "security/ir.model.access.csv",
+        "security/sale_pricelist_rules_security.xml",
     ],
     "installable": True,
     "auto_install": True,

@@ -87,7 +87,7 @@ class SaleOrderLine(models.Model):
         self.possible_item_ids = [(6, 0, item_ids)]
 
     discount2 = fields.Float(
-        string='Discount (%)', digits=dp.get_precision('Discount'),
+        string='Discount 2 (%)', digits=dp.get_precision('Discount'),
         readonly=True, states={'draft': [('readonly', False)]}, default=0.0)
     offer_id = fields.Many2one(
         comodel_name='product.pricelist.item.offer', string='Offer')
