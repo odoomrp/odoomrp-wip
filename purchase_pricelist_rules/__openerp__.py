@@ -21,31 +21,25 @@
     "version": "1.0",
     "depends": [
         "purchase",
+        "account",
         "purchase_discount",
+        "product",
         "product_pricelist_rules",
     ],
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
     ],
-    "category": "Custom Module",
+    "category": "Hidden/Dependency",
     "website": "http://www.odoomrp.com",
-    "complexity": "normal",
     "summary": "",
-    "description": """
-This module allows to apply *product_pricelist_rules* extended features to
-purchase order lines and gets the best pricelist rule automatically.
-
-**Warning**: This module requires *product_pricelist_rules*, which is
-incompatible with *product_visible_discount*.
-
-**Warning**: The required module *purchase_discount* is available at:
-https://github.com/OCA/purchase-workflow.
-    """,
     "data": [
         "views/purchase_pricelist_view.xml",
         "views/purchase_view.xml",
         "security/ir.model.access.csv",
+        "security/purchase_pricelist_rules_security.xml",
     ],
     "installable": True,
     "auto_install": True,

@@ -25,20 +25,16 @@
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
     ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
     "complexity": "normal",
     "summary": "",
-    "description": """
-This module extends the pricelist items, making possible to add a second
-discount, and to add an 'special offer' like "Buy two and get one free
-(2+1)"
-
-**Warning**: This module is incompatible with *product_visible_discount*
-    """,
     "data": [
         "views/pricelist_view.xml",
+        "views/product_view.xml",
         "security/ir.model.access.csv",
     ],
     "installable": True,

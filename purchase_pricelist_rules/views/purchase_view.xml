@@ -48,7 +48,8 @@
                     </div>
                 </field>
                 <field name="company_id" position="after">
-                    <field name="item_id" on_change="onchange_item_id(item_id)" />
+                    <field name="item_id" />
+                    <field name="possible_item_ids" invisible="1" />
                     <field name="offer_id" />
                 </field>
             </field>

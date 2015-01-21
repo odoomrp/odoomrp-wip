@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
+from openerp import models, fields, api, tools, _
 import openerp.addons.decimal_precision as dp
 
 
@@ -100,17 +100,17 @@ class PricelistItem(models.Model):
         domain.extend(['&', ('product_id', '=', False),
                        '&', ('product_tmpl_id', '=', False),
                        ('categ_id', '=', False)])
-        item_ids = self.search(domain,
-                               order='min_quantity desc,sequence asc')
-        for item in item_ids:
+        items = self.search(domain, order='min_quantity desc,sequence asc')
+        item_ids = items.ids
+        for item in items:
             if item.base == -1:
-                item_ids.remove(item)
+                item_ids.remove(item.id)
                 new_item_ids = self.domain_by_pricelist(
-                    item.base_pricelist_id, product_id=product_id,
+                    item.base_pricelist_id.id, product_id=product_id,
                     product_tmpl_id=product_tmpl_id, categ_id=categ_id,
                     qty=qty)
                 item_ids += new_item_ids
-        return item_ids.ids
+        return item_ids
 
     @api.model
     def get_best_pricelist_item(self, pricelist_id, product_id=False,
@@ -122,3 +122,68 @@ class PricelistItem(models.Model):
         if pricelist_item_ids:
             pricelist_item_id = pricelist_item_ids[0]
         return pricelist_item_id
+
+    @api.one
+    def price_get(self, product_id, qty, partner_id, uom_id):
+        product_obj = self.env['product.product']
+        price_type_obj = self.env['product.price.type']
+        product = product_obj.browse(product_id)
+        price = False
+        qty_uom_id = uom_id or product.uom_id.id
+        price_types = {}
+        if self.base == -1:
+            if self.base_pricelist_id:
+                price_tmp = self.base_pricelist_id._price_get_multi(
+                    self.base_pricelist_id,
+                    [(product, qty, False)])[product.id]
+                ptype_src = self.base_pricelist_id.currency_id
+                price_uom_id = qty_uom_id
+                price = ptype_src.compute(
+                    price_tmp, self.pricelist.currency_id, round=False)
+        elif self.base == -2:
+            seller = False
+            for seller_id in product.seller_ids:
+                if (not partner_id) or (seller_id.name.id != partner_id):
+                    continue
+                seller = seller_id
+            if not seller and product.seller_ids:
+                seller = product.seller_ids[0]
+            if seller:
+                qty_in_seller_uom = qty
+                for line in seller.pricelist_ids:
+                    if line.min_quantity <= qty_in_seller_uom:
+                        price = line.price
+        else:
+            if self.base not in price_types:
+                price_types[self.base] = price_type_obj.browse(int(self.base))
+            price_type = price_types[self.base]
+            # price_get returns the price in the context UoM, i.e.
+            # qty_uom_id
+            price_uom_id = qty_uom_id
+            price = price_type.currency_id.compute(
+                product.product_tmpl_id._price_get(
+                    product, price_type.field)[product.id],
+                self.pricelist.currency_id,
+                round=False)
+        if price is not False:
+            price_limit = price
+            price = price * (1.0+(self.price_discount or 0.0))
+            if self.price_round:
+                price = tools.float_round(
+                    price, precision_rounding=self.price_round)
+            convert_to_price_uom = (
+                lambda price: product.uom_id._compute_price(
+                    price, price_uom_id))
+            if self.price_surcharge:
+                price_surcharge = convert_to_price_uom(self.price_surcharge)
+                price += price_surcharge
+            if self.price_min_margin:
+                price_min_margin = convert_to_price_uom(self.price_min_margin)
+                price = max(price, price_limit + price_min_margin)
+            if self.price_max_margin:
+                price_max_margin = convert_to_price_uom(self.price_max_margin)
+                price = min(price, price_limit + price_max_margin)
+        # Final price conversion to target UoM
+        uom_obj = self.env['product.uom']
+        price = uom_obj._compute_price(price_uom_id, price, qty_uom_id)
+        return price

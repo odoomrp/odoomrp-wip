@@ -7,14 +7,6 @@
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
                 <data>
-                    <field name="order_line" position="attributes">
-                        <attribute name="context">{'pricelist_id':pricelist_id}</attribute>
-                    </field>
-<!--                     <notebook position="inside"> -->
-<!--                         <page string="Subtotals per line by pricelist"> -->
-<!--                             <field name="subtotal_ids" nolabel="1" /> -->
-<!--                         </page> -->
-<!--                     </notebook> -->
                     <xpath
                         expr="//field[@name='order_line']/form//div[@name='discount']"
                         position="after">
@@ -28,23 +20,18 @@
                     <xpath
                         expr="//field[@name='order_line']/form//field[@name='address_allotment_id']"
                         position="after">
-                        <field name="item_id" groups="product.group_sale_pricelist"
-                            domain="[('pricelist','=',parent.pricelist_id)]"/>
-                        <field name="offer_id" groups="sale.group_discount_per_so_line"/>
+                        <field name="item_id" groups="product.group_sale_pricelist" />
+                        <field name="possible_item_ids" invisible="1" />
+                        <field name="offer_id"
+                            groups="sale.group_discount_per_so_line" />
                     </xpath>
-<!--                     <xpath -->
-<!--                         expr="//field[@name='order_line']/form//field[@name='invoice_lines']/.." -->
-<!--                         position="after"> -->
-<!--                         <div> -->
-<!--                             <label for="subtotal_ids" /> -->
-<!--                             <field name="subtotal_ids" nolabel="1" /> -->
-<!--                         </div> -->
-<!--                     </xpath> -->
                     <xpath
                         expr="//field[@name='order_line']/tree//field[@name='discount']"
                         position="after">
-                        <field name="discount2" groups="sale.group_discount_per_so_line"/>
-                        <field name="offer_id" groups="sale.group_discount_per_so_line"/>
+                        <field name="discount2"
+                            groups="sale.group_discount_per_so_line" />
+                        <field name="offer_id"
+                            groups="sale.group_discount_per_so_line" />
                     </xpath>
                 </data>
             </field>

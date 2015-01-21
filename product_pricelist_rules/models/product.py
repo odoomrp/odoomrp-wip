@@ -26,14 +26,12 @@ class ProductTemplate(models.Model):
     def show_pricelists(self):
         self.with_context(
             {'search_default_pricelist_type_id': 1}).browse(self.ids)
-        return {
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'product.pricelist.item',
-            'domain': [('product_tmpl_id', '=', self.id)],
-            'type': 'ir.actions.act_window',
-            'context': {'search_default_pricelist_type_id': 1}
-            }
+        result = self._get_act_window_dict(
+            'product_pricelist_rules.pricelist_items_action')
+        result['context'] = {'search_default_pricelist_type_id': 1,
+                             'default_product_tmpl_id': self.id}
+        result['domain'] = [('product_tmpl_id', '=', self.id)]
+        return result
 
 
 class ProductProduct(models.Model):
@@ -44,5 +42,7 @@ class ProductProduct(models.Model):
         res = super(self.product_tmpl_id.__class__,
                     self.product_tmpl_id).show_pricelists()
         if res:
+            res['context'] = {'search_default_pricelist_type_id': 1,
+                              'default_product_id': self.id}
             res['domain'] = [('product_id', '=', self.id)]
         return res

@@ -49,7 +49,7 @@ class SaleOrderLineSubtotal(models.Model):
         ondelete='cascade')
     subtotal = fields.Float(
         string='Subtotal', digits=dp.get_precision('Account'),
-        compute=_calculate_subtotal)
+        compute='_calculate_subtotal')
 
 
 class SaleOrderLine(models.Model):
@@ -76,19 +76,33 @@ class SaleOrderLine(models.Model):
         cur = self.order_id.pricelist_id.currency_id
         self.price_subtotal = cur.round(taxes['total'])
 
+    @api.one
+    @api.depends('product_id', 'product_uom_qty',
+                 'order_id.pricelist_id')
+    def _get_possible_items(self):
+        item_obj = self.env['product.pricelist.item']
+        item_ids = item_obj.domain_by_pricelist(
+            self.order_id.pricelist_id.id, product_id=self.product_id.id,
+            qty=self.product_uom_qty)
+        self.possible_item_ids = [(6, 0, item_ids)]
+
     discount2 = fields.Float(
-        string='Discount (%)', digits=dp.get_precision('Discount'),
+        string='Discount 2 (%)', digits=dp.get_precision('Discount'),
         readonly=True, states={'draft': [('readonly', False)]}, default=0.0)
     offer_id = fields.Many2one(
         comodel_name='product.pricelist.item.offer', string='Offer')
     item_id = fields.Many2one(
-        comodel_name='product.pricelist.item', string='Pricelist Item')
+        comodel_name='product.pricelist.item', string='Pricelist Item',
+        domain="[('id', 'in', possible_item_ids[0][2])]")
+    possible_item_ids = fields.Many2many(
+        comodel_name='product.pricelist.item',
+        compute='_get_possible_items')
     subtotal_ids = fields.One2many(
         comodel_name='sale.order.line.subtotal', inverse_name='line_id',
         string='Subtotals by pricelist')
     price_subtotal = fields.Float(
         string='Subtotal', digits=dp.get_precision('Account'),
-        compute=_amount_line)
+        compute='_amount_line')
 
     _sql_constraints = [
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
@@ -116,11 +130,13 @@ class SaleOrderLine(models.Model):
             name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
             date_order=date_order, packaging=packaging,
             fiscal_position=fiscal_position, flag=flag)
+        item_obj = self.env['product.pricelist.item']
         if product:
-            item_obj = self.env['product.pricelist.item']
             item_id = item_obj.get_best_pricelist_item(
                 pricelist, product_id=product, qty=qty)
             res['value'].update({'item_id': item_id})
+            res['value']['price_unit'] = item_obj.browse(
+                item_id).price_get(product, qty, partner_id, uom)[0]
         return res
 
     @api.one
@@ -130,6 +146,10 @@ class SaleOrderLine(models.Model):
             self.discount = self.item_id.discount
             self.discount2 = self.item_id.discount2
             self.offer_id = self.item_id.offer.id
+            if self.product_id:
+                self.price_unit = self.item_id.price_get(
+                    self.product_id.id, self.product_uom_qty,
+                    self.order_id.partner_id.id, self.product_id.uom_id.id)[0]
 
 
 class SaleOrder(models.Model):
@@ -146,8 +166,9 @@ class SaleOrder(models.Model):
             def _check_rec(eview):
                 if eview.attrib.get('name', '') == 'order_line':
                     context = eview.attrib.get(
-                        'context',
-                        '{}').replace("}", ",'pricelist_id':pricelist_id}")
+                        'context', '{}').replace(
+                        '}', ",'pricelist_id':pricelist_id}").replace(
+                        '{,', '{')
                     eview.set('context', context)
                 for child in eview:
                     _check_rec(child)
@@ -167,6 +188,18 @@ class SaleOrder(models.Model):
                                          line.order_id.partner_id)['taxes']:
             val += c.get('amount', 0.0)
         return val
+
+    @api.multi
+    def onchange_pricelist_id(self, pricelist_id, order_lines, context=None):
+        res = super(SaleOrder, self).onchange_pricelist_id(
+            pricelist_id, order_lines)
+        if pricelist_id:
+            item_obj = self.env['product.pricelist.item']
+            for line in self.order_line:
+                line.item_id = item_obj.get_best_pricelist_item(
+                    pricelist_id, product_id=line.product_id,
+                    qty=line.product_uom_qty)
+        return res
 
     subtotal_ids = fields.One2many(
         comodel_name='sale.order.line.subtotal', inverse_name='sale_id',
