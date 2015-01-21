@@ -83,7 +83,7 @@ class MrpRoutingWorkcenter(models.Model):
         for line in self.op_wc_lines:
             if line.default:
                 self.workcenter_id = line.workcenter
-                self.cycle_nbr = 1  # Force this value to 1
+                self.cycle_nbr = line.capacity_per_cycle
                 self.hour_nbr = line.time_cycle
                 break
 

@@ -14,10 +14,10 @@
                     <attribute name="string">Default workcenter</attribute>
                 </field>
                 <field name="hour_nbr" position="attributes">
-                    <attribute name="invisible">1</attribute>
+                    <attribute name="sum">Total</attribute>
                 </field>
                 <field name="cycle_nbr" position="attributes">
-                    <attribute name="invisible">1</attribute>
+                    <attribute name="sum">Total</attribute>
                 </field>
                 <field name="company_id" position="before">
                     <field name="do_production" />
