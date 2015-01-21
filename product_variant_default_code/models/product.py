@@ -21,7 +21,7 @@ import re
 from string import Template
 from collections import defaultdict
 
-DEFAULT_REFERENCE_SEPERATOR = '-'
+DEFAULT_REFERENCE_SEPARATOR = '-'
 PLACE_HOLDER_4_MISSING_VALUE = '/'
 
 
@@ -99,7 +99,7 @@ class ProductTemplate(models.Model):
             attribute_names = []
             for line in product.attribute_line_ids:
                 attribute_names.append("[{}]".format(line.attribute_id.name))
-            default_mask = DEFAULT_REFERENCE_SEPERATOR.join(attribute_names)
+            default_mask = DEFAULT_REFERENCE_SEPARATOR.join(attribute_names)
             vals['reference_mask'] = default_mask
         elif vals.get('reference_mask'):
             sanitize_reference_mask(product, vals['reference_mask'])
@@ -107,19 +107,30 @@ class ProductTemplate(models.Model):
 
     @api.one
     def write(self, vals):
+        product_obj = self.env['product.product']
+        if 'reference_mask' in vals and not vals['reference_mask']:
+            if self.attribute_line_ids:
+                attribute_names = []
+                for line in self.attribute_line_ids:
+                    attribute_names.append("[{}]".format(
+                        line.attribute_id.name))
+                default_mask = DEFAULT_REFERENCE_SEPARATOR.join(
+                    attribute_names)
+                vals['reference_mask'] = default_mask
         result = super(ProductTemplate, self).write(vals)
         if vals.get('reference_mask'):
-            sanitize_reference_mask(self, vals['reference_mask'])
-            product_obj = self.env['product.product']
-            cond = [('product_tmpl_id', '=', self.id)]
+            cond = [('product_tmpl_id', '=', self.id),
+                    ('manual_code', '=', False)]
             products = product_obj.search(cond)
             for product in products:
-                render_default_code(product, vals['reference_mask'])
+                render_default_code(product, product.reference_mask)
         return result
 
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
+
+    manual_code = fields.Boolean(string='Manual code')
 
     @api.model
     def create(self, values):
@@ -127,6 +138,11 @@ class ProductProduct(models.Model):
         if product.reference_mask:
             render_default_code(product, product.reference_mask)
         return product
+
+    @api.one
+    @api.onchange('default_code')
+    def onchange_default_code(self):
+        self.manual_code = bool(self.default_code)
 
 
 class ProductAttribute(models.Model):
@@ -139,10 +155,11 @@ class ProductAttribute(models.Model):
 class ProductAttributeValue(models.Model):
     _inherit = 'product.attribute.value'
 
+    @api.one
     @api.onchange('name')
     def onchange_name(self):
         if self.name:
-            self.attribute_code = self.name[0:1]
+            self.attribute_code = self.name[0:2]
 
     attribute_code = fields.Char(
         string='Attribute Code', default=onchange_name)
@@ -150,6 +167,22 @@ class ProductAttributeValue(models.Model):
     @api.model
     def create(self, values):
         if 'attribute_code' not in values:
-            values['attribute_code'] = values.get('name', '')[0:1]
+            values['attribute_code'] = values.get('name', '')[0:2]
         value = super(ProductAttributeValue, self).create(values)
         return value
+
+    @api.one
+    def write(self, vals):
+        attribute_line_obj = self.env['product.attribute.line']
+        product_obj = self.env['product.product']
+        result = super(ProductAttributeValue, self).write(vals)
+        if 'attribute_code' in vals:
+            cond = [('attribute_id', '=', self.attribute_id.id)]
+            attribute_lines = attribute_line_obj.search(cond)
+            for line in attribute_lines:
+                cond = [('product_tmpl_id', '=', line.product_tmpl_id.id),
+                        ('manual_code', '=', False)]
+                products = product_obj.search(cond)
+                for product in products:
+                    render_default_code(product, product.reference_mask)
+        return result
