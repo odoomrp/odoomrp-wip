@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-30 18:22+0000\n"
-"PO-Revision-Date: 2014-10-30 19:23+0100\n"
+"POT-Creation-Date: 2015-01-22 14:16+0000\n"
+"PO-Revision-Date: 2015-01-22 15:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_project_link
-#: code:addons/mrp_project_link/models/mrp_production.py:59
+#: code:addons/mrp_project_link/models/mrp_production.py:45
 #, python-format
 msgid ""
 "\n"
@@ -36,7 +36,7 @@ msgstr ""
 "                "
 
 #. module: mrp_project_link
-#: code:addons/mrp_project_link/models/mrp_production.py:111
+#: code:addons/mrp_project_link/models/mrp_production.py:112
 #, python-format
 msgid ""
 "\n"
@@ -56,10 +56,15 @@ msgstr ""
 "            "
 
 #. module: mrp_project_link
-#: code:addons/mrp_project_link/models/mrp_production.py:131
+#: code:addons/mrp_project_link/models/mrp_production.py:132
 #, python-format
 msgid "%s:: WO%s-%s:: %s"
 msgstr "%s:: OT%s-%s:: %s"
+
+#. module: mrp_project_link
+#: view:create.project.mrp.wiz:mrp_project_link.create_project_mrp_form_view
+msgid "A project must be assigned in order to record the manufacturing costs."
+msgstr "Para calcular los costes de una orden de fabricación, debe añadir un proyecto."
 
 #. module: mrp_project_link
 #: field:mrp.production,analytic_account_id:0
@@ -72,9 +77,56 @@ msgid "Analytic Line"
 msgstr "Línea analítica"
 
 #. module: mrp_project_link
+#: view:create.project.mrp.wiz:mrp_project_link.create_project_mrp_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: mrp_project_link
+#: view:create.project.mrp.wiz:mrp_project_link.create_project_mrp_form_view
+msgid "Create"
+msgstr "Crear"
+
+#. module: mrp_project_link
+#: code:addons/mrp_project_link/models/mrp_production.py:72
+#: view:create.project.mrp.wiz:mrp_project_link.create_project_mrp_form_view
+#, python-format
+msgid "Create Project"
+msgstr "Crear proyecto"
+
+#. module: mrp_project_link
+#: field:create.project.mrp.wiz,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mrp_project_link
+#: field:create.project.mrp.wiz,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: mrp_project_link
+#: view:create.project.mrp.wiz:mrp_project_link.create_project_mrp_form_view
+msgid "Do you want to create one automatically?"
+msgstr "¿Desea crearlo automáticamente?"
+
+#. module: mrp_project_link
 #: view:account.analytic.line:mrp_project_link.account_analytic_line_mrp_form_view
 msgid "General Accounting"
 msgstr "Contabilidad general"
+
+#. module: mrp_project_link
+#: field:create.project.mrp.wiz,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: mrp_project_link
+#: field:create.project.mrp.wiz,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: mrp_project_link
+#: field:create.project.mrp.wiz,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización el"
 
 #. module: mrp_project_link
 #: view:account.analytic.line:mrp_project_link.account_analytic_line_mrp_form_view
@@ -119,6 +171,11 @@ msgid "Procurements"
 msgstr "Abastecimientos"
 
 #. module: mrp_project_link
+#: field:stock.move,product_tmpl_id:0
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: mrp_project_link
 #: model:ir.model,name:mrp_project_link.model_mrp_production_product_line
 msgid "Production Scheduled Product"
 msgstr "Producto planificado de la fabricación"
@@ -128,6 +185,11 @@ msgstr "Producto planificado de la fabricación"
 #: field:mrp.production,project_id:0
 msgid "Project"
 msgstr "Proyecto"
+
+#. module: mrp_project_link
+#: field:account.analytic.line,task_id:0
+msgid "Project Task"
+msgstr "Tarea de proyecto"
 
 #. module: mrp_project_link
 #: view:project.task:mrp_project_link.project_task_mrp_form_view
@@ -166,4 +228,19 @@ msgstr "Orden de trabajo"
 #: view:project.task:mrp_project_link.project_task_mrp_inh_search_view
 msgid "Workorder"
 msgstr "Orden de trabajo"
+
+#. module: mrp_project_link
+#: view:mrp.production:mrp_project_link.mrp_production_project_form_view
+msgid "action_pre_confirm"
+msgstr "action_pre_confirm"
+
+#. module: mrp_project_link
+#: view:mrp.production:mrp_project_link.mrp_production_project_form_view
+msgid "object"
+msgstr "objeto"
+
+#. module: mrp_project_link
+#: view:create.project.mrp.wiz:mrp_project_link.create_project_mrp_form_view
+msgid "or"
+msgstr "o"
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="create_project_mrp_form_view">
+            <field name="name">create.project.mrp.wiz.form</field>
+            <field name="model">create.project.mrp.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Create Project">
+                    <h3>
+                    <label string="A project must be assigned in order to record the manufacturing costs."/>
+                    <label string="Do you want to create one automatically?"/>
+                    </h3>
+                    <footer>
+                        <button class="oe_highlight" 
+                                name="create_project"
+                                string="Create"
+                                type="object" />
+                        or
+                        <button class="oe_link" 
+                                special="cancel"
+                                string="Cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

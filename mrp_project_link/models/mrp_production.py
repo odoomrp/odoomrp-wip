@@ -65,6 +65,20 @@ class MrpProduction(models.Model):
         return super(MrpProduction, self).action_in_production()
 
     @api.multi
+    def action_pre_confirm(self):
+        self.ensure_one()
+        if not self.project_id:
+            return {'name': _('Create Project'),
+                    'type': 'ir.actions.act_window',
+                    'res_model': 'create.project.mrp.wiz',
+                    'view_type': 'form',
+                    'view_mode': 'form',
+                    'target': 'new',
+                    }
+        else:
+            self.signal_workflow('button_confirm')
+
+    @api.multi
     def action_confirm(self):
         procurement_obj = self.env['procurement.order']
         mto_record = self.env.ref('stock.route_warehouse0_mto')

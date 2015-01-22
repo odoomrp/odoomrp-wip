@@ -16,23 +16,4 @@
 #
 ##############################################################################
 
-{
-    "name": "MRP Project Link",
-    "summary": "Project for production",
-    "version": "1.0",
-    "depends": [
-        "mrp_operations_project",
-        "analytic"
-    ],
-    "author": "OdooMRP team",
-    "category": "Manufacturing",
-    'data': [
-        "views/mrp_production_view.xml",
-        "views/procurement_order_view.xml",
-        "views/project_project_view.xml",
-        "views/account_analytic_line_view.xml",
-        "wizard/create_project_mrp_view.xml"
-    ],
-    'installable': True,
-    'auto_install': False,
-}
+from . import create_project_mrp
