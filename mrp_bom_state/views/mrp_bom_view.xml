@@ -95,7 +95,7 @@
                     <attribute name="attrs">{'readonly':[('state', '=', 'historical')]}</attribute>
                 </field>
                 <field name="active" position="attributes">
-                    <attribute name="attrs">{'readonly':[('state', 'in', ('active','historical'))]}</attribute>
+                    <attribute name="attrs">{'readonly':[('state', '!=', 'draft')]}</attribute>
                 </field>
             </field>
         </record>
