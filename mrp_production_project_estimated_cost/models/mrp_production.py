@@ -35,8 +35,7 @@ class MrpProduction(models.Model):
         else:
             values['name'] = sequence_obj.get(self._cr, self._uid,
                                               'fictitious.mrp.production')
-        production = super(MrpProduction, self).create(values)
-        return production
+        return super(MrpProduction, self).create(values)
 
     @api.multi
     def action_compute(self, properties=None):
@@ -117,11 +116,10 @@ class MrpProduction(models.Model):
                          line.workcenter_id.product_id.name))
                 vals = self._catch_information_estimated_cost(
                     journal_wk, name, self, line,
-                    line.workcenter_id.product_id, 0)
+                    line.workcenter_id.product_id, op_number)
                 vals.update({
                     'estim_average_cost': op_number * op_avg_cost,
                     'estim_standard_cost': op_number * op_avg_cost,
-                    'unit_amount': op_number,
                 })
                 analytic_line_obj.create(vals)
 
