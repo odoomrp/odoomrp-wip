@@ -41,8 +41,9 @@ class MrpProduction(models.Model):
     @api.multi
     def action_compute(self, properties=None):
         self.ensure_one()
+        res = super(MrpProduction, self).action_compute(properties=properties)
         self._calculate_production_estimated_cost()
-        return len(self._action_compute_lines(properties=properties))
+        return res
 
     def _calculate_production_estimated_cost(self):
         analytic_line_obj = self.env['account.analytic.line']
