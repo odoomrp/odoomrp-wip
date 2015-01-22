@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="wiz_create_fictitious_of_view" model="ir.ui.view">
+            <field name="name">wiz.create.fictitious.of.view</field>
+            <field name="model">wiz.create.fictitious.of</field>
+            <field name="arch" type="xml">
+                <form string="Create fictitius OF">
+                    <group string="Create fictitious OF">
+                        <field name="date_planned" />
+                    </group>
+                    <footer>
+                        <button name="do_create_fictitious_of" type="object" string="Create fictitius OF" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+         <record id="act_product_create_fictitious_of" model="ir.actions.act_window">
+            <field name="name">Create fictitious OF</field>
+            <field name="res_model">wiz.create.fictitious.of</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wiz_create_fictitious_of_view" />
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>

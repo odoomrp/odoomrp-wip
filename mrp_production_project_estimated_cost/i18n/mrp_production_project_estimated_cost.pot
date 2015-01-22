@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-04 14:59+0000\n"
-"PO-Revision-Date: 2014-12-04 14:59+0000\n"
+"POT-Creation-Date: 2015-01-22 16:46+0000\n"
+"PO-Revision-Date: 2015-01-22 16:46+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,44 +16,87 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_production_project_estimated_cost
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:44
+#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:63
 #, python-format
 msgid "%s-%s"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:65
+#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:91
 #, python-format
 msgid "%s-%s Post-operation"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:56
+#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:82
 #, python-format
 msgid "%s-%s Pre-operation"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:96
+#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:120
 #, python-format
 msgid "%s-%s-%s"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:73
+#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:101
 #, python-format
 msgid "%s-%s-C-%s"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:81
+#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:109
 #, python-format
 msgid "%s-%s-H-%s"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
+#: field:mrp.production,active:0
+msgid "Active"
+msgstr ""
+
+#. module: mrp_production_project_estimated_cost
 #: model:ir.model,name:mrp_production_project_estimated_cost.model_account_analytic_line
 msgid "Analytic Line"
+msgstr ""
+
+#. module: mrp_production_project_estimated_cost
+#: view:wiz.create.fictitious.of:mrp_production_project_estimated_cost.wiz_create_fictitious_of_view
+msgid "Cancel"
+msgstr ""
+
+#. module: mrp_production_project_estimated_cost
+#: view:product.product:mrp_production_project_estimated_cost.product_product_form_view_bom_button_inh_estimatedcost
+#: view:product.template:mrp_production_project_estimated_cost.product_template_form_view_bom_button_inh_estimatedcost
+msgid "Create Fictitious OF"
+msgstr ""
+
+#. module: mrp_production_project_estimated_cost
+#: model:ir.actions.act_window,name:mrp_production_project_estimated_cost.act_product_create_fictitious_of
+#: view:wiz.create.fictitious.of:mrp_production_project_estimated_cost.wiz_create_fictitious_of_view
+msgid "Create fictitious OF"
+msgstr ""
+
+#. module: mrp_production_project_estimated_cost
+#: view:wiz.create.fictitious.of:mrp_production_project_estimated_cost.wiz_create_fictitious_of_view
+msgid "Create fictitius OF"
+msgstr ""
+
+#. module: mrp_production_project_estimated_cost
+#: field:wiz.create.fictitious.of,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: mrp_production_project_estimated_cost
+#: field:wiz.create.fictitious.of,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: mrp_production_project_estimated_cost
+#: code:addons/mrp_production_project_estimated_cost/wizard/wiz_create_fictitious_of.py:26
+#, python-format
+msgid "Error!: The product has variants"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
@@ -67,18 +110,29 @@ msgid "Estimate Standard Cost"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
+#: model:ir.actions.act_window,name:mrp_production_project_estimated_cost.mrp_fictitious_production_action
+#: model:ir.ui.menu,name:mrp_production_project_estimated_cost.menu_mrp_fictitious_production_action
+msgid "Fictitious Manufacturing Orders to estimate costs"
+msgstr ""
+
+#. module: mrp_production_project_estimated_cost
 #: view:account.analytic.line:mrp_production_project_estimated_cost.view_account_analytic_line_form_inh_estimatedcost
 msgid "General Accounting"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: field:account.analytic.line,last_purchase_cost:0
-msgid "Last Purchase Cost"
+#: field:wiz.create.fictitious.of,id:0
+msgid "ID"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: field:account.analytic.line,last_sale_price:0
-msgid "Last Sale Price"
+#: field:wiz.create.fictitious.of,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mrp_production_project_estimated_cost
+#: field:wiz.create.fictitious.of,write_date:0
+msgid "Last Updated on"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
@@ -92,12 +146,6 @@ msgid "Manufacturing Order"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:41
-#, python-format
-msgid "Operation \"%s\", without code."
-msgstr ""
-
-#. module: mrp_production_project_estimated_cost
 #: model:ir.model,name:mrp_production_project_estimated_cost.model_product_template
 msgid "Product Template"
 msgstr ""
@@ -108,27 +156,29 @@ msgid "Production Information"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:37
-#, python-format
-msgid "Routing WC line \"%s\", without operation."
+#: field:wiz.create.fictitious.of,date_planned:0
+msgid "Scheduled Date"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:110
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:113
+#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:140
 #, python-format
 msgid "You must define Income account in the product \"%s\", or in the product category"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:117
+#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:144
 #, python-format
-msgid "You must define one Analytic Account for this MO"
+msgid "You must define one Analytic Account for this MO: %s"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
-#: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:114
-#, python-format
-msgid "You must define one Analytic Account for this OF"
+#: view:wiz.create.fictitious.of:mrp_production_project_estimated_cost.wiz_create_fictitious_of_view
+msgid "or"
+msgstr ""
+
+#. module: mrp_production_project_estimated_cost
+#: view:mrp.production:mrp_production_project_estimated_cost.mrp_production_form_view_inh_estimatedcost
+msgid "{'invisible':['|',('active','=',False),('state','!=','draft')]}"
 msgstr ""
 

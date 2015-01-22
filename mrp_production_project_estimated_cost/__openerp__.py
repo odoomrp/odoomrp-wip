@@ -37,7 +37,10 @@
     ],
     "data": [
         "data/analytic_journal_data.xml",
+        "data/fictitious_mrp_production_sequence.xml",
+        "wizard/wiz_create_fictitious_of_view.xml",
         "views/account_analytic_line_view.xml",
+        "views/mrp_production_view.xml",
         "views/product_view.xml",
     ],
     "installable": True,

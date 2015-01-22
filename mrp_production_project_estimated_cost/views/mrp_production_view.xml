@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="mrp_production_project_form_view_inh_estimatedcost" model="ir.ui.view">
+            <field name="name">mrp.production.project.form.view.inh.estimatedcost</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp_project_link.mrp_production_project_form_view"/>
+            <field name="arch" type="xml">
+                <field name="project_id" position="after">
+                    <field name="active" />
+                </field>
+            </field>
+        </record>
+        <record id="mrp_production_form_view_inh_estimatedcost" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.inh.estimatedcost</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <button name="button_confirm" position="attributes">
+                    <attribute name="states"></attribute>
+                    <attribute name="attrs">{'invisible':['|',('active','=',False),('state','!=','draft')]}</attribute>
+                </button>
+            </field>
+        </record>
+        <record id="mrp_fictitious_production_action" model="ir.actions.act_window">
+            <field name="name">Fictitious Manufacturing Orders to estimate costs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.production</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph,gantt</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="mrp.view_mrp_production_filter"/>
+            <field name="context">{}</field>
+            <field name="domain">[('active','=',False)]</field>
+        </record>
+        <menuitem action="mrp_fictitious_production_action" id="menu_mrp_fictitious_production_action"
+            parent="mrp.menu_mrp_manufacturing" sequence="10"/>
+        <record id="mrp.mrp_production_action" model="ir.actions.act_window">
+            <field name="domain">[('active','=',True)]</field>
+        </record>
+        <record id="mrp.mrp_production_action_planning" model="ir.actions.act_window">
+            <field name="domain">[('state','in',('ready','confirmed','in_production')),('active','=',True)]</field>
+        </record>
+        <record id="mrp.mrp_production_action2" model="ir.actions.act_window">
+            <field name="domain">[('state','=','ready'),('active','=',True)]</field>
+        </record>
+        <record id="mrp.mrp_production_action3" model="ir.actions.act_window">
+            <field name="domain">[('state','=','in_production'),('active','=',True)]</field>
+        </record>
+
+        <record id="mrp.mrp_production_action4" model="ir.actions.act_window">
+            <field name="domain">[('state','=','confirmed'),('active','=',True)]</field>
+        </record>
+        <record id="mrp.act_product_mrp_production" model="ir.actions.act_window">
+            <field name="domain">[('active','=',True)]</field>
+        </record>
+    </data>
+</openerp>
