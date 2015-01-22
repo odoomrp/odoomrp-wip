@@ -49,7 +49,7 @@ class PurchaseOrderLineSubtotal(models.Model):
         ondelete='cascade')
     subtotal = fields.Float(
         string='Subtotal', digits=dp.get_precision('Account'),
-        compute=_calculate_subtotal)
+        compute='_calculate_subtotal')
 
 
 class PurchaseOrderLine(models.Model):
@@ -76,12 +76,17 @@ class PurchaseOrderLine(models.Model):
         cur = self.order_id.pricelist_id.currency_id
         self.price_subtotal = cur.round(taxes['total'])
 
+    def _get_possible_item_ids(self, pricelist_id, product_id=False, qty=0):
+        item_obj = self.env['product.pricelist.item']
+        item_ids = item_obj.domain_by_pricelist(
+            pricelist_id, product_id=product_id, qty=qty)
+        return item_ids
+
     @api.one
     @api.depends('product_id', 'product_qty',
                  'order_id.pricelist_id')
     def _get_possible_items(self):
-        item_obj = self.env['product.pricelist.item']
-        item_ids = item_obj.domain_by_pricelist(
+        item_ids = self._get_possible_item_ids(
             self.order_id.pricelist_id.id, product_id=self.product_id.id,
             qty=self.product_qty)
         self.possible_item_ids = [(6, 0, item_ids)]
@@ -92,8 +97,7 @@ class PurchaseOrderLine(models.Model):
     offer_id = fields.Many2one(
         comodel_name='product.pricelist.item.offer', string='Offer')
     item_id = fields.Many2one(
-        comodel_name='product.pricelist.item', string='Pricelist Item',
-        domain="[('id', 'in', possible_item_ids[0][2])]")
+        comodel_name='product.pricelist.item', string='Pricelist Item')
     possible_item_ids = fields.Many2many(
         comodel_name='product.pricelist.item',
         compute='_get_possible_items')
@@ -136,6 +140,11 @@ class PurchaseOrderLine(models.Model):
             res['value'].update({'item_id': item_id})
             res['value']['price_unit'] = item_obj.browse(
                 item_id).price_get(product_id, qty, partner_id, uom_id)[0]
+            res['domain'].update({'item_id':
+                                  [('id', 'in',
+                                    self._get_possible_item_ids(
+                                        pricelist_id, product_id=product_id,
+                                        qty=qty))]})
         return res
 
     @api.one
