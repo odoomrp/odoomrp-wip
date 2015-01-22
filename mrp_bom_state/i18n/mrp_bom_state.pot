@@ -1,0 +1,189 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mrp_bom_state
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-21 16:29+0000\n"
+"PO-Revision-Date: 2015-01-21 16:29+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
+msgid "Activate"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.view_mrp_bom_filter_inh_state
+#: selection:mrp.bom,state:0
+msgid "Active"
+msgstr ""
+
+#. module: mrp_bom_state
+#: field:mrp.bom,allow_re_edit:0
+msgid "Allow re-edit the BoM list"
+msgstr ""
+
+#. module: mrp_bom_state
+#: model:ir.model,name:mrp_bom_state.model_mrp_bom
+msgid "Bill of Material"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
+#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
+msgid "Cancel"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
+msgid "Confirm MRP BoM activation"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
+msgid "Confirm MRP BoM historification"
+msgstr ""
+
+#. module: mrp_bom_state
+#: code:addons/mrp_bom_state/models/mrp.py:80
+#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
+#, python-format
+msgid "Confirm activation"
+msgstr ""
+
+#. module: mrp_bom_state
+#: code:addons/mrp_bom_state/models/mrp.py:95
+#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
+#, python-format
+msgid "Confirm historification"
+msgstr ""
+
+#. module: mrp_bom_state
+#: field:wiz.confirm.activation,create_uid:0
+#: field:wiz.confirm.historification,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: mrp_bom_state
+#: field:wiz.confirm.activation,create_date:0
+#: field:wiz.confirm.historification,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
+#: selection:mrp.bom,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
+#: selection:mrp.bom,state:0
+msgid "Historical"
+msgstr ""
+
+#. module: mrp_bom_state
+#: field:mrp.bom,historical_date:0
+msgid "Historical Date"
+msgstr ""
+
+#. module: mrp_bom_state
+#: field:wiz.confirm.activation,id:0
+#: field:wiz.confirm.historification,id:0
+msgid "ID"
+msgstr ""
+
+#. module: mrp_bom_state
+#: field:wiz.confirm.activation,write_uid:0
+#: field:wiz.confirm.historification,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mrp_bom_state
+#: field:wiz.confirm.activation,write_date:0
+#: field:wiz.confirm.historification,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mrp_bom_state
+#: model:mail.message.subtype,description:mrp_bom_state.mt_active
+#: model:mail.message.subtype,name:mrp_bom_state.mt_active
+msgid "MRP BoM Active"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.mrp_bom_tree_view
+msgid "MRP BoMs"
+msgstr ""
+
+#. module: mrp_bom_state
+#: model:ir.model,name:mrp_bom_state.model_mrp_production
+msgid "Manufacturing Order"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.view_mrp_bom_filter_inh_state
+msgid "Product"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.view_mrp_bom_filter_inh_state
+msgid "State"
+msgstr ""
+
+#. module: mrp_bom_state
+#: field:mrp.bom,state:0
+msgid "Status"
+msgstr ""
+
+#. module: mrp_bom_state
+#: code:addons/mrp_bom_state/models/mrp.py:54
+#, python-format
+msgid "The sequence must be unique"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
+msgid "You are going to historicize an LdM. Doing, not be able to unlock it unless you make a copy. Are you sure you want to proceed?"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
+msgid "You will activate the LdM, If you have not set a route, you can not put. Are you sure you want to proceed?"
+msgstr ""
+
+#. module: mrp_bom_state
+#: code:addons/mrp_bom_state/models/mrp.py:67
+#, python-format
+msgid "not allowed to re-edit the BoM"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
+#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
+msgid "or"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
+msgid "{'readonly':[('state', '!=', 'draft')]}"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
+msgid "{'readonly':[('state', '=', 'historical')]}"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
+msgid "{'readonly':[('state', 'in', ('active','historical'))]}"
+msgstr ""
+

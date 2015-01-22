@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="wiz_confirm_activation_view" model="ir.ui.view">
+            <field name="name">wiz.confirm.activation.view</field>
+            <field name="model">wiz.confirm.activation</field>
+            <field name="arch" type="xml">
+                <form string="Confirm MRP BoM activation">
+                    <group string="Confirm MRP BoM activation">
+                        <label string="You will activate the LdM, If you have not set a route, you can not put. Are you sure you want to proceed?" class="oe_inline" />
+                    </group>
+                    <footer>
+                        <button name="do_confirm_activation" type="object" string="Confirm activation" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
