@@ -66,17 +66,21 @@ class MrpProduction(models.Model):
 
     @api.multi
     def action_pre_confirm(self):
-        self.ensure_one()
-        if not self.project_id:
-            return {'name': _('Create Project'),
-                    'type': 'ir.actions.act_window',
-                    'res_model': 'create.project.mrp.wiz',
-                    'view_type': 'form',
-                    'view_mode': 'form',
-                    'target': 'new',
-                    }
-        else:
-            self.signal_workflow('button_confirm')
+        project_obj = self.env['project.project']
+        for record in self:
+            if not record.project_id:
+                project = project_obj.search([('name', '=', record.name)],
+                                             limit=1)
+                if not project:
+                    project_vals = {'name': record.name,
+                                    'use_tasks': True,
+                                    'use_timesheets': True,
+                                    'use_issues': True
+                                    }
+                    project = project_obj.create(project_vals)
+                record.project_id = project.id
+                record.analytic_account_id = project.analytic_account_id.id
+        self.signal_workflow('button_confirm')
 
     @api.multi
     def action_confirm(self):
