@@ -38,6 +38,14 @@ class MrpProduction(models.Model):
         return super(MrpProduction, self).create(values)
 
     @api.multi
+    def unlink(self):
+        analytic_line_obj = self.env['account.analytic.line']
+        for production in self:
+            cond = [('mrp_production_id', '=', self.id)]
+            analytic_line_obj.search(cond).unlink()
+        return super(MrpProduction, self).unlink()
+
+    @api.multi
     def action_compute(self, properties=None):
         self.ensure_one()
         res = super(MrpProduction, self).action_compute(properties=properties)
@@ -47,9 +55,7 @@ class MrpProduction(models.Model):
     def _calculate_production_estimated_cost(self):
         analytic_line_obj = self.env['account.analytic.line']
         cond = [('mrp_production_id', '=', self.id)]
-        analytic_lines = analytic_line_obj.search(cond)
-        if analytic_lines:
-            analytic_lines.unlink()
+        analytic_line_obj.search(cond).unlink()
         journal = self.env.ref(
             'mrp_production_project_estimated_cost.analytic_journal_materials',
             False)
