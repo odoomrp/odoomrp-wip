@@ -15,19 +15,41 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import models, api, exceptions, _
+from openerp import models, fields, api, exceptions, _
 
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    @api.one
+    active = fields.Boolean('Active', default=False)
+    name = fields.Char(
+        string='Referencen', required=True, readonly=True, copy="False",
+        states={'draft': [('readonly', False)]}, default="/")
+
     @api.model
-    def action_confirm(self):
+    def create(self, values):
+        sequence_obj = self.pool['ir.sequence']
+        if values['active']:
+            values['name'] = sequence_obj.get(self._cr, self._uid,
+                                              'mrp.production')
+        else:
+            values['name'] = sequence_obj.get(self._cr, self._uid,
+                                              'fictitious.mrp.production')
+        production = super(MrpProduction, self).create(values)
+        return production
+
+    @api.multi
+    def action_compute(self, properties=None):
+        self.ensure_one()
+        self._calculate_production_estimated_cost()
+        return len(self._action_compute_lines(properties=properties))
+
+    def _calculate_production_estimated_cost(self):
         analytic_line_obj = self.env['account.analytic.line']
-        res = super(MrpProduction, self).action_confirm()
-        if self.state == 'draft':
-            return res
+        cond = [('mrp_production_id', '=', self.id)]
+        analytic_lines = analytic_line_obj.search(cond)
+        if analytic_lines:
+            analytic_lines.unlink()
         journal = self.env.ref(
             'mrp_production_project_estimated_cost.analytic_journal_materials',
             False)
@@ -97,9 +119,10 @@ class MrpProduction(models.Model):
                     line.workcenter_id.product_id, 0)
                 vals.update({
                     'estim_average_cost': op_number * op_avg_cost,
+                    'estim_standard_cost': op_number * op_avg_cost,
+                    'unit_amount': op_number,
                 })
                 analytic_line_obj.create(vals)
-        return res
 
     def _catch_information_estimated_cost(self, journal, name, production,
                                           workorder, product, qty):
