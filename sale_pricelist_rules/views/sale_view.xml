@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
+        <record model="ir.ui.view" id="sale.view_order_form_editable_list">
+            <field name="groups_id" eval="[(4, ref('product.group_sale_pricelist'))]" />
+        </record>
+
         <record model="ir.ui.view" id="sale_order_form_view_ext">
             <field name="name">sale.order.form.ext</field>
             <field name="model">sale.order</field>
@@ -20,7 +24,7 @@
                     <xpath
                         expr="//field[@name='order_line']/form//field[@name='address_allotment_id']"
                         position="after">
-                        <field name="item_id" groups="product.group_sale_pricelist" />
+                        <field name="item_id" groups="product.group_sale_pricelist" widget="selection" />
                         <field name="possible_item_ids" invisible="1" />
                         <field name="offer_id"
                             groups="sale.group_discount_per_so_line" />
@@ -34,6 +38,22 @@
                             groups="sale.group_discount_per_so_line" />
                     </xpath>
                 </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_order_line_form_view">
+            <field name="name">sale.order.line.form</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_order_line_form2" />
+            <field name="arch" type="xml">
+                <field name="discount" position="after">
+                    <field name="discount2"
+                         groups="sale.group_discount_per_so_line" />
+                    <field name="item_id" groups="product.group_sale_pricelist" widget="selection" />
+                    <field name="possible_item_ids" invisible="1" />
+                    <field name="offer_id"
+                         groups="sale.group_discount_per_so_line" />
+                </field>
             </field>
         </record>
 

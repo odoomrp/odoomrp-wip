@@ -48,7 +48,7 @@
                     </div>
                 </field>
                 <field name="company_id" position="after">
-                    <field name="item_id" />
+                    <field name="item_id" widget="selection" />
                     <field name="possible_item_ids" invisible="1" />
                     <field name="offer_id" />
                 </field>

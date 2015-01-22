@@ -196,8 +196,8 @@ class PurchaseOrder(models.Model):
             item_obj = self.env['product.pricelist.item']
             for line in self.order_line:
                 line.item_id = item_obj.get_best_pricelist_item(
-                    pricelist_id, product_id=line.product_id,
-                    qty=line.product_uom_qty)
+                    pricelist_id, product_id=line.product_id.id,
+                    qty=line.product_qty)
         return res
 
     subtotal_ids = fields.One2many(
