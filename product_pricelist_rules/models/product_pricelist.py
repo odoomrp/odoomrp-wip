@@ -173,7 +173,7 @@ class PricelistItem(models.Model):
                     price, precision_rounding=self.price_round)
             convert_to_price_uom = (
                 lambda price: product.uom_id._compute_price(
-                    price, price_uom_id))
+                    price_uom_id, price))
             if self.price_surcharge:
                 price_surcharge = convert_to_price_uom(self.price_surcharge)
                 price += price_surcharge
