@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-21 16:29+0000\n"
-"PO-Revision-Date: 2015-01-21 16:29+0000\n"
+"POT-Creation-Date: 2015-01-23 09:49+0000\n"
+"PO-Revision-Date: 2015-01-23 09:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgid "Active"
 msgstr ""
 
 #. module: mrp_bom_state
-#: field:mrp.bom,allow_re_edit:0
+#: field:mrp.config.settings,group_mrp_bom_state:0
 msgid "Allow re-edit the BoM list"
 msgstr ""
 
@@ -53,14 +53,14 @@ msgid "Confirm MRP BoM historification"
 msgstr ""
 
 #. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:80
+#: code:addons/mrp_bom_state/models/mrp.py:63
 #: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
 #, python-format
 msgid "Confirm activation"
 msgstr ""
 
 #. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:95
+#: code:addons/mrp_bom_state/models/mrp.py:78
 #: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
 #, python-format
 msgid "Confirm historification"
@@ -120,6 +120,11 @@ msgid "MRP BoM Active"
 msgstr ""
 
 #. module: mrp_bom_state
+#: model:res.groups,name:mrp_bom_state.group_mrp_bom_state
+msgid "MRP BoM state"
+msgstr ""
+
+#. module: mrp_bom_state
 #: view:mrp.bom:mrp_bom_state.mrp_bom_tree_view
 msgid "MRP BoMs"
 msgstr ""
@@ -145,7 +150,12 @@ msgid "Status"
 msgstr ""
 
 #. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:54
+#: help:mrp.config.settings,group_mrp_bom_state:0
+msgid "The active state may be passed back to state draft"
+msgstr ""
+
+#. module: mrp_bom_state
+#: code:addons/mrp_bom_state/models/mrp.py:40
 #, python-format
 msgid "The sequence must be unique"
 msgstr ""
@@ -158,12 +168,6 @@ msgstr ""
 #. module: mrp_bom_state
 #: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
 msgid "You will activate the LdM, If you have not set a route, you can not put. Are you sure you want to proceed?"
-msgstr ""
-
-#. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:67
-#, python-format
-msgid "not allowed to re-edit the BoM"
 msgstr ""
 
 #. module: mrp_bom_state
@@ -180,10 +184,5 @@ msgstr ""
 #. module: mrp_bom_state
 #: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
 msgid "{'readonly':[('state', '=', 'historical')]}"
-msgstr ""
-
-#. module: mrp_bom_state
-#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
-msgid "{'readonly':[('state', 'in', ('active','historical'))]}"
 msgstr ""
 

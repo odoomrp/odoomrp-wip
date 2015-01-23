@@ -35,8 +35,10 @@
     ],
     "data": [
         "data/mrp_bom_data.xml",
+        "security/mrp_bom_state_security.xml",
         "wizard/wiz_confirm_activation_view.xml",
         "wizard/wiz_confirm_historification_view.xml",
+        "views/res_config_view.xml",
         "views/mrp_bom_view.xml",
     ],
     "installable": True

@@ -21,7 +21,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/group" position="before">
                     <header>
-                        <button name="button_draft" type="object" string="Draft" attrs="{'invisible':[('state','!=','active')]}" class="oe_highlight" />
+                        <button name="button_draft" type="object" string="Draft" groups="mrp_bom_state.group_mrp_bom_state" attrs="{'invisible':[('state','!=','active')]}" class="oe_highlight" />
                         <button name="button_activate" type="object" string="Activate" attrs="{'invisible':[('state','!=',False)]}" class="oe_highlight" />
                         <button name="button_activate" type="object" string="Activate" attrs="{'invisible':[('state','!=','draft')]}" class="oe_highlight" />
                         <button name="button_historical" type="object" string="Historical" attrs="{'invisible':[('state','!=','active')]}" class="oe_highlight" />
@@ -31,7 +31,6 @@
                 <field name="company_id" position="after">
                     <group colspan="2" >
                         <field name="historical_date" />
-                        <field name="allow_re_edit" attrs="{'readonly':[('state','=','historical')]}" />
                     </group>
                 </field>
                 <field name="product_tmpl_id" position="attributes">

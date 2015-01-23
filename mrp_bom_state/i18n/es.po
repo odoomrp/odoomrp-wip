@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-21 16:29+0000\n"
-"PO-Revision-Date: 2015-01-21 17:34+0100\n"
+"POT-Creation-Date: 2015-01-23 09:49+0000\n"
+"PO-Revision-Date: 2015-01-23 10:52+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,9 +27,9 @@ msgid "Active"
 msgstr "Activa"
 
 #. module: mrp_bom_state
-#: field:mrp.bom,allow_re_edit:0
+#: field:mrp.config.settings,group_mrp_bom_state:0
 msgid "Allow re-edit the BoM list"
-msgstr "Permitir volver a editar la LdM"
+msgstr "Permitir la re-editar la lista de lista de materiales"
 
 #. module: mrp_bom_state
 #: model:ir.model,name:mrp_bom_state.model_mrp_bom
@@ -53,14 +53,14 @@ msgid "Confirm MRP BoM historification"
 msgstr "Confirmar la historificación de la LdM"
 
 #. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:80
+#: code:addons/mrp_bom_state/models/mrp.py:63
 #: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
 #, python-format
 msgid "Confirm activation"
 msgstr "Confirmar activación"
 
 #. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:95
+#: code:addons/mrp_bom_state/models/mrp.py:78
 #: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
 #, python-format
 msgid "Confirm historification"
@@ -120,6 +120,11 @@ msgid "MRP BoM Active"
 msgstr "MRP LdM activa"
 
 #. module: mrp_bom_state
+#: model:res.groups,name:mrp_bom_state.group_mrp_bom_state
+msgid "MRP BoM state"
+msgstr "Estado LdM"
+
+#. module: mrp_bom_state
 #: view:mrp.bom:mrp_bom_state.mrp_bom_tree_view
 msgid "MRP BoMs"
 msgstr "MRP LdMs"
@@ -142,10 +147,15 @@ msgstr "Estado"
 #. module: mrp_bom_state
 #: field:mrp.bom,state:0
 msgid "Status"
-msgstr "Estado"
+msgstr "Estatus"
 
 #. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:54
+#: help:mrp.config.settings,group_mrp_bom_state:0
+msgid "The active state may be passed back to state draft"
+msgstr "El estado activo puede ser devuelto al estado de borrador"
+
+#. module: mrp_bom_state
+#: code:addons/mrp_bom_state/models/mrp.py:40
 #, python-format
 msgid "The sequence must be unique"
 msgstr "La secuencia debe ser única"
@@ -159,12 +169,6 @@ msgstr "Va a historificar una LM. Si lo hace, no podrá volver a activarla a no 
 #: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
 msgid "You will activate the LdM, If you have not set a route, you can not put. Are you sure you want to proceed?"
 msgstr "Va a activar la LdM. Si no ha puesto ruta, no podrá ya ponerla. ¿Está seguro de que desea proceder?"
-
-#. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:67
-#, python-format
-msgid "not allowed to re-edit the BoM"
-msgstr "No permitido volver a editar la LdM"
 
 #. module: mrp_bom_state
 #: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
@@ -181,9 +185,4 @@ msgstr "{'readonly':[('state', '!=', 'draft')]}"
 #: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
 msgid "{'readonly':[('state', '=', 'historical')]}"
 msgstr "{'readonly':[('state', '=', 'historical')]}"
-
-#. module: mrp_bom_state
-#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
-msgid "{'readonly':[('state', 'in', ('active','historical'))]}"
-msgstr "{'readonly':[('state', 'in', ('active','historical'))]}"
 
