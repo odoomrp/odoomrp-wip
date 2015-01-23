@@ -21,11 +21,21 @@ from openerp import models, fields, api, exceptions, _
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
+    @api.one
+    def _count_created_estimated_cost(self):
+        analytic_line_obj = self.env['account.analytic.line']
+        cond = [('mrp_production_id', '=', self.id),
+                ('task_id', '=', False)]
+        analytic_lines = analytic_line_obj.search(cond)
+        self.created_estimated_cost = len(analytic_lines)
+
     active = fields.Boolean(
         'Active', default=lambda self: self.env.context.get('active', True))
     name = fields.Char(
         string='Referencen', required=True, readonly=True, copy="False",
         states={'draft': [('readonly', False)]}, default="/")
+    created_estimated_cost = fields.Integer(
+        compute="_count_created_estimated_cost", string="Estimated Costs")
 
     @api.model
     def create(self, values):
