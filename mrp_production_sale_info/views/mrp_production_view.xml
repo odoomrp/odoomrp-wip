@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="mrp_production_sale_info_tree_view" model="ir.ui.view">
+            <field name="name">mrp.production.sale.info.tree</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="partner" />
+                    <field name="sale_order" />
+                </field>
+            </field>
+        </record>
+
+        <record id="mrp_production_sale_info_form_view" model="ir.ui.view">
+            <field name="name">mrp.production.sale.info.form.view</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <field name="move_prod_id" position="before">
+                    <field name="sale_order" readonly="1" />
+                    <field name="sale_line" readonly="1" />
+                    <field name="partner" readonly="1" />
+                </field>
+            </field>
+        </record>
+
+        <record id="mrp_production_sale_info_search_view" model="ir.ui.view">
+            <field name="name">mrp.production.sale.info.search</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
+            <field name="arch" type="xml">
+                <field name="product_id" position="after">
+                    <field name="partner" />
+                    <field name="sale_order" />
+                </field>
+                <filter string="Product" position="before">
+                    <filter string="Customer" icon="terp-accessories-archiver"
+                        domain="[]" context="{'group_by':'partner'}" />
+                    <filter string="Sale Order" icon="terp-accessories-archiver"
+                        domain="[]" context="{'group_by':'sale_order'}" />
+                </filter>
+            </field>
+        </record>
+    </data>
+</openerp>

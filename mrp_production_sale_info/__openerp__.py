@@ -15,22 +15,25 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-from openerp import models, api
 
-
-class ProcurementOrder(models.Model):
-    _inherit = 'procurement.order'
-
-    @api.multi
-    @api.model
-    def make_mo(self):
-        production_obj = self.env['mrp.production']
-        res = super(ProcurementOrder, self).make_mo()
-        for key in res.keys():
-            production_id = res[key]
-            production = production_obj.browse(production_id)
-            if production.move_prod_id:
-                saleline = production.move_prod_id.procurement_id.sale_line_id
-                vals = {'sale_line': saleline.id}
-                production.write(vals)
-        return res
+{
+    "name": "MRP - Production sale info",
+    "version": "1.0",
+    "author": "OdooMRP team",
+    "website": "http://www.odoomrp.com",
+    "contributors": [
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>"
+    ],
+    "category": "Manufacturing",
+    "depends": [
+        "sale",
+        "mrp",
+        "stock",
+    ],
+    "data": [
+        "views/mrp_production_view.xml",
+    ],
+    "installable": True
+}
