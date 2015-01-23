@@ -21,7 +21,6 @@ class MrpBom(models.Model):
         return maxseq
 
     active = fields.Boolean('Active', default=False)
-    allow_re_edit = fields.Boolean('Allow re-edit the BoM list', default=True)
     historical_date = fields.Date(string='Historical Date', readonly=True)
     state = fields.Selection([('draft', 'Draft'),
                               ('active', 'Active'),
@@ -49,9 +48,6 @@ class MrpBom(models.Model):
 
     @api.multi
     def button_draft(self):
-        self.ensure_one()
-        if not self.allow_re_edit:
-            raise exceptions.Warning(_('not allowed to re-edit the BoM'))
         self.state = 'draft'
 
     @api.multi
