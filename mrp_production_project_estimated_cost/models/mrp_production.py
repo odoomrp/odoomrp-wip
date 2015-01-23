@@ -21,7 +21,8 @@ from openerp import models, fields, api, exceptions, _
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    active = fields.Boolean('Active', default=False)
+    active = fields.Boolean(
+        'Active', default=lambda self: self.env.context.get('active', True))
     name = fields.Char(
         string='Referencen', required=True, readonly=True, copy="False",
         states={'draft': [('readonly', False)]}, default="/")
