@@ -22,6 +22,29 @@
                 </button>
             </field>
         </record>
+        <record id="action_estimated_costs_per_production" model="ir.actions.act_window">
+            <field name="name">Estimated costs from production order</field>
+            <field name="res_model">account.analytic.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('mrp_production_id','=',active_id),('task_id','=',False)]</field>
+        </record>
+        <record model="ir.ui.view" id="mrp_production_buttons_inh_estimatedcost">
+            <field name="name">mrp.production.buttons.inh.estimatedcost</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_buttons" />
+            <field name="arch" type="xml">
+                <div name="buttons" position="inside">
+                    <button class="oe_inline oe_stat_button"
+                            type="action"
+                            name="%(action_estimated_costs_per_production)d"
+                            icon="fa-bookmark-o">
+                        <field name="created_estimated_cost"
+                               widget="statinfo"
+                               string="Estimated costs" />
+                    </button>
+                </div>
+            </field>
+        </record>
         <record id="mrp_fictitious_production_action" model="ir.actions.act_window">
             <field name="name">Fictitious Manufacturing Orders to estimate costs</field>
             <field name="type">ir.actions.act_window</field>
