@@ -44,5 +44,8 @@ class ProductProduct(models.Model):
         if res:
             res['context'] = {'search_default_pricelist_type_id': 1,
                               'default_product_id': self.id}
-            res['domain'] = [('product_id', '=', self.id)]
+            res['domain'] = ['|', ('product_id', '=', self.id),
+                             '&', ('product_tmpl_id', '=',
+                                   self.product_tmpl_id.id),
+                             ('product_id', '=', False)]
         return res
