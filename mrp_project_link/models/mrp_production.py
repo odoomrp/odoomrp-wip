@@ -65,24 +65,6 @@ class MrpProduction(models.Model):
         return super(MrpProduction, self).action_in_production()
 
     @api.multi
-    def action_pre_confirm(self):
-        project_obj = self.env['project.project']
-        for record in self:
-            if not record.project_id:
-                project = project_obj.search([('name', '=', record.name)],
-                                             limit=1)
-                if not project:
-                    project_vals = {'name': record.name,
-                                    'use_tasks': True,
-                                    'use_timesheets': True,
-                                    'use_issues': True
-                                    }
-                    project = project_obj.create(project_vals)
-                record.project_id = project.id
-                record.analytic_account_id = project.analytic_account_id.id
-        self.signal_workflow('button_confirm')
-
-    @api.multi
     def action_confirm(self):
         procurement_obj = self.env['procurement.order']
         mto_record = self.env.ref('stock.route_warehouse0_mto')

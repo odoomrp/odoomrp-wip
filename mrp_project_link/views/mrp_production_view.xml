@@ -13,10 +13,6 @@
                         <field name="project_id"/>
                     </group>
                 </xpath>
-                <button name="button_confirm" position="attributes">
-                    <attribute name="type">object</attribute>
-                    <attribute name="name">action_pre_confirm</attribute>
-                </button>
             </field>
         </record>
 

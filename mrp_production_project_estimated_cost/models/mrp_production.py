@@ -40,7 +40,8 @@ class MrpProduction(models.Model):
     @api.model
     def create(self, values):
         sequence_obj = self.pool['ir.sequence']
-        if values['active']:
+        if 'active' not in values or values['active']:
+            values['active'] = True
             values['name'] = sequence_obj.get(self._cr, self._uid,
                                               'mrp.production')
         else:
@@ -52,15 +53,35 @@ class MrpProduction(models.Model):
     def unlink(self):
         analytic_line_obj = self.env['account.analytic.line']
         for production in self:
-            cond = [('mrp_production_id', '=', self.id)]
+            cond = [('mrp_production_id', '=', production.id)]
             analytic_line_obj.search(cond).unlink()
+            if production.project_id.automatic_creation:
+                production.project_id.unlink()
+                analytic_lines = analytic_line_obj.search(
+                    [('account_id', '=', production.analytic_account_id.id)])
+                if not analytic_lines:
+                    production.analytic_account_id.unlink()
         return super(MrpProduction, self).unlink()
 
     @api.multi
     def action_compute(self, properties=None):
-        self.ensure_one()
+        project_obj = self.env['project.project']
         res = super(MrpProduction, self).action_compute(properties=properties)
-        self._calculate_production_estimated_cost()
+        for record in self:
+            if not record.project_id:
+                project = project_obj.search([('name', '=', record.name)],
+                                             limit=1)
+                if not project:
+                    project_vals = {'name': record.name,
+                                    'use_tasks': True,
+                                    'use_timesheets': True,
+                                    'use_issues': True,
+                                    'automatic_creation': True,
+                                    }
+                    project = project_obj.create(project_vals)
+                record.project_id = project.id
+                record.analytic_account_id = project.analytic_account_id.id
+            record._calculate_production_estimated_cost()
         return res
 
     def _calculate_production_estimated_cost(self):
