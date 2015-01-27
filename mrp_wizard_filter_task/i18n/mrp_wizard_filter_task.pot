@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-27 11:13+0000\n"
-"PO-Revision-Date: 2015-01-27 11:13+0000\n"
+"POT-Creation-Date: 2015-01-27 14:14+0000\n"
+"PO-Revision-Date: 2015-01-27 14:14+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,25 +36,25 @@ msgid "Created on"
 msgstr ""
 
 #. module: mrp_wizard_filter_task
-#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:111
+#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:96
 #, python-format
 msgid "Error!: You must enter Work summary"
 msgstr ""
 
 #. module: mrp_wizard_filter_task
-#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:114
+#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:99
 #, python-format
 msgid "Error!: You must enter the hours to work/impute"
 msgstr ""
 
 #. module: mrp_wizard_filter_task
-#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:105
+#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:90
 #, python-format
 msgid "Error!: You must select a task"
 msgstr ""
 
 #. module: mrp_wizard_filter_task
-#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:108
+#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:93
 #, python-format
 msgid "Error!: You must select a user"
 msgstr ""
@@ -62,6 +62,12 @@ msgstr ""
 #. module: mrp_wizard_filter_task
 #: field:wizard.filter.mrp.task,id:0
 msgid "ID"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: model:ir.actions.act_window,name:mrp_wizard_filter_task.action_wizard_filter_mrp_task
+#: model:ir.ui.menu,name:mrp_wizard_filter_task.menu_wizard_filter_mrp_task
+msgid "Impute/Search imputations in tasks"
 msgstr ""
 
 #. module: mrp_wizard_filter_task
@@ -102,12 +108,6 @@ msgstr ""
 #. module: mrp_wizard_filter_task
 #: model:ir.model,name:mrp_wizard_filter_task.model_project_task_work
 msgid "Project Task Work"
-msgstr ""
-
-#. module: mrp_wizard_filter_task
-#: model:ir.actions.act_window,name:mrp_wizard_filter_task.action_wizard_filter_mrp_task
-#: model:ir.ui.menu,name:mrp_wizard_filter_task.menu_wizard_filter_mrp_task
-msgid "Select tasks to impute"
 msgstr ""
 
 #. module: mrp_wizard_filter_task

@@ -33,7 +33,7 @@
         </record>
 
         <record id="action_wizard_filter_mrp_task" model="ir.actions.act_window">
-            <field name="name">Select tasks to impute</field>
+            <field name="name">Impute/Search imputations in tasks</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">wizard.filter.mrp.task</field>
             <field name="view_type">form</field>
@@ -43,7 +43,7 @@
         </record>
 
         <menuitem
-            name="Select tasks to impute"
+            name="Impute/Search imputations in tasks"
             parent="mrp.menu_mrp_manufacturing"
             action="action_wizard_filter_mrp_task"
             id="menu_wizard_filter_mrp_task" />
