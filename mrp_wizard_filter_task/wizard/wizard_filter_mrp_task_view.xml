@@ -8,16 +8,24 @@
             <field name="arch" type="xml">
                 <form string="Wizard filter MRP task">
                     <group string="Production">
-                        <field name="mrp_production" on_change="onchange_mrp_production(mrp_production)"/>
+                        <field name="mrp_production" />
                     </group>
                     <group string="Work Order">
                         <field name="wk_order" />
                     </group>
+                    <group string="Task">
+                        <field name="task" />
+                    </group>
                     <group string="User">
                         <field name="user" />
                     </group>
+                    <group string="Time Spent" colspan="4" col="8">
+                        <field name="name" colspan="6"/>
+                        <field name="hours" colspan="2"/>
+                    </group>
                     <group colspan="4" col="6">
                         <button special="cancel" string="Cancel" icon="gtk-cancel"/>
+                        <button name="mrp_create_task_analytic" string="Create task/impute analytic" type="object" icon="gtk-ok"/>
                         <button name="mrp_task_open_window" string="Open Tasks" type="object" icon="gtk-ok"/>
                     </group>
                 </form>
@@ -25,7 +33,7 @@
         </record>
 
         <record id="action_wizard_filter_mrp_task" model="ir.actions.act_window">
-            <field name="name">Select tasks to impute</field>
+            <field name="name">Impute/Search imputations in tasks</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">wizard.filter.mrp.task</field>
             <field name="view_type">form</field>
@@ -35,7 +43,7 @@
         </record>
 
         <menuitem
-            name="Select tasks to impute"
+            name="Impute/Search imputations in tasks"
             parent="mrp.menu_mrp_manufacturing"
             action="action_wizard_filter_mrp_task"
             id="menu_wizard_filter_mrp_task" />

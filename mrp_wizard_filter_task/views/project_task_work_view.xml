@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="action_project_task_work_filter_tree2" model="ir.actions.act_window">
+            <field name="name">Tasks</field>
+            <field name="res_model">project.task.work</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="project.view_task_work_tree"/>
+        </record>
+    </data>
+</openerp>
