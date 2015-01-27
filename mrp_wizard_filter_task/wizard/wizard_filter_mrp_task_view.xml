@@ -8,16 +8,24 @@
             <field name="arch" type="xml">
                 <form string="Wizard filter MRP task">
                     <group string="Production">
-                        <field name="mrp_production" on_change="onchange_mrp_production(mrp_production)"/>
+                        <field name="mrp_production" />
                     </group>
                     <group string="Work Order">
                         <field name="wk_order" />
                     </group>
+                    <group string="Task">
+                        <field name="task" />
+                    </group>
                     <group string="User">
                         <field name="user" />
                     </group>
+                    <group string="Time Spent" colspan="4" col="8">
+                        <field name="name" colspan="6"/>
+                        <field name="hours" colspan="2"/>
+                    </group>
                     <group colspan="4" col="6">
                         <button special="cancel" string="Cancel" icon="gtk-cancel"/>
+                        <button name="mrp_create_task_analytic" string="Create task/impute analytic" type="object" icon="gtk-ok"/>
                         <button name="mrp_task_open_window" string="Open Tasks" type="object" icon="gtk-ok"/>
                     </group>
                 </form>
