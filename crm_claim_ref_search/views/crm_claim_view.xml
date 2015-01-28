@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_crm_case_claims_filter_inh_refsearch" model="ir.ui.view">
+            <field name="name">view.crm.case.claims.filter.inh.refsearch</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.view_crm_case_claims_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <separator/>
+                    <field name="ref_name" />
+                </field>
+                <filter string="Partner" position="after">
+                    <filter string="Reference" domain="[]" help="Reference" context="{'group_by':'ref_model_name'}"/>
+                </filter>
+            </field>
+        </record>
+        <record id="crm_case_claims_tree_view_inh_refsearch" model="ir.ui.view">
+            <field name="name">crm.case.claims.tree.view.inh.refsearch</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="ref_model_name" />
+                    <field name="ref_name" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
+
