@@ -21,6 +21,9 @@
                     <attribute name="states"></attribute>
                     <attribute name="attrs">{'invisible':['|',('active','=',False),('state','!=','draft')]}</attribute>
                 </button>
+                <button name="action_cancel" position="after">
+                    <button name="calculate_production_estimated_cost" states="draft,ready,in_production" string="Create Estimated Costs" type="object"/>
+                </button>
             </field>
         </record>
 
@@ -50,12 +53,10 @@
             <field name="arch" type="xml">
                 <div name="buttons" position="inside">
                     <button class="oe_inline oe_stat_button"
-                            type="action"
-                            name="%(action_estimated_costs_per_production)d"
-                            icon="fa-bookmark-o">
-                        <field name="created_estimated_cost"
-                               widget="statinfo"
-                               string="Estimated costs" />
+                            type="object"
+                            string="Estim. Costs"
+                            name="action_show_estimated_costs"
+                            icon="fa-bar-chart">
                     </button>
                 </div>
             </field>

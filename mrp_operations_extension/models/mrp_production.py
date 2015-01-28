@@ -34,6 +34,7 @@ class MrpProduction(models.Model):
     def _action_compute_lines(self, properties=None):
         res = super(MrpProduction, self)._action_compute_lines(
             properties=properties)
+        print res
         self._get_workorder_in_product_lines(
             self.workcenter_lines, self.product_lines, properties=properties)
         return res
@@ -85,3 +86,5 @@ class MrpProductionWorkcenterLine(models.Model):
     routing_wc_line = fields.Many2one('mrp.routing.workcenter',
                                       string='Routing WC Line')
     do_production = fields.Boolean(string='Produce here')
+    time_start = fields.Float(string="Time Start")
+    time_stop = fields.Float(string="Time Stop")
