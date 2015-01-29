@@ -36,7 +36,7 @@ class MrpProductionWorkcenterLine(models.Model):
             production = self.production_id
             workcenter = self.workcenter_id
             product = workcenter.product_id
-            journal_id = workcenter.costs_journal_id.id or False
+            journal_id = workcenter.costs_journal_id or False
             if not journal_id:
                 journal_id = self.env.ref(
                     'mrp_production_project_estimated_cost.analytic_journal_'
@@ -67,7 +67,7 @@ class MrpProductionWorkcenterLine(models.Model):
                              'product_uom_id': hour_uom.id,
                              'amount': -(price * operation_line.uptime),
                              'unit_amount': operation_line.uptime,
-                             'journal_id': journal_id,
+                             'journal_id': journal_id.id,
                              'account_id': analytic_account_id,
                              'general_account_id': general_acc,
                              'task_id': task_id,
