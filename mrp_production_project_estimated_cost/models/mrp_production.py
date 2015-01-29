@@ -127,15 +127,15 @@ class MrpProduction(models.Model):
             journal = record.env.ref('mrp_production_project_estimated_cost.'
                                      'analytic_journal_machines', False)
             for line in record.workcenter_lines:
-                workcenter = line.workcenter_id
+                wc = line.workcenter_id
                 for op_workcenter in line.routing_wc_line.op_wc_lines:
                     if line.workcenter_id == op_workcenter.workcenter:
-                        workcenter = op_workcenter
+                        wc = op_workcenter
                         break
-                time_start = workcenter.time_start
-                time_stop = workcenter.time_stop
-                op_number = workcenter.op_number
-                op_avg_cost = workcenter.op_avg_cost
+                time_start = wc.time_start
+                time_stop = wc.time_stop
+                op_number = wc.op_number
+                op_avg_cost = wc.op_avg_cost
                 if (time_start and line.workcenter_id.pre_op_product):
                     name = (_('%s-%s Pre-operation') %
                             (record.name, line.workcenter_id.name))
@@ -143,7 +143,7 @@ class MrpProduction(models.Model):
                         journal, name, record, line,
                         line.workcenter_id.pre_op_product, time_start)
                     amount = line.workcenter_id.pre_op_product.standard_price
-                    vals.update({'amount': amount})
+                    vals['amount'] = amount
                     analytic_line_obj.create(vals)
                 if (time_stop and line.workcenter_id.post_op_product):
                     name = (_('%s-%s Post-operation') %
@@ -151,9 +151,8 @@ class MrpProduction(models.Model):
                     vals = record._catch_information_estimated_cost(
                         journal, name, record, line,
                         line.workcenter_id.post_op_product, time_stop)
-                    vals.update(
-                        {'amount':
-                         line.workcenter_id.post_op_product.standard_price})
+                    amount = line.workcenter_id.post_op_product.standard_price
+                    vals['amount'] = amount
                     analytic_line_obj.create(vals)
                 if line.cycle and line.workcenter_id.product_id:
                     name = (_('%s-%s-C-%s') %
@@ -163,8 +162,8 @@ class MrpProduction(models.Model):
                         journal, name, record, line,
                         line.workcenter_id.product_id, line.cycle)
                     cost = line.workcenter_id.costs_cycle
-                    vals.update({'estim_average_cost': line.cycle * cost,
-                                 'estim_standard_cost': line.cycle * cost})
+                    vals['estim_avg_cost'] = line.cycle * cost
+                    vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
                 if line.hour and line.workcenter_id.product_id:
                     name = (_('%s-%s-H-%s') %
@@ -179,8 +178,8 @@ class MrpProduction(models.Model):
                         journal, name, record, line,
                         line.workcenter_id.product_id, hour)
                     cost = line.workcenter_id.costs_hour
-                    vals.update({'estim_average_cost': hour * cost,
-                                 'estim_standard_cost': hour * cost})
+                    vals['estim_avg_cost'] = hour * cost
+                    vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
                 if op_number > 0:
                     journal_wk = record.env.ref(
@@ -192,10 +191,8 @@ class MrpProduction(models.Model):
                     vals = record._catch_information_estimated_cost(
                         journal_wk, name, record, line,
                         line.workcenter_id.product_id, op_number)
-                    vals.update({
-                        'estim_average_cost': op_number * op_avg_cost,
-                        'estim_standard_cost': op_number * op_avg_cost,
-                    })
+                    vals['estim_avg_cost'] = op_number * op_avg_cost
+                    vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
 
     def _catch_information_estimated_cost(self, journal, name, production,
@@ -227,7 +224,7 @@ class MrpProduction(models.Model):
             'unit_amount': qty,
             'product_uom_id': product.uom_id.id,
             'general_account_id': general_account.id,
-            'estim_standard_cost': qty * product.manual_standard_cost,
-            'estim_average_cost': qty * product.standard_price,
+            'estim_std_cost': qty * product.manual_standard_cost,
+            'estim_avg_cost': qty * product.standard_price,
         }
         return vals

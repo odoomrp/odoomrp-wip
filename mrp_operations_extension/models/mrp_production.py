@@ -34,7 +34,6 @@ class MrpProduction(models.Model):
     def _action_compute_lines(self, properties=None):
         res = super(MrpProduction, self)._action_compute_lines(
             properties=properties)
-        print res
         self._get_workorder_in_product_lines(
             self.workcenter_lines, self.product_lines, properties=properties)
         return res

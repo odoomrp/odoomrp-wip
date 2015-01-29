@@ -22,9 +22,7 @@ import openerp.addons.decimal_precision as dp
 class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
 
-    estim_standard_cost = fields.Float(
-        string='Estimate Standard Cost',
-        digits=dp.get_precision('Product Price'))
-    estim_average_cost = fields.Float(
-        string='Estimate Average Cost',
-        digits=dp.get_precision('Product Price'))
+    estim_std_cost = fields.Float(string='Estimate Standard Cost',
+                                  digits=dp.get_precision('Product Price'))
+    estim_avg_cost = fields.Float(string='Estimate Average Cost',
+                                  digits=dp.get_precision('Product Price'))

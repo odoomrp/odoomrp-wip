@@ -73,8 +73,8 @@ class MrpProductionWorkcenterLine(models.Model):
                              'task_id': task_id,
                              'mrp_production_id': production.id or False,
                              'workorder': self.id,
-                             'estim_average_cost': 0.0,
-                             'estim_standard_cost': 0.0
+                             'estim_avg_cost': 0.0,
+                             'estim_std_cost': 0.0
                              }
             analytic_line = analytic_line_obj.create(analytic_vals)
             return analytic_line
