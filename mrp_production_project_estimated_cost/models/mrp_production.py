@@ -95,19 +95,26 @@ class MrpProduction(models.Model):
         analytic_line_obj = self.env['account.analytic.line']
         id2 = self.env.ref(
             'mrp_production_project_estimated_cost.estimated_cost_list_view')
+        search_view = self.env.ref('mrp_project_link.account_analytic_line'
+                                   '_mrp_search_view')
         analytic_line_list = analytic_line_obj.search(
             [('mrp_production_id', '=', self.id),
              ('task_id', '=', False)])
+        self = self.with_context(search_default_group_production=1,
+                                 search_default_group_workorder=1,
+                                 search_default_group_journal=1)
         return {
-            'view_type': 'tree',
+            'view_type': 'form',
             'view_mode': 'tree',
             'res_model': 'account.analytic.line',
             'views': [(id2.id, 'tree')],
+            'search_view_id': search_view.id,
             'view_id': False,
             'type': 'ir.actions.act_window',
             'target': 'new',
             'domain': "[('id','in',[" +
             ','.join(map(str, analytic_line_list.ids)) + "])]",
+            'context': self.env.context
             }
 
     @api.multi
@@ -120,18 +127,17 @@ class MrpProduction(models.Model):
                                      'analytic_journal_materials', False)
             for line in record.product_lines:
                 name = _('%s-%s' % (record.name, line.work_order.name or ''))
-                vals = record._catch_information_estimated_cost(
+                vals = record._prepare_estim_cost_analytic_line(
                     journal, name, record, line.work_order, line.product_id,
                     line.product_qty)
                 analytic_line_obj.create(vals)
             journal = record.env.ref('mrp_production_project_estimated_cost.'
                                      'analytic_journal_machines', False)
             for line in record.workcenter_lines:
-                wc = line.workcenter_id
-                for op_workcenter in line.routing_wc_line.op_wc_lines:
-                    if line.workcenter_id == op_workcenter.workcenter:
-                        wc = op_workcenter
-                        break
+                op_wc_lines = line.routing_wc_line.op_wc_lines
+                wc = op_wc_lines.filtered(lambda r: r.workcenter ==
+                                          line.workcenter_id) or \
+                    line.workcenter_id
                 time_start = wc.time_start
                 time_stop = wc.time_stop
                 op_number = wc.op_number
@@ -139,7 +145,7 @@ class MrpProduction(models.Model):
                 if (time_start and line.workcenter_id.pre_op_product):
                     name = (_('%s-%s Pre-operation') %
                             (record.name, line.workcenter_id.name))
-                    vals = record._catch_information_estimated_cost(
+                    vals = record._prepare_estim_cost_analytic_line(
                         journal, name, record, line,
                         line.workcenter_id.pre_op_product, time_start)
                     amount = line.workcenter_id.pre_op_product.standard_price
@@ -148,7 +154,7 @@ class MrpProduction(models.Model):
                 if (time_stop and line.workcenter_id.post_op_product):
                     name = (_('%s-%s Post-operation') %
                             (record.name, line.workcenter_id.name))
-                    vals = record._catch_information_estimated_cost(
+                    vals = record._prepare_estim_cost_analytic_line(
                         journal, name, record, line,
                         line.workcenter_id.post_op_product, time_stop)
                     amount = line.workcenter_id.post_op_product.standard_price
@@ -158,7 +164,7 @@ class MrpProduction(models.Model):
                     name = (_('%s-%s-C-%s') %
                             (record.name, line.routing_wc_line.operation.code,
                              line.workcenter_id.name))
-                    vals = record._catch_information_estimated_cost(
+                    vals = record._prepare_estim_cost_analytic_line(
                         journal, name, record, line,
                         line.workcenter_id.product_id, line.cycle)
                     cost = line.workcenter_id.costs_cycle
@@ -174,7 +180,7 @@ class MrpProduction(models.Model):
                         hour += time_stop
                     if (time_start and not line.workcenter_id.pre_op_product):
                         hour += time_start
-                    vals = record._catch_information_estimated_cost(
+                    vals = record._prepare_estim_cost_analytic_line(
                         journal, name, record, line,
                         line.workcenter_id.product_id, hour)
                     cost = line.workcenter_id.costs_hour
@@ -188,14 +194,14 @@ class MrpProduction(models.Model):
                     name = (_('%s-%s-%s') %
                             (record.name, line.routing_wc_line.operation.code,
                              line.workcenter_id.product_id.name))
-                    vals = record._catch_information_estimated_cost(
+                    vals = record._prepare_estim_cost_analytic_line(
                         journal_wk, name, record, line,
                         line.workcenter_id.product_id, op_number)
                     vals['estim_avg_cost'] = op_number * op_avg_cost
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
 
-    def _catch_information_estimated_cost(self, journal, name, production,
+    def _prepare_estim_cost_analytic_line(self, journal, name, production,
                                           workorder, product, qty):
         analytic_line_obj = self.env['account.analytic.line']
         general_account = (product.property_account_income or
