@@ -48,6 +48,7 @@ class StockMove(models.Model):
                     task_id = False
                     if record.production_id:
                         production = record.production_id
+                        price = -price
                     elif record.raw_material_production_id:
                         production = record.raw_material_production_id
                     if production:

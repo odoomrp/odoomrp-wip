@@ -58,12 +58,10 @@ class MrpBom(models.Model):
                 cycle = int(cycle) + 1
             hour = wc.hour_nbr * cycle
             default_wc_line = wc.op_wc_lines.filtered(lambda r: r.default)
-            pre_hour = default_wc_line.time_start or 0.0
-            post_hour = default_wc_line.time_stop or 0.0
             work_order['cycle'] = cycle
             work_order['hour'] = hour
-            work_order['time_start'] = pre_hour
-            work_order['time_stop'] = post_hour
+            work_order['time_start'] = default_wc_line.time_start or 0.0
+            work_order['time_stop'] = default_wc_line.time_stop or 0.0
             if 'routing_wc_line' not in work_order:
                 work_order['routing_wc_line'] = routing_line_id
                 work_order['do_production'] = wc.do_production

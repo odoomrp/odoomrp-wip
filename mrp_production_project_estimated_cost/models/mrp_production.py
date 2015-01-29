@@ -138,29 +138,25 @@ class MrpProduction(models.Model):
                 wc = op_wc_lines.filtered(lambda r: r.workcenter ==
                                           line.workcenter_id) or \
                     line.workcenter_id
-                time_start = wc.time_start
-                time_stop = wc.time_stop
-                op_number = wc.op_number
-                op_avg_cost = wc.op_avg_cost
-                if (time_start and line.workcenter_id.pre_op_product):
+                if (wc.time_start and line.workcenter_id.pre_op_product):
                     name = (_('%s-%s Pre-operation') %
                             (record.name, line.workcenter_id.name))
                     vals = record._prepare_estim_cost_analytic_line(
                         journal, name, record, line,
-                        line.workcenter_id.pre_op_product, time_start)
+                        line.workcenter_id.pre_op_product, wc.time_start)
                     amount = line.workcenter_id.pre_op_product.standard_price
                     vals['amount'] = amount
                     analytic_line_obj.create(vals)
-                if (time_stop and line.workcenter_id.post_op_product):
+                if (wc.time_stop and line.workcenter_id.post_op_product):
                     name = (_('%s-%s Post-operation') %
                             (record.name, line.workcenter_id.name))
                     vals = record._prepare_estim_cost_analytic_line(
                         journal, name, record, line,
-                        line.workcenter_id.post_op_product, time_stop)
+                        line.workcenter_id.post_op_product, wc.time_stop)
                     amount = line.workcenter_id.post_op_product.standard_price
                     vals['amount'] = amount
                     analytic_line_obj.create(vals)
-                if line.cycle and line.workcenter_id.product_id:
+                if line.cycle:
                     name = (_('%s-%s-C-%s') %
                             (record.name, line.routing_wc_line.operation.code,
                              line.workcenter_id.name))
@@ -171,15 +167,15 @@ class MrpProduction(models.Model):
                     vals['estim_avg_cost'] = line.cycle * cost
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
-                if line.hour and line.workcenter_id.product_id:
+                if line.hour:
                     name = (_('%s-%s-H-%s') %
                             (record.name, line.routing_wc_line.operation.code,
                              line.workcenter_id.name))
                     hour = line.hour
-                    if (time_stop and not line.workcenter_id.post_op_product):
-                        hour += time_stop
-                    if (time_start and not line.workcenter_id.pre_op_product):
-                        hour += time_start
+                    if wc.time_stop and not line.workcenter_id.post_op_product:
+                        hour += wc.time_stop
+                    if wc.time_start and not line.workcenter_id.pre_op_product:
+                        hour += wc.time_start
                     vals = record._prepare_estim_cost_analytic_line(
                         journal, name, record, line,
                         line.workcenter_id.product_id, hour)
@@ -187,7 +183,7 @@ class MrpProduction(models.Model):
                     vals['estim_avg_cost'] = hour * cost
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
-                if op_number > 0:
+                if wc.op_number > 0:
                     journal_wk = record.env.ref(
                         'mrp_production_project_estimated_cost.analytic_'
                         'journal_operators', False)
@@ -196,8 +192,8 @@ class MrpProduction(models.Model):
                              line.workcenter_id.product_id.name))
                     vals = record._prepare_estim_cost_analytic_line(
                         journal_wk, name, record, line,
-                        line.workcenter_id.product_id, op_number)
-                    vals['estim_avg_cost'] = op_number * op_avg_cost
+                        line.workcenter_id.product_id, wc.op_number)
+                    vals['estim_avg_cost'] = wc.op_number * wc.op_avg_cost
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
 
