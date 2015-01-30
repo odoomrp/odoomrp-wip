@@ -144,10 +144,10 @@ class StockMove(models.Model):
 
     @api.one
     def get_unit_price(self):
-        analytic_line_obj = self.env['account.analytic.line']
-        res = super(StockMove, self).get_unit_price()
         if self.production_id:
+            analytic_line_obj = self.env['account.analytic.line']
             analytic_lines = analytic_line_obj.search(
                 [('mrp_production_id', '=', self.production_id.id)])
-            res = sum([-line.amount for line in analytic_lines])
-        return res
+            return sum([-line.amount for line in analytic_lines])
+        else:
+            return super(StockMove, self).get_unit_price()
