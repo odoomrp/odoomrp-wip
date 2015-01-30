@@ -148,6 +148,6 @@ class StockMove(models.Model):
         res = super(StockMove, self).get_unit_price()
         if self.production_id:
             analytic_lines = analytic_line_obj.search(
-                    [('mrp_production_id', '=', self.production_id.id)])
+                [('mrp_production_id', '=', self.production_id.id)])
             res = sum([-line.amount for line in analytic_lines])
         return res
