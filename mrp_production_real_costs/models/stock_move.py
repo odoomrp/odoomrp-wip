@@ -142,8 +142,9 @@ class StockMove(models.Model):
                 # manager may not have the right to write on products
                 product.sudo().write({'standard_price': new_std_price})
 
-    @api.one
+    @api.multi
     def get_unit_price(self):
+        self.ensure_one()
         if self.production_id:
             analytic_line_obj = self.env['account.analytic.line']
             analytic_lines = analytic_line_obj.search(
