@@ -68,24 +68,55 @@ class StockMove(models.Model):
                                          'product.category'))
                     date = datetime.now().strftime('%Y-%m-%d')
                     uom_id = record.product_id.uom_id.id
-                    analytic_vals = {'name': name,
-                                     'ref': name,
-                                     'date': date,
-                                     'user_id': self.env.uid,
-                                     'product_id': product.id,
-                                     'product_uom_id': uom_id,
-                                     'amount': -(price * product_qty),
-                                     'unit_amount': product_qty,
-                                     'journal_id': journal_id.id,
-                                     'account_id': analytic_account_id,
-                                     'general_account_id': general_account,
-                                     'task_id': task_id,
-                                     'mrp_production_id': production_id,
-                                     'workorder': record.work_order.id,
-                                     'estim_average_cost': 0.0,
-                                     'estim_standard_cost': 0.0
-                                     }
-                    analytic_line_obj.create(analytic_vals)
+                    if record.raw_material_production_id:
+                        analytic_vals = {'name': name,
+                                         'ref': name,
+                                         'date': date,
+                                         'user_id': self.env.uid,
+                                         'product_id': product.id,
+                                         'product_uom_id': uom_id,
+                                         'amount': -(price * product_qty),
+                                         'unit_amount': product_qty,
+                                         'journal_id': journal_id.id,
+                                         'account_id': analytic_account_id,
+                                         'general_account_id': general_account,
+                                         'task_id': task_id,
+                                         'mrp_production_id': production_id,
+                                         'workorder': record.work_order.id,
+                                         'estim_avg_cost': 0.0,
+                                         'estim_std_cost': 0.0
+                                         }
+                        analytic_line_obj.create(analytic_vals)
+                    elif record.production_id:
+                        amount = 0.0
+                        unit_amount = 0.0
+                        for wc in production.workcenter_lines:
+                            cycle_cost = wc.workcenter_id.costs_cycle
+                            cycle_units = wc.workcenter_id.capacity_per_cycle
+                            cycle = product_qty / cycle_units
+                            if (wc.routing_wc_line.limited_production_capacity
+                                    and not cycle.is_integer()):
+                                cycle = int(cycle) + 1
+                            amount += cycle * cycle_cost
+                            unit_amount += cycle
+                        analytic_vals = {'name': name,
+                                         'ref': name,
+                                         'date': date,
+                                         'user_id': self.env.uid,
+                                         'product_id': product.id,
+                                         'product_uom_id': uom_id,
+                                         'amount': amount,
+                                         'unit_amount': unit_amount,
+                                         'journal_id': journal_id.id,
+                                         'account_id': analytic_account_id,
+                                         'general_account_id': general_account,
+                                         'task_id': task_id,
+                                         'mrp_production_id': production_id,
+                                         'workorder': record.work_order.id,
+                                         'estim_avg_cost': 0.0,
+                                         'estim_std_cost': 0.0
+                                         }
+                        analytic_line_obj.create(analytic_vals)
         return result
 
     @api.multi
