@@ -18,6 +18,7 @@
 
 from openerp import models, api
 from datetime import datetime
+import math
 
 
 class StockMove(models.Model):
@@ -93,10 +94,7 @@ class StockMove(models.Model):
                         for wc in production.workcenter_lines:
                             cycle_cost = wc.workcenter_id.costs_cycle
                             cycle_units = wc.workcenter_id.capacity_per_cycle
-                            cycle = product_qty / cycle_units
-                            if (wc.routing_wc_line.limited_production_capacity
-                                    and not cycle.is_integer()):
-                                cycle = int(cycle) + 1
+                            cycle = int(math.ceil(product_qty / cycle_units))
                             amount += cycle * cycle_cost
                             unit_amount += cycle
                         analytic_vals = {'name': name,
