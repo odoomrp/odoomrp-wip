@@ -32,8 +32,7 @@ class MrpWorkcenter(models.Model):
 class MrpRoutingWorkcenter(models.Model):
     _inherit = 'mrp.routing.workcenter'
 
-    limited_production_capacity = fields.Boolean(
-        string='Limited Production Capacity')
+    limited_production_capacity = fields.Boolean()
 
 
 class MrpProduction(models.Model):
@@ -43,7 +42,6 @@ class MrpProduction(models.Model):
     def product_qty_change_production_capacity(self, product_qty=0,
                                                routing_id=False):
         result = {}
-        result['value'] = {}
         routing_obj = self.env['mrp.routing']
         if product_qty and routing_id:
             routing = routing_obj.browse(routing_id)
