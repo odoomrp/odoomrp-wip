@@ -167,7 +167,7 @@ msgstr "Va a historificar una LM. Si lo hace, no podrá volver a activarla a no 
 
 #. module: mrp_bom_state
 #: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
-msgid "You will activate the LdM, If you have not set a route, you can not put. Are you sure you want to proceed?"
+msgid "You will activate the BoM. If you haven't set a route yet, then you won't be able to do it after this. Are you sure you want to proceed?"
 msgstr "Va a activar la LdM. Si no ha puesto ruta, no podrá ya ponerla. ¿Está seguro de que desea proceder?"
 
 #. module: mrp_bom_state
