@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-26 10:39+0000\n"
-"PO-Revision-Date: 2014-11-26 10:39+0000\n"
+"POT-Creation-Date: 2015-02-04 15:49+0000\n"
+"PO-Revision-Date: 2015-02-04 15:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr ""
 
 #. module: mrp_production_capacity
 #: field:mrp.routing.workcenter,limited_production_capacity:0
-msgid "Limited Production Capacity"
+msgid "Limited production capacity"
 msgstr ""
 
 #. module: mrp_production_capacity
@@ -36,33 +36,15 @@ msgid "Manufacturing Order"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:72
-#: code:addons/mrp_production_capacity/models/mrp.py:121
-#, python-format
-msgid "Product QTY  < Capacity per cycleminimun"
-msgstr ""
-
-#. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:66
-#: code:addons/mrp_production_capacity/models/mrp.py:114
-#, python-format
-msgid "Product QTY  > Capacity per cyclemaximun"
-msgstr ""
-
-#. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:58
-#: code:addons/mrp_production_capacity/models/mrp.py:105
+#: code:addons/mrp_production_capacity/models/mrp.py:59
+#: code:addons/mrp_production_capacity/models/mrp.py:96
 #, python-format
 msgid "Product QTY < Capacity per cycle minimun, or > Capacity per cycle maximun"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:57
-#: code:addons/mrp_production_capacity/models/mrp.py:65
-#: code:addons/mrp_production_capacity/models/mrp.py:71
-#: code:addons/mrp_production_capacity/models/mrp.py:104
-#: code:addons/mrp_production_capacity/models/mrp.py:113
-#: code:addons/mrp_production_capacity/models/mrp.py:120
+#: code:addons/mrp_production_capacity/models/mrp.py:58
+#: code:addons/mrp_production_capacity/models/mrp.py:95
 #, python-format
 msgid "Warning!"
 msgstr ""
