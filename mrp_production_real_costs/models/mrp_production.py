@@ -24,16 +24,17 @@ class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
     @api.one
-    @api.depends('analytic_line_ids', 'analytic_line_ids.amount')
+    @api.depends('analytic_line_ids', 'analytic_line_ids.amount',
+                 'product_qty')
     def get_real_cost(self):
         self.real_cost = sum([-line.amount for line in
                              self.analytic_line_ids])
         self.unit_real_cost = self.real_cost / self.product_qty
 
     real_cost = fields.Float("Total Real Cost", compute="get_real_cost",
-                             multi="real_cost")
+                             store=True)
     unit_real_cost = fields.Float("Unit Real Cost", compute="get_real_cost",
-                                  multi="real_cost")
+                                  store=True)
 
     @api.multi
     def action_production_end(self):

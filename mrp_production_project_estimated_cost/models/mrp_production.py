@@ -22,14 +22,16 @@ class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
     @api.one
-    @api.depends('analytic_line_ids', 'analytic_line_ids.estim_std_cost')
+    @api.depends('analytic_line_ids', 'analytic_line_ids.estim_std_cost',
+                 'product_qty')
     def get_unit_std_cost(self):
         self.std_cost = sum([line.estim_std_cost for line in
                              self.analytic_line_ids])
         self.unit_std_cost = self.std_cost / self.product_qty
 
     @api.one
-    @api.depends('analytic_line_ids', 'analytic_line_ids.estim_avg_cost')
+    @api.depends('analytic_line_ids', 'analytic_line_ids.estim_avg_cost',
+                 'product_qty')
     def get_unit_avg_cost(self):
         self.avg_cost = sum([line.estim_avg_cost for line in
                              self.analytic_line_ids])
@@ -51,13 +53,13 @@ class MrpProduction(models.Model):
     created_estimated_cost = fields.Integer(
         compute="_count_created_estimated_cost", string="Estimated Costs")
     std_cost = fields.Float(string="Estimated Standard Cost",
-                            compute="get_unit_std_cost", multi="std_cost")
+                            compute="get_unit_std_cost", store=True)
     avg_cost = fields.Float(string="Estimated Average Cost",
-                            compute="get_unit_avg_cost", multi="avg_cost")
+                            compute="get_unit_avg_cost", store=True)
     unit_std_cost = fields.Float(string="Estimated Standard Unit Cost",
-                                 compute="get_unit_std_cost", multi="std_cost")
+                                 compute="get_unit_std_cost", store=True)
     unit_avg_cost = fields.Float(string="Estimated Average Unit Cost",
-                                 compute="get_unit_avg_cost", multi="avg_cost")
+                                 compute="get_unit_avg_cost", store=True)
     product_manual_cost = fields.Float(
         string="Product Manual Cost",
         related="product_id.manual_standard_cost")
