@@ -22,6 +22,22 @@ class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
     @api.one
+    @api.depends('analytic_line_ids', 'analytic_line_ids.estim_std_cost',
+                 'product_qty')
+    def get_unit_std_cost(self):
+        self.std_cost = sum([line.estim_std_cost for line in
+                             self.analytic_line_ids])
+        self.unit_std_cost = self.std_cost / self.product_qty
+
+    @api.one
+    @api.depends('analytic_line_ids', 'analytic_line_ids.estim_avg_cost',
+                 'product_qty')
+    def get_unit_avg_cost(self):
+        self.avg_cost = sum([line.estim_avg_cost for line in
+                             self.analytic_line_ids])
+        self.unit_avg_cost = self.avg_cost / self.product_qty
+
+    @api.one
     def _count_created_estimated_cost(self):
         analytic_line_obj = self.env['account.analytic.line']
         cond = [('mrp_production_id', '=', self.id),
@@ -36,6 +52,22 @@ class MrpProduction(models.Model):
         states={'draft': [('readonly', False)]}, default="/")
     created_estimated_cost = fields.Integer(
         compute="_count_created_estimated_cost", string="Estimated Costs")
+    std_cost = fields.Float(string="Estimated Standard Cost",
+                            compute="get_unit_std_cost", store=True)
+    avg_cost = fields.Float(string="Estimated Average Cost",
+                            compute="get_unit_avg_cost", store=True)
+    unit_std_cost = fields.Float(string="Estimated Standard Unit Cost",
+                                 compute="get_unit_std_cost", store=True)
+    unit_avg_cost = fields.Float(string="Estimated Average Unit Cost",
+                                 compute="get_unit_avg_cost", store=True)
+    product_manual_cost = fields.Float(
+        string="Product Manual Cost",
+        related="product_id.manual_standard_cost")
+    product_cost = fields.Float(string="Product Cost",
+                                related="product_id.standard_price")
+    analytic_line_ids = fields.One2many("account.analytic.line",
+                                        "mrp_production_id",
+                                        string="Cost Lines")
 
     @api.model
     def create(self, values):
@@ -230,3 +262,10 @@ class MrpProduction(models.Model):
             'estim_avg_cost': qty * product.standard_price,
         }
         return vals
+
+    @api.multi
+    def load_product_std_price(self):
+        for record in self:
+            product = record.product_id
+            if record.unit_std_cost:
+                product.manual_standard_cost = record.unit_std_cost

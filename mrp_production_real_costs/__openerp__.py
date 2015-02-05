@@ -37,7 +37,7 @@
             (Product stock * Product standard price + Production real cost) /
             (Product stock + Final product quantity)
         """,
-    'data': [],
+    'data': ["views/mrp_production_view.xml"],
     'demo': [],
     'installable': True,
     'auto_install': False,
