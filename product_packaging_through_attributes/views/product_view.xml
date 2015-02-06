@@ -7,19 +7,21 @@
             <field name="inherit_id" ref="product.attribute_tree_view" />
             <field name="arch" type="xml">
                 <field name="name" position="before">
-                    <field name="is_package" />
+                    <field name="is_packaging" />
                 </field>
             </field>
         </record>
 
-        <record model="ir.ui.view" id="product_attribute_value_packaging_tree_view">
+        <record model="ir.ui.view"
+            id="product_attribute_value_packaging_tree_view">
             <field name="name">product.attribute.value.packaging.tree</field>
             <field name="model">product.attribute.value</field>
-            <field name="inherit_id"
-                ref="product.variants_tree_view" />
+            <field name="inherit_id" ref="product.variants_tree_view" />
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                    <field name="product" />
+                    <field name="packaging_product"
+                        attrs="{'required':[('is_packaging_attr','=',True)]}" />
+                    <field name="is_packaging_attr" invisible="1" />
                 </field>
             </field>
         </record>

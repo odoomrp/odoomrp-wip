@@ -9,10 +9,13 @@ from openerp import models, fields
 class ProductAttribute(models.Model):
     _inherit = 'product.attribute'
 
-    is_package = fields.Boolean(string='Is package')
+    is_packaging = fields.Boolean(string='Is packaging')
 
 
 class ProductAttributeValue(models.Model):
     _inherit = "product.attribute.value"
 
-    product = fields.Many2one('product.product', string='Product')
+    is_packaging_attr = fields.Boolean(
+        string='Packaging attribute', related='attribute_id.is_packaging')
+    packaging_product = fields.Many2one(
+        comodel_name='product.product', string='Packaging Product')
