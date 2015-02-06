@@ -32,7 +32,9 @@
     ],
     "category": "Custom Module",
     "summary": "",
-    "data": [],
+    "data": [
+        "views/stock_view.xml",
+    ],
     "installable": True,
     "auto_install": False,
 }

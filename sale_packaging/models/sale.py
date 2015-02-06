@@ -18,28 +18,28 @@ class SaleOrderLine(models.Model):
 
     @api.one
     @api.depends('order_id.product_ul', 'product_id', 'product_uom_qty')
-    def calculate_product_ul_qty(self):
+    def calculate_packaging_qty(self):
         for attr_value in self.product_id.attribute_value_ids:
             if attr_value.attribute_id.is_package:
-                self.product_ul_qty = (
+                self.packaging_qty = (
                     self.product_uom_qty / (attr_value.numeric_value or 1.0))
 
     @api.one
     @api.depends('order_id.product_ul', 'product_ul_qty')
-    def calculate_order_product_ul_qty(self):
+    def calculate_pallet_qty(self):
         for attr_value in self.product_id.attribute_value_ids:
             if attr_value.attribute_id.is_package:
                 product = attr_value.product
         for packaging in self.order_id.product_ul.packagings:
             if (product and
                     packaging.product_tmpl_id == product.product_tmpl_id):
-                self.order_product_ul_qty = (
-                    self.product_ul_qty / (
+                self.pallet_qty = (
+                    self.packaging_qty / (
                         (packaging.ul_qty * packaging.rows) or 1.0))
 
-    product_ul_qty = fields.Float(
-        string='# Packaging', compute='calculate_product_ul_qty',
+    packaging_qty = fields.Float(
+        string='# Packaging', compute='calculate_packaging_qty',
         store=True)
-    order_product_ul_qty = fields.Float(
+    pallet_qty = fields.Float(
         string='# Pallet',
-        compute='calculate_order_product_ul_qty', store=True)
+        compute='calculate_pallet_qty', store=True)

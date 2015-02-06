@@ -23,7 +23,6 @@
         "base",
         "mrp",
         "product_attribute_types",
-        "product_packaging",
     ],
     "author": "OdooMRP team",
     "website": "http://www.odoomrp.com",
