@@ -10,7 +10,8 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     product_ul = fields.Many2one(
-        comodel_name='product.ul', string='Logistic Unit')
+        comodel_name='product.ul', string='Logistic Unit',
+        domain="[('type','=','pallet')]")
 
 
 class SaleOrderLine(models.Model):
