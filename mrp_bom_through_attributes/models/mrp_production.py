@@ -32,15 +32,15 @@ class MrpProduction(models.Model):
         workorder =\
             self.workcenter_lines and self.workcenter_lines[0].id
         for attr_value in self.product_id.attribute_value_ids:
-            if attr_value.product:
-                raw_product = attr_value.product
+            if attr_value.raw_product:
+                raw_product = attr_value.raw_product
                 value = self.get_new_components_info(
                     raw_product.id,
                     raw_product.property_stock_production.id,
                     raw_product.property_stock_inventory.id,
                     raw_product.uom_id.id,
                     raw_product.uos_id.id,
-                    self.product_qty * attr_value.qty,
+                    self.product_qty * attr_value.raw_qty,
                     workorder)
                 res.append(value)
         return res

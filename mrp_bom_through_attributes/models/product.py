@@ -1,3 +1,4 @@
+
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -16,28 +17,12 @@
 #
 ##############################################################################
 
-{
-    "name": "Raw Materials to Manufacturing Order Through Attributes",
-    "version": "1.0",
-    "depends": [
-        "base",
-        "mrp",
-        "product_attribute_types",
-        "product_packaging",
-    ],
-    "author": "OdooMRP team",
-    "website": "http://www.odoomrp.com",
-    "contributors": [
-        "Mikel Arregi <mikelarregi@avanzosc.es>",
-        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
-        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-        "Ana Juaristi <ajuaristio@gmail.com>"
-    ],
-    "category": "Manufacturing",
-    'data': [
-        "views/attribute_value_view.xml",
-        "views/mrp_production_view.xml",
-    ],
-    "installable": True,
-    "auto_install": False,
-}
+from openerp import fields, models
+
+
+class ProductAttributeValue(models.Model):
+    _inherit = "product.attribute.value"
+
+    raw_product = fields.Many2one('product.product',
+                                  string='Raw Product')
+    raw_qty = fields.Float(string='Raw Product QTY', default=1.)

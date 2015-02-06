@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="attribute_associated_product_tree_view">
+                <field name="name">product.attribute.value</field>
+                <field name="model">product.attribute.value</field>
+                <field name="type">tree</field>
+                <field name="inherit_id" ref="product_attribute_types.product_attribute_value_extended_tree_view"/>
+                <field name="arch" type="xml">
+                        <field name="numeric_value" position="after">
+                            <field name="raw_product"/>
+                            <field name="raw_qty" attrs="{'required': [('raw_product','!=', False)]}"/>
+                    </field>
+                </field>
+        </record>
+    </data>
+</openerp>
