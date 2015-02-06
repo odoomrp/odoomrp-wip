@@ -11,7 +11,8 @@ class SaleOrder(models.Model):
 
     product_ul = fields.Many2one(
         comodel_name='product.ul', string='Logistic Unit',
-        domain="[('type','=','pallet')]")
+        domain="[('type','=','pallet')]", readonly=True,
+        states={'draft': [('readonly', False)]})
 
 
 class SaleOrderLine(models.Model):
