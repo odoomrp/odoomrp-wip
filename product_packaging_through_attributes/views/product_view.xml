@@ -16,9 +16,10 @@
             id="product_attribute_value_packaging_tree_view">
             <field name="name">product.attribute.value.packaging.tree</field>
             <field name="model">product.attribute.value</field>
-            <field name="inherit_id" ref="product.variants_tree_view" />
+            <field name="inherit_id"
+                ref="product_attribute_types.product_attribute_value_extended_tree_view" />
             <field name="arch" type="xml">
-                <field name="name" position="after">
+                <field name="numeric_value" position="after">
                     <field name="packaging_product"
                         attrs="{'required':[('is_packaging_attr','=',True)]}" />
                     <field name="is_packaging_attr" invisible="1" />
