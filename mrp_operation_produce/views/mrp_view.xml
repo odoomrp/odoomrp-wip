@@ -20,15 +20,15 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="operation_produce_form_view">
+        <record model="ir.ui.view" id="operation_produce_buttons_form_view">
             <field name="name">mrp.production.workcenter.line.form
             </field>
             <field name="model">mrp.production</field>
             <field name="inherit_id"
-                ref="mrp_operations_extension.mrp_production_operation_buttons_form_view" />
+                ref="mrp_operations.mrp_production_form_inherit_view" />
             <field name="arch" type="xml">
 
-                <button string="Produce" position="after">
+                <button string="Cancel Order" position="after">
                     <button name="action_assign" states="startworking"
                         string="Check Availability" type="object" class="oe_highlight" />
                     <button name="force_assign" states="startworking"
@@ -37,24 +37,7 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="operation_produce_moves_form_view">
-            <field name="name">mrp.production.workcenter.line.form
-            </field>
-            <field name="model">mrp.production.workcenter.line</field>
-            <field name="inherit_id"
-                ref="mrp_operations_extension.workcenter_line_inh_form_view" />
-            <field name="arch" type="xml">
-                <field name="product_line" position="after">
-                    <field name="move_lines" />
-                </field>
-                <button string="Produce" position="before">
-                    <button name="action_assign" states="startworking"
-                        string="Check Availability" type="object" class="oe_highlight" />
-                    <button name="force_assign" states="startworking"
-                        string="Force Reservation" type="object" />
-                </button>
-            </field>
-        </record>
+
 
 
         <record model="ir.ui.view"

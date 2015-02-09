@@ -17,12 +17,10 @@
 #
 ##############################################################################
 from openerp import models, fields, api, exceptions, _
-import logging
 
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
-    
 
     def _get_minor_sequence_operation(self, operations):
         if operations and len(operations) > 1:
@@ -44,12 +42,14 @@ class MrpProduction(models.Model):
             self._get_operation_moves(operation, state='assigned')
         return no_assigned_products == []
 
+
 class MrpProductionWorkcenterLine(models.Model):
 
     _inherit = 'mrp.production.workcenter.line'
 
     move_lines = fields.One2many('stock.move', 'work_order',
-                                 string = 'Moves')
+                                 string='Moves')
+
     @api.one
     def action_assign(self):
         self.move_lines.action_assign()
@@ -82,37 +82,24 @@ class MrpProductionWorkcenterLine(models.Model):
                 _("Missing materials"),
                 _("Missing materials to start the production"))
         return super(MrpProductionWorkcenterLine, self).action_start_working()
-    
-#    def _get_operation_moves(self, operation, state=None):
-#        products = []
-#        assigned_moves = []
-#        for product_line in operation.raw_products:
-#            products.append(product_line.product_id)
-#        for move_line in operation.production_id.move_lines:
-#            move_product = move_line.product_id
-#            if (not state or
-#                    move_line.state == state) and move_product in products:
-#                assigned_moves.append(move_line)
-#                products.remove(move_product)
-#        return assigned_moves, products
-    
 
 
 class MrpRouting(models.Model):
-    
+
     _inherit = 'mrp.routing'
-    
+
     previous_operations_finished = fields.Boolean(
         string='Previous operations finished')
-    
+
+
 class MrpRoutingWorkcenter(models.Model):
-    
+
     _inherit = 'mrp.routing.workcenter'
-    
+
     def get_routing_previous_operations(self):
         self.previous_operations_finished = \
             self.routing_id.previous_operations_finished
-    
+
     previous_operations_finished = fields.Boolean(
         string='Previous operations finished',
         default="get_routing_previous_operations")
