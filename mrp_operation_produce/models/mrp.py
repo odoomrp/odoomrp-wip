@@ -67,7 +67,6 @@ class MrpProductionWorkcenterLine(models.Model):
 
     def check_operation_moves_state(self, state):
         for move_line in self.move_lines:
-            move_product = move_line.product_id
             if move_line.state != state:
                 return False
         return True
