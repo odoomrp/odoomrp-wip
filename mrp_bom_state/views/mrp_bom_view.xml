@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="mrp_bom_tree_view" model="ir.ui.view">
+        <record id="mrp.mrp_bom_tree_view" model="ir.ui.view">
             <field name="name">mrp.bom.tree.view</field>
             <field name="model">mrp.bom</field>
             <field name="arch" type="xml">
                 <tree string="MRP BoMs">
+                    <field name="code"/>
                     <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="mrp_bom_state_tree_view" model="ir.ui.view">
+            <field name="name">mrp.bom.state.tree.view</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
                     <field name="active" />
                     <field name="sequence" />
                     <field name="state" />
                     <field name="historical_date"/>
-                </tree>
+                </field>
             </field>
         </record>
+
         <record id="mrp_bom_form_view_inh_state" model="ir.ui.view">
             <field name="name">mrp.bom.form.view.inh.state</field>
             <field name="model">mrp.bom</field>
