@@ -27,5 +27,39 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="product_packaging_product_form_view">
+            <field name="name">product.packging.product.form</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref="product.product_packaging_form_view" />
+            <field name="arch" type="xml">
+                <field name="product_tmpl_id" position="after">
+                    <field name="product" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_packaging_product_tree_view">
+            <field name="name">product.packging.product.tree</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref="product.product_packaging_tree_view" />
+            <field name="arch" type="xml">
+                <field name="product_tmpl_id" position="after">
+                    <field name="product" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_ul_packaging_product_form_view">
+            <field name="name">product.ul.packaging_product.form</field>
+            <field name="model">product.ul</field>
+            <field name="inherit_id"
+                ref="product_packaging_views.product_ul_packaging_form_view" />
+            <field name="arch" type="xml">
+                <field name="product_tmpl_id" position="after">
+                    <field name="product" />
+                </field>
+            </field>
+        </record>
+
     </data>
 </openerp>

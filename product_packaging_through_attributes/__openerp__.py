@@ -20,8 +20,10 @@
     "name": "Product Packaging through Attributes",
     "version": "1.0",
     "depends": [
+        "base",
         "product",
         "product_packaging_views",
+        "product_attribute_types",
     ],
     "author": "OdooMRP team",
     "website": "http://www.odoomrp.com",
@@ -34,6 +36,7 @@
     "summary": "",
     "data": [
         "views/product_view.xml",
+        "views/res_partner_view.xml",
     ],
     "installable": True,
     "auto_install": False,

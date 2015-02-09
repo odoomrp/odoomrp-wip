@@ -29,12 +29,13 @@ class SaleOrderLine(models.Model):
     @api.one
     @api.depends('order_id.product_ul', 'packaging_qty')
     def calculate_pallet_qty(self):
+        product = False
         for attr_value in self.product_id.attribute_value_ids:
             if attr_value.attribute_id.is_packaging:
                 product = attr_value.packaging_product
         for packaging in self.order_id.product_ul.packagings:
             if (product and
-                    packaging.product_tmpl_id == product.product_tmpl_id):
+                    packaging.product == product):
                 self.pallet_qty = (
                     self.packaging_qty / (
                         (packaging.ul_qty * packaging.rows) or 1.0))
