@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="mrp.mrp_bom_tree_view" model="ir.ui.view">
-            <field name="name">mrp.bom.tree.view</field>
+        <record id="mrp.mrp_bom_tree_parent_view" model="ir.ui.view">
+            <field name="name">mrp.bom.tree.parent.view</field>
             <field name="model">mrp.bom</field>
             <field name="arch" type="xml">
                 <tree string="MRP BoMs">
@@ -15,7 +15,7 @@
         <record id="mrp_bom_state_tree_view" model="ir.ui.view">
             <field name="name">mrp.bom.state.tree.view</field>
             <field name="model">mrp.bom</field>
-            <field name="inherit_id" ref="mrp.mrp_bom_tree_view"/>
+            <field name="inherit_id" ref="mrp.mrp_bom_tree_parent_view"/>
             <field name="arch" type="xml">
                 <field name="name" position="after">
                     <field name="active" />
