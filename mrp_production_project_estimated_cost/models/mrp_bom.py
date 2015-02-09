@@ -21,7 +21,7 @@ from openerp import models, fields
 
 class MrpBom(models.Model):
 
-    _inherit="mrp.bom"
+    _inherit = "mrp.bom"
 
     product_standard_price = fields.Float(string="Product Standard Price",
                                           related="product_id.standard_price")
