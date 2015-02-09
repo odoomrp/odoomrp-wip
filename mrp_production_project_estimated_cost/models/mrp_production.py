@@ -46,7 +46,8 @@ class MrpProduction(models.Model):
         self.created_estimated_cost = len(analytic_lines)
 
     active = fields.Boolean(
-        'Active', default=lambda self: self.env.context.get('active', True))
+        'Active', default=lambda self: self.env.context.get('default_active',
+                                                            True))
     name = fields.Char(
         string='Referencen', required=True, readonly=True, copy="False",
         states={'draft': [('readonly', False)]}, default="/")

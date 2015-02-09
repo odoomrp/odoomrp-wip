@@ -42,6 +42,7 @@
         "views/account_analytic_line_view.xml",
         "views/mrp_production_view.xml",
         "views/product_view.xml",
+        "views/mrp_bom_view.xml"
     ],
     "installable": True,
 }
