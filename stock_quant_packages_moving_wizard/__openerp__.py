@@ -17,7 +17,7 @@
 ##############################################################################
 
 {
-    "name": "Stock Quant Packages moving wizard",
+    "name": "Stock - Quant & Packages moving wizard",
     "summary": "",
     "category": "Warehouse Management",
     "version": "1.0",
@@ -32,8 +32,9 @@
         "Ana Juaristi <ajuaristio@gmail.com>"
     ],
     "data": [
+        "wizard/quant_move_wizard_view.xml",
+        "wizard/quants_move_wizard_view.xml",
         "wizard/quant_packages_move_wizard_view.xml",
     ],
     "installable": True,
-    "auto_install": False,
 }

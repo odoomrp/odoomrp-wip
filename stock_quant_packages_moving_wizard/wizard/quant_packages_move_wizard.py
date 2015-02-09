@@ -1,22 +1,9 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class StockQuantPackageMove(models.TransientModel):
@@ -29,21 +16,32 @@ class StockQuantPackageMove(models.TransientModel):
     def default_get(self, cr, uid, fields, context=None):
         res = super(StockQuantPackageMove, self).default_get(
             cr, uid, fields, context=context)
-        quants_ids = context.get('active_ids', [])
-        if not quants_ids:
+        packages_ids = context.get('active_ids', [])
+        if not packages_ids:
             return res
-        quant_obj = self.pool['stock.quant']
-        quants = quant_obj.browse(cr, uid, quants_ids, context=context)
+        packages_obj = self.pool['stock.quant.package']
+        packages = packages_obj.browse(cr, uid, packages_ids, context=context)
         items = []
-        for quant in quants:
-            item = {
-                'quant': quant.id,
-                'source_pkg': quant.package_id.id,
-                'source_loc': quant.location_id.id,
-            }
-            items.append(item)
+        for package in packages:
+            if not package.parent_id and package.location_id:
+                item = {
+                    'package': package.id,
+                    'source_loc': package.location_id.id,
+                }
+                items.append(item)
         res.update(pack_move_items=items)
         return res
+
+    @api.one
+    def do_detailed_transfer(self):
+        for item in self.pack_move_items:
+            if item.dest_loc is not item.source_loc:
+                for quant in item.package.quant_ids:
+                    quant.location_id = item.dest_loc
+                for package in item.package.children_ids:
+                    for quant in package.quant_ids:
+                        quant.location_id = item.dest_loc
+        return True
 
 
 class StockQuantPackageMoveItems(models.TransientModel):
@@ -52,18 +50,16 @@ class StockQuantPackageMoveItems(models.TransientModel):
 
     move_id = fields.Many2one(
         comodel_name='stock.quant.package.move', string='Package move')
-    quant = fields.Many2one(
-        comodel_name='stock.quant', string='Quant')
-    source_pkg = fields.Many2one(
-        comodel_name='stock.quant.package', string='Source package',
-        domain="['|', ('location_id', 'child_of', source_loc),"
-        " ('location_id','=',False)]")
+    package = fields.Many2one(
+        comodel_name='stock.quant.package', string='Quant package',
+        domain=[('parent_id', '=', False), ('location_id', '!=', False)])
     source_loc = fields.Many2one(
         comodel_name='stock.location', string='Source Location', required=True)
     dest_loc = fields.Many2one(
         comodel_name='stock.location', string='Destination Location',
         required=True)
-    dest_pkg = fields.Many2one(
-        comodel_name='stock.quant.package', string='Destination package',
-        domain="['|', ('location_id', 'child_of', dest_loc),"
-        " ('location_id','=',False)]")
+
+    @api.one
+    @api.onchange('package')
+    def onchange_quant(self):
+        self.source_loc = self.package.location_id
