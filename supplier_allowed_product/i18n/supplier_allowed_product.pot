@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* supplier_allowed_product
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-09 19:35+0000\n"
+"PO-Revision-Date: 2015-02-09 19:35+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: supplier_allowed_product
+#: field:purchase.order,allowed_products:0
+msgid "Allowed products"
+msgstr ""
+
+#. module: supplier_allowed_product
+#: field:purchase.order,only_products_allowed:0
+#: field:res.partner,only_products_allowed_in_purchase:0
+msgid "Only products allowed in purchase"
+msgstr ""
+
+#. module: supplier_allowed_product
+#: model:ir.model,name:supplier_allowed_product.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: supplier_allowed_product
+#: model:ir.model,name:supplier_allowed_product.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: supplier_allowed_product
+#: model:ir.model,name:supplier_allowed_product.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: supplier_allowed_product
+#: view:purchase.order:supplier_allowed_product.purchase_order_form_inh_supplierallowedproduct
+msgid "[('id', 'in', parent.allowed_products[0][2])]"
+msgstr ""
+
