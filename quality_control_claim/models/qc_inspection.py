@@ -42,9 +42,13 @@ class QcInspection(models.Model):
         for inspection in self:
             if inspection.state == 'failed' and inspection.automatic_claims:
                 vals = inspection.init_claim_vals()
-                vals['name'] = _('Quality test %s for product %s'
-                                 ' unsurpassed') % (self.name,
-                                                    self.object_id.name)
+                if self.object_id:
+                    id, name = self.object_id.name_get()[0]
+                    vals['name'] = _('Quality test %s for object %s '
+                                     ' unsurpassed') % (self.name, name)
+                else:
+                    vals['name'] = (_('Quality test %s unsurpassed') %
+                                    (self.name))
                 crm_claim_obj.create(vals)
             elif inspection.automatic_claims_by_line:
                 for line in inspection.inspection_lines:
@@ -60,8 +64,12 @@ class QcInspection(models.Model):
     def create_claim_by_line(self, line):
         crm_claim_obj = self.env['crm.claim']
         vals = self.init_claim_vals()
-        vals['name'] = _('Quality test %s for product %s unsurpassed, in test'
-                         ' line %s') % (self.name,
-                                        self.object_id.name, line.name)
+        if self.object_id:
+            id, name = self.object_id.name_get()[0]
+            vals['name'] = _('Quality test %s for %s unsurpassed, in test'
+                             ' line %s') % (self.name, name, line.name)
+        else:
+            vals['name'] = (_('Quality test %s unsurpassed, in test line %s') %
+                            (self.name, line.name))
         claim = crm_claim_obj.create(vals)
         return claim
