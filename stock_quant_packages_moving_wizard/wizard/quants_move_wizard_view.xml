@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="stock_quants_move_wizard" model="ir.ui.view">
+            <field name="name">Enter transfer details</field>
+            <field name="model">stock.quants.move</field>
+            <field name="arch" type="xml">
+                <form string="Transfer details" version="7">
+                    <group groups="stock.group_tracking_lot">
+                        <field name="dest_loc" />
+                        <field name="pack_move_items"
+                            nolabel="1" colspan="2">
+                            <tree editable="bottom">
+                                <field name="quant" />
+                                <field name="source_loc" />
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="do_transfer"
+                            string="_Apply" type="object" class="oe_highlight" />
+                        or
+                        <button string="_Cancel" class="oe_link"
+                            special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+<!--         <act_window name="Move Stock Quants To" groups="stock.group_tracking_lot" -->
+<!--             res_model="stock.quants.move" src_model="stock.quant" -->
+<!--             view_mode="form" target="new" id="action_move_quants_to" /> -->
+
+        <record id="action_move_quants_to" model="ir.actions.act_window">
+            <field name="name">Move Stock Quants To</field>
+            <field name="res_model">stock.quants.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="stock_quants_move_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_move_quants_to" id="menu_quant_move_wizard"
+            parent="stock.menu_traceability" groups="stock.group_production_lot"
+            sequence="100"/>
+    </data>
+</openerp>

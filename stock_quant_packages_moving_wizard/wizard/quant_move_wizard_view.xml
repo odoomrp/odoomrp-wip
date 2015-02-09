@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="stock_quant_move_wizard" model="ir.ui.view">
+            <field name="name">Enter transfer details</field>
+            <field name="model">stock.quant.move</field>
+            <field name="arch" type="xml">
+                <form string="Transfer details" version="7">
+                    <group groups="stock.group_tracking_lot">
+                        <field name="pack_move_items"
+                            nolabel="1">
+                            <tree editable="bottom">
+                                <field name="quant" />
+                                <field name="source_loc" />
+                                <field name="dest_loc" />
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="do_transfer"
+                            string="_Apply" type="object" class="oe_highlight" />
+                        or
+                        <button string="_Cancel" class="oe_link"
+                            special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Move Stock Quant" groups="stock.group_tracking_lot"
+            res_model="stock.quant.move" src_model="stock.quant"
+            view_mode="form" target="new" key2="client_action_multi" id="action_move_quants" />
+    </data>
+</openerp>
