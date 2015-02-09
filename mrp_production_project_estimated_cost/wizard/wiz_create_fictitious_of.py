@@ -11,6 +11,7 @@ class WizCreateFictitiousOf(models.TransientModel):
     date_planned = fields.Datetime(
         string='Scheduled Date', required=True, default=fields.Datetime.now())
     load_on_product = fields.Boolean("Load cost on product")
+    project_id = fields.Many2one("project.project", string="Project")
 
     @api.multi
     def do_create_fictitious_of(self):
@@ -34,15 +35,16 @@ class WizCreateFictitiousOf(models.TransientModel):
                     'location_src_id': production_obj._src_id_default(),
                     'location_dest_id': production_obj._dest_id_default(),
                     'active': False,
-                    'product_uom': product.uom_id.id
+                    'product_uom': product.uom_id.id,
+                    'project_id': self.project_id.id
                     }
             new_production = production_obj.create(vals)
+            new_production.action_compute()
             production_list.append(new_production.id)
         if self.load_on_product:
-            for production_id in production_list:
+            for production in production_list:
                 try:
                     production = production_obj.browse(production_id)
-                    production.action_compute()
                     production.calculate_production_estimated_cost()
                     production.load_product_std_price()
                 except:

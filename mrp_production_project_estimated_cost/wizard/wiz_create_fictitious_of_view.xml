@@ -9,6 +9,7 @@
                     <group string="Create fictitious OF">
                         <field name="date_planned" />
                         <field name="load_on_product" />
+                        <field name="project_id" />
                     </group>
                     <footer>
                         <button name="do_create_fictitious_of" type="object" string="Create fictitius OF" class="oe_highlight" />
