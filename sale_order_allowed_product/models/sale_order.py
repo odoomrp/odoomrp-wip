@@ -14,14 +14,14 @@ class SaleOrder(models.Model):
         comodel_name='product.product',
         string='Allowed products')
 
-    def onchange_partner_id(self, cr, uid, ids, partner_id, context=None):
-        partner_obj = self.pool['res.partner']
-        result = super(SaleOrder, self).onchange_partner_id(
-            cr, uid, ids, partner_id, context=context)
-        partner = partner_obj.browse(cr, uid, partner_id, context=context)
+    @api.multi
+    def onchange_partner_id(self, partner_id):
+        partner_obj = self.env['res.partner']
+        result = super(SaleOrder, self).onchange_partner_id(partner_id)
+        partner = partner_obj.browse(partner_id)
         value = result['value']
-        value['only_products_allowed'] = (
-            partner.sale_only_allowed)
+        value['only_products_allowed'] = partner.sale_only_allowed
+        result['value'] = value
         return result
 
     @api.one
@@ -44,6 +44,5 @@ class SaleOrder(models.Model):
                 if line.product_tmpl_id.sale_ok:
                     cond = [('product_tmpl_id', '=', line.product_tmpl_id.id)]
                     products = product_obj.search(cond)
-                    if products:
-                        allowed_products.extend(products.ids)
+                    allowed_products.extend(products.ids)
             self.allowed_products = [(6, 0, allowed_products)]
