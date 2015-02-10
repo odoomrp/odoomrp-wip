@@ -42,7 +42,7 @@ class WizCreateFictitiousOf(models.TransientModel):
             new_production.action_compute()
             production_list.append(new_production.id)
         if self.load_on_product:
-            for production in production_list:
+            for production_id in production_list:
                 try:
                     production = production_obj.browse(production_id)
                     production.calculate_production_estimated_cost()
