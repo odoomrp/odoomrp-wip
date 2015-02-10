@@ -10,5 +10,5 @@ class PurchaseOrder(models.Model):
 
     def _prepare_allowed_product_domain(self):
         result = super(PurchaseOrder, self)._prepare_allowed_product_domain()
-        result.extend([('type', '=', 'supplier')])
+        result.append(('type', '=', 'supplier'))
         return result
