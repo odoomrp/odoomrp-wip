@@ -9,7 +9,7 @@ class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
     only_products_allowed = fields.Boolean(
-        string="Only products allowed in purchase")
+        string="Use only allowed products in purchase")
     allowed_products = fields.Many2many(
         comodel_name='product.product',
         string='Allowed products')
@@ -21,7 +21,7 @@ class PurchaseOrder(models.Model):
         partner = partner_obj.browse(cr, uid, partner_id, context=context)
         value = result['value']
         value['only_products_allowed'] = (
-            partner.only_products_allowed_in_purchase)
+            partner.purchase_only_allowed)
         return result
 
     @api.one

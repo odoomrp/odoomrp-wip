@@ -20,7 +20,7 @@
 #
 ##############################################################################
 {
-    "name": "Supplier Allowed Product",
+    "name": "Purchase Order Allowed Product With Customer Supplier Info",
     "version": "1.0",
     "author": "OdooMRP team",
     "website": "http://www.odoomrp.com",
@@ -29,15 +29,12 @@
         "Ana Juaristi <ajuaristo@gmail.com>",
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
     ],
-    "category": "Product",
+    "category": "Purchase",
     "depends": [
-        "base",
-        "product",
-        "purchase",
+        "purchase_order_allowed_product",
+        "product_supplierinfo_for_customer",
     ],
-    "data": [
-        "views/res_partner_view.xml",
-        "views/purchase_order_view.xml",
-    ],
+    "data": [],
     "installable": True,
+    "auto_install": True,
 }

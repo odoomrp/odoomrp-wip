@@ -8,5 +8,5 @@ from openerp import models, fields
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    only_products_allowed_in_purchase = fields.Boolean(
-        string="Only products allowed in purchase")
+    purchase_only_allowed = fields.Boolean(
+        string="Use only allowed products in purchase")
