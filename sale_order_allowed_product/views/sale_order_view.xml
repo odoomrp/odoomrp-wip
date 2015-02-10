@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_order_form_inh_saleallowedproduct">
+            <field name="name">view.order.form.inh.saleallowedproduct</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="only_allowed_products" />
+                    <field name="allowed_products" invisible="1"/>
+                </field>
+                <xpath expr="//form[@string='Sales Order Lines']/group/group/field[@name='product_id']" position="attributes">
+                    <attribute name="domain">[('id', 'in', parent.allowed_products[0][2])]</attribute>
+                </xpath>
+                <xpath expr="//tree[@string='Sales Order Lines']/field[@name='product_id']" position="attributes">
+                    <attribute name="domain">[('id', 'in', parent.allowed_products[0][2])]</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
