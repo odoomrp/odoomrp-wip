@@ -1,9 +1,21 @@
 Sale order allowed product
 ==========================
-* This module adds in sale orders form the new field "Use only allowed products
-  in sale". When a customer is selected in sale order form, the value of this
-  new field, will be that defined in the customer.
 
-* If this new field is activated in sale order form, only be able to select
-  products that can be buy by the customer. If not activated, you can select
-  any product.
+This module adds a restriction in sale orders that has the mark "Use only
+allowed products" checked for allowing to select only the products that have
+this customer added in the customer tab of the products.
+
+This can be done thanks to *product_supplierinfo_for_customer module*, that
+allows to set customers for each product.
+
+The restriction can be set by default for each partner, and it's propagated
+to their sale orders, but it can be change for each order if you want.
+
+Credits
+=======
+
+Contributors
+------------
+* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com
+* Ana Juaristi <ajuaristo@gmail.com>
+* Alfredo de la Fuente <alfredodelafuente@avanzosc.es>

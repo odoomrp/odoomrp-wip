@@ -32,12 +32,21 @@ msgstr ""
 
 #. module: sale_order_allowed_product
 #: field:res.partner,sale_only_allowed:0
-#: field:sale.order,only_products_allowed:0
-msgid "Use only allowed products in sale"
+msgid "Use in sales only allowed products"
 msgstr ""
 
 #. module: sale_order_allowed_product
-#: view:sale.order:sale_order_allowed_product.view_order_form_inh_saleallowedproduct
-msgid "[('id', 'in', parent.allowed_products[0][2])]"
+#: help:res.partner,sale_only_allowed:0
+msgid "If checked, by default you will only be able to select products that have this customer added to their customer list when creating a sale order for it. This value can be changed for each order."
+msgstr ""
+
+#. module: sale_order_allowed_product
+#: field:sale.order,only_allowed_products:0
+msgid "Use only allowed products"
+msgstr "Usar sólo productos permitidos"
+
+#. module: sale_order_allowed_product
+#: help:sale.order,only_allowed_products:0
+msgid "If checked, you will only be able to select products that have this customer added to their customer list."
 msgstr ""
 

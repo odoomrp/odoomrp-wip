@@ -6,14 +6,19 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
-                <field name="partner_id" position="after">
-                    <field name="only_allowed_products" />
+                <field name="order_line" position="before">
+                    <field name="only_allowed_products"
+                           attrs="{'invisible': [('state', 'not in', ('draft', 'send'))]}"
+                           class="oe_edit_only" />
+                    <label for="only_allowed_products"
+                           attrs="{'invisible': [('state', 'not in', ('draft', 'send'))]}"
+                           class="oe_edit_only" />
                     <field name="allowed_products" invisible="1"/>
                 </field>
-                <xpath expr="//form[@string='Sales Order Lines']/group/group/field[@name='product_id']" position="attributes">
+                <xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="attributes">
                     <attribute name="domain">[('id', 'in', parent.allowed_products[0][2])]</attribute>
                 </xpath>
-                <xpath expr="//tree[@string='Sales Order Lines']/field[@name='product_id']" position="attributes">
+                <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']" position="attributes">
                     <attribute name="domain">[('id', 'in', parent.allowed_products[0][2])]</attribute>
                 </xpath>
             </field>
