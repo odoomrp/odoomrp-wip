@@ -29,20 +29,24 @@ class PurchaseOrder(models.Model):
     def onchange_only_products_allowed(self):
         supplierinfo_obj = self.env['product.supplierinfo']
         product_obj = self.env['product.product']
-        self.allowed_products = []
+        allowed_products = []
+        products = product_obj.search([])
+        for product in products:
+            if product.product_tmpl_id.purchase_ok:
+                allowed_products.append(product.id)
+        self.allowed_products = [(6, 0, allowed_products)]
         allowed_products = []
         if self.only_products_allowed and self.partner_id:
-            cond = [('name', '=', self.partner_id.id)]
+            cond = self._prepare_allowed_product_domain()
             supplierinfo_ids = supplierinfo_obj.search(cond)
             for line in supplierinfo_ids:
                 if line.product_tmpl_id.purchase_ok:
                     cond = [('product_tmpl_id', '=', line.product_tmpl_id.id)]
                     products = product_obj.search(cond)
-                    for product in products:
-                        allowed_products.append(product.id)
-        else:
-            products = product_obj.search([])
-            for product in products:
-                if product.product_tmpl_id.purchase_ok:
-                    allowed_products.append(product.id)
-        self.allowed_products = [(6, 0, allowed_products)]
+                    if products:
+                        allowed_products.extend(products.ids)
+            self.allowed_products = [(6, 0, allowed_products)]
+
+    def _prepare_allowed_product_domain(self):
+        cond = [('name', '=', self.partner_id.id)]
+        return cond
