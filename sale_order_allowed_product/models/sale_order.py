@@ -29,7 +29,12 @@ class SaleOrder(models.Model):
     def onchange_only_products_allowed(self):
         supplierinfo_obj = self.env['product.supplierinfo']
         product_obj = self.env['product.product']
-        self.allowed_products = []
+        allowed_products = []
+        products = product_obj.search([])
+        for product in products:
+            if product.product_tmpl_id.sale_ok:
+                allowed_products.append(product.id)
+        self.allowed_products = allowed_products
         allowed_products = []
         if self.only_products_allowed and self.partner_id:
             cond = [('type', '=', 'customer'),
@@ -39,11 +44,6 @@ class SaleOrder(models.Model):
                 if line.product_tmpl_id.sale_ok:
                     cond = [('product_tmpl_id', '=', line.product_tmpl_id.id)]
                     products = product_obj.search(cond)
-                    for product in products:
-                        allowed_products.append(product.id)
-        else:
-            products = product_obj.search([])
-            for product in products:
-                if product.product_tmpl_id.sale_ok:
-                    allowed_products.append(product.id)
-        self.allowed_products = [(6, 0, allowed_products)]
+                    if products:
+                        allowed_products.extend(products.ids)
+            self.allowed_products = [(6, 0, allowed_products)]
