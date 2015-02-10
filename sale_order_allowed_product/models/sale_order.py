@@ -15,7 +15,6 @@ class SaleOrder(models.Model):
         string='Allowed products')
 
     def onchange_partner_id(self, cr, uid, ids, partner_id, context=None):
-        
         partner_obj = self.pool['res.partner']
         result = super(SaleOrder, self).onchange_partner_id(
             cr, uid, ids, partner_id, context=context)
