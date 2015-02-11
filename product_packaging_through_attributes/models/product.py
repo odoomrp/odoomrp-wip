@@ -25,7 +25,7 @@ class ProductPackaging(models.Model):
     _inherit = 'product.packaging'
 
     product = fields.Many2one(
-        comodel_name='product.product', string='Packging Product')
+        comodel_name='product.product', string='Packaging Product')
 
     @api.one
     @api.onchange('product')

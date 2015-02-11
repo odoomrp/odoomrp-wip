@@ -10,8 +10,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     product_ul = fields.Many2one(
-        comodel_name='product.ul', string='Logistic Unit',
-        domain="[('type','=','pallet')]", readonly=True,
+        comodel_name='product.ul', string='Logistic Unit', readonly=True,
         states={'draft': [('readonly', False)]})
 
 
@@ -20,15 +19,15 @@ class SaleOrderLine(models.Model):
 
     @api.one
     @api.depends('order_id.product_ul', 'product_id', 'product_uom_qty')
-    def calculate_packaging_qty(self):
+    def calculate_pri_packaging_qty(self):
         for attr_value in self.product_id.attribute_value_ids:
             if attr_value.attribute_id.is_packaging:
                 self.packaging_qty = (
                     self.product_uom_qty / (attr_value.numeric_value or 1.0))
 
     @api.one
-    @api.depends('order_id.product_ul', 'packaging_qty')
-    def calculate_pallet_qty(self):
+    @api.depends('order_id.product_ul', 'pri_pack_qty')
+    def calculate_sec_packaging_qty(self):
         product = False
         for attr_value in self.product_id.attribute_value_ids:
             if attr_value.attribute_id.is_packaging:
@@ -40,9 +39,9 @@ class SaleOrderLine(models.Model):
                     self.packaging_qty / (
                         (packaging.ul_qty * packaging.rows) or 1.0))
 
-    packaging_qty = fields.Float(
-        string='# Packaging', compute='calculate_packaging_qty',
+    pri_pack_qty = fields.Float(
+        string='# Primary Packaging', compute='calculate_pri_packaging_qty',
         store=True)
-    pallet_qty = fields.Float(
-        string='# Pallet',
-        compute='calculate_pallet_qty', store=True)
+    sec_pack_qty = fields.Float(
+        string='# Secondary Packaging', compute='calculate_sec_packaging_qty',
+        store=True)

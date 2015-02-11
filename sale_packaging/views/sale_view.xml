@@ -10,12 +10,12 @@
                     <field name="product_ul" groups="product.group_stock_packaging" />
                 </field>
                 <xpath expr="//field[@name='order_line']/form//field[@name='th_weight']" position="after">
-                    <field name="packaging_qty" groups="product.group_stock_packaging" />
-                    <field name="pallet_qty" groups="product.group_stock_packaging" />
+                    <field name="pri_pack_qty" groups="product.group_stock_packaging" />
+                    <field name="sec_pack_qty" groups="product.group_stock_packaging" />
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="before">
-                    <field name="packaging_qty" groups="product.group_stock_packaging" />
-                    <field name="pallet_qty" groups="product.group_stock_packaging" sum="# Pallet" />
+                    <field name="pri_pack_qty" groups="product.group_stock_packaging" />
+                    <field name="sec_pack_qty" groups="product.group_stock_packaging" sum="# Pallet" />
                 </xpath>
             </field>
         </record>
@@ -26,8 +26,8 @@
             <field name="inherit_id" ref="sale.view_order_line_form2" />
             <field name="arch" type="xml">
                 <field name="company_id" position="before">
-                    <field name="packaging_qty" groups="product.group_stock_packaging" />
-                    <field name="pallet_qty" groups="product.group_stock_packaging" />
+                    <field name="pri_pack_qty" groups="product.group_stock_packaging" />
+                    <field name="sec_pack_qty" groups="product.group_stock_packaging" />
                 </field>
             </field>
         </record>
@@ -38,8 +38,8 @@
             <field name="inherit_id" ref="sale.view_order_line_tree" />
             <field name="arch" type="xml">
                 <field name="state" position="before">
-                    <field name="packaging_qty" groups="product.group_stock_packaging" />
-                    <field name="pallet_qty" groups="product.group_stock_packaging" sum="# Pallet" />
+                    <field name="pri_pack_qty" groups="product.group_stock_packaging" />
+                    <field name="sec_pack_qty" groups="product.group_stock_packaging" sum="# Pallet" />
                 </field>
             </field>
         </record>
