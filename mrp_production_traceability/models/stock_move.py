@@ -1,30 +1,35 @@
-
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-
 from openerp import models, fields, api
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
+    @api.one
+    @api.depends('picking_id')
+    def _get_picking_partner(self):
+        self.picking_partner = False
+        if self.picking_id:
+            self.picking_partner = self.picking_id.partner_id.id
+
+    @api.one
+    @api.depends('production_id')
+    def _get_final_product(self):
+        self.final_product = False
+        if self.production_id:
+            self.final_product = self.production_id.product_id.id
+
     prod_parent_lot = fields.Many2one('stock.production.lot',
                                       'Parent production lot')
+    picking_partner = fields.Many2one(
+        'res.partner', string='Picking Partner', compute=_get_picking_partner,
+        store=True)
+    final_product = fields.Many2one(
+        'product.product', string='Final Product', compute=_get_final_product,
+        store=True)
 
     @api.multi
     def action_done(self):
