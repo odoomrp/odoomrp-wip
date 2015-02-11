@@ -27,10 +27,10 @@
     'category': 'Manufacturing',
     'depends': ["mrp",
                 "stock",
-    ],
+                ],
     'data': ["views/mrp_stock_move_view.xml",
              "views/track_lot_view.xml",
              "views/stock_move_view.xml",
-    ],
+             ],
     'installable': True,
 }
