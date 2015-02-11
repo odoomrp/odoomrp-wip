@@ -24,11 +24,6 @@
     "version": "1.0",
     "author": "OdooMRP team",
     "website": "http://www.odoomrp.com",
-    "contributors": [
-        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com",
-        "Ana Juaristi <ajuaristo@gmail.com>",
-        "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
-    ],
     "category": "Purchase",
     "depends": [
         "base",
