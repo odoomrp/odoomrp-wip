@@ -1,5 +1,5 @@
-Sale order allowed product
-==========================
+mrp production traceability
+===========================
 
 This modules adds component traceability in production orders.
 
