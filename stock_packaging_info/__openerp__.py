@@ -17,10 +17,10 @@
 ##############################################################################
 
 {
-    "name": "Sale Packaging",
+    "name": "Stock - Packaging information",
     "version": "1.0",
     "depends": [
-        "sale",
+        "stock",
         "product_packaging_through_attributes",
     ],
     "author": "OdooMRP team",
@@ -33,7 +33,8 @@
     "category": "Custom Module",
     "summary": "",
     "data": [
-        "views/sale_view.xml",
+        "views/stock_view.xml",
     ],
     "installable": True,
+    "auto_install": False,
 }

@@ -1,5 +1,5 @@
-Stock Packaging
-===============
+Packaging information
+=====================
 
 * This module shows the "Packaging number" on objects "Stock move" and
   "Stock quant", for products that have an attribute of type "Package".

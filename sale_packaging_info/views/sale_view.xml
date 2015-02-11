@@ -15,7 +15,7 @@
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="before">
                     <field name="pri_pack_qty" groups="product.group_stock_packaging" />
-                    <field name="sec_pack_qty" groups="product.group_stock_packaging" sum="# Pallet" />
+                    <field name="sec_pack_qty" groups="product.group_stock_packaging" sum="# Secondary Packaging" />
                 </xpath>
             </field>
         </record>
@@ -39,7 +39,7 @@
             <field name="arch" type="xml">
                 <field name="state" position="before">
                     <field name="pri_pack_qty" groups="product.group_stock_packaging" />
-                    <field name="sec_pack_qty" groups="product.group_stock_packaging" sum="# Pallet" />
+                    <field name="sec_pack_qty" groups="product.group_stock_packaging" sum="# Secondary Packaging" />
                 </field>
             </field>
         </record>

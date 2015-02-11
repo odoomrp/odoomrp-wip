@@ -22,7 +22,7 @@ class SaleOrderLine(models.Model):
     def calculate_pri_packaging_qty(self):
         for attr_value in self.product_id.attribute_value_ids:
             if attr_value.attribute_id.is_packaging:
-                self.packaging_qty = (
+                self.pri_pack_qty = (
                     self.product_uom_qty / (attr_value.numeric_value or 1.0))
 
     @api.one
@@ -35,8 +35,8 @@ class SaleOrderLine(models.Model):
         for packaging in self.order_id.product_ul.packagings:
             if (product and
                     packaging.product == product):
-                self.pallet_qty = (
-                    self.packaging_qty / (
+                self.sec_pack_qty = (
+                    self.pri_pack_qty / (
                         (packaging.ul_qty * packaging.rows) or 1.0))
 
     pri_pack_qty = fields.Float(
