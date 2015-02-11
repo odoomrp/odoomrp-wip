@@ -20,14 +20,55 @@ class MrpBom(models.Model):
         maxseq = bom.sequence + 1
         return maxseq
 
-    active = fields.Boolean('Active', default=False)
+    active = fields.Boolean(
+        string='Active', default=False,
+        states={'historical': [('readonly', True)]})
     historical_date = fields.Date(string='Historical Date', readonly=True)
     state = fields.Selection([('draft', 'Draft'),
                               ('active', 'Active'),
                               ('historical', 'Historical'),
                               ], string='Status', index=True, readonly=True,
                              default='draft', copy=False)
-    sequence = fields.Integer(default=_get_max_sequence, copy=False)
+    sequence = fields.Integer(
+        default=_get_max_sequence, copy=False,
+        states={'historical': [('readonly', True)]})
+
+    name = fields.Char(
+        states={'historical': [('readonly', True)]})
+    code = fields.Char(
+        states={'historical': [('readonly', True)]})
+    type = fields.Selection(
+        states={'historical': [('readonly', True)]})
+    company_id = fields.Many2one(
+        states={'historical': [('readonly', True)]})
+    product_tmpl_id = fields.Many2one(
+        states={'historical': [('readonly', True)]})
+    product_id = fields.Many2one(
+        states={'historical': [('readonly', True)]})
+    product_qty = fields.Float(
+        states={'historical': [('readonly', True)]})
+    product_uom = fields.Many2one(
+        states={'historical': [('readonly', True)]})
+    routing_id = fields.Many2one(
+        readonly=True, states={'draft': [('readonly', False)]})
+    bom_line_ids = fields.One2many(
+        readonly=True, states={'draft': [('readonly', False)]})
+    position = fields.Char(
+        states={'historical': [('readonly', True)]})
+    date_start = fields.Date(
+        states={'historical': [('readonly', True)]})
+    date_stop = fields.Date(
+        states={'historical': [('readonly', True)]})
+    property_ids = fields.Many2many(
+        states={'historical': [('readonly', True)]})
+    product_rounding = fields.Float(
+        states={'historical': [('readonly', True)]})
+    product_efficiency = fields.Float(
+        states={'historical': [('readonly', True)]})
+    message_follower_ids = fields.Many2many(
+        states={'historical': [('readonly', True)]})
+    message_ids = fields.One2many(
+        states={'historical': [('readonly', True)]})
 
     @api.one
     @api.constrains('sequence')
