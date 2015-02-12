@@ -16,13 +16,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_packaging_through_attributes
-#: field:product.attribute,is_packaging:0
-msgid "Is packaging"
+#: field:product.attribute,is_package:0
+msgid "Is package"
 msgstr ""
 
 #. module: product_packaging_through_attributes
-#: field:product.attribute.value,packaging_product:0
-msgid "Packaging Product"
+#: field:product.attribute.value,package_product:0
+msgid "Package Product"
 msgstr ""
 
 #. module: product_packaging_through_attributes

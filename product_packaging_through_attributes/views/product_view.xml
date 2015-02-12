@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="product.attribute_tree_view" />
             <field name="arch" type="xml">
                 <field name="name" position="before">
-                    <field name="is_packaging" />
+                    <field name="is_package" />
                 </field>
             </field>
         </record>
@@ -20,15 +20,15 @@
                 ref="product_attribute_types.product_attribute_value_extended_tree_view" />
             <field name="arch" type="xml">
                 <field name="numeric_value" position="after">
-                    <field name="packaging_product"
-                        attrs="{'required':[('is_packaging_attr','=',True)]}" />
-                    <field name="is_packaging_attr" invisible="1" />
+                    <field name="package_product"
+                        attrs="{'required':[('is_package_attr','=',True)]}" />
+                    <field name="is_package_attr" invisible="1" />
                 </field>
             </field>
         </record>
 
         <record model="ir.ui.view" id="product_packaging_product_form_view">
-            <field name="name">product.packging.product.form</field>
+            <field name="name">product.packaging.product.form</field>
             <field name="model">product.packaging</field>
             <field name="inherit_id" ref="product.product_packaging_form_view" />
             <field name="arch" type="xml">

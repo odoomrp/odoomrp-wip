@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="res_partner_pallet_form_view">
-            <field name="name">res.partner.pallet.form</field>
+        <record model="ir.ui.view" id="res_partner_ul_form_view">
+            <field name="name">res.partner.ul.form</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
                 <field name="date" position="after">
-                    <field name="multiple_of_sec_pack" />
                     <field name="partner_product_ul" />
                 </field>
             </field>

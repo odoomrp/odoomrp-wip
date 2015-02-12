@@ -19,19 +19,19 @@ class SaleOrderLine(models.Model):
 
     @api.one
     @api.depends('order_id.product_ul', 'product_id', 'product_uom_qty')
-    def calculate_pri_packaging_qty(self):
+    def calculate_pri_packages_qty(self):
         for attr_value in self.product_id.attribute_value_ids:
-            if attr_value.attribute_id.is_packaging:
+            if attr_value.attribute_id.is_package:
                 self.pri_pack_qty = (
                     self.product_uom_qty / (attr_value.numeric_value or 1.0))
 
     @api.one
     @api.depends('order_id.product_ul', 'pri_pack_qty')
-    def calculate_sec_packaging_qty(self):
+    def calculate_sec_packages_qty(self):
         product = False
         for attr_value in self.product_id.attribute_value_ids:
-            if attr_value.attribute_id.is_packaging:
-                product = attr_value.packaging_product
+            if attr_value.attribute_id.is_package:
+                product = attr_value.package_product
         for packaging in self.order_id.product_ul.packagings:
             if (product and
                     packaging.product == product):
@@ -40,8 +40,8 @@ class SaleOrderLine(models.Model):
                         (packaging.ul_qty * packaging.rows) or 1.0))
 
     pri_pack_qty = fields.Float(
-        string='# Primary Packaging', compute='calculate_pri_packaging_qty',
+        string='# Primary Packages', compute='calculate_pri_packages_qty',
         store=True)
     sec_pack_qty = fields.Float(
-        string='# Secondary Packaging', compute='calculate_sec_packaging_qty',
+        string='# Secondary Packages', compute='calculate_sec_packages_qty',
         store=True)

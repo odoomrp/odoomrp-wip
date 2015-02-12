@@ -16,9 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_packaging_info
-#: field:stock.move,packaging_number:0
-#: field:stock.quant,packaging_number:0
-msgid "# Packaging"
+#: field:stock.move,packages_number:0
+#: field:stock.quant,packages_number:0
+msgid "# Packages"
 msgstr "Nº de envases"
 
 #. module: stock_packaging_info

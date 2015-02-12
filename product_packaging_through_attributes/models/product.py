@@ -9,23 +9,23 @@ from openerp import models, fields, api
 class ProductAttribute(models.Model):
     _inherit = 'product.attribute'
 
-    is_packaging = fields.Boolean(string='Is packaging')
+    is_package = fields.Boolean(string='Is package')
 
 
 class ProductAttributeValue(models.Model):
     _inherit = 'product.attribute.value'
 
-    is_packaging_attr = fields.Boolean(
-        string='Packaging attribute', related='attribute_id.is_packaging')
-    packaging_product = fields.Many2one(
-        comodel_name='product.product', string='Packaging Product')
+    is_package_attr = fields.Boolean(
+        string='Package attribute', related='attribute_id.is_package')
+    package_product = fields.Many2one(
+        comodel_name='product.product', string='Package Product')
 
 
 class ProductPackaging(models.Model):
     _inherit = 'product.packaging'
 
     product = fields.Many2one(
-        comodel_name='product.product', string='Packaging Product')
+        comodel_name='product.product', string='Package Product')
 
     @api.one
     @api.onchange('product')

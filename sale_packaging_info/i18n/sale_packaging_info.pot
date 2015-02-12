@@ -17,14 +17,14 @@ msgstr ""
 
 #. module: sale_packaging_info
 #: field:sale.order.line,pri_pack_qty:0
-msgid "# Primary Packaging"
+msgid "# Primary Packages"
 msgstr ""
 
 #. module: sale_packaging_info
 #: view:sale.order:sale_packaging.sale_order_packaging_form_view
 #: view:sale.order.line:sale_packaging.sale_order_line_packaging_tree_view
 #: field:sale.order.line,sec_pack_qty:0
-msgid "# Secondary Packaging"
+msgid "# Secondary Packages"
 msgstr ""
 
 #. module: sale_packaging_info
