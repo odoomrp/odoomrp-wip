@@ -16,5 +16,25 @@
 #
 ##############################################################################
 
-from . import res_config
-from . import sale
+from openerp import models, fields, api
+
+
+class SaleConfigSettings(models.TransientModel):
+    _inherit = 'sale.config.settings'
+
+    group_third_discount = fields.Boolean(
+        string='Allow third discount',
+        implied_group='sale_third_discount.group_third_discount')
+
+    @api.one
+    @api.onchange('group_third_discount')
+    def onchange_group_third_discount(self):
+        if self.group_third_discount:
+            self.group_discount_per_so_line = True
+            self.group_second_discount = True
+
+    @api.multi
+    def write(self, vals):
+        if vals.get('group_third_discount'):
+            vals['group_second_discount'] = True
+        return super(SaleConfigSettings, self).write(vals)

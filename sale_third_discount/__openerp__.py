@@ -11,10 +11,21 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
-#    You should have received a copy of the GNU Affero General Public License
+#    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
 
-from . import res_config
-from . import sale
+{
+    "name": "Sale Third Discount",
+    "version": "1.0",
+    "depends": ["sale_pricelist_rules"],
+    "author": "OdooMRP team",
+    "category": "Sales Management",
+    'data': ["security/sale_third_discount_security.xml",
+             "views/res_config_view.xml",
+             "views/sale_order_line_view.xml",
+             "views/product_pricelist_item_view.xml"],
+    'installable': True,
+    'auto_install': False,
+}

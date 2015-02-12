@@ -9,7 +9,7 @@
                 <field name="price_max_margin" position="after">
                     <newline />
                     <field name="discount" />
-                    <field name="discount2" />
+                    <field name="discount2" groups="product_pricelist_rules.group_second_discount"/>
                     <field name="offer" />
                 </field>
             </field>
@@ -38,7 +38,7 @@
                 </field>
                 <field name="min_quantity" position="after">
                     <field name="discount" />
-                    <field name="discount2" />
+                    <field name="discount2" groups="product_pricelist_rules.group_second_discount"/>
                     <field name="offer" />
                     <field name="price_surcharge"/>
                 </field>

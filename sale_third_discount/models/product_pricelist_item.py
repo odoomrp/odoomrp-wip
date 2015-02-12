@@ -11,10 +11,23 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
-#    You should have received a copy of the GNU Affero General Public License
+#    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
 
-from . import res_config
-from . import sale
+from openerp import models, fields, _
+import openerp.addons.decimal_precision as dp
+
+
+class PricelistItem(models.Model):
+
+    _inherit = 'product.pricelist.item'
+
+    discount3 = fields.Float('Discount 3 %',
+                             digits=dp.get_precision('Product Price'))
+
+    _sql_constraints = [
+        ('discount3_limit', 'CHECK (discount3 <= 100.0)',
+         _('Third discount must be lower than 100%.')),
+    ]

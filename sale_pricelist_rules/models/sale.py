@@ -17,6 +17,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
+from openerp.osv import fields as old_fields
 import openerp.addons.decimal_precision as dp
 from lxml import etree
 
@@ -55,26 +56,36 @@ class SaleOrderLineSubtotal(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    @api.multi
     def _calc_price_subtotal(self):
+        self.ensure_one()
         price = self.price_unit * (1 - (self.discount or 0.0) / 100.0)
         return price * (1 - (self.discount2 or 0.0) / 100.0)
 
+    @api.multi
     def _calc_qty(self):
+        self.ensure_one()
         qty = self.product_uom_qty
         if self.offer_id:
             total = self.offer_id.free_qty + self.offer_id.paid_qty
             qty = round((qty / total) * self.offer_id.paid_qty)
         return qty
 
-    @api.one
-    def _amount_line(self):
-        new_price_subtotal = self._calc_price_subtotal()
-        qty = self._calc_qty()
-        taxes = self.tax_id.compute_all(
-            new_price_subtotal, qty, self.product_id,
-            self.order_id.partner_id)
-        cur = self.order_id.pricelist_id.currency_id
-        self.price_subtotal = cur.round(taxes['total'])
+    def _amount_line(self, cr, uid, ids, field_name, arg, context=None):
+        res = {}
+        tax_obj = self.pool.get('account.tax')
+        cur_obj = self.pool.get('res.currency')
+        for line in self.browse(cr, uid, ids, context=context):
+            new_price_subtotal = self._calc_price_subtotal(cr, uid, line.id,
+                                                           context=context)
+            qty = self._calc_qty(cr, uid, line.id, context=context)
+            taxes = tax_obj.compute_all(cr, uid, line.tax_id,
+                                        new_price_subtotal, qty,
+                                        line.product_id,
+                                        line.order_id.partner_id)
+            cur = line.order_id.pricelist_id.currency_id
+            res[line.id] = cur_obj.round(cr, uid, cur, taxes['total'])
+        return res
 
     def _get_possible_item_ids(self, pricelist_id, product_id=False, qty=0):
         item_obj = self.env['product.pricelist.item']
@@ -104,9 +115,12 @@ class SaleOrderLine(models.Model):
     subtotal_ids = fields.One2many(
         comodel_name='sale.order.line.subtotal', inverse_name='line_id',
         string='Subtotals by pricelist')
-    price_subtotal = fields.Float(
-        string='Subtotal', digits=dp.get_precision('Account'),
-        compute='_amount_line')
+
+    _columns = {
+        'price_subtotal': old_fields.function(
+            _amount_line, type="float", string='Subtotal',
+            digits_compute=dp.get_precision('Account'))
+    }
 
     _sql_constraints = [
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',

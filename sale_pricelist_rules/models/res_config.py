@@ -16,5 +16,24 @@
 #
 ##############################################################################
 
-from . import res_config
-from . import sale
+from openerp import models, fields, api
+
+
+class SaleConfigSettings(models.TransientModel):
+    _inherit = 'sale.config.settings'
+
+    group_second_discount = fields.Boolean(
+        string='Allow second discount',
+        implied_group='product_pricelist_rules.group_second_discount')
+
+    @api.one
+    @api.onchange('group_second_discount')
+    def onchange_group_second_discount(self):
+        if self.group_second_discount:
+            self.group_discount_per_so_line = True
+
+    @api.multi
+    def write(self, vals):
+        if vals.get('group_second_discount'):
+            vals['group_discount_per_so_line'] = True
+        return super(SaleConfigSettings, self).write(vals)

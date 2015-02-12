@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="sale_third_discount_settings_form_view">
+            <field name="name">sale.third.discount.settings.form</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sale_pricelist_rules.sale_second_discount_settings_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='group_second_discount']/.." position="inside">
+                    <div>
+                        <field name="group_third_discount" class="oe_inline"/>
+                        <label for="group_third_discount"/>
+                    </div>
+                </xpath>
+                <field name="group_discount_per_so_line" position="attributes">
+                    <attribute name="attrs">{'readonly':['|', ('group_second_discount','=',True),('group_third_discount','=',True)]}</attribute>
+                </field>
+                <field name="group_second_discount" position="attributes">
+                    <attribute name="attrs">{'readonly':[('group_third_discount','=',True)]}</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
