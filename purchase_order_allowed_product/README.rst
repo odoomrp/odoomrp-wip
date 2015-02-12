@@ -1,9 +1,18 @@
 Purchase order allowed product
-=============================
-* This module adds in purchase orders form the new field "Only products allowed
-  in purchase". When a supplier is selected in purchase order form, the value
-  of this new field, will be that defined in the supplier.
+==============================
 
-* If this new field is activated in purchase order form, only be able to select
-  products supplied by the supplier. If not activated, you can select any
-  product.
+This module adds a restriction in purchase orders that has the mark "Use only
+allowed products" checked for allowing to select only products that can be
+supplied by the supplier.
+
+The restriction can be set by default for each partner, and it's propagated
+to their purchase orders, but it can be change for each order if you want.
+
+Credits
+=======
+
+Contributors
+------------
+* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com
+* Ana Juaristi <ajuaristo@gmail.com>
+* Alfredo de la Fuente <alfredodelafuente@avanzosc.es>

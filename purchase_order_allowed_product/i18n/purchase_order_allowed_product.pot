@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-10 10:36+0000\n"
-"PO-Revision-Date: 2015-02-10 10:36+0000\n"
+"POT-Creation-Date: 2015-02-11 09:31+0000\n"
+"PO-Revision-Date: 2015-02-11 09:31+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,16 @@ msgid "Allowed products"
 msgstr ""
 
 #. module: purchase_order_allowed_product
+#: help:res.partner,purchase_only_allowed:0
+msgid "If checked, by default you will only be able to select products that can be supplied by this supplier when creating a purchase order for it. This value can be changed for each order."
+msgstr ""
+
+#. module: purchase_order_allowed_product
+#: help:purchase.order,only_allowed_products:0
+msgid "If checked, you will only be able to select products that can be supplied by this supplier."
+msgstr ""
+
+#. module: purchase_order_allowed_product
 #: model:ir.model,name:purchase_order_allowed_product.model_res_partner
 msgid "Partner"
 msgstr ""
@@ -31,14 +41,12 @@ msgid "Purchase Order"
 msgstr ""
 
 #. module: purchase_order_allowed_product
-#: field:purchase.order,only_products_allowed:0
 #: field:res.partner,purchase_only_allowed:0
-msgid "Use only allowed products in purchase"
+msgid "Use in purchases only allowed products"
 msgstr ""
 
 #. module: purchase_order_allowed_product
-#: view:purchase.order:purchase_order_allowed_product.purchase_order_form_inh_purchaseallowedproduct
-#: view:purchase.order.line:purchase_order_allowed_product.purchase_order_line_form_inh_purchaseallowedproduct
-msgid "[('id', 'in', parent.allowed_products[0][2])]"
+#: field:purchase.order,only_allowed_products:0
+msgid "Use only allowed products"
 msgstr ""
 
