@@ -17,6 +17,7 @@ msgstr ""
 
 #. module: sale_packaging
 #: field:sale.order.line,pri_pack_qty:0
+#: field:sale.order.line,pri_pack:0
 msgid "# Primary Packages"
 msgstr "Nº de envases primarios"
 

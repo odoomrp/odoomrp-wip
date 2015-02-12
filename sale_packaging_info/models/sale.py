@@ -3,7 +3,7 @@
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class SaleOrder(models.Model):
@@ -19,29 +19,30 @@ class SaleOrderLine(models.Model):
 
     @api.one
     @api.depends('order_id.product_ul', 'product_id', 'product_uom_qty')
-    def calculate_pri_packages_qty(self):
+    def _calculate_packages(self):
+        package_attr = False
         for attr_value in self.product_id.attribute_value_ids:
             if attr_value.attribute_id.is_package:
-                self.pri_pack_qty = (
-                    self.product_uom_qty / (attr_value.numeric_value or 1.0))
-
-    @api.one
-    @api.depends('order_id.product_ul', 'pri_pack_qty')
-    def calculate_sec_packages_qty(self):
-        product = False
-        for attr_value in self.product_id.attribute_value_ids:
-            if attr_value.attribute_id.is_package:
-                product = attr_value.package_product
-        for packaging in self.order_id.product_ul.packagings:
-            if (product and
-                    packaging.product == product):
-                self.sec_pack_qty = (
-                    self.pri_pack_qty / (
-                        (packaging.ul_qty * packaging.rows) or 1.0))
+                package_attr = attr_value
+                break
+        if package_attr:
+            self.pri_pack_qty = (
+                self.product_uom_qty / (package_attr.numeric_value or 1.0))
+            if package_attr.package_product:
+                self.pri_pack = _('%.2f %s' %
+                                  (self.pri_pack_qty,
+                                   package_attr.package_product.name))
+                for packaging in self.order_id.product_ul.packagings:
+                    if packaging.product == package_attr.package_product:
+                        self.sec_pack_qty = (
+                            self.pri_pack_qty / (
+                                (packaging.ul_qty * packaging.rows) or 1.0))
 
     pri_pack_qty = fields.Float(
-        string='# Primary Packages', compute='calculate_pri_packages_qty',
+        string='# Primary Packages', compute='_calculate_packages',
         store=True)
+    pri_pack = fields.Char(
+        string='# Primary Packages', compute='_calculate_packages')
     sec_pack_qty = fields.Float(
-        string='# Secondary Packages', compute='calculate_sec_packages_qty',
+        string='# Secondary Packages', compute='_calculate_packages',
         store=True)
