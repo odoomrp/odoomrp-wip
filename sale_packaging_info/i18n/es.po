@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_packaging
+#	* sale_packaging_info
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-11 16:49+0000\n"
-"PO-Revision-Date: 2015-02-11 16:49+0000\n"
+"POT-Creation-Date: 2015-02-13 11:02+0000\n"
+"PO-Revision-Date: 2015-02-13 11:02+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,31 +15,40 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: sale_packaging
+#. module: sale_packaging_info
 #: field:sale.order.line,pri_pack_qty:0
+msgid "# Pkg 1"
+msgstr "Nº de env. 1"
+
+#. module: sale_packaging_info
 #: field:sale.order.line,pri_pack:0
-msgid "# Primary Packages"
-msgstr "Nº de envases primarios"
+msgid "Pkg 1"
+msgstr "Env. 1"
 
-#. module: sale_packaging
-#: view:sale.order:sale_packaging.sale_order_packaging_form_view
-#: view:sale.order.line:sale_packaging.sale_order_line_packaging_tree_view
+#. module: sale_packaging_info
+#: view:sale.order:sale_packaging_info.sale_order_packaging_form_view
+#: view:sale.order.line:sale_packaging_info.sale_order_line_packaging_tree_view
 #: field:sale.order.line,sec_pack_qty:0
-msgid "# Secondary Packages"
-msgstr "Nº de envases secundarios"
+msgid "# Pkg 2"
+msgstr "Nº de env.2"
 
-#. module: sale_packaging
+#. module: sale_packaging_info
+#: field:sale.order.line,sec_pack:0
+msgid "Pkg 2"
+msgstr "Env. 2"
+
+#. module: sale_packaging_info
 #: field:sale.order,product_ul:0
 msgid "Logistic Unit"
 msgstr "Unidad logística"
 
-#. module: sale_packaging
-#: model:ir.model,name:sale_packaging.model_sale_order
+#. module: sale_packaging_info
+#: model:ir.model,name:sale_packaging_info.model_sale_order
 msgid "Sales Order"
 msgstr "Pedido de venta"
 
-#. module: sale_packaging
-#: model:ir.model,name:sale_packaging.model_sale_order_line
+#. module: sale_packaging_info
+#: model:ir.model,name:sale_packaging_info.model_sale_order_line
 msgid "Sales Order Line"
 msgstr "Línea pedido de venta"
 

@@ -3,7 +3,7 @@
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
 
-from openerp import models, fields, api, _
+from openerp import models, fields, api
 
 
 class SaleOrder(models.Model):
@@ -29,20 +29,21 @@ class SaleOrderLine(models.Model):
             self.pri_pack_qty = (
                 self.product_uom_qty / (package_attr.numeric_value or 1.0))
             if package_attr.package_product:
-                self.pri_pack = _('%.2f %s' %
-                                  (self.pri_pack_qty,
-                                   package_attr.package_product.name))
+                self.pri_pack = package_attr.package_product
                 for packaging in self.order_id.product_ul.packagings:
                     if packaging.product == package_attr.package_product:
                         self.sec_pack_qty = (
                             self.pri_pack_qty / (
                                 (packaging.ul_qty * packaging.rows) or 1.0))
+                        self.sec_pack = self.order_id.product_ul
 
     pri_pack_qty = fields.Float(
-        string='# Primary Packages', compute='_calculate_packages',
-        store=True)
-    pri_pack = fields.Char(
-        string='# Primary Packages', compute='_calculate_packages')
+        string='# Pkg 1', compute='_calculate_packages', store=True)
+    pri_pack = fields.Many2one(
+        comodel_name='product.product', string='Pkg 1',
+        compute='_calculate_packages', readonly=True)
     sec_pack_qty = fields.Float(
-        string='# Secondary Packages', compute='_calculate_packages',
-        store=True)
+        string='# Pkg 2', compute='_calculate_packages', store=True)
+    sec_pack = fields.Many2one(
+        comodel_name='product.ul', string='Pkg 2',
+        compute='_calculate_packages', readonly=True)
