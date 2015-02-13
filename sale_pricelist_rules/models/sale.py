@@ -157,18 +157,29 @@ class SaleOrderLine(models.Model):
             name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
             date_order=date_order, packaging=packaging,
             fiscal_position=fiscal_position, flag=flag)
+        warning_msgs = res.get('warning') and res['warning']['message'] or ''
         item_obj = self.env['product.pricelist.item']
         if product:
             item_id = item_obj.get_best_pricelist_item(
                 pricelist, product_id=product, qty=qty)
-            res['value'].update({'item_id': item_id})
-            res['value']['price_unit'] = item_obj.browse(
-                item_id).price_get(product, qty, partner_id, uom)[0]
-            res['domain'].update({'item_id':
-                                  [('id', 'in',
-                                    self._get_possible_item_ids(
-                                        pricelist, product_id=product,
-                                        qty=qty))]})
+            if not item_id:
+                warn_msg = _('Cannot find a pricelist line matching this '
+                             'product and quantity.\nYou have to change either'
+                             ' the product, the quantity or the pricelist.')
+                warning_msgs += (_("No valid pricelist line found ! :") +
+                                 warn_msg + "\n\n")
+            else:
+                res['value']['price_unit'] = item_obj.browse(
+                    item_id).price_get(product, qty, partner_id, uom)[0]
+                res['value'].update({'item_id': item_id})
+                res['domain'].update({'item_id':
+                                      [('id', 'in',
+                                        self._get_possible_item_ids(
+                                            pricelist, product_id=product,
+                                            qty=qty))]})
+        if warning_msgs:
+            res['warning'] = {'title': _('Configuration Error!'),
+                              'message': warning_msgs}
         return res
 
     @api.one
