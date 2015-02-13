@@ -37,13 +37,13 @@ msgstr "Creado en"
 
 #. module: sale_pricelist_rules
 #: field:sale.order.line,discount2:0
-msgid "Discount 2 (%)"
-msgstr "Descuento 2 (%)"
+msgid "Disc. 2 (%)"
+msgstr "Desc. 2 (%)"
 
 #. module: sale_pricelist_rules
 #: field:sale.order.line,discount3:0
-msgid "Discount 3 (%)"
-msgstr "Descuento 3 (%)"
+msgid "Disc. 3 (%)"
+msgstr "Desc. 3 (%)"
 
 #. module: sale_pricelist_rules
 #: field:sale.order.line.subtotal,id:0

@@ -43,13 +43,13 @@ msgstr "Descuento %"
 
 #. module: product_pricelist_rules
 #: field:product.pricelist.item,discount2:0
-msgid "Discount 2 %"
-msgstr "Descuento 2 %"
+msgid "Disc. 2 %"
+msgstr "Desc. 2 %"
 
 #. module: product_pricelist_rules
 #: field:product.pricelist.item,discount3:0
-msgid "Discount 3 %"
-msgstr "Descuento 3 %"
+msgid "Disc. 3 %"
+msgstr "Desc. 3 %"
 
 #. module: product_pricelist_rules
 #: sql_constraint:product.pricelist.item:0
@@ -128,7 +128,7 @@ msgstr "Tipo de tarifa"
 #. module: product_pricelist_rules
 #: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
 msgid "Pricelist Version"
-msgstr "Version de tarifa"
+msgstr "Versión de tarifa"
 
 #. module: product_pricelist_rules
 #: model:ir.model,name:product_pricelist_rules.model_product_pricelist_item

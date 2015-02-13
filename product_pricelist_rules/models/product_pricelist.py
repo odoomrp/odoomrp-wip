@@ -40,9 +40,9 @@ class PricelistItem(models.Model):
         comodel_name='product.pricelist.item.offer', string='Offer')
     discount = fields.Float('Discount %',
                             digits=dp.get_precision('Product Price'))
-    discount2 = fields.Float('Discount 2 %',
+    discount2 = fields.Float('Disc. 2 %',
                              digits=dp.get_precision('Product Price'))
-    discount3 = fields.Float('Discount 3 %',
+    discount3 = fields.Float('Disc. 3 %',
                              digits=dp.get_precision('Product Price'))
     product_ul = fields.Many2one(
         comodel_name='product.ul', string='Logistic Unit')
