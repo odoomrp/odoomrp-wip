@@ -11,6 +11,9 @@ class QcTriggerLine(models.AbstractModel):
 
     trigger = fields.Many2one(comodel_name="qc.trigger", required=True)
     test = fields.Many2one(comodel_name="qc.test", required=True)
+    user = fields.Many2one(
+        comodel_name='res.users', string='Responsible',
+        track_visibility='always', default=lambda self: self.env.user)
 
     def get_test_for_product(self, trigger, product):
         """Overridable method for getting test associated to a product.

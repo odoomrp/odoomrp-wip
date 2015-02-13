@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="qc_inspection_department_form_view">
+            <field name="name">qc.inspection.department.form</field>
+            <field name="model">qc.inspection</field>
+            <field name="inherit_id" ref="quality_control.qc_inspection_form_view" />
+            <field name="groups_id" eval="[(4, ref('quality_control_hr.group_quality_control_all_inspection'))], [(4, ref('quality_control.group_quality_control_manager'))]" />
+            <field name="arch" type="xml">
+                <field name="user" position="after">
+                    <field name="department" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="qc_inspection_department_tree_view">
+            <field name="name">qc.inspection.department.tree</field>
+            <field name="model">qc.inspection</field>
+            <field name="inherit_id" ref="quality_control.qc_inspection_tree_view" />
+            <field name="groups_id" eval="[(4, ref('quality_control_hr.group_quality_control_all_inspection'))], [(4, ref('quality_control.group_quality_control_manager'))]" />
+            <field name="arch" type="xml">
+                <field name="user" position="after">
+                    <field name="department" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="qc_inspection_department_search_view">
+            <field name="name">qc.inspection.department.search</field>
+            <field name="model">qc.inspection</field>
+            <field name="inherit_id" ref="quality_control.qc_inspection_search_view" />
+            <field name="groups_id" eval="[(4, ref('quality_control_hr.group_quality_control_all_inspection'))], [(4, ref('quality_control.group_quality_control_manager'))]" />
+            <field name="arch" type="xml">
+                <field name="user" position="after">
+                    <field name="department" />
+                </field>
+                <filter string="Responsible" position="after">
+                    <filter string="Department"
+                            domain="[]"
+                            context="{'group_by': 'department'}" />
+                </filter>
+            </field>
+        </record>
+
+    </data>
+</openerp>

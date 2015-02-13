@@ -61,7 +61,7 @@ msgstr "Cancelar"
 #. module: quality_control
 #: selection:qc.inspection,state:0
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancelado"
 
 #. module: quality_control
 #: field:qc.test,category:0
@@ -710,4 +710,9 @@ msgstr "Debe proveer una unidad de medida para las preguntas cualitativas."
 #, python-format
 msgid "You should provide an answer for all quantitative questions."
 msgstr "Debe proveer una respuesta para todas las preguntas cuantitativas."
+
+#. module: quality_control
+#: field:qc.test.category,complete_name:0
+msgid "Full name"
+msgstr "Nombre completo"
 

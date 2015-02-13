@@ -737,3 +737,8 @@ msgstr ""
 msgid "You should provide an answer for all quantitative questions."
 msgstr ""
 
+#. module: quality_control
+#: field:qc.test.category,complete_name:0
+msgid "Full name"
+msgstr ""
+

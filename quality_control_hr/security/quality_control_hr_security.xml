@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="0">
+
+        <record id="quality_control.group_quality_control_user" model="res.groups">
+            <field name="name">See Own Inspections</field>
+            <field name="category_id" ref="quality_control.module_category_quality_control"/>
+        </record>
+
+        <record id="group_quality_control_department" model="res.groups">
+            <field name="name">See Department Inspections</field>
+            <field name="category_id" ref="quality_control.module_category_quality_control"/>
+            <field name="implied_ids" eval="[(4, ref('quality_control.group_quality_control_user'))]"/>
+        </record>
+
+        <record id="group_quality_control_all_inspection" model="res.groups">
+            <field name="name">See All Inspections</field>
+            <field name="category_id" ref="quality_control.module_category_quality_control"/>
+            <field name="implied_ids" eval="[(4, ref('group_quality_control_department'))]"/>
+        </record>
+
+        <record id="quality_control.group_quality_control_manager" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('group_quality_control_all_inspection'))]"/>
+        </record>
+
+    </data>
+</openerp>

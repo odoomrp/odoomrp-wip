@@ -78,6 +78,9 @@ class QcInspection(models.Model):
         states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'qc.inspection'))
+    user = fields.Many2one(
+        comodel_name='res.users', string='Responsible',
+        track_visibility='always', default=lambda self: self.env.user)
 
     @api.model
     def create(self, vals):
@@ -165,7 +168,7 @@ class QcInspection(models.Model):
         return inspection
 
     @api.multi
-    def _prepare_inspection_header(self, object_ref, test):
+    def _prepare_inspection_header(self, object_ref, test, user):
         """Overridable hook method for preparing inspection header.
         :param object_ref: Object instance
         :param test: Test instance
@@ -176,6 +179,7 @@ class QcInspection(models.Model):
                                                    object_ref.id) or False,
             'state': 'ready',
             'test': test.id,
+            'user': user,
             'auto_generated': True,
         }
 
