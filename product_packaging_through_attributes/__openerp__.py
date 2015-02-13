@@ -9,7 +9,7 @@
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
+#    GNU General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
@@ -17,25 +17,26 @@
 ##############################################################################
 
 {
-    "name": "Raw Materials to Manufacturing Order Through Attributes",
+    "name": "Product Packaging through Attributes",
     "version": "1.0",
     "depends": [
         "base",
-        "mrp",
+        "product",
+        "product_packaging_views",
         "product_attribute_types",
     ],
     "author": "OdooMRP team",
     "website": "http://www.odoomrp.com",
     "contributors": [
-        "Mikel Arregi <mikelarregi@avanzosc.es>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <ajuaristio@gmail.com>"
     ],
-    "category": "Manufacturing",
-    'data': [
-        "views/attribute_value_view.xml",
-        "views/mrp_production_view.xml",
+    "category": "Custom Module",
+    "summary": "",
+    "data": [
+        "views/product_view.xml",
+        "views/res_partner_view.xml",
     ],
     "installable": True,
     "auto_install": False,

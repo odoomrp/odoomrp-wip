@@ -17,11 +17,11 @@
 ##############################################################################
 
 {
-    "name": "Sale Packaging",
+    "name": "Sale - Packaging information",
     "version": "1.0",
     "depends": [
         "sale",
-        "product_packaging_views",
+        "product_packaging_through_attributes",
     ],
     "author": "OdooMRP team",
     "website": "http://www.odoomrp.com",

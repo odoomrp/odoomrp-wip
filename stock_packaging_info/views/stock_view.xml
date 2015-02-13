@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="stock_move_packaging_tree_view">
+            <field name="name">stock.move.packaging.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.stock_move_tree"/>
+            <field name="arch" type="xml">
+                <field name="product_uom" position="after">
+                    <field name="packages_number" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="stock_move_packaging_tree_view2">
+            <field name="name">stock.move.packaging.tree2</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree"/>
+            <field name="arch" type="xml">
+                <field name="product_uom" position="after">
+                    <field name="packages_number" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="stock_move_receipt_packaging_tree_view">
+            <field name="name">stock.move.receipt.packaging.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree_receipt_picking"/>
+            <field name="arch" type="xml">
+                <field name="product_uom" position="after">
+                    <field name="packages_number" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="stock_move_receipt_board_packaging_tree_view">
+            <field name="name">stock.move.receipt.board.packaging.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree_receipt_picking_board"/>
+            <field name="arch" type="xml">
+                <field name="product_uom" position="after">
+                    <field name="packages_number" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="stock_quant_packaging_tree_view">
+            <field name="name">stock.quant.packaging.tree</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+            <field name="arch" type="xml">
+                <field name="qty" position="after">
+                    <field name="packages_number" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,54 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_packaging_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-13 10:58+0000\n"
+"PO-Revision-Date: 2015-02-13 10:58+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_packaging_info
+#: field:sale.order.line,pri_pack_qty:0
+msgid "# Pkg 1"
+msgstr ""
+
+#. module: sale_packaging_info
+#: field:sale.order.line,pri_pack:0
+msgid "Pkg 1"
+msgstr ""
+
+#. module: sale_packaging_info
+#: view:sale.order:sale_packaging_info.sale_order_packaging_form_view
+#: view:sale.order.line:sale_packaging_info.sale_order_line_packaging_tree_view
+#: field:sale.order.line,sec_pack_qty:0
+msgid "# Pkg 2"
+msgstr ""
+
+#. module: sale_packaging_info
+#: field:sale.order.line,sec_pack:0
+msgid "Pkg 2"
+msgstr ""
+
+#. module: sale_packaging_info
+#: field:sale.order,product_ul:0
+msgid "Logistic Unit"
+msgstr ""
+
+#. module: sale_packaging_info
+#: model:ir.model,name:sale_packaging_info.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_packaging_info
+#: model:ir.model,name:sale_packaging_info.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
