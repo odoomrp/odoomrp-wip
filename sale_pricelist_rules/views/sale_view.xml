@@ -20,6 +20,12 @@
                             <field name="discount2" class="oe_inline" />
                             %
                         </div>
+                        <label for="discount3"
+                            groups="product_pricelist_rules.group_third_discount" />
+                        <div name="discount3" groups="product_pricelist_rules.group_third_discount">
+                            <field name="discount3" class="oe_inline" />
+                            %
+                        </div>
                     </xpath>
                     <xpath
                         expr="//field[@name='order_line']/form//field[@name='address_allotment_id']"
@@ -34,6 +40,8 @@
                         position="after">
                         <field name="discount2"
                             groups="product_pricelist_rules.group_second_discount" />
+                        <field name="discount3"
+                            groups="product_pricelist_rules.group_third_discount" />
                         <field name="offer_id"
                             groups="sale.group_discount_per_so_line" />
                     </xpath>
@@ -49,6 +57,8 @@
                 <field name="discount" position="after">
                     <field name="discount2"
                          groups="product_pricelist_rules.group_second_discount" />
+                    <field name="discount3"
+                         groups="product_pricelist_rules.group_third_discount" />
                     <field name="item_id" groups="product.group_sale_pricelist" widget="selection" />
                     <field name="possible_item_ids" invisible="1" />
                     <field name="offer_id"

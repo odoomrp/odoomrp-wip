@@ -8,12 +8,16 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='group_discount_per_so_line']/.." position="inside">
                     <div>
-                        <field name="group_second_discount" class="oe_inline"/>
+                        <field name="group_second_discount" class="oe_inline" attrs="{'readonly':[('group_third_discount','=',True)]}"/>
                         <label for="group_second_discount"/>
+                    </div>
+                    <div>
+                        <field name="group_third_discount" class="oe_inline"/>
+                        <label for="group_third_discount"/>
                     </div>
                 </xpath>
                 <field name="group_discount_per_so_line" position="attributes">
-                    <attribute name="attrs">{'readonly':[('group_second_discount','=',True)]}</attribute>
+                    <attribute name="attrs">{'readonly':['|', ('group_second_discount','=',True), ('group_third_discount','=',True)]}</attribute>
                 </field>
             </field>
         </record>

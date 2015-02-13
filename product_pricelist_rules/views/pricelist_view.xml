@@ -10,6 +10,7 @@
                     <newline />
                     <field name="discount" />
                     <field name="discount2" groups="product_pricelist_rules.group_second_discount"/>
+                    <field name="discount3" groups="product_pricelist_rules.group_third_discount"/>
                     <field name="offer" />
                 </field>
             </field>
@@ -39,6 +40,7 @@
                 <field name="min_quantity" position="after">
                     <field name="discount" />
                     <field name="discount2" groups="product_pricelist_rules.group_second_discount"/>
+                    <field name="discount3" groups="product_pricelist_rules.group_third_discount"/>
                     <field name="offer" />
                     <field name="price_surcharge"/>
                 </field>

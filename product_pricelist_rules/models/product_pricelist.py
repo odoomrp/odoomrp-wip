@@ -42,6 +42,8 @@ class PricelistItem(models.Model):
                             digits=dp.get_precision('Product Price'))
     discount2 = fields.Float('Discount 2 %',
                              digits=dp.get_precision('Product Price'))
+    discount3 = fields.Float('Discount 3 %',
+                             digits=dp.get_precision('Product Price'))
     product_ul = fields.Many2one(
         comodel_name='product.ul', string='Logistic Unit')
     item_formula = fields.Char(compute='_item_formula')
@@ -51,6 +53,8 @@ class PricelistItem(models.Model):
          'Discount must be lower than 100%.'),
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
          'Second discount must be lower than 100%.'),
+        ('discount3_limit', 'CHECK (discount3 <= 100.0)',
+         _('Third discount must be lower than 100%.')),
     ]
 
     price_version_id = fields.Many2one()

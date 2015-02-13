@@ -25,15 +25,24 @@ class SaleConfigSettings(models.TransientModel):
     group_second_discount = fields.Boolean(
         string='Allow second discount',
         implied_group='product_pricelist_rules.group_second_discount')
+    group_third_discount = fields.Boolean(
+        string='Allow third discount',
+        implied_group='product_pricelist_rules.group_third_discount')
 
     @api.one
-    @api.onchange('group_second_discount')
-    def onchange_group_second_discount(self):
-        if self.group_second_discount:
+    @api.onchange('group_second_discount', 'group_third_discount')
+    def onchange_group_discount(self):
+        if self.group_third_discount:
+            self.group_discount_per_so_line = True
+            self.group_second_discount = True
+        elif self.group_second_discount:
             self.group_discount_per_so_line = True
 
     @api.multi
     def write(self, vals):
-        if vals.get('group_second_discount'):
+        if vals.get('group_third_discount'):
+            vals['group_second_discount'] = True
+            vals['group_discount_per_so_line'] = True
+        elif vals.get('group_second_discount'):
             vals['group_discount_per_so_line'] = True
         return super(SaleConfigSettings, self).write(vals)

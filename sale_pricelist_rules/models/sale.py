@@ -29,7 +29,8 @@ class SaleOrderLineSubtotal(models.Model):
     def _calculate_subtotal(self):
         price = (self.line_id.price_unit *
                  (1 - (self.item_id.discount or 0.0) / 100) *
-                 (1 - (self.item_id.discount2 or 0.0) / 100))
+                 (1 - (self.item_id.discount2 or 0.0) / 100) *
+                 (1 - (self.item_id.discount3 or 0.0) / 100))
         qty = self.line_id.product_uom_qty
         if self.item_id.offer_id:
             total = (self.item_id.offer_id.free_qty +
@@ -59,8 +60,11 @@ class SaleOrderLine(models.Model):
     @api.multi
     def _calc_price_subtotal(self):
         self.ensure_one()
-        price = self.price_unit * (1 - (self.discount or 0.0) / 100.0)
-        return price * (1 - (self.discount2 or 0.0) / 100.0)
+        price = (self.price_unit *
+                 (1 - (self.discount or 0.0) / 100.0) *
+                 (1 - (self.discount2 or 0.0) / 100.0) *
+                 (1 - (self.discount3 or 0.0) / 100.0))
+        return price
 
     @api.multi
     def _calc_qty(self):
@@ -105,6 +109,9 @@ class SaleOrderLine(models.Model):
     discount2 = fields.Float(
         string='Discount 2 (%)', digits=dp.get_precision('Discount'),
         readonly=True, states={'draft': [('readonly', False)]}, default=0.0)
+    discount3 = fields.Float(
+        string='Discount 3 (%)', digits=dp.get_precision('Discount'),
+        readonly=True, states={'draft': [('readonly', False)]}, default=0.0)
     offer_id = fields.Many2one(
         comodel_name='product.pricelist.item.offer', string='Offer')
     item_id = fields.Many2one(
@@ -125,6 +132,8 @@ class SaleOrderLine(models.Model):
     _sql_constraints = [
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
          _('Second discount must be lower than 100%.')),
+        ('discount3_limit', 'CHECK (discount3 <= 100.0)',
+         _('Third discount must be lower than 100%.')),
     ]
 
     def default_get(self, cr, uid, fields_list, context=None):
@@ -168,6 +177,7 @@ class SaleOrderLine(models.Model):
         if self.item_id:
             self.discount = self.item_id.discount
             self.discount2 = self.item_id.discount2
+            self.discount3 = self.item_id.discount3
             self.offer_id = self.item_id.offer.id
             if self.product_id:
                 self.price_unit = self.item_id.price_get(
