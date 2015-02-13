@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-11 10:07+0000\n"
-"PO-Revision-Date: 2015-02-11 11:12+0100\n"
+"POT-Creation-Date: 2015-02-13 09:47+0000\n"
+"PO-Revision-Date: 2015-02-13 10:49+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -84,12 +84,6 @@ msgstr "Lote producción padre"
 
 #. module: mrp_production_traceability
 #: view:stock.move:mrp_production_traceability.view_move_search_inh_mrpproductiontrace
-#: field:stock.move,picking_partner:0
-msgid "Picking Partner"
-msgstr "Albarán"
-
-#. module: mrp_production_traceability
-#: view:stock.move:mrp_production_traceability.view_move_search_inh_mrpproductiontrace
 msgid "Product"
 msgstr "Producto"
 
@@ -98,6 +92,11 @@ msgstr "Producto"
 #: field:mrp.track.lot,production:0
 msgid "Production"
 msgstr "Producción"
+
+#. module: mrp_production_traceability
+#: help:stock.move,final_product:0
+msgid "Production Final Product"
+msgstr "Producción producto final"
 
 #. module: mrp_production_traceability
 #: view:mrp.track.lot:mrp_production_traceability.view_track_production_lot_tree

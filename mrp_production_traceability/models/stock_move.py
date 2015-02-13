@@ -10,12 +10,9 @@ class StockMove(models.Model):
 
     prod_parent_lot = fields.Many2one('stock.production.lot',
                                       'Parent production lot')
-    picking_partner = fields.Many2one(
-        'res.partner', string='Picking Partner', store=True,
-        related='picking_id.partner_id')
     final_product = fields.Many2one(
         'product.product', string='Final Product', store=True,
-        related='production_id.product_id')
+        related='production_id.product_id', help='Production Final Product')
 
     @api.multi
     def action_done(self):
