@@ -37,12 +37,12 @@ msgstr ""
 
 #. module: sale_pricelist_rules
 #: field:sale.order.line,discount2:0
-msgid "Discount 2 (%)"
+msgid "Disc. 2 (%)"
 msgstr ""
 
 #. module: sale_pricelist_rules
 #: field:sale.order.line,discount3:0
-msgid "Discount 3 (%)"
+msgid "Disc. 3 (%)"
 msgstr ""
 
 #. module: sale_pricelist_rules
