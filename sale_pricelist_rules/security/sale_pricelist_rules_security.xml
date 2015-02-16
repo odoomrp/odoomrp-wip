@@ -5,4 +5,9 @@
             <field name="users" eval="[(4, ref('base.user_root'))]"/>
         </record>
     </data>
+    <data noupdate="0">
+        <record id="product_pricelist_rules.group_second_discount" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('sale.group_discount_per_so_line'))]"/>
+        </record>
+    </data>
 </openerp>

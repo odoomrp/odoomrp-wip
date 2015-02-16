@@ -37,10 +37,11 @@
     "complexity": "normal",
     "summary": "",
     "data": [
-        "views/sale_pricelist_view.xml",
-        "views/sale_view.xml",
         "security/ir.model.access.csv",
         "security/sale_pricelist_rules_security.xml",
+        "views/res_config_view.xml",
+        "views/sale_pricelist_view.xml",
+        "views/sale_view.xml",
     ],
     "installable": True,
     "auto_install": True,

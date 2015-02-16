@@ -33,6 +33,7 @@
     "complexity": "normal",
     "summary": "",
     "data": [
+        "security/product_pricelist_rules_security.xml",
         "views/pricelist_view.xml",
         "views/product_view.xml",
         "security/ir.model.access.csv",

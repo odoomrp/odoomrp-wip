@@ -17,6 +17,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
+from openerp.osv import fields as old_fields
 import openerp.addons.decimal_precision as dp
 from lxml import etree
 
@@ -28,7 +29,8 @@ class SaleOrderLineSubtotal(models.Model):
     def _calculate_subtotal(self):
         price = (self.line_id.price_unit *
                  (1 - (self.item_id.discount or 0.0) / 100) *
-                 (1 - (self.item_id.discount2 or 0.0) / 100))
+                 (1 - (self.item_id.discount2 or 0.0) / 100) *
+                 (1 - (self.item_id.discount3 or 0.0) / 100))
         qty = self.line_id.product_uom_qty
         if self.item_id.offer_id:
             total = (self.item_id.offer_id.free_qty +
@@ -55,26 +57,39 @@ class SaleOrderLineSubtotal(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    @api.multi
     def _calc_price_subtotal(self):
-        price = self.price_unit * (1 - (self.discount or 0.0) / 100.0)
-        return price * (1 - (self.discount2 or 0.0) / 100.0)
+        self.ensure_one()
+        price = (self.price_unit *
+                 (1 - (self.discount or 0.0) / 100.0) *
+                 (1 - (self.discount2 or 0.0) / 100.0) *
+                 (1 - (self.discount3 or 0.0) / 100.0))
+        return price
 
+    @api.multi
     def _calc_qty(self):
+        self.ensure_one()
         qty = self.product_uom_qty
         if self.offer_id:
             total = self.offer_id.free_qty + self.offer_id.paid_qty
             qty = round((qty / total) * self.offer_id.paid_qty)
         return qty
 
-    @api.one
-    def _amount_line(self):
-        new_price_subtotal = self._calc_price_subtotal()
-        qty = self._calc_qty()
-        taxes = self.tax_id.compute_all(
-            new_price_subtotal, qty, self.product_id,
-            self.order_id.partner_id)
-        cur = self.order_id.pricelist_id.currency_id
-        self.price_subtotal = cur.round(taxes['total'])
+    def _amount_line(self, cr, uid, ids, field_name, arg, context=None):
+        res = {}
+        tax_obj = self.pool.get('account.tax')
+        cur_obj = self.pool.get('res.currency')
+        for line in self.browse(cr, uid, ids, context=context):
+            new_price_subtotal = self._calc_price_subtotal(cr, uid, line.id,
+                                                           context=context)
+            qty = self._calc_qty(cr, uid, line.id, context=context)
+            taxes = tax_obj.compute_all(cr, uid, line.tax_id,
+                                        new_price_subtotal, qty,
+                                        line.product_id,
+                                        line.order_id.partner_id)
+            cur = line.order_id.pricelist_id.currency_id
+            res[line.id] = cur_obj.round(cr, uid, cur, taxes['total'])
+        return res
 
     def _get_possible_item_ids(self, pricelist_id, product_id=False, qty=0):
         item_obj = self.env['product.pricelist.item']
@@ -92,7 +107,10 @@ class SaleOrderLine(models.Model):
         self.possible_item_ids = [(6, 0, item_ids)]
 
     discount2 = fields.Float(
-        string='Discount 2 (%)', digits=dp.get_precision('Discount'),
+        string='Disc. 2 (%)', digits=dp.get_precision('Discount'),
+        readonly=True, states={'draft': [('readonly', False)]}, default=0.0)
+    discount3 = fields.Float(
+        string='Disc. 3 (%)', digits=dp.get_precision('Discount'),
         readonly=True, states={'draft': [('readonly', False)]}, default=0.0)
     offer_id = fields.Many2one(
         comodel_name='product.pricelist.item.offer', string='Offer')
@@ -104,13 +122,18 @@ class SaleOrderLine(models.Model):
     subtotal_ids = fields.One2many(
         comodel_name='sale.order.line.subtotal', inverse_name='line_id',
         string='Subtotals by pricelist')
-    price_subtotal = fields.Float(
-        string='Subtotal', digits=dp.get_precision('Account'),
-        compute='_amount_line')
+
+    _columns = {
+        'price_subtotal': old_fields.function(
+            _amount_line, type="float", string='Subtotal',
+            digits_compute=dp.get_precision('Account'))
+    }
 
     _sql_constraints = [
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
          _('Second discount must be lower than 100%.')),
+        ('discount3_limit', 'CHECK (discount3 <= 100.0)',
+         _('Third discount must be lower than 100%.')),
     ]
 
     def default_get(self, cr, uid, fields_list, context=None):
@@ -134,18 +157,29 @@ class SaleOrderLine(models.Model):
             name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
             date_order=date_order, packaging=packaging,
             fiscal_position=fiscal_position, flag=flag)
+        warning_msgs = res.get('warning') and res['warning']['message'] or ''
         item_obj = self.env['product.pricelist.item']
         if product:
             item_id = item_obj.get_best_pricelist_item(
                 pricelist, product_id=product, qty=qty)
-            res['value'].update({'item_id': item_id})
-            res['value']['price_unit'] = item_obj.browse(
-                item_id).price_get(product, qty, partner_id, uom)[0]
-            res['domain'].update({'item_id':
-                                  [('id', 'in',
-                                    self._get_possible_item_ids(
-                                        pricelist, product_id=product,
-                                        qty=qty))]})
+            if not item_id:
+                warn_msg = _('Cannot find a pricelist line matching this '
+                             'product and quantity.\nYou have to change either'
+                             ' the product, the quantity or the pricelist.')
+                warning_msgs += (_("No valid pricelist line found ! :") +
+                                 warn_msg + "\n\n")
+            else:
+                res['value']['price_unit'] = item_obj.browse(
+                    item_id).price_get(product, qty, partner_id, uom)[0]
+                res['value'].update({'item_id': item_id})
+                res['domain'].update({'item_id':
+                                      [('id', 'in',
+                                        self._get_possible_item_ids(
+                                            pricelist, product_id=product,
+                                            qty=qty))]})
+        if warning_msgs:
+            res['warning'] = {'title': _('Configuration Error!'),
+                              'message': warning_msgs}
         return res
 
     @api.one
@@ -154,6 +188,7 @@ class SaleOrderLine(models.Model):
         if self.item_id:
             self.discount = self.item_id.discount
             self.discount2 = self.item_id.discount2
+            self.discount3 = self.item_id.discount3
             self.offer_id = self.item_id.offer.id
             if self.product_id:
                 self.price_unit = self.item_id.price_get(
