@@ -18,24 +18,24 @@ msgstr ""
 #. module: sale_packaging_info
 #: field:sale.order.line,pri_pack_qty:0
 msgid "# Pkg 1"
-msgstr "Nº de env. 1"
+msgstr "Nº env.1"
 
 #. module: sale_packaging_info
 #: field:sale.order.line,pri_pack:0
 msgid "Pkg 1"
-msgstr "Env. 1"
+msgstr "Env.1"
 
 #. module: sale_packaging_info
 #: view:sale.order:sale_packaging_info.sale_order_packaging_form_view
 #: view:sale.order.line:sale_packaging_info.sale_order_line_packaging_tree_view
 #: field:sale.order.line,sec_pack_qty:0
 msgid "# Pkg 2"
-msgstr "Nº de env.2"
+msgstr "Nº env.2"
 
 #. module: sale_packaging_info
 #: field:sale.order.line,sec_pack:0
 msgid "Pkg 2"
-msgstr "Env. 2"
+msgstr "Env.2"
 
 #. module: sale_packaging_info
 #: field:sale.order,product_ul:0
