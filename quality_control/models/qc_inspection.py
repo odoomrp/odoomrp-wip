@@ -7,6 +7,7 @@ from openerp import models, fields, api, exceptions, _
 
 class QcInspection(models.Model):
     _name = 'qc.inspection'
+    _description = 'Quality control inspection'
     _inherit = ['mail.thread', 'ir.needaction_mixin']
 
     @api.one
@@ -150,6 +151,7 @@ class QcInspection(models.Model):
                 inspection.object_id, test)
             del header['state']  # don't change current status
             del header['auto_generated']  # don't change auto_generated flag
+            del header['user']  # don't change current user
             inspection.write(header)
             self.inspection_lines.unlink()
             inspection.inspection_lines = inspection._prepare_inspection_lines(
@@ -168,7 +170,7 @@ class QcInspection(models.Model):
         return inspection
 
     @api.multi
-    def _prepare_inspection_header(self, object_ref, test, user):
+    def _prepare_inspection_header(self, object_ref, test, user=False):
         """Overridable hook method for preparing inspection header.
         :param object_ref: Object instance
         :param test: Test instance

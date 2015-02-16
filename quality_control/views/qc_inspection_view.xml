@@ -45,7 +45,8 @@
                                     name="%(action_qc_inspection_set_test)d"
                                     icon="fa-bookmark-o"
                                     states="draft"
-                                    string="Set test"/>
+                                    string="Set test"
+                                    groups="quality_control.group_quality_control_manager"/>
                         </div>
                         <h1>
                             <label string="Inspection "/>
