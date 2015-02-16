@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="mrp_production_workcenter_form_view_inh_operationtrace" model="ir.ui.view">
+        <field name="name">mrp.production.workcenter.form.view.inh.operationtrace</field>
+        <field name="model">mrp.production.workcenter.line</field>
+        <field name="inherit_id" ref="mrp_operations.mrp_production_workcenter_form_view_inherit" />
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <div class="oe_right oe_button_box" name="track_lot_button">
+                    <button type="object"
+                        name="action_view_track_lot_from_workcenter_line"
+                        class="oe_stat_button">
+                        <field name="created_mrp_track_lot" widget="statinfo" string="Track Production Lots" />
+                    </button>
+                </div>
+                <newline/>
+            </field>
+        </field>
+    </record>
+    <record id="mrp_production_form_view_inh_operationtrace" model="ir.ui.view">
+        <field name="name">mrp.production.workcenter.form.view.inh.operationtrace</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='workcenter_lines']/form//field[@name='name']" position="after">
+                <div class="oe_right oe_button_box" name="track_lot_button">
+                    <button type="object"
+                        name="action_view_track_lot_from_workcenter_line"
+                        class="oe_stat_button">
+                        <field name="created_mrp_track_lot" widget="statinfo" string="Track Production Lots" />
+                    </button>
+                </div>
+                <newline/>
+            </xpath>
+        </field>
+    </record>
+</data>
+</openerp>
