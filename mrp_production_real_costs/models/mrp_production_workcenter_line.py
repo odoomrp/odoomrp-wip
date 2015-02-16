@@ -52,12 +52,12 @@ class MrpProductionWorkcenterLine(models.Model):
             name = ((production.name or '') + '-' +
                     (self.routing_wc_line.operation.code or '') + '-' +
                     (product.default_code or ''))
-            general_acc = (workcenter.costs_general_account_id.id or
-                           product.property_account_expense.id or
-                           product.categ_id.property_account_expense_categ.id
-                           or
-                           property_obj.get('property_account_expense_categ',
-                                            'product.category'))
+            general_acc = (
+                workcenter.costs_general_account_id.id or
+                product.property_account_expense.id or
+                product.categ_id.property_account_expense_categ.id or
+                property_obj.get('property_account_expense_categ',
+                                 'product.category'))
             price = workcenter.costs_hour
             analytic_vals = {'name': name,
                              'ref': name,

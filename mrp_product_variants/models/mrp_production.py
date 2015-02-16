@@ -205,8 +205,7 @@ class MrpProduction(models.Model):
                 _("You can not confirm without product or variant defined."))
         if not production.product_id:
             product_obj = self.env['product.product']
-            att_values_ids = [attr_line.value and attr_line.value.id
-                              or False
+            att_values_ids = [attr_line.value and attr_line.value.id or False
                               for attr_line in production.product_attributes]
             domain = [('product_tmpl_id', '=', production.product_template.id)]
             for value in att_values_ids:
@@ -228,8 +227,7 @@ class MrpProduction(models.Model):
     def _make_production_consume_line(self, line):
         if not line.product_id:
             product_obj = self.env['product.product']
-            att_values_ids = [attr_line.value and attr_line.value.id
-                              or False
+            att_values_ids = [attr_line.value and attr_line.value.id or False
                               for attr_line in line.product_attributes]
             domain = [('product_tmpl_id', '=', line.product_template.id)]
             for value in att_values_ids:
@@ -299,9 +297,8 @@ class MrpProductionProductLine(models.Model):
         if self.product_template:
             product_id = self.env['product.product']
             if not self.product_template.attribute_line_ids:
-                product_id = (
-                    self.product_template.product_variant_ids and
-                    self.product_template.product_variant_ids[0])
+                product_id = (self.product_template.product_variant_ids and
+                              self.product_template.product_variant_ids[0])
                 product_attributes = (
                     product_id._get_product_attributes_values_dict())
             else:

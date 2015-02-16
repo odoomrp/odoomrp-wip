@@ -63,9 +63,10 @@ class ProductProduct(models.Model):
             product_tmpl_ids |= product.product_tmpl_id
         res = self.env['ir.actions.act_window'].for_xml_id(
             'product_price_history', 'action_price_history')
-        res['domain'] = ((res.get('domain', []) or []) +
-                         [('product_template_id', 'in', product_tmpl_ids.ids)]
-                         + [('product', 'in', self.ids)])
+        res['domain'] = (
+            (res.get('domain', []) or []) +
+            [('product_template_id', 'in', product_tmpl_ids.ids)] +
+            [('product', 'in', self.ids)])
         return res
 
     @api.multi

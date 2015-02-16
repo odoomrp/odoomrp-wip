@@ -41,8 +41,8 @@ class MrpProduction(models.Model):
     def _set_workorder(self, bom, p_line, workcenter_lines, properties=None):
         phantom_op = self.env.context.get('phantom_op', False)
         for bom_line in bom.bom_line_ids:
-            if ((bom_line.product_template.id == p_line.product_template.id
-                    or bom_line.product_id.product_tmpl_id.id ==
+            if ((bom_line.product_template.id == p_line.product_template.id or
+                    bom_line.product_id.product_tmpl_id.id ==
                     p_line.product_template.id) and
                     (not bom_line.product_id or
                      bom_line.product_id.id == p_line.product_id.id)):

@@ -56,10 +56,11 @@ class MrpBom(models.Model):
         product_obj = self.env['product.product']
         template_obj = self.env['product.template']
         if 'code' in values and not values.get('code'):
-            product = (product_obj.browse(values.get('product_id'))
-                       or self.product_id)
+            product = (product_obj.browse(values.get('product_id')) or
+                       self.product_id)
             if not product:
-                product = (template_obj.browse(values.get('product_tmpl_id'))
-                           or self.product_tmpl_id)
+                product = (
+                    template_obj.browse(values.get('product_tmpl_id')) or
+                    self.product_tmpl_id)
             values['code'] = product.default_code or ''
         return super(MrpBom, self).write(values)

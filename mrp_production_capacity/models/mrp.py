@@ -47,8 +47,9 @@ class MrpProduction(models.Model):
             routing = routing_obj.browse(routing_id)
             for line in routing.workcenter_lines:
                 if line.limited_production_capacity:
-                    capacity_min = (line.workcenter_id.capacity_per_cycle_min
-                                    or sys.float_info.min)
+                    capacity_min = (
+                        line.workcenter_id.capacity_per_cycle_min or
+                        sys.float_info.min)
                     capacity_max = (line.workcenter_id.capacity_per_cycle or
                                     sys.float_info.max)
                     if capacity_min and capacity_max:
