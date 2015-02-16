@@ -144,9 +144,9 @@ class SaleOrderLine(models.Model):
         for line in self:
             if not line.product_id:
                 product_obj = self.env['product.product']
-                att_values_ids = [attr_line.value and attr_line.value.id
-                                  or False
-                                  for attr_line in line.product_attributes]
+                att_values_ids = [
+                    attr_line.value and attr_line.value.id or False
+                    for attr_line in line.product_attributes]
                 domain = [('product_tmpl_id', '=', line.product_template.id)]
                 for value in att_values_ids:
                     if not value:

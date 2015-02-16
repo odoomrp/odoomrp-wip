@@ -59,9 +59,10 @@ class StockMove(models.Model):
                              ('wk_order', '=', False)])
                         if task:
                             task_id = task[0].id
-                    name = ((production.name or '') + '-' +
-                            (record.work_order.routing_wc_line.operation.code
-                             or '') + '-' + (product.default_code or ''))
+                    name = (
+                        (production.name or '') + '-' +
+                        (record.work_order.routing_wc_line.operation.code or
+                         '') + '-' + (product.default_code or ''))
                     general_account = (
                         product.property_account_expense.id or
                         product.categ_id.property_account_expense_categ.id or

@@ -56,9 +56,10 @@ class ProcurementSaleForecast(models.Model):
             for product_line in record.forecast_lines:
                 if product_line.product_id and not product_line.procurement_id:
                     procure_id = procurement_obj.create({
-                        'name': ('MPS: ' + record.name +
-                                 ' (' + record.date_from + '.' + record.date_to
-                                 + ') ' + record.warehouse_id.name),
+                        'name': (
+                            'MPS: ' + record.name + ' (' + record.date_from +
+                            '.' + record.date_to + ') ' +
+                            record.warehouse_id.name),
                         'date_planned': product_line.date,
                         'product_id': product_line.product_id.id,
                         'product_qty': product_line.qty,

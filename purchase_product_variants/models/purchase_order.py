@@ -67,8 +67,7 @@ class PurchaseOrderLine(models.Model):
     def onchange_product_attributes(self):
         if not self.product_id:
             product_obj = self.env['product.product']
-            att_values_ids = [attr_line.value and attr_line.value.id
-                              or False
+            att_values_ids = [attr_line.value and attr_line.value.id or False
                               for attr_line in self.product_attributes]
             domain = [('product_tmpl_id', '=', self.product_template.id)]
             for value in att_values_ids:
@@ -114,9 +113,9 @@ class PurchaseOrderLine(models.Model):
         for line in self:
             if not line.product_id:
                 product_obj = self.env['product.product']
-                att_values_ids = [attr_line.value and attr_line.value.id
-                                  or False
-                                  for attr_line in line.product_attributes]
+                att_values_ids = [
+                    attr_line.value and attr_line.value.id or False
+                    for attr_line in line.product_attributes]
                 domain = [('product_tmpl_id', '=', line.product_template.id)]
                 for value in att_values_ids:
                     domain.append(('attribute_value_ids', '=', value))

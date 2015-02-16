@@ -210,12 +210,11 @@ class MrpBom(models.Model):
                         bom_line_id.product_id.product_tmpl_id.id),
                     'product_qty': quantity,
                     'product_uom': bom_line_id.product_uom.id,
-                    'product_uos_qty': (bom_line_id.product_uos and
-                                        _factor((bom_line_id.product_uos_qty *
-                                                 factor),
-                                                bom_line_id.product_efficiency,
-                                                bom_line_id.product_rounding)
-                                        or False),
+                    'product_uos_qty': (
+                        bom_line_id.product_uos and
+                        _factor((bom_line_id.product_uos_qty * factor),
+                                bom_line_id.product_efficiency,
+                                bom_line_id.product_rounding) or False),
                     'product_uos': (bom_line_id.product_uos and
                                     bom_line_id.product_uos.id or False),
                     'product_attributes': map(lambda x: (0, 0, x),

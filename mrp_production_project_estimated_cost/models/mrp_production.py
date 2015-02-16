@@ -234,8 +234,8 @@ class MrpProduction(models.Model):
                                           workorder, product, qty):
         analytic_line_obj = self.env['account.analytic.line']
         general_account = (product.property_account_income or
-                           product.categ_id.property_account_income_categ
-                           or False)
+                           product.categ_id.property_account_income_categ or
+                           False)
         if not product:
             raise exceptions.Warning(_('There is at least one line without'
                                        ' product.'))
