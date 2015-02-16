@@ -10,9 +10,8 @@ class MrpProduction(models.Model):
 
     @api.one
     def _count_created_track_lot(self):
-        lines = self.env['mrp.track.lot'].search([('production', '=',
-                                                   self.id)])
-        self.created_mrp_track_lot = len(lines)
+        return self.env['mrp.track.lot'].search_count([('production', '=',
+                                                        self.id)])
 
     created_mrp_track_lot = fields.Integer(
         compute="_count_created_track_lot", string="Track Production Lots")
