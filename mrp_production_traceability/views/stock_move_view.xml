@@ -3,8 +3,8 @@
 <data>
 
     <!-- stock.move.view -->
-    <record id="view_production_lot_form_inh" model="ir.ui.view">
-        <field name="name">stock.production.lot.form.inh</field>
+    <record id="view_production_lot_form_inh_productiontrace" model="ir.ui.view">
+        <field name="name">view.production.lot.form.inh.productiontrace</field>
         <field name="model">stock.production.lot</field>
         <field name="inherit_id" ref="stock.view_production_lot_form" />
         <field name="arch" type="xml">
@@ -14,8 +14,8 @@
            </button>
         </field>
     </record>
-    <record id="stock_move_tree_inh_mrpproductiontrace" model="ir.ui.view">
-        <field name="name">stock.move.tree.inh.mrpproductiontrace</field>
+    <record id="stock_move_tree_inh_productiontrace" model="ir.ui.view">
+        <field name="name">stock.move.tree.inh.productiontrace</field>
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.stock_move_tree" />
         <field name="arch" type="xml">
@@ -25,8 +25,8 @@
             </field>
         </field>
     </record>
-    <record id="view_move_tree_inh_mrpproductiontrace" model="ir.ui.view">
-        <field name="name">view_move_tree.inh.mrpproductiontrace</field>
+    <record id="view_move_tree_inh_productiontrace" model="ir.ui.view">
+        <field name="name">view_move_tree.inh.productiontrace</field>
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_tree" />
         <field name="arch" type="xml">
@@ -36,8 +36,8 @@
             </field>
         </field>
     </record>
-    <record id="view_move_picking_tree_inh_mrpproductiontrace" model="ir.ui.view">
-        <field name="name">view.move.picking.tree.inh.mrpproductiontrace</field>
+    <record id="view_move_picking_tree_inh_productiontrace" model="ir.ui.view">
+        <field name="name">view.move.picking.tree.inh.productiontrace</field>
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_picking_tree" />
         <field name="arch" type="xml">
@@ -47,8 +47,8 @@
             </field>
         </field>
     </record>
-    <record id="view_move_search_inh_mrpproductiontrace" model="ir.ui.view">
-        <field name="name">view.move.search.inh.mrpproductiontrace</field>
+    <record id="view_move_search_inh_productiontrace" model="ir.ui.view">
+        <field name="name">view.move.search.inh.productiontrace</field>
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_search" />
         <field name="arch" type="xml">

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-13 09:47+0000\n"
-"PO-Revision-Date: 2015-02-13 09:47+0000\n"
+"POT-Creation-Date: 2015-02-16 12:59+0000\n"
+"PO-Revision-Date: 2015-02-16 12:59+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgstr ""
 #. module: mrp_production_traceability
 #: view:mrp.track.lot:mrp_production_traceability.view_track_production_lot_tree_filter
 #: field:mrp.track.lot,product:0
-#: view:stock.move:mrp_production_traceability.view_move_search_inh_mrpproductiontrace
+#: view:stock.move:mrp_production_traceability.view_move_search_inh_productiontrace
 #: field:stock.move,final_product:0
 msgid "Final Product"
 msgstr ""
@@ -77,14 +77,24 @@ msgid "Lot/Serial"
 msgstr ""
 
 #. module: mrp_production_traceability
-#: view:stock.move:mrp_production_traceability.view_move_search_inh_mrpproductiontrace
+#: model:ir.model,name:mrp_production_traceability.model_mrp_production
+msgid "Manufacturing Order"
+msgstr ""
+
+#. module: mrp_production_traceability
+#: view:stock.move:mrp_production_traceability.view_move_search_inh_productiontrace
 #: field:stock.move,prod_parent_lot:0
 msgid "Parent production lot"
 msgstr ""
 
 #. module: mrp_production_traceability
-#: view:stock.move:mrp_production_traceability.view_move_search_inh_mrpproductiontrace
+#: view:stock.move:mrp_production_traceability.view_move_search_inh_productiontrace
 msgid "Product"
+msgstr ""
+
+#. module: mrp_production_traceability
+#: model:ir.model,name:mrp_production_traceability.model_mrp_product_produce
+msgid "Product Produce"
 msgstr ""
 
 #. module: mrp_production_traceability
@@ -115,8 +125,8 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: mrp_production_traceability
-#: code:addons/mrp_production_traceability/models/stock_production.py:29
-#: view:stock.production.lot:mrp_production_traceability.view_production_lot_form_inh
+#: code:addons/mrp_production_traceability/models/stock_production_lot.py:29
+#: view:stock.production.lot:mrp_production_traceability.view_production_lot_form_inh_productiontrace
 #, python-format
 msgid "Total Traceability"
 msgstr ""
@@ -124,6 +134,8 @@ msgstr ""
 #. module: mrp_production_traceability
 #: model:ir.actions.act_window,name:mrp_production_traceability.track_production_lots_act
 #: model:ir.ui.menu,name:mrp_production_traceability.track_production_lots
+#: view:mrp.production:mrp_production_traceability.mrp_production_form_view_inh_productiontrace
+#: view:mrp.track.lot:mrp_production_traceability.view_track_production_lot_form
 msgid "Track Production Lots"
 msgstr ""
 

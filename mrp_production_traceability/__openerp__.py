@@ -28,7 +28,7 @@
     'depends': ["mrp",
                 "stock",
                 ],
-    'data': ["views/mrp_stock_move_view.xml",
+    'data': ["views/mrp_production_view.xml",
              "views/track_lot_view.xml",
              "views/stock_move_view.xml",
              ],
