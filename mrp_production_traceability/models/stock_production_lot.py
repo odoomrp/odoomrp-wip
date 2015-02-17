@@ -26,7 +26,7 @@ class stock_production_lot(models.Model):
                 return {
                     'domain': "[('id','in',[" + ','.join(map(
                         str, list(moves))) + "])]",
-                    'name': _('Total Traceability'),
+                    'name': _('Full traceability'),
                     'view_mode': 'tree,form',
                     'view_type': 'form',
                     'context': {'tree_view_ref': 'stock.view_move_tree'},

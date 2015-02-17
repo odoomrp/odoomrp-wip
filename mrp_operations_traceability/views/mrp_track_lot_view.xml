@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="view_track_production_lot_tree_inh_operationtrace" model="ir.ui.view">
+        <field name="name">view.track.production.lot.tree.inh.operationtrace</field>
+        <field name="model">mrp.track.lot</field>
+        <field name="inherit_id" ref="mrp_production_traceability.view_track_production_lot_tree" />
+        <field name="arch" type="xml">
+            <field name="production" position="before">
+                <field name="workcenter_line" />
+            </field>
+        </field>
+    </record>
+    <record id="view_track_production_lot_form_inh_operationtrace" model="ir.ui.view">
+        <field name="name">view.track.production.lot.form.inh.operationtrace</field>
+        <field name="model">mrp.track.lot</field>
+        <field name="inherit_id" ref="mrp_production_traceability.view_track_production_lot_form" />
+        <field name="arch" type="xml">
+            <field name="production" position="before">
+                <field name="workcenter_line" />
+            </field>
+        </field>
+    </record>
+    <record id="view_track_production_lot_tree_filter_inh_operationtrace" model="ir.ui.view">
+        <field name="name">view.track.production.lot.tree.filter.inh.operationtrace</field>
+        <field name="model">mrp.track.lot</field>
+        <field name="inherit_id" ref="mrp_production_traceability.view_track_production_lot_tree_filter" />
+        <field name="arch" type="xml">
+            <field name="production" position="before">
+                <field name="workcenter_line" />
+            </field>
+            <filter string="Production" position="before">
+                <filter string="Work Order" domain="[]" context="{'group_by':'workcenter_line'}"/>
+            </filter>
+        </field>
+    </record>
+</data>
+</openerp>
