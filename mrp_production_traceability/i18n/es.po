@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-16 12:59+0000\n"
-"PO-Revision-Date: 2015-02-16 14:01+0100\n"
+"POT-Creation-Date: 2015-02-17 09:12+0000\n"
+"PO-Revision-Date: 2015-02-17 10:13+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -50,6 +50,13 @@ msgstr "Producto final"
 #: field:mrp.track.lot,product_lot:0
 msgid "Final Product Lot"
 msgstr "Lote producto final"
+
+#. module: mrp_production_traceability
+#: code:addons/mrp_production_traceability/models/stock_production_lot.py:29
+#: view:stock.production.lot:mrp_production_traceability.view_production_lot_form_inh_productiontrace
+#, python-format
+msgid "Full traceability"
+msgstr "Trazabilidad completa"
 
 #. module: mrp_production_traceability
 #: view:mrp.track.lot:mrp_production_traceability.view_track_production_lot_tree_filter
@@ -123,13 +130,6 @@ msgstr "Buscar lotes de producción"
 #: field:mrp.track.lot,st_move:0
 msgid "Stock Move"
 msgstr "Movimiento de existencias"
-
-#. module: mrp_production_traceability
-#: code:addons/mrp_production_traceability/models/stock_production_lot.py:29
-#: view:stock.production.lot:mrp_production_traceability.view_production_lot_form_inh_productiontrace
-#, python-format
-msgid "Total Traceability"
-msgstr "Trazabilidad total"
 
 #. module: mrp_production_traceability
 #: model:ir.actions.act_window,name:mrp_production_traceability.track_production_lots_act

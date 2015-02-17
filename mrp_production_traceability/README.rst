@@ -4,7 +4,7 @@ Traceability for production orders
 This module allows you to manage the complete traceability of products consumed
 in production.
 
-To view this complete traceability of a lot, this module shows the "Total
+To view this complete traceability of a lot, this module shows the "Full
 Traceability" button in the form of lots.
 
 The lot, and the final product production, are displayed in the movements of
