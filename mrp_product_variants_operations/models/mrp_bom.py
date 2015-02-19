@@ -42,6 +42,6 @@ class MrpBom(models.Model):
             bom, product, factor, properties=properties, level=level,
             routing_id=routing_id, previous_products=previous_products,
             master_bom=master_bom, production=production)
-        self._get_workorder_operations(result2, factor=factor, level=level,
-                                       routing_id=routing_id)
+        result2 = self._get_workorder_operations(
+            result2, factor=factor, level=level, routing_id=routing_id)
         return result, result2
