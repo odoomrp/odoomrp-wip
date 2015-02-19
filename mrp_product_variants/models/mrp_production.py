@@ -50,9 +50,9 @@ class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
     product_id = fields.Many2one(required=False)
-    product_template = fields.Many2one(comodel_name='product.template',
-                                       string='Product', readonly=True,
-                                       states={'draft': [('readonly', False)]})
+    product_template = fields.Many2one(
+        comodel_name='product.template', string='Product', readonly=True,
+        states={'draft': [('readonly', False)]})
     product_attributes = fields.One2many(
         comodel_name='mrp.production.attribute', inverse_name='mrp_production',
         string='Product attributes', copy=True, readonly=True,

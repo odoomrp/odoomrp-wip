@@ -36,8 +36,8 @@
     "summary": "Customized product in manufacturing",
     "data": [
         "security/ir.model.access.csv",
-        "views/mrp_view.xml",
-        "views/product_view.xml",
+        "views/mrp_production_view.xml",
+        "views/product_attribute_view.xml",
     ],
     "installable": True,
 }
