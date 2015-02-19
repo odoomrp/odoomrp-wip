@@ -26,18 +26,20 @@
                     <button name="load_product_std_price" string="Load Cost on Product" type="object" attrs="{'invisible':[('std_cost', '=', 0)]}"/>
                 </button>
                 <page string="Extra Information" position="inside">
-                    <group colspan="4" col="4">
-                        <group colspan="4" col="4" string="Manufacturing costs">
+                    <group string="Manufacturing costs">
+                        <group>
                             <field name="std_cost" />
                             <field name="unit_std_cost" />
                             <field name="avg_cost" />
                             <field name="unit_avg_cost" />
                         </group>
+                        <group>
+                            <field name="product_cost"/>
+                            <field name="product_manual_cost"/>
+                        </group>
                     </group>
                 </page>
                 <xpath expr="//field[@name='product_uom']/.." position="after">
-                    <field name="product_cost"/>
-                    <field name="product_manual_cost"/>
                 </xpath>
             </field>
         </record>
