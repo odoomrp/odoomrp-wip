@@ -189,7 +189,7 @@ class MrpProduction(models.Model):
                     amount = line.workcenter_id.post_op_product.standard_price
                     vals['amount'] = amount
                     analytic_line_obj.create(vals)
-                if line.cycle:
+                if line.cycle and line.workcenter_id.product_id:
                     name = (_('%s-%s-C-%s') %
                             (record.name, line.routing_wc_line.operation.code,
                              line.workcenter_id.name))
@@ -200,7 +200,7 @@ class MrpProduction(models.Model):
                     vals['estim_avg_cost'] = line.cycle * cost
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
-                if line.hour:
+                if line.hour and line.workcenter_id.product_id:
                     name = (_('%s-%s-H-%s') %
                             (record.name, line.routing_wc_line.operation.code,
                              line.workcenter_id.name))
@@ -216,7 +216,7 @@ class MrpProduction(models.Model):
                     vals['estim_avg_cost'] = hour * cost
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
-                if wc.op_number > 0:
+                if wc.op_number > 0 and line.workcenter_id.product_id:
                     journal_wk = record.env.ref(
                         'mrp_production_project_estimated_cost.analytic_'
                         'journal_operators', False)
