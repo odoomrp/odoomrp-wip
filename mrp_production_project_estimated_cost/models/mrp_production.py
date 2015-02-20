@@ -225,8 +225,9 @@ class MrpProduction(models.Model):
                              line.workcenter_id.product_id.name))
                     vals = record._prepare_estim_cost_analytic_line(
                         journal_wk, name, record, line,
-                        line.workcenter_id.product_id, wc.op_number)
-                    vals['estim_avg_cost'] = wc.op_number * wc.op_avg_cost
+                        line.workcenter_id.product_id, wc.hour)
+                    vals['estim_avg_cost'] = (wc.op_number * wc.op_avg_cost *
+                                              wc.hour)
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
 
