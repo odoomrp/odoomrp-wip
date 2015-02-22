@@ -24,5 +24,5 @@ class StockWarehouse(models.Model):
 
     @api.model
     def _get_manufacture_pull_rule(self, warehouse):
-        return super(StockWarehouse, self).with_context(
-            lang='en_US')._get_manufacture_pull_rule(warehouse)
+        return super(StockWarehouse, self.with_context(
+            lang='en_US'))._get_manufacture_pull_rule(warehouse)
