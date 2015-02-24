@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_quant_package_form_inh_pickingwavepackageinfo">
+            <field name="name">view.quant.package.form.inh.pickingwavepackageinfo</field>
+            <field name="model">stock.quant.package</field>
+            <field name="inherit_id" ref="stock_picking_package_info.view_quant_package_form_inh_pickingpackageinfo" />
+            <field name="arch" type="xml">
+                <page string="Pickings" position="after">
+                    <page string="Picking Waves">
+                        <field name="waves" />
+                    </page>
+                </page>
+            </field>
+        </record>
+    </data>
+</openerp>
