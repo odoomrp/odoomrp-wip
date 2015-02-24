@@ -195,7 +195,7 @@ class MrpProduction(models.Model):
                 if line.cycle:
                     if not line.workcenter_id.product_id:
                         raise exceptions.Warning(
-                            _("There is at least one workcenter without "
+                            _("There is at least this workcenter without "
                               "product: %s") % line.workcenter_id.name)
                     name = (_('%s-%s-C-%s') %
                             (record.name, line.routing_wc_line.operation.code,
@@ -210,7 +210,7 @@ class MrpProduction(models.Model):
                 if line.hour:
                     if not line.workcenter_id.product_id:
                         raise exceptions.Warning(
-                            _("There is at least one workcenter without "
+                            _("There is at least this workcenter without "
                               "product: %s") % line.workcenter_id.name)
                     name = (_('%s-%s-H-%s') %
                             (record.name, line.routing_wc_line.operation.code,
@@ -230,7 +230,7 @@ class MrpProduction(models.Model):
                 if wc.op_number > 0:
                     if not line.workcenter_id.product_id:
                         raise exceptions.Warning(
-                            _("There is at least one workcenter without "
+                            _("There is at least this workcenter without "
                               "product: %s") % line.workcenter_id.name)
                     journal_wk = record.env.ref(
                         'mrp_production_project_estimated_cost.analytic_'
