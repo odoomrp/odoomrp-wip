@@ -27,24 +27,8 @@ class StockPickingWave(models.Model):
         compute='_calculate_packages', store=True)
 
 
-class StockQuantPackage(models.Model):
-    _inherit = 'stock.quant.package'
-
-    waves = fields.Many2many(
-        comodel_name='stock.picking.wave',
-        relation='rel_wave_package', column1='package_id',
-        column2='wave_id', string='Picking Waves')
-
-
 class StockMove(models.Model):
     _inherit = 'stock.move'
-
-    wave = fields.Many2one('stock.picking.wave', related='picking_id.wave_id',
-                           string='Picking Wave', store=True)
-
-
-class StockPackOperation(models.Model):
-    _inherit = 'stock.pack.operation'
 
     wave = fields.Many2one('stock.picking.wave', related='picking_id.wave_id',
                            string='Picking Wave', store=True)

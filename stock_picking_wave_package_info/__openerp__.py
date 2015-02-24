@@ -26,7 +26,6 @@
     'website': "http://www.odoomrp.com",
     'category': 'Stock Management',
     'depends': ["stock_picking_wave",
-                "stock_picking_wave_fix",
                 "stock_picking_package_info",
                 ],
     'data': ["views/stock_picking_wave_view.xml",

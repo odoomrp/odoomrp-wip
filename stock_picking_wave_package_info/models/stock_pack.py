@@ -2,6 +2,11 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from . import stock
-from . import stock_pack
-from . import stock_quant
+from openerp import models, fields
+
+
+class StockPackOperation(models.Model):
+    _inherit = 'stock.pack.operation'
+
+    wave = fields.Many2one('stock.picking.wave', related='picking_id.wave_id',
+                           string='Picking Wave', store=True)
