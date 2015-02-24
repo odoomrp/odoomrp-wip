@@ -34,7 +34,7 @@ class PurchaseOrderLineSubtotal(models.Model):
             total = (self.item_id.offer_id.free_qty +
                      self.item_id.offer_id.paid_qty)
             qty = round((qty / total) * self.item_id.offer_id.paid_qty)
-        taxes = self.line_id.tax_id.compute_all(
+        taxes = self.line_id.taxes_id.compute_all(
             price, qty, self.line_id.product_id, self.order_id.partner_id)
         cur = self.order_id.pricelist_id.currency_id
         self.subtotal = cur.round(taxes['total'])
@@ -70,7 +70,7 @@ class PurchaseOrderLine(models.Model):
     def _amount_line(self):
         new_price_subtotal = self._calc_price_subtotal()
         qty = self._calc_qty()
-        taxes = self.tax_id.compute_all(
+        taxes = self.taxes_id.compute_all(
             new_price_subtotal, qty, self.product_id,
             self.order_id.partner_id)
         cur = self.order_id.pricelist_id.currency_id
@@ -191,9 +191,9 @@ class PurchaseOrder(models.Model):
         val = 0.0
         new_price_subtotal = line._calc_price_subtotal()
         qty = line._calc_qty()
-        for c in line.tax_id.compute_all(new_price_subtotal,
-                                         qty, line.product_id,
-                                         line.order_id.partner_id)['taxes']:
+        for c in line.taxes_id.compute_all(new_price_subtotal,
+                                           qty, line.product_id,
+                                           line.order_id.partner_id)['taxes']:
             val += c.get('amount', 0.0)
         return val
 
