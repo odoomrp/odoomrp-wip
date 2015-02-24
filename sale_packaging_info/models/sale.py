@@ -43,11 +43,13 @@ class SaleOrderLine(models.Model):
                                 (packaging.ul_qty * packaging.rows) or 1.0))
 
     pri_pack_qty = fields.Float(
-        string='# Pkg 1', compute='_calculate_packages', store=True)
+        string='# Pkg 1', compute='_calculate_packages', digits=(12, 2),
+        store=True)
     pri_pack = fields.Many2one(
         comodel_name='product.product', string='Pkg 1',
         compute='_calculate_packages', readonly=True)
     sec_pack_qty = fields.Float(
-        string='# Pkg 2', compute='_calculate_packages', store=True)
+        string='# Pkg 2', compute='_calculate_packages', digits=(12, 2),
+        store=True)
     sec_pack = fields.Many2one(
         comodel_name='product.ul', string='Pkg 2')
