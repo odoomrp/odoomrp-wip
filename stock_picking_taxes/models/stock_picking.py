@@ -97,8 +97,6 @@ class StockPicking(models.Model):
                 else:
                     tax_grouped[key]['base'] += val['base']
                     tax_grouped[key]['amount'] += val['amount']
-                    tax_grouped[key]['base_amount'] += val['base_amount']
-                    tax_grouped[key]['tax_amount'] += val['tax_amount']
         for t in tax_grouped.values():
             t['base'] = currency.round(t['base'])
             t['amount'] = currency.round(t['amount'])
