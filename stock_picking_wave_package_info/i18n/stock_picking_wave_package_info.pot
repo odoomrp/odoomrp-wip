@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-24 11:23+0000\n"
-"PO-Revision-Date: 2015-02-24 11:23+0000\n"
+"POT-Creation-Date: 2015-02-25 19:24+0000\n"
+"PO-Revision-Date: 2015-02-25 19:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,27 +17,6 @@ msgstr ""
 
 #. module: stock_picking_wave_package_info
 #: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "Cancel picking"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "Confirm picking"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "Force availability"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "Moves"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-#: field:stock.picking.wave,pickings_operations:0
 msgid "Operations"
 msgstr ""
 
@@ -48,19 +27,12 @@ msgid "Packages"
 msgstr ""
 
 #. module: stock_picking_wave_package_info
-#: model:ir.model,name:stock_picking_wave_package_info.model_stock_pack_operation
-msgid "Packing Operation"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
 #: model:ir.model,name:stock_picking_wave_package_info.model_stock_quant_package
 msgid "Physical Packages"
 msgstr ""
 
 #. module: stock_picking_wave_package_info
 #: model:ir.model,name:stock_picking_wave_package_info.model_stock_picking_wave
-#: field:stock.move,wave:0
-#: field:stock.pack.operation,wave:0
 msgid "Picking Wave"
 msgstr ""
 
@@ -71,30 +43,7 @@ msgid "Picking Waves"
 msgstr ""
 
 #. module: stock_picking_wave_package_info
-#: help:stock.move,wave:0
-#: help:stock.pack.operation,wave:0
-msgid "Picking wave associated to this picking"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
 #: view:stock.quant.package:stock_picking_wave_package_info.view_quant_package_form_inh_pickingwavepackageinfo
 msgid "Pickings"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-#: field:stock.picking.wave,pickings_products:0
-msgid "Products"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: model:ir.model,name:stock_picking_wave_package_info.model_stock_move
-msgid "Stock Move"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "Unit of Measure"
 msgstr ""
 

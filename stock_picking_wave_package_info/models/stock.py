@@ -16,19 +16,8 @@ class StockPickingWave(models.Model):
             operation.result_package_id.id for operation in
             self.pickings_operations if operation.result_package_id]
 
-    pickings_products = fields.One2many(
-        'stock.move', 'wave', string='Products')
-    pickings_operations = fields.One2many(
-        'stock.pack.operation', 'wave', string='Operations')
     packages = fields.Many2many(
         comodel_name='stock.quant.package',
         relation='rel_wave_package', column1='wave_id',
         column2='package_id', string='Packages',
         compute='_calculate_packages', store=True)
-
-
-class StockMove(models.Model):
-    _inherit = 'stock.move'
-
-    wave = fields.Many2one('stock.picking.wave', related='picking_id.wave_id',
-                           string='Picking Wave', store=True)
