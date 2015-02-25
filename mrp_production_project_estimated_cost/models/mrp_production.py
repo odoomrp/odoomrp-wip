@@ -159,6 +159,9 @@ class MrpProduction(models.Model):
             journal = record.env.ref('mrp_production_project_estimated_cost.'
                                      'analytic_journal_materials', False)
             for line in record.product_lines:
+                if not line.product_id:
+                    raise exceptions.Warning(
+                        _("One consume line has no product assigned."))
                 name = _('%s-%s' % (record.name, line.work_order.name or ''))
                 vals = record._prepare_estim_cost_analytic_line(
                     journal, name, record, line.work_order, line.product_id,
@@ -190,6 +193,10 @@ class MrpProduction(models.Model):
                     vals['amount'] = amount
                     analytic_line_obj.create(vals)
                 if line.cycle:
+                    if not line.workcenter_id.product_id:
+                        raise exceptions.Warning(
+                            _("There is at least this workcenter without "
+                              "product: %s") % line.workcenter_id.name)
                     name = (_('%s-%s-C-%s') %
                             (record.name, line.routing_wc_line.operation.code,
                              line.workcenter_id.name))
@@ -201,6 +208,10 @@ class MrpProduction(models.Model):
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
                 if line.hour:
+                    if not line.workcenter_id.product_id:
+                        raise exceptions.Warning(
+                            _("There is at least this workcenter without "
+                              "product: %s") % line.workcenter_id.name)
                     name = (_('%s-%s-H-%s') %
                             (record.name, line.routing_wc_line.operation.code,
                              line.workcenter_id.name))
@@ -217,6 +228,10 @@ class MrpProduction(models.Model):
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
                 if wc.op_number > 0:
+                    if not line.workcenter_id.product_id:
+                        raise exceptions.Warning(
+                            _("There is at least this workcenter without "
+                              "product: %s") % line.workcenter_id.name)
                     journal_wk = record.env.ref(
                         'mrp_production_project_estimated_cost.analytic_'
                         'journal_operators', False)
@@ -225,8 +240,9 @@ class MrpProduction(models.Model):
                              line.workcenter_id.product_id.name))
                     vals = record._prepare_estim_cost_analytic_line(
                         journal_wk, name, record, line,
-                        line.workcenter_id.product_id, wc.op_number)
-                    vals['estim_avg_cost'] = wc.op_number * wc.op_avg_cost
+                        line.workcenter_id.product_id, wc.hour)
+                    vals['estim_avg_cost'] = (wc.op_number * wc.op_avg_cost *
+                                              wc.hour)
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
 
@@ -236,9 +252,6 @@ class MrpProduction(models.Model):
         general_account = (product.property_account_income or
                            product.categ_id.property_account_income_categ or
                            False)
-        if not product:
-            raise exceptions.Warning(_('There is at least one line without'
-                                       ' product.'))
         if not general_account:
             raise exceptions.Warning(
                 _('You must define Income account in the product "%s", or in'
