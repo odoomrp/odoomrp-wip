@@ -19,7 +19,7 @@
                  <button name="action_view_bom" position="after">
                     <button class="oe_inline oe_stat_button" 
                         name="%(act_product_create_fictitious_of)d" 
-                        string="Create Fictitious OF" type="action"
+                        string="Create Fictitious MO" type="action"
                         attrs="{'invisible':[('type', '=', 'service')]}" icon="fa-flask" />
                  </button>
             </field>
@@ -32,7 +32,7 @@
                  <button name="action_view_mos" position="before">
                     <button class="oe_inline oe_stat_button" 
                         name="%(act_product_create_fictitious_of)d" 
-                        string="Create Fictitious OF" type="action"
+                        string="Create Fictitious MO" type="action"
                         attrs="{'invisible':[('type', '=', 'service')]}" icon="fa-flask" />
                  </button>
             </field>

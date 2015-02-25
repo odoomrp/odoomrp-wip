@@ -89,7 +89,7 @@ msgstr "Crear costes estimados"
 #. module: mrp_production_project_estimated_cost
 #: view:product.product:mrp_production_project_estimated_cost.product_product_form_view_bom_button_inh_estimatedcost
 #: view:product.template:mrp_production_project_estimated_cost.product_template_form_view_bom_button_inh_estimatedcost
-msgid "Create Fictitious OF"
+msgid "Create Fictitious MO"
 msgstr "Crea OF ficticia"
 
 #. module: mrp_production_project_estimated_cost
@@ -97,12 +97,12 @@ msgstr "Crea OF ficticia"
 #: model:ir.actions.act_window,name:mrp_production_project_estimated_cost.action_run_create_fictitious_of
 #: model:ir.actions.act_window,name:mrp_production_project_estimated_cost.action_run_template_create_fictitious_of
 #: view:wiz.create.fictitious.of:mrp_production_project_estimated_cost.wiz_create_fictitious_of_view
-msgid "Create fictitious OF"
+msgid "Create fictitious MO"
 msgstr "CrearOF ficticia"
 
 #. module: mrp_production_project_estimated_cost
 #: view:wiz.create.fictitious.of:mrp_production_project_estimated_cost.wiz_create_fictitious_of_view
-msgid "Create fictitius OF"
+msgid "Create fictitious MO"
 msgstr "Crear OF ficticia"
 
 #. module: mrp_production_project_estimated_cost
@@ -133,7 +133,7 @@ msgstr "Coste medio estimado"
 #. module: mrp_production_project_estimated_cost
 #: field:account.analytic.line,estim_std_cost:0
 msgid "Estimate Standard Cost"
-msgstr "Coste estandar estimado"
+msgstr "Coste estándar estimado"
 
 #. module: mrp_production_project_estimated_cost
 #: field:mrp.production,avg_cost:0
@@ -153,12 +153,12 @@ msgstr "Costes estimados"
 #. module: mrp_production_project_estimated_cost
 #: field:mrp.production,std_cost:0
 msgid "Estimated Standard Cost"
-msgstr "Coste estandar estimado"
+msgstr "Coste estándar estimado"
 
 #. module: mrp_production_project_estimated_cost
 #: field:mrp.production,unit_std_cost:0
 msgid "Estimated Standard Unit Cost"
-msgstr "Coste estandar estimado por unidad"
+msgstr "Coste estándar estimado por unidad"
 
 #. module: mrp_production_project_estimated_cost
 #: model:ir.actions.act_window,name:mrp_production_project_estimated_cost.action_estimated_costs_per_production
@@ -209,7 +209,7 @@ msgstr "Cargar coste en el producto"
 #. module: mrp_production_project_estimated_cost
 #: field:product.template,manual_standard_cost:0
 msgid "Manual Standard Cost"
-msgstr "Coste estandar manual"
+msgstr "Coste estándar manual"
 
 #. module: mrp_production_project_estimated_cost
 #: model:ir.model,name:mrp_production_project_estimated_cost.model_mrp_production
@@ -260,7 +260,7 @@ msgstr "Esta máquina no tiene un producto asignado: %s"
 #: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:257
 #, python-format
 msgid "You must define Income account in the product \"%s\", or in the product category"
-msgstr "Debe de definir la cuenta de entrada en el producto \"%s\", o en la categoría del producto"
+msgstr "Debe definir la cuenta de entrada en el producto \"%s\", o en la categoría del producto"
 
 #. module: mrp_production_project_estimated_cost
 #: code:addons/mrp_production_project_estimated_cost/models/mrp_production.py:261

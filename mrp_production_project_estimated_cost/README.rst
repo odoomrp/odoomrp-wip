@@ -16,9 +16,9 @@ and the other per cycle cost.
 
 It has also created the new menu option "Fictitious Manufacturing Orders to
 estimate costs". When a new MO is created and the new field "active" is equal
-to false, the OF will be considered as a fictional MO, what with can not be
+to false, the MO will be considered as a fictional MO, what with can not be
 confirmed, and only is valid to estimate costs. To estimate costs will have to
 press the "Compute data" button in tab "Work Orders". These fictitious MO will
 have a different sequence.
-From the product form may create a fictitious OF.
+From the product form may create a fictitious MO.
 

@@ -89,7 +89,7 @@ msgstr ""
 #. module: mrp_production_project_estimated_cost
 #: view:product.product:mrp_production_project_estimated_cost.product_product_form_view_bom_button_inh_estimatedcost
 #: view:product.template:mrp_production_project_estimated_cost.product_template_form_view_bom_button_inh_estimatedcost
-msgid "Create Fictitious OF"
+msgid "Create Fictitious MO"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
@@ -97,12 +97,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:mrp_production_project_estimated_cost.action_run_create_fictitious_of
 #: model:ir.actions.act_window,name:mrp_production_project_estimated_cost.action_run_template_create_fictitious_of
 #: view:wiz.create.fictitious.of:mrp_production_project_estimated_cost.wiz_create_fictitious_of_view
-msgid "Create fictitious OF"
+msgid "Create fictitious MO"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
 #: view:wiz.create.fictitious.of:mrp_production_project_estimated_cost.wiz_create_fictitious_of_view
-msgid "Create fictitius OF"
+msgid "Create fictitious MO"
 msgstr ""
 
 #. module: mrp_production_project_estimated_cost
