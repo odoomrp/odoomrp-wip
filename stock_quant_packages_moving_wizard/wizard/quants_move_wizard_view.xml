@@ -27,10 +27,6 @@
             </field>
         </record>
 
-<!--         <act_window name="Move Stock Quants To" groups="stock.group_tracking_lot" -->
-<!--             res_model="stock.quants.move" src_model="stock.quant" -->
-<!--             view_mode="form" target="new" id="action_move_quants_to" /> -->
-
         <record id="action_move_quants_to" model="ir.actions.act_window">
             <field name="name">Move Stock Quants To</field>
             <field name="res_model">stock.quants.move</field>
@@ -41,7 +37,7 @@
         </record>
 
         <menuitem action="action_move_quants_to" id="menu_quant_move_wizard"
-            parent="stock.menu_traceability" groups="stock.group_production_lot"
+            parent="stock.menu_traceability" groups="stock.group_tracking_lot"
             sequence="100"/>
     </data>
 </openerp>

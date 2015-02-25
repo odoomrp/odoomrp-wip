@@ -38,7 +38,7 @@ class StockQuantsMoveWizard(models.Model):
     @api.one
     def do_transfer(self):
         for item in self.pack_move_items:
-            item.quant.location_id = self.dest_loc
+            item.quant.move_to(self.dest_loc)
         return True
 
 

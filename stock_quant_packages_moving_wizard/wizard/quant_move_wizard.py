@@ -35,7 +35,7 @@ class StockQuantMove(models.TransientModel):
     @api.one
     def do_transfer(self):
         for item in self.pack_move_items:
-            item.quant.location_id = item.dest_loc
+            item.quant.move_to(item.dest_loc)
         return True
 
 

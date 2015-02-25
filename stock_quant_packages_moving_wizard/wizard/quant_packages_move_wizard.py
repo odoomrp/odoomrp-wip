@@ -37,10 +37,10 @@ class StockQuantPackageMove(models.TransientModel):
         for item in self.pack_move_items:
             if item.dest_loc is not item.source_loc:
                 for quant in item.package.quant_ids:
-                    quant.location_id = item.dest_loc
+                    quant.move_to(item.dest_loc)
                 for package in item.package.children_ids:
                     for quant in package.quant_ids:
-                        quant.location_id = item.dest_loc
+                        quant.move_to(item.dest_loc)
         return True
 
 
