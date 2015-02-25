@@ -101,11 +101,6 @@ msgid "Create fictitious MO"
 msgstr "CrearOF ficticia"
 
 #. module: mrp_production_project_estimated_cost
-#: view:wiz.create.fictitious.of:mrp_production_project_estimated_cost.wiz_create_fictitious_of_view
-msgid "Create fictitious MO"
-msgstr "Crear OF ficticia"
-
-#. module: mrp_production_project_estimated_cost
 #: field:wiz.create.fictitious.of,create_uid:0
 msgid "Created by"
 msgstr "Creado por"
@@ -127,15 +122,6 @@ msgstr "Costes estim."
 
 #. module: mrp_production_project_estimated_cost
 #: field:account.analytic.line,estim_avg_cost:0
-msgid "Estimate Average Cost"
-msgstr "Coste medio estimado"
-
-#. module: mrp_production_project_estimated_cost
-#: field:account.analytic.line,estim_std_cost:0
-msgid "Estimate Standard Cost"
-msgstr "Coste estándar estimado"
-
-#. module: mrp_production_project_estimated_cost
 #: field:mrp.production,avg_cost:0
 msgid "Estimated Average Cost"
 msgstr "Coste medio estimado"
@@ -151,6 +137,7 @@ msgid "Estimated Costs"
 msgstr "Costes estimados"
 
 #. module: mrp_production_project_estimated_cost
+#: field:account.analytic.line,estim_std_cost:0
 #: field:mrp.production,std_cost:0
 msgid "Estimated Standard Cost"
 msgstr "Coste estándar estimado"
