@@ -9,7 +9,8 @@
             <field name="arch" type="xml">
                 <field name="standard_price" position="after">
                     <button name="open_product_historic_prices"
-                        string="Price history" type="object" class="oe_link" />
+                        string="Price history" type="object" class="oe_link"
+                        colspan="2"/>
                 </field>
             </field>
         </record>
