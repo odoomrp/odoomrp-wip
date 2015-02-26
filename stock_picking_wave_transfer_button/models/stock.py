@@ -40,7 +40,7 @@ class StockPickingWave(models.Model):
         wave = self.browse(cr, uid, ids[0], context=context)
         picking_ids = [picking.id for picking in
                        wave.picking_ids if picking.state == 'assigned']
-        return  picking_obj.do_enter_transfer_details(
+        return picking_obj.do_enter_transfer_details(
             cr, uid, picking_ids, context=context)
 
 
