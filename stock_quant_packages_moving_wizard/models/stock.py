@@ -17,4 +17,5 @@ class StockQuant(models.Model):
         new_move.location_dest_id = dest_location
         new_move.date_expected = fields.Datetime.now()
         new_move.date = new_move.date_expected
+        new_move.product_uom_qty = self.qty
         new_move.action_done()
