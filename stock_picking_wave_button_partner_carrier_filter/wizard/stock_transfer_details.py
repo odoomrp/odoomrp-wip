@@ -14,7 +14,6 @@ class StockTransferDetails(models.TransientModel):
             new_pickings)
         if 'origin_wave' in self._context:
             origin_wave = wave_obj.browse(self._context['origin_wave'])
-            self._context['active_ids']
             new_wave.update({'partner': origin_wave.partner,
                              'carrier': origin_wave.carrier})
         return new_wave
