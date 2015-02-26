@@ -120,7 +120,7 @@ class StockTransferDetails(models.TransientModel):
         new_wave = wave_obj.create(vals)
         pickings = picking_obj.browse(new_pickings)
         pickings.write({'wave_id': new_wave.id})
-        return True
+        return new_wave
 
 
 class StockTransferDetailsItems(models.TransientModel):
