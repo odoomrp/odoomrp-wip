@@ -54,7 +54,6 @@ class StockTransferDetails(models.TransientModel):
     @api.one
     def do_detailed_transfer(self):
         operation_obj = self.env['stock.pack.operation']
-        picking_obj = self.env['stock.picking']
         new_pickings = []
         if len(self.picking_ids) == 1:
             result = super(StockTransferDetails, self).do_detailed_transfer()
