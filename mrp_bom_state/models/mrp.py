@@ -21,18 +21,23 @@ class MrpBom(models.Model):
         return maxseq
 
     active = fields.Boolean(
-        string='Active', default=False,
-        states={'historical': [('readonly', True)]})
+        string='Active', default=False, readonly=True,
+        states={'draft': [('readonly', False)]})
     historical_date = fields.Date(string='Historical Date', readonly=True)
     state = fields.Selection([('draft', 'Draft'),
                               ('active', 'Active'),
                               ('historical', 'Historical'),
                               ], string='Status', index=True, readonly=True,
                              default='draft', copy=False)
+    product_tmpl_id = fields.Many2one(readonly=True,
+        states={'draft': [('readonly', False)]})
+    product_id = fields.Many2one(readonly=True,
+        states={'draft': [('readonly', False)]})
+    product_qty = fields.Float(readonly=True,
+        states={'draft': [('readonly', False)]})
     sequence = fields.Integer(
         default=_get_max_sequence, copy=False,
         states={'historical': [('readonly', True)]})
-
     name = fields.Char(
         states={'historical': [('readonly', True)]})
     code = fields.Char(
@@ -40,12 +45,6 @@ class MrpBom(models.Model):
     type = fields.Selection(
         states={'historical': [('readonly', True)]})
     company_id = fields.Many2one(
-        states={'historical': [('readonly', True)]})
-    product_tmpl_id = fields.Many2one(
-        states={'historical': [('readonly', True)]})
-    product_id = fields.Many2one(
-        states={'historical': [('readonly', True)]})
-    product_qty = fields.Float(
         states={'historical': [('readonly', True)]})
     product_uom = fields.Many2one(
         states={'historical': [('readonly', True)]})
