@@ -29,12 +29,12 @@ class MrpBom(models.Model):
                               ('historical', 'Historical'),
                               ], string='Status', index=True, readonly=True,
                              default='draft', copy=False)
-    product_tmpl_id = fields.Many2one(readonly=True,
-        states={'draft': [('readonly', False)]})
-    product_id = fields.Many2one(readonly=True,
-        states={'draft': [('readonly', False)]})
-    product_qty = fields.Float(readonly=True,
-        states={'draft': [('readonly', False)]})
+    product_tmpl_id = fields.Many2one(
+        readonly=True, states={'draft': [('readonly', False)]})
+    product_id = fields.Many2one(
+        readonly=True, states={'draft': [('readonly', False)]})
+    product_qty = fields.Float(
+        readonly=True, states={'draft': [('readonly', False)]})
     sequence = fields.Integer(
         default=_get_max_sequence, copy=False,
         states={'historical': [('readonly', True)]})
