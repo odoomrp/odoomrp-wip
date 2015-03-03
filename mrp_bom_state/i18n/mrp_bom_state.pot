@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-23 09:49+0000\n"
-"PO-Revision-Date: 2015-01-23 09:49+0000\n"
+"POT-Creation-Date: 2015-03-03 08:14+0000\n"
+"PO-Revision-Date: 2015-03-03 08:14+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #. module: mrp_bom_state
 #: field:mrp.config.settings,group_mrp_bom_state:0
-msgid "Allow re-edit the BoM list"
+msgid "Allow to re-edit BoMs"
 msgstr ""
 
 #. module: mrp_bom_state
@@ -53,14 +53,14 @@ msgid "Confirm MRP BoM historification"
 msgstr ""
 
 #. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:63
+#: code:addons/mrp_bom_state/models/mrp.py:103
 #: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
 #, python-format
 msgid "Confirm activation"
 msgstr ""
 
 #. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:78
+#: code:addons/mrp_bom_state/models/mrp.py:118
 #: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
 #, python-format
 msgid "Confirm historification"
@@ -125,11 +125,6 @@ msgid "MRP BoM state"
 msgstr ""
 
 #. module: mrp_bom_state
-#: view:mrp.bom:mrp_bom_state.mrp_bom_tree_view
-msgid "MRP BoMs"
-msgstr ""
-
-#. module: mrp_bom_state
 #: model:ir.model,name:mrp_bom_state.model_mrp_production
 msgid "Manufacturing Order"
 msgstr ""
@@ -155,7 +150,7 @@ msgid "The active state may be passed back to state draft"
 msgstr ""
 
 #. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:40
+#: code:addons/mrp_bom_state/models/mrp.py:80
 #, python-format
 msgid "The sequence must be unique"
 msgstr ""
@@ -174,15 +169,5 @@ msgstr ""
 #: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
 #: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
 msgid "or"
-msgstr ""
-
-#. module: mrp_bom_state
-#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
-msgid "{'readonly':[('state', '!=', 'draft')]}"
-msgstr ""
-
-#. module: mrp_bom_state
-#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
-msgid "{'readonly':[('state', '=', 'historical')]}"
 msgstr ""
 
