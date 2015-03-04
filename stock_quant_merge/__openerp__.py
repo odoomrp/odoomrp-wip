@@ -17,22 +17,20 @@
 ##############################################################################
 
 {
-    "name": "Stock - Check Availability button on stock moves",
+    "name": "Stock - Quant merge",
     "version": "1.0",
     "depends": [
         "stock",
-        "stock_quant_merge",
     ],
     "author": "OdooMRP team",
     "website": "http://www.odoomrp.com",
     "contributors": [
-        "Daniel Campos <danielcampos@avanzosc.es>",
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-        "Ana Juaristi <ajuaristio@gmail.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>"
     ],
     "category": "Warehouse Management",
-    "data": [
-        "views/stock_move_view.xml"
-    ],
+    "summary": "",
+    "data": [],
     "installable": True,
 }
