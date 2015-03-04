@@ -192,7 +192,7 @@ class MrpProduction(models.Model):
                     amount = line.workcenter_id.post_op_product.standard_price
                     vals['amount'] = amount
                     analytic_line_obj.create(vals)
-                if line.cycle:
+                if line.cycle and line.workcenter_id.costs_cycle:
                     if not line.workcenter_id.product_id:
                         raise exceptions.Warning(
                             _("There is at least this workcenter without "
@@ -207,7 +207,7 @@ class MrpProduction(models.Model):
                     vals['estim_avg_cost'] = line.cycle * cost
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
-                if line.hour:
+                if line.hour and line.workcenter_id.costs_hour:
                     if not line.workcenter_id.product_id:
                         raise exceptions.Warning(
                             _("There is at least this workcenter without "
@@ -227,7 +227,7 @@ class MrpProduction(models.Model):
                     vals['estim_avg_cost'] = hour * cost
                     vals['estim_std_cost'] = vals['estim_avg_cost']
                     analytic_line_obj.create(vals)
-                if wc.op_number > 0:
+                if wc.op_number > 0 and line.hour:
                     if not line.workcenter_id.product_id:
                         raise exceptions.Warning(
                             _("There is at least this workcenter without "
@@ -240,8 +240,8 @@ class MrpProduction(models.Model):
                              line.workcenter_id.product_id.name))
                     vals = record._prepare_estim_cost_analytic_line(
                         journal_wk, name, record, line,
-                        line.workcenter_id.product_id, (line.hour *
-                                                        wc.op_number))
+                        line.workcenter_id.product_id,
+                        line.hour * wc.op_number)
                     vals['estim_avg_cost'] = (wc.op_number * wc.op_avg_cost *
                                               line.hour)
                     vals['estim_std_cost'] = vals['estim_avg_cost']
