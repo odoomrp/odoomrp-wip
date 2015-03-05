@@ -116,8 +116,9 @@ class MrpProduction(models.Model):
                     continue
             for link_product in linked_raw_products:
                 if link_product['product_id'] in prod_line_ids:
-                    new_op.write({'product_lines': [(1, line.id,
-                                                     link_product)]})
+                    new_op.write(
+                        {'product_lines': [(1, link_product['product_id'],
+                                            link_product)]})
                 else:
                     add_product.append(link_product)
             new_op.write({'product_lines': map(lambda x: (0, 0, x),
