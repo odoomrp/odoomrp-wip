@@ -20,7 +20,7 @@
 #
 ##############################################################################
 {
-    'name': 'Stock picking wave transfer button',
+    'name': 'Stock Picking Wave Management',
     'version': "1.0",
     'author': 'OdooMRP team',
     'website': "http://www.odoomrp.com",

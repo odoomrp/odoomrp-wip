@@ -25,7 +25,7 @@
     'author': 'OdooMRP team',
     'website': "http://www.odoomrp.com",
     'category': 'Stock Management',
-    'depends': ["stock_picking_wave_transfer_button",
+    'depends': ["stock_picking_wave_management",
                 "stock_picking_wave_partner_carrier_filter",
                 ],
     'data': [],

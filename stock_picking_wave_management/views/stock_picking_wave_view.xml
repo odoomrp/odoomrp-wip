@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="view_picking_wave_form_inh_transferbutton">
-            <field name="name">view.picking.wave.form.inh.transferbutton</field>
+        <record model="ir.ui.view" id="view_picking_wave_form_inh_management">
+            <field name="name">view.picking.wave.form.inh.management</field>
             <field name="model">stock.picking.wave</field>
             <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_form" />
             <field name="arch" type="xml">
