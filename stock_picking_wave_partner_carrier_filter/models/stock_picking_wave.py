@@ -17,7 +17,12 @@ class StockPickingWave(models.Model):
         self.ensure_one()
         cond = [('state', 'not in', ('done', 'cancel'))]
         if self.partner:
-            cond.extend([('partner_id', '=', self.partner.id)])
+            if self.partner.parent_id:
+                cond.extend(['|', ('partner_id', '=', self.partner.id),
+                             ('partner_id', '=', self.partner.parent_id.id)])
+            else:
+                cond.extend([('partner_id', '=', self.partner.id)])
         if self.carrier:
             cond.extend([('carrier_id', '=', self.carrier.id)])
+        print '*** cond: ' + str(cond)
         return {'domain': {'picking_ids': cond}}
