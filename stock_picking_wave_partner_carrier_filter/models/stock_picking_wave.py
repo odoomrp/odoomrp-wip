@@ -17,9 +17,10 @@ class StockPickingWave(models.Model):
         self.ensure_one()
         cond = [('state', 'not in', ('done', 'cancel'))]
         if self.partner:
-            if self.partner.parent_id:
+            if self.partner.child_ids:
+                ids = map(lambda x: x['id'], self.partner.child_ids)
                 cond.extend(['|', ('partner_id', '=', self.partner.id),
-                             ('partner_id', '=', self.partner.parent_id.id)])
+                             ('partner_id', 'child_of', ids)])
             else:
                 cond.extend([('partner_id', '=', self.partner.id)])
         if self.carrier:
