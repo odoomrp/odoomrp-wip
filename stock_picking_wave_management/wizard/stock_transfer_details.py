@@ -116,7 +116,8 @@ class StockTransferDetails(models.TransientModel):
                 'state': 'draft'
                 }
         new_wave = wave_obj.create(vals)
-        new_pickings.write({'wave_id': new_wave.id})
+        for new_picking in new_pickings:
+            new_picking.write({'wave_id': new_wave.id})
         if 'origin_wave' in self._context:
             origin_wave = wave_obj.browse(self._context['origin_wave'])
             new_wave.update({'partner': origin_wave.partner})

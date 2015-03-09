@@ -12,7 +12,7 @@
                 <button name="print_picking" position="after">
                     <field name="num_confirmed" invisible="1"/>
                     <field name="num_assigned" invisible="1"/>
-                    <button type="object"  name="button_check_disponibility"
+                    <button type="object"  name="button_check_availability"
                         string="Check Disponibility"
                         attrs="{'invisible': [('num_confirmed', '=', 0)]}" />
                     <button type="object"  name="action_transfer"
