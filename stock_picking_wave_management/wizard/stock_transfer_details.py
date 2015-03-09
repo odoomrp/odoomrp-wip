@@ -66,28 +66,30 @@ class StockTransferDetails(models.TransientModel):
         for picking in self.picking_ids:
             processed_ids = []
             # Create new and update existing pack operations
-            for lstits in [self.item_ids, self.packop_ids]:
+            for lstits in [self.item_ids.filtered(lambda x: x.picking_id ==
+                                                  picking.id),
+                           self.packop_ids.filtered(lambda x: x.picking_id ==
+                                                    picking.id)]:
                 for prod in lstits:
-                    if prod.picking_id.id == picking.id:
-                        pack_datas = {
-                            'product_id': prod.product_id.id,
-                            'product_uom_id': prod.product_uom_id.id,
-                            'product_qty': prod.quantity,
-                            'package_id': prod.package_id.id,
-                            'lot_id': prod.lot_id.id,
-                            'location_id': prod.sourceloc_id.id,
-                            'location_dest_id': prod.destinationloc_id.id,
-                            'result_package_id': prod.result_package_id.id,
-                            'date': prod.date if prod.date else datetime.now(),
-                            'owner_id': prod.owner_id.id,
-                        }
-                        if prod.packop_id:
-                            prod.packop_id.write(pack_datas)
-                            processed_ids.append(prod.packop_id.id)
-                        else:
-                            pack_datas['picking_id'] = picking.id
-                            packop_id = operation_obj.create(pack_datas)
-                            processed_ids.append(packop_id.id)
+                    pack_datas = {
+                        'product_id': prod.product_id.id,
+                        'product_uom_id': prod.product_uom_id.id,
+                        'product_qty': prod.quantity,
+                        'package_id': prod.package_id.id,
+                        'lot_id': prod.lot_id.id,
+                        'location_id': prod.sourceloc_id.id,
+                        'location_dest_id': prod.destinationloc_id.id,
+                        'result_package_id': prod.result_package_id.id,
+                        'date': prod.date if prod.date else datetime.now(),
+                        'owner_id': prod.owner_id.id,
+                    }
+                    if prod.packop_id:
+                        prod.packop_id.write(pack_datas)
+                        processed_ids.append(prod.packop_id.id)
+                    else:
+                        pack_datas['picking_id'] = picking.id
+                        packop_id = operation_obj.create(pack_datas)
+                        processed_ids.append(packop_id.id)
             # Delete the others
             cond = ['&', ('picking_id', '=', picking.id), '!',
                     ('id', 'in', processed_ids)]
@@ -104,22 +106,20 @@ class StockTransferDetails(models.TransientModel):
     def _find_new_pickings(self, new_pickings, picking):
         picking_obj = self.env['stock.picking']
         cond = [('backorder_id', '=', picking.id)]
-        pickings = picking_obj.search(cond)
-        if not isinstance(pickings, list):
-            pickings = [pickings]
-        new_pickings.extend([x.id for x in pickings])
+        new_pickings.extend(picking_obj.search(cond))
         return new_pickings
 
     def _create_new_wave(self, new_pickings):
         wave_obj = self.env['stock.picking.wave']
-        picking_obj = self.env['stock.picking']
         vals = {'name': '/',
                 'user_id': self._uid,
                 'state': 'draft'
                 }
         new_wave = wave_obj.create(vals)
-        pickings = picking_obj.browse(new_pickings)
-        pickings.write({'wave_id': new_wave.id})
+        new_pickings.write({'wave_id': new_wave.id})
+        if 'origin_wave' in self._context:
+            origin_wave = wave_obj.browse(self._context['origin_wave'])
+            new_wave.update({'partner': origin_wave.partner})
         return new_wave
 
 

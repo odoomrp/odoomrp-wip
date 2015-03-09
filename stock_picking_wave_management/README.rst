@@ -2,7 +2,7 @@ Stock picking wave management
 =============================
 
 This module displays in the picking waves form, moves, and operations, from all
-pickings included.
+pickings included, also allows to filter pickings for partners.
 
 Allows management of pickings from the wave itself.
 
@@ -17,5 +17,4 @@ Contributors
 ------------
 * Pedro M. Baeza <pedro.baeza@serviciosbaeza.com
 * Ana Juaristi <ajuaristo@gmail.com>
-* Daniel Campos <danielcampos@avanzosc.es>
 * Alfredo de la Fuente <alfredodelafuente@avanzosc.es>

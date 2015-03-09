@@ -4,10 +4,9 @@
         <record model="ir.ui.view" id="view_picking_wave_form_inh_partnercarrier">
             <field name="name">view.picking.wave.form.inh.partnercarrier</field>
             <field name="model">stock.picking.wave</field>
-            <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_form" />
+            <field name="inherit_id" ref="stock_picking_wave_management.view_picking_wave_form_inh_management" />
             <field name="arch" type="xml">
-                <field name="user_id" position="after">
-                    <field name="partner" />
+                <field name="partner" position="after">
                     <field name="carrier" />
                 </field> 
             </field>
@@ -15,10 +14,9 @@
         <record model="ir.ui.view" id="view_picking_wave_tree_inh_partnercarrier">
             <field name="name">view.picking.wave.tree.inh.partnercarrier</field>
             <field name="model">stock.picking.wave</field>
-            <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_tree" />
+            <field name="inherit_id" ref="stock_picking_wave_management.view_picking_wave_tree_inh_management" />
             <field name="arch" type="xml">
-                <field name="user_id" position="after">
-                    <field name="partner" />
+                <field name="partner" position="after">
                     <field name="carrier" />
                 </field> 
             </field>
@@ -26,15 +24,13 @@
         <record model="ir.ui.view" id="view_picking_wave_filter_inh_partnercarrier">
             <field name="name">view.picking.wave.filter.inh.partnercarrier</field>
             <field name="model">stock.picking.wave</field>
-            <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_filter" />
+            <field name="inherit_id" ref="stock_picking_wave_management.view_picking_wave_filter_inh_management" />
             <field name="arch" type="xml">
-                <field name="user_id" position="after">
-                    <field name="partner" />
+                <field name="partner" position="after">
                     <field name="carrier" />
                 </field> 
-                <filter string="User" position="after">
+                <filter string="Partner" position="after">
                     <filter string="Partner" domain="[]" context="{'group_by':'partner'}"/>
-                    <filter string="Carrier" domain="[]" context="{'group_by':'carrier'}"/>
                 </filter>
             </field>
         </record>

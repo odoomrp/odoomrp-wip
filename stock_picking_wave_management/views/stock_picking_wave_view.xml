@@ -6,6 +6,9 @@
             <field name="model">stock.picking.wave</field>
             <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_form" />
             <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="partner" />
+                </field> 
                 <button name="print_picking" position="after">
                     <field name="num_confirmed" invisible="1"/>
                     <field name="num_assigned" invisible="1"/>
@@ -67,6 +70,29 @@
                         </page>
                     </notebook>
                 </separator>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_picking_wave_tree_inh_management">
+            <field name="name">view.picking.wave.tree.inh.management</field>
+            <field name="model">stock.picking.wave</field>
+            <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_tree" />
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="partner" />
+                </field> 
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_picking_wave_filter_inh_management">
+            <field name="name">view.picking.wave.filter.inh.management</field>
+            <field name="model">stock.picking.wave</field>
+            <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_filter" />
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="partner" />
+                </field> 
+                <filter string="User" position="after">
+                    <filter string="Partner" domain="[]" context="{'group_by':'partner'}"/>
+                </filter>
             </field>
         </record>
     </data>

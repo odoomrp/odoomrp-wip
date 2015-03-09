@@ -20,15 +20,15 @@
 #
 ##############################################################################
 {
-    'name': 'Stock Picking Wave Button Partner Carrier Info',
+    'name': 'Stock Picking Wave Carrier Filter',
     'version': "1.0",
     'author': 'OdooMRP team',
     'website': "http://www.odoomrp.com",
     'category': 'Stock Management',
-    'depends': ["stock_picking_wave_management",
-                "stock_picking_wave_partner_carrier_filter",
+    'depends': ["delivery",
+                "stock_picking_wave_management",
                 ],
-    'data': [],
+    'data': ["views/stock_picking_wave_view.xml",
+             ],
     'installable': True,
-    'auto_install': True,
 }

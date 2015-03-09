@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-06 09:39+0000\n"
-"PO-Revision-Date: 2015-03-06 10:40+0100\n"
+"POT-Creation-Date: 2015-03-09 15:29+0000\n"
+"PO-Revision-Date: 2015-03-09 16:30+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -50,6 +50,12 @@ msgstr "Operaciones"
 #: model:ir.model,name:stock_picking_wave_management.model_stock_pack_operation
 msgid "Packing Operation"
 msgstr "Operación de empaquetado"
+
+#. module: stock_picking_wave_management
+#: view:stock.picking.wave:stock_picking_wave_management.view_picking_wave_filter_inh_management
+#: field:stock.picking.wave,partner:0
+msgid "Partner"
+msgstr "Empresa"
 
 #. module: stock_picking_wave_management
 #: field:stock.transfer_details_items,picking_id:0
@@ -105,4 +111,9 @@ msgstr "Transferir"
 #: view:stock.picking.wave:stock_picking_wave_management.view_picking_wave_form_inh_management
 msgid "Unit of Measure"
 msgstr "Unidad de medida"
+
+#. module: stock_picking_wave_management
+#: view:stock.picking.wave:stock_picking_wave_management.view_picking_wave_filter_inh_management
+msgid "User"
+msgstr "Usuario"
 
