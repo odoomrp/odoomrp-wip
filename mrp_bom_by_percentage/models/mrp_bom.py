@@ -36,13 +36,24 @@ class MrpBom(models.Model):
         string='QTY to consume', compute='_compute_qtytoconsume', store=True,
         digits=dp.get_precision('Product Unit of Measure'))
 
+    @api.one
     @api.onchange('by_percentage')
     def onchange_by_percentage(self):
         if self.by_percentage:
             self.product_qty = 100
 
     @api.one
+    @api.onchange('bom_line_ids')
+    def onchange_qty_to_consume(self):
+        qty_to_consume = 0
+        if self.bom_line_ids:
+            for line in self.bom_line_ids:
+                qty_to_consume += line.product_qty
+        self.qty_to_consume = qty_to_consume
+
+    @api.one
     @api.constrains('by_percentage', 'qty_to_consume', 'bom_line_ids')
     def _check_by_percentage(self):
-        if self.by_percentage and self.qty_to_consume != 100:
+        if (self.by_percentage and self.qty_to_consume > 0 and
+                self.qty_to_consume != 100):
             raise exceptions.Warning(_('Quantity to consume <> 100'))
