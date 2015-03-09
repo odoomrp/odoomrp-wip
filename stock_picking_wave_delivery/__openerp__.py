@@ -20,7 +20,7 @@
 #
 ##############################################################################
 {
-    'name': 'Stock Picking Wave Carrier Filter',
+    'name': 'Stock Picking Wave Delivery',
     'version': "1.0",
     'author': 'OdooMRP team',
     'website': "http://www.odoomrp.com",

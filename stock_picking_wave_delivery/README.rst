@@ -1,5 +1,5 @@
-Stock picking wave carrier filter
-=================================
+Stock picking wave delivery
+===========================
 
 This module allows to filter pickings for carriers, in stock picking wave.
 
