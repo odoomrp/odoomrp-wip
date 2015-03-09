@@ -25,5 +25,4 @@ class StockPickingWave(models.Model):
                 cond.extend([('partner_id', '=', self.partner.id)])
         if self.carrier:
             cond.extend([('carrier_id', '=', self.carrier.id)])
-        print '*** cond: ' + str(cond)
         return {'domain': {'picking_ids': cond}}
