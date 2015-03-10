@@ -25,19 +25,17 @@ class MrpBom(models.Model):
     @api.one
     @api.depends('bom_line_ids', 'bom_line_ids.product_qty')
     def _compute_qtytoconsume(self):
-        qty_to_consume = 0
-        if self.bom_line_ids:
-            for line in self.bom_line_ids:
-                qty_to_consume += line.product_qty
-        self.qty_to_consume = qty_to_consume
+        self.qty_to_consume = sum(x.product_qty for x in self.bom_line_ids)
 
     by_percentage = fields.Boolean(string='Produce by percentage')
     qty_to_consume = fields.Float(
-        string='QTY to consume', compute='_compute_qtytoconsume', store=True,
+        string='QTY to consume', compute='_compute_qtytoconsume',
         digits=dp.get_precision('Product Unit of Measure'))
 
-    @api.onchange('by_percentage')
+    @api.one
+    @api.onchange('by_percentage', 'bom_line_ids')
     def onchange_by_percentage(self):
+        self.qty_to_consume = sum(x.product_qty for x in self.bom_line_ids)
         if self.by_percentage:
             self.product_qty = 100
 
