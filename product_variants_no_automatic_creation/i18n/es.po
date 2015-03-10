@@ -6,14 +6,41 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-03 09:20+0000\n"
-"PO-Revision-Date: 2014-11-03 09:20+0000\n"
+"POT-Creation-Date: 2015-03-10 16:13+0000\n"
+"PO-Revision-Date: 2015-03-10 16:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: product_variants_no_automatic_creation
+#: code:addons/product_variants_no_automatic_creation/models/pricelist.py:48
+#, python-format
+msgid "At least one pricelist has no active version !\n"
+"Please create or activate one."
+msgstr "¡Al menos una lista de precios no tiene una versión activa!\n"
+"Por favor, cree o active una."
+
+#. module: product_variants_no_automatic_creation
+#: code:addons/product_variants_no_automatic_creation/models/product.py:34
+#: code:addons/product_variants_no_automatic_creation/models/product.py:65
+#, python-format
+msgid "Change warning!"
+msgstr "Atención cambio!"
+
+#. module: product_variants_no_automatic_creation
+#: code:addons/product_variants_no_automatic_creation/models/product.py:35
+#: code:addons/product_variants_no_automatic_creation/models/product.py:66
+#, python-format
+msgid "Changing this parameter may cause automatic variants creation"
+msgstr "Cambiar este parametro puede causar que se creen variantes automáticamente"
+
+#. module: product_variants_no_automatic_creation
+#: selection:product.template,no_create_variants:0
+msgid "Create them automatically"
+msgstr "Crearlas automáticamente"
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
@@ -25,14 +52,25 @@ msgstr "No crearlas automáticamente"
 msgid "Don't create variants automatically"
 msgstr "No crear variantes automáticamente"
 
-#: field:product.template,no_create_variants:0
-msgid "Variant creation"
-msgstr "Creación de variantes"
+#. module: product_variants_no_automatic_creation
+#: model:ir.model,name:product_variants_no_automatic_creation.model_product_pricelist
+msgid "Pricelist"
+msgstr "Tarifa"
 
 #. module: product_variants_no_automatic_creation
-#: selection:product.template,no_create_variants:0
-msgid "User the category value"
-msgstr "Usar el valor de la categoría"
+#: model:ir.model,name:product_variants_no_automatic_creation.model_product_product
+msgid "Product"
+msgstr "Producto"
+
+#. module: product_variants_no_automatic_creation
+#: model:ir.model,name:product_variants_no_automatic_creation.model_product_category
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: product_variants_no_automatic_creation
+#: model:ir.model,name:product_variants_no_automatic_creation.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
 
 #. module: product_variants_no_automatic_creation
 #: help:product.category,no_create_variants:0
@@ -46,6 +84,22 @@ msgstr "Esta selección define si se crearán automáticamente las variantes par
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
-msgid "Create them automatically"
-msgstr "Crearlas automáticamente"
+msgid "Use the category value"
+msgstr "Use the category value"
+
+#. module: product_variants_no_automatic_creation
+#: view:product.template:product_variants_no_automatic_creation.product_template_no_variant_form_view
+msgid "Variant Prices"
+msgstr "Precios de las variantes"
+
+#. module: product_variants_no_automatic_creation
+#: model:ir.actions.act_window,name:product_variants_no_automatic_creation.attribute_price_action
+#: view:product.attribute.price:product_variants_no_automatic_creation.attribute_price_tree_view
+msgid "Variant Values"
+msgstr "Valores de las variantes"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.template,no_create_variants:0
+msgid "Variant creation"
+msgstr "Creación de variantes"
 

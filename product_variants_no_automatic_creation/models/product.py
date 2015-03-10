@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class ProductCategory(models.Model):
@@ -26,6 +26,24 @@ class ProductCategory(models.Model):
         string="Don't create variants automatically",
         help='This check disables the automatic creation of product variants '
              'for all the products of this category.', default=True)
+
+    @api.multi
+    @api.onchange('no_create_variants')
+    def onchange_no_create_variants(self):
+        self.ensure_one()
+        return {'warning': {'title': _('Change warning!'),
+                            'message': _('Changing this parameter may cause'
+                                         ' automatic variants creation')}}
+
+    @api.multi
+    def write(self, values):
+        res = super(ProductCategory, self).write(values)
+        if ('no_create_variants' in values and
+                not values.get('no_create_variants')):
+            self.env['product.template'].search(
+                [('categ_id', '=', self.id),
+                 ('no_create_variants', '=', 'empty')]).create_variant_ids()
+        return res
 
 
 class ProductTemplate(models.Model):
@@ -39,6 +57,21 @@ class ProductTemplate(models.Model):
         help="This selection defines if variants for all attribute "
              "combinations are going to be created automatically at saving "
              "time.")
+
+    @api.multi
+    @api.onchange('no_create_variants')
+    def onchange_no_create_variants(self):
+        self.ensure_one()
+        return {'warning': {'title': _('Change warning!'),
+                            'message': _('Changing this parameter may cause'
+                                         ' automatic variants creation')}}
+
+    @api.multi
+    def write(self, values):
+        res = super(ProductTemplate, self).write(values)
+        if 'no_create_variants' in values:
+            self.create_variant_ids()
+        return res
 
     def _get_product_attributes_dict(self):
         product_attributes = []

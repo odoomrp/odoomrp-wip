@@ -6,14 +6,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-03 09:20+0000\n"
-"PO-Revision-Date: 2014-11-03 09:20+0000\n"
+"POT-Creation-Date: 2015-03-10 16:12+0000\n"
+"PO-Revision-Date: 2015-03-10 16:12+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: product_variants_no_automatic_creation
+#: code:addons/product_variants_no_automatic_creation/models/pricelist.py:48
+#, python-format
+msgid "At least one pricelist has no active version !\n"
+"Please create or activate one."
+msgstr ""
+
+#. module: product_variants_no_automatic_creation
+#: code:addons/product_variants_no_automatic_creation/models/product.py:34
+#: code:addons/product_variants_no_automatic_creation/models/product.py:65
+#, python-format
+msgid "Change warning!"
+msgstr ""
+
+#. module: product_variants_no_automatic_creation
+#: code:addons/product_variants_no_automatic_creation/models/product.py:35
+#: code:addons/product_variants_no_automatic_creation/models/product.py:66
+#, python-format
+msgid "Changing this parameter may cause automatic variants creation"
+msgstr ""
+
+#. module: product_variants_no_automatic_creation
+#: selection:product.template,no_create_variants:0
+msgid "Create them automatically"
+msgstr ""
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
@@ -26,13 +52,23 @@ msgid "Don't create variants automatically"
 msgstr ""
 
 #. module: product_variants_no_automatic_creation
-#: field:product.template,no_create_variants:0
-msgid "Variant creation"
+#: model:ir.model,name:product_variants_no_automatic_creation.model_product_pricelist
+msgid "Pricelist"
 msgstr ""
 
 #. module: product_variants_no_automatic_creation
-#: selection:product.template,no_create_variants:0
-msgid "Use the category value"
+#: model:ir.model,name:product_variants_no_automatic_creation.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: product_variants_no_automatic_creation
+#: model:ir.model,name:product_variants_no_automatic_creation.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: product_variants_no_automatic_creation
+#: model:ir.model,name:product_variants_no_automatic_creation.model_product_template
+msgid "Product Template"
 msgstr ""
 
 #. module: product_variants_no_automatic_creation
@@ -47,6 +83,22 @@ msgstr ""
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
-msgid "Create them automatically"
+msgid "Use the category value"
+msgstr ""
+
+#. module: product_variants_no_automatic_creation
+#: view:product.template:product_variants_no_automatic_creation.product_template_no_variant_form_view
+msgid "Variant Prices"
+msgstr ""
+
+#. module: product_variants_no_automatic_creation
+#: model:ir.actions.act_window,name:product_variants_no_automatic_creation.attribute_price_action
+#: view:product.attribute.price:product_variants_no_automatic_creation.attribute_price_tree_view
+msgid "Variant Values"
+msgstr ""
+
+#. module: product_variants_no_automatic_creation
+#: field:product.template,no_create_variants:0
+msgid "Variant creation"
 msgstr ""
 
