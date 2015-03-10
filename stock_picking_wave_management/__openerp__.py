@@ -20,16 +20,16 @@
 #
 ##############################################################################
 {
-    'name': 'Stock picking wave package info',
+    'name': 'Stock Picking Wave Management',
     'version': "1.0",
     'author': 'OdooMRP team',
     'website': "http://www.odoomrp.com",
-    'category': 'Stock Management',
-    'depends': ["stock_picking_package_info",
-                "stock_picking_wave_management",
+    'category': 'Warehouse Management',
+    'depends': ["stock",
+                "stock_picking_wave",
                 ],
-    'data': ["views/stock_picking_wave_view.xml",
-             "views/stock_quant_package_view.xml",
+    'data': ["wizard/stock_transfer_details_view.xml",
+             "views/stock_picking_wave_view.xml",
              ],
     'installable': True,
 }

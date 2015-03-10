@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_picking_wave_form_inh_partnercarrier">
+            <field name="name">view.picking.wave.form.inh.partnercarrier</field>
+            <field name="model">stock.picking.wave</field>
+            <field name="inherit_id" ref="stock_picking_wave_management.view_picking_wave_form_inh_management" />
+            <field name="arch" type="xml">
+                <field name="partner" position="after">
+                    <field name="carrier" />
+                </field> 
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_picking_wave_tree_inh_partnercarrier">
+            <field name="name">view.picking.wave.tree.inh.partnercarrier</field>
+            <field name="model">stock.picking.wave</field>
+            <field name="inherit_id" ref="stock_picking_wave_management.view_picking_wave_tree_inh_management" />
+            <field name="arch" type="xml">
+                <field name="partner" position="after">
+                    <field name="carrier" />
+                </field> 
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_picking_wave_filter_inh_partnercarrier">
+            <field name="name">view.picking.wave.filter.inh.partnercarrier</field>
+            <field name="model">stock.picking.wave</field>
+            <field name="inherit_id" ref="stock_picking_wave_management.view_picking_wave_filter_inh_management" />
+            <field name="arch" type="xml">
+                <field name="partner" position="after">
+                    <field name="carrier" />
+                </field> 
+                <filter string="Partner" position="after">
+                    <filter string="Partner" domain="[]" context="{'group_by':'partner'}"/>
+                </filter>
+            </field>
+        </record>
+    </data>
+</openerp>

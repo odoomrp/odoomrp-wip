@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_picking_wave_form_inh_management">
+            <field name="name">view.picking.wave.form.inh.management</field>
+            <field name="model">stock.picking.wave</field>
+            <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_form" />
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="partner" />
+                </field> 
+                <button name="print_picking" position="after">
+                    <field name="num_confirmed" invisible="1"/>
+                    <field name="num_assigned" invisible="1"/>
+                    <button type="object"  name="button_check_availability"
+                        string="Check Availability"
+                        attrs="{'invisible': [('num_confirmed', '=', 0)]}" />
+                    <button type="object"  name="action_transfer"
+                        string="Transfer"
+                        attrs="{'invisible': [('num_assigned', '=', 0)]}" />
+                </button> 
+                <field name="picking_ids" position="replace"/>
+                <separator string="Pickings" position="replace" >
+                    <notebook>
+                        <page string="Pickings">
+                            <field name="picking_ids" widget="many2many" domain="[('wave_id', '=', False), ('state', 'not in', ('done', 'cancel'))]">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="backorder_id"/>
+                                    <field name="origin"/>
+                                    <field name="date"/>
+                                    <field name="min_date"/>
+                                    <field name="state"/>
+                                    <button name="action_assign" string="Confirm picking" type="object" icon="gtk-apply" attrs="{'invisible': [('state', 'in', ('done', 'cancel', 'confirmed', 'assigned'))]}"/>
+                                    <button name="force_assign" string="Force availability" type="object" icon="gtk-go-forward" attrs="{'invisible': [('state', 'in', ('done', 'cancel', 'draft', 'assigned'))]}"/>
+                                    <button name="action_cancel" string="Cancel picking" type="object" icon="gtk-cancel" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Products">
+                            <field name="pickings_products" >
+                                <tree colors="grey:state == 'cancel'" string="Moves" create="false">
+                                    <field name="picking_id" />
+                                    <field name="product_id"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="product_uom"  string="Unit of Measure" groups="product.group_uom"/>
+                                    <field name="product_packaging" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                                    <field name="location_id" groups="stock.group_locations"/>
+                                    <field name="location_dest_id" groups="stock.group_locations"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Operations">
+                            <field name="pickings_operations">
+                                <tree>
+                                    <field name="picking_id" />
+                                    <field name="package_id" groups="stock.group_tracking_lot"/>
+                                    <field name="product_id" on_change="product_id_change(product_id, product_uom_id, product_qty)"/>
+                                    <field name="product_uom_id" groups="product.group_uom"/>
+                                    <field name="lot_id" domain="[('product_id','=?', product_id)]" context="{'product_id': product_id}" groups="stock.group_production_lot"/>
+                                    <field name="picking_id" invisible="1"/>
+                                    <field name="owner_id" groups="stock.group_tracking_owner"/>
+                                    <field name="product_qty" attrs="{'required': [('product_id', '!=', False)]}"/>
+                                    <field name="location_id" domain="[('id', 'child_of', parent.location_id)]"/>
+                                    <field name="location_dest_id" domain="[('id', 'child_of', parent.location_dest_id)]"/>
+                                    <field name="result_package_id" groups="stock.group_tracking_lot" context="{'location_id': location_dest_id}"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </separator>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_picking_wave_tree_inh_management">
+            <field name="name">view.picking.wave.tree.inh.management</field>
+            <field name="model">stock.picking.wave</field>
+            <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_tree" />
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="partner" />
+                </field> 
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_picking_wave_filter_inh_management">
+            <field name="name">view.picking.wave.filter.inh.management</field>
+            <field name="model">stock.picking.wave</field>
+            <field name="inherit_id" ref="stock_picking_wave.view_picking_wave_filter" />
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="partner" />
+                </field> 
+                <filter string="User" position="after">
+                    <filter string="Partner" domain="[]" context="{'group_by':'partner'}"/>
+                </filter>
+            </field>
+        </record>
+    </data>
+</openerp>
