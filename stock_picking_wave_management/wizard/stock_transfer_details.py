@@ -66,11 +66,11 @@ class StockTransferDetails(models.TransientModel):
         for picking in self.picking_ids:
             processed_ids = []
             # Create new and update existing pack operations
-            for lstits in [self.item_ids.filtered(
-                            lambda x: x.picking_id.id == picking.id),
-                           self.packop_ids.filtered(
-                            lambda x: x.picking_id.id == picking.id)]:
-                for prod in lstits:
+            for line in [self.item_ids.filtered(lambda x: x.picking_id.id ==
+                                                picking.id),
+                         self.packop_ids.filtered(lambda x: x.picking_id.id ==
+                                                  picking.id)]:
+                for prod in line:
                     pack_datas = {
                         'product_id': prod.product_id.id,
                         'product_uom_id': prod.product_uom_id.id,
