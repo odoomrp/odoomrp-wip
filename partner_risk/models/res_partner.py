@@ -210,8 +210,8 @@ class ResPartner(models.Model):
                         stpick_undelibered_amount += undelibered_amount
                 residual_total += stpick_amount
                 total_undelibered += stpick_amount + stpick_undelibered_amount
-            partner.write({'financial_risk_amount': residual_total,
-                           'comercial_risk_amount': total_undelibered})
+            partner.financial_risk_amount = residual_total
+            partner.comercial_risk_amount = total_undelibered
 
     def action_open_risk_window(self, cr, uid, ids, context=None):
         data_obj = self.pool['ir.model.data']

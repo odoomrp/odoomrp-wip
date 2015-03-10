@@ -25,24 +25,26 @@ class SaleOrder(models.Model):
 
     def __init__(self, pool, cr):
         """Add a new state value"""
-        if not (('wait_risk', 'Waiting Risk Approval')) in (
-                self._columns['state'].selection):
-            i = self._columns['state'].selection.index(
-                ('draft', 'Draft Quotation'))
-            super(SaleOrder, self)._columns['state'].selection.insert(
-                i+1, ('wait_risk', 'Waiting Risk Approval'))
+        if self._columns:
+            if not (('wait_risk', 'Waiting Risk Approval')) in (
+                    self._columns['state'].selection):
+                i = self._columns['state'].selection.index(
+                    ('draft', 'Draft Quotation'))
+                super(SaleOrder, self)._columns['state'].selection.insert(
+                    i+1, ('wait_risk', 'Waiting Risk Approval'))
         super(SaleOrder, self).__init__(pool, cr)
 
     amount_invoiced = fields.Float(string='Invoiced Amount',
                                    compute="_amount_invoiced")
 
     # Inherited onchange function
-    def onchange_partner_id(self, cr, uid, ids, part, context=None):
-        result = super(SaleOrder, self).onchange_partner_id(cr, uid, ids, part,
-                                                            context)
-        partner_obj = self.pool['res.partner']
+    @api.multi
+    @api.onchange('partner_id')
+    def onchange_partner_id(self, part):
+        result = super(SaleOrder, self).onchange_partner_id(part)
+        partner_obj = self.env['res.partner']
         if part:
-            partner = partner_obj.browse(cr, uid, part, context)
+            partner = partner_obj.browse(part)
             if partner.available_risk < 0.0:
                 result['warning'] = {
                     'title': _('Credit Limit Exceeded'),
@@ -69,7 +71,6 @@ class SaleOrder(models.Model):
                         'debt': partner.financial_risk_amount}}
             else:
                 return result
-
         return result
 
     @api.multi

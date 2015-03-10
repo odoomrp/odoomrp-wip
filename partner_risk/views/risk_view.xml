@@ -1,46 +1,49 @@
 <?xml version="1.0"?>
 <openerp>
-<data>
+    <data>
 
-    <!-- Add risk button in partner form. -->
-    <record model="ir.ui.view" id="view_partner_form">
-        <field name="name">res.partner.form.risk</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/>
-        <field name="arch" type="xml">
-            <field name="credit_limit" position="after">
-                <footer>
-                    <button string="View Risk Information" name="action_open_risk_window"
-                    class="oe_highlight" type="object" colspan="2"/>
-                </footer>
+        <!-- Add risk button in partner form. -->
+        <record model="ir.ui.view" id="view_partner_form">
+            <field name="name">res.partner.form.risk</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <field name="credit_limit" position="after">
+                    <footer>
+                        <button string="View Risk Information"
+                            name="action_open_risk_window" class="oe_highlight"
+                            type="object" colspan="2" />
+                    </footer>
+                </field>
             </field>
-        </field>
-    </record>
+        </record>
 
-    <record id="open_risk_window_view" model="ir.ui.view">
-           <field name="name">open.risk.window.view</field>
-           <field name="model">res.partner</field>
-            <field name="priority" eval="40"/>
-           <field name="arch" type="xml">
+        <record id="open_risk_window_view" model="ir.ui.view">
+            <field name="name">open.risk.window.view</field>
+            <field name="model">res.partner</field>
+            <field name="priority" eval="40" />
+            <field name="arch" type="xml">
                 <form string="Partner Risk Information">
-                <separator string="Partner Risk Info"/>
-                <group col="4">
-                    <field name="unpayed_amount"/>
-                    <field name="pending_amount"/>
-                    <field name="draft_invoices_amount"/>
-                    <field name="circulating_amount"/>
-                    <field name="pending_orders_amount"/>
-                    <separator colspan="4"/>
-                    <field name="total_debt"/>
-                    <field name="credit_limit"/>
-                    <field name="available_risk"/>
-                    <field name="financial_risk_amount"/>
-                    <field name="comercial_risk_amount"/>
-                    <separator colspan="4"/>
-                    <field name="total_risk_percent" widget="progressbar" colspan="4"/>
-                </group>
+                    <separator string="Partner Risk Info" />
+                    <group col="4">
+                        <field name="unpayed_amount" />
+                        <field name="pending_amount" />
+                        <field name="draft_invoices_amount" />
+                        <field name="circulating_amount" />
+                        <field name="pending_orders_amount" />
+                        <separator colspan="4" />
+                        <field name="total_debt" />
+                        <field name="credit_limit" />
+                        <field name="available_risk" />
+                        <field name="financial_risk_amount" />
+                        <field name="comercial_risk_amount" />
+                        <separator colspan="4" />
+                        <field name="total_risk_percent" widget="progressbar"
+                            colspan="4" />
+                    </group>
                 </form>
-           </field>
-      </record>
-</data>
+            </field>
+        </record>
+
+    </data>
 </openerp>

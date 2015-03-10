@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, api, exceptions, _
+from openerp import models, api, _
 
 
 class StockMove(models.Model):
@@ -29,12 +29,15 @@ class StockMove(models.Model):
     def action_done(self):
         for move in self:
             partner = move.partner_id
-            if partner.financial_risk_amount > partner.credit:
-                raise exceptions.Warning(
-                    _('Warning: Financial Risk Exceeded.\n Partner has a risk '
-                      'limit of %(risk).2f and already has a debt of '
-                      '%(debt).2f.') % (
-                        {'risk': partner.credit_limit,
-                         'debt': partner.financial_risk_amount}))
-        else:
-            return super(StockMove, self).action_done()
+            frisk = partner.financial_risk_amount
+            limit = partner.credit
+            res = super(StockMove, self).action_done()
+            if frisk > limit:
+                res['warning'] = {
+                    'title': _('Credit Limit Exceeded'),
+                    'message': _('Warning: Financial Risk Exceeded.\n Partner'
+                                 'has a risk limit of %(risk).2f and already '
+                                 'has a debt of %(debt).2f.'
+                                 ) % {'risk': partner.credit_limit,
+                                      'debt': partner.financial_risk_amount}}
+            return res
