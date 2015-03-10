@@ -29,7 +29,7 @@ class MrpBom(models.Model):
 
     by_percentage = fields.Boolean(string='Produce by percentage')
     qty_to_consume = fields.Float(
-        string='QTY to consume', compute='_compute_qtytoconsume', store=True,
+        string='QTY to consume', compute='_compute_qtytoconsume',
         digits=dp.get_precision('Product Unit of Measure'))
 
     @api.one
