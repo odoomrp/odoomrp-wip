@@ -35,18 +35,18 @@ class StockTransferDetails(models.TransientModel):
         item_ids = []
         packop_ids = []
         picking_ids = context.get('active_ids', [])
-        for picking in picking_ids:
+        for picking_id in picking_ids:
             c = context.copy()
-            c.update({'active_ids': [picking]})
+            c.update({'active_ids': [picking_id]})
             res = super(StockTransferDetails, self).default_get(
                 cr, uid, fields, context=c)
             lines = res.get('item_ids')
             for line in lines:
-                line.update({'picking_id': picking})
+                line['picking_id'] = picking_id
                 item_ids.append(line)
             lines = res.get('packop_ids')
             for line in lines:
-                line.update({'picking_id': picking})
+                line['picking_id'] = picking_id
                 packop_ids.append(line)
         return {'picking_id': False, 'item_ids': item_ids,
                 'packop_ids': packop_ids, 'picking_ids': picking_ids}
@@ -66,10 +66,10 @@ class StockTransferDetails(models.TransientModel):
         for picking in self.picking_ids:
             processed_ids = []
             # Create new and update existing pack operations
-            for lstits in [self.item_ids.filtered(lambda x: x.picking_id ==
-                                                  picking.id),
-                           self.packop_ids.filtered(lambda x: x.picking_id ==
-                                                    picking.id)]:
+            for lstits in [self.item_ids.filtered(
+                            lambda x: x.picking_id.id == picking.id),
+                           self.packop_ids.filtered(
+                            lambda x: x.picking_id.id == picking.id)]:
                 for prod in lstits:
                     pack_datas = {
                         'product_id': prod.product_id.id,

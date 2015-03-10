@@ -24,7 +24,7 @@
     'version': "1.0",
     'author': 'OdooMRP team',
     'website': "http://www.odoomrp.com",
-    'category': 'Stock Management',
+    'category': 'Warehouse Management',
     'depends': ["delivery",
                 "stock_picking_wave_management",
                 ],
