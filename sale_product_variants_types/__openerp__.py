@@ -17,7 +17,7 @@
 ##############################################################################
 
 {
-    "name": "Sale product variants types",
+    "name": "Sale - Product variants types",
     "version": "1.0",
     "depends": [
         "sale_product_variants",
@@ -26,14 +26,12 @@
     "author": "OdooMRP team",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
     ],
     "category": "Hidden/Dependency",
     "website": "http://www.odoomrp.com",
     "summary": "",
-    "description": """
-This module extends product variants on sales. It adds the possibility of
-defining a custom value when the attribute is of range type.
-    """,
     "data": [
         "views/sale_order_view.xml",
     ],
