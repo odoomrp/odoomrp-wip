@@ -1,6 +1,5 @@
 Stock picking wave packaging info
-=================================
-
+================================
 This module displays in the picking waves form, packages from all pickings
 included.
 
