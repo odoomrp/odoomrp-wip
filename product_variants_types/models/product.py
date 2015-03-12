@@ -17,5 +17,5 @@ class ProductTemplate(models.Model):
                 [('attribute_id', '=', attribute['attribute']),
                  ('product_tmpl_id', '=', self.id)])
             attribute.update(
-                {'value': line and line[0].default and line[0].default.id})
+                {'value': line and line[0].default.id})
         return product_attributes
