@@ -45,12 +45,13 @@ class MrpProduction(models.Model):
         self.write({'pack': pack_lines})
 
     @api.one
-    def recalcule_bom_qtys(self, bom_qty):
+    def recalcule_bom_qtys(self, bom_qty, product):
         products = dict((x.product_id.id, x.product_qty)
                         for x in self.bom_id.bom_line_ids)
         product_ids = products.keys()
         for line in self.product_lines:
-            if line.product_id.id in product_ids:
+            if line.product_id.id in product_ids and \
+                    line.product_id != product:
                 self.write(
                     {'product_lines':
                         [(1, line.id,
@@ -88,7 +89,7 @@ class MrpProduction(models.Model):
             new_op = self.create(data['value'])
             new_op.action_compute()
             if equal_uom:
-                new_op.recalcule_bom_qtys(op.qty)
+                new_op.recalcule_bom_qtys(op.qty, self.product_id)
             workorder =\
                 new_op.workcenter_lines and new_op.workcenter_lines[0].id
             for attr_value in op.product.attribute_value_ids:
