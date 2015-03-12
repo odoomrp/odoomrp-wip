@@ -1,0 +1,1 @@
+Assign variants of a product to a other product

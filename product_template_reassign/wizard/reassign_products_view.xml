@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="reassign_product_form_view">
+            <field name="name">reassign.product.form</field>
+            <field name="model">reassign.products</field>
+            <field name="arch" type="xml">
+                <form string="Reassign Products">
+                    <field name="products" />
+                    <footer>
+                        <button name="reassign" type="object"
+                            string="Confirm" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link"
+                            special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="reassign_product_lines_form_view">
+            <field name="name">reassign.product.lines.form</field>
+            <field name="model">reassign.product.lines</field>
+            <field name="arch" type="xml">
+                <form string="Reassign product lines">
+                    <field name="attributes" />
+                    <field name="product" />
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="reassign_product_lines_tree_view">
+            <field name="name">reassign.product.lines.tree</field>
+            <field name="model">reassign.product.lines</field>
+            <field name="arch" type="xml">
+                <tree string="Reassign product lines" editable="top" delete="0" create="0">
+                    <field name="attributes" widget="many2many_tags" readonly="1"/>
+                    <field name="product" attrs="{'readonly': [('exists', '=', True)]}"/>
+                    <field name="exists" invisible="1"/>
+                </tree>
+            </field>
+        </record>        
+
+        <act_window name="Reassign products" res_model="reassign.products"
+            src_model="product.template" view_mode="form" target="new"
+            id="reassign_products_action" />
+
+    </data>
+</openerp>
