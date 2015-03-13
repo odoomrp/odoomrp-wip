@@ -32,4 +32,5 @@
              "views/stock_quant_package_view.xml",
              ],
     'installable': True,
+    'auto_install': True,
 }

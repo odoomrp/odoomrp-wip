@@ -1,24 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-TODAY OpenERP S.A. <http://www.odoo.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-
 from openerp import models, api
 from datetime import datetime
 
@@ -27,7 +10,17 @@ class StockTransferDetails(models.TransientModel):
     _inherit = 'stock.transfer_details'
 
     @api.one
+    def do_detailed_transfer(self):
+        wave_obj = self.env['stock.picking.wave']
+        result = super(StockTransferDetails, self).do_detailed_transfer()
+        if 'origin_wave' in self._context:
+            origin_wave = wave_obj.browse(self._context['origin_wave'])
+            origin_wave._catch_operations()
+        return result
+
+    @api.one
     def do_record(self):
+        wave_obj = self.env['stock.picking.wave']
         operation_obj = self.env['stock.pack.operation']
         for picking in self.picking_ids:
             # Create new and update existing pack operations
@@ -56,4 +49,7 @@ class StockTransferDetails(models.TransientModel):
                             operation_obj.create(pack_datas)
                         else:
                             prod.packop_id.write(pack_datas)
+        if 'origin_wave' in self._context:
+            origin_wave = wave_obj.browse(self._context['origin_wave'])
+            origin_wave._catch_operations()
         return True
