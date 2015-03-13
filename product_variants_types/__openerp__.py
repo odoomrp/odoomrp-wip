@@ -17,22 +17,22 @@
 ##############################################################################
 
 {
-    "name": "Product Variants",
+    "name": "Product Variants with Attribute Types",
     "version": "1.0",
     "depends": [
-        "product",
+        "product_variants_no_automatic_creation",
+        "product_attribute_types",
     ],
     "author": "OdooMRP team",
+    "website": "http://www.odoomrp.com",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-        "Ana Juaristi <ajuaristio@gmail.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>"
     ],
     "category": "Hidden/Dependency",
-    "website": "http://www.odoomrp.com",
-    "summary": "Disable automatic product variant creation",
-    "data": [
-        "views/product_view.xml",
-    ],
+    "summary": "",
+    "data": [],
     "installable": True,
+    "auto_install": True,
 }

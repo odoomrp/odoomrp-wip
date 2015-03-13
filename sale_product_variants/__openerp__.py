@@ -29,13 +29,12 @@
     "contributors": [
         "Mikel Arregi <mikelarregi@avanzosc.es>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
     ],
     "category": "Sales Management",
     "website": "http://www.odoomrp.com",
-    "summary": "",
-    "description": """
-Create custom product from a sale order
-    """,
+    "summary": "Product variants in sale management",
     "data": [
         "security/ir.model.access.csv",
         "views/sale_view.xml",
