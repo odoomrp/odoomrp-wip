@@ -30,9 +30,9 @@ class ReassignProducts(models.TransientModel):
     @api.multi
     def _product_by_variants(self, variants, products):
         set_var_ids = set(variants)
-        for product in products:
-            if set(product.attribute_value_ids.ids) == set_var_ids:
-                return product.id
+        for prod in products:
+            if set(prod.attribute_value_ids.ids) == set_var_ids:
+                return prod.id
 
     @api.model
     def default_get(self, var_fields):
