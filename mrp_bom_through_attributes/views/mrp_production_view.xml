@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="mrp_production_packaging_form">
-            <field name="name">MRP packaging form</field>
+        <record model="ir.ui.view" id="mrp_production_raw_product_form_view">
+            <field name="name">mrp.production.raw.product.form</field>
             <field name="model">mrp.production</field>
             <field name="inherit_id" ref="mrp.mrp_production_form_view" />
             <field name="arch" type="xml">
