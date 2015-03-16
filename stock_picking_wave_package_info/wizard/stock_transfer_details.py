@@ -19,7 +19,7 @@ class StockTransferDetails(models.TransientModel):
         return result
 
     @api.one
-    def do_record(self):
+    def do_save_for_later(self):
         wave_obj = self.env['stock.picking.wave']
         operation_obj = self.env['stock.pack.operation']
         for picking in self.picking_ids:
