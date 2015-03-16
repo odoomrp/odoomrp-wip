@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="0">
+
+        <record id="quality_control.group_quality_control_user" model="res.groups">
+            <field name="name">See Own Inspections</field>
+            <field name="category_id" ref="quality_control.module_category_quality_control"/>
+        </record>
+
+        <record id="group_quality_control_department" model="res.groups">
+            <field name="name">See Department Inspections</field>
+            <field name="category_id" ref="quality_control.module_category_quality_control"/>
+            <field name="implied_ids" eval="[(4, ref('quality_control.group_quality_control_user'))]"/>
+        </record>
+
+        <record id="group_quality_control_all_inspection" model="res.groups">
+            <field name="name">See All Inspections</field>
+            <field name="category_id" ref="quality_control.module_category_quality_control"/>
+            <field name="implied_ids" eval="[(4, ref('group_quality_control_department'))]"/>
+        </record>
+
+        <record id="quality_control.group_quality_control_manager" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('group_quality_control_all_inspection'))]"/>
+        </record>
+
+    </data>
+
+    <data noupdate="1">
+        <record id="qc_rule_personal_inspection" model="ir.rule">
+            <field name="name">Personal Inspections</field>
+            <field ref="quality_control.model_qc_inspection" name="model_id"/>
+            <field name="domain_force">['|',('user','=',user.id),('user','=',False)]</field>
+            <field name="groups" eval="[(4, ref('quality_control.group_quality_control_user'))]"/>
+        </record>
+        <record id="qc_rule_department_inspection" model="ir.rule">
+            <field name="name">Department Inspections</field>
+            <field ref="quality_control.model_qc_inspection" name="model_id"/>
+            <field name="domain_force">['|',('department','=',user.employee_ids[0].department_id.id),('department','=',False)]</field>
+            <field name="groups" eval="[(4, ref('group_quality_control_department'))]"/>
+        </record>
+        <record id="qc_rule_all_inspection" model="ir.rule">
+            <field name="name">All Inspections</field>
+            <field ref="quality_control.model_qc_inspection" name="model_id"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('group_quality_control_all_inspection'))]"/>
+        </record>
+
+        <record id="qc_rule_personal_inspection_line" model="ir.rule">
+            <field name="name">Personal Inspection Lines</field>
+            <field ref="quality_control.model_qc_inspection_line" name="model_id"/>
+            <field name="domain_force">['|',('user','=',user.id),('user','=',False)]</field>
+            <field name="groups" eval="[(4, ref('quality_control.group_quality_control_user'))]"/>
+        </record>
+        <record id="qc_rule_department_inspection_line" model="ir.rule">
+            <field name="name">Department Inspection Lines</field>
+            <field ref="quality_control.model_qc_inspection_line" name="model_id"/>
+            <field name="domain_force">['|',('department','=',user.employee_ids[0].department_id.id),('department','=',False)]</field>
+            <field name="groups" eval="[(4, ref('group_quality_control_department'))]"/>
+        </record>
+        <record id="qc_rule_all_inspection_line" model="ir.rule">
+            <field name="name">All Inspection Lines</field>
+            <field ref="quality_control.model_qc_inspection_line" name="model_id"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('group_quality_control_all_inspection'))]"/>
+        </record>
+    </data>
+
+</openerp>

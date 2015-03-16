@@ -27,12 +27,12 @@ class QcInspection(models.Model):
                             compute='_count_claims', store=False)
 
     @api.multi
-    def _prepare_inspection_header(self, object_ref, test):
+    def _prepare_inspection_header(self, object_ref, trigger_line):
         result = super(QcInspection, self)._prepare_inspection_header(
-            object_ref, test)
-        result.update({'automatic_claims': test.automatic_claims,
+            object_ref, trigger_line)
+        result.update({'automatic_claims': trigger_line.test.automatic_claims,
                        'automatic_claims_by_line':
-                       test.automatic_claims_by_line})
+                       trigger_line.test.automatic_claims_by_line})
         return result
 
     @api.multi
