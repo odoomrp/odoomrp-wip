@@ -31,6 +31,8 @@ class ProductCategory(models.Model):
     @api.onchange('no_create_variants')
     def onchange_no_create_variants(self):
         self.ensure_one()
+        if not self._origin:
+            return {}
         return {'warning': {'title': _('Change warning!'),
                             'message': _('Changing this parameter may cause'
                                          ' automatic variants creation')}}
@@ -62,6 +64,8 @@ class ProductTemplate(models.Model):
     @api.onchange('no_create_variants')
     def onchange_no_create_variants(self):
         self.ensure_one()
+        if not self._origin:
+            return {}
         return {'warning': {'title': _('Change warning!'),
                             'message': _('Changing this parameter may cause'
                                          ' automatic variants creation')}}
