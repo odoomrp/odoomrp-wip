@@ -140,6 +140,8 @@ class PurchaseOrderLine(models.Model):
             res['value'].update({'item_id': item_id})
             res['value']['price_unit'] = item_obj.browse(
                 item_id).price_get(product_id, qty, partner_id, uom_id)[0]
+            if 'domain' not in res:
+                res['domain'] = {}
             res['domain'].update({'item_id':
                                   [('id', 'in',
                                     self._get_possible_item_ids(
