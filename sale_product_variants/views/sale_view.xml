@@ -7,46 +7,45 @@
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="priority" eval="20" />
             <field name="arch" type="xml">
-                <xpath
-                    expr="//field[@name='order_line']/tree" position="attributes">
+                <xpath expr="//field[@name='order_line']/tree" position="attributes">
                     <attribute name="editable"/>
                 </xpath>
-                <xpath
-                    expr="//field[@name='order_line']/tree//field[@name='product_id']"
-                    position="before">
+                <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']"
+                       position="before">
                     <field name="product_template" />
                 </xpath>
-                <xpath
-                    expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
-                    position="after">
-                    <button name="action_duplicate" state="draft"
-                        string="Duplicate" type="object" icon="STOCK_COPY"
-                        help="Duplicate line" />
+                <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
+                       position="after">
+                    <button name="action_duplicate"
+                            state="draft"
+                            string="Duplicate"
+                            type="object"
+                            icon="STOCK_COPY"
+                            help="Duplicate line" />
                 </xpath>
-                <xpath
-                    expr="//field[@name='order_line']/form//field[@name='product_id']"
-                    position="before">
+                <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"
+                       position="before">
                     <field name="product_template" />
                 </xpath>
-                <xpath
-                    expr="//field[@name='order_line']//form//field[@name='price_unit']"
-                    position="after">
+                <xpath expr="//field[@name='order_line']//form//field[@name='price_unit']"
+                       position="after">
                     <button name="update_price_unit"
-                        states="draft" string="(update)" type="object"
-                        class="oe_edit_only oe_link" colspan="2" 
-                        attrs="{'invisible':[('product_id','!=',False)]}"/>
+                            states="draft" string="(update)" type="object"
+                            class="oe_edit_only oe_link" colspan="2"
+                            attrs="{'invisible':[('product_id','!=',False)]}"/>
                 </xpath>
-                <xpath
-                    expr="//field[@name='order_line']/form//label[@for='name']"
-                    position="before">
+                <xpath expr="//field[@name='order_line']/form//label[@for='name']"
+                       position="before">
                     <label for="product_attributes"
-                        attrs="{'invisible':[('product_attributes','=',[])]}" />
+                           attrs="{'invisible':[('product_attributes','=',[])]}" />
                     <field name="product_attributes"
-                        attrs="{'invisible':[('product_attributes','=',[])]}"
-                        options="{'no_create': True, 'no_delete': True}">
+                           attrs="{'invisible':[('product_attributes','=',[])]}"
+                           options="{'no_create': True, 'no_delete': True}">
                         <tree create="0" delete="0" editable="1">
                             <field name="attribute" />
-                            <field name="possible_values" invisible="True" />
+                            <field name="possible_values"
+                                   invisible="1"
+                                   widget="many2many_tags" />
                             <field name="value" />
                             <field name="price_extra" readonly="True" />
                         </tree>
@@ -99,8 +98,10 @@
                     <field name="product_template" />
                 </field>
                 <filter string="Product" position="after">
-                    <filter string="Template" icon="terp-accessories-archiver"
-                        domain="[]" context="{'group_by':'product_template'}" />
+                    <filter string="Template"
+                            icon="terp-accessories-archiver"
+                            domain="[]"
+                            context="{'group_by':'product_template'}" />
                 </filter>
             </field>
         </record>

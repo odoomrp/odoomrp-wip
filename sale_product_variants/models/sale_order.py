@@ -51,7 +51,7 @@ class ProductAttributeValueSaleLine(models.Model):
         domain="[('id', 'in', possible_values[0][2])]")
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
-        compute='_get_possible_attribute_values')
+        compute='_get_possible_attribute_values', readonly=True)
     price_extra = fields.Float(
         compute='_get_price_extra', string='Attribute Price Extra',
         digits=dp.get_precision('Product Price'),
