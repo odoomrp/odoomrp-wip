@@ -98,6 +98,8 @@ class SaleOrderLine(models.Model):
                 self.product_template.product_variant_ids[0])
         else:
             self.product_id = False
+            self.product_uom = self.product_template.uom_id
+            self.product_uos = self.product_template.uos_id
             self.price_unit = self.order_id.pricelist_id.with_context(
                 {
                     'uom': self.product_uom.id,
