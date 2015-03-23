@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="purchase_pricelist_item_form_view">
+            <field name="name">purchase.pricelist.item.form</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product_pricelist_rules.pricelist_item_form_view_ext" />
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="pricelist_type" invisible="1"/>
+                </field>
+                <field name="discount3" position="attributes">
+                    <attribute name="attrs">{'invisible': [('pricelist_type','=','purchase')]}</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

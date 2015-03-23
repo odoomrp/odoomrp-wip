@@ -38,6 +38,7 @@
     "data": [
         "views/purchase_pricelist_view.xml",
         "views/purchase_view.xml",
+        "views/pricelist_view.xml",
         "security/ir.model.access.csv",
         "security/purchase_pricelist_rules_security.xml",
     ],
