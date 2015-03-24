@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-25 19:24+0000\n"
-"PO-Revision-Date: 2015-02-25 20:25+0100\n"
+"POT-Creation-Date: 2015-03-24 08:58+0000\n"
+"PO-Revision-Date: 2015-03-24 10:00+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+
+#. module: stock_picking_wave_package_info
+#: field:stock.picking.wave,num_packages:0
+msgid "Num. Packages"
+msgstr "Num. Paquetes"
 
 #. module: stock_picking_wave_package_info
 #: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
@@ -43,7 +48,17 @@ msgid "Picking Waves"
 msgstr "Agrupaciones de albaranes"
 
 #. module: stock_picking_wave_package_info
+#: model:ir.model,name:stock_picking_wave_package_info.model_stock_transfer_details
+msgid "Picking wizard"
+msgstr "Asistente de albarán"
+
+#. module: stock_picking_wave_package_info
 #: view:stock.quant.package:stock_picking_wave_package_info.view_quant_package_form_inh_pickingwavepackageinfo
 msgid "Pickings"
 msgstr "Albaranes"
+
+#. module: stock_picking_wave_package_info
+#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "Total packages by logistic unit"
+msgstr "Total paquetes por unidad logística"
 
