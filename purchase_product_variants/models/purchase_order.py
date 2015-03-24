@@ -58,6 +58,7 @@ class PurchaseOrderLine(models.Model):
                                            attribute.attribute_id})
             line.product_attributes = product_attributes
             line.name = line.product_template.name
+            line.product_uom = line.product_template.uom_po_id
             return {'domain': {'product_id':
                                [('product_tmpl_id', '=',
                                  line.product_template.id)]}}
@@ -74,22 +75,19 @@ class PurchaseOrderLine(models.Model):
                 domain.append(('attribute_value_ids', '=', value))
             self.product_id = product_obj.search(domain, limit=1)
 
-    def onchange_product_id(self, cr, uid, ids, pricelist_id, product_id, qty,
-                            uom_id, partner_id, date_order=False,
-                            fiscal_position_id=False, date_planned=False,
-                            name=False, price_unit=False, state='draft',
-                            context=None):
+    @api.multi
+    def onchange_product_id(
+            self, pricelist_id, product_id, qty, uom_id, partner_id,
+            date_order=False, fiscal_position_id=False, date_planned=False,
+            name=False, price_unit=False, state='draft'):
         res = super(PurchaseOrderLine, self).onchange_product_id(
-            cr, uid, ids, pricelist_id, product_id, qty, uom_id, partner_id,
+            pricelist_id, product_id, qty, uom_id, partner_id,
             date_order=date_order, fiscal_position_id=fiscal_position_id,
             date_planned=date_planned, name=name, price_unit=price_unit,
-            state=state, context=context)
-        product_obj = self.pool['product.product']
-        product = product_obj.browse(cr, uid, product_id, context=context)
-        attributes = []
-        for attribute_value in product.attribute_value_ids:
-            attributes.append({'attribute': attribute_value.attribute_id.id,
-                               'value': attribute_value.id})
+            state=state)
+        product_obj = self.env['product.product']
+        product = product_obj.browse(product_id)
+        attributes = product._get_product_attributes_values_dict()
         res['value'].update({'product_attributes': attributes,
                              'product_template': product.product_tmpl_id.id})
         return res

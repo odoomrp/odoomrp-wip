@@ -81,13 +81,13 @@ class SaleOrderLine(models.Model):
             date_order=date_order, packaging=packaging,
             fiscal_position=fiscal_position, flag=flag)
         product = product_obj.browse(product_id)
-        if (product.attribute_value_ids and name and
-                'value' in res and 'name' in res['value'] and
-                name != res['value']['name']):
-            attributes_dict = product._get_product_attributes_values_dict()
+        attributes_dict = product._get_product_attributes_values_dict()
+        res['value'].update({'product_attributes': attributes_dict})
+        if (product.attribute_value_ids and 'value' in res and
+                'name' in res['value']):
+            name = product._get_product_attributes_values_text()
             res['value'].update({'name': (('%s\n--\n%s') %
-                                          (res['value']['name'], name)),
-                                 'product_attributes': attributes_dict})
+                                          (res['value']['name'], name))})
         return res
 
     @api.multi
@@ -126,7 +126,8 @@ class SaleOrderLine(models.Model):
                                                 attr_line.value.name)
         self.product_id = product_obj._product_find(self.product_template,
                                                     self.product_attributes)
-        self.name = description
+        if not self.product_id:
+            self.name = description
         if self.product_template:
             self.update_price_unit()
 

@@ -120,6 +120,13 @@ class ProductProduct(models.Model):
                                        'value': attr_value.id})
         return product_attributes
 
+    def _get_product_attributes_values_text(self):
+        description = self.product_tmpl_id.name
+        for attr_value in self.attribute_value_ids:
+            description += _('\n%s: %s') % (attr_value.attribute_id.name,
+                                            attr_value.name)
+        return description
+
     def _product_find(self, product_template, product_attributes):
         domain = []
         if product_template:
