@@ -15,7 +15,7 @@ class StockPickingWave(models.Model):
     package_totals = fields.One2many(
         "stock.picking.package.total", "wave",
         string="Total UL Packages Info", readonly=True)
-    num_packages = fields.Integer(string='Num. Packages', readonly=True)
+    num_packages = fields.Integer(string='# Packages', readonly=True)
 
     def _catch_operations(self):
         self.packages = [
