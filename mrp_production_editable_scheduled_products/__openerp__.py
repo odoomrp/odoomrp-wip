@@ -25,7 +25,9 @@
     "description": """
     This module allows to edit production order to add more scheduled products.
     """,
-    'author': 'OdooMRP team',
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     'website': "http://www.odoomrp.com",
     "depends": ['mrp'],
     "category": "Manufacturing",

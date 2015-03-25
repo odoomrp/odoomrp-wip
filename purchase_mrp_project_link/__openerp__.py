@@ -24,7 +24,9 @@
         "mrp_project_link",
         "purchase",
     ],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "Hidden/Dependency",
     "data": [
         "views/purchase_order_view.xml",

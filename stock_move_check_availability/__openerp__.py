@@ -23,7 +23,9 @@
         "stock",
         "stock_quant_merge",
     ],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "contributors": [
         "Daniel Campos <danielcampos@avanzosc.es>",

@@ -25,7 +25,9 @@
         "product_variants_no_automatic_creation",
         "mrp_production_editable_scheduled_products",
     ],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",

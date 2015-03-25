@@ -18,7 +18,9 @@
 {
     "name": "MRP Final Product Lot",
     "version": "1.0",
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "MRP",
     "website": "http://www.odoomrp.com",
     "description": """

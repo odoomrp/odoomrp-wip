@@ -25,7 +25,9 @@
         "product",
         "product_pricelist_rules",
     ],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Daniel Campos <danielcampos@avanzosc.es>",

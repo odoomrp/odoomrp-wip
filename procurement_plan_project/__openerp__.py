@@ -21,7 +21,9 @@
     "version": "1.0",
     "depends": ["mrp_project_link",
                 "procurements_plan"],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "Project",
     "description": """
         When the procurements are loaded into a plan it will assign the main

@@ -23,7 +23,9 @@
     "description": """
     This module allows to know the product last prices in a purchase order.
     """,
-    'author': 'OdooMRP team',
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     'website': "http://www.odoomrp.com",
     "depends": ['purchase'],
     "category": "Custom Modules",

@@ -21,7 +21,9 @@
     "name": "Product Suppliers from Product Category",
     "version": "1.0",
     "depends": ["base", "product"],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
             "Pedro Manuel Baeza Romero <pedro.baeza@serviciosbaeza.com>",
             "Ana Juaristi Olalde <ajuaristio@gmail.com>",

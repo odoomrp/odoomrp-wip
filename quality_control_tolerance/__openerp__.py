@@ -22,7 +22,9 @@
 {
     "name": "Quality control - Tolerances in questions",
     "version": "1.0",
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "Quality control",
     "website": "http://www.odoomrp.com",
     "depends": [

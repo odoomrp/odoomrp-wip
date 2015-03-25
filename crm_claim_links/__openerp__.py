@@ -33,7 +33,9 @@
     - For each crm claim, its associated Stock Pickings and repair orders list
     - For any product return it must have a crm claim linked.
     """,
-    'author': 'OdooMRP team',
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     'contributors': ["Daniel Campos <danielcampos@avanzosc.es>"],
     'website': "http://www.odoomrp.com",
     'depends': ["crm_claim", "mrp_repair"],

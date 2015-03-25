@@ -21,7 +21,9 @@
     "version": "1.0",
     "depends": ["mrp_production_real_costs",
                 "product"],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "Product",
     "website": "www.odoomrp.com",
     "description": """

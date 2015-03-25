@@ -20,7 +20,9 @@
     "name": "Invoicing type on pickings",
     "version": "1.0",
     "depends": ["sale_journal", "stock_account"],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>",
                      "Ainara Galdona <ainaragaldona@avanzosc.es>"],
     "category": "stock_picking",

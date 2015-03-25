@@ -21,7 +21,9 @@
     "name": "Product Purchase Warrant",
     "version": "1.0",
     "depends": ["base", "stock", "product"],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Product",
     "description": """

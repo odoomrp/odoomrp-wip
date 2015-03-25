@@ -21,7 +21,9 @@
     "version": "1.0",
     "depends": ["procurement_sale_forecast",
                 "purchase"],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "MPS",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",

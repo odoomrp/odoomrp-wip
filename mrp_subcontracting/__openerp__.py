@@ -18,7 +18,9 @@
 {
     "name": "MRP Subcontracting",
     "version": "1.0",
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
         "Incaser Informatica S.L.",
         "Ana Juaristi <ajuaristio@gmail.com>",

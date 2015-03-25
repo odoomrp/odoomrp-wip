@@ -20,7 +20,9 @@
     "name": "Estimated costs in manufacturing orders",
     "version": "1.0",
     "category": "Manufacturing",
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "contributors": [
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",

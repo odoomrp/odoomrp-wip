@@ -18,7 +18,9 @@
 {
     "name": "MRP Procurements Plan",
     "version": "1.0",
-    'author': 'OdooMRP team',
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "Manufacturing",
     'website': "http://www.odoomrp.com",
     "description": """

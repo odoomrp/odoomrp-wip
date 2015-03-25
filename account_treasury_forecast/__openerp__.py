@@ -23,8 +23,10 @@
         "account",
         "purchase",
     ],
-    "author": "Avanzosc, S.L.",
-    "website": "http://www.avanzosc.es",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "website": "http://www.odoomrp.com",
     "category": "Accounting",
     "description": """
         This module manages the treasury forecast.

@@ -26,7 +26,9 @@
     "depends": [
         "sale",
     ],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
         "Carlos Sánchez Cifuentes <csanchez@grupovermon.com>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",

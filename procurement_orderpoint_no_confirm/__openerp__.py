@@ -20,7 +20,9 @@
     "name": "Procurement Orderpoint No Confirm",
     "version": "1.0",
     "depends": ["stock"],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
         "Ainara Galdona <ainaragaldona@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",

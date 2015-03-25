@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -24,7 +23,9 @@
     "name": "Warning Log",
     "version": "1.0",
     "depends": ["base", "warning"],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "Tools",

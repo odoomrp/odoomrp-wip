@@ -25,7 +25,9 @@
     This modules links mrp.workcenters and machines. Also adds the machine
     users to the workcenter operators.
     """,
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "Avanzosc,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": ["Daniel Campos <danielcampos@avanzosc.es>"],
     "website": "http://www.odoomrp.com",
     "depends": [

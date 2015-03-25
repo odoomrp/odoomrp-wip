@@ -22,7 +22,9 @@
     "depends": ["account_treasury_forecast",
                 "account_payment_sale",
                 "account_payment_purchase"],
-    "author": "Avanzosc, S.L.",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.avanzosc.es",
     "category": "Accounting",
     "description": """

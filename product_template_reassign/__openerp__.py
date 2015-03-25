@@ -23,8 +23,8 @@
         "product"
     ],
     "author": "OdooMRP team,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza, "
-              "Avanzosc",
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
         "Mikel Arregi <mikelarregi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",

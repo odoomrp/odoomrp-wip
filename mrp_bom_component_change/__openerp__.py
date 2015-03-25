@@ -26,7 +26,9 @@
     This module allows to change massively one component by another on a list
     of BoMs.
     """,
-    'author': 'OdooMRP team',
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     'website': "http://www.odoomrp.com",
     "depends": ['mrp'],
     "category": "Manufacturing",

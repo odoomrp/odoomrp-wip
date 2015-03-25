@@ -24,7 +24,9 @@
         "mrp_operations_project",
         "analytic"
     ],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "Manufacturing",
     'data': [
         "views/mrp_production_view.xml",

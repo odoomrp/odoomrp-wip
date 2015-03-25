@@ -26,7 +26,9 @@
     This module allows to add the operation on BoM where the secondary products
     will be produced.
     """,
-    'author': 'OdooMRP team',
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     'website': "http://www.odoomrp.com",
     "depends": ['mrp_byproduct', 'mrp_operations_extension'],
     "category": "Manufacturing",

@@ -21,7 +21,9 @@
     "name": "Stock move purchase price",
     "version": "1.0",
     "depends": ["base", "stock", "purchase"],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "purchase",
     "description": """

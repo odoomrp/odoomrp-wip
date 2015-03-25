@@ -23,7 +23,10 @@
 {
     "name": "Product Price History",
     "version": "1.2.3",
-    "author": "Camptocamp",
+    "author": "Camptocamp,"
+              "OdooMRP team,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza,"
+              "AvanzOSC",
     "category": "Generic Modules/Inventory Control",
     "depends": [
         "product",

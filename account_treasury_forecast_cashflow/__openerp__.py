@@ -20,8 +20,10 @@
     "name": "Account Treasury Forecast Cashflow",
     "version": "1.0",
     "depends": ["account_treasury_forecast"],
-    "author": "Avanzosc, S.L.",
-    "website": "http://www.avanzosc.es",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "website": "http://www.odoomrp.com",
     "category": "Accounting",
     "description": """
     This module adds two new treasury forecast types:

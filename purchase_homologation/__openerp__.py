@@ -36,7 +36,9 @@ You can also set the permission "Bypass purchase homologation" to certain users
 to not restrict the creation of the purchase order, but only warn about the
 lack of the homologation.
     """,
-    'author': 'OdooMRP team',
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     'contributors': [
         'Carlos Sánchez Cifuentes <csanchez@grupovermon.com>',
         'Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>',

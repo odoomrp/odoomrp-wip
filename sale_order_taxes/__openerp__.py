@@ -23,7 +23,9 @@
         "sale",
         "account",
     ],
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "Sales Management",
     "website": "http://www.odoomrp.com",
     "data": [

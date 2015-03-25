@@ -22,7 +22,9 @@
 {
     "name": "Purchase Order Allowed Product Template",
     "version": "1.0",
-    "author": "OdooMRP team",
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "category": "Purchase",
     "depends": [

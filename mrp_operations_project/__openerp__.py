@@ -27,7 +27,9 @@
 
     - Links Mrp Operations extension with project states.
     - Links Project tasks with Work Orders""",
-    'author': 'OdooMRP team',
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     'website': 'http://www.avanzosc.com',
     "depends": ['mrp_operations_extension', 'project'],
     "category": "Manufacturing",
