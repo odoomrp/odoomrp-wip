@@ -18,7 +18,7 @@
 ##############################################################################
 
 from openerp import fields, models, api
-from itertools import product
+from itertools import product as iter_product
 
 
 class ReassignProducts(models.TransientModel):
@@ -40,8 +40,8 @@ class ReassignProducts(models.TransientModel):
     def default_get(self, var_fields):
         template = self.env['product.template'].browse(
             self.env.context['active_id'])
-        values = product(*map(lambda x: x.value_ids.ids,
-                              template.attribute_line_ids))
+        values = iter_product(*map(lambda x: x.value_ids.ids,
+                                   template.attribute_line_ids))
         val_list = list(values)
         products = template.product_variant_ids
         lines = []
