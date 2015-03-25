@@ -53,7 +53,7 @@ class WizProductionProductLine(models.TransientModel):
     def _prepare_product_addition(self, product, product_qty, production):
         addition_vals = super(
             WizProductionProductLine, self)._prepare_product_addition(
-                product, product_qty, production)
+            product, product_qty, production)
         if self.work_order:
             addition_vals['work_order'] = self.work_order.id
         return addition_vals

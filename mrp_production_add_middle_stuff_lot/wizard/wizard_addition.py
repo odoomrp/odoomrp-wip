@@ -28,7 +28,7 @@ class WizProductionProductLine(models.TransientModel):
     def _prepare_product_addition(self, product, product_qty, production):
         addition_vals = super(
             WizProductionProductLine, self)._prepare_product_addition(
-                product, product_qty, production)
+            product, product_qty, production)
         if self.lot:
             addition_vals['lot'] = self.lot.id
         return addition_vals
