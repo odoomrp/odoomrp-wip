@@ -23,20 +23,21 @@ from itertools import product
 
 class ReassignProducts(models.TransientModel):
     _name = "reassign.products"
-    _rec_name = "products"
-    products = fields.One2many('reassign.product.lines',
-                               'reassign', string='Attributes Products')
+
+    products = fields.One2many(
+        comodel_name='reassign.product.lines',
+        inverse_name='wizard', string='Products by attributes')
 
     @api.multi
     def _product_by_variants(self, variants, products):
         set_var_ids = set(variants)
-        for prod in products:
-            if set(prod.attribute_value_ids.ids) == set_var_ids:
-                return prod.id
+        for product in products:
+            if set(product.attribute_value_ids.ids) == set_var_ids:
+                return product.id
+        return False
 
     @api.model
     def default_get(self, var_fields):
-        lines = {}
         template = self.env['product.template'].browse(
             self.env.context['active_id'])
         values = product(*map(lambda x: x.value_ids.ids,
@@ -45,32 +46,41 @@ class ReassignProducts(models.TransientModel):
         products = template.product_variant_ids
         lines = []
         for vals in val_list:
-            val_product = self._product_by_variants(vals, products)
-            lines.append((0, 0, {'attributes': [(6, 0, list(vals))],
-                                 'exists': val_product and True,
-                                 'product': val_product
-                                 }))
+            line_vals = {
+                'attributes': [(6, 0, list(vals))],
+                'product': self._product_by_variants(vals, products),
+            }
+            line_vals['old_product'] = line_vals['product']
+            lines.append((0, 0, line_vals))
         return {'products': lines}
 
     @api.multi
     def reassign(self):
+        template_id = self.env.context['active_id']
         for line in self.products:
             if line.product:
-                template = line.product.product_tmpl_id
+                old_template = line.product.product_tmpl_id
+                if old_template.id == template_id:
+                    continue
+                if line.old_product:
+                    line.old_product.unlink()
                 line.product.write(
                     {'attribute_value_ids': [(6, 0, line.attributes.ids)],
-                     'product_tmpl_id': self.env.context['active_id']})
-                if len(template.product_variant_ids.ids) == 0:
-                    template.unlink()
+                     'product_tmpl_id': template_id})
+                if not old_template.product_variant_ids:
+                    old_template.unlink()
+        return True
 
 
 class ReassignProductLines(models.TransientModel):
     _name = "reassign.product.lines"
 
-    attributes = fields.Many2many('product.attribute.value',
-                                  string="Attributes")
-    reassign = fields.Many2one(comodel_name='reassign.products',
-                               string='Reassign Wizard')
-    product = fields.Many2one(comodel_name='product.product',
-                              string='Product')
-    exists = fields.Boolean(string="Exists")
+    wizard = fields.Many2one(
+        comodel_name='reassign.products', string='Reassign Wizard',
+        required=True)
+    attributes = fields.Many2many(
+        'product.attribute.value', string="Attributes")
+    old_product = fields.Many2one(
+        comodel_name='product.product', string='Product')
+    product = fields.Many2one(
+        comodel_name='product.product', string='Product')

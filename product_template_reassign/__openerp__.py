@@ -17,16 +17,21 @@
 #
 ##############################################################################
 {
-    "name": "Product Template Reasing",
+    "name": "Product template reassigning",
     "version": "1.0",
-    "depends": ["base", "product_variants_no_automatic_creation"],
-    "author": "OdooMRP team",
+    "depends": [
+        "product"
+    ],
+    "author": "OdooMRP team,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza, "
+              "Avanzosc",
     "contributors": [
-            "Pedro Manuel Baeza Romero <pedro.baeza@serviciosbaeza.com>",
-            "Ana Juaristi Olalde <ajuaristio@gmail.com>",
-            "Mikel Arregi <mikelarregi@avanzosc.es>"],
-    "category": "Product",
-    'data': ["wizard/reassign_products_view.xml"],
+        "Mikel Arregi <mikelarregi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+    ],
+    "category": 'Product Management',
+    'data': [
+        "wizard/reassign_products_view.xml"
+    ],
     "installable": True,
-    "auto_install": False,
 }
