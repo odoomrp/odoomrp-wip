@@ -31,9 +31,9 @@
                     <div colspan="4"
                          attrs="{'invisible': [('product_attributes', '=', [])]}">
                         <label for="product_attributes"/>
-                        <field name="product_attributes"
-                               options="{'no_create': True, 'no_delete': True}">
-                            <tree create="false" editable="1">
+                        <field name="product_attributes">
+                            <tree create="false" delete="false" editable="1">
+                                <field name="possible_values" invisible="1" />
                                 <field name="attribute" />
                                 <field name="value" />
                             </tree>
@@ -53,9 +53,9 @@
                     <div colspan="4"
                          attrs="{'invisible': [('product_attributes', '=', [])]}">
                         <label for="product_attributes" />
-                        <field name="product_attributes"
-                               options="{'no_create': True, 'no_delete': True}">
-                            <tree create="false" editable="1">
+                        <field name="product_attributes">
+                            <tree create="false" delete="false" editable="1">
+                                <field name="possible_values" invisible="1" />
                                 <field name="attribute" />
                                 <field name="value" />
                             </tree>
