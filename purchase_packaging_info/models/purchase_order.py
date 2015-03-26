@@ -37,11 +37,8 @@ class PurchaseOrderLine(models.Model):
     @api.one
     @api.depends('order_id.product_ul', 'product_id', 'product_qty')
     def _calculate_packages(self):
-        package_attr = False
-        for attr_value in self.product_id.attribute_value_ids:
-            if attr_value.attribute_id.is_package:
-                package_attr = attr_value
-                break
+        package_attr = self.product_id.attribute_value_ids.filtered(
+            lambda x: x.attribute_id.is_package)
         if package_attr:
             self.pri_pack_qty = (
                 self.product_qty / (package_attr.numeric_value or 1.0))
