@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="purchase_order_form_packaging">
+            <field name="name">purchase.order.form.packaging</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <field name="currency_id" position="after">
+                    <field name="product_ul" groups="product.group_stock_packaging" />
+                </field>
+                <field name="order_line" position="attributes">
+                    <attribute name="context">{'default_product_ul': product_ul}</attribute>
+                </field>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='product_uom']" position="after">
+                    <field name="pri_pack_qty"
+                           groups="product.group_stock_packaging"
+                           sum="# Pkg 1"
+                            />
+                    <field name="pri_pack"
+                           groups="product.group_stock_packaging"
+                            />
+                    <field name="sec_pack_qty"
+                           groups="product.group_stock_packaging"
+                           sum="# Pkg 2"
+                            />
+                    <field name="sec_pack"
+                           groups="product.group_stock_packaging"
+                            />
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_order_line_form_packaging">
+            <field name="name">purchase.order.form.packaging</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_order_line_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_qty']/.." position="after">
+                    <label for="pri_pack_qty" groups="product.group_stock_packaging"/>
+                    <div groups="product.group_stock_packaging">
+                        <field name="pri_pack_qty"
+                               class="oe_inline"
+                                />
+                        <field name="pri_pack"
+                               class="oe_inline oe_no_button"
+                               groups="product.group_uom"
+                                />
+                    </div>
+                    <label for="sec_pack_qty" groups="product.group_stock_packaging"/>
+                    <div groups="product.group_stock_packaging">
+                        <field name="sec_pack_qty"
+                               class="oe_inline"
+                                />
+                        <field name="sec_pack"
+                               class="oe_inline oe_no_button"
+                               groups="product.group_uom"
+                                />
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_order_line_form2_packaging">
+            <field name="name">purchase.order.line.packaging.form2.packaging</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_order_line_form2" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_qty']/.." position="after">
+                    <label for="pri_pack_qty" groups="product.group_stock_packaging"/>
+                    <div groups="product.group_stock_packaging">
+                        <field name="pri_pack_qty"
+                               class="oe_inline"
+                                />
+                        <field name="pri_pack"
+                               class="oe_inline oe_no_button"
+                               groups="product.group_uom"
+                                />
+                    </div>
+                    <label for="sec_pack_qty" groups="product.group_stock_packaging"/>
+                    <div groups="product.group_stock_packaging">
+                        <field name="sec_pack_qty"
+                               class="oe_inline"
+                                />
+                        <field name="sec_pack"
+                               class="oe_inline oe_no_button"
+                               groups="product.group_uom"
+                                />
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_order_line_tree_packaging">
+            <field name="name">purchase.order.line.tree.packaging</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_order_line_tree" />
+            <field name="arch" type="xml">
+                <field name="product_uom" position="after">
+                    <field name="pri_pack_qty"
+                           groups="product.group_stock_packaging"
+                           sum="# Pkg 1"
+                            />
+                    <field name="pri_pack"
+                           groups="product.group_stock_packaging"
+                            />
+                    <field name="sec_pack_qty"
+                           groups="product.group_stock_packaging"
+                           sum="# Pkg 2"
+                            />
+                    <field name="sec_pack"
+                           groups="product.group_stock_packaging"
+                            />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
