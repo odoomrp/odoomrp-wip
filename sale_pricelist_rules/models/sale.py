@@ -72,7 +72,15 @@ class SaleOrderLine(models.Model):
         qty = self.product_uom_qty
         if self.offer_id:
             total = self.offer_id.free_qty + self.offer_id.paid_qty
-            qty = round((qty / total) * self.offer_id.paid_qty)
+            packs = qty // total
+            remaining = qty - packs * total
+            if remaining:
+                if remaining < self.offer_id.paid_qty:
+                    qty = packs * self.offer_id.paid_qty + remaining
+                else:
+                    qty = (packs + 1) * self.offer_id.paid_qty
+            else:
+                qty = packs * self.offer_id.paid_qty
         return qty
 
     def _amount_line(self, cr, uid, ids, field_name, arg, context=None):
