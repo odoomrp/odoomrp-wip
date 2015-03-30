@@ -42,13 +42,10 @@ class StockTransferDetails(models.TransientModel):
                         'owner_id': prod.owner_id.id,
                     }
                     if prod.packop_id:
-                        if prod.packop_id.product_qty != prod.quantity:
-                            qty = prod.packop_id.product_qty - prod.quantity
-                            prod.packop_id.write({'product_qty': qty})
-                            pack_datas['picking_id'] = picking.id
-                            operation_obj.create(pack_datas)
-                        else:
-                            prod.packop_id.write(pack_datas)
+                        prod.packop_id.write(pack_datas)
+                    else:
+                        pack_datas['picking_id'] = picking.id
+                        operation_obj.create(pack_datas)
         if 'origin_wave' in self._context:
             origin_wave = wave_obj.browse(self._context['origin_wave'])
             origin_wave._catch_operations()

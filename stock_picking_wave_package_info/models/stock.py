@@ -2,7 +2,7 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class StockPickingWave(models.Model):
@@ -38,6 +38,10 @@ class StockPickingWave(models.Model):
                               'quantity': cont}
                     self.env['stock.picking.package.total'].create(values)
                     self.num_packages += cont
+
+    @api.one
+    def button_refresh_package_totals(self):
+        self._calculate_package_totals()
 
 
 class StockPickingPackageTotal(models.Model):
