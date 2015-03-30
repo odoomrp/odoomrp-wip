@@ -9,23 +9,43 @@
                 <field name="currency_id" position="after">
                     <field name="product_ul" groups="product.group_stock_packaging" />
                 </field>
-                <xpath expr="//field[@name='order_line']/form//field[@name='th_weight']" position="after">
+                <xpath expr="//field[@name='order_line']/tree//field[@name='product_uom']" position="after">
+                    <field name="pri_pack_qty"
+                           groups="product.group_stock_packaging"
+                           sum="# Pkg 1"
+                            />
+                    <field name="pri_pack"
+                           groups="product.group_stock_packaging"
+                            />
+                    <field name="sec_pack_qty"
+                           groups="product.group_stock_packaging"
+                           sum="# Pkg 2"
+                            />
+                    <field name="sec_pack"
+                           groups="product.group_stock_packaging"
+                            />
+                </xpath>
+                <xpath expr="//field[@name='order_line']/form//field[@name='product_uom_qty']/.." position="after">
                     <label for="pri_pack_qty" groups="product.group_stock_packaging"/>
                     <div groups="product.group_stock_packaging">
-                        <field name="pri_pack_qty" class="oe_inline" />
-                        <field name="pri_pack" class="oe_inline oe_no_button" />
+                        <field name="pri_pack_qty"
+                               class="oe_inline"
+                                />
+                        <field name="pri_pack"
+                               class="oe_inline oe_no_button"
+                               groups="product.group_uom"
+                                />
                     </div>
                     <label for="sec_pack_qty" groups="product.group_stock_packaging"/>
                     <div groups="product.group_stock_packaging">
-                        <field name="sec_pack_qty" class="oe_inline" />
-                        <field name="sec_pack" class="oe_inline oe_no_button" />
+                        <field name="sec_pack_qty"
+                               class="oe_inline"
+                                />
+                        <field name="sec_pack"
+                               class="oe_inline oe_no_button"
+                               groups="product.group_uom"
+                                />
                     </div>
-                </xpath>
-                <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="before">
-                    <field name="pri_pack_qty" groups="product.group_stock_packaging" />
-                    <field name="pri_pack" groups="product.group_stock_packaging" />
-                    <field name="sec_pack_qty" groups="product.group_stock_packaging" sum="# Pkg 2" />
-                    <field name="sec_pack" groups="product.group_stock_packaging" />
                 </xpath>
             </field>
         </record>
@@ -35,10 +55,28 @@
             <field name="model">sale.order.line</field>
             <field name="inherit_id" ref="sale.view_order_line_form2" />
             <field name="arch" type="xml">
-                <field name="company_id" position="before">
-                    <field name="pri_pack" groups="product.group_stock_packaging" />
-                    <field name="sec_pack_qty" groups="product.group_stock_packaging" />
-                </field>
+                <xpath expr="//field[@name='product_uom_qty']/.." position="after">
+                    <label for="pri_pack_qty" groups="product.group_stock_packaging"/>
+                    <div groups="product.group_stock_packaging">
+                        <field name="pri_pack_qty"
+                               class="oe_inline"
+                                />
+                        <field name="pri_pack"
+                               class="oe_inline oe_no_button"
+                               groups="product.group_uom"
+                                />
+                    </div>
+                    <label for="sec_pack_qty" groups="product.group_stock_packaging"/>
+                    <div groups="product.group_stock_packaging">
+                        <field name="sec_pack_qty"
+                               class="oe_inline"
+                                />
+                        <field name="sec_pack"
+                               class="oe_inline oe_no_button"
+                               groups="product.group_uom"
+                                />
+                    </div>
+                </xpath>
             </field>
         </record>
 
@@ -47,7 +85,7 @@
             <field name="model">sale.order.line</field>
             <field name="inherit_id" ref="sale.view_order_line_tree" />
             <field name="arch" type="xml">
-                <field name="state" position="before">
+                <field name="product_uom" position="before">
                     <field name="pri_pack_qty" groups="product.group_stock_packaging" />
                     <field name="pri_pack" groups="product.group_stock_packaging" />
                     <field name="sec_pack_qty" groups="product.group_stock_packaging" sum="# Pkg 2" />

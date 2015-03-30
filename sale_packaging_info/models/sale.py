@@ -24,7 +24,8 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     @api.one
-    @api.depends('order_id.product_ul', 'product_id', 'product_uom_qty')
+    @api.depends('order_id.product_ul', 'product_id', 'product_uom_qty',
+                 'pri_pack', 'sec_pack')
     def _calculate_packages(self):
         package_attr = False
         for attr_value in self.product_id.attribute_value_ids:

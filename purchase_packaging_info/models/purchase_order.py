@@ -35,7 +35,8 @@ class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
     @api.one
-    @api.depends('order_id.product_ul', 'product_id', 'product_qty')
+    @api.depends('order_id.product_ul', 'product_id', 'product_qty',
+                 'pri_pack', 'sec_pack')
     def _calculate_packages(self):
         package_attr = self.product_id.attribute_value_ids.filtered(
             lambda x: x.attribute_id.is_package)
