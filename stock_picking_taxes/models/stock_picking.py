@@ -47,8 +47,7 @@ class StockPicking(models.Model):
         string='Total', compute='_amount_all',
         digits=dp.get_precision('Sale Price'), help='The total amount.')
     currency_id = fields.Many2one(
-        string='Sale currency', related='sale_id.currency_id', store=True,
-        readonly=True)
+        string='Sale currency', related='sale_id.currency_id')
 
     @api.multi
     @api.depends('move_lines', 'move_lines.product_qty',
