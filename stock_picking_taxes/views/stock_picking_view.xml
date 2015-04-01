@@ -8,20 +8,20 @@
             <field name="arch" type="xml">
                 <notebook position="inside">
                     <page string="Taxes">
-                        <group col="4">
+                        <group col="6">
                             <field name="amount_untaxed" />
+                            <field name="amount_tax" />
                             <field name="amount_total" />
                         </group>
-                        <field name="taxes" nolabel="1" >
+                        <field name="taxes" nolabel="1">
                             <tree>
                                 <field name="name" />
                                 <field name="base" />
                                 <field name="amount" />
                             </tree>
                         </field>
-                        <button name="refresh_taxes"
-                            string="Refresh" type="object"
-                            icon="gtk-ok" />
+                        <button name="refresh_taxes" string="Refresh"
+                            type="object" icon="gtk-ok" />
                     </page>
                 </notebook>
             </field>

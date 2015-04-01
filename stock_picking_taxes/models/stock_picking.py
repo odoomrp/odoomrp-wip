@@ -40,6 +40,9 @@ class StockPicking(models.Model):
     amount_untaxed = fields.Float(
         string='Untaxed Amount', compute='_amount_all',
         digits=dp.get_precision('Sale Price'), help='The amount without tax.')
+    amount_tax = fields.Float(
+        string='Taxes', compute='_amount_all',
+        digits=dp.get_precision('Sale Price'), help='Tax amount')
     amount_total = fields.Float(
         string='Total', compute='_amount_all',
         digits=dp.get_precision('Sale Price'), help='The total amount.')
@@ -51,7 +54,7 @@ class StockPicking(models.Model):
         for picking in self:
             picking.amount_untaxed = 0.0
             picking.amount_total = 0.0
-            val1 = val = 0.0
+            val2 = val1 = val = 0.0
             for line in picking.move_lines:
                 if line.procurement_id and line.procurement_id.sale_line_id:
                     sale_line = line.procurement_id.sale_line_id
@@ -64,7 +67,10 @@ class StockPicking(models.Model):
                         line.product_id, sale_line.order_id.partner_id)
                     val1 += cur.round(taxes['total'])
                     val += cur.round(taxes['total_included'])
+                    for tax in taxes['taxes']:
+                        val2 += tax.get('amount', 0.0)
             picking.amount_untaxed = val1
+            picking.amount_tax = val2
             picking.amount_total = val
 
     @api.multi
