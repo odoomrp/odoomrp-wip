@@ -8,10 +8,14 @@
             <field name="arch" type="xml">
                 <notebook position="inside">
                     <page string="Taxes">
+                        <field name="currency_id" invisible="1" />
                         <group col="6">
-                            <field name="amount_untaxed" />
-                            <field name="amount_tax" />
-                            <field name="amount_total" />
+                            <field name="amount_untaxed" widget="monetary"
+                                options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_tax" widget="monetary"
+                                options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_total" widget="monetary"
+                                options="{'currency_field': 'currency_id'}"/>
                         </group>
                         <field name="taxes" nolabel="1">
                             <tree>
