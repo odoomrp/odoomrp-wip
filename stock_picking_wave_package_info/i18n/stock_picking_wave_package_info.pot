@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-24 08:58+0000\n"
-"PO-Revision-Date: 2015-03-24 08:58+0000\n"
+"POT-Creation-Date: 2015-03-30 09:14+0000\n"
+"PO-Revision-Date: 2015-03-30 09:14+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #. module: stock_picking_wave_package_info
 #: field:stock.picking.wave,num_packages:0
-msgid "Num. Packages"
+msgid "# Packages"
 msgstr ""
 
 #. module: stock_picking_wave_package_info
@@ -59,6 +59,21 @@ msgstr ""
 
 #. module: stock_picking_wave_package_info
 #: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "Refresh package totals"
+msgstr ""
+
+#. module: stock_picking_wave_package_info
+#: model:ir.model,name:stock_picking_wave_package_info.model_stock_picking_package_total
+msgid "Stock Picking Package Total"
+msgstr ""
+
+#. module: stock_picking_wave_package_info
+#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
 msgid "Total packages by logistic unit"
+msgstr ""
+
+#. module: stock_picking_wave_package_info
+#: field:stock.picking.package.total,wave:0
+msgid "Wave"
 msgstr ""
 
