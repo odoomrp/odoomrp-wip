@@ -21,7 +21,8 @@ class StockTransferDetails(models.TransientModel):
     @api.one
     def do_save_for_later(self):
         wave_obj = self.env['stock.picking.wave']
-        operation_obj = self.env['stock.pack.operation']
+        operation_obj = self.env['stock.pack.operation'].with_context(
+            no_recompute=True)
         for picking in self.picking_ids:
             # Create new and update existing pack operations
             for line in [self.item_ids.filtered(lambda x: x.picking_id.id ==
@@ -42,11 +43,12 @@ class StockTransferDetails(models.TransientModel):
                         'owner_id': prod.owner_id.id,
                     }
                     if prod.packop_id:
-                        prod.packop_id.write(pack_datas)
+                        prod.packop_id.with_context(no_recompute=True).write(
+                            pack_datas)
                     else:
                         pack_datas['picking_id'] = picking.id
                         operation_obj.create(pack_datas)
-        if 'origin_wave' in self._context:
-            origin_wave = wave_obj.browse(self._context['origin_wave'])
+        if 'origin_wave' in self.env.context:
+            origin_wave = wave_obj.browse(self.env.context['origin_wave'])
             origin_wave._catch_operations()
         return True

@@ -77,3 +77,8 @@ msgstr ""
 msgid "Wave"
 msgstr ""
 
+#. module: stock_picking_wave_package_info
+#: view:stock.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "(Refresh)"
+msgstr ""
+
