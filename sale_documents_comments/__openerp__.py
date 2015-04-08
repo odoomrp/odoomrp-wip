@@ -30,17 +30,8 @@
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    "contributors": [
-        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
-    ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
-    "summary": "",
-    "description": """
-With this module you can add specific comments to a customer, for sale order,
-delivery order and invoices. Part of the info will be passed from one to other.
-Those data will be automatically added to each item.
-    """,
     "data": [
         "views/partner_view.xml",
         "views/sale_view.xml",
