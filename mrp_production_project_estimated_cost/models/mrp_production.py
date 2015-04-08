@@ -70,6 +70,22 @@ class MrpProduction(models.Model):
                                         "mrp_production_id",
                                         string="Cost Lines")
 
+    @api.multi
+    def _src_id_default(self):
+        location_id = super(MrpProduction, self)._src_id_default()
+        if not location_id:
+            x = self.env['ir.values'].get_defaults_dict('mrp.production')
+            location_id = x.get('location_src_id', False)
+        return location_id
+
+    @api.multi
+    def _dest_id_default(self):
+        location_id = super(MrpProduction, self)._dest_id_default()
+        if not location_id:
+            x = self.env['ir.values'].get_defaults_dict('mrp.production')
+            location_id = x.get('location_dest_id', False)
+        return location_id
+
     @api.model
     def create(self, values):
         sequence_obj = self.pool['ir.sequence']
