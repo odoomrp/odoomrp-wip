@@ -103,7 +103,6 @@ class MrpProduction(models.Model):
                         raw_product.uos_id.id,
                         op.qty, workorder)
                     linked_raw_products.append(value)
-            prod_line_ids = {}
             for line in new_op.product_lines:
                 if self.product_id.product_tmpl_id == line.product_template:
                     if new_op.product_id.track_all or\
