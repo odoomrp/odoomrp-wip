@@ -105,7 +105,6 @@ class MrpProduction(models.Model):
                     linked_raw_products.append(value)
             prod_line_ids = {}
             for line in new_op.product_lines:
-                prod_line_ids[line.id] = line.product_id.id
                 if self.product_id.product_tmpl_id == line.product_template:
                     if new_op.product_id.track_all or\
                             new_op.product_id.track_production:
@@ -116,17 +115,10 @@ class MrpProduction(models.Model):
                     new_op.manual_production_lot = line.lot.name
                     continue
             for link_product in linked_raw_products:
-                if link_product['product_id'] in prod_line_ids.values():
-                    line_id = False
-                    for line_key in prod_line_ids.keys():
-                        if (prod_line_ids[line_key] ==
-                                link_product['product_id']):
-                            line_id = line_key
-                            break
-                    if line_id:
-                        new_op.write(
-                            {'product_lines': [(1, line_id,
-                                                link_product)]})
+                recs = new_op.product_lines.filtered(
+                    lambda x: x.product_id.id == link_product['product_id'])
+                if recs:
+                    recs.write(link_product)
                 else:
                     add_product.append(link_product)
             new_op.write({'product_lines': map(lambda x: (0, 0, x),
