@@ -32,8 +32,6 @@ class WizCreateFictitiousOf(models.TransientModel):
                     'product_qty': 1,
                     'date_planned': self.date_planned,
                     'user_id': self._uid,
-                    'location_src_id': production_obj._src_id_default(),
-                    'location_dest_id': production_obj._dest_id_default(),
                     'active': False,
                     'product_uom': product.uom_id.id,
                     'project_id': self.project_id.id
