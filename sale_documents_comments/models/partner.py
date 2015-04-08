@@ -27,5 +27,5 @@ class ResPartner(models.Model):
                                           ' orders')
     picking_comment = fields.Text(string='Comments for pickings')
     picking_propagated_comment = fields.Text(string='Propagated comments for'
-                                            ' pickings')
+                                             ' pickings')
     invoice_comment = fields.Text(string='Comments for invoices')
