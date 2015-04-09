@@ -21,6 +21,7 @@
                             string="Duplicate"
                             type="object"
                             icon="STOCK_COPY"
+                            attrs="{'invisible': [('state', 'not in', ['draft', 'sent'])]}"
                             help="Duplicate line" />
                 </xpath>
                 <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"
