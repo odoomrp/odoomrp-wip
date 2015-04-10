@@ -35,7 +35,7 @@ class AccountInvoice(models.Model):
         if partner_id:
             partner_obj = self.env['res.partner']
             partner = partner_obj.browse(partner_id)
-            comment = partner.invoice_comment
+            comment = partner.invoice_comment or ''
             if partner.parent_id:
                 comment += '\n' + (partner.parent_id.invoice_comment or '')
             val['value']['sale_comment'] = comment

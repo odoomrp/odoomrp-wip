@@ -32,8 +32,8 @@ class StockPicking(models.Model):
         picking_com = ''
         picking_pcom = ''
         if self.partner_id:
-            picking_com = self.partner_id.picking_comment
-            picking_pcom = self.partner_id.picking_propagated_comment
+            picking_com = self.partner_id.picking_comment or ''
+            picking_pcom = self.partner_id.picking_propagated_comment or ''
             parent = self.partner_id.parent_id
             if parent:
                 picking_com += '\n' + (parent.picking_comment or '')
@@ -60,8 +60,8 @@ class StockPicking(models.Model):
                         values['sale_propagated_comment'] += (
                             sale.propagated_comment)
             partner = partner_obj.browse(partner_id)
-            picking_com = partner.picking_comment
-            picking_pcom = partner.picking_propagated_comment
+            picking_com = partner.picking_comment or ''
+            picking_pcom = partner.picking_propagated_comment or ''
             if partner.parent_id:
                 picking_com += '\n' + partner.parent_id.picking_comment
                 picking_pcom += ('\n' +

@@ -40,8 +40,8 @@ class SaleOrder(models.Model):
         if partner_id:
             partner_obj = self.env['res.partner']
             partner = partner_obj.browse(partner_id)
-            comment = partner.sale_comment
-            p_comment = partner.sale_propagated_comment
+            comment = partner.sale_comment or ''
+            p_comment = partner.sale_propagated_comment or ''
             if partner.parent_id:
                 comment += '\n' + (partner.parent_id.sale_comment or '')
                 p_comment += '\n' + (partner.parent_id.sale_propagated_comment
