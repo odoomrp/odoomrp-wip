@@ -67,8 +67,34 @@ class SaleOrderLine(models.Model):
     product_attributes = fields.One2many(
         comodel_name='sale.order.line.attribute', inverse_name='sale_line',
         string='Product attributes', copy=True)
-    order_state = fields.Selection(
-        related='order_id.state', readonly=True)
+    # Neeeded because one2many result type is not constant when evaluating
+    # visibility in XML
+    product_attributes_count = fields.Integer(
+        compute="_get_product_attributes_count")
+    order_state = fields.Selection(related='order_id.state', readonly=True)
+    product_id = fields.Many2one(
+        domain="[('product_tmpl_id', '=', product_template)]")
+
+    @api.one
+    @api.depends('product_attributes')
+    def _get_product_attributes_count(self):
+        self.product_attributes_count = len(self.product_attributes)
+
+    def _get_product_description(self, template, product, product_attributes):
+        name = product and product.name or template.name
+        group = self.env.ref(
+            'sale_product_variants.group_product_variant_extended_description')
+        extended = group in self.env.user.groups_id
+        if not product_attributes and product:
+            product_attributes = product.attribute_value_ids
+        if extended:
+            description = "\n".join(product_attributes.mapped(
+                lambda x: "%s: %s" % (x.attribute_id.name, x.name)))
+        else:
+            description = ", ".join(product_attributes.mapped('name'))
+        if not description:
+            return name
+        return ("%s\n%s" if extended else "%s (%s)") % (name, description)
 
     @api.multi
     def product_id_change(
@@ -82,14 +108,12 @@ class SaleOrderLine(models.Model):
             name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
             date_order=date_order, packaging=packaging,
             fiscal_position=fiscal_position, flag=flag)
-        product = product_obj.browse(product_id)
-        attributes_dict = product._get_product_attributes_values_dict()
-        res['value'].update({'product_attributes': attributes_dict})
-        if (product.attribute_value_ids and 'value' in res and
-                'name' in res['value']):
-            name = product._get_product_attributes_values_text()
-            res['value'].update({'name': (('%s\n--\n%s') %
-                                          (res['value']['name'], name))})
+        if product_id:
+            product = product_obj.browse(product_id)
+            res['value']['product_attributes'] = (
+                product._get_product_attributes_values_dict())
+            res['value']['name'] = self._get_product_description(
+                product.product_tmpl_id, product, product.attribute_value_ids)
         return res
 
     @api.multi
@@ -106,30 +130,23 @@ class SaleOrderLine(models.Model):
             self.product_uom = self.product_template.uom_id
             self.product_uos = self.product_template.uos_id
             self.price_unit = self.order_id.pricelist_id.with_context(
-                {
-                    'uom': self.product_uom.id,
-                    'date': self.order_id.date_order,
-                }).template_price_get(
+                {'uom': self.product_uom.id,
+                 'date': self.order_id.date_order}).template_price_get(
                 self.product_template.id, self.product_uom_qty or 1.0,
                 self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
         self.product_attributes = (
             self.product_template._get_product_attributes_dict())
-        return {'domain': {'product_id': [('product_tmpl_id', '=',
-                                           self.product_template.id)]}}
 
     @api.one
     @api.onchange('product_attributes')
     def onchange_product_attributes(self):
         product_obj = self.env['product.product']
-        description = self.product_template.name
-        for attr_line in self.product_attributes:
-            if attr_line.value:
-                description += _('\n%s: %s') % (attr_line.attribute.name,
-                                                attr_line.value.name)
-        self.product_id = product_obj._product_find(self.product_template,
-                                                    self.product_attributes)
+        self.product_id = product_obj._product_find(
+            self.product_template, self.product_attributes)
         if not self.product_id:
-            self.name = description
+            self.name = self._get_product_description(
+                self.product_template, False,
+                self.product_attributes.mapped('value'))
         if self.product_template:
             self.update_price_unit()
 

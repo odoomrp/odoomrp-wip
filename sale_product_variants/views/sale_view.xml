@@ -28,6 +28,21 @@
                 <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"
                        position="before">
                     <field name="product_template" />
+                    <field name="product_attributes_count" invisible="1"/>
+                    <div colspan="4"
+                         attrs="{'invisible': [('product_attributes_count', '=', 0)]}">
+                        <label for="product_attributes" />
+                        <field name="product_attributes">
+                            <tree create="false" delete="false" editable="1">
+                                <field name="attribute" />
+                                <field name="possible_values"
+                                       invisible="1"
+                                       widget="many2many_tags" />
+                                <field name="value" />
+                                <field name="price_extra" readonly="True" />
+                            </tree>
+                        </field>
+                    </div>
                 </xpath>
                 <xpath expr="//field[@name='order_line']//form//field[@name='price_unit']"
                        position="after">
@@ -35,23 +50,6 @@
                             states="draft" string="(update)" type="object"
                             class="oe_edit_only oe_link" colspan="2"
                             attrs="{'invisible':[('product_id','!=',False)]}"/>
-                </xpath>
-                <xpath expr="//field[@name='order_line']/form//label[@for='name']"
-                       position="before">
-                    <label for="product_attributes"
-                           attrs="{'invisible':[('product_attributes','=',[])]}" />
-                    <field name="product_attributes"
-                           attrs="{'invisible':[('product_attributes','=',[])]}"
-                           options="{'no_create': True, 'no_delete': True}">
-                        <tree create="0" delete="0" editable="1">
-                            <field name="attribute" />
-                            <field name="possible_values"
-                                   invisible="1"
-                                   widget="many2many_tags" />
-                            <field name="value" />
-                            <field name="price_extra" readonly="True" />
-                        </tree>
-                    </field>
                 </xpath>
             </field>
         </record>

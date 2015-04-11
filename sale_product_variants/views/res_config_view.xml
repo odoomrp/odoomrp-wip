@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_sales_config_product_variant" model="ir.ui.view">
+            <field name="name">sale settings (for product variants)</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sale.view_sales_config"/>
+            <field name="arch" type="xml">
+                <div name="Customer Features" position="inside">
+                    <div>
+                        <field name="group_product_variant_extended_description" class="oe_inline"/>
+                        <label for="group_product_variant_extended_description"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</openerp>
