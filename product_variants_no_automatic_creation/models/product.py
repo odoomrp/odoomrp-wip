@@ -78,10 +78,8 @@ class ProductTemplate(models.Model):
         return res
 
     def _get_product_attributes_dict(self):
-        product_attributes = []
-        for attribute in self.attribute_line_ids:
-            product_attributes.append({'attribute': attribute.attribute_id.id})
-        return product_attributes
+        return self.attribute_line_ids.mapped(
+            lambda x: {'attribute': x.attribute_id.id})
 
     @api.multi
     def create_variant_ids(self):
@@ -114,18 +112,18 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     def _get_product_attributes_values_dict(self):
-        product_attributes = []
-        for attr_value in self.attribute_value_ids:
-            product_attributes.append({'attribute': attr_value.attribute_id.id,
-                                       'value': attr_value.id})
-        return product_attributes
+        # Retrieve first the attributes from template to preserve order
+        res = self.product_tmpl_id._get_product_attributes_dict()
+        for val in res:
+            value = self.attribute_value_ids.filtered(
+                lambda x: x.attribute_id.id == val['attribute'])
+            val['value'] = value.id
+        return res
 
     def _get_product_attributes_values_text(self):
-        description = self.product_tmpl_id.name
-        for attr_value in self.attribute_value_ids:
-            description += _('\n%s: %s') % (attr_value.attribute_id.name,
-                                            attr_value.name)
-        return description
+        description = self.attribute_value_ids.mapped(
+            lambda x: "%s: %s" % (x.attribute_id.name, x.name))
+        return "%s\n%s" % (self.product_tmpl_id.name, "\n".join(description))
 
     def _product_find(self, product_template, product_attributes):
         domain = []
