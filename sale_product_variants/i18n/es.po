@@ -100,5 +100,5 @@ msgstr "Valor"
 #: code:addons/sale_product_variants/models/sale_order.py:179
 #, python-format
 msgid "You can not confirm before configuring all attribute values."
-msgstr "No puede confirmar antes de configura todos los valores de atributo."
+msgstr "No puede confirmar antes de configurar todos los valores de atributo."
 
