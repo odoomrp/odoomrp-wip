@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-30 09:14+0000\n"
-"PO-Revision-Date: 2015-03-30 11:16+0100\n"
+"POT-Creation-Date: 2015-04-11 20:36+0000\n"
+"PO-Revision-Date: 2015-04-11 22:37+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,13 +23,18 @@ msgstr "Num. paquetes"
 #. module: stock_picking_wave_package_info
 #: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
 msgid "Operations"
-msgstr "Operaciones"
+msgstr "Composición Palets"
 
 #. module: stock_picking_wave_package_info
 #: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
 #: field:stock.picking.wave,packages:0
 msgid "Packages"
-msgstr "Paquetes"
+msgstr "Palets de Envío"
+
+#. module: stock_picking_wave_package_info
+#: field:stock.picking.wave,packages_info:0
+msgid "Packages Info"
+msgstr "Información paquetes"
 
 #. module: stock_picking_wave_package_info
 #: model:ir.model,name:stock_picking_wave_package_info.model_stock_quant_package
@@ -50,7 +55,7 @@ msgstr "Agrupaciones de albaranes"
 #. module: stock_picking_wave_package_info
 #: model:ir.model,name:stock_picking_wave_package_info.model_stock_transfer_details
 msgid "Picking wizard"
-msgstr "Asistente de albarán"
+msgstr "Wizard albarán"
 
 #. module: stock_picking_wave_package_info
 #: view:stock.quant.package:stock_picking_wave_package_info.view_quant_package_form_inh_pickingwavepackageinfo
@@ -58,14 +63,24 @@ msgid "Pickings"
 msgstr "Albaranes"
 
 #. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "Refresh package totals"
-msgstr "Refrescar total paquetes"
+#: model:ir.model,name:stock_picking_wave_package_info.model_stock_picking_package_kg_lot
+msgid "Stock Picking Package KG Lot"
+msgstr "Stock Picking Package KG Lot"
 
 #. module: stock_picking_wave_package_info
 #: model:ir.model,name:stock_picking_wave_package_info.model_stock_picking_package_total
 msgid "Stock Picking Package Total"
-msgstr "Albarán total paquetes"
+msgstr "Total paquete albarán"
+
+#. module: stock_picking_wave_package_info
+#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "Total Kg. and Lots by package"
+msgstr "Total Kg. y lotes por paquete"
+
+#. module: stock_picking_wave_package_info
+#: field:stock.picking.wave,package_totals:0
+msgid "Total UL Packages Info"
+msgstr "Total UL Packages Info"
 
 #. module: stock_picking_wave_package_info
 #: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
@@ -73,12 +88,8 @@ msgid "Total packages by logistic unit"
 msgstr "Total paquetes por unidad logística"
 
 #. module: stock_picking_wave_package_info
+#: field:stock.picking.package.kg.lot,wave:0
 #: field:stock.picking.package.total,wave:0
 msgid "Wave"
 msgstr "Agrupación"
-
-#. module: stock_picking_wave_package_info
-#: view:stock.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "(Refresh)"
-msgstr "(Actualizar)"
 
