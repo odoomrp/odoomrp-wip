@@ -67,6 +67,8 @@ class SaleOrderLine(models.Model):
     product_attributes = fields.One2many(
         comodel_name='sale.order.line.attribute', inverse_name='sale_line',
         string='Product attributes', copy=True)
+    order_state = fields.Selection(
+        related='order_id.state', readonly=True)
 
     @api.multi
     def product_id_change(

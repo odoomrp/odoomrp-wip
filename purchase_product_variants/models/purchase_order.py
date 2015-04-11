@@ -49,12 +49,13 @@ class ProductAttributeValuePurchaseLine(models.Model):
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
-    product_template = fields.Many2one(comodel_name='product.template',
-                                       string='Product Template')
-    product_attributes = fields.One2many('purchase.order.line.attribute',
-                                         'purchase_line',
-                                         string='Product attributes',
-                                         copy=True)
+    product_template = fields.Many2one(
+        comodel_name='product.template', string='Product Template')
+    product_attributes = fields.One2many(
+        comodel_name='purchase.order.line.attribute',
+        inverse_name='purchase_line', string='Product attributes', copy=True)
+    order_state = fields.Selection(
+        related='order_id.state', readonly=True)
 
     @api.multi
     @api.onchange('product_template')

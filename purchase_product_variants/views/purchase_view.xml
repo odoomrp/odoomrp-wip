@@ -16,12 +16,13 @@
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
                        position="after">
+                    <field name="order_state" invisible="1"/>
                     <button name="action_duplicate"
                             state="draft"
                             string="Duplicate"
                             type="object"
-                            icon="gtk-go-forward"
-                            attrs="{'invisible': [('state', 'not in', ['draft', 'sent'])]}"
+                            icon="STOCK_COPY"
+                            attrs="{'invisible': [('order_state', 'not in', ['draft', 'sent'])]}"
                             help="Duplicate line"/>
                 </xpath>
             </field>
