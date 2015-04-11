@@ -23,34 +23,49 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    @api.one
-    @api.depends('order_id.product_ul', 'product_id', 'product_uom_qty',
-                 'pri_pack', 'sec_pack')
-    def _calculate_packages(self):
-        package_attr = False
-        for attr_value in self.product_id.attribute_value_ids:
-            if attr_value.attribute_id.is_package:
-                package_attr = attr_value
-                break
-        if package_attr:
-            self.pri_pack_qty = (
-                self.product_uom_qty / (package_attr.numeric_value or 1.0))
-            if package_attr.package_product:
-                self.pri_pack = package_attr.package_product
-                for packaging in self.sec_pack.packagings:
-                    if packaging.product == package_attr.package_product:
-                        self.sec_pack_qty = (
-                            self.pri_pack_qty / (
-                                (packaging.ul_qty * packaging.rows) or 1.0))
-
     pri_pack_qty = fields.Float(
         string='# Pkg 1', compute='_calculate_packages', digits=(12, 2),
         store=True)
     pri_pack = fields.Many2one(
         comodel_name='product.product', string='Pkg 1',
-        compute='_calculate_packages', readonly=True)
+        compute='_calculate_packages')
     sec_pack_qty = fields.Float(
         string='# Pkg 2', compute='_calculate_packages', digits=(12, 2),
         store=True)
     sec_pack = fields.Many2one(
         comodel_name='product.ul', string='Pkg 2')
+    # needed because of https://github.com/odoo/odoo/issues/6276
+    attributes_values = fields.Many2many(
+        comodel_name='product.attribute.value',
+        compute='_get_attributes_values')
+
+    @api.one
+    def _get_attributes_values(self):
+        self.attributes_values = self.product_id.attribute_value_ids
+
+    @api.one
+    @api.depends('order_id.product_ul', 'product_id', 'product_uom_qty',
+                 'pri_pack', 'sec_pack')
+    def _calculate_packages(self):
+        if self.env.context.get('attribute_values'):
+            # This is to allow to get values list from another source
+            # (for example, for sale_product_variants, that doesn't have
+            #  product_id filled)
+            # It won't work while https://github.com/odoo/odoo/issues/6276
+            # isn't solved
+            attribute_values = self.env.context['attribute_values']
+        elif self.attributes_values:
+            attribute_values = self.attributes_values
+        else:
+            attribute_values = self.product_id.attribute_value_ids
+        pack_attr_values = attribute_values.filtered("attribute_id.is_package")
+        package_attr = pack_attr_values and pack_attr_values[0] or False
+        if package_attr:
+            self.pri_pack = package_attr.package_product
+            self.pri_pack_qty = (
+                self.product_uom_qty / (package_attr.numeric_value or 1.0))
+            if self.pri_pack:
+                packaging = self.sec_pack.packagings.filtered(
+                    lambda x: x.product == self.pri_pack)
+                self.sec_pack_qty = (self.pri_pack_qty / (
+                    (packaging.ul_qty * packaging.rows) or 1.0))
