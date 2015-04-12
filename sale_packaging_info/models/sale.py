@@ -44,9 +44,12 @@ class SaleOrderLine(models.Model):
         self.attributes_values = self.product_id.attribute_value_ids
 
     @api.one
-    @api.depends('order_id.product_ul', 'product_id', 'product_uom_qty',
-                 'pri_pack', 'sec_pack')
+    @api.depends('product_id', 'product_uom_qty',
+                 'pri_pack', 'sec_pack', 'attributes_values')
     def _calculate_packages(self):
+        self.pri_pack = False
+        self.pri_pack_qty = 0.0
+        self.sec_pack_qty = 0.0
         if self.env.context.get('attribute_values'):
             # This is to allow to get values list from another source
             # (for example, for sale_product_variants, that doesn't have
@@ -62,10 +65,12 @@ class SaleOrderLine(models.Model):
         package_attr = pack_attr_values and pack_attr_values[0] or False
         if package_attr:
             self.pri_pack = package_attr.package_product
-            self.pri_pack_qty = (
-                self.product_uom_qty / (package_attr.numeric_value or 1.0))
+            if package_attr.numeric_value:
+                self.pri_pack_qty = (
+                    self.product_uom_qty / package_attr.numeric_value)
             if self.pri_pack:
                 packaging = self.sec_pack.packagings.filtered(
                     lambda x: x.product == self.pri_pack)
-                self.sec_pack_qty = (self.pri_pack_qty / (
-                    (packaging.ul_qty * packaging.rows) or 1.0))
+                if packaging.ul_qty and packaging.rows:
+                    self.sec_pack_qty = (
+                        self.pri_pack_qty / packaging.ul_qty * packaging.rows)
