@@ -16,10 +16,9 @@
                                 <field name="pack" nolabel="1"
                                     colspan="4" col="4">
                                     <tree string="Pack" editable="top"
-                                        create="0" fonts="bold:processed==False"
+                                        fonts="bold:processed==False"
                                         colors="blue:packing_state in ('draft','confirmed');gray:packing_state in ('done','cancel')" >
-                                        <field name="product"
-                                            readonly="1" />
+                                        <field name="product" />
                                         <field name="qty" />
                                         <field name="fill" sum="Total Qty"/>
                                         <field name="processed" invisible="1" />
@@ -36,7 +35,7 @@
                                 <button
                                     name="create_mo_from_packaging_operation"
                                     string="Create Pack Manufacturing Orders"
-                                    type="object" colspan="2" states="done"/>
+                                    type="object" colspan="2" />
                             </group>
                             <group string='Expected Production'
                                 colspan="4" col="4">
