@@ -2,35 +2,58 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields, api
+from openerp import models, fields
 
 
 class StockPickingWave(models.Model):
     _inherit = 'stock.picking.wave'
 
-    @api.one
-    @api.depends('package_totals', 'package_totals.quantity')
-    def _compute_num_packages(self):
-        self.num_packages = 0
-        self.num_packages = sum(x.quantity for x in self.package_totals)
-
     packages = fields.Many2many(
         comodel_name='stock.quant.package',
         relation='rel_wave_package', column1='wave_id',
         column2='package_id', string='Packages')
+    packages_info = fields.One2many(
+        "stock.picking.package.kg.lot", "wave", string="Packages Info",
+        readonly=True)
     package_totals = fields.One2many(
         "stock.picking.package.total", "wave",
         string="Total UL Packages Info", readonly=True)
-    num_packages = fields.Integer(
-        string='# Packages', compute='_compute_num_packages', store=True)
+    num_packages = fields.Integer(string='# Packages', readonly=True)
 
     def _catch_operations(self):
         self.packages = [
             operation.result_package_id.id for operation in
             self.pickings_operations if operation.result_package_id]
+        self._calculate_package_info()
         self._calculate_package_totals()
 
+    def _calculate_package_info(self):
+        if self.packages_info:
+            self.packages_info.unlink()
+        if self.packages:
+            for package in self.packages:
+                kg_net = sum(x.product_qty for x in
+                             self.pickings_operations.filtered(
+                                 lambda r: r.result_package_id.id ==
+                                 package.id))
+                vals = {'wave': self.id,
+                        'package': package.id,
+                        'kg_net': kg_net,
+                        'gross_net': kg_net + package.empty_weight
+                        }
+                lots = False
+                for operation in self.pickings_operations.filtered(
+                        lambda r: r.result_package_id.id == package.id and
+                        r.lot_id):
+                    if not lots:
+                        lots = operation.lot_id.name
+                    else:
+                        lots += ', ' + operation.lot_id.name
+                vals['lots'] = lots
+                self.env['stock.picking.package.kg.lot'].create(vals)
+
     def _calculate_package_totals(self):
+        self.num_packages = 0
         if self.package_totals:
             self.package_totals.unlink()
         if self.packages:
@@ -43,10 +66,13 @@ class StockPickingWave(models.Model):
                               'ul': product_ul.id,
                               'quantity': cont}
                     self.env['stock.picking.package.total'].create(values)
+                    self.num_packages += cont
 
-    @api.one
-    def button_refresh_package_totals(self):
-        self._calculate_package_totals()
+
+class StockPickingPackageKgLot(models.Model):
+    _inherit = 'stock.picking.package.kg.lot'
+
+    wave = fields.Many2one('stock.picking.wave', string='Wave')
 
 
 class StockPickingPackageTotal(models.Model):
