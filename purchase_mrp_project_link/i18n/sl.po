@@ -1,0 +1,47 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* purchase_mrp_project_link
+#
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-30 18:18+0000\n"
+"PO-Revision-Date: 2015-04-14 08:01+0200\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian <translate@matmoz.si>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Lokalize 1.5\n"
+
+#. module: purchase_mrp_project_link
+#: field:purchase.order,main_project_id:0
+msgid "Main Project"
+msgstr "Glavni projekt"
+
+#. module: purchase_mrp_project_link
+#: model:ir.model,name:purchase_mrp_project_link.model_procurement_order
+msgid "Procurement"
+msgstr "Oskrba"
+
+#. module: purchase_mrp_project_link
+#: model:ir.model,name:purchase_mrp_project_link.model_project_project
+msgid "Project"
+msgstr "Projekt"
+
+#. module: purchase_mrp_project_link
+#: model:ir.model,name:purchase_mrp_project_link.model_purchase_order
+msgid "Purchase Order"
+msgstr "Nabavni nalog"
+
+#. module: purchase_mrp_project_link
+#: model:ir.actions.act_window,name:purchase_mrp_project_link.act_project_2_purchase_all
+#: view:project.project:purchase_mrp_project_link.project_purchase_shortcut_form_view
+msgid "Purchases"
+msgstr "Nabave"
+
+
