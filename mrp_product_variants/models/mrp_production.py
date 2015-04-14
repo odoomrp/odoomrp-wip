@@ -68,6 +68,9 @@ class MrpProduction(models.Model):
             if ('routing_id' in result['value'] and
                     not result['value']['routing_id']):
                 del result['value']['routing_id']
+            if ('product_uom' in result['value'] and
+                    not result['value']['product_uom']):
+                del result['value']['product_uom']
         if product_id:
             bom_obj = self.env['mrp.bom']
             product = self.env['product.product'].browse(product_id)
