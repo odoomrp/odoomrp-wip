@@ -1,5 +1,18 @@
+Manufacturing order from packaging summary
+==========================================
+
 This module provides an association between the bulk product and the way it
-must be packaged at the end of the bulk product manufacturing.
+must be packaged.
 
 Particularly suitable for chemical industries and others that produce liquid
 packing products.
+
+Credits
+=======
+
+Contributors
+------------
+* Mikel Arregi <mikelarregi@avanzosc.es>
+* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+* Ana Juaristi <ajuaristio@gmail.com>
+* Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>

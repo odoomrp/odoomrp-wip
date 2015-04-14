@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models, exceptions, _
+from openerp import api, fields, models
 
 
 class MrpProduction(models.Model):
@@ -60,13 +60,6 @@ class MrpProduction(models.Model):
 
     @api.one
     def create_mo_from_packaging_operation(self):
-        if self.move_created_ids:
-            raise exceptions.Warning(
-                _("You can't pack a product before it is manufactured"))
-        total = sum([x.fill for x in self.pack])
-        if total > self.product_qty:
-            raise exceptions.Warning(
-                _("You can not pack more quantity than you have manufactured"))
         for op in self.pack:
             linked_raw_products = []
             add_product = []
