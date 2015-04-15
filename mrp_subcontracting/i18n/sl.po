@@ -1,0 +1,150 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mrp_subcontracting
+#
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-10 15:03+0000\n"
+"PO-Revision-Date: 2015-04-14 07:59+0200\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian <translate@matmoz.si>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Lokalize 1.5\n"
+
+#. module: mrp_subcontracting
+#: code:addons/mrp_subcontracting/models/mrp_subcontrating.py:114
+#, python-format
+msgid "Company warehouse not found"
+msgstr "Skladišče podjetja ni najdeno"
+
+#. module: mrp_subcontracting
+#: model:ir.actions.act_window,name:mrp_subcontracting.action_purchases_per_production
+msgid "Created Purchases"
+msgstr "Ustvarjene nabave"
+
+#. module: mrp_subcontracting
+#: field:mrp.production.workcenter.line,external:0
+#: field:mrp.routing.workcenter,external:0
+msgid "External"
+msgstr "Zunanji"
+
+#. module: mrp_subcontracting
+#: field:mrp.production.workcenter.line,in_picking:0
+msgid "In Picking"
+msgstr "Vhodni prevzem"
+
+#. module: mrp_subcontracting
+#: model:ir.actions.act_window,name:mrp_subcontracting.action_inpickings_per_production
+msgid "In Pickings"
+msgstr "Vhodni prevzemi"
+
+#. module: mrp_subcontracting
+#: view:mrp.production:mrp_subcontracting.mrp_production_form_view2_inh_subcontracting
+#: view:mrp.production.workcenter.line:mrp_subcontracting.mrp_production_workcenter_subcontracting_form_view_inherit
+msgid "Information"
+msgstr "Podrobnosti"
+
+#. module: mrp_subcontracting
+#: help:mrp.routing.workcenter,external:0
+msgid "Is Subcontract Operation"
+msgstr "Je podizvajalska operacija"
+
+#. module: mrp_subcontracting
+#: field:purchase.order,mrp_operation:0
+msgid "MPR Operation"
+msgstr "Operacija upravljanja proizvodnje"
+
+#. module: mrp_subcontracting
+#: field:purchase.order,mrp_production:0
+#: field:stock.picking,mrp_production:0
+msgid "MPR Production"
+msgstr "Proizvodnja upravljanja proizvodnje"
+
+#. module: mrp_subcontracting
+#: model:ir.model,name:mrp_subcontracting.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Proizvodni nalog"
+
+#. module: mrp_subcontracting
+#: field:mrp.production.workcenter.line,out_picking:0
+msgid "Out Picking"
+msgstr "Izhodni prevzem"
+
+#. module: mrp_subcontracting
+#: model:ir.actions.act_window,name:mrp_subcontracting.action_outpickings_per_production
+msgid "Out Pickings"
+msgstr "Izhodni prevzemi"
+
+#. module: mrp_subcontracting
+#: model:ir.model,name:mrp_subcontracting.model_stock_picking
+msgid "Picking List"
+msgstr "Prevzemni seznam"
+
+#. module: mrp_subcontracting
+#: field:mrp.routing.workcenter,picking_type_id:0
+msgid "Picking Type"
+msgstr "Tip prevzema"
+
+#. module: mrp_subcontracting
+#: field:mrp.production.workcenter.line,procurement_order:0
+msgid "Procurement Order"
+msgstr "Oskrbovalni nalog"
+
+#. module: mrp_subcontracting
+#: code:addons/mrp_subcontracting/models/mrp_subcontrating.py:113
+#: code:addons/mrp_subcontracting/models/mrp_subcontrating.py:121
+#, python-format
+msgid "Production Confirmation Error"
+msgstr "Napaka pri potrjevanju proizvodnje"
+
+#. module: mrp_subcontracting
+#: model:ir.model,name:mrp_subcontracting.model_purchase_order
+#: field:mrp.production.workcenter.line,purchase_order:0
+msgid "Purchase Order"
+msgstr "Nabavni nalog"
+
+#. module: mrp_subcontracting
+#: code:addons/mrp_subcontracting/models/mrp_subcontrating.py:122
+#, python-format
+msgid "Rule for procurement order not found"
+msgstr "Pravilo oskrbovalnega naloga ni najdeno"
+
+#. module: mrp_subcontracting
+#: field:mrp.routing.workcenter,semifinished_id:0
+msgid "Semifinished Subcontracting"
+msgstr "Podizvajanje polizdelkov"
+
+#. module: mrp_subcontracting
+#: view:mrp.production:mrp_subcontracting.mrp_production_form_view2_inh_subcontracting
+#: view:mrp.production.workcenter.line:mrp_subcontracting.mrp_production_workcenter_subcontracting_form_view_inherit
+msgid "Subcontracting"
+msgstr "Podizvajanje"
+
+#. module: mrp_subcontracting
+#: code:addons/mrp_subcontracting/models/mrp_subcontrating.py:137
+#, python-format
+msgid ""
+"The procurement order does not generate purchaseorder for product: %s, "
+"warehouse: %s, rule: %s"
+msgstr ""
+"Oskrbovalni nalog ne ustvarja nabavnega naloga za proizvod: %s, skladišče: %"
+"s, pravilo: %s"
+
+#. module: mrp_subcontracting
+#: model:ir.model,name:mrp_subcontracting.model_mrp_routing_workcenter
+msgid "Work Center Usage"
+msgstr "Uporaba delovnega centra"
+
+#. module: mrp_subcontracting
+#: model:ir.model,name:mrp_subcontracting.model_mrp_production_workcenter_line
+msgid "Work Order"
+msgstr "Delovni nalog"
+
+
