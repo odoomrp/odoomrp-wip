@@ -13,7 +13,7 @@
                     <field name="picking_code" invisible="1"/>
                 </field>
                 <page string="Operations" position="after">
-                    <page string="Packages" attrs="{'invisible': ['|',('packages','=',[]),('picking_code','!=', 'outgoing')]}">
+                    <page string="Packages" attrs="{'invisible': [('packages','=',[])]}">
                         <field name="packages" >
                             <tree>
                                 <field name="name" />
@@ -43,8 +43,7 @@
                     </page>
                 </page>
                 <field name="pack_operation_ids" position="after">
-                    <group name="group_packages_info" string="Total Kg. and Lots by package"
-                            attrs="{'invisible': [('picking_code','!=', 'outgoing')]}">
+                    <group name="group_packages_info" string="Total Kg. and Lots by package">
                         <field name="packages_info" nolabel="1">
                             <tree>
                                 <field name="package" />
