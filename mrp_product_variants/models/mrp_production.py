@@ -68,6 +68,9 @@ class MrpProduction(models.Model):
             if ('routing_id' in result['value'] and
                     not result['value']['routing_id']):
                 del result['value']['routing_id']
+            if ('product_uom' in result['value'] and
+                    not result['value']['product_uom'] and not product_id):
+                del result['value']['product_uom']
         if product_id:
             bom_obj = self.env['mrp.bom']
             product = self.env['product.product'].browse(product_id)
@@ -92,7 +95,8 @@ class MrpProduction(models.Model):
         res = super(MrpProduction, self).bom_id_change(bom_id)
         if bom_id:
             bom = self.env['mrp.bom'].browse(bom_id)
-            res['value']['product_id'] = bom.product_id.id
+            if bom.product_id:
+                res['value']['product_id'] = bom.product_id.id
             if 'domain' not in res:
                 res['domain'] = {}
             res['domain']['routing_id'] = [('id', '=', bom.routing_id.id)]
