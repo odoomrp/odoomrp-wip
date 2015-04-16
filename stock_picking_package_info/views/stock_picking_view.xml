@@ -9,6 +9,9 @@
                 <field name="product_qty" position="attributes" >
                     <attribute name="sum">sum_product_qty</attribute>
                 </field>
+                <field name="date" position="before">
+                    <field name="picking_code" invisible="1"/>
+                </field>
                 <page string="Operations" position="after">
                     <page string="Packages" attrs="{'invisible': [('packages','=',[])]}">
                         <field name="packages" >
