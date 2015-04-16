@@ -31,12 +31,15 @@ class StockPickingWave(models.Model):
         if self.packages_info:
             self.packages_info.unlink()
         if self.packages:
+            sequence = 0
             for package in self.packages:
                 kg_net = sum(x.product_qty for x in
                              self.pickings_operations.filtered(
                                  lambda r: r.result_package_id.id ==
                                  package.id))
+                sequence += 1
                 vals = {'wave': self.id,
+                        'sequence': sequence,
                         'package': package.id,
                         'kg_net': kg_net,
                         'gross_net': kg_net + package.empty_weight
