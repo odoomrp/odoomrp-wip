@@ -12,7 +12,8 @@ class StockTransferDetails(models.TransientModel):
     @api.one
     def do_detailed_transfer(self):
         result = super(StockTransferDetails, self).do_detailed_transfer()
-        self.picking_id._catch_operations()
+        if self.picking_id.picking_code == 'outgoing':
+            self.picking_id._catch_operations()
         return result
 
     @api.one

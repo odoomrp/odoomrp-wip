@@ -14,6 +14,8 @@ class StockPicking(models.Model):
     def _compute_num_packages(self):
         self.num_packages = sum(x.quantity for x in self.package_totals)
 
+    picking_code = fields.Selection(
+        string="Picking Code", related="picking_type_id.code", store=True)
     packages = fields.Many2many(
         comodel_name='stock.quant.package',
         relation='rel_picking_package', column1='picking_id',
