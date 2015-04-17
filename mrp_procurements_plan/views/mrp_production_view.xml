@@ -22,15 +22,16 @@
             </field>
         </record>
         <record model="ir.ui.view" id="view_mrp_production_filter_inh_mrpprocurementplan" >
-            <field name="name">view.mrp.production.filter.inh.mrpprocurementplan</field>
+            <field name="name">view.mrp.production.plan.filter</field>
             <field name="model">mrp.production</field>
             <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
             <field name="arch" type="xml">
-                <field name="name" position="before">
+                <field name="product_id" position="before">
                     <field name="plan" />
                 </field>
                 <filter string="Product" position="before">
-                    <filter string="Plan" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'plan'}"/>
+                    <filter string="Plan" icon="terp-accessories-archiver"
+                        domain="[]" context="{'group_by':'plan'}"/>
                 </filter>
             </field>
         </record>
