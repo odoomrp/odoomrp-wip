@@ -35,6 +35,7 @@
         "mrp_operations",
         "mrp",
         "stock",
+        "hr",
     ],
     "data": [
         "wizard/mrp_workorder_produce_view.xml",
