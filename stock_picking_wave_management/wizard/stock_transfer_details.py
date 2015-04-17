@@ -126,6 +126,7 @@ class StockTransferDetails(models.TransientModel):
 
 class StockTransferDetailsItems(models.TransientModel):
     _inherit = 'stock.transfer_details_items'
+    _order = 'destinationloc_id'
 
     picking_id = fields.Many2one(
         'stock.picking', string="Picking", required=True)

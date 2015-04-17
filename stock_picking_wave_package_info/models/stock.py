@@ -2,7 +2,19 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields
+from openerp import models, fields, api
+
+
+class StockPicking(models.Model):
+    _inherit = 'stock.picking'
+
+    @api.multi
+    def action_assign(self):
+        super(StockPicking, self).action_assing()
+        for picking in self:
+            if picking.wave_id:
+                picking.wave_id._delete_packages_information()
+        return True
 
 
 class StockPickingWave(models.Model):
@@ -19,6 +31,14 @@ class StockPickingWave(models.Model):
         "stock.picking.package.total", "wave",
         string="Total UL Packages Info", readonly=True)
     num_packages = fields.Integer(string='# Packages', readonly=True)
+
+    @api.one
+    def _delete_packages_information(self):
+        self.pickings_operations.unlink()
+        self.packages.unlink()
+        self.packages_info.unlink()
+        self.package_totals.unlink()
+        return True
 
     def _catch_operations(self):
         self.packages = [
