@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <form string="Wizard picking to picking wave" >
                     <group string="Picking wave" >
-                        <field name="wave" />
+                        <field name="wave" domain="[('state', 'not in', ('cancel','done'))]" />
                     </group>
                     <footer>
                         <button name="do_picking_to_wave" string="_Apply" type="object" class="oe_highlight"/>
