@@ -27,7 +27,7 @@
     "author": "OdooMRP team, "
               "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    "category": "Warehouse Management",
+    "category": "Inventory, Logistic, Valuation, Accounting",
     "website": "http://www.odoomrp.com",
     "data": [
         "security/ir.model.access.csv",

@@ -24,8 +24,6 @@
                                 <field name="amount" />
                             </tree>
                         </field>
-                        <button name="refresh_taxes" string="Refresh"
-                            type="object" icon="gtk-ok" />
                     </page>
                 </notebook>
             </field>

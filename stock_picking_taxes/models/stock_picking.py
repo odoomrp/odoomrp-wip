@@ -1,19 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
 
 from openerp import models, fields, api
@@ -23,8 +10,8 @@ import openerp.addons.decimal_precision as dp
 class StockPickingTax(models.Model):
     _name = 'stock.picking.tax'
 
-    picking = fields.Many2one('stock.picking', string='Picking',
-                              ondelete='cascade')
+    picking = fields.Many2one(
+        comodel_name='stock.picking', string='Picking', ondelete='cascade')
     name = fields.Char(string='Tax Description', required=True)
     base = fields.Float(string='Base', digits=dp.get_precision('Account'))
     amount = fields.Float(string='Amount', digits=dp.get_precision('Account'))
@@ -36,7 +23,9 @@ class StockPickingTax(models.Model):
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    taxes = fields.One2many('stock.picking.tax', 'picking', string='Taxes')
+    taxes = fields.One2many(
+        comodel_name='stock.picking.tax', string='Taxes',
+        compute='_calc_taxes')
     amount_untaxed = fields.Float(
         string='Untaxed Amount', compute='_amount_all',
         digits=dp.get_precision('Sale Price'), help='The amount without tax.')
@@ -111,32 +100,16 @@ class StockPicking(models.Model):
         return tax_grouped
 
     @api.multi
+    @api.depends('amount_untaxed', 'amount_tax', 'amount_total')
     def _calc_taxes(self):
-        tax_model = self.env['stock.picking.tax']
+        taxes = tax_obj = self.env['stock.picking.tax']
         for picking in self:
             picking.taxes.unlink()
             for tax in self.compute(picking).values():
-                tax_model.create({
+                taxes += tax_obj.create({
                     'picking': tax['picking'],
                     'sequence': tax['sequence'],
                     'name': tax['name'],
                     'base': tax['base'],
                     'amount': tax['amount']})
-        return True
-
-    @api.multi
-    def refresh_taxes(self):
-        return self._calc_taxes()
-
-
-class StockMove(models.Model):
-    _inherit = 'stock.move'
-
-    @api.model
-    def create(self, data):
-        move_id = super(StockMove, self).create(data)
-        if 'picking_id' in data:
-            picking_obj = self.env['stock.picking']
-            picking = picking_obj.browse(data['picking_id'])
-            picking._calc_taxes()
-        return move_id
+            picking.taxes = taxes.ids
