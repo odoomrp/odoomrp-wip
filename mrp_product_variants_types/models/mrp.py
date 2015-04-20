@@ -17,6 +17,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, exceptions, _
+from __builtin__ import False
 
 
 class SaleOrderLineAttribute(models.Model):
@@ -26,14 +27,29 @@ class SaleOrderLineAttribute(models.Model):
     attr_type = fields.Selection(string='Type', store=False,
                                  related='attribute.attr_type')
 
-    @api.one
-    @api.constrains('custom_value', 'attr_type')
-    def _custom_value_in_range(self):
+    def _is_custom_value_in_range(self):
         if self.attr_type == 'range':
             if not (self.value.min_range <= self.custom_value and
                     self.value.max_range >= self.custom_value):
-                raise exceptions.Warning(
-                    _("Custom value from attribute '%s' must be between %s and"
-                      " %s.")
-                    % (self.attribute.name, self.value.min_range,
-                       self.value.max_range))
+                return False
+        return True
+
+    @api.one
+    @api.constrains('custom_value', 'attr_type')
+    def _custom_value_in_range(self):
+        if not self._custom_value_in_range():
+            raise exceptions.Warning(
+                _("Custom value from attribute '%s' must be between %s and"
+                  " %s.")
+                % (self.attribute.name, self.value.min_range,
+                   self.value.max_range))
+
+    @api.one
+    @api.onchange('custom_value', 'attr_type')
+    def onchange_custom_value_in_range(self):
+        if not self._custom_value_in_range():
+            raise exceptions.Warning(
+                _("Custom value from attribute '%s' must be between %s and"
+                  " %s.")
+                % (self.attribute.name, self.value.min_range,
+                   self.value.max_range))
