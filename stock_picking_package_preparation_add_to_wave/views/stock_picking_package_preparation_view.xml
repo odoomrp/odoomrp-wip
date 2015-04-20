@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="stock_picking_package_preparation_form_inh_pickingtowave">
-            <field name="name">stock.picking.package.preparation.form.inh.pickingtowav</field>
+        <record model="ir.ui.view" id="stock_picking_package_preparation_form_inh_addtowave">
+            <field name="name">stock.picking.package.preparation.form.inh.addtowave</field>
             <field name="model">stock.picking.package.preparation</field>
             <field name="inherit_id" ref="stock_picking_package_preparation.stock_picking_package_preparation_form"/>
             <field name="arch" type="xml">

@@ -18,7 +18,7 @@
 #
 ##############################################################################
 {
-    'name': 'Stock picking add to wave',
+    'name': 'Stock picking package preparation add to wave',
     'version': "1.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
@@ -38,5 +38,4 @@
              "views/stock_picking_package_preparation_view.xml",
              ],
     'installable': True,
-    'auto_install': True,
 }

@@ -1,5 +1,5 @@
-Stock picking add to wave
-=========================
+Stock picking package preparation add to wave
+=============================================
 This module displays in the Package Preparation form, the new button
 "Send to wave" to assign all pickings defined in "Package Preparation" form,
 to one picking wave.
