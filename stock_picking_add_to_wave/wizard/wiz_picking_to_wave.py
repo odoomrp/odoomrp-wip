@@ -16,6 +16,6 @@ class WizPickingToWave(models.TransientModel):
     def do_picking_to_wave(self):
         package_preparation_obj = self.env['stock.picking.package.preparation']
         package_preparation = package_preparation_obj.browse(
-                self._context['active_id'])
+            self._context['active_id'])
         package_preparation.picking_ids.write({'wave_id': self.wave.id})
         return True
