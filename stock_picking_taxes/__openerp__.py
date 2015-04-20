@@ -24,10 +24,10 @@
         "sale_stock",
         "account",
     ],
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    "category": "Warehouse management",
+    "category": "Inventory, Logistic, Valuation, Accounting",
     "website": "http://www.odoomrp.com",
     "data": [
         "security/ir.model.access.csv",

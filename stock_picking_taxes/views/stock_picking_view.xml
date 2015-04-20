@@ -8,20 +8,22 @@
             <field name="arch" type="xml">
                 <notebook position="inside">
                     <page string="Taxes">
-                        <group col="4">
-                            <field name="amount_untaxed" />
-                            <field name="amount_total" />
+                        <field name="currency_id" invisible="1" />
+                        <group col="6">
+                            <field name="amount_untaxed" widget="monetary"
+                                options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_tax" widget="monetary"
+                                options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_total" widget="monetary"
+                                options="{'currency_field': 'currency_id'}"/>
                         </group>
-                        <field name="taxes" nolabel="1" >
+                        <field name="taxes" nolabel="1">
                             <tree>
                                 <field name="name" />
                                 <field name="base" />
                                 <field name="amount" />
                             </tree>
                         </field>
-                        <button name="refresh_taxes"
-                            string="Refresh" type="object"
-                            icon="gtk-ok" />
                     </page>
                 </notebook>
             </field>
