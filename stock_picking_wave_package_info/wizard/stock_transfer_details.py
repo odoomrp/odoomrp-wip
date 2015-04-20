@@ -22,6 +22,13 @@ class StockTransferDetails(models.TransientModel):
     def do_save_for_later(self):
         wave_obj = self.env['stock.picking.wave']
         operation_obj = self.env['stock.pack.operation']
+        if not self.item_ids and not self.packop_ids:
+            for picking in self.picking_ids:
+                picking._delete_packages_information()
+            if 'origin_wave' in self._context:
+                origin_wave = wave_obj.browse(self._context['origin_wave'])
+                origin_wave._delete_packages_information()
+            return True
         for picking in self.picking_ids:
             # Create new and update existing pack operations
             for line in [self.item_ids.filtered(lambda x: x.picking_id.id ==
