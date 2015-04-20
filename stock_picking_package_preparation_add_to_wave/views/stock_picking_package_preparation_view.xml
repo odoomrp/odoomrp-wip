@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="stock_picking_package_preparation_form_inh_addtowave">
+            <field name="name">stock.picking.package.preparation.form.inh.addtowave</field>
+            <field name="model">stock.picking.package.preparation</field>
+            <field name="inherit_id" ref="stock_picking_package_preparation.stock_picking_package_preparation_form"/>
+            <field name="arch" type="xml">
+                <button name="action_put_in_pack" position="after">
+                    <button name="%(act_wiz_picking_to_wave)d" states="draft" string="Send to wave" type="action" class="oe_highlight" groups="base.group_user"/>
+                </button>
+            </field>
+        </record>
+    </data>
+</openerp>

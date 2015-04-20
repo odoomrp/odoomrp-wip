@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="wiz_picking_to_wave_form_view" model="ir.ui.view">
+            <field name="name">wiz.picking.to_wave.form.view</field>
+            <field name="model">wiz.picking.to.wave</field>
+            <field name="arch" type="xml">
+                <form string="Wizard picking to picking wave" >
+                    <group string="Picking wave" >
+                        <field name="wave" domain="[('state', 'not in', ('cancel','done'))]" />
+                    </group>
+                    <footer>
+                        <button name="do_picking_to_wave" string="_Apply" type="object" class="oe_highlight"/>
+                        or
+                        <button string="_Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="act_wiz_picking_to_wave" model="ir.actions.act_window">
+            <field name="name">Picking to wave</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wiz.picking.to.wave</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="wiz_picking_to_wave_form_view"/>
+        </record>
+    </data>
+</openerp>

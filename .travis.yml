@@ -18,6 +18,7 @@ install:
   - git clone https://github.com/OCA/banking ${HOME}/banking -b ${VERSION}
   - git clone https://github.com/OCA/purchase-workflow ${HOME}/purchase-workflow -b ${VERSION}
   - git clone https://github.com/OCA/product-attribute ${HOME}/product-attribute -b ${VERSION}
+  - git clone https://github.com/guewen/stock-logistics-workflow.git ${HOME}/stock-logistics-workflow -b add-stock_picking_package_preparation
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
 
