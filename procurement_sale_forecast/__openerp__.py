@@ -33,6 +33,7 @@
         "Ainara Galdona <ainaragaldona@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <anajuaristi@avanzosc.es>",
+        "Daniel Campos <danielcampos@avanzosc.es>",
     ],
     "category": "MPS",
     "website": "http://www.odoomrp.com",
