@@ -16,8 +16,10 @@ class SaleOrder(models.Model):
     def _prepare_invoice(self, order, lines):
         res = super(SaleOrder, self)._prepare_invoice(order, lines)
         comment = res.get('sale_comment', '')
-        res['sale_comment'] = '%s %s' % (comment,
-                                         order.propagated_comment or '')
+        if comment != '':
+            comment = '%s ' % comment
+        res['sale_comment'] = '%s%s' % (comment,
+                                        order.propagated_comment or '')
         return res
 
     @api.multi
