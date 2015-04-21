@@ -32,6 +32,7 @@
                 ],
     'data': ["views/stock_picking_wave_view.xml",
              "views/stock_quant_package_view.xml",
+             "reports/label_creator_wave_palet_report.xml"
              ],
     'installable': True,
     'auto_install': True,

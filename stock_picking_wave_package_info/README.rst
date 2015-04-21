@@ -4,6 +4,8 @@ This module displays in the picking waves form, packages from all pickings
 included. Also, this module displays in the picking waves form, the number of
 packages per logistic unit.
 
+You can print labels of pallets.
+
 Credits
 =======
 
