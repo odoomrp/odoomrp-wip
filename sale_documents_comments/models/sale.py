@@ -31,11 +31,9 @@ class SaleOrder(models.Model):
             comment = partner.sale_comment or ''
             p_comment = partner.sale_propagated_comment or ''
             if partner.parent_id:
-                comment = '%s\n%s' % (comment,
-                                      partner.parent_id.sale_comment or '')
-                p_comment = ('%s\n%s' %
-                             (p_comment,
-                              partner.parent_id.sale_propagated_comment or ''))
+                comment = '\n%s' % (partner.parent_id.sale_comment or '')
+                p_comment += (
+                    '\n%s' % (partner.parent_id.sale_propagated_comment or ''))
             val['value'].update({'comment': comment,
                                  'propagated_comment': p_comment})
         return val
