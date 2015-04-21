@@ -17,7 +17,6 @@
 ##############################################################################
 
 from openerp import models, fields, api
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 
@@ -57,8 +56,8 @@ class SaleForecastLoad(models.TransientModel):
             date_from = record.date_order
         elif model == 'procurement.sale.forecast':
             reg_date = record.date_from
-            cur_year = datetime.strptime(reg_date, '%Y-%m-%d').year
-            date_from = datetime.strptime(reg_date, '%Y-%m-%d').replace(
+            cur_year = fields.Date.from_string(reg_date).year
+            date_from = fields.Date.from_string(reg_date).replace(
                 year=cur_year-1)
         return date_from
 
@@ -70,8 +69,8 @@ class SaleForecastLoad(models.TransientModel):
             date_to = record.date_order
         elif model == 'procurement.sale.forecast':
             reg_date = record.date_to
-            cur_year = datetime.strptime(reg_date, '%Y-%m-%d').year
-            date_to = datetime.strptime(reg_date, '%Y-%m-%d').replace(
+            cur_year = fields.Date.from_string(reg_date).year
+            date_to = fields.Date.from_string(reg_date).replace(
                 year=cur_year-1)
         return date_to
 
@@ -100,11 +99,11 @@ class SaleForecastLoad(models.TransientModel):
         if self.forecast_id:
             from_date = self.forecast_id.date_from
             to_date = self.forecast_id.date_to
-            f_cur_year = datetime.strptime(from_date, '%Y-%m-%d').year
-            t_cur_year = datetime.strptime(to_date, '%Y-%m-%d').year
-            date_from = datetime.strptime(from_date, '%Y-%m-%d').replace(
+            f_cur_year = fields.Date.from_string(from_date).year
+            t_cur_year = fields.Date.from_string(to_date).year
+            date_from = fields.Date.from_string(from_date).replace(
                 year=f_cur_year-1)
-            date_to = datetime.strptime(to_date, '%Y-%m-%d').replace(
+            date_to = fields.Date.from_string(to_date).replace(
                 year=t_cur_year-1)
             self.date_from = date_from
             self.date_to = date_to
@@ -139,16 +138,16 @@ class SaleForecastLoad(models.TransientModel):
     def get_date_list(self, forecast):
         self.ensure_one()
         date_list = []
-        date_format = '%Y-%m-%d'
-        date_start = datetime.strptime(forecast.date_from, date_format)
-        date_end = datetime.strptime(forecast.date_to, date_format)
+        date_start = fields.Date.from_string(forecast.date_from)
+        date_end = fields.Date.from_string(forecast.date_to)
         month_count = ((date_end.year - date_start.year) * 12 +
                        date_end.month - date_start.month)
-        first_date = datetime(date_start.year, date_start.month, 1)
-        date_list.append(datetime.strftime(first_date, date_format))
+        date = '-'.join([str(date_start.year), str(date_start.month), str(1)])
+        first_date = fields.Date.from_string(date)
+        date_list.append(date)
         while month_count > 0:
             next_date = first_date + relativedelta(months=month_count)
-            date_list.append(datetime.strftime(next_date, date_format))
+            date_list.append(fields.Date.to_string(next_date))
             month_count -= 1
         return date_list
 
@@ -183,13 +182,12 @@ class SaleForecastLoad(models.TransientModel):
     @api.multi
     def load_sales(self):
         self.ensure_one()
-        date_format = '%Y-%m-%d'
         forecast_line_obj = self.env['procurement.sale.forecast.line']
         forecast = self.forecast_id
         sale_lines = self.get_sale_forecast_lists(forecast)
         date_list = self.get_date_list(forecast)
-        date_start = datetime.strptime(self.date_from, date_format)
-        date_end = datetime.strptime(self.date_to, date_format)
+        date_start = fields.Date.from_string(self.date_from)
+        date_end = fields.Date.from_string(self.date_to)
         month_count = ((date_end.year - date_start.year) * 12 +
                        date_end.month - date_start.month + 1)
         result = self.match_sales_forecast(sale_lines, self.factor)
