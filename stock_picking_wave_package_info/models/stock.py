@@ -10,7 +10,7 @@ class StockPicking(models.Model):
 
     @api.multi
     def action_assign(self):
-        super(StockPicking, self).action_assing()
+        super(StockPicking, self).action_assign()
         for picking in self:
             if picking.wave_id:
                 picking.wave_id._delete_packages_information()
