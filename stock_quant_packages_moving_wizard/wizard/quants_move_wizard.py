@@ -6,7 +6,7 @@
 from openerp import models, fields, api
 
 
-class StockQuantsMoveWizard(models.Model):
+class StockQuantsMoveWizard(models.TransientModel):
     _name = 'stock.quants.move'
 
     pack_move_items = fields.One2many(
