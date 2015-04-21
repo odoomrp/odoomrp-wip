@@ -56,7 +56,10 @@ class SaleForecastLoad(models.TransientModel):
         if model == 'sale.order':
             date_from = record.date_order
         elif model == 'procurement.sale.forecast':
-            date_from = record.date_from
+            reg_date = record.date_from
+            cur_year = datetime.strptime(reg_date, '%Y-%m-%d').year
+            date_from = datetime.strptime(reg_date, '%Y-%m-%d').replace(
+                year=cur_year-1)
         return date_from
 
     def _get_default_date_to(self):
@@ -66,7 +69,10 @@ class SaleForecastLoad(models.TransientModel):
         if model == 'sale.order':
             date_to = record.date_order
         elif model == 'procurement.sale.forecast':
-            date_to = record.date_to
+            reg_date = record.date_to
+            cur_year = datetime.strptime(reg_date, '%Y-%m-%d').year
+            date_to = datetime.strptime(reg_date, '%Y-%m-%d').replace(
+                year=cur_year-1)
         return date_to
 
     partner_id = fields.Many2one("res.partner", string="Partner",
@@ -92,8 +98,16 @@ class SaleForecastLoad(models.TransientModel):
     @api.onchange('forecast_id')
     def forecast_onchange(self):
         if self.forecast_id:
-            self.date_from = self.forecast_id.date_from
-            self.date_to = self.forecast_id.date_to
+            from_date = self.forecast_id.date_from
+            to_date = self.forecast_id.date_to
+            f_cur_year = datetime.strptime(from_date, '%Y-%m-%d').year
+            t_cur_year = datetime.strptime(to_date, '%Y-%m-%d').year
+            date_from = datetime.strptime(from_date, '%Y-%m-%d').replace(
+                year=f_cur_year-1)
+            date_to = datetime.strptime(to_date, '%Y-%m-%d').replace(
+                year=t_cur_year-1)
+            self.date_from = date_from
+            self.date_to = date_to
 
     @api.multi
     def match_sales_forecast(self, sales, factor):
