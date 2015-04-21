@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="purchase_order_form_inh_purchaseallowedtemplate">
-            <field name="name">purchase.order.form.inh.purchaseallowedtemplate</field>
+        <record model="ir.ui.view" id="purchase_order_allowed_template_form">
+            <field name="name">purchase.order.allowed.template.form</field>
             <field name="model">purchase.order</field>
             <field name="inherit_id" ref="purchase.purchase_order_form" />
             <field name="arch" type="xml">
@@ -11,8 +11,8 @@
                 </field>
             </field>
         </record>
-        <record model="ir.ui.view" id="purchase_order_extended_form_view_inh_purchaseallowedtemplate">
-            <field name="name">purchase.order.extended.form.view.inh.purchaseallowedtemplate</field>
+        <record model="ir.ui.view" id="purchase_order_allowed_template_variants_form">
+            <field name="name">purchase.order.allowed.template.variants.form</field>
             <field name="model">purchase.order</field>
             <field name="inherit_id" ref="purchase_product_variants.purchase_order_extended_form_view" />
             <field name="arch" type="xml">
@@ -21,8 +21,8 @@
                 </xpath>
             </field>
         </record>
-        <record model="ir.ui.view" id="purchase_order_line_extended_form_view_inh_purchaseallowedtemplate">
-            <field name="name">purchase.order.line.extended.form.view.inh.purchaseallowedtemplate</field>
+        <record model="ir.ui.view" id="purchase_order_line_allowed_template_form">
+            <field name="name">purchase.order.line.allowed.template.form</field>
             <field name="model">purchase.order.line</field>
             <field name="inherit_id" ref="purchase_product_variants.purchase_order_line_extended_form_view" />
             <field name="arch" type="xml">
@@ -31,8 +31,8 @@
                 </field>
             </field>
         </record>
-        <record model="ir.ui.view" id="purchase_order_line_extended_form_view2_inh_purchaseallowedtemplate">
-            <field name="name">purchase.order.line.extended.form.view2.inh.purchaseallowedtemplate</field>
+        <record model="ir.ui.view" id="purchase_order_line_allowed_template_variants_form">
+            <field name="name">purchase.order.line.allowed.template.variants.form</field>
             <field name="model">purchase.order.line</field>
             <field name="inherit_id" ref="purchase_product_variants.purchase_order_line_extended_form_view2" />
             <field name="arch" type="xml">
