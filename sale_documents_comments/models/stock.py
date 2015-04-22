@@ -50,10 +50,10 @@ class StockPicking(models.Model):
                 picking_pcom += ('\n%s' %
                                  (partner.parent_id.picking_propagated_comment
                                   or ''))
-            if picking_com and comment != picking_com:
-                comment += '\n%s' % (comment or '')
-            if picking_pcom and pcomment != picking_pcom:
-                pcomment += '\n%s' % (pcomment or '')
+            if comment != picking_com:
+                comment += '\n%s' % (picking_com or '')
+            if pcomment != picking_pcom:
+                pcomment += '\n%s' % (picking_pcom or '')
             values.update({'sale_comment': comment,
                            'sale_propagated_comment': pcomment})
         return super(StockPicking, self).create(values)
