@@ -113,11 +113,6 @@ msgid "Pickings"
 msgstr ""
 
 #. module: stock_picking_wave_package_info
-#: model:ir.model,name:stock_picking_wave_package_info.model_stock_picking_package_kg_lot
-msgid "Stock Picking Package KG Lot"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
 #: model:ir.model,name:stock_picking_wave_package_info.model_stock_picking_package_total
 msgid "Stock Picking Package Total"
 msgstr ""
@@ -151,45 +146,5 @@ msgstr ""
 #. module: stock_picking_wave_package_info
 #: view:website:stock_picking_wave_package_info.label_creator_palet_wave_report_document
 msgid "of"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "sum_empty_weight"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "sum_gross_net"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "sum_kg_net"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "sum_quantity"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "sum_real_weight"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "sum_total_estim_weight"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "sum_total_estim_weight_net"
-msgstr ""
-
-#. module: stock_picking_wave_package_info
-#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
-msgid "sum_tvolume_charge"
 msgstr ""
 
