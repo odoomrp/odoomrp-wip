@@ -5,7 +5,7 @@
         <report
 		    id="label_creator_wave_palet_report"
 		    model="stock.picking.wave"
-		    string="Etiqueta palet grupo"
+		    string="Picking wave palet label"
 		    report_type="qweb-pdf"
 		    name="stock_picking_wave_package_info.label_creator_palet_wave_report_document"
 		    file="stock_picking_wave_package_info.label_creator_palet_wave"
