@@ -66,10 +66,10 @@ class StockPicking(models.Model):
                     cont = len(picking.packages.filtered(
                         lambda x: x.ul_id.id == product_ul.id))
                     if cont:
-                        total += package_total_obj.create({'picking': self.id,
-                                                           'ul': product_ul.id,
-                                                           'quantity': cont,
-                                                           })
+                        total += total_obj.create({'picking': self.id,
+                                                   'ul': product_ul.id,
+                                                   'quantity': cont,
+                                                   })
             picking.package_totals = total.ids
 
     packages = fields.Many2many(
