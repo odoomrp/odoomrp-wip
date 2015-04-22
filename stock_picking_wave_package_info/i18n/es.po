@@ -1,19 +1,20 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_picking_wave_package_info
+# 	* stock_picking_wave_package_info
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-22 08:01+0000\n"
-"PO-Revision-Date: 2015-04-22 10:02+0100\n"
-"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"POT-Creation-Date: 2015-04-22 09:16+0000\n"
+"PO-Revision-Date: 2015-04-22 11:19+0100\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. module: stock_picking_wave_package_info
 #: field:stock.picking.wave,num_packages:0
@@ -22,7 +23,7 @@ msgstr "Num. paquetes"
 
 #. module: stock_picking_wave_package_info
 #: view:website:stock_picking_wave_package_info.label_creator_palet_wave_report_document
-msgid "Adress:"
+msgid "Address:"
 msgstr "Dirección:"
 
 #. module: stock_picking_wave_package_info
@@ -46,18 +47,13 @@ msgid "Number of lots:"
 msgstr "Número de lotes:"
 
 #. module: stock_picking_wave_package_info
-#: view:website:stock_picking_wave_package_info.label_creator_palet_wave_report_document
-msgid "Nº Picking:"
-msgstr "Nº albarán:"
-
-#. module: stock_picking_wave_package_info
 #: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
 msgid "Operations"
-msgstr "Operaciones"
+msgstr "Composición Palets"
 
 #. module: stock_picking_wave_package_info
 #: view:website:stock_picking_wave_package_info.label_creator_palet_wave_report_document
-msgid "Package Nº:"
+msgid "Package number:"
 msgstr "Nº paquete:"
 
 #. module: stock_picking_wave_package_info
@@ -69,7 +65,7 @@ msgstr "Paquete:"
 #: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
 #: field:stock.picking.wave,packages:0
 msgid "Packages"
-msgstr "Paquetes"
+msgstr "Palets de Envío"
 
 #. module: stock_picking_wave_package_info
 #: field:stock.picking.wave,packages_info:0
@@ -105,12 +101,22 @@ msgstr "Etiqueta palet grupo albaranes"
 #. module: stock_picking_wave_package_info
 #: model:ir.model,name:stock_picking_wave_package_info.model_stock_transfer_details
 msgid "Picking wizard"
-msgstr "Wizard albarán"
+msgstr "Albarán wizard"
+
+#. module: stock_picking_wave_package_info
+#: view:website:stock_picking_wave_package_info.label_creator_palet_wave_report_document
+msgid "Picking:"
+msgstr "Albarán:"
 
 #. module: stock_picking_wave_package_info
 #: view:stock.quant.package:stock_picking_wave_package_info.view_quant_package_form_inh_pickingwavepackageinfo
 msgid "Pickings"
 msgstr "Albaranes"
+
+#. module: stock_picking_wave_package_info
+#: model:ir.model,name:stock_picking_wave_package_info.model_stock_picking_package_kg_lot
+msgid "Stock Picking Package KG Lot"
+msgstr "Stock Picking Package KG Lot"
 
 #. module: stock_picking_wave_package_info
 #: model:ir.model,name:stock_picking_wave_package_info.model_stock_picking_package_total
@@ -148,3 +154,42 @@ msgstr "Agrupación"
 msgid "of"
 msgstr "de"
 
+#. module: stock_picking_wave_package_info
+#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "sum_empty_weight"
+msgstr "sum_empty_weight"
+
+#. module: stock_picking_wave_package_info
+#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "sum_gross_net"
+msgstr "sum_gross_net"
+
+#. module: stock_picking_wave_package_info
+#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "sum_kg_net"
+msgstr "sum_kg_net"
+
+#. module: stock_picking_wave_package_info
+#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "sum_quantity"
+msgstr "sum_quantity"
+
+#. module: stock_picking_wave_package_info
+#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "sum_real_weight"
+msgstr "sum_real_weight"
+
+#. module: stock_picking_wave_package_info
+#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "sum_total_estim_weight"
+msgstr "sum_total_estim_weight"
+
+#. module: stock_picking_wave_package_info
+#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "sum_total_estim_weight_net"
+msgstr "sum_total_estim_weight_net"
+
+#. module: stock_picking_wave_package_info
+#: view:stock.picking.wave:stock_picking_wave_package_info.view_picking_wave_form_inh_pickingwavepackageinfo
+msgid "sum_tvolume_charge"
+msgstr "sum_tvolume_charge"
