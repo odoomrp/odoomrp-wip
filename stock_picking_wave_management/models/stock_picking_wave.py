@@ -50,9 +50,11 @@ class StockPickingWave(models.Model):
         cond = [('wave_id', '=', False),
                 ('state', 'not in', ('done', 'cancel'))]
         if self.partner.child_ids:
-            cond.extend(['|', ('partner_id', '=', self.partner.id),
+            cond.extend([('wave_id', '=', False),
+                         '|', ('partner_id', '=', self.partner.id),
                          ('partner_id', 'child_of',
                           self.partner.child_ids.ids)])
         elif self.partner:
-            cond.extend([('partner_id', '=', self.partner.id)])
+            cond.extend([('wave_id', '=', False),
+                         ('partner_id', '=', self.partner.id)])
         return {'domain': {'picking_ids': cond}}

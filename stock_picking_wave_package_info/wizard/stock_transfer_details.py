@@ -16,6 +16,8 @@ class StockTransferDetails(models.TransientModel):
         if 'origin_wave' in self._context:
             origin_wave = wave_obj.browse(self._context['origin_wave'])
             origin_wave._catch_operations()
+            for picking in origin_wave.picking_ids:
+                picking._catch_operations()
         return result
 
     @api.one
@@ -28,6 +30,8 @@ class StockTransferDetails(models.TransientModel):
             if 'origin_wave' in self._context:
                 origin_wave = wave_obj.browse(self._context['origin_wave'])
                 origin_wave._delete_packages_information()
+                for picking in origin_wave.picking_ids:
+                    picking._delete_packages_information()
             return True
         for picking in self.picking_ids:
             # Create new and update existing pack operations
@@ -57,4 +61,6 @@ class StockTransferDetails(models.TransientModel):
         if 'origin_wave' in self._context:
             origin_wave = wave_obj.browse(self._context['origin_wave'])
             origin_wave._catch_operations()
+            for picking in origin_wave.picking_ids:
+                picking._catch_operations()
         return True
