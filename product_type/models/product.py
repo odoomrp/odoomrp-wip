@@ -25,8 +25,8 @@ class ProductProductType(models.Model):
     name = fields.Char(string='Product Type', translate=True)
 
 
-class ProductProduct(models.Model):
-    _inherit = 'product.product'
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
 
     product_type = fields.Many2one(comodel_name='product.product.type',
                                    string='Product Type')

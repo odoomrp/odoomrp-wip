@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="product_product_extended_form_view">
-            <field name="name">product.product.extended.form</field>
-            <field name="model">product.product</field>
-            <field name="inherit_id" ref="product.product_normal_form_view" />
+        <record model="ir.ui.view" id="product_template_extended_form_view">
+            <field name="name">product.template.extended.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view" />
             <field name="arch" type="xml">
                 <field name="type" position="after">
                     <field name="product_type" widget="selection" />
@@ -12,12 +12,12 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="product_product_extended_search_view">
-            <field name="name">product.product_search_form_view</field>
-            <field name="model">product.product</field>
-            <field name="inherit_id" ref="product.product_search_form_view" />
+        <record model="ir.ui.view" id="product_template_extended_search_view">
+            <field name="name">product.template_search_form_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view" />
             <field name="arch" type="xml">
-                <field name="product_tmpl_id" position="after">
+                <field name="name" position="after">
                     <field name="product_type" />
                 </field>
                 <group string="Group by..." position="inside">
