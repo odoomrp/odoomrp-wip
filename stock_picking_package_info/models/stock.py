@@ -14,59 +14,36 @@ class StockPicking(models.Model):
     def _compute_num_packages(self):
         self.num_packages = sum(x.quantity for x in self.package_totals)
 
-    packages = fields.Many2many(
-        comodel_name='stock.quant.package',
-        relation='rel_picking_package', column1='picking_id',
-        column2='package_id', string='Packages', copy=False)
-    packages_info = fields.One2many(
-        "stock.picking.package.kg.lot", "picking", string="Packages Info",
-        readonly=True)
-    package_totals = fields.One2many(
-        "stock.picking.package.total", "picking",
-        string="Total UL Packages Info", readonly=True)
-    num_packages = fields.Integer(
-        string='Num. Packages', compute='_compute_num_packages', store=True)
+    @api.multi
+    @api.depends('pack_operation_ids', 'pack_operation_ids.result_package_id')
+    def _calc_picking_packages(self):
+        for picking in self:
+            picking.packages.unlink()
+            picking.packages = [
+                operation.result_package_id.id for operation in
+                picking.pack_operation_ids if operation.result_package_id]
 
     @api.multi
-    def action_assign(self):
-        super(StockPicking, self).action_assign()
-        self._delete_packages_information()
-        return True
-
-    @api.one
-    def _delete_packages_information(self):
-        self.pack_operation_ids.unlink()
-        self.packages.unlink()
-        self.packages_info.unlink()
-        self.package_totals.unlink()
-        return True
-
-    def _catch_operations(self):
-        self.packages = [
-            operation.result_package_id.id for operation in
-            self.pack_operation_ids if operation.result_package_id]
-        self._calculate_package_info()
-        self._calculate_package_totals()
-
-    def _calculate_package_info(self):
-        if self.packages_info:
-            self.packages_info.unlink()
-        if self.packages:
+    @api.depends('packages')
+    def _calc_picking_packages_info(self):
+        package_kg = package_kg_obj = self.env['stock.picking.package.kg.lot']
+        for picking in self:
+            picking.packages_info.unlink()
             sequence = 0
-            for package in self.packages:
+            for package in picking.packages:
                 kg_net = sum(x.product_qty for x in
-                             self.pack_operation_ids.filtered(
+                             picking.pack_operation_ids.filtered(
                                  lambda r: r.result_package_id.id ==
                                  package.id))
                 sequence += 1
-                vals = {'picking': self.id,
+                vals = {'picking': picking.id,
                         'sequence': sequence,
                         'package': package.id,
                         'kg_net': kg_net,
                         'gross_net': kg_net + package.empty_weight
                         }
                 lots = False
-                for operation in self.pack_operation_ids.filtered(
+                for operation in picking.pack_operation_ids.filtered(
                         lambda r: r.result_package_id.id == package.id and
                         r.lot_id):
                     if not lots:
@@ -74,27 +51,47 @@ class StockPicking(models.Model):
                     else:
                         lots += ', ' + operation.lot_id.name
                 vals['lots'] = lots
-                self.env['stock.picking.package.kg.lot'].create(vals)
+                package_kg += package_kg_obj.create(vals)
+            picking.packages_info = package_kg.ids
 
-    def _calculate_package_totals(self):
-        if self.package_totals:
-            self.package_totals.unlink()
-        if self.packages:
-            package_total_obj = self.env['stock.picking.package.total'].sudo()
-            products_ul = self.env['product.ul'].search([])
-            for product_ul in products_ul:
-                cont = len(self.packages.filtered(lambda x: x.ul_id.id ==
-                                                  product_ul.id))
-                if cont:
-                    package_total_obj.create({
-                        'picking': self.id,
-                        'ul': product_ul.id,
-                        'quantity': cont,
-                    })
+    @api.multi
+    @api.depends('packages', 'packages.ul_id')
+    def _calc_picking_packages_totals(self):
+        total = total_obj = self.env['stock.picking.package.total'].sudo()
+        products_ul = self.env['product.ul'].search([])
+        for picking in self:
+            picking.package_totals.unlink()
+            if picking.packages:
+                for product_ul in products_ul:
+                    cont = len(picking.packages.filtered(
+                        lambda x: x.ul_id.id == product_ul.id))
+                    if cont:
+                        total += total_obj.create({'picking': self.id,
+                                                   'ul': product_ul.id,
+                                                   'quantity': cont,
+                                                   })
+            picking.package_totals = total.ids
 
-    @api.one
-    def button_refresh_package_totals(self):
-        self._calculate_package_totals()
+    packages = fields.Many2many(
+        comodel_name='stock.quant.package',
+        relation='rel_picking_package', column1='picking_id',
+        column2='package_id', string='Packages', copy=False, store=True,
+        compute='_calc_picking_packages', readonly=False)
+    packages_info = fields.One2many(
+        "stock.picking.package.kg.lot", "picking", string="Packages Info",
+        compute='_calc_picking_packages_info', store=True)
+    package_totals = fields.One2many(
+        "stock.picking.package.total", "picking",
+        string="Total UL Packages Info", store=True,
+        compute='_calc_picking_packages_totals')
+    num_packages = fields.Integer(
+        string='Num. Packages', compute='_compute_num_packages', store=True)
+
+    @api.multi
+    def action_assign(self):
+        super(StockPicking, self).action_assign()
+        self.pack_operation_ids.unlink()
+        return True
 
 
 class StockPickingPackageKkLot(models.Model):
