@@ -18,7 +18,7 @@ class StockPicking(models.Model):
     @api.depends('pack_operation_ids', 'pack_operation_ids.result_package_id')
     def _calc_picking_packages(self):
         for picking in self:
-            picking.packages.unlink()
+            picking.packages = [(6, 0, [])]
             picking.packages = [
                 operation.result_package_id.id for operation in
                 picking.pack_operation_ids if operation.result_package_id]
