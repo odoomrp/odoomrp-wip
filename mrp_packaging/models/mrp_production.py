@@ -59,6 +59,12 @@ class MrpProduction(models.Model):
                            products[line.product_id.id] * bom_qty})]})
 
     @api.one
+    def recalcule_product_qty(self, qty, product):
+        line = self.product_lines.filtered(
+            lambda x: x.product_id == product)
+        line.write({'product_qty': qty})
+
+    @api.one
     def create_mo_from_packaging_operation(self):
         for op in self.pack:
             linked_raw_products = []
@@ -83,6 +89,7 @@ class MrpProduction(models.Model):
             new_op.action_compute()
             if equal_uom:
                 new_op.recalcule_bom_qtys(op.qty, self.product_id)
+            new_op.recalcule_product_qty(op.fill, self.product_id)
             workorder =\
                 new_op.workcenter_lines and new_op.workcenter_lines[0].id
             for attr_value in op.product.attribute_value_ids:
