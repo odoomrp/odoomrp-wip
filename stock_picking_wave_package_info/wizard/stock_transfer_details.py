@@ -15,6 +15,7 @@ class StockTransferDetails(models.TransientModel):
         result = super(StockTransferDetails, self).do_detailed_transfer()
         if 'origin_wave' in self._context:
             origin_wave = wave_obj.browse(self._context['origin_wave'])
+            origin_wave.state = 'done'
             origin_wave._catch_operations()
             for picking in origin_wave.picking_ids:
                 picking._catch_operations()
