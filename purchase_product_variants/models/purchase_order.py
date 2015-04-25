@@ -19,6 +19,29 @@
 from openerp import models, fields, api
 
 
+class PurchaseOrder(models.Model):
+    _inherit = "purchase.order"
+
+    @api.multi
+    def wkf_confirm_order(self):
+        """Create possible product variants not yet created."""
+        for order in self:
+            for line in order.order_line:
+                if not line.product_id:
+                    product_obj = self.env['product.product']
+                    att_values_ids = line.product_attributes.mapped('value.id')
+                    domain = [
+                        ('product_tmpl_id', '=', line.product_template.id),
+                        ('attribute_value_ids', 'in', att_values_ids)]
+                    product = product_obj.search(domain)
+                    if not product:
+                        product = product_obj.create(
+                            {'product_tmpl_id': line.product_template.id,
+                             'attribute_value_ids': [(6, 0, att_values_ids)]})
+                    line.write({'product_id': product.id})
+        return super(PurchaseOrder, self).wkf_confirm_order()
+
+
 class ProductAttributeValuePurchaseLine(models.Model):
     _name = 'purchase.order.line.attribute'
 
@@ -124,22 +147,3 @@ class PurchaseOrderLine(models.Model):
             'res_id': self.order_id.id,
             'type': 'ir.actions.act_window',
         }
-
-    @api.multi
-    def action_confirm(self):
-        for line in self:
-            if not line.product_id:
-                product_obj = self.env['product.product']
-                att_values_ids = [
-                    attr_line.value and attr_line.value.id or False
-                    for attr_line in line.product_attributes]
-                domain = [('product_tmpl_id', '=', line.product_template.id)]
-                for value in att_values_ids:
-                    domain.append(('attribute_value_ids', '=', value))
-                product = product_obj.search(domain)
-                if not product:
-                    product = product_obj.create(
-                        {'product_tmpl_id': line.product_template.id,
-                         'attribute_value_ids': [(6, 0, att_values_ids)]})
-                line.write({'product_id': product.id})
-        super(PurchaseOrderLine, self).action_confirm()
