@@ -104,7 +104,8 @@ class PurchaseOrderLine(models.Model):
         if product_id:
             product_obj = self.env['product.product']
             product = product_obj.browse(product_id)
-            attributes = product._get_product_attributes_values_dict()
+            attributes = [(0, 0, x) for x in
+                          product._get_product_attributes_values_dict()]
             res['value'].update(
                 {'product_attributes': attributes,
                  'product_template': product.product_tmpl_id.id})
