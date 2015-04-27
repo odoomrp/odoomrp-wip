@@ -28,6 +28,16 @@ class StockPickingWave(models.Model):
         compute="_count_assigned_pickings", string="Assigned pickings")
     partner = fields.Many2one('res.partner', 'Partner')
 
+    @api.multi
+    def confirm_picking(self):
+        picking_obj = self.env['stock.picking']
+        for wave in self:
+            pickings = picking_obj.search([('wave_id', '=', wave.id),
+                                           ('state', '=', 'draft')])
+            pickings.action_assign()
+            wave.state = 'in_progress'
+        return True
+
     @api.one
     def button_check_availability(self):
         pickings = self.picking_ids.filtered(lambda x: x.state == 'confirmed')
