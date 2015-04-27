@@ -95,8 +95,9 @@ class MrpProduction(models.Model):
     def assign_parent_lot(self, production):
         line = self.product_lines.filtered(
             lambda x: x.product_id == production.product_id)
-        line.write({'lot': (production.move_created_ids2 and
-                            production.move_created_ids2[0].lot_id.id)})
+        line.write({'lot': (
+                    production.move_created_ids2 and
+                    production.move_created_ids2[0].restrict_lot_id.id)})
 
     @api.one
     def create_mo_from_packaging_operation(self):
