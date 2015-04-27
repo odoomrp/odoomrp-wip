@@ -1,1 +1,0 @@
-This module creates a page on product where to display price info.
