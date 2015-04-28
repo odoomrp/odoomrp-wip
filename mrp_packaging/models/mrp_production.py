@@ -97,7 +97,8 @@ class MrpProduction(models.Model):
             lambda x: x.product_id == production.product_id)
         line.write({'lot': (
                     production.move_created_ids2 and
-                    production.move_created_ids2[0].restrict_lot_id.id)})
+                    production.move_created_ids2[0].restrict_lot_id.id or
+                    False)})
 
     @api.one
     def create_mo_from_packaging_operation(self):
