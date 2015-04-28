@@ -136,6 +136,11 @@ class SaleOrderLine(models.Model):
                 self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
         self.product_attributes = (
             self.product_template._get_product_attributes_dict())
+        # Update taxes
+        fpos = self.order_id.fiscal_position
+        if not fpos:
+            fpos = self.order_id.partner_id.property_account_position
+        self.tax_id = fpos.map_tax(self.product_template.taxes_id)
 
     @api.one
     @api.onchange('product_attributes')
