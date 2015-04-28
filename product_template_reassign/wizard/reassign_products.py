@@ -47,7 +47,7 @@ class ReassignProducts(models.TransientModel):
         lines = []
         for vals in val_list:
             line_vals = {
-                'attributes': [(6, 0, list(vals))],
+                'values': [(6, 0, list(vals))],
                 'product': self._product_by_variants(vals, products),
             }
             line_vals['old_product'] = line_vals['product']
@@ -64,9 +64,19 @@ class ReassignProducts(models.TransientModel):
                     continue
                 if line.old_product:
                     line.old_product.unlink()
+                # Keep value before overwriting
+                lst_price = line.product.lst_price
                 line.product.write(
-                    {'attribute_value_ids': [(6, 0, line.attributes.ids)],
-                     'product_tmpl_id': template_id})
+                    {'attribute_value_ids': [(6, 0, line.values.ids)],
+                     'product_tmpl_id': template_id,
+                     'image': line.product.image})
+                # Overwrite list price making a trick with price extra
+                # (only valid if there is one attribute)
+                if len(line.values) == 1:
+                    template = self.env['product.template'].browse(template_id)
+                    if lst_price != template.lst_price:
+                        line.values.price_extra = (
+                            lst_price - template.lst_price)
                 if not old_template.product_variant_ids:
                     old_template.unlink()
         return True
@@ -78,9 +88,8 @@ class ReassignProductLines(models.TransientModel):
     wizard = fields.Many2one(
         comodel_name='reassign.products', string='Reassign Wizard',
         required=True)
-    attributes = fields.Many2many(
+    values = fields.Many2many(
         'product.attribute.value', string="Attributes")
-    old_product = fields.Many2one(
-        comodel_name='product.product', string='Product')
+    old_product = fields.Many2one(comodel_name='product.product')
     product = fields.Many2one(
         comodel_name='product.product', string='Product')

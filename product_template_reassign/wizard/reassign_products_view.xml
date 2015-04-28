@@ -9,7 +9,7 @@
                 <form string="Reassign Products">
                     <field name="products">
                         <tree string="Reassign product lines" editable="top" delete="0" create="0">
-                            <field name="attributes" widget="many2many_tags" readonly="1"/>
+                            <field name="values" widget="many2many_tags" readonly="1"/>
                             <field name="product"/>
                         </tree>
                     </field>
