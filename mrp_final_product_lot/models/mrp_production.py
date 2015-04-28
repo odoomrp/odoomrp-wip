@@ -31,15 +31,10 @@ class MrpProduction(models.Model):
                 if not lot_id:
                     code = production.manual_production_lot or ''
                     if production.concatenate_lots_components:
-                        lot_ids = set()
-                        for line in wiz.consume_lines:
-                            if line.lot_id:
-                                lot_ids.add(line.lot_id)
-                        for line in production.move_lines2:
-                            if line.restrict_lot_id:
-                                lot_ids.add(line.restrict_lot_id)
-                        for lot in lot_ids:
-                            code += '-%s' % lot.name
+                        lots = wiz.consume_line.mapped('lot_id')
+                        lots += production.move_lines2.mapped(
+                            'restrict_lot_id')
+                        code = '-'.join(lots.mapped('name'))
                     vals = {'name': code,
                             'product_id': production.product_id.id}
                     new_lot = lot_obj.create(vals)
