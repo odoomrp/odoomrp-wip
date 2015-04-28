@@ -1,0 +1,177 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mrp_packaging
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-28 09:13+0000\n"
+"PO-Revision-Date: 2015-04-28 09:13+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Cancel Production"
+msgstr "Cancelar fabricación"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Check Availability"
+msgstr "Comprobar disponibilidad"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Confirm Production"
+msgstr "Confirmar producción"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Create Pack Manufacturing Orders"
+msgstr "Crear ordenes de envasado"
+
+#. module: mrp_packaging
+#: field:packaging.operation,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mrp_packaging
+#: field:packaging.operation,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+#: field:mrp.production,expected_production:0
+msgid "Expected Production"
+msgstr "Producción esperada"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Extra Information"
+msgstr "Información extra"
+
+#. module: mrp_packaging
+#: field:packaging.operation,fill:0
+msgid "Fill"
+msgstr "Llenado"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Force Reservation"
+msgstr "Forzar reservas"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Get packages"
+msgstr "Traer envases"
+
+#. module: mrp_packaging
+#: field:packaging.operation,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: mrp_packaging
+#: field:packaging.operation,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: mrp_packaging
+#: field:packaging.operation,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: mrp_packaging
+#: model:ir.model,name:mrp_packaging.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Órden de producción"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Mark as Started"
+msgstr "Marcar como iniciado"
+
+#. module: mrp_packaging
+#: field:packaging.operation,operation:0
+msgid "Operation"
+msgstr "Operación"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+#: field:mrp.production,pack:0
+msgid "Pack"
+msgstr "Envase"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Packaging"
+msgstr "Envasado"
+
+#. module: mrp_packaging
+#: field:packaging.operation,packaging_production:0
+msgid "Packing manufacturing order"
+msgstr "Orden de envasado"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Produce"
+msgstr "Fabricar"
+
+#. module: mrp_packaging
+#: field:packaging.operation,product:0
+msgid "Product"
+msgstr "Producto"
+
+#. module: mrp_packaging
+#: help:packaging.operation,qty:0
+msgid "Product Quantity. It will be the new manufacturing order quantity if dump uom is equal to product uom"
+msgstr "Cantidad de producto. Será la nueva cantidad de la orden de fabricación si la UdM de volcado es igual a la UdM del producto"
+
+#. module: mrp_packaging
+#: help:packaging.operation,fill:0
+msgid "Product linked Raw Material value * Product Quantity. It will be the new manufacturing order quantity if dump UoM is not equal to product UoM"
+msgstr "Valor de la materia prima asociada al producto * Cantidad de producto. Será la nueva cantidad de la orden de fabricación si la UdM de volcado no es igual a la UdM del producto"
+
+#. module: mrp_packaging
+#: help:packaging.operation,product:0
+msgid "Product that is going to be manufactured"
+msgstr "Producto que va a ser fabricado"
+
+#. module: mrp_packaging
+#: field:mrp.production,production:0
+msgid "Production"
+msgstr "Producción"
+
+#. module: mrp_packaging
+#: field:packaging.operation,qty:0
+msgid "Qty"
+msgstr "Ctdad"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Total Qty"
+msgstr "Ctdad total"
+
+#. module: mrp_packaging
+#: code:addons/mrp_packaging/models/mrp_production.py:194
+#, python-format
+msgid "Warning"
+msgstr "Atención"
+
+#. module: mrp_packaging
+#: code:addons/mrp_packaging/models/mrp_production.py:171
+#, python-format
+msgid "You can not compute again the list."
+msgstr "No puedes recalcular la lista."
+
+#. module: mrp_packaging
+#: code:addons/mrp_packaging/models/mrp_production.py:197
+#, python-format
+msgid "You won't be able to pack %f, there is only %f left"
+msgstr "No puedes envasar %f, solo quedan %f por envasar"
+
