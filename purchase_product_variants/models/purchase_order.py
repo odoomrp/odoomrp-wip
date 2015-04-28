@@ -15,8 +15,8 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-
-from openerp import models, fields, api
+from openerp import models, fields, api, _
+from openerp.tools.float_utils import float_compare
 
 
 class PurchaseOrder(models.Model):
@@ -83,24 +83,64 @@ class PurchaseOrderLine(models.Model):
     @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
-        for line in self:
-            product_attributes = []
-            if not line.product_template.attribute_line_ids:
-                line.product_id = (
-                    line.product_template.product_variant_ids and
-                    line.product_template.product_variant_ids[0])
-            if (line.product_id and line.product_id not in
-                    line.product_template.product_variant_ids):
-                line.product_id = False
-            for attribute in line.product_template.attribute_line_ids:
-                product_attributes.append({'attribute':
-                                           attribute.attribute_id})
-            line.product_attributes = product_attributes
-            line.name = line.product_template.name
-            line.product_uom = line.product_template.uom_po_id
-            return {'domain': {'product_id':
-                               [('product_tmpl_id', '=',
-                                 line.product_template.id)]}}
+        self.ensure_one()
+        res = {}
+        product_attributes = []
+        if not self.product_template.attribute_line_ids:
+            self.product_id = (
+                self.product_template.product_variant_ids and
+                self.product_template.product_variant_ids[0])
+        if (self.product_id and self.product_id not in
+                self.product_template.product_variant_ids):
+            self.product_id = False
+        for attribute in self.product_template.attribute_line_ids:
+            product_attributes.append({'attribute':
+                                       attribute.attribute_id})
+        self.product_attributes = product_attributes
+        self.name = self.product_template.name
+        self.product_uom = self.product_template.uom_po_id
+        # Get planned date and min quantity
+        supplierinfo = False
+        precision = self.env['decimal.precision'].precision_get(
+            'Product Unit of Measure')
+        for supplier in self.product_template.seller_ids:
+            if supplier.name == self.order_id.partner_id:
+                supplierinfo = supplier
+                if supplierinfo.product_uom != self.product_uom:
+                    res['warning'] = {
+                        'title': _('Warning!'),
+                        'message': _('The selected supplier only sells this '
+                                     'product by %s') % (
+                            supplierinfo.product_uom.name)
+                    }
+                min_qty = supplierinfo.product_uom._compute_qty(
+                    supplierinfo.product_uom.id, supplierinfo.min_qty,
+                    to_uom_id=self.product_uom.id)
+                # If the supplier quantity is greater than entered from user,
+                # set minimal.
+                if (float_compare(
+                        min_qty, self.product_qty,
+                        precision_digits=precision) == 1):
+                    if self.product_qty:
+                        res['warning'] = {
+                            'title': _('Warning!'),
+                            'message': _('The selected supplier has a minimal '
+                                         'quantity set to %s %s, you should '
+                                         'not purchase less.') % (
+                                supplierinfo.min_qty,
+                                supplierinfo.product_uom.name)
+                        }
+                    self.product_qty = min_qty
+        if not self.date_planned:
+            dt = fields.Datetime.to_string(
+                self._get_date_planned(supplierinfo, self.order_id.date_order))
+            self.date_planned = dt
+        # Get taxes
+        taxes = self.product_template.supplier_taxes_id
+        self.taxes_id = self.order_id.fiscal_position.map_tax(taxes)
+        res['domain'] = {'product_id': [('product_tmpl_id', '=',
+                                         self.product_template.id)]}
+        return res
 
     @api.one
     @api.onchange('product_attributes')
