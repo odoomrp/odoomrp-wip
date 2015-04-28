@@ -28,7 +28,7 @@
     "website": "http://www.odoomrp.com",
     "contributors": [
         "Ana Juaristi Olalde <ajuaristio@gmail.com>",
-        "Pedro Manuel Baeza Romero <pedro.baeza@gmail.com>"
+        "Pedro Manuel Baeza Romero <pedro.baeza@serviciosbaeza.com>"
         "Mikel Arregi <mikelarregi@avanzosc.es>",
     ],
     "category": "Warehouse Management",

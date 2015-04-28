@@ -9,7 +9,7 @@
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
+#    GNU General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
@@ -17,29 +17,22 @@
 ##############################################################################
 
 {
-    "name": "Manufacturing order from packaging summary",
+    "name": "Manual assignment of quants for packaging summary",
     "version": "1.0",
     "depends": [
-        "base",
-        "mrp_product_variants",
-        "mrp_bom_through_attributes",
-        "mrp_lot_reserve",
+        "mrp_packaging",
+        "stock_quant_manual_assign",
     ],
     "author": "OdooMRP team, "
               "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "website": "http://www.odoomrp.com",
     "contributors": [
-        "Mikel Arregi <mikelarregi@avanzosc.es>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <anajuaristi@avanzosc.es>",
     ],
-    "category": "Manufacturing",
-    'data': [
-        "security/ir.model.access.csv",
-        "data/mrp_packaging_data.xml",
-        "views/mrp_production2production_view.xml",
-    ],
+    "category": "Custom Module",
     "installable": True,
-    "auto_install": False,
+    "auto_install": True,
 }
