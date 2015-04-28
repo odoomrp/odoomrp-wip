@@ -27,8 +27,8 @@
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "contributors": [
-        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com",
-        "Ana Juaristi <ajuaristo@gmail.com>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <anajuaristi@avanzosc.es>",
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
     ],
     "category": "Purchase",

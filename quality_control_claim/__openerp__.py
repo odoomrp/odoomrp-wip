@@ -29,7 +29,7 @@
     "website": "http://www.odoomrp.com",
     "contributors": [
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com",
-        "Ana Juaristi <ajuaristo@gmail.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
     ],
     "category": "Quality control",

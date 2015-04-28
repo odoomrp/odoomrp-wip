@@ -15,7 +15,7 @@ Credits
 
 Contributors
 ------------
-* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com
-* Ana Juaristi <ajuaristo@gmail.com>
+* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+* Ana Juaristi <anajuaristi@gmail.com>
 * Daniel Campos <danielcampos@avanzosc.es>
 * Alfredo de la Fuente <alfredodelafuente@avanzosc.es>
