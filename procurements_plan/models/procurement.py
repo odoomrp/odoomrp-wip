@@ -19,7 +19,6 @@ class ProcurementOrder(models.Model):
         untreated_procurements = {}
         untreated_moves = {}
         if 'procurement_ids' in self.env.context:
-            print '*** entro 1'
             cond = [('id', 'not in', self.env.context['procurement_ids']),
                     ('state', 'not in', ('cancel', 'done'))]
             procurements = procurement_obj.search(cond)
