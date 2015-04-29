@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-03 14:42+0000\n"
-"PO-Revision-Date: 2014-11-03 15:43+0100\n"
+"POT-Creation-Date: 2015-04-29 13:15+0000\n"
+"PO-Revision-Date: 2015-04-29 15:16+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,11 @@ msgstr ""
 
 #. module: procurements_plan
 #: view:procurement.plan:procurements_plan.procurement_plan_form_view
-#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
+msgid "Calculate Stock"
+msgstr "Calcular stock"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -27,19 +31,17 @@ msgid "Cancelled"
 msgstr "Cancelado"
 
 #. module: procurements_plan
-#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
-msgid "Compute all procurements with plan in the background."
-msgstr "Calcular todos los abastecimientos con plan en segundo plano."
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "Check Disponibility"
+msgstr "Comprobar disponibilidad"
 
 #. module: procurements_plan
 #: field:procurement.plan,create_uid:0
-#: field:run.scheduler.with.plan,create_uid:0
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: procurements_plan
 #: field:procurement.plan,create_date:0
-#: field:run.scheduler.with.plan,create_date:0
 msgid "Created on"
 msgstr "Creado el"
 
@@ -59,12 +61,6 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: procurements_plan
-#: code:addons/procurements_plan/models/procurement_plan.py:81
-#, python-format
-msgid "Error!"
-msgstr "Error!"
-
-#. module: procurements_plan
 #: field:procurement.plan,from_date:0
 msgid "From Date"
 msgstr "Desde fecha"
@@ -76,7 +72,6 @@ msgstr "Agrupar por"
 
 #. module: procurements_plan
 #: field:procurement.plan,id:0
-#: field:run.scheduler.with.plan,id:0
 msgid "ID"
 msgstr "ID"
 
@@ -87,21 +82,23 @@ msgstr "Importar abastecimientos"
 
 #. module: procurements_plan
 #: field:procurement.plan,write_uid:0
-#: field:run.scheduler.with.plan,write_uid:0
 msgid "Last Updated by"
 msgstr "Última actualización por"
 
 #. module: procurements_plan
 #: field:procurement.plan,write_date:0
-#: field:run.scheduler.with.plan,write_date:0
 msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: procurements_plan
-#: code:addons/procurements_plan/models/procurement_plan.py:82
-#, python-format
-msgid "No procurements to treat"
-msgstr "No hay abastecimientos para tratar"
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
+msgid "Location"
+msgstr "Ubicación"
+
+#. module: procurements_plan
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
+msgid "Origin"
+msgstr "Origen"
 
 #. module: procurements_plan
 #: view:procurement.order:procurements_plan.procurement_form_view_inh_withplan
@@ -110,7 +107,6 @@ msgstr "No hay abastecimientos para tratar"
 #: view:purchase.order:procurements_plan.view_purchase_order_filter_inh_withplan
 #: view:purchase.order:procurements_plan.view_request_for_quotation_filter_inh_withplan
 #: field:purchase.order,plan:0
-#: field:run.scheduler.with.plan,plan:0
 msgid "Plan"
 msgstr "Plan"
 
@@ -149,14 +145,14 @@ msgid "Procurements Plans"
 msgstr "Planes de abastecimientos"
 
 #. module: procurements_plan
-#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
-msgid "Product"
-msgstr "Producto"
-
-#. module: procurements_plan
 #: field:procurement.plan,project_id:0
 msgid "Project"
 msgstr "Proyecto"
+
+#. module: procurements_plan
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
+msgid "Purchase"
+msgstr "Compra"
 
 #. module: procurements_plan
 #: model:ir.model,name:procurements_plan.model_purchase_order
@@ -165,13 +161,24 @@ msgstr "Pedido de compra"
 
 #. module: procurements_plan
 #: view:procurement.plan:procurements_plan.procurement_plan_form_view
+#: field:procurement.plan,purchase_ids:0
 msgid "Purchase Orders"
 msgstr "Pedido de compra"
 
 #. module: procurements_plan
-#: field:procurement.plan,purchase_ids:0
-msgid "Purchases"
-msgstr "Compras"
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "Remove of the Plan"
+msgstr "Borrar del plan"
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "Reset to confirm"
+msgstr "Reconfirmar"
+
+#. module: procurements_plan
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
+msgid "Rule"
+msgstr "Regla"
 
 #. module: procurements_plan
 #: view:procurement.plan:procurements_plan.procurement_plan_form_view
@@ -179,24 +186,14 @@ msgid "Run"
 msgstr "Ejecutar"
 
 #. module: procurements_plan
-#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
-msgid "Run Plan"
-msgstr "Ejecutar plan"
-
-#. module: procurements_plan
 #: model:ir.model,name:procurements_plan.model_run_scheduler_with_plan
 msgid "Run Scheduler With Plan"
 msgstr "Ejecutar abastecimiento con plan"
 
 #. module: procurements_plan
-#: model:ir.actions.act_window,name:procurements_plan.action_run_schedulers_with_plan
-msgid "Run Schedulers With Plan"
-msgstr "Ejecutar abastecimientos con plan"
-
-#. module: procurements_plan
-#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
-msgid "Scheduler Parameters With Plan"
-msgstr "Párametros programados con plan"
+#: selection:procurement.plan,state:0
+msgid "Running"
+msgstr "En ejecución"
 
 #. module: procurements_plan
 #: view:procurement.plan:procurements_plan.procurement_plan_search_view
@@ -214,9 +211,10 @@ msgid "State"
 msgstr "Estado"
 
 #. module: procurements_plan
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
 #: field:procurement.plan,state:0
 msgid "Status"
-msgstr "Estatus"
+msgstr "Estado"
 
 #. module: procurements_plan
 #: view:purchase.order:procurements_plan.view_purchase_order_filter_inh_withplan

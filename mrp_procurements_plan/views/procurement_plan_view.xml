@@ -1,6 +1,30 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
+        <record model="ir.ui.view" id="procurement_plan_search_view_inh_mrpprocurementplan" >
+            <field name="name">procurement.plan.search.view.inh.mrpprocurementplan</field>
+            <field name="model">procurement.plan</field>
+            <field name="inherit_id" ref="procurements_plan.procurement_plan_search_view"/>
+            <field name="arch" type="xml">
+                <field name="sequence" position="before">
+                    <field name="product_id" />
+                </field>
+                <filter string="State" position="before">
+                    <filter string="Product" domain="[]" context="{'group_by':'product_id'}"/>
+                </filter>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="procurement_plan_tree_view_inh_mrpprocurementplan" >
+            <field name="name">procurement.plan.tree.view.inh.mrpprocurementplan</field>
+            <field name="model">procurement.plan</field>
+            <field name="inherit_id" ref="procurements_plan.procurement_plan_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="product_id" />
+                    <field name="qty_to_produce" />
+                </field>
+            </field>
+        </record>
         <record model="ir.ui.view" id="procurement_plan_form_view_inh_mrpprocurementplan" >
             <field name="name">procurement.plan.form.view.inh.mrpprocurementplan</field>
             <field name="model">procurement.plan</field>
@@ -11,6 +35,19 @@
                         <field name="production_ids" />
                     </page>
                 </page>
+                <notebook position="before" >
+                    <group colspan="4" col="8">
+                        <field name="product_id" colspan="6" />
+                        <field name="qty_to_produce" />
+                        <field name="mrp_bom_id" invisible="1"/>
+                    </group>
+                </notebook>
+                <button name="action_import" position="after">
+                    <button name="button_generate_procurements" type='object' string='Generate procurements' />
+                </button>
+                <field name="date_planned" position="before">
+                    <field name="level" />
+                </field>
             </field>
         </record>
     </data>

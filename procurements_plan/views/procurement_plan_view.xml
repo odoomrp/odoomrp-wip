@@ -41,10 +41,13 @@
             <field name="arch" type="xml">
                 <form string="Procurement Plan">
                 <header>
-                    <button name="action_import" type='object' string='Import Procurements' attrs="{'invisible':[('state','&lt;&gt;','draft')]}" />
-                    <button name="button_run" states="draft" type="object" string="Run" class="oe_highlight" />
-                    <button name="button_cancel" states="draft"  type="object" string="Cancel" class="oe_highlight"/>
-                    <field name="state" widget="statusbar" type="object" statusbar_visible="draft,done,canceled" readonly="1"/>
+                    <button name="action_import" type='object' string='Import Procurements' />
+                    <button name="button_calculate_stock" type="object" string="Calculate Stock" class="oe_highlight" />
+                    <button name="button_check" type="object" string="Check Disponibility" class="oe_highlight" />
+                    <button name="button_reset_to_confirm" type="object" string="Reset to confirm" class="oe_highlight" />
+                    <button name="button_run" type="object" string="Run" class="oe_highlight" />
+                    <button name="button_cancel" type="object" string="Cancel" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" type="object" statusbar_visible="draft,running,done,cancel" readonly="1"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -70,7 +73,7 @@
                                     <field name="product_qty"/>
                                     <field name="product_uom" string="Unit of Measure"/>
                                     <field name="state"/>
-                                    <button name="button_remove_plan" string="Remove Plan" states="confirmed" type="object" icon="gtk-cancel"/>
+                                    <button name="button_remove_plan" string="Remove of the Plan" states="confirmed" type="object" icon="gtk-cancel"/>
                                 </tree>
                             </field>
                         </page>

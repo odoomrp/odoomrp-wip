@@ -1,25 +1,14 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
 
 
 class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
+
+    level = fields.Integer(string='Level')
 
     @api.multi
     def make_mo(self):
@@ -64,5 +53,94 @@ class ProcurementOrder(models.Model):
 class ProcurementPlan(models.Model):
     _inherit = 'procurement.plan'
 
+    product_id = fields.Many2one(
+        'product.product', string='Final Product')
+    qty_to_produce = fields.Integer(
+        string='Quantity to be produced')
+    mrp_bom_id = fields.Many2one(
+        'mrp.bom', string='MRP BoM')
     production_ids = fields.One2many(
         'mrp.production', 'plan', string='Productions', readonly=True)
+
+    @api.multi
+    def button_generate_procurements(self):
+        for plan in self:
+            if not plan.product_id:
+                raise exceptions.Warning(_('Error!: You must enter the final'
+                                           ' product'))
+            if not plan.qty_to_produce:
+                raise exceptions.Warning(_('Error!: You must enter the'
+                                           ' quantity to produce'))
+            if not plan.mrp_bom_id:
+                raise exceptions.Warning(_('Error!: No BoM found'))
+            res = []
+            plan._generate_procurements(
+                plan._calculate_bom_details(plan.mrp_bom_id, res))
+        return True
+
+    def _calculate_bom_details(self, bom, res):
+        for line in bom.bom_line_ids:
+            vals = ({'level': 1,
+                     'product': line.product_id,
+                     'qty': line.product_qty})
+            res.append(vals)
+            if line.child_line_ids:
+                res = self._calculate_bom_line_details(line.child_line_ids,
+                                                       1, res)
+        return res
+
+    def _calculate_bom_line_details(self, child_line_ids, level, res):
+        level += 1
+        for line in child_line_ids:
+            vals = ({'level': level,
+                     'product': line.product_id,
+                     'qty': line.product_qty})
+            res.append(vals)
+            if line.child_line_ids:
+                res = self._calculate_bom_line_details(line.child_line_ids,
+                                                       level, res)
+        return res
+
+    def _generate_procurements(self, res):
+        procurement_obj = self.env['procurement.order']
+        if not res:
+            return True
+        for line in res:
+            qty = ((line['qty'] * self.qty_to_produce) /
+                   self.mrp_bom_id.product_qty)
+            val = procurement_obj.onchange_product_id(line['product'].id)
+            vals = {'name': 'Generated from plan',
+                    'level': line['level'],
+                    'product_id': line['product'].id,
+                    'plan': self.id,
+                    'main_project_id': self.project_id.id,
+                    'product_uos': val['value']['product_uos'],
+                    'product_uom': val['value']['product_uom'],
+                    'product_qty': qty
+                    }
+            procurement_obj.create(vals)
+        return True
+
+    @api.one
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        bom_obj = self.env['mrp.bom']
+        self.mrp_bom_id = False
+        if self.product_id:
+            cond = [('product_tmpl_id', '=',
+                     self.product_id.product_tmpl_id.id),
+                    ('product_id', '=', self.product_id.id)]
+            boms = bom_obj.search(cond)
+            if not boms:
+                cond = [('product_tmpl_id', '=', False),
+                        ('product_id', '=', self.product_id.id)]
+                boms = bom_obj.search(cond)
+            if not boms:
+                cond = [('product_tmpl_id', '=',
+                         self.product_id.product_tmpl_id.id),
+                        ('product_id', '=', False)]
+                boms = bom_obj.search(cond)
+            if not boms:
+                self.product_id = False
+                raise exceptions.Warning(_('Error!: No BoM found'))
+            self.mrp_bom_id = boms[0].id

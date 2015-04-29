@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-03 14:40+0000\n"
-"PO-Revision-Date: 2014-11-03 14:40+0000\n"
+"POT-Creation-Date: 2015-04-29 13:15+0000\n"
+"PO-Revision-Date: 2015-04-29 13:15+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,11 @@ msgstr ""
 
 #. module: procurements_plan
 #: view:procurement.plan:procurements_plan.procurement_plan_form_view
-#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
+msgid "Calculate Stock"
+msgstr ""
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
 msgid "Cancel"
 msgstr ""
 
@@ -27,19 +31,17 @@ msgid "Cancelled"
 msgstr ""
 
 #. module: procurements_plan
-#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
-msgid "Compute all procurements with plan in the background."
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "Check Disponibility"
 msgstr ""
 
 #. module: procurements_plan
 #: field:procurement.plan,create_uid:0
-#: field:run.scheduler.with.plan,create_uid:0
 msgid "Created by"
 msgstr ""
 
 #. module: procurements_plan
 #: field:procurement.plan,create_date:0
-#: field:run.scheduler.with.plan,create_date:0
 msgid "Created on"
 msgstr ""
 
@@ -59,12 +61,6 @@ msgid "Draft"
 msgstr ""
 
 #. module: procurements_plan
-#: code:addons/procurements_plan/models/procurement_plan.py:81
-#, python-format
-msgid "Error!"
-msgstr ""
-
-#. module: procurements_plan
 #: field:procurement.plan,from_date:0
 msgid "From Date"
 msgstr ""
@@ -76,7 +72,6 @@ msgstr ""
 
 #. module: procurements_plan
 #: field:procurement.plan,id:0
-#: field:run.scheduler.with.plan,id:0
 msgid "ID"
 msgstr ""
 
@@ -87,20 +82,22 @@ msgstr ""
 
 #. module: procurements_plan
 #: field:procurement.plan,write_uid:0
-#: field:run.scheduler.with.plan,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
 #. module: procurements_plan
 #: field:procurement.plan,write_date:0
-#: field:run.scheduler.with.plan,write_date:0
 msgid "Last Updated on"
 msgstr ""
 
 #. module: procurements_plan
-#: code:addons/procurements_plan/models/procurement_plan.py:82
-#, python-format
-msgid "No procurements to treat"
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
+msgid "Location"
+msgstr ""
+
+#. module: procurements_plan
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
+msgid "Origin"
 msgstr ""
 
 #. module: procurements_plan
@@ -110,7 +107,6 @@ msgstr ""
 #: view:purchase.order:procurements_plan.view_purchase_order_filter_inh_withplan
 #: view:purchase.order:procurements_plan.view_request_for_quotation_filter_inh_withplan
 #: field:purchase.order,plan:0
-#: field:run.scheduler.with.plan,plan:0
 msgid "Plan"
 msgstr ""
 
@@ -149,13 +145,13 @@ msgid "Procurements Plans"
 msgstr ""
 
 #. module: procurements_plan
-#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
-msgid "Product"
+#: field:procurement.plan,project_id:0
+msgid "Project"
 msgstr ""
 
 #. module: procurements_plan
-#: field:procurement.plan,project_id:0
-msgid "Project"
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
+msgid "Purchase"
 msgstr ""
 
 #. module: procurements_plan
@@ -165,12 +161,23 @@ msgstr ""
 
 #. module: procurements_plan
 #: view:procurement.plan:procurements_plan.procurement_plan_form_view
+#: field:procurement.plan,purchase_ids:0
 msgid "Purchase Orders"
 msgstr ""
 
 #. module: procurements_plan
-#: field:procurement.plan,purchase_ids:0
-msgid "Purchases"
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "Remove of the Plan"
+msgstr ""
+
+#. module: procurements_plan
+#: view:procurement.plan:procurements_plan.procurement_plan_form_view
+msgid "Reset to confirm"
+msgstr ""
+
+#. module: procurements_plan
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
+msgid "Rule"
 msgstr ""
 
 #. module: procurements_plan
@@ -179,23 +186,13 @@ msgid "Run"
 msgstr ""
 
 #. module: procurements_plan
-#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
-msgid "Run Plan"
-msgstr ""
-
-#. module: procurements_plan
 #: model:ir.model,name:procurements_plan.model_run_scheduler_with_plan
 msgid "Run Scheduler With Plan"
 msgstr ""
 
 #. module: procurements_plan
-#: model:ir.actions.act_window,name:procurements_plan.action_run_schedulers_with_plan
-msgid "Run Schedulers With Plan"
-msgstr ""
-
-#. module: procurements_plan
-#: view:run.scheduler.with.plan:procurements_plan.view_run_scheduler_with_plan_wizard
-msgid "Scheduler Parameters With Plan"
+#: selection:procurement.plan,state:0
+msgid "Running"
 msgstr ""
 
 #. module: procurements_plan
@@ -214,6 +211,7 @@ msgid "State"
 msgstr ""
 
 #. module: procurements_plan
+#: view:procurement.order:procurements_plan.view_procurement_filter_inh_withplan
 #: field:procurement.plan,state:0
 msgid "Status"
 msgstr ""
