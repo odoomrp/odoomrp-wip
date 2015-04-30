@@ -37,7 +37,6 @@
              'security/procurements_with_plan.xml',
              'security/ir.model.access.csv',
              'views/procurement_view.xml',
-             'views/purchase_order_view.xml',
              'views/procurement_plan_view.xml',
              ],
     "installable": True

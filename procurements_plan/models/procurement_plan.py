@@ -39,8 +39,10 @@ class ProcurementPlan(models.Model):
                                  required=True)
     procurement_ids = fields.One2many(
         'procurement.order', 'plan', string='Procurements', readonly=True)
-    purchase_ids = fields.One2many(
-        'purchase.order', 'plan', string='Purchase Orders', readonly=True)
+    purchase_ids = fields.Many2many(
+        comodel_name='purchase.order',
+        relation='rel_procurement_plan_purchase_order', column1='plan_id',
+        column2='purchase_id', string='Purchase Orders', copy=False)
     state = fields.Selection(
         [('draft', 'Draft'),
          ('running', 'Running'),
@@ -80,6 +82,7 @@ class ProcurementPlan(models.Model):
             procurements = plan.procurement_ids.filtered(
                 lambda x: x.state in ('confirmed', 'exception'))
             procurements.with_context(my_context).run()
+            plan._catch_purchases()
         return True
 
     @api.multi
@@ -100,6 +103,7 @@ class ProcurementPlan(models.Model):
             procurements = plan.procurement_ids.filtered(lambda x: x.state in
                                                          ('running'))
             procurements.with_context(my_context).check()
+            plan._catch_purchases()
         return True
 
     @api.multi
@@ -122,8 +126,22 @@ class ProcurementPlan(models.Model):
         context['active_ids'] = [self.id]
         context['active_model'] = 'procurement.plan'
         context['plan'] = self.id
-        context['procurement_ids'] = self.procurement_ids.ids
+        context['procurement_ids'] = self.procurement_ids
         result = procurement_obj.with_context(
             context)._procure_orderpoint_confirm(use_new_cursor=False,
                                                  company_id=user.company_id.id)
+        self._catch_purchases()
+        cond = [('state', 'not in', ('cancel', 'done'))]
+        plans = self.search(cond)
+        for plan in plans:
+            plan. _get_state()
         return result
+
+    @api.one
+    def _catch_purchases(self):
+        purchase_ids = []
+        purchases = [procurement.purchase_id for procurement in
+                     self.procurement_ids if procurement.purchase_id]
+        for purchase in purchases:
+            if purchase.id not in purchase_ids:
+                purchase_ids.append(purchase.id)

@@ -13,51 +13,25 @@ class ProcurementOrder(models.Model):
     @api.model
     def _procure_orderpoint_confirm(self, use_new_cursor=False,
                                     company_id=False):
-        procurement_obj = self.env['procurement.order']
-        move_obj = self.env['stock.move']
         my_cursor = False
-        untreated_procurements = {}
-        untreated_moves = {}
-        if 'procurement_ids' in self.env.context:
-            cond = [('id', 'not in', self.env.context['procurement_ids']),
-                    ('state', 'not in', ('cancel', 'done'))]
-            procurements = procurement_obj.search(cond)
-            for procurement in procurements:
-                my_vals = {'id': procurement.id,
-                           'state': procurement.state,
-                           }
-                untreated_procurements[(procurement.id)] = my_vals
-                cond = [('procurement_id', '=', procurement.id)]
-                moves = move_obj.search(cond)
-                if moves:
-                    for move in moves:
-                        my_vals = {'id': move.id,
-                                   'state': move.state,
-                                   }
-                        untreated_moves[(move.id)] = my_vals
-                    self.env.cr.execute('update stock_move set state=%s'
-                                        ' where id in %s',
-                                        ('cancel', tuple(moves.ids)))
-            if procurements:
-                self.env.cr.execute('update procurement_order set state=%s'
-                                    ' where id in %s',
-                                    ('cancel', tuple(procurements.ids)))
+        product_ids = []
         if 'procurement_ids' not in self.env.context:
             my_cursor = use_new_cursor
+        else:
+            products = [procurement.product_id for procurement in
+                        self.env.context['procurement_ids']]
+            for product in products:
+                if product.id not in product_ids:
+                    product_ids.append(product.id)
         result = super(ProcurementOrder, self)._procure_orderpoint_confirm(
             use_new_cursor=my_cursor, company_id=company_id)
-        if untreated_procurements:
-            for data in untreated_procurements:
-                datos_array = untreated_procurements[data]
-                self.env.cr.execute('update procurement_order set state=%s'
-                                    ' where id = %s', (datos_array['state'],
-                                                       datos_array['id']))
-        if untreated_moves:
-            for data in untreated_moves:
-                datos_array = untreated_moves[data]
-                self.env.cr.execute('update stock_move set state=%s'
-                                    ' where id = %s', (datos_array['state'],
-                                                       datos_array['id']))
+        if (product_ids and self.env.context['active_model'] ==
+                'procurement.plan'):
+            cond = [('plan', '=', self.env.context['active_id']),
+                    ('product_id', 'not in', product_ids)]
+            orders = self.search(cond)
+            for order in orders:
+                order.plan = False
         return result
 
     @api.model
@@ -66,16 +40,6 @@ class ProcurementOrder(models.Model):
             data.update({'plan': self.env.context.get('plan')})
         procurement = super(ProcurementOrder, self).create(data)
         return procurement
-
-    def create_procurement_purchase_order(self, cr, uid, procurement, po_vals,
-                                          line_vals, context=None):
-        purchase_obj = self.pool['purchase.order']
-        pur = super(ProcurementOrder, self).create_procurement_purchase_order(
-            cr, uid, procurement, po_vals, line_vals, context=context)
-        if procurement.plan:
-            vals = {'plan': procurement.plan.id}
-            purchase_obj.write(cr, uid, [pur], vals, context=context)
-        return pur
 
     @api.multi
     def button_remove_plan(self):

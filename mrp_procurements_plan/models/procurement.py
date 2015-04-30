@@ -62,6 +62,14 @@ class ProcurementPlan(models.Model):
     production_ids = fields.One2many(
         'mrp.production', 'plan', string='Productions', readonly=True)
 
+    @api.one
+    def action_import(self):
+        if self.product_id:
+            raise exceptions.Warning(_('Error!: You can not import'
+                                       ' procurements, there is defined an'
+                                       ' final product'))
+        return super(ProcurementPlan, self).action_import
+
     @api.multi
     def button_generate_procurements(self):
         for plan in self:
@@ -73,58 +81,51 @@ class ProcurementPlan(models.Model):
                                            ' quantity to produce'))
             if not plan.mrp_bom_id:
                 raise exceptions.Warning(_('Error!: No BoM found'))
-            res = []
-            plan._generate_procurements(
-                plan._calculate_bom_details(plan.mrp_bom_id, res))
+            if len(plan.procurement_ids) > 0 and self.state != 'cancel':
+                raise exceptions.Warning(_('Error!: Already generated'
+                                           ' procurements orders'))
+            plan._deploy_bom_details(plan.mrp_bom_id)
         return True
 
-    def _calculate_bom_details(self, bom, res):
+    def _deploy_bom_details(self, bom):
         for line in bom.bom_line_ids:
-            vals = ({'level': 1,
-                     'product': line.product_id,
-                     'qty': line.product_qty})
-            res.append(vals)
+            self._create_procurement_from_bom_line(1, line.product_id,
+                                                   line.product_qty)
             if line.child_line_ids:
-                res = self._calculate_bom_line_details(line.child_line_ids,
-                                                       1, res)
-        return res
+                self._calculate_bom_line_details(line.child_line_ids, 1)
+        return True
 
-    def _calculate_bom_line_details(self, child_line_ids, level, res):
+    def _calculate_bom_line_details(self, child_line_ids, level):
         level += 1
         for line in child_line_ids:
-            vals = ({'level': level,
-                     'product': line.product_id,
-                     'qty': line.product_qty})
-            res.append(vals)
+            self._create_procurement_from_bom_line(level, line.product_id,
+                                                   line.product_qty)
             if line.child_line_ids:
-                res = self._calculate_bom_line_details(line.child_line_ids,
-                                                       level, res)
-        return res
+                self._calculate_bom_line_details(line.child_line_ids, level)
+        return True
 
-    def _generate_procurements(self, res):
+    def _create_procurement_from_bom_line(self, level, product, product_qty):
         procurement_obj = self.env['procurement.order']
-        if not res:
-            return True
-        for line in res:
-            qty = ((line['qty'] * self.qty_to_produce) /
-                   self.mrp_bom_id.product_qty)
-            val = procurement_obj.onchange_product_id(line['product'].id)
-            vals = {'name': 'Generated from plan',
-                    'level': line['level'],
-                    'product_id': line['product'].id,
-                    'plan': self.id,
-                    'main_project_id': self.project_id.id,
-                    'product_uos': val['value']['product_uos'],
-                    'product_uom': val['value']['product_uom'],
-                    'product_qty': qty
-                    }
-            procurement_obj.create(vals)
+        qty = ((product_qty * self.qty_to_produce) /
+               self.mrp_bom_id.product_qty)
+        vals = {'name': 'Generated from plan',
+                'level': level,
+                'product_id': product.id,
+                'plan': self.id,
+                'main_project_id': self.project_id.id,
+                'product_qty': qty
+                }
+        val = procurement_obj.onchange_product_id(product.id)
+        vals.update(val['value'])
+        procurement_obj.create(vals)
         return True
 
     @api.one
     @api.onchange('product_id')
     def onchange_product_id(self):
         bom_obj = self.env['mrp.bom']
+        if len(self.procurement_ids) > 0 and self.state != 'cancel':
+            raise exceptions.Warning(_('Error!: You can not change Product'))
         self.mrp_bom_id = False
         if self.product_id:
             cond = [('product_tmpl_id', '=',
@@ -143,4 +144,8 @@ class ProcurementPlan(models.Model):
             if not boms:
                 self.product_id = False
                 raise exceptions.Warning(_('Error!: No BoM found'))
-            self.mrp_bom_id = boms[0].id
+            sequence = 0
+            for bom in boms:
+                if sequence == 0 or sequence > bom.sequence:
+                    sequence = bom.sequence
+                    self.mrp_bom_id = bom.id

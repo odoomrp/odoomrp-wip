@@ -36,10 +36,10 @@
                     </page>
                 </page>
                 <notebook position="before" >
-                    <group colspan="4" col="8">
-                        <field name="product_id" colspan="6" />
+                    <group colspan="4" col="10">
+                        <field name="product_id" colspan="4" />
+                        <field name="mrp_bom_id" colspan="4" />
                         <field name="qty_to_produce" />
-                        <field name="mrp_bom_id" invisible="1"/>
                     </group>
                 </notebook>
                 <button name="action_import" position="after">

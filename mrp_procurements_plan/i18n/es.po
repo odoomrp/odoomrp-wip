@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-29 18:33+0000\n"
-"PO-Revision-Date: 2015-04-29 20:35+0100\n"
+"POT-Creation-Date: 2015-04-30 13:46+0000\n"
+"PO-Revision-Date: 2015-04-30 15:48+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,20 +16,38 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:75
-#: code:addons/mrp_procurements_plan/models/procurement.py:145
+#: code:addons/mrp_procurements_plan/models/procurement.py:85
+#, python-format
+msgid "Error!: Already generated procurements orders"
+msgstr "Error!: Ya hay generados abastecimientos."
+
+#. module: mrp_procurements_plan
+#: code:addons/mrp_procurements_plan/models/procurement.py:83
+#: code:addons/mrp_procurements_plan/models/procurement.py:146
 #, python-format
 msgid "Error!: No BoM found"
 msgstr "Error!: LdM no encontrada."
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:69
+#: code:addons/mrp_procurements_plan/models/procurement.py:128
+#, python-format
+msgid "Error!: You can not change Product"
+msgstr "Error!: No puede cambiar el producto."
+
+#. module: mrp_procurements_plan
+#: code:addons/mrp_procurements_plan/models/procurement.py:68
+#, python-format
+msgid "Error!: You can not import procurements, there is defined an final product"
+msgstr "Error!: No puede importar abastecimientos, hay definido un producto final."
+
+#. module: mrp_procurements_plan
+#: code:addons/mrp_procurements_plan/models/procurement.py:77
 #, python-format
 msgid "Error!: You must enter the final product"
 msgstr "Error!: Debe de introducir el producto fina.."
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:72
+#: code:addons/mrp_procurements_plan/models/procurement.py:80
 #, python-format
 msgid "Error!: You must enter the quantity to produce"
 msgstr "Error!: Debe de introducir la cantidad a producir."
