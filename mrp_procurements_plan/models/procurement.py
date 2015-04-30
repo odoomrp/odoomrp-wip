@@ -68,7 +68,7 @@ class ProcurementPlan(models.Model):
             raise exceptions.Warning(_('Error!: You can not import'
                                        ' procurements, there is defined an'
                                        ' final product'))
-        return super(ProcurementPlan, self).action_import
+        super(ProcurementPlan, self).action_import()
 
     @api.multi
     def button_generate_procurements(self):
