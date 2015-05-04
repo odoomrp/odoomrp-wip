@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-30 13:46+0000\n"
-"PO-Revision-Date: 2015-04-30 13:46+0000\n"
+"POT-Creation-Date: 2015-05-04 21:08+0000\n"
+"PO-Revision-Date: 2015-05-04 21:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,13 +23,20 @@ msgstr ""
 
 #. module: mrp_procurements_plan
 #: code:addons/mrp_procurements_plan/models/procurement.py:83
-#: code:addons/mrp_procurements_plan/models/procurement.py:146
+#: code:addons/mrp_procurements_plan/models/procurement.py:151
 #, python-format
 msgid "Error!: No BoM found"
 msgstr ""
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:128
+#: code:addons/mrp_procurements_plan/models/procurement.py:111
+#, python-format
+msgid "Error!: Warehouse not found."
+msgstr ""
+
+#. module: mrp_procurements_plan
+#: code:addons/mrp_procurements_plan/models/procurement.py:137
+#: code:addons/mrp_procurements_plan/models/procurement.py:141
 #, python-format
 msgid "Error!: You can not change Product"
 msgstr ""

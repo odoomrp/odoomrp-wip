@@ -26,6 +26,10 @@ class ProcurementPlan(models.Model):
                 lambda x: x.state == 'cancel')) == len(self.procurement_ids)):
             self.state = 'cancel'
 
+    @api.one
+    def _count_num_procurements(self):
+        self.num_procurements = len(self.procurement_ids)
+
     name = fields.Char(string='Description', required=True, readonly=True,
                        states={'draft': [('readonly', False)]})
     sequence = fields.Char(string='Sequence', readonly=True)
@@ -39,6 +43,8 @@ class ProcurementPlan(models.Model):
                                  required=True)
     procurement_ids = fields.One2many(
         'procurement.order', 'plan', string='Procurements', readonly=True)
+    num_procurements = fields.Integer(
+        compute="_count_num_procurements", string="Procurements")
     purchase_ids = fields.Many2many(
         comodel_name='purchase.order',
         relation='rel_procurement_plan_purchase_order', column1='plan_id',
@@ -77,43 +83,35 @@ class ProcurementPlan(models.Model):
     @api.multi
     def button_run(self):
         for plan in self:
-            my_context = self.env.context.copy()
-            my_context['plan'] = plan.id
             procurements = plan.procurement_ids.filtered(
                 lambda x: x.state in ('confirmed', 'exception'))
-            procurements.with_context(my_context).run()
+            procurements.with_context(plan=plan.id).run()
             plan._catch_purchases()
         return True
 
     @api.multi
     def button_cancel(self):
         for plan in self:
-            my_context = self.env.context.copy()
-            my_context['plan'] = plan.id
             procurements = plan.procurement_ids.filtered(
                 lambda x: x.state in ('confirmed', 'exception', 'running'))
-            procurements.with_context(my_context).cancel()
+            procurements.with_context(plan=plan.id).cancel()
         return True
 
     @api.multi
     def button_check(self):
         for plan in self:
-            my_context = self.env.context.copy()
-            my_context['plan'] = plan.id
             procurements = plan.procurement_ids.filtered(lambda x: x.state in
                                                          ('running'))
-            procurements.with_context(my_context).check()
+            procurements.with_context(plan=plan.id).check()
             plan._catch_purchases()
         return True
 
     @api.multi
     def button_reset_to_confirm(self):
         for plan in self:
-            my_context = self.env.context.copy()
-            my_context['plan'] = plan.id
             procurements = plan.procurement_ids.filtered(lambda x: x.state in
                                                          ('cancel'))
-            procurements.with_context(my_context).reset_to_confirmed()
+            procurements.with_context(plan=plan.id).reset_to_confirmed()
         return True
 
     @api.multi
@@ -121,20 +119,17 @@ class ProcurementPlan(models.Model):
         procurement_obj = self.env['procurement.order']
         user = self.env['res.users'].browse(self.env.uid)
         self.ensure_one()
-        context = self.env.context.copy()
-        context['active_id'] = self.id
-        context['active_ids'] = [self.id]
-        context['active_model'] = 'procurement.plan'
-        context['plan'] = self.id
-        context['procurement_ids'] = self.procurement_ids
         result = procurement_obj.with_context(
-            context)._procure_orderpoint_confirm(use_new_cursor=False,
-                                                 company_id=user.company_id.id)
+            active_model='procurement_plan', active_id=self.id,
+            procurement_ids=self.procurement_ids, active_ids=[self.id],
+            plan=self.id)._procure_orderpoint_confirm(
+                use_new_cursor=False,
+                company_id=user.company_id.id)
         self._catch_purchases()
         cond = [('state', 'not in', ('cancel', 'done'))]
         plans = self.search(cond)
         for plan in plans:
-            plan. _get_state()
+            plan._get_state()
         return result
 
     @api.one
@@ -143,5 +138,7 @@ class ProcurementPlan(models.Model):
         purchases = [procurement.purchase_id for procurement in
                      self.procurement_ids if procurement.purchase_id]
         for purchase in purchases:
-            if purchase.id not in purchase_ids:
-                purchase_ids.append(purchase.id)
+            if purchase not in purchase_ids:
+                purchase_ids.append(purchase)
+        self.purchase_ids = [(6, 0, [purchase.id for purchase in
+                                     purchase_ids])]

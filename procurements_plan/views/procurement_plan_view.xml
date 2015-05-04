@@ -42,11 +42,13 @@
                 <form string="Procurement Plan">
                 <header>
                     <button name="action_import" type='object' string='Import Procurements' />
+                    <!-- 
                     <button name="button_calculate_stock" type="object" string="Calculate Stock" class="oe_highlight" />
-                    <button name="button_check" type="object" string="Check Disponibility" class="oe_highlight" />
-                    <button name="button_reset_to_confirm" type="object" string="Reset to confirm" class="oe_highlight" />
+                    -->
                     <button name="button_run" type="object" string="Run" class="oe_highlight" />
+                    <button name="button_check" type="object" string="Check Procurements" class="oe_highlight" />
                     <button name="button_cancel" type="object" string="Cancel" class="oe_highlight"/>
+                    <button name="button_reset_to_confirm" type="object" string="Reset to confirm" class="oe_highlight" />
                     <field name="state" widget="statusbar" type="object" statusbar_visible="draft,running,done,cancel" readonly="1"/>
                 </header>
                 <sheet>
@@ -55,6 +57,12 @@
                             <label string="Procurement Plan" />
                             <field name="name" class="oe_inline" string="name"/>
                         </h1>
+                        <button class="oe_inline oe_stat_button"
+                            type="action" name="%(action_procurement_plan_procurements)d"
+                            icon="fa-list">
+                            <field name="num_procurements"
+                                widget="statinfo" />
+                        </button>
                     </div>
                     <group colspan="4" col="6">
                         <field name="sequence" colspan="2"/>
@@ -69,11 +77,16 @@
                                     <field name="plan" invisible="1" />
                                     <field name="date_planned" widget="date"/>
                                     <field name="origin"/>
+                                    <field name="rule_id" />
                                     <field name="product_id"/>
                                     <field name="product_qty"/>
                                     <field name="product_uom" string="Unit of Measure"/>
                                     <field name="state"/>
-                                    <button name="button_remove_plan" string="Remove of the Plan" states="confirmed" type="object" icon="gtk-cancel"/>
+                                    <button name="button_remove_plan" string="Remove of the Plan" states="confirmed" type="object" icon="gtk-remove"/>
+                                    <button name="button_run" states="confirmed,exception" type="object" string="Run" icon="gtk-execute" />
+                                    <button name="button_check" states="running" type="object" string="Check Procurements" icon="gtk-execute" />
+                                    <button name="cancel" states="exception,confirmed,running" type="object" string="Cancel" icon="gtk-cancel"/>
+                                    <button name="reset_to_confirmed" states="cancel" type="object" string="Reset to confirm" icon="gtk-convert" />
                                 </tree>
                             </field>
                         </page>

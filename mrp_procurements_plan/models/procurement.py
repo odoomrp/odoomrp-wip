@@ -84,68 +84,70 @@ class ProcurementPlan(models.Model):
             if len(plan.procurement_ids) > 0 and self.state != 'cancel':
                 raise exceptions.Warning(_('Error!: Already generated'
                                            ' procurements orders'))
-            plan._deploy_bom_details(plan.mrp_bom_id)
+            for line in plan.mrp_bom_id.bom_line_ids:
+                self._create_procurement_from_bom_line(
+                    plan, 1, line.product_id, line.product_qty)
+                if line.child_line_ids:
+                    self._calculate_bom_line_details(
+                        plan, line.child_line_ids, 1)
         return True
 
-    def _deploy_bom_details(self, bom):
-        for line in bom.bom_line_ids:
-            self._create_procurement_from_bom_line(1, line.product_id,
-                                                   line.product_qty)
-            if line.child_line_ids:
-                self._calculate_bom_line_details(line.child_line_ids, 1)
-        return True
-
-    def _calculate_bom_line_details(self, child_line_ids, level):
+    def _calculate_bom_line_details(self, plan, child_line_ids, level):
         level += 1
         for line in child_line_ids:
-            self._create_procurement_from_bom_line(level, line.product_id,
-                                                   line.product_qty)
+            self._create_procurement_from_bom_line(
+                plan, level, line.product_id, line.product_qty)
             if line.child_line_ids:
-                self._calculate_bom_line_details(line.child_line_ids, level)
+                self._calculate_bom_line_details(
+                    plan, line.child_line_ids, level)
         return True
 
-    def _create_procurement_from_bom_line(self, level, product, product_qty):
+    def _create_procurement_from_bom_line(self, plan, level, product,
+                                          product_qty):
+        company_id = self.env['res.users']._get_company()
+        cond = [('company_id', '=', company_id)]
+        warehouse_ids = self.env['stock.warehouse'].search(cond)
+        if not warehouse_ids:
+            raise exceptions.Warning(_('Error!: Warehouse not found.'))
         procurement_obj = self.env['procurement.order']
         qty = ((product_qty * self.qty_to_produce) /
                self.mrp_bom_id.product_qty)
-        vals = {'name': 'Generated from plan',
+        vals = {'name': plan.name,
+                'origin': plan.name,
                 'level': level,
                 'product_id': product.id,
                 'plan': self.id,
                 'main_project_id': self.project_id.id,
-                'product_qty': qty
+                'product_qty': qty,
+                'warehouse_id': warehouse_ids[0].id,
+                'location_id':  warehouse_ids[0].lot_stock_id.id
                 }
-        val = procurement_obj.onchange_product_id(product.id)
-        vals.update(val['value'])
-        procurement_obj.create(vals)
+        vals.update(procurement_obj.onchange_product_id(product.id)['value'])
+        procurement = procurement_obj.create(vals)
+        procurement.write({'rule_id': procurement_obj._find_suitable_rule(
+            procurement)})
         return True
 
     @api.one
     @api.onchange('product_id')
     def onchange_product_id(self):
         bom_obj = self.env['mrp.bom']
-        if len(self.procurement_ids) > 0 and self.state != 'cancel':
-            raise exceptions.Warning(_('Error!: You can not change Product'))
+        try:
+            if len(self.procurement_ids) and self.state != 'cancel':
+                raise exceptions.Warning(_('Error!: You can not change'
+                                           ' Product'))
+        except:
+            if len(self.procurement_ids) and self.state != 'cancel':
+                raise exceptions.Warning(_('Error!: You can not change'
+                                           ' Product'))
         self.mrp_bom_id = False
         if self.product_id:
-            cond = [('product_tmpl_id', '=',
-                     self.product_id.product_tmpl_id.id),
+            cond = ['|', ('product_tmpl_id', '=',
+                    self.product_id.product_tmpl_id.id),
                     ('product_id', '=', self.product_id.id)]
             boms = bom_obj.search(cond)
             if not boms:
-                cond = [('product_tmpl_id', '=', False),
-                        ('product_id', '=', self.product_id.id)]
-                boms = bom_obj.search(cond)
-            if not boms:
-                cond = [('product_tmpl_id', '=',
-                         self.product_id.product_tmpl_id.id),
-                        ('product_id', '=', False)]
-                boms = bom_obj.search(cond)
-            if not boms:
                 self.product_id = False
                 raise exceptions.Warning(_('Error!: No BoM found'))
-            sequence = 0
-            for bom in boms:
-                if sequence == 0 or sequence > bom.sequence:
-                    sequence = bom.sequence
-                    self.mrp_bom_id = bom.id
+            sorted_boms = sorted(boms, key=lambda l: l.sequence, reverse=True)
+            self.mrp_bom_id = sorted_boms[0].id
