@@ -29,7 +29,8 @@ class MrpProduction(models.Model):
                         lot_id = line.restric_lot_id.id
                         break
                 if not lot_id:
-                    code = production.manual_production_lot or ''
+                    code = (production.manual_production_lot or
+                            production.name or '')
                     if production.concatenate_lots_components:
                         lots = wiz.consume_line.mapped('lot_id')
                         lots += production.move_lines2.mapped(
