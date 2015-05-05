@@ -1,19 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
 
 from openerp import models, fields, api, exceptions, _
@@ -26,14 +13,24 @@ class SaleOrderLineAttribute(models.Model):
     attr_type = fields.Selection(string='Type', store=False,
                                  related='attribute.attr_type')
 
-    @api.one
-    @api.constrains('custom_value', 'attr_type')
-    def _custom_value_in_range(self):
+    def _is_custom_value_in_range(self):
         if self.attr_type == 'range':
             if not (self.value.min_range <= self.custom_value and
                     self.value.max_range >= self.custom_value):
-                raise exceptions.Warning(
-                    _("Custom value from attribute '%s' must be between %s and"
-                      " %s.")
-                    % (self.attribute.name, self.value.min_range,
-                       self.value.max_range))
+                return False
+        return True
+
+    @api.one
+    @api.constrains('custom_value', 'attr_type', 'value')
+    def _custom_value_in_range(self):
+        if not self._is_custom_value_in_range():
+            raise exceptions.Warning(
+                _("Custom value for attribute '%s' must be between %s and"
+                  " %s.")
+                % (self.attribute.name, self.value.min_range,
+                   self.value.max_range))
+
+    @api.one
+    @api.onchange('custom_value', 'value')
+    def _onchange_custom_value(self):
+        self._custom_value_in_range()
