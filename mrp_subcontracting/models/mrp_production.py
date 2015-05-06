@@ -24,28 +24,24 @@ class MrpProduction(models.Model):
 
     @api.one
     def _created_purchases(self):
-        purchase_obj = self.env['purchase.order']
         cond = [('mrp_production', '=', self.id)]
-        purchases = purchase_obj.search(cond)
-        self.created_purchases = len(purchases)
+        self.created_purchases = len(self.env['purchase.order'].search(cond))
 
     @api.one
     def _created_outpickings(self):
         picking_obj = self.env['stock.picking']
         cond = [('mrp_production', '=', self.id)]
-        pickings = picking_obj.search(cond)
-        cont = len([picking for picking in pickings if
-                    picking.picking_type_id.code == 'outgoing'])
-        self.created_outpickings = cont
+        self.created_outpickings = len(
+            picking_obj.search(cond).filtered(
+                lambda x: x.picking_type_id.code == 'outgoing'))
 
     @api.one
     def _created_inpickings(self):
         picking_obj = self.env['stock.picking']
         cond = [('mrp_production', '=', self.id)]
-        pickings = picking_obj.search(cond)
-        cont = len([picking for picking in pickings if
-                    picking.picking_type_id.code == 'incoming'])
-        self.created_inpickings = cont
+        self.created_outpickings = len(
+            picking_obj.search(cond).filtered(
+                lambda x: x.picking_type_id.code == 'incoming'))
 
     created_purchases = fields.Integer(
         string='Created Purchases', readonly=True,
@@ -59,11 +55,9 @@ class MrpProduction(models.Model):
 
     @api.one
     def action_confirm(self):
-        user_obj = self.env['res.users']
         warehouse_obj = self.env['stock.warehouse']
         res = super(MrpProduction, self).action_confirm()
-        user = user_obj.browse(self._uid)
-        cond = [('company_id', '=', user.company_id.id)]
+        cond = [('company_id', '=', self.env.user.company_id.id)]
         warehouse = False
         for move in self.move_lines:
             if move.work_order.routing_wc_line.external:
@@ -83,20 +77,22 @@ class MrpProduction(models.Model):
                     self._create_external_procurement(wc_line, warehouse))
         return res
 
+    def _prepare_extenal_procurement(self, wc_line, warehouse):
+        return {
+            'name': wc_line.name,
+            'origin': wc_line.name,
+            'product_id': wc_line.routing_wc_line.semifinished_id.id,
+            'product_qty': self.product_qty,
+            'product_uom': wc_line.routing_wc_line.semifinished_id.uom_id.id,
+            'location_id': self.location_dest_id.id,
+            'production_id': self.id,
+            'warehouse_id': warehouse.id,
+            'mrp_operation': wc_line.id,
+        }
+
     def _create_external_procurement(self, wc_line, warehouse):
-        procurement_obj = self.env['procurement.order']
-        vals = {'name': wc_line.name,
-                'origin': wc_line.name,
-                'product_id': wc_line.routing_wc_line.semifinished_id.id,
-                'product_qty': self.product_qty,
-                'product_uom':
-                wc_line.routing_wc_line.semifinished_id.uom_id.id,
-                'location_id': self.location_dest_id.id,
-                'production_id': self.id,
-                'warehouse_id': warehouse.id,
-                'mrp_operation': wc_line.id,
-                }
-        procurement = procurement_obj.create(vals)
+        procurement = self.env['procurement.order'].create(
+            self._prepare_extenal_procurement(wc_line, warehouse))
         procurement.run()
         return procurement.id
 
