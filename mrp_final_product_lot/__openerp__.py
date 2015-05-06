@@ -15,33 +15,27 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+
 {
     "name": "MRP Final Product Lot",
     "version": "1.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    "category": "MRP",
+    "category": "Manufacturing",
     "website": "http://www.odoomrp.com",
-    "description": """
-    This module automatically creates the lot to the final product of the
-    production order.
-
-    In the MRP production object, two new fields are added: Manual Production
-    Lot of type char, and Concatenate Lots Components of type boolean.
-
-    The lot code is generated:
-
-    1.- If the new field Manual Production lot has value: This data, if not the
-        order number.
-    2.- If the check Concatenate Lots Components, this clicked, to the previous
-        point code is concatenated all lot numbers of all components used to
-        make the final product.
-    """,
-    "depends": ['stock',
-                'mrp',
-                ],
-    "data": ['views/mrp_production_view.xml',
-             ],
+    "contributors": [
+        "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
+        "Ana Juaristi <anajuaristi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+    ],
+    "depends": [
+        'stock',
+        'mrp',
+    ],
+    "data": [
+        'views/mrp_production_view.xml',
+    ],
     "installable": True
 }
