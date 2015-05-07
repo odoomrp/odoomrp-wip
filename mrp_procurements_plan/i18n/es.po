@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-04 21:08+0000\n"
-"PO-Revision-Date: 2015-05-04 23:09+0100\n"
+"POT-Creation-Date: 2015-05-07 07:59+0000\n"
+"PO-Revision-Date: 2015-05-07 10:00+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,45 +16,44 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:85
+#: code:addons/mrp_procurements_plan/models/procurement.py:140
+#, python-format
+msgid "Error!"
+msgstr "Error!"
+
+#. module: mrp_procurements_plan
+#: code:addons/mrp_procurements_plan/models/procurement.py:87
 #, python-format
 msgid "Error!: Already generated procurements orders"
 msgstr "Error!: Ya hay generados abastecimientos."
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:83
-#: code:addons/mrp_procurements_plan/models/procurement.py:151
+#: code:addons/mrp_procurements_plan/models/procurement.py:85
+#: code:addons/mrp_procurements_plan/models/procurement.py:152
 #, python-format
 msgid "Error!: No BoM found"
 msgstr "Error!: LdM no encontrada."
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:111
+#: code:addons/mrp_procurements_plan/models/procurement.py:113
 #, python-format
 msgid "Error!: Warehouse not found."
 msgstr "Error!: Almacén no encontrado."
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:137
-#: code:addons/mrp_procurements_plan/models/procurement.py:141
-#, python-format
-msgid "Error!: You can not change Product"
-msgstr "Error!: No puede cambiar el producto."
-
-#. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:68
+#: code:addons/mrp_procurements_plan/models/procurement.py:70
 #, python-format
 msgid "Error!: You can not import procurements, there is defined an final product"
 msgstr "Error!: No puede importar abastecimientos, hay definido un producto final."
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:77
+#: code:addons/mrp_procurements_plan/models/procurement.py:79
 #, python-format
 msgid "Error!: You must enter the final product"
 msgstr "Error!: Debe de introducir el producto fina.."
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:80
+#: code:addons/mrp_procurements_plan/models/procurement.py:82
 #, python-format
 msgid "Error!: You must enter the quantity to produce"
 msgstr "Error!: Debe de introducir la cantidad a producir."
@@ -96,6 +95,11 @@ msgid "Plan"
 msgstr "Plan"
 
 #. module: mrp_procurements_plan
+#: field:procurement.plan,previous_product_id:0
+msgid "Previous Final Product"
+msgstr "Producto final anterior"
+
+#. module: mrp_procurements_plan
 #: model:ir.model,name:mrp_procurements_plan.model_procurement_order
 msgid "Procurement"
 msgstr "Abastecimiento"
@@ -114,7 +118,7 @@ msgstr "Producto"
 #. module: mrp_procurements_plan
 #: field:procurement.plan,production_ids:0
 msgid "Productions"
-msgstr "Producciones"
+msgstr "Productions"
 
 #. module: mrp_procurements_plan
 #: view:procurement.plan:mrp_procurements_plan.procurement_plan_form_view_inh_mrpprocurementplan
@@ -130,4 +134,10 @@ msgstr "Cantidad a producir"
 #: view:procurement.plan:mrp_procurements_plan.procurement_plan_search_view_inh_mrpprocurementplan
 msgid "State"
 msgstr "Estado"
+
+#. module: mrp_procurements_plan
+#: code:addons/mrp_procurements_plan/models/procurement.py:141
+#, python-format
+msgid "You can not change product"
+msgstr "No puede cambiar el producto"
 

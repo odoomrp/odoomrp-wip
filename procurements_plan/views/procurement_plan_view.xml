@@ -52,11 +52,7 @@
                     <field name="state" widget="statusbar" type="object" statusbar_visible="draft,running,done,cancel" readonly="1"/>
                 </header>
                 <sheet>
-                    <div class="oe_title">
-                        <h1>
-                            <label string="Procurement Plan" />
-                            <field name="name" class="oe_inline" string="name"/>
-                        </h1>
+                    <div class="oe_right oe_button_box" name="buttons">
                         <button class="oe_inline oe_stat_button"
                             type="action" name="%(action_procurement_plan_procurements)d"
                             icon="fa-list">
@@ -64,6 +60,10 @@
                                 widget="statinfo" />
                         </button>
                     </div>
+                    <h1>
+                        <label string="Procurement Plan" />
+                        <field name="name" class="oe_inline" string="name"/>
+                    </h1>
                     <group colspan="4" col="6">
                         <field name="sequence" colspan="2"/>
                         <field name="from_date" colspan="2"/>

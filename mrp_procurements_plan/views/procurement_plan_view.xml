@@ -37,8 +37,14 @@
                 </page>
                 <notebook position="before" >
                     <group colspan="4" col="10">
+                        <field name="previous_product_id" invisible="1" colspan="10" />
                         <field name="product_id" colspan="4" />
-                        <field name="mrp_bom_id" colspan="4" />
+                        <field name="mrp_bom_id"
+                            domain="['|', ('product_id','=',product_id),
+                                     '&amp;',
+                                     ('product_tmpl_id.product_variant_ids','=',product_id),
+                                     ('product_id','=',False)]"
+                            colspan="4" />
                         <field name="qty_to_produce" />
                     </group>
                 </notebook>

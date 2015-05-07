@@ -55,6 +55,8 @@ class ProcurementPlan(models.Model):
 
     product_id = fields.Many2one(
         'product.product', string='Final Product')
+    previous_product_id = fields.Many2one(
+        'product.product', string='Previous Final Product')
     qty_to_produce = fields.Integer(
         string='Quantity to be produced')
     mrp_bom_id = fields.Many2one(
@@ -113,7 +115,7 @@ class ProcurementPlan(models.Model):
         qty = ((product_qty * self.qty_to_produce) /
                self.mrp_bom_id.product_qty)
         vals = {'name': plan.name,
-                'origin': plan.name,
+                'origin': plan.sequence,
                 'level': level,
                 'product_id': product.id,
                 'plan': self.id,
@@ -128,18 +130,17 @@ class ProcurementPlan(models.Model):
             procurement)})
         return True
 
-    @api.one
+    @api.multi
     @api.onchange('product_id')
     def onchange_product_id(self):
         bom_obj = self.env['mrp.bom']
-        try:
-            if len(self.procurement_ids) and self.state != 'cancel':
-                raise exceptions.Warning(_('Error!: You can not change'
-                                           ' Product'))
-        except:
-            if len(self.procurement_ids) and self.state != 'cancel':
-                raise exceptions.Warning(_('Error!: You can not change'
-                                           ' Product'))
+        if len(self.procurement_ids) and self.state != 'cancel':
+            self.product_id = self.previous_product_id.id
+            return {'warning': {
+                    'title': _('Error!'),
+                    'message': _("You can not change product")
+                    }}
+        self.previous_product_id = self.product_id.id
         self.mrp_bom_id = False
         if self.product_id:
             cond = ['|', ('product_tmpl_id', '=',
@@ -151,3 +152,4 @@ class ProcurementPlan(models.Model):
                 raise exceptions.Warning(_('Error!: No BoM found'))
             sorted_boms = sorted(boms, key=lambda l: l.sequence, reverse=True)
             self.mrp_bom_id = sorted_boms[0].id
+        return {}
