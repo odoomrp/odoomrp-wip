@@ -22,7 +22,7 @@ class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
     mrp_operation = fields.Many2one(
-        'mrp.production.workcenter.line', 'MPR Operation')
+        'mrp.production.workcenter.line', 'MRP Operation')
 
     @api.multi
     def make_po(self):
