@@ -87,33 +87,33 @@ class ProcurementPlan(models.Model):
                 raise exceptions.Warning(_('Error!: Already generated'
                                            ' procurements orders'))
             for line in plan.mrp_bom_id.bom_line_ids:
-                self._create_procurement_from_bom_line(
-                    plan, 1, line.product_id, line.product_qty)
+                qty = ((line.product_qty * self.qty_to_produce) /
+                       self.mrp_bom_id.product_qty)
+                self._create_procurement_from_bom_line(plan, 1,
+                                                       line.product_id, qty)
                 if line.child_line_ids:
-                    self._calculate_bom_line_details(
-                        plan, line.child_line_ids, 1)
+                    self._calculate_bom_line_details(plan, line.child_line_ids,
+                                                     qty, 1)
+            plan._catch_purchases()
         return True
 
-    def _calculate_bom_line_details(self, plan, child_line_ids, level):
+    def _calculate_bom_line_details(self, plan, child_line_ids, qty, level):
         level += 1
         for line in child_line_ids:
             self._create_procurement_from_bom_line(
-                plan, level, line.product_id, line.product_qty)
+                plan, level, line.product_id, line.product_qty * qty)
             if line.child_line_ids:
                 self._calculate_bom_line_details(
-                    plan, line.child_line_ids, level)
+                    plan, line.child_line_ids, line.product_qty * qty, level)
         return True
 
-    def _create_procurement_from_bom_line(self, plan, level, product,
-                                          product_qty):
+    def _create_procurement_from_bom_line(self, plan, level, product, qty):
         company_id = self.env['res.users']._get_company()
         cond = [('company_id', '=', company_id)]
         warehouse_ids = self.env['stock.warehouse'].search(cond)
         if not warehouse_ids:
             raise exceptions.Warning(_('Error!: Warehouse not found.'))
         procurement_obj = self.env['procurement.order']
-        qty = ((product_qty * self.qty_to_produce) /
-               self.mrp_bom_id.product_qty)
         vals = {'name': plan.name,
                 'origin': plan.sequence,
                 'level': level,

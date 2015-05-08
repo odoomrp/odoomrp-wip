@@ -26,13 +26,20 @@ class ProcurementPlan(models.Model):
                 lambda x: x.state == 'cancel')) == len(self.procurement_ids)):
             self.state = 'cancel'
 
+    @api.multi
+    def _get_plan_sequence(self):
+        sequence = self.env['ir.sequence'].next_by_code('procurement.plan')
+        return sequence
+
     @api.one
     def _count_num_procurements(self):
         self.num_procurements = len(self.procurement_ids)
 
     name = fields.Char(string='Description', required=True, readonly=True,
-                       states={'draft': [('readonly', False)]})
-    sequence = fields.Char(string='Sequence', readonly=True)
+                       states={'draft': [('readonly', False)]},
+                       default="/")
+    sequence = fields.Char(string='Sequence', readonly=True,
+                           default=_get_plan_sequence)
     from_date = fields.Date(
         string='From Date', readonly=True,
         states={'draft': [('readonly', False)]})
@@ -56,16 +63,6 @@ class ProcurementPlan(models.Model):
          ('done', 'Done')],
         string='Status', compute='_get_state', index=True, store=True,
         track_visibility='onchange', )
-
-    def create(self, cr, uid, data, context=None):
-        sequence_obj = self.pool['ir.sequence']
-        if context is None:
-            context = {}
-        if 'sequence' not in data:
-            data.update({'sequence': sequence_obj.get(cr, uid,
-                                                      'procurement.plan')})
-        return super(ProcurementPlan, self).create(cr, uid, data,
-                                                   context=context)
 
     @api.one
     def action_import(self):
