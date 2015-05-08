@@ -81,36 +81,84 @@ class ProcurementOrder(models.Model):
 
     @api.multi
     def button_run(self, autocommit=False):
+        plan = False
         for procurement in self:
             procurement.with_context(plan=procurement.plan.id).run(
                 autocommit=autocommit)
             procurement.plan._catch_purchases()
             procurement.plan._get_state()
-        return True
+            plan = procurement.plan
+        if plan:
+            return {'view_type': 'form,tree',
+                    'view_mode': 'form',
+                    'res_model': 'procurement.plan',
+                    'res_id': plan.id,
+                    'view_id': False,
+                    'type': 'ir.actions.act_window',
+                    'target': 'current',
+                    }
+        else:
+            return True
 
     @api.multi
     def button_check(self, autocommit=False):
+        plan = False
         for procurement in self:
             procurement.with_context(plan=procurement.plan.id).check(
                 autocommit=autocommit)
             procurement.plan._catch_purchases()
             procurement.plan._get_state()
-        return True
+            plan = procurement.plan
+        if plan:
+            return {'view_type': 'form,tree',
+                    'view_mode': 'form',
+                    'res_model': 'procurement.plan',
+                    'res_id': plan.id,
+                    'view_id': False,
+                    'type': 'ir.actions.act_window',
+                    'target': 'current',
+                    }
+        else:
+            return True
 
     @api.multi
     def cancel(self):
+        plan = False
         super(ProcurementOrder, self).cancel()
         for procurement in self:
             if procurement.plan:
                 procurement.plan._catch_purchases()
                 procurement.plan._get_state()
-        return True
+                plan = procurement.plan
+        if plan:
+            return {'view_type': 'form,tree',
+                    'view_mode': 'form',
+                    'res_model': 'procurement.plan',
+                    'res_id': plan.id,
+                    'view_id': False,
+                    'type': 'ir.actions.act_window',
+                    'target': 'current',
+                    }
+        else:
+            return True
 
     @api.multi
     def reset_to_confirmed(self):
+        plan = False
         super(ProcurementOrder, self).reset_to_confirmed()
         for procurement in self:
             if procurement.plan:
                 procurement.plan._catch_purchases()
                 procurement.plan._get_state()
-        return True
+                plan = procurement.plan
+        if plan:
+            return {'view_type': 'form,tree',
+                    'view_mode': 'form',
+                    'res_model': 'procurement.plan',
+                    'res_id': plan.id,
+                    'view_id': False,
+                    'type': 'ir.actions.act_window',
+                    'target': 'current',
+                    }
+        else:
+            return True
