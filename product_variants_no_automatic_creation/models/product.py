@@ -107,6 +107,25 @@ class ProductTemplate(models.Model):
             'product_variants_no_automatic_creation.attribute_price_action')
         return result
 
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+        # Make a search with default criteria
+        temp = super(models.Model, self).name_search(
+            name=name, args=args, operator=operator, limit=limit)
+        # Make the other search
+        temp += super(ProductTemplate, self).name_search(
+            name=name, args=args, operator=operator, limit=limit)
+        # Merge both results
+        res = []
+        keys = []
+        for val in temp:
+            if val[0] not in keys:
+                res.append(val)
+                keys.append(val[0])
+                if len(res) >= limit:
+                    break
+        return res
+
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
