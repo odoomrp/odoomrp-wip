@@ -9,6 +9,7 @@ class ProcurementPlan(models.Model):
 
     _name = 'procurement.plan'
     _description = 'Procurement Plan'
+    _rec_name = 'sequence'
 
     @api.one
     @api.depends('procurement_ids', 'procurement_ids.state')

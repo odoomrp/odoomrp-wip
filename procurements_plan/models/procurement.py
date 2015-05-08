@@ -85,7 +85,7 @@ class ProcurementOrder(models.Model):
             procurement.with_context(plan=procurement.plan.id).run(
                 autocommit=autocommit)
             procurement.plan._catch_purchases()
-            procurement._get_state()
+            procurement.plan._get_state()
         return True
 
     @api.multi
@@ -94,6 +94,7 @@ class ProcurementOrder(models.Model):
             procurement.with_context(plan=procurement.plan.id).check(
                 autocommit=autocommit)
             procurement.plan._catch_purchases()
+            procurement.plan._get_state()
         return True
 
     @api.multi
@@ -102,6 +103,7 @@ class ProcurementOrder(models.Model):
         for procurement in self:
             if procurement.plan:
                 procurement.plan._catch_purchases()
+                procurement.plan._get_state()
         return True
 
     @api.multi
@@ -110,4 +112,5 @@ class ProcurementOrder(models.Model):
         for procurement in self:
             if procurement.plan:
                 procurement.plan._catch_purchases()
+                procurement.plan._get_state()
         return True
