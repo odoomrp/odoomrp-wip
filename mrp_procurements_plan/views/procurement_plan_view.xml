@@ -37,15 +37,17 @@
                 </page>
                 <notebook position="before" >
                     <group colspan="4" col="10">
-                        <field name="previous_product_id" invisible="1" colspan="10" />
-                        <field name="product_id" colspan="4" />
+                        <field name="product_id" colspan="4" 
+                               attrs="{'readonly':[('procurement_ids','!=', []),('state','!=',('cancel'))]}" />
                         <field name="mrp_bom_id"
                             domain="['|', ('product_id','=',product_id),
                                      '&amp;',
                                      ('product_tmpl_id.product_variant_ids','=',product_id),
                                      ('product_id','=',False)]"
+                            attrs="{'readonly':[('procurement_ids','!=', []),('state','!=',('cancel'))]}"
                             colspan="4" />
-                        <field name="qty_to_produce" />
+                        <field name="qty_to_produce"
+                               attrs="{'readonly':[('procurement_ids','!=', []),('state','!=',('cancel'))]}" />
                     </group>
                 </notebook>
                 <button name="action_import" position="after">
@@ -54,6 +56,12 @@
                 <field name="date_planned" position="before">
                     <field name="level" />
                 </field>
+                <sheet position="after">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </sheet>
             </field>
         </record>
     </data>

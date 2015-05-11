@@ -51,12 +51,11 @@ class ProcurementOrder(models.Model):
 
 
 class ProcurementPlan(models.Model):
-    _inherit = 'procurement.plan'
+    _name = 'procurement.plan'
+    _inherit = ['procurement.plan', 'mail.thread']
 
     product_id = fields.Many2one(
         'product.product', string='Final Product')
-    previous_product_id = fields.Many2one(
-        'product.product', string='Previous Final Product')
     qty_to_produce = fields.Integer(
         string='Quantity to be produced')
     mrp_bom_id = fields.Many2one(
@@ -74,6 +73,7 @@ class ProcurementPlan(models.Model):
 
     @api.multi
     def button_generate_procurements(self):
+        result = {}
         for plan in self:
             if not plan.product_id:
                 raise exceptions.Warning(_('Error!: You must enter the final'
@@ -83,37 +83,72 @@ class ProcurementPlan(models.Model):
                                            ' quantity to produce'))
             if not plan.mrp_bom_id:
                 raise exceptions.Warning(_('Error!: No BoM found'))
-            if len(plan.procurement_ids) > 0 and self.state != 'cancel':
+            if plan.procurement_ids and self.state != 'cancel':
                 raise exceptions.Warning(_('Error!: Already generated'
                                            ' procurements orders'))
+            product_errors = []
             for line in plan.mrp_bom_id.bom_line_ids:
                 qty = ((line.product_qty * self.qty_to_produce) /
                        self.mrp_bom_id.product_qty)
-                self._create_procurement_from_bom_line(plan, 1,
-                                                       line.product_id, qty)
-                if line.child_line_ids:
-                    self._calculate_bom_line_details(plan, line.child_line_ids,
-                                                     qty, 1)
+                product_errors = self._calculate_bom_line_details(
+                    plan, line, qty, 0, product_errors)
             plan._catch_purchases()
-        return True
+            if product_errors:
+                message = "<p>" + _('THEY HAVE NOT GENERATED ALL PROCUREMENTS')
+                message += str(fields.Datetime.now())
+                message += "<br> <br>"
+                for line_error in product_errors:
+                    message += line_error['error'] + "<br>"
+                message += "</p>"
+                vals = {'type': 'comment',
+                        'model': 'procurement.plan',
+                        'record_name': plan.name,
+                        'res_id': plan.id,
+                        # 'res_id': mail.id,
+                        'body': message}
+                self.env['mail.message'].create(vals)
+        return result
 
-    def _calculate_bom_line_details(self, plan, child_line_ids, qty, level):
+    def _calculate_bom_line_details(self, plan, line, qty, level,
+                                    product_errors):
         level += 1
-        for line in child_line_ids:
-            self._create_procurement_from_bom_line(
-                plan, level, line.product_id, line.product_qty * qty)
-            if line.child_line_ids:
+        if not line.product_id and not line.product_template:
+            product_errors.append(
+                {'error': (_('Product has not been found, or product template,'
+                             ' on the list of materials %s, Level %s')
+                           % (plan.mrp_bom_id.name, str(level)))})
+        elif not line.product_id and line.product_template:
+            product_errors.append(
+                {'error': (_('Product has not been found on the list of'
+                             ' materials %s, product template %s, Level %s') %
+                           (plan.mrp_bom_id.name, line.product_template.name,
+                            str(level)))})
+        else:
+            self._create_procurement_from_bom_line(plan, level,
+                                                   line.product_id, qty)
+        for child in line.child_line_ids:
+            if child.child_line_ids:
                 self._calculate_bom_line_details(
-                    plan, line.child_line_ids, line.product_qty * qty, level)
-        return True
+                    plan, child, child.product_qty * qty, level,
+                    product_errors)
+            else:
+                self._create_procurement_from_bom_line(
+                    plan, level+1, line.product_id, child.product_qty * qty)
+        return product_errors
 
     def _create_procurement_from_bom_line(self, plan, level, product, qty):
-        company_id = self.env['res.users']._get_company()
-        cond = [('company_id', '=', company_id)]
-        warehouse_ids = self.env['stock.warehouse'].search(cond)
+        procurement_obj = self.env['procurement.order']
+        vals = self._prepare_procurements_vals(plan, level, product, qty)
+        procurement = procurement_obj.create(vals)
+        procurement.write({'rule_id': procurement_obj._find_suitable_rule(
+            procurement)})
+        return True
+
+    def _prepare_procurements_vals(self, plan, level, product, qty):
+        procurement_obj = self.env['procurement.order']
+        warehouse_ids = self.env['stock.warehouse'].search([])
         if not warehouse_ids:
             raise exceptions.Warning(_('Error!: Warehouse not found.'))
-        procurement_obj = self.env['procurement.order']
         vals = {'name': plan.name,
                 'origin': plan.sequence,
                 'level': level,
@@ -125,22 +160,12 @@ class ProcurementPlan(models.Model):
                 'location_id':  warehouse_ids[0].lot_stock_id.id
                 }
         vals.update(procurement_obj.onchange_product_id(product.id)['value'])
-        procurement = procurement_obj.create(vals)
-        procurement.write({'rule_id': procurement_obj._find_suitable_rule(
-            procurement)})
-        return True
+        return vals
 
     @api.multi
     @api.onchange('product_id')
     def onchange_product_id(self):
         bom_obj = self.env['mrp.bom']
-        if len(self.procurement_ids) and self.state != 'cancel':
-            self.product_id = self.previous_product_id.id
-            return {'warning': {
-                    'title': _('Error!'),
-                    'message': _("You can not change product")
-                    }}
-        self.previous_product_id = self.product_id.id
         self.mrp_bom_id = False
         if self.product_id:
             cond = ['|', ('product_tmpl_id', '=',

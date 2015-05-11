@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-07 07:59+0000\n"
-"PO-Revision-Date: 2015-05-07 10:00+0100\n"
+"POT-Creation-Date: 2015-05-11 16:56+0000\n"
+"PO-Revision-Date: 2015-05-11 19:05+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,10 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:140
-#, python-format
-msgid "Error!"
-msgstr "Error!"
+#: help:procurement.plan,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Fecha del último mensaje publicado en el registro."
 
 #. module: mrp_procurements_plan
 #: code:addons/mrp_procurements_plan/models/procurement.py:87
@@ -29,19 +28,19 @@ msgstr "Error!: Ya hay generados abastecimientos."
 
 #. module: mrp_procurements_plan
 #: code:addons/mrp_procurements_plan/models/procurement.py:85
-#: code:addons/mrp_procurements_plan/models/procurement.py:152
+#: code:addons/mrp_procurements_plan/models/procurement.py:177
 #, python-format
 msgid "Error!: No BoM found"
 msgstr "Error!: LdM no encontrada."
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:113
+#: code:addons/mrp_procurements_plan/models/procurement.py:151
 #, python-format
 msgid "Error!: Warehouse not found."
 msgstr "Error!: Almacén no encontrado."
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:70
+#: code:addons/mrp_procurements_plan/models/procurement.py:69
 #, python-format
 msgid "Error!: You can not import procurements, there is defined an final product"
 msgstr "Error!: No puede importar abastecimientos, hay definido un producto final."
@@ -59,9 +58,9 @@ msgid "Error!: You must enter the quantity to produce"
 msgstr "Error!: Debe de introducir la cantidad a producir."
 
 #. module: mrp_procurements_plan
-#: field:procurement.plan,product_id:0
-msgid "Final Product"
-msgstr "Producto final"
+#: field:procurement.plan,message_follower_ids:0
+msgid "Followers"
+msgstr "Seguidores"
 
 #. module: mrp_procurements_plan
 #: view:procurement.plan:mrp_procurements_plan.procurement_plan_form_view_inh_mrpprocurementplan
@@ -69,14 +68,29 @@ msgid "Generate procurements"
 msgstr "Generar abastecimientos"
 
 #. module: mrp_procurements_plan
+#: help:procurement.plan,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr "Resumen del chat (número de mensajes, ...). Este resumen es directamente en formato html para ser insertada en vistas kanban."
+
+#. module: mrp_procurements_plan
+#: help:procurement.plan,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "Clicado si los nuevos mensajes requieren su atención."
+
+#. module: mrp_procurements_plan
+#: field:procurement.plan,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Es un seguidor"
+
+#. module: mrp_procurements_plan
+#: field:procurement.plan,message_last_post:0
+msgid "Last Message Date"
+msgstr "Fecha último mensaje"
+
+#. module: mrp_procurements_plan
 #: field:procurement.order,level:0
 msgid "Level"
 msgstr "Nivel"
-
-#. module: mrp_procurements_plan
-#: field:procurement.plan,mrp_bom_id:0
-msgid "MRP BoM"
-msgstr "MRP LdM"
 
 #. module: mrp_procurements_plan
 #: view:procurement.plan:mrp_procurements_plan.procurement_plan_form_view_inh_mrpprocurementplan
@@ -89,15 +103,20 @@ msgid "Manufacturing Order"
 msgstr "Órden de producción"
 
 #. module: mrp_procurements_plan
+#: field:procurement.plan,message_ids:0
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: mrp_procurements_plan
+#: help:procurement.plan,message_ids:0
+msgid "Messages and communication history"
+msgstr "Mensajes e historia de comunicación"
+
+#. module: mrp_procurements_plan
 #: view:mrp.production:mrp_procurements_plan.view_mrp_production_filter_inh_mrpprocurementplan
 #: field:mrp.production,plan:0
 msgid "Plan"
 msgstr "Plan"
-
-#. module: mrp_procurements_plan
-#: field:procurement.plan,previous_product_id:0
-msgid "Previous Final Product"
-msgstr "Producto final anterior"
 
 #. module: mrp_procurements_plan
 #: model:ir.model,name:mrp_procurements_plan.model_procurement_order
@@ -106,6 +125,7 @@ msgstr "Abastecimiento"
 
 #. module: mrp_procurements_plan
 #: model:ir.model,name:mrp_procurements_plan.model_procurement_plan
+#: model:ir.model,name:mrp_procurements_plan.model_procurement_plant
 msgid "Procurement Plan"
 msgstr "Plan abastecimientos"
 
@@ -116,9 +136,16 @@ msgid "Product"
 msgstr "Producto"
 
 #. module: mrp_procurements_plan
-#: field:procurement.plan,production_ids:0
-msgid "Productions"
-msgstr "Productions"
+#: code:addons/mrp_procurements_plan/models/procurement.py:122
+#, python-format
+msgid "Product has not been found on the list of materials %s, product template %s, Level %s"
+msgstr "El producto no ha sido encontrado en la lista de materiales %s, plantilla de producto %s, Nivel %s"
+
+#. module: mrp_procurements_plan
+#: code:addons/mrp_procurements_plan/models/procurement.py:117
+#, python-format
+msgid "Product has not been found, or product template, on the list of materials %s, Level %s"
+msgstr "Producto o plantilla de producto no encontrada en la lista de materiales %s, Nivel %s"
 
 #. module: mrp_procurements_plan
 #: view:procurement.plan:mrp_procurements_plan.procurement_plan_form_view_inh_mrpprocurementplan
@@ -126,18 +153,33 @@ msgid "Purchase Orders"
 msgstr "Pedido de compra"
 
 #. module: mrp_procurements_plan
-#: field:procurement.plan,qty_to_produce:0
-msgid "Quantity to be produced"
-msgstr "Cantidad a producir"
-
-#. module: mrp_procurements_plan
 #: view:procurement.plan:mrp_procurements_plan.procurement_plan_search_view_inh_mrpprocurementplan
 msgid "State"
 msgstr "Estado"
 
 #. module: mrp_procurements_plan
-#: code:addons/mrp_procurements_plan/models/procurement.py:141
+#: field:procurement.plan,message_summary:0
+msgid "Summary"
+msgstr "Sumario"
+
+#. module: mrp_procurements_plan
+#: code:addons/mrp_procurements_plan/models/procurement.py:97
 #, python-format
-msgid "You can not change product"
-msgstr "No puede cambiar el producto"
+msgid "THEY HAVE NOT GENERATED ALL PROCUREMENTS"
+msgstr "NO SE HAN GENERADO TODOS LOS ABASTECIMIENTOS."
+
+#. module: mrp_procurements_plan
+#: field:procurement.plan,message_unread:0
+msgid "Unread Messages"
+msgstr "Mensajes sin leer"
+
+#. module: mrp_procurements_plan
+#: field:procurement.plan,website_message_ids:0
+msgid "Website Messages"
+msgstr "Mensajes Web"
+
+#. module: mrp_procurements_plan
+#: help:procurement.plan,website_message_ids:0
+msgid "Website communication history"
+msgstr "Historial de comunicación web."
 

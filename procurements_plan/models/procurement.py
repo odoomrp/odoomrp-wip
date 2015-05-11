@@ -14,7 +14,7 @@ class ProcurementOrder(models.Model):
     def _procure_orderpoint_confirm(self, use_new_cursor=False,
                                     company_id=False):
         procurement_obj = self.env['procurement.order']
-        move_obj = self.env['move.obj']
+        move_obj = self.env['stock.move']
         my_cursor = False
         untreated_procurements = {}
         untreated_moves = {}
@@ -81,14 +81,15 @@ class ProcurementOrder(models.Model):
 
     @api.multi
     def button_run(self, autocommit=False):
-        plan = False
         for procurement in self:
             procurement.with_context(plan=procurement.plan.id).run(
                 autocommit=autocommit)
             procurement.plan._catch_purchases()
             procurement.plan._get_state()
-            plan = procurement.plan
-        if plan:
+        plans = self.mapped('plan')
+        if not plans:
+            return True
+        for plan in plans:
             return {'view_type': 'form,tree',
                     'view_mode': 'form',
                     'res_model': 'procurement.plan',
@@ -97,19 +98,18 @@ class ProcurementOrder(models.Model):
                     'type': 'ir.actions.act_window',
                     'target': 'current',
                     }
-        else:
-            return True
 
     @api.multi
     def button_check(self, autocommit=False):
-        plan = False
         for procurement in self:
             procurement.with_context(plan=procurement.plan.id).check(
                 autocommit=autocommit)
             procurement.plan._catch_purchases()
             procurement.plan._get_state()
-            plan = procurement.plan
-        if plan:
+        plans = self.mapped('plan')
+        if not plans:
+            return True
+        for plan in plans:
             return {'view_type': 'form,tree',
                     'view_mode': 'form',
                     'res_model': 'procurement.plan',
@@ -118,19 +118,18 @@ class ProcurementOrder(models.Model):
                     'type': 'ir.actions.act_window',
                     'target': 'current',
                     }
-        else:
-            return True
 
     @api.multi
     def cancel(self):
-        plan = False
         super(ProcurementOrder, self).cancel()
         for procurement in self:
             if procurement.plan:
                 procurement.plan._catch_purchases()
                 procurement.plan._get_state()
-                plan = procurement.plan
-        if plan:
+        plans = self.mapped('plan')
+        if not plans:
+            return True
+        for plan in plans:
             return {'view_type': 'form,tree',
                     'view_mode': 'form',
                     'res_model': 'procurement.plan',
@@ -139,19 +138,18 @@ class ProcurementOrder(models.Model):
                     'type': 'ir.actions.act_window',
                     'target': 'current',
                     }
-        else:
-            return True
 
     @api.multi
     def reset_to_confirmed(self):
-        plan = False
         super(ProcurementOrder, self).reset_to_confirmed()
         for procurement in self:
             if procurement.plan:
                 procurement.plan._catch_purchases()
                 procurement.plan._get_state()
-                plan = procurement.plan
-        if plan:
+        plans = self.mapped('plan')
+        if not plans:
+            return True
+        for plan in plans:
             return {'view_type': 'form,tree',
                     'view_mode': 'form',
                     'res_model': 'procurement.plan',
@@ -160,5 +158,3 @@ class ProcurementOrder(models.Model):
                     'type': 'ir.actions.act_window',
                     'target': 'current',
                     }
-        else:
-            return True

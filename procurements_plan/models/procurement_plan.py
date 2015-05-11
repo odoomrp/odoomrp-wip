@@ -125,18 +125,11 @@ class ProcurementPlan(models.Model):
                 company_id=user.company_id.id)
         self._catch_purchases()
         cond = [('state', 'not in', ('cancel', 'done'))]
-        plans = self.search(cond)
-        for plan in plans:
-            plan._get_state()
+        self.search(cond)._get_state()
         return result
 
     @api.one
     def _catch_purchases(self):
-        purchase_ids = []
-        purchases = [procurement.purchase_id for procurement in
-                     self.procurement_ids if procurement.purchase_id]
-        for purchase in purchases:
-            if purchase not in purchase_ids:
-                purchase_ids.append(purchase)
+        purchases = set(self.procurement_ids.mapped('purchase_id'))
         self.purchase_ids = [(6, 0, [purchase.id for purchase in
-                                     purchase_ids])]
+                                     purchases])]
