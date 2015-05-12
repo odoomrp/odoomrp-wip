@@ -25,7 +25,8 @@ class WizImportProcurementFromPlan(models.TransientModel):
         cond = [('state', 'not in', ('done', 'cancel')),
                 ('plan', '=', False)]
         procurements = proc_obj.search(cond)
-        procs = procurements.filtered(lambda r: r.location_id.usage == 'internal')
+        procs = procurements.filtered(
+            lambda r: r.location_id.usage == 'internal')
         procs.write({'plan': plan.id,
                      'level': 0})
         return True
