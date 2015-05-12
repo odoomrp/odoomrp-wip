@@ -65,8 +65,9 @@ class ProcurementPlan(models.Model):
         string='Status', compute='_get_state', index=True, store=True,
         track_visibility='onchange', )
 
-    @api.one
+    @api.multi
     def action_import(self):
+        self.ensure_one()
         proc_obj = self.env['procurement.order']
         cond = [('state', '!=', 'done'),
                 ('plan', '=', False)]

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="wiz_import_procurement_from_plan_view" model="ir.ui.view">
+            <field name="name">wiz.import.procurement.from.plan.view</field>
+            <field name="model">wiz.import.procurement.from.plan</field>
+            <field name="arch" type="xml">
+                <form string="Procurements">
+                    <group string="Import Procurements">
+                        <label string="You are going to import procurements. Are you sure you want to proceed?" class="oe_inline" />
+                    </group>
+                    <footer>
+                        <button name="do_import_procurements" type="object" string="Import ALL Procurements" class="oe_highlight" />
+                        or
+                        <button name="do_import_procurements_internal" type="object" string="Import Procurements WITH INTERNAL Location" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

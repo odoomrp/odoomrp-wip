@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="procurement_plan_form_view_inh_mrpprocurementplan" >
+            <field name="name">procurement.plan.form.view.inh.mrpprocurementplan</field>
+            <field name="model">procurement.plan</field>
+            <field name="inherit_id" ref="procurement_plan.procurement_plan_form_view"/>
+            <field name="arch" type="xml">
+                <page string="Purchase Orders" position="after">
+                    <page string="MRP Productions">
+                        <field name="production_ids" />
+                    </page>
+                </page>
+                <button name="action_import" position="after">
+                    <button name="button_generate_procurements" type='object' string='Generate procurements' />
+                </button>
+                <button name="action_import" position="replace">
+                    <button name="button_wizard_import" type='object' string='Import Procurements' />
+                </button>
+                <field name="date_planned" position="before">
+                    <field name="level" />
+                </field>
+                <button name="reset_to_confirmed" position="after">
+                    <field name="id" />
+                    <field name="show_button_create" invisible="1" />
+                    <field name="show_button_delete" invisible="1" />
+                    <button name="button_erase_lower_levels" type="object" string="Erase lower levels" icon="gtk-convert" 
+                            attrs="{'invisible':[('show_button_delete','=',False)]}" />
+                    <button name="button_create_lower_levels" type="object" string="Create lower levels" icon="gtk-convert"
+                            attrs="{'invisible':[('show_button_create','=',False)]}" />
+                </button>
+                <sheet position="after">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </sheet>
+            </field>
+        </record>
+    </data>
+</openerp>

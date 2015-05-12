@@ -18,25 +18,20 @@
 #
 ##############################################################################
 {
-    "name": "Procurements Plan",
+    "name": "Procurement Plan MRP",
     "version": "1.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
-    "category": "Procurements",
-    "depends": ['procurement',
-                'project',
-                'stock',
-                'purchase',
-                'sale',
-                'sale_stock',
-                'procurement_manager'
+    "category": "Manufacturing",
+    "depends": ['mail',
+                'mrp',
+                'procurement_plan',
                 ],
-    "data": ['data/sequence.xml',
-             'security/procurements_with_plan.xml',
-             'security/ir.model.access.csv',
-             'views/procurement_view.xml',
+    "data": ['security/ir.model.access.csv',
+             'wizard/wiz_import_procurement_from_plan_view.xml',
+             'views/mrp_production_view.xml',
              'views/procurement_plan_view.xml',
              ],
     "installable": True

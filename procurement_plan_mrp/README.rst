@@ -1,15 +1,15 @@
-MRP Procurements plan
-=====================
+Procurement plan MRP
+====================
 
 This module performs the following:
 
-* Inherit the module 'procurements_plan'.
+* Inherit the module 'procurement_plan'.
 * In mrp.production object, has added a new field: Plan.
 
 When procurements run from the plan, all Procurements, purchases, and
 generated MRP Productions, are associated with the plan.
 
-Also if a product to produce is introduced into the plan, and then click the
+Also you can import procurements with "Internal" location, and then click the
 button "Generate procurements", what it does is generate procurements for all
 products that are needed in the production of this final product.
 

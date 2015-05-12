@@ -1,0 +1,216 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* procurement_plan
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-12 17:34+0000\n"
+"PO-Revision-Date: 2015-05-12 17:34+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Check Procurements"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,name:0
+msgid "Description"
+msgstr ""
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Done"
+msgstr ""
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,from_date:0
+msgid "From Date"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "Group By"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,id:0
+msgid "ID"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Import Procurements"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Location"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Origin"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.procurement_form_view_inh_withplan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:procurement.order,plan:0
+msgid "Plan"
+msgstr ""
+
+#. module: procurement_plan
+#: model:ir.model,name:procurement_plan.model_procurement_order
+msgid "Procurement"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Procurement Lines"
+msgstr ""
+
+#. module: procurement_plan
+#: model:ir.model,name:procurement_plan.model_procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: model:res.groups,name:procurement_plan.group_procurement_plan
+msgid "Procurement Plan"
+msgstr ""
+
+#. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_tree_view
+msgid "Procurement Plans"
+msgstr ""
+
+#. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_procurement_plan_procurements
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: field:procurement.plan,procurement_ids:0
+msgid "Procurements"
+msgstr ""
+
+#. module: procurement_plan
+#: model:ir.ui.menu,name:procurement_plan.procurement_plan_menu_view
+msgid "Procurements Plans"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,project_id:0
+msgid "Project"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Purchase"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: field:procurement.plan,purchase_ids:0
+msgid "Purchase Orders"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Remove of the Plan"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Reset to confirm"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Rule"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Run"
+msgstr ""
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Running"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "Search Procurement Plan"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,sequence:0
+msgid "Sequence"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "State"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:procurement.plan,state:0
+msgid "Status"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "name"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,to_date:0
+msgid "to Date"
+msgstr ""
+

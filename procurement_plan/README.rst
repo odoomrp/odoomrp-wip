@@ -1,5 +1,5 @@
-Procurements plan
-=================
+Procurement plan
+================
 
 This module creates the new object Procurement Plan, with these fields:
 

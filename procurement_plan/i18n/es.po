@@ -1,0 +1,216 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* procurement_plan
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-12 17:34+0000\n"
+"PO-Revision-Date: 2015-05-12 17:34+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Check Procurements"
+msgstr "Comprobar abastecimientos"
+
+#. module: procurement_plan
+#: field:procurement.plan,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: procurement_plan
+#: field:procurement.plan,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: procurement_plan
+#: field:procurement.plan,name:0
+msgid "Description"
+msgstr "Descripción"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Done"
+msgstr "Realizado"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: procurement_plan
+#: field:procurement.plan,from_date:0
+msgid "From Date"
+msgstr "Desde fecha"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: procurement_plan
+#: field:procurement.plan,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Import Procurements"
+msgstr "Importar abastecimientos"
+
+#. module: procurement_plan
+#: field:procurement.plan,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: procurement_plan
+#: field:procurement.plan,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Location"
+msgstr "Ubicación"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Origin"
+msgstr "Origen"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.procurement_form_view_inh_withplan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:procurement.order,plan:0
+msgid "Plan"
+msgstr "Plan"
+
+#. module: procurement_plan
+#: model:ir.model,name:procurement_plan.model_procurement_order
+msgid "Procurement"
+msgstr "Abastecimiento"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Procurement Lines"
+msgstr "Línas de abastecimientos"
+
+#. module: procurement_plan
+#: model:ir.model,name:procurement_plan.model_procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: model:res.groups,name:procurement_plan.group_procurement_plan
+msgid "Procurement Plan"
+msgstr "Plan abastecimientos"
+
+#. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_tree_view
+msgid "Procurement Plans"
+msgstr "Planes de abastecimientos"
+
+#. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_procurement_plan_procurements
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: field:procurement.plan,procurement_ids:0
+msgid "Procurements"
+msgstr "Abastecimientos"
+
+#. module: procurement_plan
+#: model:ir.ui.menu,name:procurement_plan.procurement_plan_menu_view
+msgid "Procurements Plans"
+msgstr "Planes de abastecimientos"
+
+#. module: procurement_plan
+#: field:procurement.plan,project_id:0
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Purchase"
+msgstr "Compra"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: field:procurement.plan,purchase_ids:0
+msgid "Purchase Orders"
+msgstr "Pedido de compra"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Remove of the Plan"
+msgstr "Borrar del plan"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Reset to confirm"
+msgstr "Reconfirmar"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Rule"
+msgstr "Regla"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Run"
+msgstr "Ejecutar"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Running"
+msgstr "En ejecución"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "Search Procurement Plan"
+msgstr "Buscar plan de abastecimientos"
+
+#. module: procurement_plan
+#: field:procurement.plan,sequence:0
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "State"
+msgstr "Estado"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:procurement.plan,state:0
+msgid "Status"
+msgstr "Estado"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Unit of Measure"
+msgstr "Unidad de medida"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "name"
+msgstr "descripción"
+
+#. module: procurement_plan
+#: field:procurement.plan,to_date:0
+msgid "to Date"
+msgstr "Hasta fecha"
+
