@@ -20,7 +20,7 @@
     "name": "Procurement Plan Project",
     "version": "1.0",
     "depends": ["mrp_project_link",
-                "procurements_plan"],
+                "procurement_plan"],
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",

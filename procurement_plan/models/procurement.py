@@ -71,7 +71,7 @@ class ProcurementOrder(models.Model):
     def button_remove_plan(self):
         template_obj = self.env['product.template']
         result = template_obj._get_act_window_dict(
-            'procurements_plan.action_procurement_plan')
+            'procurement_plan.action_procurement_plan')
         result['domain'] = "[('id', '=', " + str(self.plan.id) + ")]"
         result['res_id'] = self.plan.id
         result['view_mode'] = 'form'
