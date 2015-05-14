@@ -32,17 +32,38 @@ class MrpProduction(models.Model):
         workorder =\
             self.workcenter_lines and self.workcenter_lines[0].id
         for attr_value in self.product_id.attribute_value_ids:
-            if attr_value.raw_product:
-                raw_product = attr_value.raw_product
-                value = self.get_new_components_info(
-                    raw_product.id,
-                    raw_product.property_stock_production.id,
-                    raw_product.property_stock_inventory.id,
-                    raw_product.uom_id.id,
-                    raw_product.uos_id.id,
-                    self.product_qty * attr_value.raw_qty,
-                    workorder)
-                res.append(value)
+            raw_product = attr_value.raw_product
+            if raw_product:
+                bom_obj = self.env['mrp.bom']
+                bom_id = bom_obj._bom_phantom_find(
+                    product_id=raw_product.id)
+                qty = self.product_qty * attr_value.raw_qty
+                if not bom_id:
+                    value = self.get_new_components_info(
+                        raw_product.id,
+                        raw_product.property_stock_production.id,
+                        raw_product.property_stock_inventory.id,
+                        raw_product.uom_id.id,
+                        raw_product.uos_id.id,
+                        qty,
+                        workorder)
+                    res.append(value)
+                else:
+                    result, result1 = bom_obj._bom_explode(
+                        bom_obj.browse(bom_id), raw_product.id,
+                        self.product_qty * attr_value.raw_qty)
+                    for line in result:
+                        product = self.env['product.product'].browse(
+                            line['product_id'])
+                        value = self.get_new_components_info(
+                            line['product_id'],
+                            product.property_stock_production.id,
+                            product.property_stock_inventory.id,
+                            product.uom_id.id,
+                            product.uos_id.id,
+                            line['product_qty'] * qty,
+                            workorder)
+                        res.append(value)
         return res
 
     @api.one
@@ -65,4 +86,54 @@ class MrpProduction(models.Model):
 
 class MrpProductionProductLine(models.Model):
     _inherit = 'mrp.production.product.line'
+
     raw_production = fields.Many2one('mrp.production', string='Production')
+
+
+class MrpBom(models.Model):
+    _inherit = 'mrp.bom'
+
+    def _bom_phantom_find(
+            self, product_tmpl_id=None, product_id=None, properties=None):
+        """ Finds BoM for particular product and product uom.
+        @param product_tmpl_id: Selected product.
+        @param product_uom: Unit of measure of a product.
+        @param properties: List of related properties.
+        @return: False or BoM id.
+        """
+        if properties is None:
+            properties = []
+        if product_id:
+            if not product_tmpl_id:
+                product_tmpl_id = self.env['product.product'].browse(
+                    product_id).product_tmpl_id.id
+            domain = [
+                '|', ('product_id', '=', product_id),
+                '&', ('product_id', '=', False),
+                ('product_tmpl_id', '=', product_tmpl_id)
+            ]
+        elif product_tmpl_id:
+            domain = [('product_id', '=', False),
+                      ('product_tmpl_id', '=', product_tmpl_id)]
+        else:
+            # neither product nor template, makes no sense to search
+            return False
+        domain += [('type', '=', 'phantom')]
+        domain = domain + ['|', ('date_start', '=', False),
+                           ('date_start', '<=', fields.Datetime.now()),
+                           '|', ('date_stop', '=', False),
+                           ('date_stop', '>=', fields.Datetime.now())]
+        # order to prioritize bom with product_id over the one without
+        bom_ids = self.search(domain, order='sequence, product_id')
+        # Search a BoM which has all properties specified, or if you can not
+        # find one, you could pass a BoM without any properties with the
+        # smallest sequence
+        bom_empty_prop = False
+        for bom in bom_ids:
+            if not (set(map(int, bom.property_ids or [])) -
+                    set(properties or [])):
+                if not properties or bom.property_ids:
+                    return bom.id
+                elif not bom_empty_prop:
+                    bom_empty_prop = bom.id
+        return bom_empty_prop
