@@ -263,7 +263,7 @@ class ProcurementPlan(models.Model):
                 'product_qty': qty,
                 'warehouse_id': warehouse_ids[0].id,
                 'location_id':  warehouse_ids[0].lot_stock_id.id,
-                'parent_procurement_id': procurement.id
+                'parent_procurement_id': (procurement.id or False)
                 }
         vals.update(procurement_obj.onchange_product_id(product.id)['value'])
         return vals

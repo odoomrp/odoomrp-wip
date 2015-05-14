@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-12 17:34+0000\n"
-"PO-Revision-Date: 2015-05-12 17:34+0000\n"
+"POT-Creation-Date: 2015-05-14 13:07+0000\n"
+"PO-Revision-Date: 2015-05-14 13:07+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,8 @@ msgstr ""
 
 #. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
 msgid "Cancel"
 msgstr ""
 
@@ -26,18 +28,45 @@ msgid "Cancelled"
 msgstr ""
 
 #. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,product_categ_id:0
+#: field:wiz.load.sale.from.plan,product_categ_id:0
+msgid "Category"
+msgstr ""
+
+#. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 msgid "Check Procurements"
 msgstr ""
 
 #. module: procurement_plan
 #: field:procurement.plan,create_uid:0
+#: field:wiz.load.purchase.from.plan,create_uid:0
+#: field:wiz.load.sale.from.plan,create_uid:0
 msgid "Created by"
 msgstr ""
 
 #. module: procurement_plan
 #: field:procurement.plan,create_date:0
+#: field:wiz.load.purchase.from.plan,create_date:0
+#: field:wiz.load.sale.from.plan,create_date:0
 msgid "Created on"
+msgstr ""
+
+#. module: procurement_plan
+#: field:wiz.load.sale.from.plan,partner_id:0
+msgid "Customer"
+msgstr ""
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,date_from:0
+#: field:wiz.load.sale.from.plan,date_from:0
+msgid "Date from"
+msgstr ""
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,date_to:0
+#: field:wiz.load.sale.from.plan,date_to:0
+msgid "Date to"
 msgstr ""
 
 #. module: procurement_plan
@@ -56,6 +85,33 @@ msgid "Draft"
 msgstr ""
 
 #. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:87
+#: code:addons/procurement_plan/models/procurement_plan.py:112
+#, python-format
+msgid "Error!: You must enter from date."
+msgstr ""
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:90
+#: code:addons/procurement_plan/models/procurement_plan.py:115
+#, python-format
+msgid "Error!: You must enter to date."
+msgstr ""
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:93
+#: code:addons/procurement_plan/models/procurement_plan.py:118
+#, python-format
+msgid "Error!:: End date is lower than start date."
+msgstr ""
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,factor:0
+#: field:wiz.load.sale.from.plan,factor:0
+msgid "Factor"
+msgstr ""
+
+#. module: procurement_plan
 #: field:procurement.plan,from_date:0
 msgid "From Date"
 msgstr ""
@@ -67,6 +123,8 @@ msgstr ""
 
 #. module: procurement_plan
 #: field:procurement.plan,id:0
+#: field:wiz.load.purchase.from.plan,id:0
+#: field:wiz.load.sale.from.plan,id:0
 msgid "ID"
 msgstr ""
 
@@ -77,12 +135,38 @@ msgstr ""
 
 #. module: procurement_plan
 #: field:procurement.plan,write_uid:0
+#: field:wiz.load.purchase.from.plan,write_uid:0
+#: field:wiz.load.sale.from.plan,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
 #. module: procurement_plan
 #: field:procurement.plan,write_date:0
+#: field:wiz.load.purchase.from.plan,write_date:0
+#: field:wiz.load.sale.from.plan,write_date:0
 msgid "Last Updated on"
+msgstr ""
+
+#. module: procurement_plan
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
+msgid "Load"
+msgstr ""
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:123
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#, python-format
+msgid "Load Purchases"
+msgstr ""
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:98
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
+#, python-format
+msgid "Load Sales"
 msgstr ""
 
 #. module: procurement_plan
@@ -138,12 +222,19 @@ msgid "Procurements Plans"
 msgstr ""
 
 #. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,product_id:0
+#: field:wiz.load.sale.from.plan,product_id:0
+msgid "Product"
+msgstr ""
+
+#. module: procurement_plan
 #: field:procurement.plan,project_id:0
 msgid "Project"
 msgstr ""
 
 #. module: procurement_plan
 #: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:wiz.load.purchase.from.plan,purchase_id:0
 msgid "Purchase"
 msgstr ""
 
@@ -179,6 +270,11 @@ msgid "Running"
 msgstr ""
 
 #. module: procurement_plan
+#: field:wiz.load.sale.from.plan,sale_id:0
+msgid "Sale"
+msgstr ""
+
+#. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_search_view
 msgid "Search Procurement Plan"
 msgstr ""
@@ -200,13 +296,36 @@ msgid "Status"
 msgstr ""
 
 #. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,partner_id:0
+msgid "Supplier"
+msgstr ""
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,product_tmpl_id:0
+#: field:wiz.load.sale.from.plan,product_tmpl_id:0
+msgid "Template"
+msgstr ""
+
+#. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 msgid "Unit of Measure"
 msgstr ""
 
 #. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,warehouse_id:0
+#: field:wiz.load.sale.from.plan,warehouse_id:0
+msgid "Warehouse"
+msgstr ""
+
+#. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 msgid "name"
+msgstr ""
+
+#. module: procurement_plan
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
+msgid "or"
 msgstr ""
 
 #. module: procurement_plan

@@ -2,7 +2,7 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
 
 
 class ProcurementPlan(models.Model):
@@ -78,6 +78,56 @@ class ProcurementPlan(models.Model):
         procurements = proc_obj.search(cond)
         procurements.write({'plan': self.id})
         return True
+
+    @api.multi
+    def button_load_sales(self):
+        self.ensure_one()
+        if not self.from_date:
+            raise exceptions.Warning(
+                _('Error!: You must enter from date.'))
+        if not self.to_date:
+            raise exceptions.Warning(
+                _('Error!: You must enter to date.'))
+        if self.from_date > self.to_date:
+            raise exceptions.Warning(
+                _('Error!:: End date is lower than start date.'))
+        context = self.env.context.copy()
+        context['active_id'] = self.id
+        context['active_ids'] = [self.id]
+        context['active_model'] = 'procurement.plan'
+        return {'name': _('Load Sales'),
+                'type': 'ir.actions.act_window',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'wiz.load.sale.from.plan',
+                'target': 'new',
+                'context': context,
+                }
+
+    @api.multi
+    def button_load_purchases(self):
+        self.ensure_one()
+        if not self.from_date:
+            raise exceptions.Warning(
+                _('Error!: You must enter from date.'))
+        if not self.to_date:
+            raise exceptions.Warning(
+                _('Error!: You must enter to date.'))
+        if self.from_date > self.to_date:
+            raise exceptions.Warning(
+                _('Error!:: End date is lower than start date.'))
+        context = self.env.context.copy()
+        context['active_id'] = self.id
+        context['active_ids'] = [self.id]
+        context['active_model'] = 'procurement.plan'
+        return {'name': _('Load Purchases'),
+                'type': 'ir.actions.act_window',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'wiz.load.purchase.from.plan',
+                'target': 'new',
+                'context': context,
+                }
 
     @api.multi
     def button_run(self):

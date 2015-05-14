@@ -45,6 +45,8 @@
                     <!-- 
                     <button name="button_calculate_stock" type="object" string="Calculate Stock" class="oe_highlight" />
                     -->
+                    <button name="button_load_sales" type="object" string="Load Sales" />
+                    <button name="button_load_purchases" type="object" string="Load Purchases" />
                     <button name="button_run" type="object" string="Run" class="oe_highlight" />
                     <button name="button_check" type="object" string="Check Procurements" class="oe_highlight" />
                     <button name="button_cancel" type="object" string="Cancel" class="oe_highlight"/>

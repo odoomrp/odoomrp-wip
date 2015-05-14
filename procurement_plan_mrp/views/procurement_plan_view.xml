@@ -21,7 +21,6 @@
                     <field name="level" />
                 </field>
                 <button name="reset_to_confirmed" position="after">
-                    <field name="id" />
                     <field name="show_button_create" invisible="1" />
                     <field name="show_button_delete" invisible="1" />
                     <button name="button_erase_lower_levels" type="object" string="Erase lower levels" icon="gtk-convert" 

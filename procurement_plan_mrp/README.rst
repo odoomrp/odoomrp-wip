@@ -9,9 +9,12 @@ This module performs the following:
 When procurements run from the plan, all Procurements, purchases, and
 generated MRP Productions, are associated with the plan.
 
-Also you can import procurements with "Internal" location, and then click the
+You can import procurements with "Internal" location, and then click the
 button "Generate procurements", what it does is generate procurements for all
 products that are needed in the production of this final product.
+
+Also you can generate procurements for sale, and purchase forecast with buttons
+"Load sales", and "Load purchases".
 
 Credits
 =======

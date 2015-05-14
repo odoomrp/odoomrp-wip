@@ -1,3 +1,5 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
 "access_procuremen_plan","procuremen_plan","procurement_plan.model_procurement_plan","group_procurement_plan",1,1,1,1
+"access_wiz_load_sale_from_plan","wiz_load_sale_from_plan","procurement_plan.model_wiz_load_sale_from_plan","group_procurement_plan",1,1,1,1
+"access_wiz_load_purchase_from_plan","wiz_load_purchase_from_plan","procurement_plan.model_wiz_load_purchase_from_plan","group_procurement_plan",1,1,1,1
 
