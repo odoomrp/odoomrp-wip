@@ -68,6 +68,9 @@ class MrpBom(models.Model):
         states={'historical': [('readonly', True)]})
     message_ids = fields.One2many(
         states={'historical': [('readonly', True)]})
+    version = fields.Integer(states={'historical': [('readonly', True)]},
+                             copy=False, default = 1,
+        )
 
     @api.one
     @api.constrains('sequence')
@@ -79,12 +82,15 @@ class MrpBom(models.Model):
             raise exceptions.Warning(
                 _('The sequence must be unique'))
 
-    @api.one
+    @api.multi
     def copy(self, default=None):
-        bom = self.search([], order='sequence desc', limit=1)
-        maxseq = bom.sequence + 1
-        default.update({'sequence': maxseq})
+        self.ensure_one()
+        if default:
+            default['version'] = 1
+        else:
+            default = {'version': 1}
         return super(MrpBom, self).copy(default=default)
+
 
     @api.multi
     def button_draft(self):
@@ -107,6 +113,21 @@ class MrpBom(models.Model):
                 'res_model': 'wiz.confirm.activation',
                 'target': 'new',
                 'context': context,
+                }
+
+    @api.multi
+    def button_new_version(self):
+        self.ensure_one()
+        self.write({'active': False, 'state': 'historical',
+                    'historical_date': fields.Date.today()})
+        version = self.version + 1
+        new_bom = self.copy({'version': version})
+        return {'type': 'ir.actions.act_window',
+                'view_type': 'form, tree',
+                'view_mode': 'form',
+                'res_model': 'mrp.bom',
+                'res_id': new_bom.id,
+                'target': 'new',
                 }
 
     @api.multi

@@ -36,6 +36,7 @@
                         <button name="button_draft" type="object" string="Draft" groups="mrp_bom_state.group_mrp_bom_state" attrs="{'invisible':[('state','!=','active')]}" class="oe_highlight" />
                         <button name="button_activate" type="object" string="Activate" attrs="{'invisible':[('state','!=',False)]}" class="oe_highlight" />
                         <button name="button_activate" type="object" string="Activate" attrs="{'invisible':[('state','!=','draft')]}" class="oe_highlight" />
+                        <button name="button_new_version" type="object" string="New Version" attrs="{'invisible':[('state','==','historical')]}" class="oe_highlight" />
                         <button name="button_historical" type="object" string="Historical" attrs="{'invisible':[('state','!=','active')]}" class="oe_highlight" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,active,historical" />
                     </header>
@@ -61,6 +62,17 @@
                     <filter string="Active" domain="[]" context="{'group_by':'active'}"/>
                     <filter string="State" domain="[]" context="{'group_by':'state'}"/>
                 </filter>
+            </field>
+        </record>
+
+        <record id="view_mrp_bom_form_inh_version" model="ir.ui.view">
+            <field name="name">view.mrp.bom.form.inh.version</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <field name="routing_id" position="after">
+                    <field name="version" string="version"/>
+                </field>
             </field>
         </record>
     </data>
