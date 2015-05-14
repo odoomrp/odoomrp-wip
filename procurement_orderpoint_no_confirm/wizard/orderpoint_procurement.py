@@ -25,6 +25,9 @@ class ProcurementCompute(models.TransientModel):
     @api.multi
     def procure_calculation(self):
         config_param_obj = self.env['ir.config_parameter']
-        config_param_obj.create({'key': 'procurement.order',
-                                 'value': 'no_confirm'})
+        config_param = config_param_obj.search(
+            [('key', '=', 'procurement.order')])
+        if not config_param:
+            config_param_obj.create({'key': 'procurement.order',
+                                     'value': 'no_confirm'})
         return super(ProcurementCompute, self).procure_calculation()
