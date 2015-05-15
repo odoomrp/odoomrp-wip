@@ -15,139 +15,139 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: mrp_lock_lot
 #: view:wiz.lock.lot:mrp_lock_lot.view_wiz_lock_lot_form
+#. module: mrp_lock_lot
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
-#. module: mrp_lock_lot
 #: field:product.category,lot_default_locked:0
+#. module: mrp_lock_lot
 msgid "Block new Serial Numbers/lots"
-msgstr ""
+msgstr "Bloquer les lots créés"
 
-#. module: mrp_lock_lot
 #: field:wiz.lock.lot,create_uid:0
+#. module: mrp_lock_lot
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
-#. module: mrp_lock_lot
 #: field:wiz.lock.lot,create_date:0
-msgid "Created on"
-msgstr ""
-
 #. module: mrp_lock_lot
+msgid "Created on"
+msgstr "Créé le"
+
 #: code:addons/mrp_lock_lot/models/mrp_production_lot.py:43
+#. module: mrp_lock_lot
 #, python-format
 msgid "Error! Serial Number/Lot \"%s\" currently has reservations."
-msgstr ""
+msgstr "Erreur ! Il existe actuellement des reservations pour le numéro de série/lot \"%s\"."
 
-#. module: mrp_lock_lot
 #: field:wiz.lock.lot,id:0
+#. module: mrp_lock_lot
 msgid "ID"
-msgstr ""
+msgstr "Id."
 
-#. module: mrp_lock_lot
 #: help:product.category,lot_default_locked:0
+#. module: mrp_lock_lot
 msgid "If checked, future Serial Numbers/lots will be created blocked by default"
-msgstr ""
+msgstr "Si coché, les lots de production seront créés verrouillés par défaut"
 
-#. module: mrp_lock_lot
 #: field:wiz.lock.lot,write_uid:0
+#. module: mrp_lock_lot
 msgid "Last Updated by"
-msgstr ""
+msgstr "Mis à jour par"
 
-#. module: mrp_lock_lot
 #: field:wiz.lock.lot,write_date:0
+#. module: mrp_lock_lot
 msgid "Last Updated on"
-msgstr ""
+msgstr "Mis à jour le"
 
-#. module: mrp_lock_lot
 #: view:stock.production.lot:mrp_lock_lot.view_production_lot_form_inh_locklot
+#. module: mrp_lock_lot
 msgid "Block"
-msgstr ""
+msgstr "Bloquer"
 
-#. module: mrp_lock_lot
 #: view:product.category:mrp_lock_lot.product_category_form_view_inh_locklot
+#. module: mrp_lock_lot
 msgid "Serial Nunber/lot blocking"
-msgstr ""
+msgstr "Blocage des numéros de série/lots"
 
-#. module: mrp_lock_lot
 #: view:wiz.lock.lot:mrp_lock_lot.view_wiz_lock_lot_form
+#. module: mrp_lock_lot
 msgid "Block Serial Numbers/Lots"
-msgstr ""
+msgstr "Bloquer les numéros de série/lots"
 
-#. module: mrp_lock_lot
 #: model:ir.actions.act_window,name:mrp_lock_lot.action_lock_lot
+#. module: mrp_lock_lot
 msgid "Block/Unblock Serial Number/lot"
-msgstr ""
+msgstr "Bloquer/débloquer le n° de série/lot"
 
-#. module: mrp_lock_lot
 #: view:wiz.lock.lot:mrp_lock_lot.view_wiz_lock_lot_form
-msgid "Block/Unblock Serial Numbers/lots"
-msgstr ""
-
 #. module: mrp_lock_lot
+msgid "Block/Unblock Serial Numbers/lots"
+msgstr "Bloquer/débloquer les numéro de série/lots"
+
 #: view:stock.production.lot:mrp_lock_lot.search_product_lot_filter_inh_locklot
 #: field:stock.production.lot,locked:0
 #: view:stock.quant:mrp_lock_lot.quant_search_view_inh_locklot
 #: field:stock.quant,locked:0
+#. module: mrp_lock_lot
 msgid "Blocked"
-msgstr ""
+msgstr "Bloqué"
 
-#. module: mrp_lock_lot
 #: view:stock.quant:mrp_lock_lot.quant_search_view_inh_locklot
-msgid "Lot"
-msgstr ""
-
 #. module: mrp_lock_lot
+msgid "Lot"
+msgstr "Lot"
+
 #: model:mail.message.subtype,description:mrp_lock_lot.mt_lock_lot
 #: model:mail.message.subtype,name:mrp_lock_lot.mt_lock_lot
-msgid "Serial Number/lot blocked"
-msgstr ""
-
 #. module: mrp_lock_lot
+msgid "Serial Number/lot blocked"
+msgstr "Numéro de série/lot bloqué"
+
 #: model:mail.message.subtype,description:mrp_lock_lot.mt_unlock_lot
 #: model:mail.message.subtype,name:mrp_lock_lot.mt_unlock_lot
+#. module: mrp_lock_lot
 msgid "Serial Number/lot unblocked"
-msgstr ""
+msgstr "Numéro de série/lot débloqué"
 
-#. module: mrp_lock_lot
 #: model:ir.model,name:mrp_lock_lot.model_stock_production_lot
+#. module: mrp_lock_lot
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Lot/n° de série"
 
-#. module: mrp_lock_lot
 #: view:stock.production.lot:mrp_lock_lot.search_product_lot_filter_inh_locklot
+#. module: mrp_lock_lot
 msgid "Product"
-msgstr ""
+msgstr "Article"
 
-#. module: mrp_lock_lot
 #: model:ir.model,name:mrp_lock_lot.model_product_category
+#. module: mrp_lock_lot
 msgid "Product Category"
-msgstr ""
+msgstr "Catégorie d'articles"
 
-#. module: mrp_lock_lot
 #: model:ir.model,name:mrp_lock_lot.model_stock_quant
+#. module: mrp_lock_lot
 msgid "Quants"
-msgstr ""
+msgstr "Quants"
 
-#. module: mrp_lock_lot
 #: view:stock.production.lot:mrp_lock_lot.view_production_lot_form_inh_locklot
+#. module: mrp_lock_lot
 msgid "Unblock"
-msgstr ""
+msgstr "Débloquer"
 
-#. module: mrp_lock_lot
 #: view:wiz.lock.lot:mrp_lock_lot.view_wiz_lock_lot_form
+#. module: mrp_lock_lot
 msgid "Unblock Serial Numbers/Lots"
-msgstr ""
+msgstr "Débloquer les Numéro de séries/lots"
 
-#. module: mrp_lock_lot
 #: view:wiz.lock.lot:mrp_lock_lot.view_wiz_lock_lot_form
+#. module: mrp_lock_lot
 msgid "What do you want to do with selected Serial Numbers/Lots?"
-msgstr ""
+msgstr "Que souhaitez-vous faire sur les n° de série/lots sélectionnés ?"
 
-#. module: mrp_lock_lot
 #: view:wiz.lock.lot:mrp_lock_lot.view_wiz_lock_lot_form
+#. module: mrp_lock_lot
 msgid "or"
-msgstr ""
+msgstr "ou"
 
