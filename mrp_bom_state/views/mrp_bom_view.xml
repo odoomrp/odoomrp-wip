@@ -36,7 +36,7 @@
                         <button name="button_draft" type="object" string="Draft" groups="mrp_bom_state.group_mrp_bom_state" attrs="{'invisible':[('state','!=','active')]}" class="oe_highlight" />
                         <button name="button_activate" type="object" string="Activate" attrs="{'invisible':[('state','!=',False)]}" class="oe_highlight" />
                         <button name="button_activate" type="object" string="Activate" attrs="{'invisible':[('state','!=','draft')]}" class="oe_highlight" />
-                        <button name="button_new_version" type="object" string="New Version" attrs="{'invisible':[('state','==','historical')]}" class="oe_highlight" />
+                        <button name="button_new_version" type="object" string="New Version" attrs="{'invisible':[('state','==','historical')]}" class="oe_highlight" confirm="You are going to create a new version of this BoM. Are you sure?"/>
                         <button name="button_historical" type="object" string="Historical" attrs="{'invisible':[('state','!=','active')]}" class="oe_highlight" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,active,historical" />
                     </header>
