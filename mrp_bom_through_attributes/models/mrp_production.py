@@ -96,7 +96,7 @@ class MrpBom(models.Model):
 
     def search(self, cr, uid, args, offset=0, limit=None, order=None,
                context=None, count=False):
-        if context.get('phantom', False):
+        if context and context.get('phantom', False):
             args.append(('type', '=', 'phantom'))
         return super(MrpBom, self).search(
             cr, uid, args, offset=offset, limit=limit, order=order,
