@@ -15,11 +15,6 @@ class MrpBom(models.Model):
         },
     }
 
-    def _get_max_sequence(self):
-        bom = self.search([], order='sequence desc', limit=1)
-        maxseq = bom.sequence + 1
-        return maxseq
-
     active = fields.Boolean(
         string='Active', default=False, readonly=True,
         states={'draft': [('readonly', False)]})
@@ -35,9 +30,6 @@ class MrpBom(models.Model):
         readonly=True, states={'draft': [('readonly', False)]})
     product_qty = fields.Float(
         readonly=True, states={'draft': [('readonly', False)]})
-    sequence = fields.Integer(
-        default=_get_max_sequence, copy=False,
-        states={'historical': [('readonly', True)]})
     name = fields.Char(
         states={'historical': [('readonly', True)]})
     code = fields.Char(
@@ -70,17 +62,6 @@ class MrpBom(models.Model):
         states={'historical': [('readonly', True)]})
     version = fields.Integer(states={'historical': [('readonly', True)]},
                              copy=False, default=1)
-
-    @api.one
-    @api.constrains('sequence')
-    def check_mrp_bom_sequence(self):
-        domain = [('id', '!=', self.id), ('sequence', '=', self.sequence),
-                  ('product_tmpl_id', '=', self.product_tmpl_id.id),
-                  ('product_id', '=', self.product_id.id)]
-        if self.search(domain):
-            raise exceptions.Warning(
-                _('The sequence must be unique'))
-
 
     @api.multi
     def button_draft(self):
