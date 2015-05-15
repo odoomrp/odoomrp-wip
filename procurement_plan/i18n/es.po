@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-14 13:08+0000\n"
-"PO-Revision-Date: 2015-05-14 15:12+0100\n"
+"POT-Creation-Date: 2015-05-15 06:29+0000\n"
+"PO-Revision-Date: 2015-05-15 08:33+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -85,6 +85,13 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:93
+#: code:addons/procurement_plan/models/procurement_plan.py:118
+#, python-format
+msgid "Error!: End date is lower than start date."
+msgstr "Error!: Fecha fin es menor que fecha comienzo."
+
+#. module: procurement_plan
 #: code:addons/procurement_plan/models/procurement_plan.py:87
 #: code:addons/procurement_plan/models/procurement_plan.py:112
 #, python-format
@@ -97,13 +104,6 @@ msgstr "Error!: Debe de introduir desde fecha."
 #, python-format
 msgid "Error!: You must enter to date."
 msgstr "Error!: Debe introducir hasta fecha."
-
-#. module: procurement_plan
-#: code:addons/procurement_plan/models/procurement_plan.py:93
-#: code:addons/procurement_plan/models/procurement_plan.py:118
-#, python-format
-msgid "Error!:: End date is lower than start date."
-msgstr "Error!:: Fecha fin menor que fecha comienzo."
 
 #. module: procurement_plan
 #: field:wiz.load.purchase.from.plan,factor:0
@@ -194,14 +194,14 @@ msgstr "Abastecimiento"
 #. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 msgid "Procurement Lines"
-msgstr "Línas de abastecimientos"
+msgstr "Líneas de abastecimientos"
 
 #. module: procurement_plan
 #: model:ir.model,name:procurement_plan.model_procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 #: model:res.groups,name:procurement_plan.group_procurement_plan
 msgid "Procurement Plan"
-msgstr "Plan abastecimientos"
+msgstr "Plan de abastecimiento"
 
 #. module: procurement_plan
 #: model:ir.actions.act_window,name:procurement_plan.action_procurement_plan
@@ -252,7 +252,7 @@ msgstr "Borrar del plan"
 #. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 msgid "Reset to confirm"
-msgstr "Reconfirmar"
+msgstr "Reestablecer a confirmado"
 
 #. module: procurement_plan
 #: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
@@ -277,7 +277,7 @@ msgstr "Venta"
 #. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_search_view
 msgid "Search Procurement Plan"
-msgstr "Buscar plan de abastecimientos"
+msgstr "Buscar plan de abastecimiento"
 
 #. module: procurement_plan
 #: field:procurement.plan,sequence:0

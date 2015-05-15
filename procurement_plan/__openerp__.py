@@ -27,9 +27,7 @@
     "category": "Procurements",
     "depends": ['procurement',
                 'project',
-                'stock',
                 'purchase',
-                'sale',
                 'sale_stock',
                 'procurement_manager'
                 ],

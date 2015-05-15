@@ -90,7 +90,7 @@ class ProcurementPlan(models.Model):
                 _('Error!: You must enter to date.'))
         if self.from_date > self.to_date:
             raise exceptions.Warning(
-                _('Error!:: End date is lower than start date.'))
+                _('Error!: End date is lower than start date.'))
         context = self.env.context.copy()
         context['active_id'] = self.id
         context['active_ids'] = [self.id]
@@ -115,7 +115,7 @@ class ProcurementPlan(models.Model):
                 _('Error!: You must enter to date.'))
         if self.from_date > self.to_date:
             raise exceptions.Warning(
-                _('Error!:: End date is lower than start date.'))
+                _('Error!: End date is lower than start date.'))
         context = self.env.context.copy()
         context['active_id'] = self.id
         context['active_ids'] = [self.id]
