@@ -19,7 +19,7 @@
             <field name="arch" type="xml">
                 <field name="name" position="after">
                     <field name="active" />
-                    <field name="sequence" />
+                    <field name="version" />
                     <field name="state" />
                     <field name="historical_date"/>
                 </field>
@@ -68,11 +68,11 @@
         <record id="view_mrp_bom_form_inh_version" model="ir.ui.view">
             <field name="name">view.mrp.bom.form.inh.version</field>
             <field name="model">mrp.bom</field>
-            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="inherit_id" ref="mrp_bom_state.mrp_bom_form_view_inh_state"/>
             <field name="arch" type="xml">
-                <field name="routing_id" position="after">
-                    <field name="version" string="version"/>
-                </field>
+                <xpath expr="//form/group/group" position="inside">
+                    <field name="version" />
+                </xpath>
             </field>
         </record>
     </data>
