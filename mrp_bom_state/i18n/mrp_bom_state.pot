@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-15 10:01+0000\n"
-"PO-Revision-Date: 2015-05-15 10:01+0000\n"
+"POT-Creation-Date: 2015-05-15 11:40+0000\n"
+"PO-Revision-Date: 2015-05-15 11:40+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -37,48 +37,6 @@ msgid "Bill of Material"
 msgstr ""
 
 #. module: mrp_bom_state
-#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
-#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
-msgid "Cancel"
-msgstr ""
-
-#. module: mrp_bom_state
-#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
-msgid "Confirm MRP BoM activation"
-msgstr ""
-
-#. module: mrp_bom_state
-#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
-msgid "Confirm MRP BoM historification"
-msgstr ""
-
-#. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:99
-#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
-#, python-format
-msgid "Confirm activation"
-msgstr ""
-
-#. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:130
-#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
-#, python-format
-msgid "Confirm historification"
-msgstr ""
-
-#. module: mrp_bom_state
-#: field:wiz.confirm.activation,create_uid:0
-#: field:wiz.confirm.historification,create_uid:0
-msgid "Created by"
-msgstr ""
-
-#. module: mrp_bom_state
-#: field:wiz.confirm.activation,create_date:0
-#: field:wiz.confirm.historification,create_date:0
-msgid "Created on"
-msgstr ""
-
-#. module: mrp_bom_state
 #: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
 #: selection:mrp.bom,state:0
 msgid "Draft"
@@ -93,24 +51,6 @@ msgstr ""
 #. module: mrp_bom_state
 #: field:mrp.bom,historical_date:0
 msgid "Historical Date"
-msgstr ""
-
-#. module: mrp_bom_state
-#: field:wiz.confirm.activation,id:0
-#: field:wiz.confirm.historification,id:0
-msgid "ID"
-msgstr ""
-
-#. module: mrp_bom_state
-#: field:wiz.confirm.activation,write_uid:0
-#: field:wiz.confirm.historification,write_uid:0
-msgid "Last Updated by"
-msgstr ""
-
-#. module: mrp_bom_state
-#: field:wiz.confirm.activation,write_date:0
-#: field:wiz.confirm.historification,write_date:0
-msgid "Last Updated on"
 msgstr ""
 
 #. module: mrp_bom_state
@@ -155,29 +95,22 @@ msgid "The active state may be passed back to state draft"
 msgstr ""
 
 #. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:82
-#, python-format
-msgid "The sequence must be unique"
-msgstr ""
-
-#. module: mrp_bom_state
 #: field:mrp.bom,version:0
 msgid "Version"
 msgstr ""
 
 #. module: mrp_bom_state
-#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
-msgid "You are going to historicize an LdM. Doing, not be able to unlock it unless you make a copy. Are you sure you want to proceed?"
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
+msgid "You are going to create a new version of this BoM. Are you sure?"
 msgstr ""
 
 #. module: mrp_bom_state
-#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
+msgid "You are going to historicize an BoM. Doing, not be able to unlock it unless you make a copy. Are you sure you want to proceed?"
+msgstr ""
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
 msgid "You will activate the BoM. If you haven't set a route yet, then you won't be able to do it after this. Are you sure you want to proceed?"
-msgstr ""
-
-#. module: mrp_bom_state
-#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
-#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
-msgid "or"
 msgstr ""
 

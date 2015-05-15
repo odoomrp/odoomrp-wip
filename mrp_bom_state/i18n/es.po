@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-15 10:02+0000\n"
-"PO-Revision-Date: 2015-05-15 12:04+0100\n"
+"POT-Creation-Date: 2015-05-15 11:40+0000\n"
+"PO-Revision-Date: 2015-05-15 13:42+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,48 +38,6 @@ msgid "Bill of Material"
 msgstr "Lista de material"
 
 #. module: mrp_bom_state
-#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
-#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
-msgid "Cancel"
-msgstr "Cancelar"
-
-#. module: mrp_bom_state
-#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
-msgid "Confirm MRP BoM activation"
-msgstr "Confirmar activación de la LdM"
-
-#. module: mrp_bom_state
-#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
-msgid "Confirm MRP BoM historification"
-msgstr "Confirmar la historificación de la LdM"
-
-#. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:99
-#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
-#, python-format
-msgid "Confirm activation"
-msgstr "Confirmar activación"
-
-#. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:130
-#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
-#, python-format
-msgid "Confirm historification"
-msgstr "Confirmar la historificación"
-
-#. module: mrp_bom_state
-#: field:wiz.confirm.activation,create_uid:0
-#: field:wiz.confirm.historification,create_uid:0
-msgid "Created by"
-msgstr "Creado por"
-
-#. module: mrp_bom_state
-#: field:wiz.confirm.activation,create_date:0
-#: field:wiz.confirm.historification,create_date:0
-msgid "Created on"
-msgstr "Creado el"
-
-#. module: mrp_bom_state
 #: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
 #: selection:mrp.bom,state:0
 msgid "Draft"
@@ -95,23 +53,6 @@ msgstr "Histórica"
 #: field:mrp.bom,historical_date:0
 msgid "Historical Date"
 msgstr "Fecha historificación"
-
-#. module: mrp_bom_state
-#: field:wiz.confirm.activation,id:0 field:wiz.confirm.historification,id:0
-msgid "ID"
-msgstr "ID"
-
-#. module: mrp_bom_state
-#: field:wiz.confirm.activation,write_uid:0
-#: field:wiz.confirm.historification,write_uid:0
-msgid "Last Updated by"
-msgstr "Última actualización por"
-
-#. module: mrp_bom_state
-#: field:wiz.confirm.activation,write_date:0
-#: field:wiz.confirm.historification,write_date:0
-msgid "Last Updated on"
-msgstr "Última actualización el"
 
 #. module: mrp_bom_state
 #: model:mail.message.subtype,description:mrp_bom_state.mt_active
@@ -155,36 +96,29 @@ msgid "The active state may be passed back to state draft"
 msgstr "El estado activo puede ser devuelto al estado de borrador"
 
 #. module: mrp_bom_state
-#: code:addons/mrp_bom_state/models/mrp.py:82
-#, python-format
-msgid "The sequence must be unique"
-msgstr "La secuencia debe ser única"
-
-#. module: mrp_bom_state
 #: field:mrp.bom,version:0
 msgid "Version"
 msgstr "Versión"
 
 #. module: mrp_bom_state
-#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
+msgid "You are going to create a new version of this BoM. Are you sure?"
+msgstr " Estas a punto de crear una nueva versión de esta LdM. ¿Estas seguro?"
+
+#. module: mrp_bom_state
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
 msgid ""
-"You are going to historicize an LdM. Doing, not be able to unlock it unless "
+"You are going to historicize an BoM. Doing, not be able to unlock it unless "
 "you make a copy. Are you sure you want to proceed?"
 msgstr ""
-"Va a historificar una LM. Si lo hace, no podrá volver a activarla a no ser "
+"Va a historificar una LdM. Si lo hace, no podrá volver a activarla a no ser "
 "que saque una copia ¿Está seguro de que desea proceder?"
 
 #. module: mrp_bom_state
-#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
+#: view:mrp.bom:mrp_bom_state.mrp_bom_form_view_inh_state
 msgid ""
 "You will activate the BoM. If you haven't set a route yet, then you won't be "
 "able to do it after this. Are you sure you want to proceed?"
 msgstr ""
 "Va a activar la LdM. Si no ha puesto ruta, no podrá ya ponerla. ¿Está seguro "
 "de que desea proceder?"
-
-#. module: mrp_bom_state
-#: view:wiz.confirm.activation:mrp_bom_state.wiz_confirm_activation_view
-#: view:wiz.confirm.historification:mrp_bom_state.wiz_confirm_historification_view
-msgid "or"
-msgstr "o"

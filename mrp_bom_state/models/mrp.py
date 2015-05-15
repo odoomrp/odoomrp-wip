@@ -68,25 +68,6 @@ class MrpBom(models.Model):
         self.state = 'draft'
 
     @api.multi
-    def button_activate(self):
-        self.ensure_one()
-        if self.routing_id:
-            return self.write({'active': True,
-                               'state': 'active'})
-        context = self.env.context.copy()
-        context['active_id'] = self.id
-        context['active_ids'] = [self.id]
-        context['active_model'] = 'mrp.bom'
-        return {'name': _('Confirm activation'),
-                'type': 'ir.actions.act_window',
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'wiz.confirm.activation',
-                'target': 'new',
-                'context': context,
-                }
-
-    @api.multi
     def button_new_version(self):
         self.ensure_one()
         self.write({'active': False, 'state': 'historical',
@@ -102,20 +83,14 @@ class MrpBom(models.Model):
                 'target': 'new',
                 }
 
-    @api.multi
+    @api.one
+    def button_activate(self):
+        return self.write({'active': True, 'state': 'active'})
+
+    @api.one
     def button_historical(self):
-        context = self.env.context.copy()
-        context['active_id'] = self.id
-        context['active_ids'] = [self.id]
-        context['active_model'] = 'mrp.bom'
-        return {'name': _('Confirm historification'),
-                'type': 'ir.actions.act_window',
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'wiz.confirm.historification',
-                'target': 'new',
-                'context': context,
-                }
+        return self.write({'active': False, 'state': 'historical',
+                           'historical_date': fields.Date.today()})
 
 
 class MrpProduction(models.Model):
