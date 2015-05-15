@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record  model="ir.sequence.type" id="seq_type_preventive_operation">
+            <field name="name">Machine preventive operation</field>
+            <field name="code">preventive.machine.operation</field>
+        </record>
+        <record model="ir.sequence" id="seq_preventive_operation">
+            <field name="name">Preventive Operation</field>
+            <field name="code">preventive.machine.operation</field>
+            <field name="prefix">MacPreOp-</field>
+            <field name="padding" eval="5"/>
+        </record>
+    </data>
+</openerp>

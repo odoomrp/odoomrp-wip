@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_preventive_manager_machine_prev_op,preventive.machine.operation,model_preventive_machine_operation,preventive_manager,1,1,1,1
+access_preventive_manager_optypel,preventive.operation.type,model_preventive_operation_type,preventive_manager,1,1,1,1
+access_preventive_manager_master,preventive.master,model_preventive_master,preventive_manager,1,1,1,1
+access_preventive_manager_omm,preventive.operation.matmach,model_preventive_operation_matmach,preventive_manager,1,1,1,1
+access_preventive_manager_operation_material,preventive.operation.material,model_preventive_operation_material,preventive_manager,1,1,1,1

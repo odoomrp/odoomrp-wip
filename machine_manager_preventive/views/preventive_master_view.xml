@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <menuitem id="menu_preventive_maintenance" name="Preventive Maintenance"
+            parent="machine_manager.menu_machinery_manager" sequence="3" />
+        <menuitem id="menu_preven_operation_config" name="Configuration"
+            parent="menu_preventive_maintenance" sequence="2" />
+
+        <!-- ================ Operation Master data ==================== -->
+
+        <record model="ir.ui.view" id="ope_master_tree_view">
+            <field name="name">preventive.master.tree</field>
+            <field name="model">preventive.master</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Master Operations">
+                    <field name="name" />
+                    <field name="pmo_type" />
+                    <field name="machinemodel" />
+                    <field name="machinery_ids" nolabel="1" />
+                    <field name="opdescription" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="ope_master_form_view">
+            <field name="name">preventive.master.form</field>
+            <field name="model">preventive.master</field>
+            <field name="arch" type="xml">
+                <form string="Preventive Master Data">
+                <header>
+                    <button name="%(action_create_preventive)d" string="Create Preventive Orders"
+                    class="oe_highlight" type="action"/>
+                </header>
+                    <group colspan="4">
+                        <field name="name" />
+                        <field name="pmo_type" />
+                        <field name="machinemodel" />
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Preventive Info">
+                            <field name="ope_material" editable="bottom"
+                                nolabel="1" colspan="4" />
+                            <separator
+                                string="Machine list for the preventive operations"
+                                colspan="4" />
+                            <field name="machinery_ids" nolabel="1"
+                                colspan="4" />
+                        </page>
+                        <page string="Preventive Description">
+                            <separator string="Description"
+                                colspan="4" />
+                            <field name="opdescription" nolabel="1"
+                                colspan="4" />
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_ope_master_view">
+            <field name="name">Preventive Master</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">preventive.master</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="ope_master_tree_view" />
+        </record>
+
+        <menuitem id="preventive_master_menu" name="Preventive master data"
+            parent="menu_preven_operation_config" action="action_ope_master_view" />
+
+<!-- ================ Operation Master Data Type ==================== -->
+
+        <record model="ir.ui.view" id="master_type_tree_view">
+            <field name="name">machinemodel.tree.view</field>
+            <field name="model">preventive.master.type</field>
+            <field name="arch" type="xml">
+                <tree string="tree_string" editable="bottom">
+                    <field name="name" />
+                    <field name="master_type" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_preventive_master_type_view">
+            <field name="name">Master Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">preventive.master.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="master_type_tree_view" />
+        </record>
+
+        <menuitem id="preventive_master_type" name="Preventive master type"
+            parent="menu_preven_operation_config" action="action_preventive_master_type_view" />
+
+    </data>
+</openerp>
