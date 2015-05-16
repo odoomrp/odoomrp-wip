@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="wiz_import_procurement_from_plan_view" model="ir.ui.view">
-            <field name="name">wiz.import.procurement.from.plan.view</field>
-            <field name="model">wiz.import.procurement.from.plan</field>
+        <record id="wiz_import_menu_plan_mrp_view" model="ir.ui.view">
+            <field name="name">wiz.import.menu.plan.mrp.view</field>
+            <field name="model">wiz.import.menu.plan.mrp</field>
             <field name="arch" type="xml">
                 <form string="Procurements">
-                    <group string="Import Procurements">
-                        <label string="You are going to import procurements. Are you sure you want to proceed?" class="oe_inline" />
+                    <group string="Import Procurements Menu">
+                        <label string="You must select one of the two import options" class="oe_inline" />
                     </group>
                     <footer>
                         <button name="do_import_procurements" type="object" string="Import ALL Procurements" class="oe_highlight" />

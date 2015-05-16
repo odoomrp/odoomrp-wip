@@ -1,3 +1,0 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_wiz_import_procurement_from_plan","procuremen_plan_mrp","procurement_plan_mrp.model_wiz_import_procurement_from_plan","procurement_plan.group_procurement_plan",1,1,1,1
-

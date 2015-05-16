@@ -26,17 +26,17 @@ class WizLoadSaleFromPlan(models.TransientModel):
 
     def _get_default_partner(self):
         model = self.env.context.get('active_model', False)
-        record = self.env[model].browse(self.env.context.get('active_id'))
         partner = False
         if model == 'sale.order':
+            record = self.env[model].browse(self.env.context.get('active_id'))
             partner = record.partner_id
         return partner
 
     def _get_default_sale(self):
         model = self.env.context.get('active_model', False)
-        record = self.env[model].browse(self.env.context.get('active_id'))
         sale = False
         if model == 'sale.order':
+            record = self.env[model].browse(self.env.context.get('active_id'))
             sale = record.id
         return sale
 
@@ -72,8 +72,6 @@ class WizLoadSaleFromPlan(models.TransientModel):
     date_to = fields.Date(string="Date to", default=_get_default_date_to)
     sale_id = fields.Many2one(
         "sale.order", "Sale", default=_get_default_sale)
-    warehouse_id = fields.Many2one(
-        'stock.warehouse', string="Warehouse", required=True)
     product_categ_id = fields.Many2one("product.category", string="Category")
     product_tmpl_id = fields.Many2one("product.template", string="Template")
     product_id = fields.Many2one("product.product", string="Product")
@@ -109,8 +107,8 @@ class WizLoadSaleFromPlan(models.TransientModel):
                             'plan': plan.id,
                             'main_project_id': plan.project_id.id,
                             'product_qty': prod_vals['qty'] / month_count,
-                            'warehouse_id': self.warehouse_id.id,
-                            'location_id':  self.warehouse_id.lot_stock_id.id,
+                            'warehouse_id': plan.warehouse_id.id,
+                            'location_id':  plan.warehouse_id.lot_stock_id.id,
                             'date_planned': date
                             }
                     vals.update(
@@ -137,8 +135,9 @@ class WizLoadSaleFromPlan(models.TransientModel):
         if self.product_id:
             sale_line_domain += [('product_id', '=', self.product_id.id)]
         elif self.product_tmpl_id:
-            sale_line_domain += [('product_tmpl_id', '=',
-                                  self.product_tmpl_id.id)]
+            sale_line_domain += [
+                ('product_id', 'in',
+                 self.product_tmpl_id.product_variant_ids.ids)]
         elif self.product_categ_id:
             products = product_obj.search([('categ_id', '=',
                                             self.product_categ_id.id)])

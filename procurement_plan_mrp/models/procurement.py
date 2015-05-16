@@ -2,87 +2,70 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api, _
 
 
 class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
     @api.one
-    def _compute_show_button_create(self):
+    def _compute_show_buttons(self):
         bom_obj = self.env['mrp.bom']
         self.show_button_create = False
-        if self.location_id.usage == 'internal':
-            cond = [('parent_procurement_id', '=', self.id)]
-            child_procs = self.search(cond, limit=1)
-            if not child_procs:
-                cond = ['|', ('product_tmpl_id', '=',
-                        self.product_id.product_tmpl_id.id),
-                        ('product_id', '=', self.product_id.id)]
-                boms = bom_obj.search(cond)
-                if boms:
-                    self.show_button_create = True
-
-    @api.one
-    def _compute_show_button_delete(self):
-        bom_obj = self.env['mrp.bom']
         self.show_button_delete = False
-        if self.location_id.usage == 'internal':
+        if (self.location_id.usage == 'internal' and
+                self.state not in ('cancel', 'done')):
             cond = [('parent_procurement_id', '=', self.id)]
             child_procs = self.search(cond, limit=1)
+            cond = ['|', ('product_tmpl_id', '=',
+                    self.product_id.product_tmpl_id.id),
+                    ('product_id', '=', self.product_id.id)]
+            boms = bom_obj.search(cond)
             if child_procs:
-                cond = ['|', ('product_tmpl_id', '=',
-                        self.product_id.product_tmpl_id.id),
-                        ('product_id', '=', self.product_id.id)]
-                boms = bom_obj.search(cond)
-                if boms:
-                    self.show_button_delete = True
+                self.show_button_delete = bool(boms)
+            else:
+                self.show_button_create = bool(boms)
 
     level = fields.Integer(string='Level')
     parent_procurement_id = fields.Many2one(
         'procurement.order', string='Procurement Parent')
     show_button_create = fields.Boolean(
-        string='Show button Create', compute='_compute_show_button_create')
+        string='Show button Create', compute='_compute_show_buttons')
     show_button_delete = fields.Boolean(
-        string='Show button Delete', compute='_compute_show_button_delete')
+        string='Show button Delete', compute='_compute_show_buttons')
 
     @api.multi
     def make_mo(self):
         production_obj = self.env['mrp.production']
         result = super(ProcurementOrder, self).make_mo()
         procurement = self.browse(result.keys()[0])
-        production = production_obj.browse(result.values()[0])
+        production = production_obj.browse(result[procurement.id])
         if procurement.plan:
             production.write({'plan': procurement.plan.id})
         return result
 
     @api.multi
-    def set_main_plan(self):
-        procurement_obj = self.env['procurement.order']
-        for record in self:
-            if record.production_id:
-                production = record.production_id
-                if production.plan:
-                    moves = production.move_lines
-                    for move in moves:
-                        procurements = procurement_obj.search(
-                            [('move_dest_id', '=', move.id)])
-                        procurements.write({'plan': production.plan.id})
-                        procurements.refresh()
-                        procurements.set_main_plan()
-                    if record.move_ids:
-                        for move in record.move_ids:
-                            procurements = procurement_obj.search(
-                                [('move_dest_id', '=', move.id)])
-                            procurements.write({'plan': production.plan.id})
-                            procurements.refresh()
-                            procurements.set_main_plan()
-        return True
-
-    @api.multi
     def run(self, autocommit=False):
-        res = super(ProcurementOrder, self).run(autocommit=autocommit)
-        self.set_main_plan()
+        for procurement in self:
+            procurement.with_context(plan=procurement.plan.id).run(
+                autocommit=autocommit)
+            procurement.plan._get_state()
+        plans = self.mapped('plan')
+        if not plans:
+            return True
+        res = {'view_type': 'form,tree',
+               'res_model': 'procurement.plan',
+               'view_id': False,
+               'type': 'ir.actions.act_window',
+               }
+        if len(plans) == 1:
+            res.update({'view_mode': 'form',
+                        'res_id': plans[0].id,
+                        'target': 'current'})
+        else:
+            res.update({'view_mode': 'tree',
+                        'domain': [('id', 'in', plans.ids)],
+                        'target': 'new'})
         return res
 
     @api.multi
@@ -110,27 +93,21 @@ class ProcurementOrder(models.Model):
                 self.product_id.product_tmpl_id.id),
                 ('product_id', '=', self.product_id.id)]
         boms = bom_obj.search(cond)
-        if not boms:
-            message = (_('BoM not found, for product: %s') %
-                       (self.product_id.name))
-            message += "<br></p>"
+        product_errors = []
+        sorted_boms = sorted(boms, key=lambda l: l.sequence,
+                             reverse=True)
+        for line in sorted_boms[0].bom_line_ids:
+            qty = ((line.product_qty * self.product_qty) /
+                   sorted_boms[0].product_qty)
+            product_errors = self.plan._calculate_bom_line_details(
+                line, qty, self.level, product_errors, self,
+                sorted_boms[0])
+        if product_errors:
+            message = ''
+            for line_error in product_errors:
+                message += line_error['error'] + "<br>"
+            message += "</p>"
             self.plan._create_message_error(message)
-        else:
-            product_errors = []
-            sorted_boms = sorted(boms, key=lambda l: l.sequence,
-                                 reverse=True)
-            for line in sorted_boms[0].bom_line_ids:
-                qty = ((line.product_qty * self.product_qty) /
-                       sorted_boms[0].product_qty)
-                product_errors = self.plan._calculate_bom_line_details(
-                    line, qty, self.level, product_errors, self,
-                    sorted_boms[0])
-            if product_errors:
-                message = ''
-                for line_error in product_errors:
-                    message += line_error['error'] + "<br>"
-                message += "</p>"
-                self.plan._create_message_error(message)
         return {'view_type': 'form,tree',
                 'view_mode': 'form',
                 'res_model': 'procurement.plan',
@@ -142,8 +119,7 @@ class ProcurementOrder(models.Model):
 
 
 class ProcurementPlan(models.Model):
-    _name = 'procurement.plan'
-    _inherit = ['procurement.plan', 'mail.thread']
+    _inherit = 'procurement.plan'
 
     production_ids = fields.One2many(
         'mrp.production', 'plan', string='Productions', readonly=True)
@@ -159,24 +135,25 @@ class ProcurementPlan(models.Model):
                 'type': 'ir.actions.act_window',
                 'view_type': 'form',
                 'view_mode': 'form',
-                'res_model': 'wiz.import.procurement.from.plan',
+                'res_model': 'wiz.import.menu.plan.mrp',
                 'target': 'new',
                 'context': context,
                 }
 
     @api.one
-    def button_generate_procurements(self):
-        procurement_obj = self.env['procurement.order']
-        bom_obj = self.env['mrp.bom']
+    def button_generate_mrp_procurements(self):
+        cond = [('name', '=', 'Manufacture')]
+        route = self.env['stock.location.route'].search(cond)
         for procurement in self.procurement_ids.filtered(
-                lambda r: r.level == 0 and r.location_id.usage == 'internal'):
+                lambda r: r.level == 0 and r.location_id.usage ==
+                'internal' and route[0].id in r.product_id.route_ids.ids):
             cond = [('parent_procurement_id', '=', procurement.id)]
-            child_procs = procurement_obj.search(cond, limit=1)
+            child_procs = self.env['procurement.order'].search(cond, limit=1)
             if not child_procs:
                 cond = ['|', ('product_tmpl_id', '=',
                         procurement.product_id.product_tmpl_id.id),
                         ('product_id', '=', procurement.product_id.id)]
-                boms = bom_obj.search(cond)
+                boms = self.env['mrp.bom'].search(cond)
                 if not boms:
                     message = (_('BoM not found, for product: %s') %
                                (procurement.product_id.name))
@@ -198,7 +175,6 @@ class ProcurementPlan(models.Model):
                             message += line_error['error'] + "<br>"
                         message += "</p>"
                         self._create_message_error(message)
-        self._catch_purchases()
 
     def _create_message_error(self, message):
         m = "<p> " + (str(fields.Datetime.now()) + ': ' +
@@ -215,17 +191,11 @@ class ProcurementPlan(models.Model):
     def _calculate_bom_line_details(self, line, qty, level, product_errors,
                                     procurement, bom):
         level += 1
-        if not line.product_id and not line.product_template:
-            product_errors.append(
-                {'error': (_('Product has not been found, or product template,'
-                             ' on the list of materials %s, Level %s')
-                           % (bom.name, str(level)))})
-        elif not line.product_id and line.product_template:
+        if not line.product_id:
             product_errors.append(
                 {'error': (_('Product has not been found on the list of'
-                             ' materials %s, product template %s, Level %s') %
-                           (bom.name, line.product_template.name,
-                            str(level)))})
+                             ' materials %s, Level %s') % (bom.name,
+                                                           str(level)))})
         else:
             procurement = self._create_procurement_from_bom_line(
                 level, line.product_id, qty, procurement)
@@ -251,9 +221,6 @@ class ProcurementPlan(models.Model):
 
     def _prepare_procurements_vals(self, level, product, qty, procurement):
         procurement_obj = self.env['procurement.order']
-        warehouse_ids = self.env['stock.warehouse'].search([])
-        if not warehouse_ids:
-            raise exceptions.Warning(_('Error!: Warehouse not found.'))
         vals = {'name': self.name,
                 'origin': self.sequence,
                 'level': level,
@@ -261,8 +228,8 @@ class ProcurementPlan(models.Model):
                 'plan': self.id,
                 'main_project_id': self.project_id.id,
                 'product_qty': qty,
-                'warehouse_id': warehouse_ids[0].id,
-                'location_id':  warehouse_ids[0].lot_stock_id.id,
+                'warehouse_id': self.warehouse_id.id,
+                'location_id':  self.warehouse_id.lot_stock_id.id,
                 'parent_procurement_id': (procurement.id or False)
                 }
         vals.update(procurement_obj.onchange_product_id(product.id)['value'])

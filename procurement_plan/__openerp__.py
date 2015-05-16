@@ -29,10 +29,12 @@
                 'project',
                 'purchase',
                 'sale_stock',
+                'mail',
                 'procurement_manager'
                 ],
     "data": ['data/sequence.xml',
              'security/procurement_plan.xml',
+             'wizard/wiz_import_procurement_from_plan_view.xml',
              'wizard/wiz_load_sale_from_plan_view.xml',
              'wizard/wiz_load_purchase_from_plan_view.xml',
              'views/procurement_view.xml',

@@ -9,6 +9,7 @@ class ProcurementPlan(models.Model):
 
     _name = 'procurement.plan'
     _description = 'Procurement Plan'
+    _inherit = ['mail.thread']
     _rec_name = 'sequence'
 
     @api.one
@@ -18,23 +19,27 @@ class ProcurementPlan(models.Model):
         if not self.procurement_ids:
             self.state = 'draft'
         elif (len(self.procurement_ids.filtered(
-                lambda x: x.state == 'draft')) == len(self.procurement_ids)):
+                lambda x: x.state == 'cancel')) > 1):
             self.state = 'draft'
-        elif (len(self.procurement_ids.filtered(
-                lambda x: x.state == 'done')) == len(self.procurement_ids)):
+        elif all(x.state == 'done' for x in self.procurement_ids):
             self.state = 'done'
-        elif (len(self.procurement_ids.filtered(
-                lambda x: x.state == 'cancel')) == len(self.procurement_ids)):
+        elif all(x.state == 'cancel' for x in self.procurement_ids):
             self.state = 'cancel'
 
     @api.multi
     def _get_plan_sequence(self):
-        sequence = self.env['ir.sequence'].next_by_code('procurement.plan')
-        return sequence
+        return self.env['ir.sequence'].next_by_code('procurement.plan')
 
     @api.one
     def _count_num_procurements(self):
         self.num_procurements = len(self.procurement_ids)
+
+    @api.one
+    @api.depends('procurement_ids', 'procurement_ids.state')
+    def _calc_plan_purchases(self):
+        purchases = set(self.procurement_ids.mapped('purchase_id'))
+        self.purchase_ids = [(6, 0, [purchase.id for purchase in
+                                     purchases])]
 
     name = fields.Char(string='Description', required=True, readonly=True,
                        states={'draft': [('readonly', False)]},
@@ -47,8 +52,10 @@ class ProcurementPlan(models.Model):
     to_date = fields.Date(
         string='to Date', readonly=True,
         states={'draft': [('readonly', False)]})
-    project_id = fields.Many2one('project.project', string='Project',
-                                 required=True)
+    warehouse_id = fields.Many2one(
+        'stock.warehouse', string='Warehouse', required=True)
+    project_id = fields.Many2one(
+        'project.project', string='Project', required=True)
     procurement_ids = fields.One2many(
         'procurement.order', 'plan', string='Procurements', readonly=True)
     num_procurements = fields.Integer(
@@ -56,7 +63,8 @@ class ProcurementPlan(models.Model):
     purchase_ids = fields.Many2many(
         comodel_name='purchase.order',
         relation='rel_procurement_plan_purchase_order', column1='plan_id',
-        column2='purchase_id', string='Purchase Orders', copy=False)
+        column2='purchase_id', string='Purchase Orders', copy=False,
+        store=True, compute='_calc_plan_purchases', readonly=False)
     state = fields.Selection(
         [('draft', 'Draft'),
          ('running', 'Running'),
@@ -64,20 +72,6 @@ class ProcurementPlan(models.Model):
          ('done', 'Done')],
         string='Status', compute='_get_state', index=True, store=True,
         track_visibility='onchange', )
-
-    @api.multi
-    def action_import(self):
-        self.ensure_one()
-        proc_obj = self.env['procurement.order']
-        cond = [('state', '!=', 'done'),
-                ('plan', '=', False)]
-        if self.from_date:
-            cond.append(('date_planned', '>=', self.from_date))
-        if self.to_date:
-            cond.append(('date_planned', '<=', self.to_date))
-        procurements = proc_obj.search(cond)
-        procurements.write({'plan': self.id})
-        return True
 
     @api.multi
     def button_load_sales(self):
@@ -135,7 +129,6 @@ class ProcurementPlan(models.Model):
             procurements = plan.procurement_ids.filtered(
                 lambda x: x.state in ('confirmed', 'exception'))
             procurements.with_context(plan=plan.id).run()
-            plan._catch_purchases()
         return True
 
     @api.multi
@@ -152,7 +145,6 @@ class ProcurementPlan(models.Model):
             procurements = plan.procurement_ids.filtered(lambda x: x.state in
                                                          ('running'))
             procurements.with_context(plan=plan.id).check()
-            plan._catch_purchases()
         return True
 
     @api.multi
@@ -162,25 +154,3 @@ class ProcurementPlan(models.Model):
                                                          ('cancel'))
             procurements.with_context(plan=plan.id).reset_to_confirmed()
         return True
-
-    @api.multi
-    def button_calculate_stock(self):
-        procurement_obj = self.env['procurement.order']
-        user = self.env['res.users'].browse(self.env.uid)
-        self.ensure_one()
-        result = procurement_obj.with_context(
-            active_model='procurement_plan', active_id=self.id,
-            procurement_ids=self.procurement_ids, active_ids=[self.id],
-            plan=self.id)._procure_orderpoint_confirm(
-                use_new_cursor=False,
-                company_id=user.company_id.id)
-        self._catch_purchases()
-        cond = [('state', 'not in', ('cancel', 'done'))]
-        self.search(cond)._get_state()
-        return result
-
-    @api.one
-    def _catch_purchases(self):
-        purchases = set(self.procurement_ids.mapped('purchase_id'))
-        self.purchase_ids = [(6, 0, [purchase.id for purchase in
-                                     purchases])]

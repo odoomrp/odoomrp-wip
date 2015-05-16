@@ -11,10 +11,10 @@
                         <field name="production_ids" />
                     </page>
                 </page>
-                <button name="action_import" position="after">
-                    <button name="button_generate_procurements" type='object' string='Generate procurements' />
+                <button string="Import Procurements" position="after">
+                    <button name="button_generate_mrp_procurements" type='object' string='Generate procurements' />
                 </button>
-                <button name="action_import" position="replace">
+                <button string="Import Procurements" position="replace">
                     <button name="button_wizard_import" type='object' string='Import Procurements' />
                 </button>
                 <field name="date_planned" position="before">
@@ -28,12 +28,6 @@
                     <button name="button_create_lower_levels" type="object" string="Create lower levels" icon="gtk-convert"
                             attrs="{'invisible':[('show_button_create','=',False)]}" />
                 </button>
-                <sheet position="after">
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
-                        <field name="message_ids" widget="mail_thread"/>
-                    </div>
-                </sheet>
             </field>
         </record>
     </data>
