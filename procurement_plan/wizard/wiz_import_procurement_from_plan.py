@@ -52,7 +52,7 @@ class WizImportProcurementFromPlan(models.TransientModel):
                           'product_uom': proc.product_uom.id,
                           'state': proc.state,
                           'rule_id': proc.rule_id.id or False,
-                          'product_id': proc.product_id.id or False
+                          'purchase_id': proc.purchase_id.id or False
                           })
         return {'procurements': lines}
 
