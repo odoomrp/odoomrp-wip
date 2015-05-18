@@ -148,6 +148,7 @@ class ProductProduct(models.Model):
         domain = []
         if product_template:
             domain.append(('product_tmpl_id', '=', product_template.id))
+            attr_values = []
             for attr_line in product_attributes:
                 if isinstance(attr_line, dict):
                     attribute_id = attr_line.get('attribute')
@@ -155,13 +156,16 @@ class ProductProduct(models.Model):
                 else:
                     attribute_id = attr_line.attribute.id
                     value_id = attr_line.value.id
-                if len(product_template.attribute_line_ids.search(
+                if value_id and len(product_template.attribute_line_ids.search(
                         [('product_tmpl_id', '=', product_template.id),
-                         ('attribute_id', '=',
-                          attribute_id)]).value_ids) > 1:
-                    domain.append(('attribute_value_ids', '=',
-                                   value_id))
-            return self.search(domain, limit=1) or False
+                         ('attribute_id', '=', attribute_id)]).value_ids) > 1:
+                    domain.append(('attribute_value_ids', '=', value_id))
+                    attr_values.append(value_id)
+            products = self.search(domain)
+            # Filter the product with the exact number of attributes values
+            for product in products:
+                if len(product.attribute_value_ids) == len(attr_values):
+                    return product
         return False
 
 
