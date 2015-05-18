@@ -169,26 +169,34 @@ class SaleOrderLine(models.Model):
             'type': 'ir.actions.act_window',
         }
 
+    @api.one
+    def _check_line_confirmability(self):
+        if any(not bool(line.value) for line in self.product_attributes):
+            raise exceptions.Warning(
+                _("You can not confirm before configuring all attribute "
+                  "values."))
+
     @api.multi
     def button_confirm(self):
+        product_obj = self.env['product.product']
         for line in self:
             if not line.product_id:
-                product_obj = self.env['product.product']
-                att_values_ids = [
-                    attr_line.value and attr_line.value.id or False
-                    for attr_line in line.product_attributes]
+                line._check_line_confirmability()
+                attr_values = line.product_attributes.mapped('value')
                 domain = [('product_tmpl_id', '=', line.product_template.id)]
-                for value in att_values_ids:
-                    if not value:
-                        raise exceptions.Warning(
-                            _("You can not confirm before configuring all"
-                              " attribute values."))
-                    domain.append(('attribute_value_ids', '=', value))
-                product = product_obj.search(domain)
+                for attr_value in attr_values:
+                    domain.append(('attribute_value_ids', '=', attr_value.id))
+                products = product_obj.search(domain)
+                # Filter the product with the exact number of attributes values
+                product = False
+                for prod in products:
+                    if len(prod.attribute_value_ids) == len(attr_values):
+                        product = prod
+                        break
                 if not product:
                     product = product_obj.create(
                         {'product_tmpl_id': line.product_template.id,
-                         'attribute_value_ids': [(6, 0, att_values_ids)]})
+                         'attribute_value_ids': [(6, 0, attr_values.ids)]})
                 line.write({'product_id': product.id})
         super(SaleOrderLine, self).button_confirm()
 

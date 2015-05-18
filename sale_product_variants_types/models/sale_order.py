@@ -15,9 +15,8 @@ class SaleOrderLineAttribute(models.Model):
 
     def _is_custom_value_in_range(self):
         if self.attr_type == 'range':
-            if not (self.value.min_range <= self.custom_value and
-                    self.value.max_range >= self.custom_value):
-                return False
+            return (self.value.min_range <= self.custom_value <=
+                    self.value.max_range)
         return True
 
     @api.one
@@ -34,3 +33,17 @@ class SaleOrderLineAttribute(models.Model):
     @api.onchange('custom_value', 'value')
     def _onchange_custom_value(self):
         self._custom_value_in_range()
+
+
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
+
+    @api.one
+    def _check_line_confirmability(self):
+        for line in self.product_attributes:
+            if not line.value:
+                if self.product_template.attribute_line_ids.filtered(
+                        lambda x: x.attribute_id == line.attribute).required:
+                    raise exceptions.Warning(
+                        _("You cannot confirm before configuring all values "
+                          "of required attributes."))
