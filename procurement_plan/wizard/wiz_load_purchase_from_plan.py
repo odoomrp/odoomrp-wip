@@ -109,7 +109,9 @@ class WizLoadPurchaseFromPlan(models.TransientModel):
                             }
                     vals.update(
                         procurement_obj.onchange_product_id(product)['value'])
-                    procurement_obj.create(vals)
+                    proc = procurement_obj.create(vals)
+                    proc.write(
+                        {'rule_id': procurement_obj._find_suitable_rule(proc)})
         return True
 
     @api.multi

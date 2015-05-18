@@ -45,30 +45,6 @@ class ProcurementOrder(models.Model):
         return result
 
     @api.multi
-    def run(self, autocommit=False):
-        for procurement in self:
-            procurement.with_context(plan=procurement.plan.id).run(
-                autocommit=autocommit)
-            procurement.plan._get_state()
-        plans = self.mapped('plan')
-        if not plans:
-            return True
-        res = {'view_type': 'form,tree',
-               'res_model': 'procurement.plan',
-               'view_id': False,
-               'type': 'ir.actions.act_window',
-               }
-        if len(plans) == 1:
-            res.update({'view_mode': 'form',
-                        'res_id': plans[0].id,
-                        'target': 'current'})
-        else:
-            res.update({'view_mode': 'tree',
-                        'domain': [('id', 'in', plans.ids)],
-                        'target': 'new'})
-        return res
-
-    @api.multi
     def button_erase_lower_levels(self):
         self.ensure_one()
         cond = [('parent_procurement_id', 'child_of', self.id),
