@@ -6,36 +6,14 @@
             <field name="model">wiz.import.procurement.from.plan</field>
             <field name="arch" type="xml">
                 <form string="Import procurements">
-                    <group string="Import Procurements">
-                        <label string="You are going to import procurements. Are you sure you want to proceed?" class="oe_inline" />
-                    </group>
-                    <group colspan="4" >
-                        <field name="procurements" nolabel="1" >
-                            <tree string="Procurements" editable="bottom">
-                                <field name="procurement_id" invisible="1"/>
-                                <field name="selected" />
-                                <field name="name" readonly="1" />
-                                <field name="date_planned" readonly="1" />
-                                <field name="location_id" readonly="1" />
-                                <field name="origin" readonly="1" />
-                                <field name="product_id" readonly="1" />
-                                <field name="product_qty" readonly="1" />
-                                <field name="product_uom" readonly="1" />
-                                <field name="state" readonly="1" />
-                                <field name="rule_id" readonly="1" />
-                                <field name="purchase_id" readonly="1" />
-                            </tree>
-                        </field>
-                    </group>
+                    <field name="from_date" invisible="1" />
+                    <field name="to_date" invisible="1" />
+                    <field name="warehouse_id" invisible="1" />
+                    <separator string="Procurements"/>
+                    <field name="procurement_ids" height="300" width="700" />
                     <footer>
                         <button name="import_procurements" type="object" 
                                 string="Import" class="oe_highlight" />
-                        or
-                        <button name="select_all" type="object" 
-                                string="Select all" class="oe_highlight"/>
-                        or
-                        <button name="unselect_all" type="object" 
-                                string="Unselect all" class="oe_highlight"/>
                         or
                         <button string="Cancel" class="oe_link"
                                 special="cancel" />

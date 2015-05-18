@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-15 06:28+0000\n"
-"PO-Revision-Date: 2015-05-15 06:28+0000\n"
+"POT-Creation-Date: 2015-05-18 12:53+0000\n"
+"PO-Revision-Date: 2015-05-18 12:53+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 
 #. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
 #: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
 #: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
 msgid "Cancel"
@@ -40,6 +41,7 @@ msgstr ""
 
 #. module: procurement_plan
 #: field:procurement.plan,create_uid:0
+#: field:wiz.import.procurement.from.plan,create_uid:0
 #: field:wiz.load.purchase.from.plan,create_uid:0
 #: field:wiz.load.sale.from.plan,create_uid:0
 msgid "Created by"
@@ -47,6 +49,7 @@ msgstr ""
 
 #. module: procurement_plan
 #: field:procurement.plan,create_date:0
+#: field:wiz.import.procurement.from.plan,create_date:0
 #: field:wiz.load.purchase.from.plan,create_date:0
 #: field:wiz.load.sale.from.plan,create_date:0
 msgid "Created on"
@@ -61,6 +64,11 @@ msgstr ""
 #: field:wiz.load.purchase.from.plan,date_from:0
 #: field:wiz.load.sale.from.plan,date_from:0
 msgid "Date from"
+msgstr ""
+
+#. module: procurement_plan
+#: help:procurement.plan,message_last_post:0
+msgid "Date of the last message posted on the record."
 msgstr ""
 
 #. module: procurement_plan
@@ -85,22 +93,22 @@ msgid "Draft"
 msgstr ""
 
 #. module: procurement_plan
-#: code:addons/procurement_plan/models/procurement_plan.py:93
-#: code:addons/procurement_plan/models/procurement_plan.py:118
+#: code:addons/procurement_plan/models/procurement_plan.py:87
+#: code:addons/procurement_plan/models/procurement_plan.py:112
 #, python-format
 msgid "Error!: End date is lower than start date."
 msgstr ""
 
 #. module: procurement_plan
-#: code:addons/procurement_plan/models/procurement_plan.py:87
-#: code:addons/procurement_plan/models/procurement_plan.py:112
+#: code:addons/procurement_plan/models/procurement_plan.py:81
+#: code:addons/procurement_plan/models/procurement_plan.py:106
 #, python-format
 msgid "Error!: You must enter from date."
 msgstr ""
 
 #. module: procurement_plan
-#: code:addons/procurement_plan/models/procurement_plan.py:90
-#: code:addons/procurement_plan/models/procurement_plan.py:115
+#: code:addons/procurement_plan/models/procurement_plan.py:84
+#: code:addons/procurement_plan/models/procurement_plan.py:109
 #, python-format
 msgid "Error!: You must enter to date."
 msgstr ""
@@ -112,7 +120,13 @@ msgid "Factor"
 msgstr ""
 
 #. module: procurement_plan
+#: field:procurement.plan,message_follower_ids:0
+msgid "Followers"
+msgstr ""
+
+#. module: procurement_plan
 #: field:procurement.plan,from_date:0
+#: field:wiz.import.procurement.from.plan,from_date:0
 msgid "From Date"
 msgstr ""
 
@@ -122,10 +136,26 @@ msgid "Group By"
 msgstr ""
 
 #. module: procurement_plan
+#: help:procurement.plan,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: procurement_plan
 #: field:procurement.plan,id:0
+#: field:wiz.import.procurement.from.plan,id:0
 #: field:wiz.load.purchase.from.plan,id:0
 #: field:wiz.load.sale.from.plan,id:0
 msgid "ID"
+msgstr ""
+
+#. module: procurement_plan
+#: help:procurement.plan,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: procurement_plan
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+msgid "Import"
 msgstr ""
 
 #. module: procurement_plan
@@ -134,7 +164,23 @@ msgid "Import Procurements"
 msgstr ""
 
 #. module: procurement_plan
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+msgid "Import procurements"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,message_last_post:0
+msgid "Last Message Date"
+msgstr ""
+
+#. module: procurement_plan
 #: field:procurement.plan,write_uid:0
+#: field:wiz.import.procurement.from.plan,write_uid:0
 #: field:wiz.load.purchase.from.plan,write_uid:0
 #: field:wiz.load.sale.from.plan,write_uid:0
 msgid "Last Updated by"
@@ -142,6 +188,7 @@ msgstr ""
 
 #. module: procurement_plan
 #: field:procurement.plan,write_date:0
+#: field:wiz.import.procurement.from.plan,write_date:0
 #: field:wiz.load.purchase.from.plan,write_date:0
 #: field:wiz.load.sale.from.plan,write_date:0
 msgid "Last Updated on"
@@ -154,7 +201,7 @@ msgid "Load"
 msgstr ""
 
 #. module: procurement_plan
-#: code:addons/procurement_plan/models/procurement_plan.py:123
+#: code:addons/procurement_plan/models/procurement_plan.py:117
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 #: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
 #, python-format
@@ -162,7 +209,7 @@ msgid "Load Purchases"
 msgstr ""
 
 #. module: procurement_plan
-#: code:addons/procurement_plan/models/procurement_plan.py:98
+#: code:addons/procurement_plan/models/procurement_plan.py:92
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 #: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
 #, python-format
@@ -172,6 +219,16 @@ msgstr ""
 #. module: procurement_plan
 #: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
 msgid "Location"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: procurement_plan
+#: help:procurement.plan,message_ids:0
+msgid "Messages and communication history"
 msgstr ""
 
 #. module: procurement_plan
@@ -213,6 +270,8 @@ msgstr ""
 #: model:ir.actions.act_window,name:procurement_plan.action_procurement_plan_procurements
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 #: field:procurement.plan,procurement_ids:0
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+#: field:wiz.import.procurement.from.plan,procurement_ids:0
 msgid "Procurements"
 msgstr ""
 
@@ -296,6 +355,11 @@ msgid "Status"
 msgstr ""
 
 #. module: procurement_plan
+#: field:procurement.plan,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: procurement_plan
 #: field:wiz.load.purchase.from.plan,partner_id:0
 msgid "Supplier"
 msgstr ""
@@ -312,9 +376,29 @@ msgid "Unit of Measure"
 msgstr ""
 
 #. module: procurement_plan
-#: field:wiz.load.purchase.from.plan,warehouse_id:0
-#: field:wiz.load.sale.from.plan,warehouse_id:0
+#: field:procurement.plan,message_unread:0
+msgid "Unread Messages"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,warehouse_id:0
+#: field:wiz.import.procurement.from.plan,warehouse_id:0
 msgid "Warehouse"
+msgstr ""
+
+#. module: procurement_plan
+#: field:procurement.plan,website_message_ids:0
+msgid "Website Messages"
+msgstr ""
+
+#. module: procurement_plan
+#: help:procurement.plan,website_message_ids:0
+msgid "Website communication history"
+msgstr ""
+
+#. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_import_procurement_plan
+msgid "Wizar import procurements from plan"
 msgstr ""
 
 #. module: procurement_plan
@@ -323,6 +407,7 @@ msgid "name"
 msgstr ""
 
 #. module: procurement_plan
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
 #: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
 #: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
 msgid "or"
@@ -330,6 +415,7 @@ msgstr ""
 
 #. module: procurement_plan
 #: field:procurement.plan,to_date:0
+#: field:wiz.import.procurement.from.plan,to_date:0
 msgid "to Date"
 msgstr ""
 

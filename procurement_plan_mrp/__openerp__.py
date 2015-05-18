@@ -28,9 +28,7 @@
     "depends": ['mrp',
                 'procurement_plan',
                 ],
-    "data": ['wizard/wiz_import_menu_plan_mrp_view.xml',
-             'wizard/wiz_import_procurement_from_plan_mrp_view.xml',
-             'views/mrp_production_view.xml',
+    "data": ['views/mrp_production_view.xml',
              'views/procurement_plan_view.xml',
              ],
     "installable": True

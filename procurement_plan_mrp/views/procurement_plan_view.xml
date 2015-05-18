@@ -14,9 +14,6 @@
                 <button string="Import Procurements" position="after">
                     <button name="button_generate_mrp_procurements" type='object' string='Generate procurements' />
                 </button>
-                <button string="Import Procurements" position="replace">
-                    <button name="button_wizard_import" type='object' string='Import Procurements' />
-                </button>
                 <field name="date_planned" position="before">
                     <field name="level" />
                 </field>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-16 08:45+0000\n"
-"PO-Revision-Date: 2015-05-16 08:45+0000\n"
+"POT-Creation-Date: 2015-05-18 12:58+0000\n"
+"PO-Revision-Date: 2015-05-18 12:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,25 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:158
+#: code:addons/procurement_plan_mrp/models/procurement.py:118
 #, python-format
 msgid "BoM not found, for product: %s"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: view:wiz.import.menu.plan.mrp:procurement_plan_mrp.wiz_import_menu_plan_mrp_view
-#: view:wiz.import.procurement.from.plan.mrp:procurement_plan_mrp.wiz_import_procurement_from_plan_mrp_view
-msgid "Cancel"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: selection:wiz.import.procurement.from.plan.mrp.line,state:0
-msgid "Cancelled"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: selection:wiz.import.procurement.from.plan.mrp.line,state:0
-msgid "Confirmed"
 msgstr ""
 
 #. module: procurement_plan_mrp
@@ -43,37 +27,8 @@ msgid "Create lower levels"
 msgstr ""
 
 #. module: procurement_plan_mrp
-#: field:wiz.import.menu.plan.mrp,create_uid:0
-#: field:wiz.import.procurement.from.plan.mrp,create_uid:0
-#: field:wiz.import.procurement.from.plan.mrp.line,create_uid:0
-msgid "Created by"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: field:wiz.import.menu.plan.mrp,create_date:0
-#: field:wiz.import.procurement.from.plan.mrp,create_date:0
-#: field:wiz.import.procurement.from.plan.mrp.line,create_date:0
-msgid "Created on"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: field:wiz.import.procurement.from.plan.mrp.line,name:0
-msgid "Description"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: selection:wiz.import.procurement.from.plan.mrp.line,state:0
-msgid "Done"
-msgstr ""
-
-#. module: procurement_plan_mrp
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
 msgid "Erase lower levels"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: selection:wiz.import.procurement.from.plan.mrp.line,state:0
-msgid "Exception"
 msgstr ""
 
 #. module: procurement_plan_mrp
@@ -82,59 +37,8 @@ msgid "Generate procurements"
 msgstr ""
 
 #. module: procurement_plan_mrp
-#: field:wiz.import.menu.plan.mrp,id:0
-#: field:wiz.import.procurement.from.plan.mrp,id:0
-#: field:wiz.import.procurement.from.plan.mrp.line,id:0
-msgid "ID"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: view:wiz.import.procurement.from.plan.mrp:procurement_plan_mrp.wiz_import_procurement_from_plan_mrp_view
-msgid "Import"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: view:wiz.import.menu.plan.mrp:procurement_plan_mrp.wiz_import_menu_plan_mrp_view
-msgid "Import ALL Procurements"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:134
-#: code:addons/procurement_plan_mrp/wizard/wiz_import_menu_plan_mrp.py:13
-#: code:addons/procurement_plan_mrp/wizard/wiz_import_menu_plan_mrp.py:24
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
-#: view:wiz.import.procurement.from.plan.mrp:procurement_plan_mrp.wiz_import_procurement_from_plan_mrp_view
-#, python-format
 msgid "Import Procurements"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: view:wiz.import.menu.plan.mrp:procurement_plan_mrp.wiz_import_menu_plan_mrp_view
-msgid "Import Procurements Menu"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: view:wiz.import.menu.plan.mrp:procurement_plan_mrp.wiz_import_menu_plan_mrp_view
-msgid "Import Procurements WITH INTERNAL Location"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: view:wiz.import.procurement.from.plan.mrp:procurement_plan_mrp.wiz_import_procurement_from_plan_mrp_view
-msgid "Import procurements"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: field:wiz.import.menu.plan.mrp,write_uid:0
-#: field:wiz.import.procurement.from.plan.mrp,write_uid:0
-#: field:wiz.import.procurement.from.plan.mrp.line,write_uid:0
-msgid "Last Updated by"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: field:wiz.import.menu.plan.mrp,write_date:0
-#: field:wiz.import.procurement.from.plan.mrp,write_date:0
-#: field:wiz.import.procurement.from.plan.mrp.line,write_date:0
-msgid "Last Updated on"
 msgstr ""
 
 #. module: procurement_plan_mrp
@@ -160,13 +64,7 @@ msgstr ""
 
 #. module: procurement_plan_mrp
 #: model:ir.model,name:procurement_plan_mrp.model_procurement_order
-#: field:wiz.import.procurement.from.plan.mrp.line,procurement_id:0
 msgid "Procurement"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: field:wiz.import.procurement.from.plan.mrp.line,location_id:0
-msgid "Procurement Location"
 msgstr ""
 
 #. module: procurement_plan_mrp
@@ -180,25 +78,12 @@ msgid "Procurement Plan"
 msgstr ""
 
 #. module: procurement_plan_mrp
-#: view:wiz.import.menu.plan.mrp:procurement_plan_mrp.wiz_import_menu_plan_mrp_view
-#: view:wiz.import.procurement.from.plan.mrp:procurement_plan_mrp.wiz_import_procurement_from_plan_mrp_view
-#: field:wiz.import.procurement.from.plan.mrp,procurements:0
-msgid "Procurements"
-msgstr ""
-
-#. module: procurement_plan_mrp
 #: view:mrp.production:procurement_plan_mrp.view_mrp_production_filter_inh_mrpprocurementplan
-#: field:wiz.import.procurement.from.plan.mrp.line,product_id:0
 msgid "Product"
 msgstr ""
 
 #. module: procurement_plan_mrp
-#: field:wiz.import.procurement.from.plan.mrp.line,product_uom:0
-msgid "Product Unit of Measure"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:196
+#: code:addons/procurement_plan_mrp/models/procurement.py:156
 #, python-format
 msgid "Product has not been found on the list of materials %s, Level %s"
 msgstr ""
@@ -209,84 +94,13 @@ msgid "Productions"
 msgstr ""
 
 #. module: procurement_plan_mrp
-#: field:wiz.import.procurement.from.plan.mrp.line,purchase_id:0
-msgid "Purchase Order"
-msgstr ""
-
-#. module: procurement_plan_mrp
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
 msgid "Purchase Orders"
 msgstr ""
 
 #. module: procurement_plan_mrp
-#: field:wiz.import.procurement.from.plan.mrp.line,product_qty:0
-msgid "Quantity"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: field:wiz.import.procurement.from.plan.mrp.line,rule_id:0
-msgid "Rule"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: selection:wiz.import.procurement.from.plan.mrp.line,state:0
-msgid "Running"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: field:wiz.import.procurement.from.plan.mrp.line,date_planned:0
-msgid "Scheduled Date"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: field:wiz.import.procurement.from.plan.mrp.line,selected:0
-msgid "Select"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: view:wiz.import.procurement.from.plan.mrp:procurement_plan_mrp.wiz_import_procurement_from_plan_mrp_view
-msgid "Select all"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: field:wiz.import.procurement.from.plan.mrp.line,origin:0
-msgid "Source Document"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: field:wiz.import.procurement.from.plan.mrp.line,state:0
-msgid "Status"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:181
+#: code:addons/procurement_plan_mrp/models/procurement.py:141
 #, python-format
 msgid "THEY HAVE NOT GENERATED ALL PROCUREMENTS"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: view:wiz.import.procurement.from.plan.mrp:procurement_plan_mrp.wiz_import_procurement_from_plan_mrp_view
-msgid "Unselect all"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: field:wiz.import.procurement.from.plan.mrp.line,wizard_id:0
-msgid "Wizard"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: view:wiz.import.procurement.from.plan.mrp:procurement_plan_mrp.wiz_import_procurement_from_plan_mrp_view
-msgid "You are going to import procurements with internal location. Are you sure you want to proceed?"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: view:wiz.import.menu.plan.mrp:procurement_plan_mrp.wiz_import_menu_plan_mrp_view
-msgid "You must select one of the two import options"
-msgstr ""
-
-#. module: procurement_plan_mrp
-#: view:wiz.import.menu.plan.mrp:procurement_plan_mrp.wiz_import_menu_plan_mrp_view
-#: view:wiz.import.procurement.from.plan.mrp:procurement_plan_mrp.wiz_import_procurement_from_plan_mrp_view
-msgid "or"
 msgstr ""
 

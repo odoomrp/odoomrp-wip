@@ -100,22 +100,6 @@ class ProcurementPlan(models.Model):
     production_ids = fields.One2many(
         'mrp.production', 'plan', string='Productions', readonly=True)
 
-    @api.multi
-    def button_wizard_import(self):
-        self.ensure_one()
-        context = self.env.context.copy()
-        context['active_id'] = self.id
-        context['active_ids'] = [self.id]
-        context['active_model'] = 'procurement.plan'
-        return {'name': _('Import Procurements'),
-                'type': 'ir.actions.act_window',
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'wiz.import.menu.plan.mrp',
-                'target': 'new',
-                'context': context,
-                }
-
     @api.one
     def button_generate_mrp_procurements(self):
         cond = [('name', '=', 'Manufacture')]
