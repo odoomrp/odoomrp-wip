@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-18 12:55+0000\n"
-"PO-Revision-Date: 2015-05-18 14:56+0100\n"
+"POT-Creation-Date: 2015-05-18 17:47+0000\n"
+"PO-Revision-Date: 2015-05-18 19:49+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -156,7 +156,7 @@ msgstr "Clicado si los nuevos mensajes requieren su atención."
 #. module: procurement_plan
 #: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
 msgid "Import"
-msgstr "Import"
+msgstr "Importar"
 
 #. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
@@ -166,7 +166,7 @@ msgstr "Importar abastecimientos"
 #. module: procurement_plan
 #: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
 msgid "Import procurements"
-msgstr "Import procurements"
+msgstr "Importar abastecimientos"
 
 #. module: procurement_plan
 #: field:procurement.plan,message_is_follower:0
@@ -220,6 +220,12 @@ msgstr "Cargar ventas"
 #: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
 msgid "Location"
 msgstr "Ubicación"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:procurement.order,location_type:0
+msgid "Location Type"
+msgstr "Tipo ubicación"
 
 #. module: procurement_plan
 #: field:procurement.plan,message_ids:0
@@ -384,7 +390,7 @@ msgstr "Mensajes sin leer"
 #: field:procurement.plan,warehouse_id:0
 #: field:wiz.import.procurement.from.plan,warehouse_id:0
 msgid "Warehouse"
-msgstr "Warehouse"
+msgstr "Almacén"
 
 #. module: procurement_plan
 #: field:procurement.plan,website_message_ids:0
@@ -395,6 +401,16 @@ msgstr "Mensajes Web"
 #: help:procurement.plan,website_message_ids:0
 msgid "Website communication history"
 msgstr "Historial de comunicación web."
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "With plan"
+msgstr "Con plan"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Without plan"
+msgstr "Sin plan"
 
 #. module: procurement_plan
 #: model:ir.actions.act_window,name:procurement_plan.action_import_procurement_plan

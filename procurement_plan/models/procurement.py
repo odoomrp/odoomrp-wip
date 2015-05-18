@@ -9,6 +9,16 @@ class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
     plan = fields.Many2one('procurement.plan', string='Plan')
+    location_type = fields.Selection([
+        ('supplier', 'Supplier Location'),
+        ('view', 'View'),
+        ('internal', 'Internal Location'),
+        ('customer', 'Customer Location'),
+        ('inventory', 'Inventory'),
+        ('procurement', 'Procurement'),
+        ('production', 'Production'),
+        ('transit', 'Transit Location')],
+        string='Location Type', related="location_id.usage", store=True)
 
     @api.model
     def create(self, data):

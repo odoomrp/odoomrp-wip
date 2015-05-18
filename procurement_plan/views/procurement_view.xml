@@ -48,10 +48,12 @@
                         <field name="purchase_id" />
                     </field>
                     <field name="state" position="after">
-                        <filter string="Plan" domain="[('plan', '!=', False)]"/>
+                        <filter string="With plan" domain="[('plan', '!=', False)]"/>
+                        <filter string="Without plan" domain="[('plan', '=', False)]"/>
                         <filter string="Purchase" domain="[('purchase_id', '!=', False)]"/>
                     </field>
                     <filter string="Status" position="after">
+                        <filter string="Location Type" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'location_type'}"/>
                         <filter string="Plan" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'plan'}"/>
                         <filter string="Origin" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'origin'}"/>
                         <filter string="Location" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'location_id'}"/>
