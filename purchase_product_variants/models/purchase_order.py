@@ -80,6 +80,15 @@ class PurchaseOrderLine(models.Model):
     order_state = fields.Selection(
         related='order_id.state', readonly=True)
 
+    def _get_product_description(self, template, product, product_attributes):
+        name = product and product.name or template.name
+        if not product_attributes and product:
+            product_attributes = product.attribute_value_ids
+        description = ", ".join(product_attributes.mapped('name'))
+        if not description:
+            return name
+        return "%s (%s)" % (name, description)
+
     @api.multi
     @api.onchange('product_template')
     def onchange_product_template(self):
@@ -145,14 +154,17 @@ class PurchaseOrderLine(models.Model):
     @api.one
     @api.onchange('product_attributes')
     def onchange_product_attributes(self):
+        product_obj = self.env['product.product']
+        att_values_ids = [attr_line.value and attr_line.value.id or False
+                          for attr_line in self.product_attributes]
+        domain = [('product_tmpl_id', '=', self.product_template.id)]
+        for value in att_values_ids:
+            domain.append(('attribute_value_ids', '=', value))
+        self.product_id = product_obj.search(domain, limit=1)
         if not self.product_id:
-            product_obj = self.env['product.product']
-            att_values_ids = [attr_line.value and attr_line.value.id or False
-                              for attr_line in self.product_attributes]
-            domain = [('product_tmpl_id', '=', self.product_template.id)]
-            for value in att_values_ids:
-                domain.append(('attribute_value_ids', '=', value))
-            self.product_id = product_obj.search(domain, limit=1)
+            self.name = self._get_product_description(
+                self.product_template, False,
+                self.product_attributes.mapped('value'))
 
     @api.multi
     def onchange_product_id(
