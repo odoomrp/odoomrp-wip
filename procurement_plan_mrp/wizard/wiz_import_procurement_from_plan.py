@@ -12,7 +12,7 @@ class WizImportProcurementFromPlan(models.TransientModel):
     @api.multi
     @api.onchange('warehouse_id')
     def onchange_warehouse_id(self):
-        self.ensure_one
+        self.ensure_one()
         res = super(WizImportProcurementFromPlan, self).onchange_warehouse_id()
         res['domain']['procurement_ids'].append(('level', 'in', (False, 0)))
         return res
