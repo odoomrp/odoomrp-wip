@@ -1,0 +1,96 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* purchase_product_variants
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-19 05:57+0000\n"
+"PO-Revision-Date: 2015-05-19 05:57+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,attribute:0
+msgid "Attribute"
+msgstr ""
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: purchase_product_variants
+#: view:purchase.order:purchase_product_variants.purchase_order_extended_form_view
+msgid "Duplicate"
+msgstr ""
+
+#. module: purchase_product_variants
+#: view:purchase.order:purchase_product_variants.purchase_order_extended_form_view
+msgid "Duplicate line"
+msgstr ""
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,id:0
+msgid "ID"
+msgstr ""
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,purchase_line:0
+msgid "Order line"
+msgstr ""
+
+#. module: purchase_product_variants
+#: field:purchase.order.line,product_template:0
+msgid "Product Template"
+msgstr ""
+
+#. module: purchase_product_variants
+#: field:purchase.order.line,product_attributes:0
+msgid "Product attributes"
+msgstr ""
+
+#. module: purchase_product_variants
+#: code:addons/purchase_product_variants/models/purchase_order.py:136
+#, python-format
+msgid "The selected supplier has a minimal quantity set to %s %s, you should not purchase less."
+msgstr ""
+
+#. module: purchase_product_variants
+#: code:addons/purchase_product_variants/models/purchase_order.py:121
+#, python-format
+msgid "The selected supplier only sells this product by %s"
+msgstr ""
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,value:0
+msgid "Value"
+msgstr ""
+
+#. module: purchase_product_variants
+#: code:addons/purchase_product_variants/models/purchase_order.py:120
+#: code:addons/purchase_product_variants/models/purchase_order.py:135
+#, python-format
+msgid "Warning!"
+msgstr ""
+
