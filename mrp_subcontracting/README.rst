@@ -1,15 +1,14 @@
 Subcontracting operations in manufacturing processes
 ====================================================
 
-The module implements the complete route for subcontrating production
-operations.
+This module improves the workflow for subcontrating manufacturing operations.
 
 Usage
 =====
 
-For any of the production operations, you can check the mark "External" to
-mean that the operation is going to be subcontracted. When you mark this
-check, you have to configure a subcontracting product and a picking type.
+When an operation is to be subcontracted, you can set it as "External". In
+this case, you will be able to configure a product used for subcontracting
+and a picking type.
 
 Credits
 =======

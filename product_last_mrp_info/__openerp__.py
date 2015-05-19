@@ -26,11 +26,6 @@
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "Product",
     "website": "www.odoomrp.com",
-    "description": """
-    This module adds new calculate fields in product:
-        - Last manufacturing order cost
-        - Last manufacturing order date
-    """,
     'data': ['views/product_view.xml'],
     'demo': [],
     'installable': True,

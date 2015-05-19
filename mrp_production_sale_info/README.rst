@@ -1,4 +1,4 @@
 MRP - Production sale info
 ==========================
 
-This module show sale order related info in manufacturing orders.
+This module displays in manufacturing orders sale order related info.
