@@ -21,7 +21,7 @@ class StockProductionLot(models.Model):
 
     @api.one
     def _get_locked_value(self):
-        return self.product_id.categ_id.lot_default_locked
+        return self.product_id.categ_id._get_parent_default_locked()
 
     locked = fields.Boolean(string='Blocked', default='_get_locked_value',
                             readonly=True)
@@ -29,7 +29,7 @@ class StockProductionLot(models.Model):
     @api.one
     @api.onchange('product_id')
     def onchange_product_id(self):
-        self.locked = self.product_id.categ_id.lot_default_locked
+        self.locked = self.product_id.categ_id._get_parent_default_locked()
 
     @api.multi
     def button_lock(self):
@@ -52,13 +52,13 @@ class StockProductionLot(models.Model):
     @api.model
     def create(self, vals):
         product = self.env['product.product']. browse(vals.get('product_id'))
-        vals['locked'] = product.categ_id.lot_default_locked
+        vals['locked'] = product.categ_id._get_parent_default_locked()
         return super(StockProductionLot, self).create(vals)
 
     @api.one
     def write(self, values):
         if 'product_id' in values:
-            product = self.env['product.product']. browse(
+            product = self.env['product.product'].browse(
                 values.get('product_id'))
-            values['locked'] = product.categ_id.lot_default_locked
+            values['locked'] = product.categ_id._get_parent_default_locked()
         return super(StockProductionLot, self).write(values)
