@@ -142,14 +142,13 @@ class StockMove(models.Model):
                 # manager may not have the right to write on products
                 product.sudo().write({'standard_price': new_std_price})
 
-    @api.multi
-    def get_price_unit(self):
-        self.ensure_one()
-        if self.production_id:
+    @api.model
+    def get_price_unit(self, move):
+        if move.production_id:
             analytic_line_obj = self.env['account.analytic.line']
             analytic_lines = analytic_line_obj.search(
-                [('mrp_production_id', '=', self.production_id.id)])
+                [('mrp_production_id', '=', move.production_id.id)])
             return (sum([-line.amount for line in analytic_lines]) /
-                    self.product_qty)
+                    move.product_qty)
         else:
-            return super(StockMove, self).get_price_unit()
+            return super(StockMove, self).get_price_unit(move)
