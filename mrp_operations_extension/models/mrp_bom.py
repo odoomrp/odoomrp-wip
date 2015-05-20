@@ -42,23 +42,20 @@ class MrpBom(models.Model):
         for work_order in result2:
             seq = work_order['sequence'] - level
             routing_lines = routing_line_obj.search([
-                ('routing_id', '=', routing_id), ('sequence', '=', seq)])
-            routing_line_id = routing_lines and routing_lines[0].id or False
-            for routing_line in routing_lines:
-                if routing_line.name in work_order['name']:
-                    routing_line_id = routing_line.id
-                    break
-            wc = routing_line_obj.browse(routing_line_id)
-            cycle = int(math.ceil(factor / wc.cycle_nbr))
-            hour = wc.hour_nbr * cycle
-            default_wc_line = wc.op_wc_lines.filtered(lambda r: r.default)
+                ('workcenter_id', '=', work_order['workcenter_id']),
+                ('sequence', '=', seq)])
+            routing_line = routing_lines.filtered(
+                lambda x: x.name in work_order['name'])
+            cycle = int(math.ceil(factor / routing_line.cycle_nbr))
+            hour = routing_line.hour_nbr * cycle
+            default_wc_line = routing_line.op_wc_lines.filtered(
+                lambda r: r.default)
             work_order['cycle'] = cycle
             work_order['hour'] = hour
-            work_order['time_start'] = default_wc_line.time_start or 0.0
-            work_order['time_stop'] = default_wc_line.time_stop or 0.0
-            if 'routing_wc_line' not in work_order:
-                work_order['routing_wc_line'] = routing_line_id
-                work_order['do_production'] = wc.do_production
+            work_order['time_start'] = default_wc_line.time_start
+            work_order['time_stop'] = default_wc_line.time_stop
+            work_order['routing_wc_line'] = routing_line.id
+            work_order['do_production'] = routing_line.do_production
         return result2
 
     @api.multi
