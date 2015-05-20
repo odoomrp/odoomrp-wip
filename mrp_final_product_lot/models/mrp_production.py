@@ -20,7 +20,7 @@ class MrpProduction(models.Model):
         if production_mode == 'consume_produce' and wiz:
             production = self.browse(production_id)
             if (production.product_id.track_all or
-                production.product_id.track_production or
+                    production.product_id.track_production or
                     production.product_id.track_incoming):
                 lot_id = False
                 for line in production.move_created_ids2:

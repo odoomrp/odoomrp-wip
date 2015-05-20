@@ -8,7 +8,9 @@
             <field name="arch" type="xml">
                 <field name="move_created_ids" position="before">
                     <group colspan="4">
-                        <field name="manual_production_lot" />
+                        <field name="manual_production_lot"
+                               attrs="{'readonly': [('state', '=', 'done')]}"
+                                />
                     </group>
                 </field>
             </field>
