@@ -23,9 +23,7 @@ from openerp import models, fields
 class Machinery(models.Model):
     _inherit = 'machinery'
 
-    preop = fields.One2many('machine.prev.op', 'machine', 'Next Revisions')
-    alert_list = fields.One2many('preventive.proceed', 'imachine', 'Alerts')
-    pmaster_ids = fields.Many2many('preventive.master', 'machine_maint_rel',
-                                   'machinery_id', 'preventive_master_id')
-    order_list = fields.One2many('mrp.repair', 'idmachine',
-                                 'Preventive Orders')
+    prev_mach_op = fields.One2many('preventive.machine.operation',
+                                   'machine', 'Next Revisions')
+    repair_orders = fields.One2many('mrp.repair', 'idmachine',
+                                    'Preventive Repair Orders')

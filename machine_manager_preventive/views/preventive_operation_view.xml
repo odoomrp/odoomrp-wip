@@ -22,8 +22,8 @@
             <field name="arch" type="xml">
                 <form string="Operation Type">
                     <sheet>
-                        <div class="oe_left" style="width: 500px;">
-                            <div class="oe_title" style="width: 390px;">
+                        <div class="oe_left">
+                            <div class="oe_title">
                                 <label class="oe_edit_only" for="name"
                                     string="Operation type" />
                                 <h1>
@@ -35,13 +35,13 @@
                             <div class="oe_left oe_inline" name="options"
                                 groups="base.group_user">
                                 <div>
-                                    <label for="hours_qty" />
-                                    <field name="hours_qty"
-                                        widget="float_time" class="oe_inline" />
-                                    <field name="basedoncy" class="oe_inline" />
-                                    <label for="basedoncy" />
-                                    <field name="basedontime" class="oe_inline" />
-                                    <label for="basedontime" />
+                                    <group col="6" colspan="2">
+                                        <field name="basedoncy" nolabel ="1"/>
+                                        <label for="basedoncy"/>
+                                        <field name="basedontime" nolabel ="1"/>
+                                        <label for="basedontime"/>
+                                        <field name="hours_qty" widget="float_time"/>
+                                    </group>
                                 </div>
                             </div>
                         </div>

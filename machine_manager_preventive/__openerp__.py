@@ -33,6 +33,7 @@
              "views/preventive_mrp_data.xml",
              "views/preventive_sequence.xml",
              "views/product_view.xml",
+             "views/machine_view.xml",
              "views/preventive_master_view.xml",
              "views/preventive_operation_view.xml",
              "views/preventive_machine_operation_view.xml",

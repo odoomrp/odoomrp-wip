@@ -62,9 +62,12 @@ class PreventiveRepairOrder(models.TransientModel):
             machine = op_pmo.machine
             if not machine.product:
                 if multiple:
-                    continue
-                raise exceptions.Warning(
-                    _('There is no product defined for the current machine.'))
+                    raise exceptions.Warning(
+                        _('There is no product defined for machine: %s') %
+                        op_pmo.machine.name)
+                else:
+                    raise exceptions.Warning(
+                        _('There is no product defined for current machine'))
             product = machine.product
             location_from = self.location_id
             location_to = self.location_dest_id

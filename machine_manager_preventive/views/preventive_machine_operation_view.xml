@@ -8,7 +8,7 @@
             <field name="name">machine.pre.op.tree</field>
             <field name="model">preventive.machine.operation</field>
             <field name="arch" type="xml">
-                <tree string="Preventive Operations">
+                <tree string="Preventive Operations" colors="red:extra_alert==True;blue:alert==True" >
                     <field name="name" />
                     <field name="machine" />
                     <field name="cycles" />
@@ -71,17 +71,28 @@
                                 </group>
                             </group>
                             <group colspan="4" col="2">
-                                <group>
-                                    <group string="1st Alert" colspan="2" col="4">
-                                        <field name="check_al1" colspan="4"/>
+                                <group col="4">
+                                <separator string="1st Alert" colspan="4"/>
+                                <field name="check_al1" invisible="1"/>
+                                <button name="set_alarm1" string="Alarm" type="object"
+                                    icon="gtk-dialog-info" colspan="4" attrs="{'invisible':[('check_al1','=',True)]}"/>
+                                 <button name="set_alarm1" string="Alarm" type="object"
+                                    icon="terp-idea" colspan="4" attrs="{'invisible':[('check_al1','=',False)]}"/>
+                                    <group colspan="2" col="4" attrs="{'invisible':[('check_al1','=',False)]}">
                                         <field name="first_margin" colspan="4"/>
                                         <field name="margin_fre1"/>
                                         <field name="meas_unit1" />
                                     </group>
                                 </group>
-                                <group>
-                                    <group string="2nd Alert" colspan="2" col="4">
-                                        <field name="check_al2" colspan="4"/>
+                                <group col="4">
+                                    <separator string="2 Alert" colspan="4"/>
+                                    <field name="check_al2" invisible="1"/>
+                                    <button name="set_alarm2" string="Alarm" type="object"
+                                    icon="gtk-dialog-info" colspan="4"  attrs="{'invisible':[('check_al2','=',True)]}"/>
+                                    <button name="set_alarm2" string="Alarm" type="object"
+                                    icon="terp-idea" colspan="4" attrs="{'invisible':[('check_al2','=',False)]}"/>
+                                    <group colspan="2" col="4"
+                                    attrs="{'invisible':[('check_al2','=',False)]}">
                                         <field name="second_margin" colspan="4"/>
                                         <field name="margin_fre2" />
                                         <field name="meas_unit2"/>
@@ -110,8 +121,10 @@
                         <field name="cycles" />
                         <field name="alert" />
                         <field name="extra_alert" />
-                        <field name="nextdate" string="Next revision date" />
                         <field name="nextcycles" string="Next revision Cycles" />
+                        <field name="nextdate" string="Next revision date" />
+                        <field name="nextdate" string="Next revision date Week" interval="week" />
+                        <field name="nextdate" string="Next revision date Day" interval="day" />
                     </group>
                     <group expand="0" string="Filter by...">
                         <filter icon="terp-personal" string="Alert"
@@ -120,17 +133,30 @@
                             domain="[('extra_alert','=',True)]" />
                     </group>
                     <group expand="0" string="Group By...">
-                        <filter string="Machine"
-                            context="{'group_by': 'machine'}" icon="terp-dolar" />
+                        <filter string="Machine" context="{'group_by': 'machine'}"/>
+                        <filter string="Type" domain="[]" context="{'group_by':'opname_omm'}" />
+                        <filter string="NxRevision Month" domain="[]" context="{'group_by':'nextdate'}" />
+                        <filter string="NxRevision Week" domain="[]" context="{'group_by':'nextdate:week'}" />
+                        <filter string="NxRevision Day" domain="[]" context="{'group_by':'nextdate:day'}" />
                     </group>
                 </search>
             </field>
         </record>
+       <record id="preventive_machine_calendar_view" model="ir.ui.view">
+            <field name="name">preventive.machine.calendar.view</field>
+            <field name="model">preventive.machine.operation</field>
+            <field name="arch" type="xml">
+                <calendar string="Preventive orders" color="opname_omm" date_start="nextdate">
+                    <field name="machine"/>
+                </calendar>
+            </field>
+        </record>
+
         <record id="action_machine_operations" model="ir.actions.act_window">
             <field name="name">Machine operations</field>
             <field name="res_model">preventive.machine.operation</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,calendar</field>
         </record>
         <menuitem id="machine_op_tree_view" name="Machine Operations"
             parent="menu_preventive_operation" action="action_machine_operations" />

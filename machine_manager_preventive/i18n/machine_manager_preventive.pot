@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-15 11:56+0000\n"
-"PO-Revision-Date: 2015-05-15 11:56+0000\n"
+"POT-Creation-Date: 2015-05-20 08:17+0000\n"
+"PO-Revision-Date: 2015-05-20 08:17+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #. module: machine_manager_preventive
 #: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
-msgid "2nd Alert"
+msgid "2 Alert"
 msgstr ""
 
 #. module: machine_manager_preventive
@@ -65,6 +65,11 @@ msgstr ""
 #: view:preventive.list:machine_manager_preventive.view_preventive_list
 #: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
 msgid "Accept"
+msgstr ""
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+msgid "Alarm"
 msgstr ""
 
 #. module: machine_manager_preventive
@@ -104,8 +109,8 @@ msgid "Create Machine Preventive operations"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:55
-#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:121
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:54
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:123
 #, python-format
 msgid "Create Order"
 msgstr ""
@@ -282,6 +287,15 @@ msgid "First Cycle Margin"
 msgstr ""
 
 #. module: machine_manager_preventive
+#: code:addons/machine_manager_preventive/models/preventive_machine_operation.py:93
+#: code:addons/machine_manager_preventive/models/preventive_machine_operation.py:102
+#: code:addons/machine_manager_preventive/models/preventive_operation.py:71
+#: code:addons/machine_manager_preventive/models/preventive_operation.py:80
+#, python-format
+msgid "First margin should be before second"
+msgstr ""
+
+#. module: machine_manager_preventive
 #: field:preventive.machine.operation,frequency:0
 #: field:preventive.operation.type,frequency:0
 msgid "Frequency"
@@ -306,6 +320,11 @@ msgstr ""
 #. module: machine_manager_preventive
 #: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
 msgid "Group By..."
+msgstr ""
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_machinery
+msgid "Holds records of Machines"
 msgstr ""
 
 #. module: machine_manager_preventive
@@ -508,6 +527,12 @@ msgid "Next Revision"
 msgstr ""
 
 #. module: machine_manager_preventive
+#: view:machinery:machine_manager_preventive.view_product_form_preventive
+#: field:machinery,prev_mach_op:0
+msgid "Next Revisions"
+msgstr ""
+
+#. module: machine_manager_preventive
 #: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
 #: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_tree
 msgid "Next revision Cycles"
@@ -520,8 +545,33 @@ msgid "Next revision date"
 msgstr ""
 
 #. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "Next revision date Day"
+msgstr ""
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "Next revision date Week"
+msgstr ""
+
+#. module: machine_manager_preventive
 #: field:preventive.list,op_count:0
 msgid "Number of operations"
+msgstr ""
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "NxRevision Day"
+msgstr ""
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "NxRevision Month"
+msgstr ""
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "NxRevision Week"
 msgstr ""
 
 #. module: machine_manager_preventive
@@ -662,6 +712,11 @@ msgid "Preventive Operations type"
 msgstr ""
 
 #. module: machine_manager_preventive
+#: field:machinery,repair_orders:0
+msgid "Preventive Repair Orders"
+msgstr ""
+
+#. module: machine_manager_preventive
 #: model:ir.model,name:machine_manager_preventive.model_preventive_list
 msgid "Preventive list"
 msgstr ""
@@ -681,6 +736,11 @@ msgstr ""
 #. module: machine_manager_preventive
 #: model:ir.model,name:machine_manager_preventive.model_preventive_machine_operation
 msgid "Preventive operation for machine."
+msgstr ""
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.preventive_machine_calendar_view
+msgid "Preventive orders"
 msgstr ""
 
 #. module: machine_manager_preventive
@@ -716,6 +776,11 @@ msgid "Repair Order"
 msgstr ""
 
 #. module: machine_manager_preventive
+#: view:machinery:machine_manager_preventive.view_product_form_preventive
+msgid "Repair Orders"
+msgstr ""
+
+#. module: machine_manager_preventive
 #: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
 msgid "Revision Frecuency"
 msgstr ""
@@ -726,9 +791,15 @@ msgid "Second Cycle Margin"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:68
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:70
 #, python-format
-msgid "There is no product defined for the current machine."
+msgid "There is no product defined for current machine"
+msgstr ""
+
+#. module: machine_manager_preventive
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:66
+#, python-format
+msgid "There is no product defined for machine: %s"
 msgstr ""
 
 #. module: machine_manager_preventive
@@ -737,6 +808,12 @@ msgid "Time takes to do the operation. hh:mm"
 msgstr ""
 
 #. module: machine_manager_preventive
+#: view:machinery:machine_manager_preventive.view_product_form_preventive
+msgid "True"
+msgstr ""
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
 #: field:preventive.master.type,master_type:0
 msgid "Type"
 msgstr ""

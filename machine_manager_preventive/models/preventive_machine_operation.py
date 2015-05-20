@@ -17,7 +17,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
 from dateutil.relativedelta import relativedelta
 
 
@@ -27,7 +27,7 @@ class PreventiveMachineOperation(models.Model):
 
     @api.one
     def _next_cycles(self):
-        if self and self.lastcycles and self.cycles:
+        if self and self.cycles:
             self.nextcycles = self.lastcycles + self.cycles
 
     name = fields.Char('REF', required=True)
@@ -85,6 +85,22 @@ class PreventiveMachineOperation(models.Model):
     actcycles = fields.Integer(related='machine.actcycles')
     repair_order = fields.Many2one('mrp.repair', 'Repair Order', readonly=True)
 
+    @api.one
+    @api.onchange('first_margin', 'second_margin')
+    def check_cycle_margins(self):
+        if self.first_margin and self.second_margin and (
+                self.first_margin > self.second_margin):
+            raise exceptions.Warning(_('First margin should be before second'))
+
+    @api.one
+    @api.onchange('margin_fre1', 'meas_unit1', 'margin_fre2', 'meas_unit2')
+    def check_time_margins(self):
+        if self.meas_unit1 and self.meas_unit2:
+            margins = self._get_freq_date(self)
+            if margins['first'] > margins['second']:
+                raise exceptions.Warning(
+                    _('First margin should be before second'))
+
     @api.multi
     def _check_alert_by_cycles(self, operation):
         """ Raise alerts by cycles
@@ -105,7 +121,7 @@ class PreventiveMachineOperation(models.Model):
     def _check_alert_by_time(self, operation):
         """ Creates an alert by time
         @param operation: Preventive operation for machine to check
-        @return: Raised Alerts
+        @return: Alert Raise
         """
         frequencies = self._get_freq_date(operation)
         date = fields.Date.today()
@@ -140,6 +156,9 @@ class PreventiveMachineOperation(models.Model):
                 res1 = self._check_alert_by_cycles(ope)
             if ope.frequency > 0:
                 res2 = self._check_alert_by_time(ope)
+            if not ope.alert and (res1 and res1['alert'] or
+                                  res2 and res2['alert']):
+                ope.alert = True
             if not ope.extra_alert and (res1 and res1['extra_alert'] or
                                         res2 and res2['extra_alert']):
                 ope.extra_alert = True
@@ -151,34 +170,34 @@ class PreventiveMachineOperation(models.Model):
         """
         frequencies = {}
         date = fields.Date.today()
-        last_op_date = (operation.lastdate or
-                        operation.machine.enrolldate or date)
+        op_date = (operation.nextdate or operation.lastdate or
+                   operation.machine.enrolldate or date)
         if operation.meas_unit1:
             if operation.meas_unit1 == 'day':
-                freq1 = fields.Date.from_string(last_op_date) + (
+                freq1 = fields.Date.from_string(op_date) + (
                     relativedelta(days=operation.margin_fre1))
             elif operation.meas_unit1 == 'week':
-                freq1 = fields.Date.from_string(last_op_date) + (
+                freq1 = fields.Date.from_string(op_date) + (
                     relativedelta(weeks=operation.margin_fre1))
             elif operation.meas_unit1 == 'mon':
-                freq1 = fields.Date.from_string(last_op_date) + (
+                freq1 = fields.Date.from_string(op_date) + (
                     relativedelta(months=operation.margin_fre1))
             else:
-                freq1 = fields.Date.from_string(last_op_date) + (
+                freq1 = fields.Date.from_string(op_date) + (
                     relativedelta(years=operation.margin_fre1))
             frequencies['first'] = fields.Date.to_string(freq1)
         if operation.meas_unit2:
             if operation.meas_unit2 == 'day':
-                freq2 = fields.Date.from_string(last_op_date) + (
+                freq2 = fields.Date.from_string(op_date) + (
                     relativedelta(days=operation.margin_fre2))
             elif operation.meas_unit2 == 'week':
-                freq2 = fields.Date.from_string(last_op_date) + (
+                freq2 = fields.Date.from_string(op_date) + (
                     relativedelta(weeks=operation.margin_fre2))
             elif operation.meas_unit2 == 'mon':
-                freq2 = fields.Date.from_string(last_op_date) + (
+                freq2 = fields.Date.from_string(op_date) + (
                     relativedelta(months=operation.margin_fre2))
             else:
-                freq2 = fields.Date.from_string(last_op_date) + (
+                freq2 = fields.Date.from_string(op_date) + (
                     relativedelta(years=operation.margin_fre2))
             frequencies['second'] = fields.Date.to_string(freq2)
         return frequencies
@@ -186,7 +205,7 @@ class PreventiveMachineOperation(models.Model):
     @api.multi
     def update_alerts(self, operation):
         if operation.cycles > 0:
-            operation.lastcycles = operation.nextcycles
+            operation.lastcycles = operation.actcycles
             self._check_alert_by_cycles(operation)
         if operation.frequency > 0:
             op_freq = operation.frequency
@@ -201,5 +220,13 @@ class PreventiveMachineOperation(models.Model):
                 calc_date = time_now + relativedelta(months=op_freq)
             else:
                 calc_date = time_now + relativedelta(years=op_freq)
-            operation.next_date = calc_date
+            operation.nextdate = calc_date
             self._check_alert_by_time(operation)
+
+    @api.one
+    def set_alarm1(self):
+        self.check_al1 = not self.check_al1
+
+    @api.one
+    def set_alarm2(self):
+        self.check_al2 = not self.check_al2

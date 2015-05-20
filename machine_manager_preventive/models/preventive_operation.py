@@ -17,7 +17,8 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
+from dateutil.relativedelta import relativedelta
 
 
 class PreventiveOperationtype(models.Model):
@@ -61,6 +62,59 @@ class PreventiveOperationtype(models.Model):
         if self.meas_unit:
             self.meas_unit1 = self.meas_unit
             self.meas_unit2 = self.meas_unit
+
+    @api.one
+    @api.onchange('margin_cy1', 'margin_cy2')
+    def check_cycle_margins(self):
+        if self.margin_cy1 and self.margin_cy2 and (
+                self.margin_cy1 > self.margin_cy2):
+            raise exceptions.Warning(_('First margin should be before second'))
+
+    @api.one
+    @api.onchange('margin_fre1', 'meas_unit1', 'margin_fre2', 'meas_unit2')
+    def check_time_margins(self):
+        if self.meas_unit1 and self.meas_unit2:
+            margins = self._get_freq_date(self)
+            if margins['first'] > margins['second']:
+                raise exceptions.Warning(
+                    _('First margin should be before second'))
+
+    def _get_freq_date(self, operation):
+        """ Returns Frecuency values for current operation
+        @param operation: Preventive operation type to check
+        @return: First and second frequency dates
+        """
+        frequencies = {}
+        op_date = fields.Date.today()
+        if operation.meas_unit1:
+            if operation.meas_unit1 == 'day':
+                freq1 = fields.Date.from_string(op_date) + (
+                    relativedelta(days=operation.margin_fre1))
+            elif operation.meas_unit1 == 'week':
+                freq1 = fields.Date.from_string(op_date) + (
+                    relativedelta(weeks=operation.margin_fre1))
+            elif operation.meas_unit1 == 'mon':
+                freq1 = fields.Date.from_string(op_date) + (
+                    relativedelta(months=operation.margin_fre1))
+            else:
+                freq1 = fields.Date.from_string(op_date) + (
+                    relativedelta(years=operation.margin_fre1))
+            frequencies['first'] = fields.Date.to_string(freq1)
+        if operation.meas_unit2:
+            if operation.meas_unit2 == 'day':
+                freq2 = fields.Date.from_string(op_date) + (
+                    relativedelta(days=operation.margin_fre2))
+            elif operation.meas_unit2 == 'week':
+                freq2 = fields.Date.from_string(op_date) + (
+                    relativedelta(weeks=operation.margin_fre2))
+            elif operation.meas_unit2 == 'mon':
+                freq2 = fields.Date.from_string(op_date) + (
+                    relativedelta(months=operation.margin_fre2))
+            else:
+                freq2 = fields.Date.from_string(op_date) + (
+                    relativedelta(years=operation.margin_fre2))
+            frequencies['second'] = fields.Date.to_string(freq2)
+        return frequencies
 
 
 class PreventiveOperationMaterial(models.Model):

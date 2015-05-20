@@ -21,8 +21,8 @@ from openerp import models, fields, api
 from dateutil.relativedelta import relativedelta
 
 
-class CreatePreventive(models.TransientModel):
-    _name = 'create.preventive'
+class PreventiveCreateWizard(models.TransientModel):
+    _name = 'preventive.create.wizard'
     _description = 'Create Machine Preventive operations'
 
     @api.multi

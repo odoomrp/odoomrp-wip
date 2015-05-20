@@ -22,3 +22,4 @@ from . import preventive_operation
 from . import preventive_master
 from . import preventive_machine_operation
 from . import mrp_repair
+from . import machinery
