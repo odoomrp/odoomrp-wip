@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api
 
 
 class MrpProduction(models.Model):
@@ -55,10 +55,7 @@ class MrpProduction(models.Model):
 
     @api.one
     def action_confirm(self):
-        warehouse_obj = self.env['stock.warehouse']
         res = super(MrpProduction, self).action_confirm()
-        cond = [('company_id', '=', self.env.user.company_id.id)]
-        warehouse = False
         for move in self.move_lines:
             if move.work_order.routing_wc_line.external:
                 ptype = move.work_order.routing_wc_line.picking_type_id
@@ -66,33 +63,27 @@ class MrpProduction(models.Model):
                 move.location_dest_id = ptype.default_location_dest_id.id
         for wc_line in self.workcenter_lines:
             if wc_line.external:
-                if not warehouse:
-                    cond = [('lot_stock_id', '=', self.location_dest_id.id)]
-                    warehouse = warehouse_obj.search(cond, limit=1)
-                    if not warehouse:
-                        raise exceptions.Warning(
-                            _('Production Confirmation Error'),
-                            _('Company warehouse not found'))
                 wc_line.procurement_order = (
-                    self._create_external_procurement(wc_line, warehouse))
+                    self._create_external_procurement(wc_line))
         return res
 
-    def _prepare_extenal_procurement(self, wc_line, warehouse):
+    def _prepare_extenal_procurement(self, wc_line):
+        wc = wc_line.routing_wc_line
         return {
             'name': wc_line.name,
             'origin': wc_line.name,
-            'product_id': wc_line.routing_wc_line.semifinished_id.id,
+            'product_id': wc.semifinished_id.id,
             'product_qty': self.product_qty,
-            'product_uom': wc_line.routing_wc_line.semifinished_id.uom_id.id,
+            'product_uom': wc.semifinished_id.uom_id.id,
             'location_id': self.location_dest_id.id,
             'production_id': self.id,
-            'warehouse_id': warehouse.id,
+            'warehouse_id': wc.picking_type_id.warehouse_id.id,
             'mrp_operation': wc_line.id,
         }
 
-    def _create_external_procurement(self, wc_line, warehouse):
+    def _create_external_procurement(self, wc_line):
         procurement = self.env['procurement.order'].create(
-            self._prepare_extenal_procurement(wc_line, warehouse))
+            self._prepare_extenal_procurement(wc_line))
         procurement.run()
         return procurement.id
 

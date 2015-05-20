@@ -43,13 +43,10 @@ class PurchaseOrder(models.Model):
                                 'invoice_state': 'none',
                                 'partner_id': self.partner_id.id,
                                 'mrp_production':
-                                self.mrp_operation.production_id.id
-                                }
+                                self.mrp_operation.production_id.id}
                         picking = picking_obj.create(vals)
-                        vals = {'out_picking': picking.id}
-                        self.mrp_operation.write(vals)
-                    vals = {'picking_id': picking.id}
-                    move.write(vals)
+                        self.mrp_operation.out_picking = picking.id
+                    move.picking_id = picking.id
         return result
 
     @api.one
