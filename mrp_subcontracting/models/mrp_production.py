@@ -69,9 +69,10 @@ class MrpProduction(models.Model):
 
     def _prepare_extenal_procurement(self, wc_line):
         wc = wc_line.routing_wc_line
+        name = "%s: %s" % (wc_line.production_id.name, wc_line.name)
         return {
-            'name': wc_line.name,
-            'origin': wc_line.name,
+            'name': name,
+            'origin': name,
             'product_id': wc.semifinished_id.id,
             'product_qty': self.product_qty,
             'product_uom': wc.semifinished_id.uom_id.id,
