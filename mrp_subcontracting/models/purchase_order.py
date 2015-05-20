@@ -27,8 +27,9 @@ class PurchaseOrder(models.Model):
         'mrp.production', string='MRP Production', store=True,
         related="mrp_operation.production_id")
 
-    @api.one
+    @api.multi
     def wkf_confirm_order(self):
+        self.ensure_one()
         picking_obj = self.env['stock.picking']
         result = super(PurchaseOrder, self).wkf_confirm_order()
         picking = False
@@ -40,6 +41,7 @@ class PurchaseOrder(models.Model):
                         vals = {'origin': self.mrp_operation.name,
                                 'picking_type_id': wc_line.picking_type_id.id,
                                 'invoice_state': 'none',
+                                'partner_id': self.partner_id.id,
                                 'mrp_production':
                                 self.mrp_operation.production_id.id
                                 }
