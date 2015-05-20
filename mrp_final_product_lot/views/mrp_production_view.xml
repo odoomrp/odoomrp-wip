@@ -11,6 +11,9 @@
                         <field name="manual_production_lot"
                                attrs="{'readonly': [('state', '=', 'done')]}"
                                 />
+                        <field name="concatenate_lots_components"
+                               attrs="{'readonly': [('state', '=', 'done')]}"
+                                />
                     </group>
                 </field>
             </field>
