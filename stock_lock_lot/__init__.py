@@ -2,6 +2,5 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from . import product_category
-from . import mrp_production_lot
-from . import stock_quant
+from . import models
+from . import wizard
