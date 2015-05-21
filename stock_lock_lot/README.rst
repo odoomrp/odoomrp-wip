@@ -1,5 +1,5 @@
-Block down Serial Numbers/lots
-==============================
+Block Serial Numbers/lots
+=========================
 This module allows you to define whether a Serial Number/lot is blocked
 or not.
 The default value can be set on the Product Category, in the

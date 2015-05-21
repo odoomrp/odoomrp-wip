@@ -12,9 +12,9 @@ class StockProductionLot(models.Model):
     _mail_post_access = 'read'
     _track = {
         'locked': {
-            'mrp_lock_lot.mt_lock_lot': lambda self, cr, uid, obj,
+            'stock_lock_lot.mt_lock_lot': lambda self, cr, uid, obj,
             ctx=None: obj.locked,
-            'mrp_lock_lot.mt_unlock_lot': lambda self, cr, uid, obj,
+            'stock_lock_lot.mt_unlock_lot': lambda self, cr, uid, obj,
             ctx=None: not obj.locked,
         },
     }
