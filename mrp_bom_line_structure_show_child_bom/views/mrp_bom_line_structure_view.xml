@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="bom_from_child_action_server_tree" model="ir.actions.server">
+            <field name="name">Show BoM</field>
+            <field name="model_id" ref="model_mrp_bom_line"/>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">
+bom_id = (object.child_line_ids and object.child_line_ids[0].bom_id.id) or (object.bom_id and object.bom_id.id) or False
+action = {
+                'name': 'BoM',
+                'type': 'ir.actions.act_window',
+                'res_model': 'mrp.bom',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'domain': [('id', '=', bom_id)],
+                'context': {'id': bom_id, 'search_default_id': bom_id},
+}
+            </field>
+        </record>
+
+        <record id="ir_bom_from_child_line_open" model="ir.values">
+            <field name="name">BoM</field>
+            <field eval="'mrp.bom.line'" name="model"/>
+            <field eval="'ir.actions.server,%d'%bom_from_child_action_server_tree" name="value"/>
+        </record>
+
+        <record model="ir.ui.view" id="view_mrp_bom_structure_show_child">
+            <field name="name">view.mrp.bom.structure.show.child</field>
+            <field name="model">mrp.bom.line</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_tree_view" />
+            <field name="arch" type="xml">
+                <data>
+                    <field name="product_uom" position="after">
+                        <field name="product_qty"/>
+                        <field name="routing_id"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>
