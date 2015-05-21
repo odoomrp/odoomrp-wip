@@ -30,11 +30,11 @@
     "contributors": [
         "Unai Alkorta <practicas@avanzosc.es>",
         "Iñaki Zabala <practicas@avanzosc.es>",
-    ],
+        ],
     "depends": ["mrp"
-    ],
+                ],
     "data": [
         "views/mrp_bom_line_structure_view.xml",
-    ],
+        ],
     "installable": True,
 }
