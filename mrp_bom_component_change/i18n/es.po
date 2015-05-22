@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-03 11:04+0000\n"
-"PO-Revision-Date: 2014-11-03 11:04+0000\n"
+"POT-Creation-Date: 2015-05-22 08:58+0000\n"
+"PO-Revision-Date: 2015-05-22 08:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,57 +18,57 @@ msgstr ""
 #. module: mrp_bom_component_change
 #: model:ir.actions.act_window,name:mrp_bom_component_change.action_bom_change_view
 msgid "BoM Component Change"
-msgstr "BoM Component Change"
+msgstr "Cambio de componentes de LdM"
 
 #. module: mrp_bom_component_change
 #: model:ir.ui.menu,name:mrp_bom_component_change.mrp_bom_change_menu
 msgid "BoM Component Modifications"
-msgstr "BoM Component Modifications"
+msgstr "Modificaciones de componentes de LdM"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,boms:0
 msgid "Boms"
-msgstr "Boms"
+msgstr "LdMs"
 
 #. module: mrp_bom_component_change
 #: view:mrp.bom.change:mrp_bom_component_change.mrp_bom_change_form_view
 msgid "Change Component"
-msgstr "Change Component"
+msgstr "Cambiar componente"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,date:0
 msgid "Change Date"
-msgstr "Change Date"
+msgstr "Cambiar fecha"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,user:0
 msgid "Changed By"
-msgstr "Changed By"
+msgstr "Cambiado por"
 
 #. module: mrp_bom_component_change
 #: view:mrp.bom.change:mrp_bom_component_change.mrp_bom_change_form_view
 msgid "Clear List"
-msgstr "Clear List"
+msgstr "Limpiar lista"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,create_uid:0
 msgid "Created by"
-msgstr "Created by"
+msgstr "Creado por"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,create_date:0
 msgid "Created on"
-msgstr "Created on"
+msgstr "Creado en"
 
 #. module: mrp_bom_component_change
 #: selection:mrp.bom.change,state:0
 msgid "Done"
-msgstr "Done"
+msgstr "Realizado"
 
 #. module: mrp_bom_component_change
 #: selection:mrp.bom.change,state:0
 msgid "Draft"
-msgstr "Draft"
+msgstr "Borrador"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,id:0
@@ -78,68 +78,63 @@ msgstr "ID"
 #. module: mrp_bom_component_change
 #: selection:mrp.bom.change,state:0
 msgid "In Process"
-msgstr "In Process"
+msgstr "En proceso"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,write_uid:0
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Última actualización por"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,write_date:0
 msgid "Last Updated on"
-msgstr "Last Updated on"
-
-#. module: mrp_bom_component_change
-#: model:ir.model,name:mrp_bom_component_change.model_mrp_bom_change
-msgid "Mrp BoM Component Change"
-msgstr "Mrp BoM Component Change"
+msgstr "Última actualización en"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,name:0
 msgid "Name"
-msgstr "Name"
+msgstr "Nombre"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,new_component:0
 msgid "New Component"
-msgstr "New Component"
+msgstr "Componente nuevo"
 
 #. module: mrp_bom_component_change
 #: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:64
 #, python-format
 msgid "Not Components selected!"
-msgstr "Not Components selected!"
+msgstr "¡Componentes no seleccionados!"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,old_component:0
 msgid "Old Component"
-msgstr "Old Component"
+msgstr "Componente antiguo"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,reason:0
 msgid "Reason"
-msgstr "Reason"
+msgstr "Razón"
 
 #. module: mrp_bom_component_change
 #: view:mrp.bom.change:mrp_bom_component_change.mrp_bom_change_form_view
 msgid "Revert"
-msgstr "Revert"
+msgstr "Revertir"
 
 #. module: mrp_bom_component_change
 #: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:77
 #, python-format
 msgid "Revert - "
-msgstr "Revert - "
+msgstr "Revertir - "
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,state:0
 msgid "State"
-msgstr "State"
+msgstr "Estado"
 
 #. module: mrp_bom_component_change
 #: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:66
 #, python-format
 msgid "There isn't any BoM for selected component"
-msgstr "There isn't any BoM for selected component"
+msgstr "No existe LdM con el componente seleccionsado"
 
