@@ -23,7 +23,7 @@ from openerp import models, fields
 class Machinery(models.Model):
     _inherit = 'machinery'
 
-    prev_mach_op = fields.One2many('preventive.machine.operation',
-                                   'machine', 'Next Revisions')
+    preventive_operations = fields.One2many(
+        'preventive.machine.operation',  'machine', 'Next Revisions')
     repair_orders = fields.One2many('mrp.repair', 'idmachine',
                                     'Preventive Repair Orders')

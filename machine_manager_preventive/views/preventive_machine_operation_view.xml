@@ -49,7 +49,7 @@
                                 <group col="6">
                                     <field name="cycles" />
                                     <field name="frequency" />
-                                    <field name="meas_unit" />
+                                    <field name="interval_unit" />
                                </group>
                             <group colspan="4" col="2">
                                 <group>
@@ -81,11 +81,11 @@
                                     <group colspan="2" col="4" attrs="{'invisible':[('check_al1','=',False)]}">
                                         <field name="first_margin" colspan="4"/>
                                         <field name="margin_fre1"/>
-                                        <field name="meas_unit1" />
+                                        <field name="interval_unit1" />
                                     </group>
                                 </group>
                                 <group col="4">
-                                    <separator string="2 Alert" colspan="4"/>
+                                    <separator string="2nd Alert" colspan="4"/>
                                     <field name="check_al2" invisible="1"/>
                                     <button name="set_alarm2" string="Alarm" type="object"
                                     icon="gtk-dialog-info" colspan="4"  attrs="{'invisible':[('check_al2','=',True)]}"/>
@@ -95,7 +95,7 @@
                                     attrs="{'invisible':[('check_al2','=',False)]}">
                                         <field name="second_margin" colspan="4"/>
                                         <field name="margin_fre2" />
-                                        <field name="meas_unit2"/>
+                                        <field name="interval_unit2"/>
                                     </group>
                                 </group>
                             </group>

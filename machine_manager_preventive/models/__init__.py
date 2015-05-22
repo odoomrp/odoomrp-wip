@@ -17,7 +17,6 @@
 #
 ##############################################################################
 
-from . import product
 from . import preventive_operation
 from . import preventive_master
 from . import preventive_machine_operation

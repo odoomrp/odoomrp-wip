@@ -18,7 +18,6 @@
 ##############################################################################
 
 from openerp import models, fields, api
-from dateutil.relativedelta import relativedelta
 
 
 class PreventiveCreateWizard(models.TransientModel):
@@ -61,13 +60,15 @@ class PreventiveCreateWizard(models.TransientModel):
                             'opname_omm': operation.id,
                             'machine': machine.id,
                             'frequency': operation.frequency,
-                            'meas_unit': operation.meas_unit,
+                            'interval_unit': operation.interval_unit,
                             'first_margin': operation.optype_id.margin_cy1,
                             'second_margin': operation.optype_id.margin_cy2,
                             'margin_fre1': operation.optype_id.margin_fre1,
-                            'meas_unit1': operation.optype_id.meas_unit1,
+                            'interval_unit1':
+                                operation.optype_id.interval_unit1,
                             'margin_fre2': operation.optype_id.margin_fre2,
-                            'meas_unit2': operation.optype_id.meas_unit2,
+                            'interval_unit2':
+                                operation.optype_id.interval_unit2,
                             'hours_qty': operation.hours_qty,
                             'last_hours_qty': operation.hours_qty,
                             }
@@ -77,26 +78,13 @@ class PreventiveCreateWizard(models.TransientModel):
                                                  machine.actcycles)
                             res['lastcycles'] = machine.actcycles
                         if operation.basedontime:  # Operation by date
-                            op_freq = operation.frequency
-                            op_meas = operation.meas_unit
-                            time_now = fields.Date.from_string(
-                                fields.Date.today())
-                            if op_meas == 'day':
-                                calc_date = time_now + relativedelta(
-                                    days=op_freq)
-                            elif op_meas == 'week':
-                                calc_date = time_now + relativedelta(
-                                    weeks=op_freq)
-                            elif op_meas == 'mon':
-                                calc_date = time_now + relativedelta(
-                                    months=op_freq)
-                            else:
-                                calc_date = time_now + relativedelta(
-                                    years=op_freq)
+                            today = fields.Date.today()
+                            calc_date = machine_operations.get_interval_date(
+                                today, operation.frequency,
+                                operation.interval_unit)
                             # TODO last data operation calculation function
-                            last_date = fields.Date.today()
-                            res['nextdate'] = fields.Date.to_string(calc_date)
-                            res['lastdate'] = last_date
+                            res['nextdate'] = calc_date
+                            res['lastdate'] = today
                         if operation.cycles > 0 or operation.frequency > 0:
                             # Alarm check activation
                             res['check_al1'] = True
@@ -139,11 +127,11 @@ class PreventiveList(models.TransientModel):
                     'first_margin': machi_pre.first_margin,
                     'second_margin': machi_pre.second_margin,
                     'frequency': machi_pre.frequency,
-                    'meas_unit': machi_pre.meas_unit,
+                    'interval_unit': machi_pre.interval_unit,
                     'margin_fre1': machi_pre.margin_fre1,
-                    'meas_unit1': machi_pre.meas_unit1,
+                    'interval_unit1': machi_pre.interval_unit1,
                     'margin_fre2': machi_pre.margin_fre2,
-                    'meas_unit2': machi_pre.meas_unit2,
+                    'interval_unit2': machi_pre.interval_unit2,
                     'nextdate': machi_pre.nextdate,
                     'nextcycles': machi_pre.nextcycles,
                     'last_hours_qty': machi_pre.last_hours_qty,
@@ -154,9 +142,7 @@ class PreventiveList(models.TransientModel):
 
     @api.multi
     def _op_count(self):
-        if 'machi_prevs' in self.env.context:
-            cont = len(self.env.context['machi_prevs'])
-        return cont
+        return len(self.env.context.get('machi_prevs', 0))
 
     machi_prevs = fields.One2many('preventive.machine.operation', 'machine',
                                   'Machine Preventive Operations',

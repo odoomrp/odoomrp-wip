@@ -18,7 +18,6 @@
 ##############################################################################
 
 from openerp import models, fields, api, exceptions, _
-from dateutil.relativedelta import relativedelta
 
 
 class PreventiveOperationtype(models.Model):
@@ -36,85 +35,72 @@ class PreventiveOperationtype(models.Model):
     margin_cy2 = fields.Integer('Cycles Margin 2')
     frequency = fields.Integer('Frequency', help="Estimated time for the next"
                                " operation.")
-    meas_unit = fields.Selection([('day', 'Days'), ('week', 'Weeks'),
-                                  ('mon', 'Months'), ('year', 'Years')],
-                                 'Meas.')
+    interval_unit = fields.Selection([('day', 'Days'), ('week', 'Weeks'),
+                                      ('mon', 'Months'), ('year', 'Years')],
+                                     'Interval Unit')
     margin_fre1 = fields.Integer(
         'Frequency Margin 1', help="A negative number means that the alarm "
         "will be activated before the compliance date")
-    meas_unit1 = fields.Selection([('day', 'Days'), ('week', 'Weeks'),
-                                   ('mon', 'Months'), ('year', 'Years')],
-                                  'Meas.')
+    interval_unit1 = fields.Selection([('day', 'Days'), ('week', 'Weeks'),
+                                       ('mon', 'Months'), ('year', 'Years')],
+                                      'Interval Unit')
     margin_fre2 = fields.Integer(
         'Frequency Margin 2', help="A negative number means that the alarm "
         "will be activated before the compliance date")
-    meas_unit2 = fields.Selection([('day', 'Days'), ('week', 'Weeks'),
-                                   ('mon', 'Months'), ('year', 'Years')],
-                                  'Meas.')
+    interval_unit2 = fields.Selection([('day', 'Days'), ('week', 'Weeks'),
+                                       ('mon', 'Months'), ('year', 'Years')],
+                                      'Interval Unit')
     description = fields.Text('Description')
     hours_qty = fields.Float('Quantity Hours', required=False,
                              help="Expected time for the execution of the "
                              "operation. hh:mm")
 
-    @api.one
-    @api.onchange('meas_unit')
-    def onchange_meas_unit(self):
-        if self.meas_unit:
-            self.meas_unit1 = self.meas_unit
-            self.meas_unit2 = self.meas_unit
+    @api.constrains('basedoncy', 'cycles')
+    def _check_basedoncy(self):
+        for record in self:
+            if record.basedoncy and record.cycles <= 0:
+                raise exceptions.ValidationError(
+                    _("Operations based on cycles must have a positive cycle "
+                      "frequency"))
 
-    @api.one
-    @api.onchange('margin_cy1', 'margin_cy2')
-    def check_cycle_margins(self):
-        if self.margin_cy1 and self.margin_cy2 and (
-                self.margin_cy1 > self.margin_cy2):
-            raise exceptions.Warning(_('First margin should be before second'))
-
-    @api.one
-    @api.onchange('margin_fre1', 'meas_unit1', 'margin_fre2', 'meas_unit2')
-    def check_time_margins(self):
-        if self.meas_unit1 and self.meas_unit2:
-            margins = self._get_freq_date(self)
-            if margins['first'] > margins['second']:
+    @api.constrains('basedontime', 'frequency', 'interval_unit')
+    def _check_basedontime(self):
+        for record in self:
+            if record.basedontime and (
+                    record.frequency <= 0 or not record.interval_unit):
                 raise exceptions.Warning(
-                    _('First margin should be before second'))
+                    _("Operations based on time must have a positive time "
+                      " frequency"))
 
-    def _get_freq_date(self, operation):
-        """ Returns Frecuency values for current operation
-        @param operation: Preventive operation type to check
-        @return: First and second frequency dates
-        """
-        frequencies = {}
-        op_date = fields.Date.today()
-        if operation.meas_unit1:
-            if operation.meas_unit1 == 'day':
-                freq1 = fields.Date.from_string(op_date) + (
-                    relativedelta(days=operation.margin_fre1))
-            elif operation.meas_unit1 == 'week':
-                freq1 = fields.Date.from_string(op_date) + (
-                    relativedelta(weeks=operation.margin_fre1))
-            elif operation.meas_unit1 == 'mon':
-                freq1 = fields.Date.from_string(op_date) + (
-                    relativedelta(months=operation.margin_fre1))
-            else:
-                freq1 = fields.Date.from_string(op_date) + (
-                    relativedelta(years=operation.margin_fre1))
-            frequencies['first'] = fields.Date.to_string(freq1)
-        if operation.meas_unit2:
-            if operation.meas_unit2 == 'day':
-                freq2 = fields.Date.from_string(op_date) + (
-                    relativedelta(days=operation.margin_fre2))
-            elif operation.meas_unit2 == 'week':
-                freq2 = fields.Date.from_string(op_date) + (
-                    relativedelta(weeks=operation.margin_fre2))
-            elif operation.meas_unit2 == 'mon':
-                freq2 = fields.Date.from_string(op_date) + (
-                    relativedelta(months=operation.margin_fre2))
-            else:
-                freq2 = fields.Date.from_string(op_date) + (
-                    relativedelta(years=operation.margin_fre2))
-            frequencies['second'] = fields.Date.to_string(freq2)
-        return frequencies
+    @api.one
+    @api.onchange('interval_unit')
+    def onchange_interval_unit(self):
+        if self.interval_unit:
+            self.interval_unit1 = self.interval_unit
+            self.interval_unit2 = self.interval_unit
+
+    @api.constrains('margin_cy1', 'margin_cy2')
+    def check_cycle_margins(self):
+        for record in self:
+            if record.margin_cy1 and record.margin_cy2 and (
+                    record.margin_cy1 > record.margin_cy2):
+                raise exceptions.ValidationError(
+                    _('First margin must be before second'))
+
+    @api.constrains('margin_fre1', 'interval_unit1', 'margin_fre2',
+                    'interval_unit2')
+    def _check_time_margins(self):
+        for record in self:
+            if record.interval_unit1 and record.interval_unit2:
+                machine_operations = self.env['preventive.machine.operation']
+                date = fields.Date.today()
+                margin1 = machine_operations.get_interval_date(
+                    date, record.margin_fre1, record.interval_unit1)
+                margin2 = machine_operations.get_interval_date(
+                    date, record.margin_fre2, record.interval_unit2)
+                if margin1 > margin2:
+                    raise exceptions.ValidationError(
+                        _("First margin must be before second"))
 
 
 class PreventiveOperationMaterial(models.Model):
@@ -148,7 +134,7 @@ class PreventiveOperationMatmach(models.Model):
     basedontime = fields.Boolean(related='optype_id.basedontime')
     cycles = fields.Integer(related='optype_id.cycles')
     frequency = fields.Integer(related='optype_id.frequency')
-    meas_unit = fields.Selection(related='optype_id.meas_unit')
+    interval_unit = fields.Selection(related='optype_id.interval_unit')
     hours_qty = fields.Float(related='optype_id.hours_qty')
     description = fields.Text('Description')
 

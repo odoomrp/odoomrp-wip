@@ -23,6 +23,6 @@ from openerp import models, fields
 class MrpRepair(models.Model):
     _inherit = 'mrp.repair'
 
-    prev_mach_op = fields.Many2many('preventive.machine.operation')
+    preventive_operations = fields.Many2many('preventive.machine.operation')
     idmachine = fields.Many2one('machinery', 'Machine')
     preventive = fields.Boolean('Is preventive')

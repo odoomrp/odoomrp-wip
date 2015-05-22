@@ -2,8 +2,14 @@
 Machine manager preventive
 ==========================
 This module allows:
-  - Generating machine preventive orders automatically.
-  - Create repair orders for the machines, using the preventive alarms defined.
+  - To generate machine preventive orders automatically.
+    Preventive operations are defined with an operation on a frequency
+    either in time or in cycle interval.
+    For each operation different materials could be added.
+    Different machines can be added to perform operations defined.
+  - Automatically create preventive alarms for defined preventive operation
+    time frequency or cycle interval.
+  - Create repair orders for machines, using the preventive alarms defined.
 
 Credits
 =======

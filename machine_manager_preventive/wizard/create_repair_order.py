@@ -27,8 +27,7 @@ class PreventiveRepairOrder(models.TransientModel):
 
     def _default_stock_location(self):
         try:
-            warehouse = self.env['ir.model.data'].get_object(
-                'stock', 'warehouse0')
+            warehouse = self.env['stock.warehouse'].search([], limit=1)
             return warehouse.lot_stock_id.id
         except:
             return False
@@ -40,9 +39,24 @@ class PreventiveRepairOrder(models.TransientModel):
                                        select=True, required=True,
                                        default=_default_stock_location)
 
+    def _prepare_repair_order(self, product, move, location_from, location_to,
+                              machine, operation_lst, description):
+        order_vals = {'name': self.env['ir.sequence'].get('mrp.repair'),
+                      'location_id': location_from.id,
+                      'location_dest_id':  location_to.id,
+                      'move_id': move.id,
+                      'product_id': product.id,
+                      'product_qty': 1,
+                      'product_uom': product.product_tmpl_id.uom_id.id,
+                      'preventive': True,
+                      'idmachine': machine.id,
+                      'preventive_operations': [(6, 0, operation_lst)],
+                      'internal_notes': description
+                      }
+        return order_vals
+
     @api.multi
     def create_order_from_pmo(self):
-        value = {}
         prev_op_obj = self.env['preventive.machine.operation']
         rep_line_obj = self.env['mrp.repair.line']
         move_obj = self.env['stock.move']
@@ -50,13 +64,14 @@ class PreventiveRepairOrder(models.TransientModel):
         multiple = False
         if len(self.env.context['active_ids']) > 1:
             multiple = True
-            value = {
-                'name': _('Create Order'),
-                'view_type': 'form',
-                'view_mode': 'tree, form',
-                'res_model': 'mrp.repair',
-                'type': 'ir.actions.act_window',
-                }
+        repair_order_lst = []
+        value = {
+            'name': _('Create Order'),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'mrp.repair',
+            'type': 'ir.actions.act_window',
+            }
         for op_pmo_id in self.env.context['active_ids']:
             op_pmo = prev_op_obj.browse(op_pmo_id)
             machine = op_pmo.machine
@@ -82,27 +97,20 @@ class PreventiveRepairOrder(models.TransientModel):
                 [('product_id', '=', machine.product.id),
                  ('state', 'in', ('draft', 'confirmed', 'ready'))])
             if not repair_lst:
-                repair = repair_obj.create(
-                    {'name': self.env['ir.sequence'].get('mrp.repair'),
-                     'location_id': location_from.id,
-                     'location_dest_id':  location_to.id,
-                     'move_id': move.id,
-                     'product_id': product.id,
-                     'product_qty': 1,
-                     'product_uom': product.product_tmpl_id.uom_id.id,
-                     'preventive': True,
-                     'idmachine': machine.id,
-                     'prev_mach_op': [(6, 0, [op_pmo.id])],
-                     'internal_notes': op_pmo.opdescription
-                     })
+                repair_values = self._prepare_repair_order(
+                    product, move, location_from, location_to, machine,
+                    [op_pmo.id], op_pmo.opdescription)
+                repair = repair_obj.create(repair_values)
             else:
                 repair = repair_lst[0]
-                repair.prev_mach_op = [op_pmo.id]
+                repair.preventive_operations = [op_pmo.id]
                 if repair.internal_notes and op_pmo.opdescription:
                     repair.internal_notes = repair.internal_notes + (
                         '\n' + op_pmo.opdescription)
                 elif op_pmo.opdescription:
                     repair.internal_notes = op_pmo.opdescription
+            if repair.id not in repair_order_lst:
+                repair_order_lst.append(repair.id)
             for material in op_pmo.opname_omm.material:
                 rep_line_obj.create({
                     'repair_id': repair.id,
@@ -117,15 +125,15 @@ class PreventiveRepairOrder(models.TransientModel):
                     'location_id': location_from.id,
                     'location_dest_id': location_to.id
                     })
-            prev_op_obj.update_alerts(op_pmo)
-            if not multiple:
-                value = {
-                    'name': _('Create Order'),
-                    'view_type': 'form',
-                    'view_mode': 'form,tree',
-                    'res_model': 'mrp.repair',
-                    'res_id': int(repair.id),
-                    'view_id': False,
-                    'type': 'ir.actions.act_window',
-                    }
+            if op_pmo.cycles:
+                op_pmo.lastcycles = op_pmo.actcycles
+            if op_pmo.interval_unit:
+                op_pmo.lastdate = fields.Date.today()
+            prev_op_obj.check_alerts()
+        if not multiple:
+            value['res_id'] = int(repair.id)
+            value['view_mode'] = 'form,tree'
+        else:
+            value['domain'] = ("[('id','in',[" +
+                               ','.join(map(str, repair_order_lst)) + "])]")
         return value

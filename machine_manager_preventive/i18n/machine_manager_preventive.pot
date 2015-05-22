@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-20 08:17+0000\n"
-"PO-Revision-Date: 2015-05-20 08:17+0000\n"
+"POT-Creation-Date: 2015-05-22 10:14+0000\n"
+"PO-Revision-Date: 2015-05-22 10:14+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #. module: machine_manager_preventive
 #: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
-msgid "2 Alert"
+msgid "2nd Alert"
 msgstr ""
 
 #. module: machine_manager_preventive
@@ -61,7 +61,7 @@ msgid "A negative number means that the alarm will be activated before the condi
 msgstr ""
 
 #. module: machine_manager_preventive
-#: view:create.preventive:machine_manager_preventive.create_preventive_form
+#: view:preventive.create.wizard:machine_manager_preventive.create_preventive_form
 #: view:preventive.list:machine_manager_preventive.view_preventive_list
 #: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
 msgid "Accept"
@@ -93,7 +93,7 @@ msgid "Based on Time"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: view:create.preventive:machine_manager_preventive.create_preventive_form
+#: view:preventive.create.wizard:machine_manager_preventive.create_preventive_form
 #: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
 msgid "Cancel"
 msgstr ""
@@ -105,18 +105,18 @@ msgstr ""
 
 #. module: machine_manager_preventive
 #: model:ir.model,name:machine_manager_preventive.model_create_preventive
+#: model:ir.model,name:machine_manager_preventive.model_preventive_create_wizard
 msgid "Create Machine Preventive operations"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:54
-#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:123
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:69
 #, python-format
 msgid "Create Order"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: view:create.preventive:machine_manager_preventive.create_preventive_form
+#: view:preventive.create.wizard:machine_manager_preventive.create_preventive_form
 #: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
 msgid "Create Preventive"
 msgstr ""
@@ -142,7 +142,7 @@ msgid "Create machine Preventive repair order"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: view:create.preventive:machine_manager_preventive.create_preventive_form
+#: view:preventive.create.wizard:machine_manager_preventive.create_preventive_form
 msgid "Create preventive operations for defined parameters?"
 msgstr ""
 
@@ -157,7 +157,7 @@ msgid "Created Preventive List"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: field:create.preventive,create_uid:0
+#: field:preventive.create.wizard,create_uid:0
 #: field:preventive.list,create_uid:0
 #: field:preventive.machine.operation,create_uid:0
 #: field:preventive.master,create_uid:0
@@ -170,7 +170,7 @@ msgid "Created by"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: field:create.preventive,create_date:0
+#: field:preventive.create.wizard,create_date:0
 #: field:preventive.list,create_date:0
 #: field:preventive.machine.operation,create_date:0
 #: field:preventive.master,create_date:0
@@ -220,12 +220,12 @@ msgid "Date"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: selection:preventive.machine.operation,meas_unit:0
-#: selection:preventive.machine.operation,meas_unit1:0
-#: selection:preventive.machine.operation,meas_unit2:0
-#: selection:preventive.operation.type,meas_unit:0
-#: selection:preventive.operation.type,meas_unit1:0
-#: selection:preventive.operation.type,meas_unit2:0
+#: selection:preventive.machine.operation,interval_unit:0
+#: selection:preventive.machine.operation,interval_unit1:0
+#: selection:preventive.machine.operation,interval_unit2:0
+#: selection:preventive.operation.type,interval_unit:0
+#: selection:preventive.operation.type,interval_unit1:0
+#: selection:preventive.operation.type,interval_unit2:0
 msgid "Days"
 msgstr ""
 
@@ -243,11 +243,6 @@ msgstr ""
 #: view:preventive.operation.type:machine_manager_preventive.optype_form_view
 #: field:preventive.operation.type,description:0
 msgid "Description"
-msgstr ""
-
-#. module: machine_manager_preventive
-#: help:product.template,spare_ok:0
-msgid "Determines if the product is a machine spare."
 msgstr ""
 
 #. module: machine_manager_preventive
@@ -287,12 +282,12 @@ msgid "First Cycle Margin"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: code:addons/machine_manager_preventive/models/preventive_machine_operation.py:93
-#: code:addons/machine_manager_preventive/models/preventive_machine_operation.py:102
-#: code:addons/machine_manager_preventive/models/preventive_operation.py:71
-#: code:addons/machine_manager_preventive/models/preventive_operation.py:80
+#: code:addons/machine_manager_preventive/models/preventive_machine_operation.py:94
+#: code:addons/machine_manager_preventive/models/preventive_machine_operation.py:108
+#: code:addons/machine_manager_preventive/models/preventive_operation.py:88
+#: code:addons/machine_manager_preventive/models/preventive_operation.py:103
 #, python-format
-msgid "First margin should be before second"
+msgid "First margin must be before second"
 msgstr ""
 
 #. module: machine_manager_preventive
@@ -334,7 +329,7 @@ msgid "Hours"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: field:create.preventive,id:0
+#: field:preventive.create.wizard,id:0
 #: field:preventive.list,id:0
 #: field:preventive.machine.operation,id:0
 #: field:preventive.master,id:0
@@ -358,8 +353,17 @@ msgid "Information"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: field:product.template,spare_ok:0
-msgid "Is a machine spare"
+#: field:preventive.machine.operation,interval_unit1:0
+#: field:preventive.machine.operation,interval_unit2:0
+#: field:preventive.operation.type,interval_unit:0
+#: field:preventive.operation.type,interval_unit1:0
+#: field:preventive.operation.type,interval_unit2:0
+msgid "Interval Unit"
+msgstr ""
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,interval_unit:0
+msgid "Interval unit"
 msgstr ""
 
 #. module: machine_manager_preventive
@@ -378,7 +382,7 @@ msgid "Last Revision"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: field:create.preventive,write_uid:0
+#: field:preventive.create.wizard,write_uid:0
 #: field:preventive.list,write_uid:0
 #: field:preventive.machine.operation,write_uid:0
 #: field:preventive.master,write_uid:0
@@ -391,7 +395,7 @@ msgid "Last Updated by"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: field:create.preventive,write_date:0
+#: field:preventive.create.wizard,write_date:0
 #: field:preventive.list,write_date:0
 #: field:preventive.machine.operation,write_date:0
 #: field:preventive.master,write_date:0
@@ -489,22 +493,12 @@ msgid "Materials"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: field:preventive.machine.operation,meas_unit:0
-#: field:preventive.machine.operation,meas_unit1:0
-#: field:preventive.machine.operation,meas_unit2:0
-#: field:preventive.operation.type,meas_unit:0
-#: field:preventive.operation.type,meas_unit1:0
-#: field:preventive.operation.type,meas_unit2:0
-msgid "Meas."
-msgstr ""
-
-#. module: machine_manager_preventive
-#: selection:preventive.machine.operation,meas_unit:0
-#: selection:preventive.machine.operation,meas_unit1:0
-#: selection:preventive.machine.operation,meas_unit2:0
-#: selection:preventive.operation.type,meas_unit:0
-#: selection:preventive.operation.type,meas_unit1:0
-#: selection:preventive.operation.type,meas_unit2:0
+#: selection:preventive.machine.operation,interval_unit:0
+#: selection:preventive.machine.operation,interval_unit1:0
+#: selection:preventive.machine.operation,interval_unit2:0
+#: selection:preventive.operation.type,interval_unit:0
+#: selection:preventive.operation.type,interval_unit1:0
+#: selection:preventive.operation.type,interval_unit2:0
 msgid "Months"
 msgstr ""
 
@@ -662,8 +656,15 @@ msgid "Operations"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: field:mrp.repair,prev_mach_op:0
-msgid "Prev mach op"
+#: code:addons/machine_manager_preventive/models/preventive_operation.py:63
+#, python-format
+msgid "Operations based on cycles must have a positive cycle frequency"
+msgstr ""
+
+#. module: machine_manager_preventive
+#: code:addons/machine_manager_preventive/models/preventive_operation.py:72
+#, python-format
+msgid "Operations based on time must have a positive time  frequency"
 msgstr ""
 
 #. module: machine_manager_preventive
@@ -739,6 +740,11 @@ msgid "Preventive operation for machine."
 msgstr ""
 
 #. module: machine_manager_preventive
+#: field:mrp.repair,preventive_operations:0
+msgid "Preventive operations"
+msgstr ""
+
+#. module: machine_manager_preventive
 #: view:preventive.machine.operation:machine_manager_preventive.preventive_machine_calendar_view
 msgid "Preventive orders"
 msgstr ""
@@ -791,13 +797,13 @@ msgid "Second Cycle Margin"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:70
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:85
 #, python-format
 msgid "There is no product defined for current machine"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:66
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:81
 #, python-format
 msgid "There is no product defined for machine: %s"
 msgstr ""
@@ -824,22 +830,22 @@ msgid "Unit of Measure"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: selection:preventive.machine.operation,meas_unit:0
-#: selection:preventive.machine.operation,meas_unit1:0
-#: selection:preventive.machine.operation,meas_unit2:0
-#: selection:preventive.operation.type,meas_unit:0
-#: selection:preventive.operation.type,meas_unit1:0
-#: selection:preventive.operation.type,meas_unit2:0
+#: selection:preventive.machine.operation,interval_unit:0
+#: selection:preventive.machine.operation,interval_unit1:0
+#: selection:preventive.machine.operation,interval_unit2:0
+#: selection:preventive.operation.type,interval_unit:0
+#: selection:preventive.operation.type,interval_unit1:0
+#: selection:preventive.operation.type,interval_unit2:0
 msgid "Weeks"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: selection:preventive.machine.operation,meas_unit:0
-#: selection:preventive.machine.operation,meas_unit1:0
-#: selection:preventive.machine.operation,meas_unit2:0
-#: selection:preventive.operation.type,meas_unit:0
-#: selection:preventive.operation.type,meas_unit1:0
-#: selection:preventive.operation.type,meas_unit2:0
+#: selection:preventive.machine.operation,interval_unit:0
+#: selection:preventive.machine.operation,interval_unit1:0
+#: selection:preventive.machine.operation,interval_unit2:0
+#: selection:preventive.operation.type,interval_unit:0
+#: selection:preventive.operation.type,interval_unit1:0
+#: selection:preventive.operation.type,interval_unit2:0
 msgid "Years"
 msgstr ""
 
@@ -850,7 +856,7 @@ msgid "create preventives"
 msgstr ""
 
 #. module: machine_manager_preventive
-#: view:create.preventive:machine_manager_preventive.create_preventive_form
+#: view:preventive.create.wizard:machine_manager_preventive.create_preventive_form
 #: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
 msgid "or"
 msgstr ""

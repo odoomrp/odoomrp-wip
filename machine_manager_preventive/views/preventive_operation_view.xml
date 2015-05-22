@@ -58,14 +58,14 @@
                             <newline />
                             <group colspan="2" col="4">
                                 <field name="frequency" colspan="2" />
-                                <field name="meas_unit" colspan="2" />
+                                <field name="interval_unit" colspan="2" />
                             </group>
                             <newline />
                             <group colspan="2" col="4">
                                 <field name="margin_fre1" />
-                                <field name="meas_unit1" />
+                                <field name="interval_unit1" />
                                 <field name="margin_fre2" />
-                                <field name="meas_unit2" />
+                                <field name="interval_unit2" />
                             </group>
                         </group>
                         <separator string="Description"
@@ -167,7 +167,7 @@
                             <separator string="Operation time frequency" colspan="4" />
                                 <group colspan="2" col="4">
                                     <field name="frequency" />
-                                    <field name="meas_unit"/>
+                                    <field name="interval_unit"/>
                                 </group>
                             </group>
                         </page>
