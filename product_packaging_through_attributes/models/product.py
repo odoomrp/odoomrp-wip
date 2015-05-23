@@ -18,14 +18,16 @@ class ProductAttributeValue(models.Model):
     is_package_attr = fields.Boolean(
         string='Package attribute', related='attribute_id.is_package')
     package_product = fields.Many2one(
-        comodel_name='product.product', string='Package Product')
+        comodel_name='product.product', string='Package Product',
+        context="{'default_sale_ok': False, 'default_purchase_ok': False}")
 
 
 class ProductPackaging(models.Model):
     _inherit = 'product.packaging'
 
     product = fields.Many2one(
-        comodel_name='product.product', string='Package Product')
+        comodel_name='product.product', string='Package Product',
+        context="{'default_sale_ok': False, 'default_purchase_ok': False}")
 
     @api.one
     @api.onchange('product')
