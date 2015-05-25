@@ -14,5 +14,7 @@ class WizImportProcurementFromPlan(models.TransientModel):
     def onchange_warehouse_id(self):
         self.ensure_one()
         res = super(WizImportProcurementFromPlan, self).onchange_warehouse_id()
-        res['domain']['procurement_ids'].append(('level', 'in', (False, 0)))
+        res['domain']['procurement_ids'].append('|')
+        res['domain']['procurement_ids'].append(('level', '=', False))
+        res['domain']['procurement_ids'].append(('level', '=', 0))
         return res

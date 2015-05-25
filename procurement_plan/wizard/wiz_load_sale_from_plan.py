@@ -2,7 +2,7 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
 from dateutil.relativedelta import relativedelta
 
 
@@ -97,8 +97,13 @@ class WizLoadSaleFromPlan(models.TransientModel):
                             'location_id':  plan.warehouse_id.lot_stock_id.id,
                             'date_planned': date
                             }
-                    vals.update(
-                        procurement_obj.onchange_product_id(product)['value'])
+                    res = procurement_obj.onchange_product_id(product)
+                    if 'value' not in res:
+                        prod = self.env['product.product'].browse(product)
+                        raise exceptions.Warning(
+                            _('Product UOM or Product UOS not found for'
+                              ' product: %s') % (prod.name))
+                    vals.update(res['value'])
                     proc = procurement_obj.create(vals)
                     proc.write(
                         {'rule_id': procurement_obj._find_suitable_rule(proc)})
