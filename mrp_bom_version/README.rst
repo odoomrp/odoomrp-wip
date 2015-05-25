@@ -1,5 +1,5 @@
-MRP - BoM state
-===============
+MRP - BoM version
+=================
 
 This module provides a state in the LdM whether to allow their use in
 manufacturing, to do the following states are defined:
@@ -19,3 +19,8 @@ manufacturing, to do the following states are defined:
 When the MRP BoM list is put to active, a record of who has activated, and when
 will include in chatter/log. It also adds a constraint for the sequence field
 to be unique.
+
+* **New version** :
+  By clicking the button version, current BOM is moved to historical state,
+  and a new BOM is creating based on this  but with version number +1 and
+  changing state to draft

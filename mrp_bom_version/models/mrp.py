@@ -92,7 +92,6 @@ class MrpBom(models.Model):
         return self.write({'active': False, 'state': 'historical',
                            'historical_date': fields.Date.today()})
 
-
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
