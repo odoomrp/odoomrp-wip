@@ -38,8 +38,19 @@ class PreventiveRepairOrder(models.TransientModel):
     location_dest_id = fields.Many2one('stock.location', 'Delivery Location',
                                        select=True, required=True,
                                        default=_default_stock_location)
+    invoice_method = fields.Selection([
+        ("none", "No Invoice"), ("b4repair", "Before Repair"),
+        ("after_repair", "After Repair")], "Invoice Method", select=True,
+        default='none')
+    partner = fields.Many2one('res.partner', 'Partner', select=True,
+                              help='Choose partner for whom the order will be '
+                              'invoiced and delivered.')
+    invoice_address = fields.Many2one(
+        'res.partner', 'Invoicing Address',
+        domain="['|',('parent_id','=',partner),('id','=',partner)]")
 
     def _prepare_repair_order(self, product, move, location_from, location_to,
+                              partner_id, inv_address_id, invoice_method,
                               machine, operation_lst, description):
         order_vals = {'name': self.env['ir.sequence'].get('mrp.repair'),
                       'location_id': location_from.id,
@@ -51,7 +62,10 @@ class PreventiveRepairOrder(models.TransientModel):
                       'preventive': True,
                       'idmachine': machine.id,
                       'preventive_operations': [(6, 0, operation_lst)],
-                      'internal_notes': description
+                      'internal_notes': description,
+                      'invoice_method': invoice_method,
+                      'partner_id': partner_id,
+                      'partner_invoice_id': inv_address_id
                       }
         return order_vals
 
@@ -98,7 +112,8 @@ class PreventiveRepairOrder(models.TransientModel):
                  ('state', 'in', ('draft', 'confirmed', 'ready'))])
             if not repair_lst:
                 repair_values = self._prepare_repair_order(
-                    product, move, location_from, location_to, machine,
+                    product, move, location_from, location_to, self.partner.id,
+                    self.invoice_address.id, self.invoice_method, machine,
                     [op_pmo.id], op_pmo.opdescription)
                 repair = repair_obj.create(repair_values)
             else:

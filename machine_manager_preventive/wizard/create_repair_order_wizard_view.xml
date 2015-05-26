@@ -13,6 +13,11 @@
                         <group colspan="4">
                             <field name="location_id"/>
                             <field name="location_dest_id"/>
+                            <field name="invoice_method"/>
+                            <group attrs="{'invisible':[('invoice_method','in',(False,'none'))]}" colspan="2" col="4">
+                                <field name="partner" attrs="{'required':[('invoice_method','in',('b4repair','after_repair'))]}"/>
+                                <field name="invoice_address" attrs="{'required':[('invoice_method','in',('b4repair','after_repair'))]}"/>
+                            </group>
                         </group>
                     <footer>
                         <button class="oe_highlight" name="create_order_from_pmo"
