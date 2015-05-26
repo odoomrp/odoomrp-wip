@@ -60,9 +60,8 @@
                     </header>
                 </xpath>
                 <field name="company_id" position="after">
-                    <group colspan="2" >
-                        <field name="historical_date" />
-                    </group>
+                    <field name="version" />
+                    <field name="historical_date" attrs="{'invisible': [('state','!=','historical')]}"/>
                 </field>
             </field>
         </record>
@@ -83,15 +82,5 @@
             </field>
         </record>
 
-        <record id="view_mrp_bom_form_inh_state" model="ir.ui.view">
-            <field name="name">view.mrp.bom.form.inh.version</field>
-            <field name="model">mrp.bom</field>
-            <field name="inherit_id" ref="mrp_bom_version.mrp_bom_form_view_inh_state"/>
-            <field name="arch" type="xml">
-                <xpath expr="//form/group/group" position="inside">
-                    <field name="version" />
-                </xpath>
-            </field>
-        </record>
     </data>
 </openerp>
