@@ -44,6 +44,7 @@
                             groups="product_pricelist_rules.group_third_discount" />
                         <field name="offer_id"
                             groups="sale.group_discount_per_so_line" />
+                        <field name="item_id" invisible="1"/>
                     </xpath>
                 </data>
             </field>
