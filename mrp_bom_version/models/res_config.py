@@ -10,5 +10,5 @@ class MrpConfigSettings(models.TransientModel):
 
     group_mrp_bom_state = fields.Boolean(
         string='Allow to re-edit BoMs',
-        implied_group='mrp_bom_state.group_mrp_bom_state',
+        implied_group='mrp_bom_version.group_mrp_bom_version',
         help='The active state may be passed back to state draft')

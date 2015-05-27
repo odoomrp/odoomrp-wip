@@ -2,7 +2,7 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api
 
 
 class MrpBom(models.Model):
@@ -14,11 +14,6 @@ class MrpBom(models.Model):
             ctx=None: obj.state == 'active',
         },
     }
-
-    def _get_max_sequence(self):
-        bom = self.search([], order='sequence desc', limit=1)
-        maxseq = bom.sequence + 1
-        return maxseq
 
     active = fields.Boolean(
         string='Active', default=False, readonly=True,
@@ -35,9 +30,6 @@ class MrpBom(models.Model):
         readonly=True, states={'draft': [('readonly', False)]})
     product_qty = fields.Float(
         readonly=True, states={'draft': [('readonly', False)]})
-    sequence = fields.Integer(
-        default=_get_max_sequence, copy=False,
-        states={'historical': [('readonly', True)]})
     name = fields.Char(
         states={'historical': [('readonly', True)]})
     code = fields.Char(
@@ -68,61 +60,37 @@ class MrpBom(models.Model):
         states={'historical': [('readonly', True)]})
     message_ids = fields.One2many(
         states={'historical': [('readonly', True)]})
-
-    @api.one
-    @api.constrains('sequence')
-    def check_mrp_bom_sequence(self):
-        domain = [('id', '!=', self.id), ('sequence', '=', self.sequence),
-                  ('product_tmpl_id', '=', self.product_tmpl_id.id),
-                  ('product_id', '=', self.product_id.id)]
-        if self.search(domain):
-            raise exceptions.Warning(
-                _('The sequence must be unique'))
-
-    @api.one
-    def copy(self, default=None):
-        bom = self.search([], order='sequence desc', limit=1)
-        maxseq = bom.sequence + 1
-        default.update({'sequence': maxseq})
-        return super(MrpBom, self).copy(default=default)
+    version = fields.Integer(states={'historical': [('readonly', True)]},
+                             copy=False, default=1)
 
     @api.multi
     def button_draft(self):
         self.state = 'draft'
 
     @api.multi
-    def button_activate(self):
+    def button_new_version(self):
         self.ensure_one()
-        if self.routing_id:
-            return self.write({'active': True,
-                               'state': 'active'})
-        context = self.env.context.copy()
-        context['active_id'] = self.id
-        context['active_ids'] = [self.id]
-        context['active_model'] = 'mrp.bom'
-        return {'name': _('Confirm activation'),
-                'type': 'ir.actions.act_window',
-                'view_type': 'form',
+        self.write({'active': False, 'state': 'historical',
+                    'historical_date': fields.Date.today()})
+        version = self.version + 1
+        new_bom = self.copy({'version': version})
+        new_bom.active = True
+        return {'type': 'ir.actions.act_window',
+                'view_type': 'form, tree',
                 'view_mode': 'form',
-                'res_model': 'wiz.confirm.activation',
+                'res_model': 'mrp.bom',
+                'res_id': new_bom.id,
                 'target': 'new',
-                'context': context,
                 }
 
-    @api.multi
+    @api.one
+    def button_activate(self):
+        return self.write({'active': True, 'state': 'active'})
+
+    @api.one
     def button_historical(self):
-        context = self.env.context.copy()
-        context['active_id'] = self.id
-        context['active_ids'] = [self.id]
-        context['active_model'] = 'mrp.bom'
-        return {'name': _('Confirm historification'),
-                'type': 'ir.actions.act_window',
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'wiz.confirm.historification',
-                'target': 'new',
-                'context': context,
-                }
+        return self.write({'active': False, 'state': 'historical',
+                           'historical_date': fields.Date.today()})
 
 
 class MrpProduction(models.Model):

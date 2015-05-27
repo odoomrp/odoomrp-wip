@@ -20,7 +20,7 @@
 #
 ##############################################################################
 {
-    "name": "MRP - BoM state",
+    "name": "MRP - BoM version",
     "version": "1.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
@@ -37,9 +37,7 @@
     ],
     "data": [
         "data/mrp_bom_data.xml",
-        "security/mrp_bom_state_security.xml",
-        "wizard/wiz_confirm_activation_view.xml",
-        "wizard/wiz_confirm_historification_view.xml",
+        "security/mrp_bom_version_security.xml",
         "views/res_config_view.xml",
         "views/mrp_bom_view.xml",
     ],
