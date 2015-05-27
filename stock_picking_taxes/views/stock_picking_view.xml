@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="stock.view_picking_form" />
             <field name="arch" type="xml">
                 <field name="move_lines" position="after">
-                    <group class="oe_subtotal_footer oe_right">
+                    <group class="oe_subtotal_footer oe_right" attrs="{'invisible': [('sale_id', '=', False)]}">
                         <field name="currency_id" invisible="1" />
                         <field name="amount_untaxed"
                                 widget="monetary"
@@ -23,7 +23,7 @@
                     <div class="oe_clear"/>
                 </field>
                 <notebook position="inside">
-                    <page string="Taxes">
+                    <page string="Taxes" attrs="{'invisible': [('sale_id', '=', False)]}">
                         <field name="taxes" nolabel="1">
                             <tree>
                                 <field name="name" />
