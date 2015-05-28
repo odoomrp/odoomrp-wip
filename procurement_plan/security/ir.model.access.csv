@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_procuremen_plan","procuremen_plan","procurement_plan.model_procurement_plan","group_procurement_plan",1,1,1,1
+

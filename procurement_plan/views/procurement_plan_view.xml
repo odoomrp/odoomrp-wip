@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    
+        <record model="ir.ui.view" id="procurement_plan_search_view">
+            <field name="name">procurement.plan.search.view</field>
+            <field name="model">procurement.plan</field>
+            <field name="arch" type="xml">
+                <search string="Search Procurement Plan">
+                    <field name="sequence" />
+                    <field name="name" />
+                    <field name="from_date" />
+                    <field name="to_date" />
+                    <field name="warehouse_id" />
+                    <field name="project_id" />
+                    <field name="state" />
+                    <group expand="0" string="Group By">
+                        <filter string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="procurement_plan_tree_view" >
+            <field name="name">procurement.plan.tree.view</field>
+            <field name="model">procurement.plan</field>
+            <field name="arch" type="xml">
+                <tree string="Procurement Plans">
+                    <field name="sequence" />
+                    <field name="name" />
+                    <field name="from_date" />
+                    <field name="to_date" />
+                    <field name="warehouse_id" />
+                    <field name="project_id" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="procurement_plan_form_view" >
+            <field name="name">procurement.plan.form.view</field>
+            <field name="model">procurement.plan</field>
+            <field name="arch" type="xml">
+                <form string="Procurement Plan">
+                <header>
+                    <button name="%(action_import_procurement_plan)d" type="action" string="Import Procurements"/>
+                    <button name="button_load_sales" type="object" string="Load Sales" />
+                    <button name="button_load_purchases" type="object" string="Load Purchases" />
+                    <button name="button_run" type="object" string="Run" class="oe_highlight" />
+                    <button name="button_check" type="object" string="Check Procurements" class="oe_highlight" />
+                    <button name="button_cancel" type="object" string="Cancel" class="oe_highlight"/>
+                    <button name="button_reset_to_confirm" type="object" string="Reset to confirm" class="oe_highlight" />
+                    <field name="state" widget="statusbar" type="object" statusbar_visible="draft,running,done,cancel" readonly="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_right oe_button_box" name="buttons">
+                        <button class="oe_inline oe_stat_button"
+                                type="action" name="%(action_procurement_plan_procurements)d"
+                                icon="fa-list">
+                            <field name="num_procurements" widget="statinfo" />
+                        </button>
+                    </div>
+                    <h1>
+                        <label string="Procurement Plan" />
+                        <field name="name" class="oe_inline" string="name"/>
+                    </h1>
+                    <group colspan="4" col="6">
+                        <field name="sequence" colspan="2"/>
+                        <field name="from_date" colspan="2"/>
+                        <field name="to_date" colspan="2"/>
+                        <field name="warehouse_id" colspan="2" />
+                        <field name="project_id" colspan="4" />
+                    </group>
+                    <notebook>
+                        <page string="Procurements">
+                            <field name="procurement_ids" context="{'default_plan': False, 'search_default_plan': False}">
+                                <tree string="Procurement Lines" colors="red:date_planned&lt;current_date and state == 'exception';black:state=='running';darkgreen:state=='confirmed';gray:state in ['done','cancel'];blue:state == 'ready'">
+                                    <field name="plan" invisible="1" />
+                                    <field name="date_planned" widget="date"/>
+                                    <field name="origin"/>
+                                    <field name="rule_id" />
+                                    <field name="product_id"/>
+                                    <field name="product_qty"/>
+                                    <field name="product_uom" string="Unit of Measure"/>
+                                    <field name="state"/>
+                                    <button name="button_remove_plan" string="Remove of the Plan" states="confirmed" type="object" icon="gtk-remove"/>
+                                    <button name="button_run" states="confirmed,exception" type="object" string="Run" icon="gtk-execute" />
+                                    <button name="button_check" states="running" type="object" string="Check Procurements" icon="gtk-execute" />
+                                    <button name="cancel" states="exception,confirmed,running" type="object" string="Cancel" icon="gtk-cancel"/>
+                                    <button name="reset_to_confirmed" states="cancel" type="object" string="Reset to confirm" icon="gtk-convert" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Purchase Orders">
+                            <field name="purchase_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_procurement_plan">
+            <field name="name">Procurement Plans</field>
+            <field name="res_model">procurement.plan</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="procurement_plan_menu_view" name="Procurements Plans"
+            parent="stock.menu_stock_sched" action="action_procurement_plan" sequence="90"/>
+
+    </data>
+</openerp>

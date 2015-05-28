@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="wiz_load_purchase_from_plan_view">
+            <field name="name">wiz.load.purchase.from.plan.view</field>
+            <field name="model">wiz.load.purchase.from.plan</field>
+            <field name="arch" type="xml">
+                <form string="Load Purchases">
+                    <group colspan="4" col="4">
+                        <field name="date_from" select="1" required="1"/>
+                        <field name="date_to" select="1" required="1"/>
+                        <field name="partner_id" select="1"
+                                domain="[('customer','=',True)]"
+                                context="{'search_default_customer':1, 'show_address': 1}"/>
+                        <field name="purchase_id" />
+                        <field name="factor"/>
+                        <newline/>
+                        <field name="product_categ_id" select="1"/>
+                        <field name="product_tmpl_id" select="1"/>
+                        <field name="product_id" select="1" colspan="4"/>
+                    </group>
+                    <footer>
+                        <button name="load_purchases" type="object" 
+                                string="Load" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link"
+                                special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

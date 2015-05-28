@@ -1,0 +1,437 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* procurement_plan
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-18 17:47+0000\n"
+"PO-Revision-Date: 2015-05-18 19:49+0100\n"
+"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,product_categ_id:0
+#: field:wiz.load.sale.from.plan,product_categ_id:0
+msgid "Category"
+msgstr "Categoría"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Check Procurements"
+msgstr "Comprobar abastecimientos"
+
+#. module: procurement_plan
+#: field:procurement.plan,create_uid:0
+#: field:wiz.import.procurement.from.plan,create_uid:0
+#: field:wiz.load.purchase.from.plan,create_uid:0
+#: field:wiz.load.sale.from.plan,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: procurement_plan
+#: field:procurement.plan,create_date:0
+#: field:wiz.import.procurement.from.plan,create_date:0
+#: field:wiz.load.purchase.from.plan,create_date:0
+#: field:wiz.load.sale.from.plan,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: procurement_plan
+#: field:wiz.load.sale.from.plan,partner_id:0
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,date_from:0
+#: field:wiz.load.sale.from.plan,date_from:0
+msgid "Date from"
+msgstr "Fecha desde"
+
+#. module: procurement_plan
+#: help:procurement.plan,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Fecha del último mensaje publicado en el registro."
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,date_to:0
+#: field:wiz.load.sale.from.plan,date_to:0
+msgid "Date to"
+msgstr "Fecha hasta"
+
+#. module: procurement_plan
+#: field:procurement.plan,name:0
+msgid "Description"
+msgstr "Descripción"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Done"
+msgstr "Realizado"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:87
+#: code:addons/procurement_plan/models/procurement_plan.py:112
+#, python-format
+msgid "Error!: End date is lower than start date."
+msgstr "Error!: Fecha fin es menor que fecha comienzo."
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:81
+#: code:addons/procurement_plan/models/procurement_plan.py:106
+#, python-format
+msgid "Error!: You must enter from date."
+msgstr "Error!: Debe de introduir desde fecha."
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:84
+#: code:addons/procurement_plan/models/procurement_plan.py:109
+#, python-format
+msgid "Error!: You must enter to date."
+msgstr "Error!: Debe introducir hasta fecha."
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,factor:0
+#: field:wiz.load.sale.from.plan,factor:0
+msgid "Factor"
+msgstr "Factor"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_follower_ids:0
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: procurement_plan
+#: field:procurement.plan,from_date:0
+#: field:wiz.import.procurement.from.plan,from_date:0
+msgid "From Date"
+msgstr "Desde fecha"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: procurement_plan
+#: help:procurement.plan,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr "Resumen del chat (número de mensajes, ...). Este resumen es directamente en formato html para ser insertada en vistas kanban."
+
+#. module: procurement_plan
+#: field:procurement.plan,id:0
+#: field:wiz.import.procurement.from.plan,id:0
+#: field:wiz.load.purchase.from.plan,id:0
+#: field:wiz.load.sale.from.plan,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: procurement_plan
+#: help:procurement.plan,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "Clicado si los nuevos mensajes requieren su atención."
+
+#. module: procurement_plan
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+msgid "Import"
+msgstr "Importar"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Import Procurements"
+msgstr "Importar abastecimientos"
+
+#. module: procurement_plan
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+msgid "Import procurements"
+msgstr "Importar abastecimientos"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Es un seguidor"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_last_post:0
+msgid "Last Message Date"
+msgstr "Fecha último mensaje"
+
+#. module: procurement_plan
+#: field:procurement.plan,write_uid:0
+#: field:wiz.import.procurement.from.plan,write_uid:0
+#: field:wiz.load.purchase.from.plan,write_uid:0
+#: field:wiz.load.sale.from.plan,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: procurement_plan
+#: field:procurement.plan,write_date:0
+#: field:wiz.import.procurement.from.plan,write_date:0
+#: field:wiz.load.purchase.from.plan,write_date:0
+#: field:wiz.load.sale.from.plan,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: procurement_plan
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
+msgid "Load"
+msgstr "Cargar"
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:117
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#, python-format
+msgid "Load Purchases"
+msgstr "Cargar compras"
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:92
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
+#, python-format
+msgid "Load Sales"
+msgstr "Cargar ventas"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Location"
+msgstr "Ubicación"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:procurement.order,location_type:0
+msgid "Location Type"
+msgstr "Tipo ubicación"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_ids:0
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: procurement_plan
+#: help:procurement.plan,message_ids:0
+msgid "Messages and communication history"
+msgstr "Mensajes e historia de comunicación"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Origin"
+msgstr "Origen"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.procurement_form_view_inh_withplan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:procurement.order,plan:0
+msgid "Plan"
+msgstr "Plan"
+
+#. module: procurement_plan
+#: model:ir.model,name:procurement_plan.model_procurement_order
+msgid "Procurement"
+msgstr "Abastecimiento"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Procurement Lines"
+msgstr "Línas de abastecimientos"
+
+#. module: procurement_plan
+#: model:ir.model,name:procurement_plan.model_procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: model:res.groups,name:procurement_plan.group_procurement_plan
+msgid "Procurement Plan"
+msgstr "Plan abastecimientos"
+
+#. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_tree_view
+msgid "Procurement Plans"
+msgstr "Planes de abastecimientos"
+
+#. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_procurement_plan_procurements
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: field:procurement.plan,procurement_ids:0
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+#: field:wiz.import.procurement.from.plan,procurement_ids:0
+msgid "Procurements"
+msgstr "Abastecimientos"
+
+#. module: procurement_plan
+#: model:ir.ui.menu,name:procurement_plan.procurement_plan_menu_view
+msgid "Procurements Plans"
+msgstr "Planes de abastecimientos"
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,product_id:0
+#: field:wiz.load.sale.from.plan,product_id:0
+msgid "Product"
+msgstr "Producto"
+
+#. module: procurement_plan
+#: field:procurement.plan,project_id:0
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:wiz.load.purchase.from.plan,purchase_id:0
+msgid "Purchase"
+msgstr "Compra"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: field:procurement.plan,purchase_ids:0
+msgid "Purchase Orders"
+msgstr "Pedido de compra"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Remove of the Plan"
+msgstr "Borrar del plan"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Reset to confirm"
+msgstr "Reconfirmar"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Rule"
+msgstr "Regla"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Run"
+msgstr "Ejecutar"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Running"
+msgstr "En ejecución"
+
+#. module: procurement_plan
+#: field:wiz.load.sale.from.plan,sale_id:0
+msgid "Sale"
+msgstr "Venta"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "Search Procurement Plan"
+msgstr "Buscar plan de abastecimientos"
+
+#. module: procurement_plan
+#: field:procurement.plan,sequence:0
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "State"
+msgstr "Estado"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:procurement.plan,state:0
+msgid "Status"
+msgstr "Estado"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_summary:0
+msgid "Summary"
+msgstr "Sumario"
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,partner_id:0
+msgid "Supplier"
+msgstr "Proveedor"
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,product_tmpl_id:0
+#: field:wiz.load.sale.from.plan,product_tmpl_id:0
+msgid "Template"
+msgstr "Plantilla"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Unit of Measure"
+msgstr "Unidad de medida"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_unread:0
+msgid "Unread Messages"
+msgstr "Mensajes sin leer"
+
+#. module: procurement_plan
+#: field:procurement.plan,warehouse_id:0
+#: field:wiz.import.procurement.from.plan,warehouse_id:0
+msgid "Warehouse"
+msgstr "Almacén"
+
+#. module: procurement_plan
+#: field:procurement.plan,website_message_ids:0
+msgid "Website Messages"
+msgstr "Mensajes Web"
+
+#. module: procurement_plan
+#: help:procurement.plan,website_message_ids:0
+msgid "Website communication history"
+msgstr "Historial de comunicación web."
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "With plan"
+msgstr "Con plan"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Without plan"
+msgstr "Sin plan"
+
+#. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_import_procurement_plan
+msgid "Wizar import procurements from plan"
+msgstr "Wizar import procurements from plan"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "name"
+msgstr "descripción"
+
+#. module: procurement_plan
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
+msgid "or"
+msgstr "o"
+
+#. module: procurement_plan
+#: field:procurement.plan,to_date:0
+#: field:wiz.import.procurement.from.plan,to_date:0
+msgid "to Date"
+msgstr "Hasta fecha"
+

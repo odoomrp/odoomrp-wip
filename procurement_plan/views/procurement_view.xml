@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="procurement_tree_view_inh_withplan" >
+            <field name="name">procurement.tree.view.inh.withplan</field>
+            <field name="model">procurement.order</field>
+            <field name="inherit_id" ref="procurement.procurement_tree_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="date_planned" position="before">
+                        <field name="name"/>
+                        <field name="plan" />
+                    </field>
+                    <field name="state" position="after">
+                        <field name="rule_id"/>
+                        <field name="purchase_id"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="procurement_form_view_inh_withplan" >
+            <field name="name">procurement.form.view.inh.withplan</field>
+            <field name="model">procurement.order</field>
+            <field name="inherit_id" ref="procurement.procurement_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <group name="scheduling" position="before">
+                        <group>
+                            <field name="plan" string="Plan"/>
+                        </group>
+                    </group>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_procurement_filter_inh_withplan" >
+            <field name="name">view.procurement.filter.inh.withplan</field>
+            <field name="model">procurement.order</field>
+            <field name="inherit_id" ref="procurement.view_procurement_filter"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="product_id" position="after">
+                        <field name="plan" />
+                        <field name="origin" />
+                        <field name="location_id" />
+                        <field name="rule_id" />
+                        <field name="purchase_id" />
+                    </field>
+                    <field name="state" position="after">
+                        <filter string="With plan" domain="[('plan', '!=', False)]"/>
+                        <filter string="Without plan" domain="[('plan', '=', False)]"/>
+                        <filter string="Purchase" domain="[('purchase_id', '!=', False)]"/>
+                    </field>
+                    <filter string="Status" position="after">
+                        <filter string="Location Type" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'location_type'}"/>
+                        <filter string="Plan" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'plan'}"/>
+                        <filter string="Origin" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'origin'}"/>
+                        <filter string="Location" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'location_id'}"/>
+                        <filter string="Rule" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'rule_id'}"/>
+                    </filter>
+                </data>
+            </field>
+        </record>
+        <record id="action_procurement_plan_procurements" model="ir.actions.act_window">
+            <field name="name">Procurements</field>
+            <field name="res_model">procurement.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">
+                    {'search_default_plan': active_id,
+                    'default_plan': active_id,
+                    }
+            </field>
+            <field name="domain">[('plan', '=', active_id)]</field>
+        </record>
+    </data>
+</openerp>

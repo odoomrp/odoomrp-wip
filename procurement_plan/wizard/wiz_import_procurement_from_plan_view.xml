@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="wiz_import_procurement_from_plan_view">
+            <field name="name">wiz.import.procurement.from.plan.view</field>
+            <field name="model">wiz.import.procurement.from.plan</field>
+            <field name="arch" type="xml">
+                <form string="Import procurements">
+                    <field name="from_date" invisible="1" />
+                    <field name="to_date" invisible="1" />
+                    <field name="warehouse_id" invisible="1" />
+                    <separator string="Procurements"/>
+                    <field name="procurement_ids" height="300" width="700" />
+                    <footer>
+                        <button name="import_procurements" type="object" 
+                                string="Import" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link"
+                                special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_import_procurement_plan">
+            <field name="name">Wizar import procurements from plan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wiz.import.procurement.from.plan</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="wiz_import_procurement_from_plan_view"/>
+        </record>
+    </data>
+</openerp>
