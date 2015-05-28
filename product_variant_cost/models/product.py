@@ -2,8 +2,8 @@
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
@@ -16,15 +16,14 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import fields, models
+from openerp.addons import decimal_precision as dp
 
 
-class MrpBom(models.Model):
+class ProductProduct(models.Model):
 
-    _inherit = "mrp.bom"
+    _inherit = 'product.product'
 
-    product_standard_price = fields.Float(string="Product Standard Price",
-                                          related="product_id.cost_price")
-    product_manual_standard_price = fields.Float(
-        string="Product Manual Standard Price",
-        related="product_id.manual_standard_cost")
+    cost_price = fields.Float(
+        string="Variant Cost Price", digits=dp.get_precision('Product Price'),
+        groups="base.group_user", company_dependent=True)

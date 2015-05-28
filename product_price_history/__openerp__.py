@@ -30,6 +30,7 @@
     "category": "Generic Modules/Inventory Control",
     "depends": [
         "product",
+        "product_variant_cost"
     ],
     "contributors": [
         "Joël Grand-Guillaume <joel.grand-guillaume@camptocamp.com>",

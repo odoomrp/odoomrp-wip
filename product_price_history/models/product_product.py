@@ -16,18 +16,13 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
-from openerp.addons import decimal_precision as dp
+from openerp import models, api
 
 from .product_price import PRODUCT_FIELD_HISTORIZE
 
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
-
-    cost_price = fields.Float(
-        string="Variant Cost Price", digits=dp.get_precision('Product Price'),
-        groups="base.group_user", company_dependent=True)
 
     @api.one
     def _set_cost_price(self, value):
