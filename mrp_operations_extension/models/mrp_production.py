@@ -22,6 +22,10 @@ from openerp import models, fields, api, exceptions, _
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
+    workcenter_lines = fields.One2many(
+        'mrp.production.workcenter.line', 'production_id',
+        'Work Centers Utilisation', readonly=False)
+
     def _get_minor_sequence_operation(self, operations):
         return min(operations, key=lambda x: x.sequence)
 
@@ -94,6 +98,18 @@ class MrpProductionProductLine(models.Model):
 class MrpProductionWorkcenterLine(models.Model):
     _inherit = 'mrp.production.workcenter.line'
 
+    @api.one
+    def _ready_materials(self):
+        ready = True
+        if self.product_line:
+            move_obj = self.env['stock.move']
+            mov_lst = move_obj.search([('work_order', '=', self.id)])
+            for move in mov_lst:
+                if move.state not in ('assigned', 'cancel', 'done'):
+                    ready = False
+                    break
+        self.ready_materials = ready
+
     product_line = fields.One2many('mrp.production.product.line',
                                    'work_order', string='Product Lines')
     routing_wc_line = fields.Many2one('mrp.routing.workcenter',
@@ -103,6 +119,8 @@ class MrpProductionWorkcenterLine(models.Model):
     time_stop = fields.Float(string="Time Stop")
     move_lines = fields.One2many('stock.move', 'work_order',
                                  string='Moves')
+    ready_materials = fields.Boolean('Materials Ready',
+                                     compute="_ready_materials")
 
     @api.one
     def action_assign(self):
