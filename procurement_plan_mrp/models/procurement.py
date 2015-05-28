@@ -204,7 +204,7 @@ class ProcurementPlan(models.Model):
                         lambda x: x.type == 'supplier')
                     if suppliers:
                         sorted_suppliers = sorted(suppliers, reverse=True,
-                            key=lambda l: l.sequence)
+                                                  key=lambda l: l.sequence)
                         days_to_sum = (sorted_suppliers[0].delay or 0)
                     break
             date = (fields.Date.from_string(procurement.date_planned[0:10]) -
