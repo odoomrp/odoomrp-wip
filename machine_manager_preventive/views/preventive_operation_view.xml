@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- ==================== Operations type ======================= -->
+
+        <record model="ir.ui.view" id="optype_tree_view">
+            <field name="name">optype.tree.view</field>
+            <field name="model">preventive.operation.type</field>
+            <field name="arch" type="xml">
+                <tree string="Preventive Operations">
+                    <field name="name" select="1" />
+                    <field name="ref" select="1" />
+                    <field name="basedoncy" />
+                    <field name="basedontime" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="optype_form_view">
+            <field name="name">optype.form.view</field>
+            <field name="model">preventive.operation.type</field>
+            <field name="arch" type="xml">
+                <form string="Operation Type">
+                    <sheet>
+                        <div class="oe_left">
+                            <div class="oe_title">
+                                <label class="oe_edit_only" for="name"
+                                    string="Operation type" />
+                                <h1>
+                                    <field name="name" class="oe_inline" />
+                                </h1>
+                                <label for="ref" class="oe_edit_only" />
+                                <field name="ref" class="oe_inline" />
+                            </div>
+                            <div class="oe_left oe_inline" name="options"
+                                groups="base.group_user">
+                                <div>
+                                    <group col="6" colspan="2">
+                                        <field name="basedoncy" nolabel ="1"/>
+                                        <label for="basedoncy"/>
+                                        <field name="basedontime" nolabel ="1"/>
+                                        <label for="basedontime"/>
+                                        <field name="hours_qty" widget="float_time"/>
+                                    </group>
+                                </div>
+                            </div>
+                        </div>
+                        <group attrs="{'invisible':[('basedoncy','=',False)]}">
+                            <separator string="Operation by Cycles frequency"
+                                colspan="4" />
+                            <field name="cycles" />
+                            <field name="margin_cy1" />
+                            <field name="margin_cy2" />
+                        </group>
+                        <group colspan="2" col="4"
+                            attrs="{'invisible':[('basedontime','=',False)]}">
+                            <separator string="Operation by time frequency" />
+                            <newline />
+                            <group colspan="2" col="4">
+                                <field name="frequency" colspan="2" />
+                                <field name="interval_unit" colspan="2" />
+                            </group>
+                            <newline />
+                            <group colspan="2" col="4">
+                                <field name="margin_fre1" />
+                                <field name="interval_unit1" />
+                                <field name="margin_fre2" />
+                                <field name="interval_unit2" />
+                            </group>
+                        </group>
+                        <separator string="Description"
+                            colspan="4" />
+                        <field name="description" colspan="4"
+                            nolabel="1" />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_optype_view">
+            <field name="name">Operation Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">preventive.operation.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="optype_tree_view" />
+        </record>
+
+        <menuitem id="optype_menu" name="Preventive Operations type"
+            parent="menu_preven_operation_config" action="action_optype_view" />
+
+        <!-- ================== Operation Material view ===================== -->
+
+        <record id="operation_material_tree" model="ir.ui.view">
+            <field name="name">operation.material.tree</field>
+            <field name="model">preventive.operation.material</field>
+            <field name="arch" type="xml">
+                <tree string="Material">
+                    <!-- <field name="op_machi_mat" invisible="1" /> -->
+                    <field name="product_id" />
+                    <field name="product_uom_qty" />
+                    <field name="product_uom" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="operation_material_form" model="ir.ui.view">
+            <field name="name">operation.material.form</field>
+            <field name="model">preventive.operation.material</field>
+            <field name="arch" type="xml">
+                <form string="Material">
+                    <group colspan="2" col="6">
+                        <field name="product_id" />
+                        <field name="product_uom" groups="product.group_uom" />
+                        <field name="product_uom_qty" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="act_operation_mat" model="ir.actions.act_window">
+            <field name="name">Operation Material</field>
+            <field name="res_model">preventive.operation.material</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- =========== Operations - Materials - Machine - Relation =========== -->
+
+        <record model="ir.ui.view" id="operation_machine_materials_tree_view">
+            <field name="name">operation.machine.materials.tree</field>
+            <field name="model">preventive.operation.matmach</field>
+            <field name="arch" type="xml">
+                <tree string="Operations">
+                    <field name="optype_id" />
+                    <field name="basedoncy"  />
+                    <field name="basedontime" />
+                    <field name="material" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="operation_machine_materials_form_view">
+            <field name="name">operation.machine.materials.form</field>
+            <field name="model">preventive.operation.matmach</field>
+            <field name="arch" type="xml">
+                <form string="Operation Machine Material">
+                    <group colspan="4">
+                        <field name="name"/>
+                        <field name="optype_id"/>
+                        <field name="hours_qty" string="Hours"
+                            widget="float_time" />
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Materials">
+                            <field name="material" default_get="{'name':name}"
+                                nolabel="1" />
+                        </page>
+                        <page string="Op. Frecuency">
+                            <field name="basedoncy" invisible="1"/>
+                            <field name="basedontime" invisible="1"/>
+                            <group attrs="{'invisible':[('basedoncy','=',False)]}">
+                                <separator string="Operation Cycle frequency" colspan="4" />
+                                <field name="cycles" />
+                            </group>
+                            <group colspan="2" col="4" attrs="{'invisible':[('basedontime','=',False)]}">
+                            <separator string="Operation time frequency" colspan="4" />
+                                <group colspan="2" col="4">
+                                    <field name="frequency" />
+                                    <field name="interval_unit"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Op. Description">
+                            <field name="description" colspan="4"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

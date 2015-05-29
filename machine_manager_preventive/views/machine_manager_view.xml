@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- ============= Machine preventive operations =================== -->
+        <record id="machines_form_inherit" model="ir.ui.view">
+            <field name="name">machines.form.inherit</field>
+            <field name="type">form</field>
+            <field name="model">machinery</field>
+            <field name="inherit_id"
+                ref="avanzosc_mrp_machine_manager.machines_form" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath
+                        expr="/form/notebook/page[@string='Extra Information']"
+                        position="after">
+                        <page string="Next Revision">
+                            <field name="preop" nolabel="1"
+                                colspan="4" default_get="{'name':name}" />
+                        </page>
+                        <page string="Alerts">
+                            <field name="alert_list" nolabel="1"
+                                colspan="4" />
+                        </page>
+                        <page string="Preventive orders">
+                            <field domain="[('preventive','=',1)]"
+                                name="order_list" nolabel="1" colspan="4" />
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>

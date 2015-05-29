@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_product_form_preventive" model="ir.ui.view">
+            <field name="name">view.product.form.preventive</field>
+            <field name="model">machinery</field>
+            <field name="inherit_id" ref="machine_manager.machines_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="bdate" position="after">
+                        <separator string="Next Revisions" colspan="4"/>
+                        <field name="preventive_operations" colspan="4" nolabel="1"/>
+                        <separator string="Repair Orders" colspan="4"/>
+                        <field name="repair_orders" colspan="4" nolabel="1"/>
+                    </field>
+                    <field name="bdate" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </field>
+                    <field name="primarymeter" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </field>
+                    <field name="bcyl" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </field>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>

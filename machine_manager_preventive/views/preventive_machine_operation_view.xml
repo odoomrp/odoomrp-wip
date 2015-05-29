@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <menuitem id="menu_preventive_operation" name="Preventive Operations"
+            parent="menu_preventive_maintenance" sequence="1" />
+
+        <record id="machine_pre_op_tree" model="ir.ui.view">
+            <field name="name">machine.pre.op.tree</field>
+            <field name="model">preventive.machine.operation</field>
+            <field name="arch" type="xml">
+                <tree string="Preventive Operations" colors="red:extra_alert==True;blue:alert==True" >
+                    <field name="name" />
+                    <field name="machine" />
+                    <field name="cycles" />
+                    <field name="alert" />
+                    <field name="extra_alert" />
+                    <field name="nextdate" string="Next revision date" />
+                    <field name="nextcycles" string="Next revision Cycles" />
+                </tree>
+            </field>
+        </record>
+        <record id="machine_pre_op_form" model="ir.ui.view">
+            <field name="name">machine.pre.op.form</field>
+            <field name="model">preventive.machine.operation</field>
+            <field name="arch" type="xml">
+                <form string="Preventive Operations">
+                <header>
+                    <button name="%(act_prevmach_repair_order)d" string="Make Repair Order" 
+                    class="oe_highlight" type="action"/>
+                </header>
+                    <group col="6" colspan="6">
+                        <group col="4" colspan="4">
+                            <field name="name" colspan="4" />
+                            <field name="opname_omm" string="Operation - Material"/>
+                        </group>
+                        <group col="4" colspan="1">
+                            <field name="alert" />
+                            <field name="extra_alert" />
+                        </group>
+                    </group>
+                    <group col="6" colspan="6">
+                        <newline />
+                        <field name="machine" />
+                        <field name="actcycles"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Information">
+                             <separator string="Revision Frecuency"/>
+                                <group col="6">
+                                    <field name="cycles" />
+                                    <field name="frequency" />
+                                    <field name="interval_unit" />
+                               </group>
+                            <group colspan="4" col="2">
+                                <group>
+                                    <separator string="Last Revision" colspan="4" />
+                                    <group>
+                                        <field name="lastdate"/>
+                                        <field name="lastcycles"/>
+                                        <field name="last_hours_qty" string="Hours" widget="float_time" />
+                                    </group>
+                                </group>
+                                <group>
+                                    <separator string="Next Revision" colspan="4" />
+                                    <group>
+                                        <field name="nextdate"/>
+                                        <field name="nextcycles"/>
+                                        <field name="hours_qty" string="Hours"
+                                            widget="float_time" />
+                                    </group>
+                                </group>
+                            </group>
+                            <group colspan="4" col="2">
+                                <group col="4">
+                                <separator string="1st Alert" colspan="4"/>
+                                <field name="check_al1" invisible="1"/>
+                                <button name="set_alarm1" string="Alarm" type="object"
+                                    icon="gtk-dialog-info" colspan="4" attrs="{'invisible':[('check_al1','=',True)]}"/>
+                                 <button name="set_alarm1" string="Alarm" type="object"
+                                    icon="terp-idea" colspan="4" attrs="{'invisible':[('check_al1','=',False)]}"/>
+                                    <group colspan="2" col="4" attrs="{'invisible':[('check_al1','=',False)]}">
+                                        <field name="first_margin" colspan="4"/>
+                                        <field name="margin_fre1"/>
+                                        <field name="interval_unit1" />
+                                    </group>
+                                </group>
+                                <group col="4">
+                                    <separator string="2nd Alert" colspan="4"/>
+                                    <field name="check_al2" invisible="1"/>
+                                    <button name="set_alarm2" string="Alarm" type="object"
+                                    icon="gtk-dialog-info" colspan="4"  attrs="{'invisible':[('check_al2','=',True)]}"/>
+                                    <button name="set_alarm2" string="Alarm" type="object"
+                                    icon="terp-idea" colspan="4" attrs="{'invisible':[('check_al2','=',False)]}"/>
+                                    <group colspan="2" col="4"
+                                    attrs="{'invisible':[('check_al2','=',False)]}">
+                                        <field name="second_margin" colspan="4"/>
+                                        <field name="margin_fre2" />
+                                        <field name="interval_unit2"/>
+                                    </group>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Description">
+                            <separator string="Description"
+                                colspan="4" />
+                            <field name="opdescription" colspan="4"
+                                nolabel="1" />
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record id="machine_pre_op_search" model="ir.ui.view">
+            <field name="name">machine.pre.op.search</field>
+            <field name="model">preventive.machine.operation</field>
+            <field name="arch" type="xml">
+                <search string="Preventive Operations">
+                    <group>
+                        <field name="name" />
+                        <field name="machine" />
+                        <field name="cycles" />
+                        <field name="alert" />
+                        <field name="extra_alert" />
+                        <field name="nextcycles" string="Next revision Cycles" />
+                        <field name="nextdate" string="Next revision date" />
+                        <field name="nextdate" string="Next revision date Week" interval="week" />
+                        <field name="nextdate" string="Next revision date Day" interval="day" />
+                    </group>
+                    <group expand="0" string="Filter by...">
+                        <filter icon="terp-personal" string="Alert"
+                            domain="[('alert','=', True)]" />
+                        <filter icon="terp-personal" string="Extra Alert"
+                            domain="[('extra_alert','=',True)]" />
+                    </group>
+                    <group expand="0" string="Group By...">
+                        <filter string="Machine" context="{'group_by': 'machine'}"/>
+                        <filter string="Type" domain="[]" context="{'group_by':'opname_omm'}" />
+                        <filter string="NxRevision Month" domain="[]" context="{'group_by':'nextdate'}" />
+                        <filter string="NxRevision Week" domain="[]" context="{'group_by':'nextdate:week'}" />
+                        <filter string="NxRevision Day" domain="[]" context="{'group_by':'nextdate:day'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+       <record id="preventive_machine_calendar_view" model="ir.ui.view">
+            <field name="name">preventive.machine.calendar.view</field>
+            <field name="model">preventive.machine.operation</field>
+            <field name="arch" type="xml">
+                <calendar string="Preventive orders" color="opname_omm" date_start="nextdate">
+                    <field name="machine"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="action_machine_operations" model="ir.actions.act_window">
+            <field name="name">Machine operations</field>
+            <field name="res_model">preventive.machine.operation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+        </record>
+        <menuitem id="machine_op_tree_view" name="Machine Operations"
+            parent="menu_preventive_operation" action="action_machine_operations" />
+
+    </data>
+</openerp>

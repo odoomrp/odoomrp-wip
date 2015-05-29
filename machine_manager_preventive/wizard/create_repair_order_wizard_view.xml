@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <!-- Start window -->
+        <record id="wizard_prev_repair_order_form" model="ir.ui.view">
+            <field name="name">wizard.prev.repair.order.form</field>
+            <field name="model">preventive.repair.order</field>
+            <field name="arch" type="xml">
+                <form string="Create Preventive">
+                    <separator
+                        string="Create repair order for current Machine?"
+                        colspan="4" />
+                        <group colspan="4">
+                            <field name="location_id"/>
+                            <field name="location_dest_id"/>
+                            <field name="invoice_method"/>
+                            <group attrs="{'invisible':[('invoice_method','in',(False,'none'))]}" colspan="2" col="4">
+                                <field name="partner" attrs="{'required':[('invoice_method','in',('b4repair','after_repair'))]}"/>
+                                <field name="invoice_address" attrs="{'required':[('invoice_method','in',('b4repair','after_repair'))]}"/>
+                            </group>
+                        </group>
+                    <footer>
+                        <button class="oe_highlight" name="create_order_from_pmo"
+                            string="Accept" type="object" />
+                        or
+                        <button class="oe_link" special="cancel"
+                            string="Cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action of machine operation wizard  -->
+
+        <record id="action_machine_operation" model="ir.actions.act_window">
+            <field name="name">create preventives</field>
+            <field name="res_model">preventive.repair.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_prev_repair_order_form" />
+            <field name="target">new</field>
+        </record>
+
+        <act_window name="Create Repair Order" res_model="preventive.repair.order"
+            src_model="preventive.machine.operation" view_mode="form" target="new"
+            key2="client_action_multi" id="act_prevmach_repair_order" />
+    </data>
+</openerp>

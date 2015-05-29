@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <!-- Start window -->
+
+        <record id="create_preventive_form" model="ir.ui.view">
+            <field name="name">machine.operation.form</field>
+            <field name="model">preventive.create.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Create Preventive">
+                    <separator
+                        string="Create preventive operations for defined parameters?"
+                        colspan="4" />
+                    <footer>
+                        <button class="oe_highlight" name="create_preventive"
+                            string="Accept" type="object" />
+                        or
+                        <button class="oe_link" special="cancel"
+                            string="Cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action of machine operation wizard -->
+
+        <record id="action_create_preventive" model="ir.actions.act_window">
+            <field name="name">create preventives</field>
+            <field name="res_model">preventive.create.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="create_preventive_form" />
+            <field name="target">new</field>
+        </record>
+
+        <act_window name="Create Preventives" res_model="preventive.create.wizard"
+            src_model="preventive.master" view_mode="form" target="new"
+            key2="client_action_multi" id="act_create_preventive" />
+
+        <!-- Preventice view list -->
+
+        <record id="view_preventive_list" model="ir.ui.view">
+            <field name="name">view.preventive_list</field>
+            <field name="model">preventive.list</field>
+            <field name="arch" type="xml">
+                <form string="Created Preventive List">
+               <group colspan="4" col="4">
+                    <field name="op_count" colspan="2"/>
+                    <newline />
+                    <field name="machi_prevs" nolabel="1" colspan="4"/>
+                </group>
+                     <footer>
+                        <button class="oe_link" special="cancel"
+                            string="Accept" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>
