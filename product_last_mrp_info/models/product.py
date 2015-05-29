@@ -26,7 +26,6 @@ class ProductProduct(models.Model):
     @api.one
     @api.depends('last_mrp_id')
     def _get_mrp_last_cost(self):
-        analytic_line_obj = self.env['account.analytic.line']
         last_mrp_cost = 0.0
         if self.last_mrp_id:
             last_mrp_cost = self.last_mrp_id.calc_mrp_real_cost()
