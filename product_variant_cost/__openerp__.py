@@ -34,5 +34,5 @@
         "views/stock_quant_view.xml"
     ],
     "installable": True,
-    "post_init_hook": "charge_cost_price_on_variant",
+    "post_init_hook": "load_cost_price_on_variant",
 }

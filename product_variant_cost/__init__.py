@@ -20,7 +20,7 @@ from . import models
 from openerp import SUPERUSER_ID
 
 
-def charge_cost_price_on_variant(cr, registry):
+def load_cost_price_on_variant(cr, registry):
     product_obj = registry['product.product']
     product_ids = product_obj.search(cr, SUPERUSER_ID, [])
     for product in product_obj.browse(cr, SUPERUSER_ID, product_ids):
