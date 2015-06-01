@@ -19,21 +19,24 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 {
-    'name': 'Stock picking wave package info',
-    'version': "1.0",
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
+    "name": "Stock picking wave package info",
+    "version": "1.0",
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    'website': "http://www.odoomrp.com",
-    'category': 'Stock Management',
-    'depends': ["stock_picking_package_info",
-                "stock_picking_wave_management",
-                ],
-    'data': ["views/stock_picking_wave_view.xml",
-             "views/stock_quant_package_view.xml",
-             "reports/label_creator_wave_palet_report.xml"
-             ],
-    'installable': True,
-    'auto_install': True,
+    "website": "http://www.odoomrp.com",
+    "category": "Inventory, Logistic, Storage",
+    "depends": [
+        "stock_picking_package_info",
+        "stock_picking_wave_management",
+    ],
+    "data": [
+        "views/stock_picking_wave_view.xml",
+        "views/stock_quant_package_view.xml",
+        "reports/label_creator_wave_palet_report.xml"
+    ],
+    "installable": True,
+    "auto_install": True,
 }

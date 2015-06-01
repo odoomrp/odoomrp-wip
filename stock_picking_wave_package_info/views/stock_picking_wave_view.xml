@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="view_picking_wave_form_inh_pickingwavepackageinfo">
-            <field name="name">view.picking.wave.form.inh.pickingwavepackageinfo</field>
+        <record model="ir.ui.view" id="stock_picking_wave_package_info_form_view">
+            <field name="name">stock.picking.wave.package.info.form</field>
             <field name="model">stock.picking.wave</field>
             <field name="inherit_id" ref="stock_picking_wave_management.view_picking_wave_form_inh_management" />
             <field name="arch" type="xml">
                 <page string="Operations" position="after">
-                    <page string="Packages" >
+                    <page string="Packages" groups="stock.group_tracking_lot"
+                          attrs="{'invisible': [('packages','=',False)]}">
                         <field name="packages" >
-                            <tree >
+                            <tree>
                                 <field name="name" />
                                 <field name="ul_id" />
                                 <field name="width" />
@@ -35,9 +36,9 @@
                             <field name="packages_info" nolabel="1">
                                 <tree>
                                     <field name="package" />
-                                    <field name="kg_net" sum="sum_kg_net"/>
+                                    <field name="net_weight" sum="sum_net_weight"/>
                                     <field name="lots" />
-                                    <field name="gross_net" sum="sum_gross_net"/>
+                                    <field name="gross_weight" sum="sum_gross_weight"/>
                                 </tree>
                             </field>
                         </group>
