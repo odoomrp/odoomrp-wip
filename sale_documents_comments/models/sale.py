@@ -16,7 +16,7 @@ class SaleOrder(models.Model):
     def _prepare_invoice(self, order, lines):
         res = super(SaleOrder, self)._prepare_invoice(order, lines)
         sale_comment = res.get('sale_comment', '')
-        partner_id = res.get('partner_id')
+        partner_id = res.get('partner_id', order.partner_invoice_id.id)
         sale_comment += '\n%s' % (order.propagated_comment or '')
         if partner_id:
             partner = self.env['res.partner'].browse(partner_id)
