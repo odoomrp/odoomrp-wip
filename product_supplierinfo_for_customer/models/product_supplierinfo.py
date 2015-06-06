@@ -34,3 +34,9 @@ class ProductSupplierinfo(models.Model):
         elif self.type == 'customer':
             return {'domain': {'name': [('customer', '=', True)]}}
         return {'domain': {'name': []}}
+
+    @api.multi
+    @api.onchange('sequence')
+    def onchange_sequence(self):
+        if self.type == 'customer' and self.sequence < 100:
+            self.sequence += 100

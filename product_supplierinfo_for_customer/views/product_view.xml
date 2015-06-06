@@ -57,6 +57,9 @@
             <field name="mode">primary</field>
             <field name="priority" eval="20" />
             <field name="arch" type="xml">
+                <field name="sequence" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
                 <field name="name" position="after">
                     <field name="product_tmpl_id" />
                 </field>
@@ -83,7 +86,12 @@
                     position="before">
                     <separator string="Customers" />
                     <field name="customer_ids"
-                        context="{'default_search_type':'customer','default_type':'customer','default_product_tmpl_id':id,'default_sequence':99}">
+                        context="{'default_search_type':'customer','default_type':'customer','default_product_tmpl_id':id,'default_sequence':101}">
+                        <tree>
+                            <field name="name"/>
+                            <field name="delay"/>
+                            <field name="min_qty"/>
+                        </tree>
                     </field>
                 </xpath>
             </field>
