@@ -10,7 +10,7 @@ import openerp.addons.decimal_precision as dp
 class StockPickingTax(models.Model):
     _name = 'stock.picking.tax'
 
-    picking = fields.Many2one(
+    picking = fields.Many2many(
         comodel_name='stock.picking', string='Picking', ondelete='cascade')
     name = fields.Char(string='Tax Description', required=True)
     base = fields.Float(string='Base', digits=dp.get_precision('Account'))
@@ -23,7 +23,7 @@ class StockPickingTax(models.Model):
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    taxes = fields.One2many(
+    taxes = fields.Many2many(
         comodel_name='stock.picking.tax', string='Taxes',
         compute='_calc_taxes')
     amount_untaxed = fields.Float(
@@ -99,17 +99,17 @@ class StockPicking(models.Model):
             t['amount'] = currency.round(t['amount'])
         return tax_grouped
 
-    @api.multi
+    @api.one
     @api.depends('amount_untaxed', 'amount_tax', 'amount_total')
     def _calc_taxes(self):
-        taxes = tax_obj = self.env['stock.picking.tax']
-        for picking in self:
-            picking.taxes.unlink()
-            for tax in self.compute(picking).values():
-                taxes += tax_obj.create({
-                    'picking': tax['picking'],
-                    'sequence': tax['sequence'],
-                    'name': tax['name'],
-                    'base': tax['base'],
-                    'amount': tax['amount']})
-            picking.taxes = taxes.ids
+        taxes = self.env['stock.picking.tax']
+        self.taxes.unlink()
+        for tax in self.compute(self).values():
+            tax_values = {
+                'sequence': tax['sequence'],
+                'name': tax['name'],
+                'base': tax['base'],
+                'amount': tax['amount']
+            }
+            taxes += self.env['stock.picking.tax'].create(tax_values)
+        self.taxes = [(6, 0, taxes.ids)]
