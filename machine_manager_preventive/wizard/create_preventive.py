@@ -32,7 +32,7 @@ class PreventiveCreateWizard(models.TransientModel):
         for master_op_id in self.env.context['active_ids']:
             prev_master = master_operations.browse(master_op_id)
             operation_list = prev_master.ope_material
-            # Preventive operation matmach for preventive master operation list
+            # Preventive operation match for preventive master operation list
             for operation in operation_list:
                 op_name = operation.optype_id.name
                 op_compose_name = '-'.join([prev_master.pmo_type.name, op_name,
@@ -45,12 +45,8 @@ class PreventiveCreateWizard(models.TransientModel):
                     # Preventive machine operations(pmo) for current machine
                     machine_op_list = machine_operations.search(
                         [('machine', '=', machine.id)])
-                    exist = False
-                    if machine_op_list != []:
-                        for machine_pre_op in machine_op_list:
-                            if machine_pre_op.opname_omm.id == operation.id:
-                                exist = True
-                                break
+                    exist = bool(machine_op_list.filtered(
+                        lambda x: x.opname_omm.id == operation.id))
                     if not exist:  # machine has no pmo
                         operation_name = '-'.join([op_compose_name,
                                                    machine.name])
@@ -64,11 +60,11 @@ class PreventiveCreateWizard(models.TransientModel):
                             'first_margin': operation.optype_id.margin_cy1,
                             'second_margin': operation.optype_id.margin_cy2,
                             'margin_fre1': operation.optype_id.margin_fre1,
-                            'interval_unit1':
-                                operation.optype_id.interval_unit1,
+                            'interval_unit1': (
+                                operation.optype_id.interval_unit1),
                             'margin_fre2': operation.optype_id.margin_fre2,
-                            'interval_unit2':
-                                operation.optype_id.interval_unit2,
+                            'interval_unit2': (
+                                operation.optype_id.interval_unit2),
                             'hours_qty': operation.hours_qty,
                             'last_hours_qty': operation.hours_qty,
                             }
