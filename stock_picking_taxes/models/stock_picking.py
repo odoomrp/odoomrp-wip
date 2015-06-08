@@ -11,13 +11,14 @@ class StockPickingTax(models.Model):
     _name = 'stock.picking.tax'
 
     picking = fields.Many2many(
-        comodel_name='stock.picking', string='Picking', ondelete='cascade')
+        comodel_name='stock.picking', string='Picking',
+        relation='rel_picking_taxes')
     name = fields.Char(string='Tax Description', required=True)
     base = fields.Float(string='Base', digits=dp.get_precision('Account'))
     amount = fields.Float(string='Amount', digits=dp.get_precision('Account'))
     sequence = fields.Integer(
         string='Sequence',
-        help="Gives the sequence order when displaying a list of picking tax.")
+        help='Gives the sequence order when displaying a list of picking tax.')
 
 
 class StockPicking(models.Model):
@@ -25,7 +26,7 @@ class StockPicking(models.Model):
 
     taxes = fields.Many2many(
         comodel_name='stock.picking.tax', string='Taxes',
-        compute='_calc_taxes')
+        compute='_calc_taxes', relation='rel_picking_taxes')
     amount_untaxed = fields.Float(
         string='Untaxed Amount', compute='_amount_all',
         digits=dp.get_precision('Sale Price'), help='The amount without tax.')
@@ -103,13 +104,13 @@ class StockPicking(models.Model):
     @api.depends('amount_untaxed', 'amount_tax', 'amount_total')
     def _calc_taxes(self):
         taxes = self.env['stock.picking.tax']
-        self.taxes.unlink()
         for tax in self.compute(self).values():
             tax_values = {
+                'picking': [(4, self.id)],
                 'sequence': tax['sequence'],
                 'name': tax['name'],
                 'base': tax['base'],
                 'amount': tax['amount']
             }
             taxes += self.env['stock.picking.tax'].create(tax_values)
-        self.taxes = [(6, 0, taxes.ids)]
+        self.taxes = taxes
