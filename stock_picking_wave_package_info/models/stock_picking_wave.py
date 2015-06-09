@@ -41,12 +41,14 @@ class StockPickingWave(models.Model):
                 lambda r: r.result_package_id == package)
             total_weight = 0.0
             for pack_operation in package_operations:
-                total_weight = (pack_operation.product_qty *
-                                pack_operation.product_id.weight)
+                total_weight += (pack_operation.product_qty *
+                                 pack_operation.product_id.weight)
             vals = {
                 'wave': self.id,
                 'sequence': sequence,
                 'package': package.id,
+                'lots': [(6, 0, (package.quant_ids.mapped('lot_id').ids or
+                                 package_operations.mapped('lot_id').ids))],
                 'net_weight': total_weight,
                 'gross_weight': total_weight + package.empty_weight,
             }
