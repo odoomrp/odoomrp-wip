@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="view_quant_package_form_inh_pickingwavepackageinfo">
-            <field name="name">view.quant.package.form.inh.pickingwavepackageinfo</field>
+        <record model="ir.ui.view" id="stock_quant_package_wave_info_form_view">
+            <field name="name">stock.quant.package.wave.info.form</field>
             <field name="model">stock.quant.package</field>
-            <field name="inherit_id" ref="stock_picking_package_info.view_quant_package_form_inh_pickingpackageinfo" />
+            <field name="inherit_id" ref="stock_picking_package_info.stock_quant_package_info_form_view" />
             <field name="arch" type="xml">
                 <page string="Pickings" position="after">
                     <page string="Picking Waves">
