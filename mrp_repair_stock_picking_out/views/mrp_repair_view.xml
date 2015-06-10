@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <data>
                 <xpath expr="//page[@string='Extra Info']//field[@name='move_id']" position="before">
-                    <field name="stock_picking" attrs="{'invisible':[('address_id','=', False)]}"/>
+                    <field name="picking_out" attrs="{'invisible':[('address_id','=', False)]}"/>
                 </xpath>
             </data>
         </field>
