@@ -26,13 +26,9 @@ class ProductProduct(models.Model):
     @api.one
     @api.depends('last_mrp_id')
     def _get_mrp_last_cost(self):
-        analytic_line_obj = self.env['account.analytic.line']
         last_mrp_cost = 0.0
         if self.last_mrp_id:
-            analytic_lines = analytic_line_obj.search(
-                [('mrp_production_id', '=', self.last_mrp_id.id)])
-            if analytic_lines:
-                last_mrp_cost = sum([-line.amount for line in analytic_lines])
+            last_mrp_cost = self.last_mrp_id.calc_mrp_real_cost()
         self.last_mrp_cost = last_mrp_cost
 
     last_mrp_id = fields.Many2one('mrp.production',

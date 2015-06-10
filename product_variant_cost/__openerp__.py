@@ -2,8 +2,8 @@
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
@@ -16,15 +16,23 @@
 #
 ##############################################################################
 
-from openerp import models, fields
-
-
-class MrpBom(models.Model):
-
-    _inherit = "mrp.bom"
-
-    product_standard_price = fields.Float(string="Product Standard Price",
-                                          related="product_id.cost_price")
-    product_manual_standard_price = fields.Float(
-        string="Product Manual Standard Price",
-        related="product_id.manual_standard_cost")
+{
+    "name": "Product Variant Cost",
+    "version": "1.0",
+    "depends": [
+        "product",
+        "stock_account"
+    ],
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "category": "Product",
+    "website": "http://www.odoomrp.com",
+    "summary": "",
+    "data": [
+        "views/product_view.xml",
+        "views/stock_quant_view.xml"
+    ],
+    "installable": True,
+    "post_init_hook": "load_cost_price_on_variant",
+}
