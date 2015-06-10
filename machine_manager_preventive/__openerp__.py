@@ -26,7 +26,7 @@
                      "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
                      "Ana Juaristi <ajuaristio@gmail.com>"],
     "category": "Manufacturing",
-    "data": ["security/avanzosc_preventive_manager_security.xml",
+    "data": ["security/preventive_manager_security.xml",
              "security/ir.model.access.csv",
              "wizard/create_preventive_wizard_view.xml",
              "wizard/create_repair_order_wizard_view.xml",
