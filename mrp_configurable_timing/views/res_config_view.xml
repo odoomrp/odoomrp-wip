@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="mrp_settings_complete_cycle_form_view">
+            <field name="name">mrp.settings.complete.cycle.form</field>
+            <field name="model">mrp.config.settings</field>
+            <field name="inherit_id" ref="mrp.view_mrp_config" />
+            <field name="arch" type="xml">
+                <xpath expr="//label[@string='Planning']/../div" position="inside">
+                    <div>
+                        <field name="complete_cycle" class="oe_inline"/>
+                        <label for="complete_cycle"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
