@@ -26,7 +26,7 @@ class MrpProduction(models.Model):
                 for line in production.move_created_ids2:
                     if (line.product_id.id == production.product_id.id and
                             line.restrict_lot_id):
-                        lot_id = line.restric_lot_id.id
+                        lot_id = line.restrict_lot_id.id
                         break
                 if not lot_id:
                     code = (production.manual_production_lot or
