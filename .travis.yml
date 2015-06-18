@@ -9,6 +9,7 @@ addons:
       - expect-dev  # provides unbuffer utility
       - python-lxml  # because pip installation is slow
       - python-unidecode
+      - antiword  # document module
 
 env:
   global:
