@@ -54,17 +54,21 @@ class StockPickingWave(models.Model):
             cr, uid, pickings.ids, context=c)
 
     @api.multi
+    def _get_pickings_domain(self):
+        self.ensure_one()
+        cond = [('wave_id', '=', False),
+                ('state', 'not in', ['done', 'cancel'])]
+        if self.partner.child_ids:
+            cond.extend(['|', ('partner_id', '=', self.partner.id),
+                         ('partner_id', 'in',
+                          self.partner.child_ids.ids)])
+        elif self.partner:
+            cond.extend([('partner_id', '=', self.partner.id)])
+        return cond
+
+    @api.multi
     @api.onchange('partner')
     def onchange_partner(self):
         self.ensure_one()
-        cond = [('wave_id', '=', False),
-                ('state', 'not in', ('done', 'cancel'))]
-        if self.partner.child_ids:
-            cond.extend([('wave_id', '=', False),
-                         '|', ('partner_id', '=', self.partner.id),
-                         ('partner_id', 'child_of',
-                          self.partner.child_ids.ids)])
-        elif self.partner:
-            cond.extend([('wave_id', '=', False),
-                         ('partner_id', '=', self.partner.id)])
+        cond = self._get_pickings_domain()
         return {'domain': {'picking_ids': cond}}

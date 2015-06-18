@@ -14,10 +14,9 @@ class StockPickingWave(models.Model):
     @api.onchange('carrier')
     def onchange_carrier(self):
         self.ensure_one()
-        result = self.onchange_partner()
-        if 'domain' in result and self.carrier:
-            domain = result['domain']
-            cond = domain['picking_ids']
+        cond = self._get_pickings_domain()
+        result = {}
+        if cond and self.carrier:
             cond.extend([('carrier_id', '=', self.carrier.id)])
-            result['domain'].update({'picking_ids': cond})
+            result['domain'] = {'picking_ids': cond}
         return result
