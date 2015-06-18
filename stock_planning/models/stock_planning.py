@@ -181,14 +181,13 @@ class StockPlanning(models.Model):
         procurements = procurement_obj.search(cond)
         if not procurements:
             raise exceptions.Warning(_('There are no procurements to show'))
-        return {
-              'name': _('Procurement orders'),
-              'view_type': 'form',
-              "view_mode": 'tree,form',
-              'res_model': 'procurement.order',
-              'type': 'ir.actions.act_window',
-              'domain': [('id', 'in', procurements.ids)],
-              }
+        return {'name': _('Procurement orders'),
+                'view_type': 'form',
+                "view_mode": 'tree,form',
+                'res_model': 'procurement.order',
+                'type': 'ir.actions.act_window',
+                'domain': [('id', 'in', procurements.ids)]
+                }
 
     @api.multi
     def generate_procurement(self):
