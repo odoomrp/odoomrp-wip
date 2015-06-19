@@ -134,6 +134,7 @@ class PricelistItem(models.Model):
         product = product_obj.browse(product_id)
         price = False
         qty_uom_id = uom_id or product.uom_id.id
+        price_uom_id = qty_uom_id
         price_types = {}
         if self.base == -1:
             if self.base_pricelist_id:
@@ -141,7 +142,6 @@ class PricelistItem(models.Model):
                     self.base_pricelist_id,
                     [(product, qty, False)])[product.id]
                 ptype_src = self.base_pricelist_id.currency_id
-                price_uom_id = qty_uom_id
                 price = ptype_src.compute(
                     price_tmp, self.pricelist.currency_id, round=False)
         elif self.base == -2:
@@ -163,7 +163,6 @@ class PricelistItem(models.Model):
             price_type = price_types[self.base]
             # price_get returns the price in the context UoM, i.e.
             # qty_uom_id
-            price_uom_id = qty_uom_id
             price = price_type.currency_id.compute(
                 product.product_tmpl_id._price_get(
                     product, price_type.field)[product.id],
