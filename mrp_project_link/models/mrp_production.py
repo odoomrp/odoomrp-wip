@@ -111,9 +111,14 @@ class MrpProductionWorkcenterLine(models.Model):
                 'project_id': record.production_id.project_id.id,
                 'parent_ids': [(6, 0, production_tasks.ids)]
             }
-            if record.routing_wc_line.operation:
-                count = record.routing_wc_line.operation.op_number
+            if record.routing_wc_line:
+                count = (record.routing_wc_line.op_wc_lines.filtered(
+                    lambda r: r.workcenter == record.workcenter_id).op_number
+                    or record.workcenter_id.op_number)
+                op_list = record.workcenter_id.operators
                 for i in range(count):
+                    if len(op_list) > i:
+                        task_values['user_id'] = op_list[i].id
                     task_name = (_("%s:: WO%s-%s:: %s") %
                                  (record.production_id.name,
                                   str(record.sequence).zfill(3),
