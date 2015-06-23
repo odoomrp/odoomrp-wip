@@ -125,13 +125,13 @@ class StockPlanning(models.Model):
 
     company = fields.Many2one('res.company', 'Company')
     warehouse = fields.Many2one('stock.warehouse', 'Warehouse')
-    location = fields.Many2one('stock.location', 'Location')
+    location = fields.Many2one('stock.location', 'Location', translate=True)
     from_date = fields.Date('From Date')
     scheduled_date = fields.Date('Scheduled date')
-    product = fields.Many2one('product.product', 'Product')
+    product = fields.Many2one('product.product', 'Product', translate=True)
     category = fields.Many2one(
         'product.category', 'category', related='product.categ_id',
-        store=True)
+        store=True, translate=True)
     qty_available = fields.Float(
         'Quantity On Hand', compute=_get_product_info_location,
         digits_compute=dp.get_precision('Product Unit of Measure'))
