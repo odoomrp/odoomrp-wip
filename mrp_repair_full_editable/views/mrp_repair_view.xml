@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_repair_order_form_fees" model="ir.ui.view">
+        <field name="name">mrp.repair.form.fees</field>
+        <field name="model">mrp.repair</field>
+        <field name="inherit_id" ref="mrp_repair.view_repair_order_form" />
+        <field name="arch" type="xml">
+            <data>
+                <field name="fees_lines" position="attributes">
+                     <attribute name="attrs">{'readonly': ['|',('state','=','done'), ('invoiced', '=', True)]}</attribute>
+                </field>
+                <field name="operations" position="attributes">
+                     <attribute name="attrs">{'readonly': ['|',('state','=','done'), ('invoiced', '=', True)]}</attribute>
+                </field>
+                <field name="pricelist_id" position="attributes">
+                     <attribute name="attrs">{'readonly': ['|',('state','=','done'), ('invoiced', '=', True)]}</attribute>
+                </field>
+            </data>
+        </field>
+        </record>
+    </data>
+</openerp>
