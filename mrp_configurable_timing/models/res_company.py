@@ -19,7 +19,7 @@
 from openerp import models, fields
 
 
-class ResCompany(models.TransientModel):
+class ResCompany(models.Model):
     _inherit = 'res.company'
 
     complete_cycle = fields.Boolean(string='Force complete cycles',
