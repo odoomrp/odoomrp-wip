@@ -3,7 +3,8 @@
 MRP Repair full editable
 ========================
 
-This module allows to add repair operations and fees freely
+This module allows to add operations and fees in not invoiced or done repair
+operations.
 
 Credits
 =======
