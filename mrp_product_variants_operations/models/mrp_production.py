@@ -17,6 +17,7 @@
 ##############################################################################
 
 from openerp import models, api
+import math
 
 
 class MrpProduction(models.Model):
@@ -34,6 +35,12 @@ class MrpProduction(models.Model):
 
     def _get_workorder_in_product_lines(self, workcenter_lines, product_lines,
                                         properties=None):
+        for workorder in workcenter_lines:
+            wc = workorder.routing_wc_line
+            cycle = wc.cycle_nbr and int(math.ceil(self.product_qty /
+                                                   wc.cycle_nbr)) or 0
+            workorder.cycle = cycle
+            workorder.hour = wc.hour_nbr * cycle
         for p_line in product_lines:
             self._set_workorder(self.bom_id, p_line, workcenter_lines,
                                 properties=properties)
