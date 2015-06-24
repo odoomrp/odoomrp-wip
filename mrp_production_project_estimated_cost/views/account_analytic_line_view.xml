@@ -36,6 +36,7 @@
                     <field name="date"/>
                     <field name="ref"/>
                     <field name="name"/>
+                    <field name="product_id"/>
                     <field name="journal_id"/>
                     <field name="estim_avg_cost"/>
                     <field name="estim_std_cost"/>
