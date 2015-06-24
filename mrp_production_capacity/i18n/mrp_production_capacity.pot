@@ -6,14 +6,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-04 15:49+0000\n"
-"PO-Revision-Date: 2015-02-04 15:49+0000\n"
+"POT-Creation-Date: 2015-06-24 13:10+0000\n"
+"PO-Revision-Date: 2015-06-24 13:10+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: mrp_production_capacity
+#: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: field:mrp.production,capacity_max:0
+#: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
+msgid "Capacity max."
+msgstr ""
+
+#. module: mrp_production_capacity
+#: field:mrp.production,capacity_min:0
+#: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
+#: field:wiz.split.production,capacity_max:0
+#: field:wiz.split.production,capacity_min:0
+msgid "Capacity min."
+msgstr ""
 
 #. module: mrp_production_capacity
 #: field:mrp.workcenter,capacity_per_cycle_min:0
@@ -26,8 +45,48 @@ msgid "Capacity per cycle minimum."
 msgstr ""
 
 #. module: mrp_production_capacity
+#: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
+msgid "Create production orders"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: field:wiz.split.production,create_uid:0
+#: field:wiz.split.production.line,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: field:wiz.split.production,create_date:0
+#: field:wiz.split.production.line,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: field:wiz.split.production,id:0
+#: field:wiz.split.production.line,id:0
+msgid "ID"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: field:wiz.split.production,write_uid:0
+#: field:wiz.split.production.line,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: field:wiz.split.production,write_date:0
+#: field:wiz.split.production.line,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mrp_production_capacity
 #: field:mrp.routing.workcenter,limited_production_capacity:0
 msgid "Limited production capacity"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: field:wiz.split.production,lines:0
+msgid "Lines"
 msgstr ""
 
 #. module: mrp_production_capacity
@@ -36,17 +95,88 @@ msgid "Manufacturing Order"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:59
-#: code:addons/mrp_production_capacity/models/mrp.py:96
+#: code:addons/mrp_production_capacity/models/mrp.py:48
+#, python-format
+msgid "Product QTY < Capacity per cycle minimun"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/models/mrp.py:117
 #, python-format
 msgid "Product QTY < Capacity per cycle minimun, or > Capacity per cycle maximun"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:58
-#: code:addons/mrp_production_capacity/models/mrp.py:95
+#: code:addons/mrp_production_capacity/models/mrp.py:57
+#, python-format
+msgid "Product QTY > Capacity per cycle maximun. You must press the \"Split Quantity\" button"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: field:wiz.split.production.line,quantity:0
+msgid "Quantity"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/wizard/wiz_split_production.py:45
+#, python-format
+msgid "Quantity < Capacity per cycle minimun"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/wizard/wiz_split_production.py:48
+#, python-format
+msgid "Quantity > Capacity per cycle maximun"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: field:wiz.split.production,product_qty:0
+msgid "Quantity to be produced"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
+msgid "Quantity to produce"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: field:mrp.production,show_split_button:0
+msgid "Show split button"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/models/mrp.py:87
+#: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
+#, python-format
+msgid "Split production"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: view:mrp.production:mrp_production_capacity.mrp_production_form_view_inh_prodcapacity
+msgid "Split quantity"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
+msgid "Sum quantity"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/models/mrp.py:47
+#: code:addons/mrp_production_capacity/models/mrp.py:56
+#: code:addons/mrp_production_capacity/models/mrp.py:116
 #, python-format
 msgid "Warning!"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
+msgid "Wizard lines"
+msgstr ""
+
+#. module: mrp_production_capacity
+#: model:ir.model,name:mrp_production_capacity.model_wiz_split_production
+msgid "Wizard split production"
 msgstr ""
 
 #. module: mrp_production_capacity
@@ -65,12 +195,7 @@ msgid "Work Order"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: view:mrp.production:mrp_production_capacity.mrp_production_form_view_inh_prodcapacity
-msgid "product_qty_change_production_capacity(product_qty, routing_id)"
-msgstr ""
-
-#. module: mrp_production_capacity
-#: view:mrp.production:mrp_production_capacity.mrp_production_form_view_inh_prodcapacity
-msgid "workcenter_change_production_capacity(parent.product_qty, workcenter_id)"
+#: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
+msgid "or"
 msgstr ""
 
