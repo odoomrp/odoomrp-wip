@@ -31,6 +31,8 @@ class MrpProduction(models.Model):
         self.capacity_min = 0
         self.capacity_max = 0
         if self.product_qty and self.routing_id:
+            max = 0
+            min = 0
             for line in self.routing_id.workcenter_lines:
                 if line.limited_production_capacity:
                     capacity_min = (
@@ -38,10 +40,22 @@ class MrpProduction(models.Model):
                         sys.float_info.min)
                     capacity_max = (line.workcenter_id.capacity_per_cycle or
                                     sys.float_info.max)
-                    self.capacity_min = capacity_min
-                    self.capacity_max = capacity_max
+                    if capacity_min and self.product_qty < capacity_min:
+                        if not min:
+                            min = capacity_min
+                        else:
+                            if capacity_min > min:
+                                min = capacity_min
                     if capacity_max and self.product_qty > capacity_max:
-                        self.show_split_button = True
+                        if not max:
+                            max = capacity_max
+                        else:
+                            if capacity_max < max:
+                                max = capacity_max
+            self.capacity_min = min
+            self.capacity_max = max
+            if max and self.product_qty > max:
+                self.show_split_button = True
 
     show_split_button = fields.Boolean(
         'Show split button', default=False, compute='_calc_capacity')
@@ -56,6 +70,8 @@ class MrpProduction(models.Model):
         result = {}
         if product_qty and routing_id:
             routing = self.env['mrp.routing'].browse(routing_id)
+            max = 0
+            min = 0
             for line in routing.workcenter_lines:
                 if line.limited_production_capacity:
                     capacity_min = (
@@ -64,21 +80,40 @@ class MrpProduction(models.Model):
                     capacity_max = (line.workcenter_id.capacity_per_cycle or
                                     sys.float_info.max)
                     if capacity_min and product_qty < capacity_min:
-                        warning = {
-                            'title': _('Warning!'),
-                            'message': _('Product QTY < Capacity per cycle'
-                                         ' minimum')
-                        }
-                        result['warning'] = warning
-                    else:
-                        if capacity_max and product_qty > capacity_max:
-                            warning = {
-                                'title': _('Warning!'),
-                                'message': _('Product QTY > Capacity per cycle'
-                                             ' maximum. You must click the'
-                                             ' "Split Quantity" button')
-                            }
-                            result['warning'] = warning
+                        if not min:
+                            min = capacity_min
+                        else:
+                            if capacity_min > min:
+                                min = capacity_min
+                    if capacity_max and product_qty > capacity_max:
+                        if not max:
+                            max = capacity_max
+                        else:
+                            if capacity_max < max:
+                                max = capacity_max
+            if max and min:
+                warning = {
+                    'title': _('Warning!'),
+                    'message': _('Product QTY < Capacity per cycle'
+                                 ' minimum, and > Capacity per cycle'
+                                 ' maximum. You must click the'
+                                 ' "Split Quantity" button')
+                }
+                result['warning'] = warning
+            elif min:
+                warning = {
+                    'title': _('Warning!'),
+                    'message': _('Product QTY > Capacity per cycle maximum.'
+                                 ' You must click the "Split Quantity" button')
+                }
+                result['warning'] = warning
+            elif max:
+                warning = {
+                    'title': _('Warning!'),
+                    'message': _('Product QTY > Capacity per cycle maximum.'
+                                 ' You must click the "Split Quantity" button')
+                }
+                result['warning'] = warning
         return result
 
     @api.one
