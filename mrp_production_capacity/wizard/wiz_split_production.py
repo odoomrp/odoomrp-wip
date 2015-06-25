@@ -9,7 +9,7 @@ class WizSplitProduction(models.TransientModel):
     _name = 'wiz.split.production'
     _description = 'Wizard split production'
 
-    product_qty = fields.Integer('Quantity to be produced', readonly=True)
+    product_qty = fields.Integer('Quantity to produce', readonly=True)
     capacity_min = fields.Integer('Capacity min.', readonly=True)
     capacity_max = fields.Integer('Capacity min.', readonly=True)
     lines = fields.One2many(
@@ -18,19 +18,20 @@ class WizSplitProduction(models.TransientModel):
 
     @api.model
     def default_get(self, var_fields):
+        production = self.env['mrp.production'].browse(
+            self.env.context['active_id'])
         lines = []
-        pending = self.env.context['product_qty']
+        pending = production.product_qty
         while pending > 0:
-            if pending > self.env.context['capacity_max']:
-                lines.append((0, 0, {'quantity':
-                                     self.env.context['capacity_max']}))
-                pending -= self.env.context['capacity_max']
+            if pending > production.capacity_max:
+                lines.append((0, 0, {'quantity': production.capacity_max}))
+                pending -= production.capacity_max
             else:
                 lines.append((0, 0, {'quantity': pending}))
                 pending = 0
-        return {'product_qty': self.env.context['product_qty'],
-                'capacity_min': self.env.context['capacity_min'],
-                'capacity_max': self.env.context['capacity_max'],
+        return {'product_qty': production.product_qty,
+                'capacity_min': production.capacity_min,
+                'capacity_max': production.capacity_max,
                 'lines': lines}
 
     @api.multi
@@ -42,12 +43,11 @@ class WizSplitProduction(models.TransientModel):
         for line in self.lines:
             if self.capacity_min and line.quantity < self.capacity_min:
                 raise exceptions.Warning(
-                    _('Quantity < Capacity per cycle minimun'))
+                    _('Quantity < Capacity per cycle minimum'))
             if self.capacity_max and line.quantity > self.capacity_max:
                 raise exceptions.Warning(
-                    _('Quantity > Capacity per cycle maximun'))
+                    _('Quantity > Capacity per cycle maximum'))
             vals = {'product_qty': line.quantity,
-                    'show_split_button': False,
                     'capacity_min': 0,
                     'capacity_max': 0}
             if first:

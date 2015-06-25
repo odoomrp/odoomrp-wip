@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-24 13:10+0000\n"
-"PO-Revision-Date: 2015-06-24 13:10+0000\n"
+"POT-Creation-Date: 2015-06-25 10:10+0000\n"
+"PO-Revision-Date: 2015-06-25 10:10+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,13 +21,11 @@ msgid "Cancel"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: field:mrp.production,capacity_max:0
 #: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
 msgid "Capacity max."
 msgstr ""
 
 #. module: mrp_production_capacity
-#: field:mrp.production,capacity_min:0
 #: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
 #: field:wiz.split.production,capacity_max:0
 #: field:wiz.split.production,capacity_min:0
@@ -95,21 +93,22 @@ msgid "Manufacturing Order"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:48
+#: code:addons/mrp_production_capacity/models/mrp.py:69
 #, python-format
-msgid "Product QTY < Capacity per cycle minimun"
+msgid "Product QTY < Capacity per cycle minimum"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:117
+#: code:addons/mrp_production_capacity/models/mrp.py:139
 #, python-format
-msgid "Product QTY < Capacity per cycle minimun, or > Capacity per cycle maximun"
+msgid "Product QTY < Capacity per cycle minimum, or > Capacity per cycle maximum"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:57
+#: code:addons/mrp_production_capacity/models/mrp.py:77
+#: code:addons/mrp_production_capacity/models/mrp.py:114
 #, python-format
-msgid "Product QTY > Capacity per cycle maximun. You must press the \"Split Quantity\" button"
+msgid "Product QTY > Capacity per cycle maximum. You must click the \"Split Quantity\" button"
 msgstr ""
 
 #. module: mrp_production_capacity
@@ -118,34 +117,25 @@ msgid "Quantity"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/wizard/wiz_split_production.py:45
+#: code:addons/mrp_production_capacity/wizard/wiz_split_production.py:46
 #, python-format
-msgid "Quantity < Capacity per cycle minimun"
+msgid "Quantity < Capacity per cycle minimum"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/wizard/wiz_split_production.py:48
+#: code:addons/mrp_production_capacity/wizard/wiz_split_production.py:49
 #, python-format
-msgid "Quantity > Capacity per cycle maximun"
-msgstr ""
-
-#. module: mrp_production_capacity
-#: field:wiz.split.production,product_qty:0
-msgid "Quantity to be produced"
+msgid "Quantity > Capacity per cycle maximum"
 msgstr ""
 
 #. module: mrp_production_capacity
 #: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
+#: field:wiz.split.production,product_qty:0
 msgid "Quantity to produce"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: field:mrp.production,show_split_button:0
-msgid "Show split button"
-msgstr ""
-
-#. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:87
+#: code:addons/mrp_production_capacity/models/mrp.py:100
 #: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
 #, python-format
 msgid "Split production"
@@ -162,15 +152,16 @@ msgid "Sum quantity"
 msgstr ""
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:47
-#: code:addons/mrp_production_capacity/models/mrp.py:56
-#: code:addons/mrp_production_capacity/models/mrp.py:116
+#: code:addons/mrp_production_capacity/models/mrp.py:68
+#: code:addons/mrp_production_capacity/models/mrp.py:76
+#: code:addons/mrp_production_capacity/models/mrp.py:138
 #, python-format
 msgid "Warning!"
 msgstr ""
 
 #. module: mrp_production_capacity
 #: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
+#: field:wiz.split.production.line,wizard:0
 msgid "Wizard lines"
 msgstr ""
 
