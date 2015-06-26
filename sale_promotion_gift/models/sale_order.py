@@ -10,19 +10,16 @@ class SaleOrder(models.Model):
 
     @api.one
     @api.depends('order_line', 'order_line.offer_id')
-    def _calc_promotion_gift_products(self):
-        self.promotion_gift_products.unlink()
-        promotions = []
-        for line in self.order_line:
-            if line.offer_id and line.offer_id.promotion_gift_products:
-                for promotion in line.offer_id.promotion_gift_products:
-                    promotions.append(promotion.id)
-        self.promotion_gift_products = [(6, 0, promotions)]
+    def _calc_gift_products(self):
+        self.gift_products.unlink()
+        lines_with_price = self.order_line.filtered(lambda x: x.price_unit > 0)
+        self.gift_products = [(
+            6, 0, lines_with_price.offer_id.gift_products.mapped('id'))]
 
-    promotion_gift_products = fields.Many2many(
-        comodel_name='promotion.gift.product',
-        string='Promotion gift products',
-        compute='_calc_promotion_gift_products')
+    gift_products = fields.Many2many(
+        comodel_name='gift.product',
+        string='Gift products',
+        compute='_calc_gift_products')
     final_gift_products = fields.One2many(
         'sale.final.gift.product', 'sale', string='Final gift products',
         copy=False)
@@ -30,66 +27,61 @@ class SaleOrder(models.Model):
     @api.one
     def action_button_confirm(self):
         sale_line_obj = self.env['sale.order.line']
-        if self.final_gift_products:
-            for line in self.final_gift_products:
-                res = sale_line_obj.product_id_change(
-                    self.pricelist_id.id, line.product.id,
-                    partner_id=self.partner_id.id, date_order=self.date_order,
-                    fiscal_position=self.fiscal_position.id)
-                vals = res['value']
-                tax = [(6, 0, vals['tax_id'])]
-                vals.update({'product_id': line.product.id,
-                             'order_id': self.id,
-                             'product_attributes': False,
-                             'tax_id': tax})
-                sale_line_obj.create(vals)
+        for line in self.final_gift_products:
+            res = sale_line_obj.product_id_change(
+                self.pricelist_id.id, line.product.id,
+                partner_id=self.partner_id.id, date_order=self.date_order,
+                fiscal_position=self.fiscal_position.id)
+            vals = res['value']
+            tax = [(6, 0, vals['tax_id'])]
+            vals.update({'product_id': line.product.id,
+                         'order_id': self.id,
+                         'product_attributes': False,
+                         'tax_id': tax,
+                         'price_unit': 0.0
+                         })
+            sale_line_obj.create(vals)
         return super(SaleOrder, self).action_button_confirm()
 
     @api.multi
-    def button_calculate_final_gift_products(self):
+    def button_dump_final_gift_products(self):
         self.ensure_one()
         self.final_gift_products.unlink()
-        for line in self.promotion_gift_products:
-            vals = {'sale': self.id,
-                    'product': line.product.id,
-                    'quantity': line.quantity
-                    }
+        for line in self.gift_products:
+            vals = self._prepare_final_gift_product_data(self.id, line)
             self.env['sale.final.gift.product'].create(vals)
         return True
+
+    def _prepare_final_gift_product_data(self, sale_id, gift_product):
+        vals = {'sale': sale_id,
+                'product': gift_product.product.id,
+                'quantity': gift_product.quantity
+                }
+        return vals
 
     @api.one
     @api.constrains('final_gift_products')
     def check_final_gift_products(self):
-        if self.final_gift_products:
-            categorys = {}
-            for line in self.final_gift_products:
-                found = False
-                for data in categorys:
-                    datos_array = categorys[data]
-                    category = datos_array['category']
-                    quantity = datos_array['quantity']
-                    if category.id == line.category.id:
-                        found = True
-                        quantity += line.quantity
-                        categorys[data].update({'quantity': quantity})
-                if not found:
-                    my_vals = {'category': line.category,
-                               'quantity': line.quantity,
-                               }
-                    categorys[(line.category.id)] = my_vals
-            for data in categorys:
-                datos_array = categorys[data]
-                allowed = sum(
-                    x.quantity for x in self.promotion_gift_products.filtered(
-                        lambda x: x.category == datos_array['category']))
-                if datos_array['quantity'] > allowed:
-                    name = datos_array['category'].name
-                    raise exceptions.Warning(
-                        _('ERROR in Final gift products'),
-                        _('Total Quantity %s, in final gift products with'
-                          ' category %s, exceeds in Promotion gift products of'
-                          ' the same category with amount %s') % (
-                            str(datos_array['quantity']), name, str(allowed)))
+        categorys = {}
+        for line in self.final_gift_products:
+            if line.category not in categorys:
+                categorys[line.category] = {'quantity': line.quantity}
+            else:
+                category = categorys[line.category]
+                sum_quantity = category.get('quantity') + line.quantity
+                categorys[line.category] = {'quantity': sum_quantity}
+        for category in categorys:
+            datos_array = categorys[category]
+            allowed = sum(
+                x.quantity for x in self.gift_products.filtered(
+                    lambda x: x.category == category))
+            if datos_array['quantity'] > allowed:
+                name = category.name
+                raise exceptions.Warning(
+                    _('Total Quantity %s, in final gift products with'
+                      ' category %s, exceeds in gift products of the same'
+                      ' category with amount %s') % (
+                        str(datos_array['quantity']), name, str(allowed)))
 
 
 class SaleFinalGiftProduct(models.Model):
@@ -109,8 +101,8 @@ class SaleFinalGiftProduct(models.Model):
     @api.onchange('product')
     def onchange_product(self):
         if self.product:
-            exist = bool(self.sale.promotion_gift_products.filtered(
+            exist = bool(self.sale.gift_products.filtered(
                 lambda x: x.category == self.product.categ_id))
             if not exist:
                 raise exceptions.Warning(
-                    _('Error!: This product is not in a permitted category.'))
+                    _('Error!: This product is not in a allowed category.'))

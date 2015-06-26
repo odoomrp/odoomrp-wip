@@ -8,14 +8,14 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <page string="Other Information" position="after">
-                   <page string="Promotion gift products">
-                        <separator string="Promotion gift products" colspan="4" />
-                        <field name="promotion_gift_products" nolabel="1">
+                   <page string="Gift products">
+                        <separator string="Gift products" colspan="4" />
+                        <field name="gift_products" nolabel="1">
                             <field name="product" />
                             <field name="category" />
                             <field name="quantity" />
                         </field>
-                        <button name="button_calculate_final_gift_products" class="oe_highlight"
+                        <button name="button_dump_final_gift_products" class="oe_highlight"
                             string="Dump offer" type="object" colspan="4" />
                         <separator string="Final gift products" colspan="4" />
                         <field name="final_gift_products" />

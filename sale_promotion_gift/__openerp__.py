@@ -1,8 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c)
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -24,12 +22,12 @@
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
-    "category": "Custom Module",
+    "category": "Sales Management",
     "depends": ['sale',
                 'product_pricelist_rules',
                 ],
     "data": ['security/ir.model.access.csv',
-             'views/promotion_gift_product_view.xml',
+             'views/gift_product_view.xml',
              'views/sale_final_gift_product_view.xml',
              'views/product_pricelist_item_offer_view.xml',
              'views/sale_order_view.xml',

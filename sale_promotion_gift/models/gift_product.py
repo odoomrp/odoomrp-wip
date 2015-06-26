@@ -5,9 +5,9 @@
 from openerp import models, fields
 
 
-class PromotionGiftProduct(models.Model):
-    _name = 'promotion.gift.product'
-    _description = 'Promotion gift product'
+class GiftProduct(models.Model):
+    _name = 'gift.product'
+    _description = 'Gift product'
 
     product_pricelist_item_offer = fields.Many2one(
         'product.pricelist.item.offer', string='Pricelist item offer',

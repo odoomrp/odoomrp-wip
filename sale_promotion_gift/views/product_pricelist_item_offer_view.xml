@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="product_pricelist_rules.pricelist_item_offer_tree_view"/>
             <field name="arch" type="xml">
                 <field name="free_qty" position="after">
-                    <field name="promotion_gift_products" />
+                    <field name="gift_products" />
                 </field>
             </field>
         </record>
@@ -18,9 +18,9 @@
             <field name="inherit_id" ref="product_pricelist_rules.pricelist_item_offer_form_view"/>
             <field name="arch" type="xml">
                 <field name="free_qty" position="after">
-                    <separator string="Promotion gift products" colspan="4"/>
-                    <field name="promotion_gift_products" nolabel="1" colspan="4">
-                        <tree string="Promotion gift products" editable="bottom">
+                    <separator string="Gift products" colspan="4"/>
+                    <field name="gift_products" nolabel="1" colspan="4">
+                        <tree string="Gift products" editable="bottom">
                             <field name="product_pricelist_item_offer" invisible="1" />
                             <field name="product" />
                             <field name="category" />

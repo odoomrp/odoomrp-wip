@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-26 11:32+0000\n"
-"PO-Revision-Date: 2015-06-26 13:45+0100\n"
+"POT-Creation-Date: 2015-06-26 16:32+0000\n"
+"PO-Revision-Date: 2015-06-26 18:35+0100\n"
 "Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,19 +16,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sale_promotion_gift
-#: field:promotion.gift.product,category:0
+#: field:gift.product,category:0
 #: field:sale.final.gift.product,category:0
 msgid "Category"
 msgstr "Categoría"
 
 #. module: sale_promotion_gift
-#: field:promotion.gift.product,create_uid:0
+#: field:gift.product,create_uid:0
 #: field:sale.final.gift.product,create_uid:0
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: sale_promotion_gift
-#: field:promotion.gift.product,create_date:0
+#: field:gift.product,create_date:0
 #: field:sale.final.gift.product,create_date:0
 msgid "Created on"
 msgstr "Creado el"
@@ -39,16 +39,10 @@ msgid "Dump offer"
 msgstr "Volcar oferta"
 
 #. module: sale_promotion_gift
-#: code:addons/sale_promotion_gift/models/sale_order.py:88
+#: code:addons/sale_promotion_gift/models/sale_order.py:108
 #, python-format
-msgid "ERROR in Final gift products"
-msgstr "ERROR en productos de regalo finales"
-
-#. module: sale_promotion_gift
-#: code:addons/sale_promotion_gift/models/sale_order.py:116
-#, python-format
-msgid "Error!: This product is not in a permitted category."
-msgstr "Error!: Este producto no está en una categoría permitida"
+msgid "Error!: This product is not in a allowed category."
+msgstr "Error!: Este producto no esta en una categoría permitida."
 
 #. module: sale_promotion_gift
 #: view:sale.final.gift.product:sale_promotion_gift.sale_final_gift_product_tree_view
@@ -58,19 +52,32 @@ msgid "Final gift products"
 msgstr "Productos de regalo finales"
 
 #. module: sale_promotion_gift
-#: field:promotion.gift.product,id:0
+#: model:ir.model,name:sale_promotion_gift.model_gift_product
+msgid "Gift product"
+msgstr "Producto regalo"
+
+#. module: sale_promotion_gift
+#: view:gift.product:sale_promotion_gift.gift_product_tree_view
+#: view:product.pricelist.item.offer:sale_promotion_gift.pricelist_item_offer_form_view_inh_promotiongift
+#: field:product.pricelist.item.offer,gift_products:0
+#: view:sale.order:sale_promotion_gift.view_order_form_inh_promotiongift
+msgid "Gift products"
+msgstr "Productos regalo"
+
+#. module: sale_promotion_gift
+#: field:gift.product,id:0
 #: field:sale.final.gift.product,id:0
 msgid "ID"
 msgstr "ID"
 
 #. module: sale_promotion_gift
-#: field:promotion.gift.product,write_uid:0
+#: field:gift.product,write_uid:0
 #: field:sale.final.gift.product,write_uid:0
 msgid "Last Updated by"
 msgstr "Última actualización por"
 
 #. module: sale_promotion_gift
-#: field:promotion.gift.product,write_date:0
+#: field:gift.product,write_date:0
 #: field:sale.final.gift.product,write_date:0
 msgid "Last Updated on"
 msgstr "Última actualización el"
@@ -81,12 +88,12 @@ msgid "Other Information"
 msgstr "Otra información"
 
 #. module: sale_promotion_gift
-#: field:promotion.gift.product,product_pricelist_item_offer:0
+#: field:gift.product,product_pricelist_item_offer:0
 msgid "Pricelist item offer"
-msgstr "Oferta producto lista de precios"
+msgstr "Oferta"
 
 #. module: sale_promotion_gift
-#: field:promotion.gift.product,product:0
+#: field:gift.product,product:0
 #: field:sale.final.gift.product,product:0
 msgid "Product"
 msgstr "Producto"
@@ -97,15 +104,7 @@ msgid "Promotion gift product"
 msgstr "Producto regalo de la promoción"
 
 #. module: sale_promotion_gift
-#: view:product.pricelist.item.offer:sale_promotion_gift.pricelist_item_offer_form_view_inh_promotiongift
-#: field:product.pricelist.item.offer,promotion_gift_products:0
-#: view:promotion.gift.product:sale_promotion_gift.promotion_gift_product_tree_view
-#: view:sale.order:sale_promotion_gift.view_order_form_inh_promotiongift
-msgid "Promotion gift products"
-msgstr "Productos regalo de la promoción"
-
-#. module: sale_promotion_gift
-#: field:promotion.gift.product,quantity:0
+#: field:gift.product,quantity:0
 #: field:sale.final.gift.product,quantity:0
 msgid "Quantity"
 msgstr "Cantidad"
@@ -123,11 +122,11 @@ msgstr "Pedido de venta"
 #. module: sale_promotion_gift
 #: model:ir.model,name:sale_promotion_gift.model_sale_order
 msgid "Sales Order"
-msgstr "Pedidos de venta"
+msgstr "Pedido de venta"
 
 #. module: sale_promotion_gift
-#: code:addons/sale_promotion_gift/models/sale_order.py:89
+#: code:addons/sale_promotion_gift/models/sale_order.py:81
 #, python-format
-msgid "Total Quantity %s, in final gift products with category %s, exceeds in Promotion gift products of the same category with amount %s"
-msgstr "Cantidad total %s, en productos de regalo finales con categoría %s, excede de los productos regalo de la promoción con la misma categoría con cantidad %s"
+msgid "Total Quantity %s, in final gift products with category %s, exceeds in gift products of the same category with amount %s"
+msgstr "Cantidad total %s, en productos regalo finales con categoría %s, exceden en productos regalo de la misma categoría con cantidad %s"
 

@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_promotion_gift_product_sale_manager,access_promotion_gift_product_sale_manager,model_product_pricelist_item_offer,base.group_sale_manager,1,1,1,1
+access_gift_product_sale_manager,access_gift_product_sale_manager,model_gift_product,base.group_sale_manager,1,1,1,1
 access_sale_final_gift_product_sale_manager,access_sale_final_gift_product_sale_manager,model_sale_final_gift_product,base.group_sale_manager,1,1,1,1
 
