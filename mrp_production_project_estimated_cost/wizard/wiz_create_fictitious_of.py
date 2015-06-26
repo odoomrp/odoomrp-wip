@@ -34,7 +34,9 @@ class WizCreateFictitiousOf(models.TransientModel):
                     'user_id': self._uid,
                     'active': False,
                     'product_uom': product.uom_id.id,
-                    'project_id': self.project_id.id
+                    'project_id': self.project_id.id,
+                    'analytic_account_id': (
+                        self.project_id.analytic_account_id.id)
                     }
             new_production = production_obj.create(vals)
             new_production.action_compute()
