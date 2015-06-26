@@ -20,8 +20,8 @@ from openerp import models, fields
 import openerp.addons.decimal_precision as dp
 
 
-class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
 
     manual_standard_cost = fields.Float(
         string='Manual Standard Cost', digits=dp.get_precision('Product Price')
