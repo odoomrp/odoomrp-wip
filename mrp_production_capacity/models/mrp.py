@@ -1,22 +1,8 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-
-from openerp import models, fields, api, _
+from openerp import models, fields, api, exceptions, _
 import sys
 
 
@@ -38,13 +24,54 @@ class MrpRoutingWorkcenter(models.Model):
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
+    @api.one
+    @api.depends('product_qty', 'routing_id')
+    def _calc_capacity(self):
+        self.show_split_button = False
+        self.capacity_min = 0
+        self.capacity_max = 0
+        if self.product_qty and self.routing_id:
+            max = 0
+            min = 0
+            for line in self.routing_id.workcenter_lines:
+                if line.limited_production_capacity:
+                    capacity_min = (
+                        line.workcenter_id.capacity_per_cycle_min or
+                        sys.float_info.min)
+                    capacity_max = (line.workcenter_id.capacity_per_cycle or
+                                    sys.float_info.max)
+                    if capacity_min and self.product_qty < capacity_min:
+                        if not min:
+                            min = capacity_min
+                        else:
+                            if capacity_min > min:
+                                min = capacity_min
+                    if capacity_max and self.product_qty > capacity_max:
+                        if not max:
+                            max = capacity_max
+                        else:
+                            if capacity_max < max:
+                                max = capacity_max
+            self.capacity_min = min
+            self.capacity_max = max
+            if max and self.product_qty > max:
+                self.show_split_button = True
+
+    show_split_button = fields.Boolean(
+        'Show split button', default=False, compute='_calc_capacity')
+    capacity_min = fields.Integer(
+        'Capacity min.', default=0, compute='_calc_capacity')
+    capacity_max = fields.Integer(
+        'Capacity max.', default=0, compute='_calc_capacity')
+
     @api.multi
     def product_qty_change_production_capacity(self, product_qty=0,
                                                routing_id=False):
         result = {}
-        routing_obj = self.env['mrp.routing']
         if product_qty and routing_id:
-            routing = routing_obj.browse(routing_id)
+            routing = self.env['mrp.routing'].browse(routing_id)
+            max = 0
+            min = 0
             for line in routing.workcenter_lines:
                 if line.limited_production_capacity:
                     capacity_min = (
@@ -52,16 +79,41 @@ class MrpProduction(models.Model):
                         sys.float_info.min)
                     capacity_max = (line.workcenter_id.capacity_per_cycle or
                                     sys.float_info.max)
-                    if capacity_min and capacity_max:
-                        if (product_qty < capacity_min or
-                                product_qty > capacity_max):
-                            warning = {
-                                'title': _('Warning!'),
-                                'message': _('Product QTY < Capacity per cycle'
-                                             ' minimun, or > Capacity per'
-                                             ' cycle maximun')
-                            }
-                            result['warning'] = warning
+                    if capacity_min and product_qty < capacity_min:
+                        if not min:
+                            min = capacity_min
+                        else:
+                            if capacity_min > min:
+                                min = capacity_min
+                    if capacity_max and product_qty > capacity_max:
+                        if not max:
+                            max = capacity_max
+                        else:
+                            if capacity_max < max:
+                                max = capacity_max
+            if max and min:
+                warning = {
+                    'title': _('Warning!'),
+                    'message': _('Product QTY < Capacity per cycle'
+                                 ' minimum, and > Capacity per cycle'
+                                 ' maximum. You must click the'
+                                 ' "Split Quantity" button')
+                }
+                result['warning'] = warning
+            elif min:
+                warning = {
+                    'title': _('Warning!'),
+                    'message': _('Product QTY > Capacity per cycle maximum.'
+                                 ' You must click the "Split Quantity" button')
+                }
+                result['warning'] = warning
+            elif max:
+                warning = {
+                    'title': _('Warning!'),
+                    'message': _('Product QTY > Capacity per cycle maximum.'
+                                 ' You must click the "Split Quantity" button')
+                }
+                result['warning'] = warning
         return result
 
     @api.one
@@ -72,6 +124,31 @@ class MrpProduction(models.Model):
                 if (line.limited_production_capacity and
                         line.workcenter_id.capacity_per_cycle):
                     self.product_qty = line.workcenter_id.capacity_per_cycle
+
+    @api.multi
+    def button_split_quantity(self):
+        self.ensure_one()
+        context = self.env.context.copy()
+        context['active_id'] = self.id
+        context['active_ids'] = [self.id]
+        context['active_model'] = 'mrp.production'
+        return {'name': _('Split production'),
+                'type': 'ir.actions.act_window',
+                'res_model': 'wiz.split.production',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new',
+                'context': context
+                }
+
+    @api.multi
+    def action_confirm(self):
+        for production in self:
+            if production.show_split_button:
+                raise exceptions.Warning(
+                    _('Product QTY > Capacity per cycle maximum. You must'
+                      ' click the "Split Quantity" button'))
+        return super(MrpProduction, self).action_confirm()
 
 
 class MrpProductionWorkcenterLine(models.Model):
@@ -95,8 +172,8 @@ class MrpProductionWorkcenterLine(models.Model):
                     warning = {
                         'title': _('Warning!'),
                         'message': _('Product QTY < Capacity per cycle'
-                                     ' minimun, or > Capacity per'
-                                     ' cycle maximun')
+                                     ' minimum, or > Capacity per'
+                                     ' cycle maximum')
                     }
                     result['warning'] = warning
         return result
