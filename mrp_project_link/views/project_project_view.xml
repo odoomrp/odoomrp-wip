@@ -48,7 +48,7 @@
                     <field name="project_id" position="after">
                         <field name="mrp_production_id"/>
                         <field name="wk_order"/>
-                        <field name="final_product"/>
+                        <field name="final_product" string="Product to Produce"/>
                     </field>
                 </field>
         </record>
@@ -63,7 +63,7 @@
                             <group colspan="4" col="4">
                                 <field name="mrp_production_id" colspan="2"/>
                                 <field name="wk_order" colspan="2"/>
-                                <field name="final_product" colspan="2"/>
+                                <field name="final_product" colspan="2" string="Product to Produce"/>
                                 <separator colspan="4" string="Scheduled Products"/>
                                 <field name="wk_sch_products" colspan="4" nolabel="1"
                                 attrs="{'invisible':[('wk_order', '=', False)]}"/>
