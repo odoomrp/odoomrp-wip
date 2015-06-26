@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="promotion_gift_product_tree_view" model="ir.ui.view">
+            <field name="name">promotion.gift.product.tree.view</field>
+            <field name="model">promotion.gift.product</field>
+            <field name="arch" type="xml">
+                <tree string="Promotion gift products">
+                    <field name="product_pricelist_item_offer" invisible="1"/>
+                    <field name="product"/>
+                    <field name="category" />
+                    <field name="quantity" />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
