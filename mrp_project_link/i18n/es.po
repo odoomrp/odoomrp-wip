@@ -165,15 +165,16 @@ msgid "Procurement"
 msgstr "Abastecimiento"
 
 #. module: mrp_project_link
-#: model:ir.model,name:mrp_project_link.model_procurement_order
-msgid "Procurement"
-msgstr ""
-
-#. module: mrp_project_link
 #: model:ir.actions.act_window,name:mrp_project_link.act_project_2_procurement_all
 #: view:project.project:mrp_project_link.project_mrp_procurement_shortcut_form_view
 msgid "Procurements"
 msgstr "Abastecimientos"
+
+#. module: mrp_project_link
+#: view:project.task:mrp_project_link.project_task_mrp_form_view
+#: view:project.task:mrp_project_link.project_task_mrp_inh_tree_view
+msgid "Product to Produce"
+msgstr ""
 
 #. module: mrp_project_link
 #: field:stock.move,product_tmpl_id:0
