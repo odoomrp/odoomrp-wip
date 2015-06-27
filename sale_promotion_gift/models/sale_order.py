@@ -10,24 +10,24 @@ class SaleOrder(models.Model):
 
     @api.one
     @api.depends('order_line', 'order_line.offer_id')
-    def _calc_gift_products(self):
-        self.gift_products.unlink()
+    def _calc_sale_promotion_gifts(self):
+        self.sale_promotion_gifts.unlink()
         lines_with_price = self.order_line.filtered(lambda x: x.price_unit > 0)
-        self.gift_products = [(
-            6, 0, lines_with_price.offer_id.gift_products.mapped('id'))]
+        self.sale_promotion_gifts = [(
+            6, 0, lines_with_price.offer_id.sale_promotion_gifts.mapped('id'))]
 
-    gift_products = fields.Many2many(
-        comodel_name='gift.product',
-        string='Gift products',
-        compute='_calc_gift_products')
-    final_gift_products = fields.One2many(
-        'sale.final.gift.product', 'sale', string='Final gift products',
+    sale_promotion_gifts = fields.Many2many(
+        comodel_name='sale.promotion.gift',
+        string='Sale promotion gifts',
+        compute='_calc_sale_promotion_gifts')
+    sale_final_gifts = fields.One2many(
+        'sale.final.gift', 'sale', string='Sale final gifts',
         copy=False)
 
     @api.one
     def action_button_confirm(self):
         sale_line_obj = self.env['sale.order.line']
-        for line in self.final_gift_products:
+        for line in self.sale_final_gifts:
             res = sale_line_obj.product_id_change(
                 self.pricelist_id.id, line.product.id,
                 partner_id=self.partner_id.id, date_order=self.date_order,
@@ -44,12 +44,12 @@ class SaleOrder(models.Model):
         return super(SaleOrder, self).action_button_confirm()
 
     @api.multi
-    def button_dump_final_gift_products(self):
+    def button_dump_sale_final_gifts(self):
         self.ensure_one()
-        self.final_gift_products.unlink()
-        for line in self.gift_products:
+        self.sale_final_gifts.unlink()
+        for line in self.sale_promotion_gifts:
             vals = self._prepare_final_gift_product_data(self.id, line)
-            self.env['sale.final.gift.product'].create(vals)
+            self.env['sale.final.gift'].create(vals)
         return True
 
     def _prepare_final_gift_product_data(self, sale_id, gift_product):
@@ -60,10 +60,10 @@ class SaleOrder(models.Model):
         return vals
 
     @api.one
-    @api.constrains('final_gift_products')
-    def check_final_gift_products(self):
+    @api.constrains('sale_final_gifts')
+    def check_sale_final_gifts(self):
         categorys = {}
-        for line in self.final_gift_products:
+        for line in self.sale_final_gifts:
             if line.category not in categorys:
                 categorys[line.category] = {'quantity': line.quantity}
             else:
@@ -73,7 +73,7 @@ class SaleOrder(models.Model):
         for category in categorys:
             datos_array = categorys[category]
             allowed = sum(
-                x.quantity for x in self.gift_products.filtered(
+                x.quantity for x in self.sale_promotion_gifts.filtered(
                     lambda x: x.category == category))
             if datos_array['quantity'] > allowed:
                 name = category.name
@@ -84,9 +84,24 @@ class SaleOrder(models.Model):
                         str(datos_array['quantity']), name, str(allowed)))
 
 
-class SaleFinalGiftProduct(models.Model):
-    _name = 'sale.final.gift.product'
-    _description = 'Sale Final gift product'
+class SalePromotionGift(models.Model):
+    _name = 'sale.promotion.gift'
+    _description = 'Sale promotion gift'
+
+    product_pricelist_item_offer = fields.Many2one(
+        'product.pricelist.item.offer', string='Pricelist item offer',
+        copy=False, ondelete='cascade')
+    product = fields.Many2one(
+        'product.product', string='Product', required=True)
+    category = fields.Many2one(
+        'product.category', 'Category', related="product.categ_id",
+        store=True, readonly=True)
+    quantity = fields.Integer(string='Quantity', required=True)
+
+
+class SaleFinalGift(models.Model):
+    _name = 'sale.final.gift'
+    _description = 'Sale final gift'
 
     sale = fields.Many2one(
         'sale.order', string='Sale Order', copy=False, ondelete='cascade')
@@ -101,7 +116,7 @@ class SaleFinalGiftProduct(models.Model):
     @api.onchange('product')
     def onchange_product(self):
         if self.product:
-            exist = bool(self.sale.gift_products.filtered(
+            exist = bool(self.sale.sale_promotion_gifts.filtered(
                 lambda x: x.category == self.product.categ_id))
             if not exist:
                 raise exceptions.Warning(

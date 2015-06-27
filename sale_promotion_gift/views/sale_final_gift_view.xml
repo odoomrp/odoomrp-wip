@@ -2,12 +2,12 @@
 <openerp>
     <data>
 
-        <record id="gift_product_tree_view" model="ir.ui.view">
-            <field name="name">gift.product.tree.view</field>
-            <field name="model">gift.product</field>
+        <record id="sale_final_gift_tree_view" model="ir.ui.view">
+            <field name="name">sale.final.gift.tree.view</field>
+            <field name="model">sale.final.gift</field>
             <field name="arch" type="xml">
-                <tree string="Gift products">
-                    <field name="product_pricelist_item_offer" invisible="1"/>
+                <tree string="Sale final gift" editable="bottom">
+                    <field name="sale" invisible="1"/>
                     <field name="product"/>
                     <field name="category" />
                     <field name="quantity" />
