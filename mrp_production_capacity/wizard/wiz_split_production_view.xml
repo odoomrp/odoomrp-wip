@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="wiz_split_production_form_view">
+            <field name="name">wiz.split.production.form.view</field>
+            <field name="model">wiz.split.production</field>
+            <field name="arch" type="xml">
+                <form string="Split production">
+                    <group colspan="4" col="6">
+                        <field name="product_qty" colspan="2"
+                               string="Quantity to produce"/>
+                        <field name="capacity_min" colspan="2"
+                               string ="Capacity min."/>
+                        <field name="capacity_max" colspan="2"
+                               string="Capacity max."/>
+                        <separator string="Quantity to produce" colspan="6" />
+                        <field name="lines" colspan="6" nolabel="1">
+                            <tree string="Wizard lines" editable="top" >
+                                <field name="wizard" invisible="1"/>
+                                <field name="quantity" sum="Sum quantity"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="split_quantity" type="object"
+                                string="Create production orders"
+                                class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link"
+                                special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -2,5 +2,4 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from . import wizard
-from . import models
+from . import wiz_split_production
