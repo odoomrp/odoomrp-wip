@@ -1,5 +1,5 @@
 MRP Simulated Production Capacity
-=================================================
+=================================
 
 When creating product's simulated manufacturing order, if some workorder is limited by capacity, the quantity to simulate will be the minimum capacity of workorder.
 

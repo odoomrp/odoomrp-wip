@@ -17,7 +17,6 @@
 ##############################################################################
 
 from openerp import models, api
-import sys
 
 
 class MrpProduction(models.Model):
@@ -27,12 +26,8 @@ class MrpProduction(models.Model):
     @api.multi
     def _get_min_qty_for_production(self, routing=False):
         qty = super(MrpProduction, self)._get_min_qty_for_production(routing)
-        if routing:
-            for line in routing.workcenter_lines:
-                if line.limited_production_capacity:
-                    capacity_min = (
-                        line.workcenter_id.capacity_per_cycle_min or
-                        sys.float_info.min)
-                    if capacity_min and qty < capacity_min:
-                        qty = capacity_min
-        return qty
+        min_capacity = routing and max(routing.workcenter_lines.filtered(
+            'limited_production_capacity').mapped('workcenter_id.'
+                                                  'capacity_per_cycle_min')
+            ) or 0
+        return max(qty, min_capacity)
