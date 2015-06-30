@@ -17,6 +17,7 @@ class WizCreateFictitiousOf(models.TransientModel):
     def do_create_fictitious_of(self):
         production_obj = self.env['mrp.production']
         product_obj = self.env['product.product']
+        routing_obj = self.env['mrp.routing']
         self.ensure_one()
         active_ids = self.env.context['active_ids']
         active_model = self.env.context['active_model']
@@ -38,6 +39,13 @@ class WizCreateFictitiousOf(models.TransientModel):
                     'analytic_account_id': (
                         self.project_id.analytic_account_id.id)
                     }
+            prod_vals = production_obj.product_id_change(product.id,
+                                                         1)['value']
+            vals.update(prod_vals)
+            if 'routing_id' in vals:
+                routing = routing_obj.browse(vals['routing_id'])
+                vals['product_qty'] = (
+                    production_obj._get_min_qty_for_production(routing))
             new_production = production_obj.create(vals)
             new_production.action_compute()
             production_list.append(new_production.id)
