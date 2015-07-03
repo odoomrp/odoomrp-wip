@@ -44,8 +44,12 @@ class WizCreateFictitiousOf(models.TransientModel):
             vals.update(prod_vals)
             if 'routing_id' in vals:
                 routing = routing_obj.browse(vals['routing_id'])
-                vals['product_qty'] = (
-                    production_obj._get_min_qty_for_production(routing))
+                product_qty = production_obj._get_min_qty_for_production(
+                    routing)
+                vals['product_qty'] = product_qty
+                prod_vals = production_obj.product_id_change(
+                    product.id, product_qty)['value']
+                vals.update(prod_vals)
             new_production = production_obj.create(vals)
             new_production.action_compute()
             production_list.append(new_production.id)
