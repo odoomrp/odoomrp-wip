@@ -291,3 +291,7 @@ class MrpProduction(models.Model):
             product = record.product_id
             if record.unit_std_cost:
                 product.manual_standard_cost = record.unit_std_cost
+
+    @api.multi
+    def _get_min_qty_for_production(self, routing=False):
+        return 1
