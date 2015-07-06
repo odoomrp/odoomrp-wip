@@ -2,7 +2,7 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields, api, _
+from openerp import models, fields, api, exceptions, _
 from dateutil.relativedelta import relativedelta
 
 
@@ -166,6 +166,11 @@ class ProcurementPlan(models.Model):
                     child, child.product_qty * qty, level,
                     product_errors, procurement, bom)
             else:
+                if not child.product_id:
+                    raise exceptions.Warning(
+                        _('No product defined for BoM line with template: %s,'
+                          ' on the list of materials %s') %
+                        (child.product_template.name, line.product_id.name))
                 procurement = self._create_procurement_from_bom_line(
                     level+1, child.product_id, child.product_qty * qty,
                     procurement)
@@ -210,5 +215,6 @@ class ProcurementPlan(models.Model):
             date = (fields.Date.from_string(procurement.date_planned[0:10]) -
                     (relativedelta(days=days_to_sum)))
             vals['date_planned'] = date
-        vals.update(procurement_obj.onchange_product_id(product.id)['value'])
+        res = procurement_obj.onchange_product_id(product.id)
+        vals.update('value' in res and res['value'] or {})
         return vals
