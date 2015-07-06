@@ -10,6 +10,5 @@ class StockPicking(models.Model):
 
     @api.multi
     def action_assign(self):
-        for pick in self:
-            pick.pack_operation_ids.unlink()
+        self.mapped('pack_operation_ids').unlink()
         return super(StockPicking, self).action_assign()
