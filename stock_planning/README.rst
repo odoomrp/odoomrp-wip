@@ -1,6 +1,6 @@
 Stock planning
 ==============
-This module show a prevision of stock and allows you to generate their
+This module shows a prevision of stock and allows you to generate their
 respective procurement order.
 
 Credits

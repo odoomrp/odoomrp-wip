@@ -53,6 +53,9 @@ class StockPlanning(models.Model):
         if self.from_date:
             cond.append(('date_planned', '>', self.from_date))
         procurements = procurement_obj.search(cond)
+        # In selected procurements can not be applied "filtered" by
+        # "purchase_id" because this field is of type "Related" and
+        # "store = False".
         for procurement in procurements:
             if (not procurement.purchase_id or
                 (procurement.purchase_id and procurement.purchase_id.state ==
@@ -82,7 +85,7 @@ class StockPlanning(models.Model):
             if lines:
                 line = max(lines, key=lambda x: x.scheduled_date)
                 qty_available = line.scheduled_to_date
-        if qty_available is not False:
+        if qty_available:
             self.scheduled_to_date = (qty_available + self.incoming_to_date -
                                       self.outgoing_to_date)
 
@@ -94,9 +97,8 @@ class StockPlanning(models.Model):
         cond = [('product_id', '=', self.product.id),
                 ('location_id', '=', self.location.id)]
         orderpoints = orderpoint_obj.search(cond)
-        if orderpoints:
-            self.rule_min_qty = orderpoints[0].product_min_qty
-            self.rule_max_qty = orderpoints[0].product_max_qty
+        self.rule_min_qty = orderpoints[:1].product_min_qty
+        self.rule_max_qty = orderpoints[:1].product_max_qty
 
     @api.one
     def _get_required_increase(self):
@@ -106,17 +108,15 @@ class StockPlanning(models.Model):
             if self.scheduled_to_date < 0:
                 self.required_increase = ((self.scheduled_to_date * -1) +
                                           self.rule_min_qty)
-        elif self.scheduled_to_date > 0 and self.rule_max_qty == 0:
-            if self.rule_min_qty == 0:
+        elif self.scheduled_to_date > 0:
+            if self.rule_min_qty == 0 and self.rule_max_qty == 0:
                 self.required_increase = self.scheduled_to_date * -1
-            elif self.rule_min_qty > self.scheduled_to_date:
+            elif (self.rule_max_qty == 0 and self.rule_min_qty >
+                  self.scheduled_to_date):
                 self.required_increase = (self.rule_min_qty -
                                           self.scheduled_to_date)
-            else:
-                self.required_increase = (
-                    (self.scheduled_to_date - self.rule_min_qty) * -1)
-        elif self.scheduled_to_date > 0 and self.rule_max_qty > 0:
-            if self.scheduled_to_date > self.rule_max_qty:
+            elif (self.rule_max_qty > 0 and self.scheduled_to_date >
+                  self.rule_max_qty):
                 self.required_increase = (
                     (self.scheduled_to_date - self.rule_max_qty) * -1)
             else:
@@ -193,14 +193,13 @@ class StockPlanning(models.Model):
     def generate_procurement(self):
         self.ensure_one()
         procurement_obj = self.env['procurement.order']
-        cond = [('warehouse', '=', self.warehouse.id or False),
+        cond = [('warehouse', '=', self.warehouse.id),
                 ('location', '=', self.location.id),
                 ('scheduled_date', '<=', self.scheduled_date),
-                ('product', '=', self.product.id)]
+                ('product', '=', self.product.id),
+                ('required_qty', '!=', 0)]
         lines = self.search(cond)
         for line in lines:
-            if line.required_qty == 0:
-                continue
             vals = {'name': 'From stock scheduler',
                     'origin': 'From stock scheduler',
                     'product_id': line.product.id,
@@ -217,10 +216,9 @@ class StockPlanning(models.Model):
                 elif route.name == 'Buy':
                     suppliers = line.product.supplier_ids.filtered(
                         lambda x: x.type == 'supplier')
-                    if suppliers:
-                        sorted_suppliers = sorted(suppliers, reverse=True,
-                                                  key=lambda l: l.sequence)
-                        days_to_sum = (sorted_suppliers[0].delay or 0)
+                    sorted_suppliers = sorted(suppliers[:1], reverse=True,
+                                              key=lambda l: l.sequence)
+                    days_to_sum = (sorted_suppliers[0].delay or 0)
                     break
             date = (fields.Date.from_string(line.scheduled_date) -
                     (relativedelta(days=days_to_sum)))
