@@ -27,93 +27,56 @@ class MrpProduction(models.Model):
     @api.one
     @api.depends('product_qty', 'routing_id')
     def _calc_capacity(self):
-        self.show_split_button = False
-        self.capacity_min = 0
-        self.capacity_max = 0
-        if self.product_qty and self.routing_id:
-            max = 0
-            min = 0
-            for line in self.routing_id.workcenter_lines:
-                if line.limited_production_capacity:
-                    capacity_min = (
-                        line.workcenter_id.capacity_per_cycle_min or
-                        sys.float_info.min)
-                    capacity_max = (line.workcenter_id.capacity_per_cycle or
-                                    sys.float_info.max)
-                    if capacity_min and self.product_qty < capacity_min:
-                        if not min:
-                            min = capacity_min
-                        else:
-                            if capacity_min > min:
-                                min = capacity_min
-                    if capacity_max and self.product_qty > capacity_max:
-                        if not max:
-                            max = capacity_max
-                        else:
-                            if capacity_max < max:
-                                max = capacity_max
-            self.capacity_min = min
-            self.capacity_max = max
-            if max and self.product_qty > max:
-                self.show_split_button = True
+        limited_lines = self.routing_id.workcenter_lines.filtered(
+            'limited_production_capacity')
+        self.capacity_min = min(limited_lines.workcenter_id.mapped(
+            'capacity_per_cycle_min')) or 0
+        self.capacity_max = max(limited_lines.workcenter_id.mapped(
+            'capacity_per_cycle')) or 0
+        self.show_split_button = self.product_qty > self.capacity_max
 
     show_split_button = fields.Boolean(
-        'Show split button', default=False, compute='_calc_capacity')
+        'Show split button', compute='_calc_capacity')
     capacity_min = fields.Integer(
-        'Capacity min.', default=0, compute='_calc_capacity')
+        'Capacity min.', compute='_calc_capacity')
     capacity_max = fields.Integer(
-        'Capacity max.', default=0, compute='_calc_capacity')
+        'Capacity max.', compute='_calc_capacity')
 
     @api.multi
+    @api.onchange('product_qty', 'routing_id')
     def product_qty_change_production_capacity(self, product_qty=0,
                                                routing_id=False):
+        self.ensure_one()
         result = {}
-        if product_qty and routing_id:
-            routing = self.env['mrp.routing'].browse(routing_id)
-            max = 0
-            min = 0
-            for line in routing.workcenter_lines:
-                if line.limited_production_capacity:
-                    capacity_min = (
-                        line.workcenter_id.capacity_per_cycle_min or
-                        sys.float_info.min)
-                    capacity_max = (line.workcenter_id.capacity_per_cycle or
-                                    sys.float_info.max)
-                    if capacity_min and product_qty < capacity_min:
-                        if not min:
-                            min = capacity_min
-                        else:
-                            if capacity_min > min:
-                                min = capacity_min
-                    if capacity_max and product_qty > capacity_max:
-                        if not max:
-                            max = capacity_max
-                        else:
-                            if capacity_max < max:
-                                max = capacity_max
-            if max and min:
-                warning = {
-                    'title': _('Warning!'),
-                    'message': _('Product QTY < Capacity per cycle'
-                                 ' minimum, and > Capacity per cycle'
-                                 ' maximum. You must click the'
-                                 ' "Split Quantity" button')
-                }
-                result['warning'] = warning
-            elif min:
-                warning = {
-                    'title': _('Warning!'),
-                    'message': _('Product QTY > Capacity per cycle maximum.'
-                                 ' You must click the "Split Quantity" button')
-                }
-                result['warning'] = warning
-            elif max:
-                warning = {
-                    'title': _('Warning!'),
-                    'message': _('Product QTY > Capacity per cycle maximum.'
-                                 ' You must click the "Split Quantity" button')
-                }
-                result['warning'] = warning
+        if not product_qty or not routing_id:
+            return result
+        max = (self.capacity_max and product_qty > self.capacity_max and
+               self.capacity_max or 0)
+        min = (self.capacity_min and product_qty < self.capacity_min and
+               self.capacity_min or 0)
+        if max and min:
+            warning = {
+                'title': _('Warning!'),
+                'message': _('Product QTY < Capacity per cycle'
+                             ' minimum, and > Capacity per cycle'
+                             ' maximum. You must click the'
+                             ' "Split Quantity" button')
+            }
+            result['warning'] = warning
+        elif min:
+            warning = {
+                'title': _('Warning!'),
+                'message': _('Product QTY > Capacity per cycle maximum.'
+                             ' You must click the "Split Quantity" button')
+            }
+            result['warning'] = warning
+        elif max:
+            warning = {
+                'title': _('Warning!'),
+                'message': _('Product QTY > Capacity per cycle maximum.'
+                             ' You must click the "Split Quantity" button')
+            }
+            result['warning'] = warning
         return result
 
     @api.one
@@ -143,11 +106,10 @@ class MrpProduction(models.Model):
 
     @api.multi
     def action_confirm(self):
-        for production in self:
-            if production.show_split_button:
-                raise exceptions.Warning(
-                    _('Product QTY > Capacity per cycle maximum. You must'
-                      ' click the "Split Quantity" button'))
+        if any(p.show_split_button for p in self):
+            raise exceptions.Warning(
+                _('Product QTY > Capacity per cycle maximum. You must'
+                  ' click the "Split Quantity" button'))
         return super(MrpProduction, self).action_confirm()
 
 

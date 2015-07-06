@@ -37,7 +37,7 @@
             <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
             <field name="arch" type="xml">
                 <field name="product_qty" position="attributes">
-                    <attribute name="on_change">product_qty_change_production_capacity(product_qty, routing_id)</attribute>
+                    <attribute name="on_change"></attribute>
                 </field>
                 <field name="product_qty" position="after">
                     <field name="show_split_button" invisible="1" />

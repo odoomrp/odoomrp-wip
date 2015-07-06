@@ -36,6 +36,7 @@ class WizSplitProduction(models.TransientModel):
 
     @api.multi
     def split_quantity(self):
+        model_obj = self.env['ir.model.data']
         productions = []
         production = self.env['mrp.production'].browse(
             self.env.context['active_id'])
@@ -57,16 +58,17 @@ class WizSplitProduction(models.TransientModel):
             else:
                 new_production = production.copy(vals)
                 productions.append(new_production.id)
-        idform = self.env.ref('mrp.mrp_production_form_view')
-        idtree = self.env.ref('mrp.mrp_production_tree_view')
-        search_view = self.env.ref('mrp.view_mrp_production_filter')
+        t = model_obj.get_object_reference('mrp', 'mrp_production_tree_view')
+        f = model_obj.get_object_reference('mrp', 'mrp_production_form_view')
+        s = model_obj.get_object_reference('mrp', 'view_mrp_production_filter')
         return {
             'type': 'ir.actions.act_window',
             'view_mode': 'tree,form,calendar,graph,gantt',
             'view_type': 'form',
             'res_model': 'mrp.production',
-            'views': [(idtree.id, 'tree'), (idform.id, 'form')],
-            'search_view_id': search_view.id,
+            'views': [(t and t[1] or False, 'tree'),
+                      (f and f[1] or False, 'form')],
+            'search_view_id': s and s[1] or False,
             'domain':
             "[('id','in',[" + ','.join(map(str, productions)) + "])]",
             'context': self.env.context,
