@@ -13,10 +13,8 @@ class SaleOrder(models.Model):
     def _calc_sale_promotion_gifts(self):
         self.sale_promotion_gifts.unlink()
         lines_with_price = self.order_line.filtered(lambda x: x.price_unit > 0)
-        gifts_list = []
-        for line in lines_with_price:
-            gifts_list += line.offer_id.sale_promotion_gifts.ids
-        self.sale_promotion_gifts = [(6, 0, gifts_list)]
+        self.sale_promotion_gifts = [(6, 0, lines_with_price.mapped(
+            'offer_id.sale_promotion_gifts.id'))]
 
     sale_promotion_gifts = fields.Many2many(
         comodel_name='sale.promotion.gift',
@@ -51,14 +49,14 @@ class SaleOrder(models.Model):
         self.ensure_one()
         self.sale_final_gifts.unlink()
         for line in self.sale_promotion_gifts:
-            vals = self._prepare_final_gift_product_data(self, line)
+            vals = self._prepare_final_gift_product_data(line)
             if vals['quantity'] > 0:
                 self.env['sale.final.gift'].create(vals)
         return True
 
-    def _prepare_final_gift_product_data(self, sale, gift_product):
+    def _prepare_final_gift_product_data(self, gift_product):
         total_packs = 0
-        sale_lines = sale.order_line.filtered(
+        sale_lines = self.order_line.filtered(
             lambda x: x.offer_id == gift_product.product_pricelist_item_offer)
         offer = gift_product.product_pricelist_item_offer
         total = offer.free_qty + offer.paid_qty
@@ -73,18 +71,18 @@ class SaleOrder(models.Model):
                 qty = 0
                 if item.product_id:
                     qty = sum(
-                        x.product_uom_qty for line in sale.order_line.filtered(
+                        x.product_uom_qty for line in self.order_line.filtered(
                             lambda x: x.product_id == item.product_id
                             and not x.offer_id.not_combinable))
                 elif item.product_tmpl_id:
                     qty = sum(
-                        x.product_uom_qty for line in sale.order_line.filtered(
+                        x.product_uom_qty for line in self.order_line.filtered(
                             lambda x: x.product_template ==
                             item.product_tmpl_id
                             and not x.offer_id.not_combinable))
                 elif item.categ_id:
                     qty = sum(
-                        x.product_uom_qty for line in sale.order_line.filtered(
+                        x.product_uom_qty for line in self.order_line.filtered(
                             lambda x: x.product_id.categ_id ==
                             item.categ_id
                             and not x.offer_id.not_combinable))
@@ -93,7 +91,7 @@ class SaleOrder(models.Model):
                         x.product_uom_qty for line in sale_lines.filtered(
                             lambda x: not x.offer_id.not_combinable))
                 total_packs += qty // total
-        vals = {'sale': sale.id,
+        vals = {'sale': self.id,
                 'product': gift_product.product.id,
                 'quantity': total_packs
                 }
