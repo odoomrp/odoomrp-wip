@@ -16,3 +16,12 @@ This module performs the following:
   between the capabilities of the new machine assigned to it, if not ... a
   warning is raised that the user has to change the quantity in the WO.
 
+Credits
+=======
+
+Contributors
+------------
+* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+* Ana Juaristi <anajuaristi@avanzosc.es>
+* Alfredo de la Fuente <alfredodelafuente@avanzosc.es>
+
