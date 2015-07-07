@@ -11,3 +11,4 @@ class ProductPricelistItemOffer(models.Model):
     sale_promotion_gifts = fields.One2many(
         'sale.promotion.gift', 'product_pricelist_item_offer',
         string='Sale promotion gifts', copy=False)
+    not_combinable = fields.Boolean('Offer not combinable')
