@@ -22,11 +22,10 @@
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "www.avanzosc.es",
     "category": "Purchase Management",
-    "contributors": [
-                    "Esther Martín <esthermartin@avanzosc.es>",
-                    "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-                    "Ana Juaristi <anajuaristi@avanzosc.es>",
-                    "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>"],
+    "contributors": ["Esther Martín <esthermartin@avanzosc.es>",
+                     "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+                     "Ana Juaristi <anajuaristi@avanzosc.es>",
+                     "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>"],
     "depends": ["base", "purchase", "purchase_requisition"],
     "data": [
             "views/bids_ext_view.xml"],
