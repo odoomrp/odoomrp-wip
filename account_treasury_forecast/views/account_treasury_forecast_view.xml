@@ -98,7 +98,8 @@
                          <field name="check_open" colspan="2" />
                         <separator string="" colspan="4" />
                         <button name="button_calculate" class="oe_highlight"
-                            string="Get Data" type="object" colspan="4" />
+                            string="Get Data" type="object" colspan="4" 
+                            confirm="This button will do some actions. First, removes all lines. Next, loads invoices by selected states and dates. If there is not any state checked, the system will not load any invoice. By last, loads template lines by dates or lines without date."/>
                     </group>
                     <group col="2" colspan="2">
                         <separator string="Calculate" colspan="2" />
