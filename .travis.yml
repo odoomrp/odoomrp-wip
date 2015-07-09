@@ -24,10 +24,7 @@ virtualenv:
 
 install:
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
-  - git clone https://github.com/odoomrp/odoomrp-utils ${HOME}/odoomrp-utils
-  - git clone https://github.com/OCA/banking ${HOME}/banking -b ${VERSION}
-  - git clone https://github.com/OCA/purchase-workflow ${HOME}/purchase-workflow -b ${VERSION}
-  - git clone https://github.com/OCA/product-attribute ${HOME}/product-attribute -b ${VERSION}
+  - git clone --depth=1 https://github.com/odoomrp/odoomrp-utils ${HOME}/odoomrp-utils
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
 
