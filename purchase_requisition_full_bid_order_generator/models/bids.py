@@ -14,7 +14,7 @@ class PurchaseRequisition(models.Model):
         partner_obj = self.env['res.partner']
         suppliers = partner_obj.search([('supplier', '=', True)])
         supplier_obj = self.env['product.supplierinfo']
-        print suppliers
+
         suppliers_list = []
         for supplier in suppliers:
             all_products = True
@@ -24,10 +24,7 @@ class PurchaseRequisition(models.Model):
                          ('product_tmpl_id', '=', line.product_id.id)]):
                     all_products = False
             if all_products:
-                print supplier.id
                 suppliers_list.append(supplier.id)
-
-        print suppliers_list
 
         for supplier in suppliers_list:
             self.make_purchase_order(supplier)
