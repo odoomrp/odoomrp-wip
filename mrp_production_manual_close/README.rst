@@ -4,7 +4,13 @@ MRP Production manual close
 ===========================
 
 This module modifies mrp production workflow to finish the production orders
-manually.
+manually adding a new close button.
+
+Known issues / Roadmap
+======================
+
+Warning, this button will complete the production for all defined product
+quantity and behaviors such operations if mrp_operations module is installed.
 
 Credits
 =======
