@@ -27,18 +27,19 @@ class PurchaseOrder(models.Model):
         """Create possible product variants not yet created."""
         for order in self:
             for line in order.order_line:
-                if not line.product_id:
-                    product_obj = self.env['product.product']
-                    att_values_ids = line.product_attributes.mapped('value.id')
-                    domain = [
-                        ('product_tmpl_id', '=', line.product_template.id),
-                        ('attribute_value_ids', 'in', att_values_ids)]
-                    product = product_obj.search(domain)
-                    if not product:
-                        product = product_obj.create(
-                            {'product_tmpl_id': line.product_template.id,
-                             'attribute_value_ids': [(6, 0, att_values_ids)]})
-                    line.write({'product_id': product.id})
+                if line.product_id:
+                    continue
+                product_obj = self.env['product.product']
+                att_values_ids = line.product_attributes.mapped('value.id')
+                domain = [('product_tmpl_id', '=', line.product_template.id)]
+                for value in att_values_ids:
+                    domain.append(('attribute_value_ids', '=', value))
+                product = product_obj.search(domain)
+                if not product:
+                    product = product_obj.create(
+                        {'product_tmpl_id': line.product_template.id,
+                         'attribute_value_ids': [(6, 0, att_values_ids)]})
+                line.write({'product_id': product.id})
         return super(PurchaseOrder, self).wkf_confirm_order()
 
 
