@@ -291,12 +291,11 @@ class SaleOrderLine(models.Model):
                 self.product_template.id, self.product_uom_qty or 1.0,
                 self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
 
-
     @api.cr_uid_ids_context
     def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
                           uom=False, qty_uos=0, uos=False, name='',
                           partner_id=False, lang=False, update_tax=True,
-                          date_order=False, packaging=False, 
+                          date_order=False, packaging=False,
                           fiscal_position=False, flag=False, context=None):
         order = self.pool['sale.order'].browse(
             cr, uid, pricelist, context=context)
@@ -315,10 +314,10 @@ class SaleOrder(models.Model):
     def _get_act_window_dict(self, cr, uid, name, context=None):
         mod_obj = self.pool.get('ir.model.data')
         act_obj = self.pool.get('ir.actions.act_window')
-        result = mod_obj.xmlid_to_res_id(cr, uid, name, raise_if_not_found=True)
+        result = mod_obj.xmlid_to_res_id(cr, uid, name,
+                                         raise_if_not_found=True)
         result = act_obj.read(cr, uid, [result], context=context)[0]
         return result
-
 
     @api.multi
     def action_open_lines(self):

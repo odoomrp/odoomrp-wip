@@ -33,10 +33,9 @@
     ],
     "category": "Product",
     "summary": "",
-    "data": [
-         "views/product_attribute_line.xml",
-         "views/sale_view.xml",
-         "security/sale_product_variants_security.xml"
-    ],
+    "data": ["views/product_attribute_line.xml",
+             "views/sale_view.xml",
+             "security/sale_product_variants_security.xml"
+             ],
     "installable": True,
 }
