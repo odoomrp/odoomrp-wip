@@ -35,8 +35,8 @@ class StockMove(models.Model):
                     journal_id = self.env.ref(
                         'mrp_production_project_estimated_cost.analytic_'
                         'journal_materials', False)
-                    name = ('Final product - ' + (production.name or '') + '-'
-                            + (product.default_code or ''))
+                    name = ('Final product - ' + (production.name or '') +
+                            '-' + (product.default_code or ''))
                     vals = production._prepare_cost_analytic_line(
                         journal_id, name, production, product,
                         qty=record.product_qty, amount=amount)

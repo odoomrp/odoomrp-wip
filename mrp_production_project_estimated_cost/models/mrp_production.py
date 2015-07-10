@@ -154,11 +154,11 @@ class MrpProduction(models.Model):
         analytic_line_obj = self.env['account.analytic.line']
         property_obj = self.env['ir.property']
         if not general_account:
-            general_account = (product.property_account_income or
-                               product.categ_id.property_account_income_categ
-                               or property_obj.get(
-                                   'property_account_expense_categ',
-                                   'product.category'))
+            general_account = (
+                product.property_account_income or
+                product.categ_id.property_account_income_categ or
+                property_obj.get('property_account_expense_categ',
+                                 'product.category'))
         if not self.analytic_account_id:
             raise exceptions.Warning(
                 _('You must define one Analytic Account for this MO: %s') %

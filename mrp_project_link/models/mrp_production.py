@@ -112,9 +112,10 @@ class MrpProductionWorkcenterLine(models.Model):
                 'parent_ids': [(6, 0, production_tasks.ids)]
             }
             if record.routing_wc_line:
-                count = (record.routing_wc_line.op_wc_lines.filtered(
-                    lambda r: r.workcenter == record.workcenter_id).op_number
-                    or record.workcenter_id.op_number)
+                count = (
+                    record.routing_wc_line.op_wc_lines.filtered(
+                        lambda r: r.workcenter == record.workcenter_id
+                    ).op_number or record.workcenter_id.op_number)
                 op_list = record.workcenter_id.operators
                 for i in range(count):
                     if len(op_list) > i:
