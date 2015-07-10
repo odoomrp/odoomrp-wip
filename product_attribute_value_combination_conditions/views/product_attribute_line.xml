@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!--<record model="ir.ui.view" id="value_constrain_form">-->
+            <!--<field name="name">value.constraint.form</field>-->
+            <!--<field name="model">value.constraint</field>-->
+            <!--<field name="arch" type="xml">-->
+                <!--<form string="Value constraint">-->
+                    <!--<label string="Predecessor Values"/>-->
+                    <!--<field name="predecessor_values" widget="many2many_tags"/>-->
+                    <!--<field name="possible_values" widget="many2many_tags"-->
+                           <!--invisible="0"/>-->
+                    <!--<field name="possible_allowed_values"-->
+                           <!--widget="many2many_tags" invisible="0"/>-->
+                    <!--<label string="Allowed Values"/>-->
+                    <!--<field name="allowed_values" widget="many2many_tags"/>-->
+                    <!--<field name="attribute_line" widget="many2many_tags"-->
+                           <!--invisible="1"/>-->
+                <!--</form>-->
+            <!--</field>-->
+        <!--</record>-->
+
+        <record model="ir.ui.view" id="conditional_variants_lines_form">
+            <field name="name">conditional.variants.lines.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id"
+                   ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <field name="attribute_id" position="before">
+                    <field name="initial"/>
+                </field>
+                <field name="value_ids" position="before">
+                    <field name="predecessors" widget="many2many_tags"
+                           attrs="{'readonly':[('initial','=',True)]}"/>
+                    <field name="possible_values" invisible="1"/>
+                    <field name="possible_predecessor_values" invisible="1"/>
+                    <field name="predecessors_constraint"
+                           widget="many2many_tags"
+                           attrs="{'readonly':[('predecessors','=',False)]}"/>
+                    <field name="value_constraints">
+                        <form string="Value constraints">
+                            <label string="Predecessor Values"/>
+                            <field name="predecessor_values"
+                                   widget="many2many_tags"
+                                   domain="[('id', 'in', parent.predecessors_constraint[0][2])]"/>
+                            <label string="Allowed Values"/>
+                            <field name="allowed_values"
+                                   widget="many2many_tags"
+                                   domain="[('id', 'in', parent.value_ids[0][2])]"/>
+                        </form>
+                    </field>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
