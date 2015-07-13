@@ -32,11 +32,11 @@
                 <field name="value_ids" position="before">
                     <field name="predecessors" widget="many2many_tags"
                            attrs="{'readonly':[('initial','=',True)]}"/>
-                    <field name="possible_values" invisible="1"/>
+                    <field name="possible_predecessors" invisible="1"/>
                     <field name="possible_predecessor_values" invisible="1"/>
                     <field name="predecessors_constraint"
                            widget="many2many_tags"
-                           attrs="{'readonly':[('predecessors','=',False)]}"/>
+                           attrs="{'readonly':['|',('initial','=',True),('predecessors','=',[(6,False,[])])]}"/>
                     <field name="value_constraints">
                         <form string="Value constraints">
                             <label string="Predecessor Values"/>
