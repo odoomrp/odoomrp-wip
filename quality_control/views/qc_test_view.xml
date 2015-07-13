@@ -33,6 +33,7 @@
                                 <field name="min_value" />
                                 <field name="max_value" />
                                 <field name="uom_id" />
+                                <field name="print_question" />
                                 <field name="ql_values" />
                             </tree>
                         </field>
@@ -74,6 +75,7 @@
                     <group>
                         <field name="sequence" />
                         <field name="type" />
+                        <field name="print_question" />
                     </group>
                     <group name="qualitative"
                            string="Answers"

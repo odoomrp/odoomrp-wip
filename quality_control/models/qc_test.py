@@ -24,8 +24,7 @@ class QcTest(models.Model):
         string='Questions', copy=True)
     object_id = fields.Reference(
         string='Reference object', selection=_links_get,)
-    fill_correct_values = fields.Boolean(
-        string='Pre-fill with correct values')
+    fill_correct_values = fields.Boolean(string='Pre-fill with correct values')
     type = fields.Selection(
         [('generic', 'Generic'),
          ('related', 'Related')],
@@ -80,6 +79,7 @@ class QcTestQuestion(models.Model):
     min_value = fields.Float(string='Min', digits=(16, 5))
     max_value = fields.Float(string='Max', digits=(15, 5))
     uom_id = fields.Many2one(comodel_name='product.uom', string='Uom')
+    print_question = fields.Boolean(string='Print')
 
 
 class QcTestQuestionValue(models.Model):

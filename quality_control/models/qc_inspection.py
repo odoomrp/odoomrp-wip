@@ -297,3 +297,4 @@ class QcInspectionLine(models.Model):
                                compute="get_valid_values")
     success = fields.Boolean(
         compute="quality_test_check", string="Success?", store=True)
+    print_question = fields.Boolean(related='test_line.print_question')

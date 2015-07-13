@@ -80,6 +80,7 @@
                                                attrs="{'readonly': [('question_type', '=', 'qualitative')]}" />
                                         <field name="test_uom_category" invisible="1"/>
                                         <field name="valid_values" />
+                                        <field name="print_question" />
                                         <field name="success" />
                                     </tree>
                                 </field>
@@ -195,6 +196,7 @@
                            attrs="{'readonly': [('question_type', '=', 'qualitative')]}" />
                     <field name="test_uom_category" invisible="1"/>
                     <field name="valid_values" />
+                    <field name="print_question" />
                     <field name="success" />
                 </tree>
             </field>
