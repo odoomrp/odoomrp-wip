@@ -74,7 +74,8 @@ class ProductAttributeLine(models.Model):
         comodel_name='product.attribute.value',
         relation='predecessors_constraint_possible_predecessors_rel',
         column1='line_id',
-        column2='value_id', compute='_get_possible_predecessors', readonly=True)
+        column2='value_id', compute='_get_possible_predecessors',
+        readonly=True)
     value_constraints = fields.One2many(comodel_name='value.constraint',
                                         inverse_name='attribute_line')
 
@@ -86,7 +87,8 @@ class ValueConstraint(models.Model):
     # @api.one
     # @api.depends('attribute_line.predecessors_constraint')
     # def _get_possible_predecessors_attribute_values(self):
-    #     self.possible_predecessors = self.attribute_line.predecessors_constraint
+    #     self.possible_predecessors = (
+    #         self.attribute_line.predecessors_constraint)
     #
     # @api.one
     # @api.depends('attribute_line.value_ids')
