@@ -19,7 +19,9 @@ class SaleOrder(models.Model):
                 vals = {'name': self.name + ' - ' + line.product_id.name,
                         'origin': self.name,
                         'product_id': line.product_id.id,
-                        'product_qty': line.product_uom_qty
+                        'product_qty': line.product_uom_qty,
+                        'warehouse_id': self.warehouse_id.id,
+                        'service_sale_line_id': line.id
                         }
                 proc_vals = procurement_obj.onchange_product_id(
                     line.product_id.id)
@@ -27,6 +29,13 @@ class SaleOrder(models.Model):
                     raise exceptions.Warning(
                         _('Product UOM or Product UOS not found for product:'
                           ' %s') % (line.product_id.name))
+                vals.update(proc_vals['value'])
+                proc_vals = procurement_obj.change_warehouse_id(
+                    self.warehouse_id.id)
+                if 'value' not in proc_vals:
+                    raise exceptions.Warning(
+                        _('Not location found for warehouse:'
+                          ' %s') % (self.warehouse_id.name))
                 vals.update(proc_vals['value'])
                 proc = procurement_obj.create(vals)
                 proc.write(
