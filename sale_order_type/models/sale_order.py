@@ -1,25 +1,7 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#                                                                            #
-#  OpenERP, Open Source Management Solution.                                 #
-#                                                                            #
-#  @author Carlos Sánchez Cifuentes <csanchez@grupovermon.com>               #
-#                                                                            #
-#  This program is free software: you can redistribute it and/or modify      #
-#  it under the terms of the GNU Affero General Public License as            #
-#  published by the Free Software Foundation, either version 3 of the        #
-#  License, or (at your option) any later version.                           #
-#                                                                            #
-#  This program is distributed in the hope that it will be useful,           #
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of            #
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the              #
-#  GNU Affero General Public License for more details.                       #
-#                                                                            #
-#  You should have received a copy of the GNU Affero General Public License  #
-#  along with this program. If not, see <http://www.gnu.org/licenses/>.      #
-#                                                                            #
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-
 from openerp import models, api, fields
 
 
@@ -31,6 +13,14 @@ class SaleOrder(models.Model):
 
     type_id = fields.Many2one(
         comodel_name='sale.order.type', string='Type', default=_get_order_type)
+
+    @api.multi
+    def onchange_partner_id(self, part):
+        res = super(SaleOrder, self).onchange_partner_id(part=part)
+        partner = self.env['res.partner'].browse(part)
+        if partner.sale_type:
+            res['value'].update({'type_id': partner.sale_type.id})
+        return res
 
     @api.multi
     def on_change_type_id(self, type_id):
@@ -52,4 +42,12 @@ class SaleOrder(models.Model):
     def _prepare_invoice(self, order, line_ids):
         res = super(SaleOrder, self)._prepare_invoice(order, line_ids)
         res['journal_id'] = order.type_id.journal_id.id
+        return res
+
+    @api.multi
+    def action_button_confirm(self):
+        res = super(SaleOrder, self).action_button_confirm()
+        for order in self:
+            if order.type_id.proof:
+                order.picking_ids.write({'invoice_state': 'none'})
         return res
