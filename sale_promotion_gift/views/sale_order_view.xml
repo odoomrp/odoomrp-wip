@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_order_form_inh_promotiongift" model="ir.ui.view">
+            <field name="name">view.order.form.inh.promotiongift</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <page string="Other Information" position="after">
+                   <page string="Sale promotion gifts">
+                        <separator string="Sale promotion gifts" colspan="4" />
+                        <field name="sale_promotion_gifts" nolabel="1">
+                            <field name="product" />
+                            <field name="category" />
+                            <field name="quantity" />
+                        </field>
+                        <button name="button_dump_sale_final_gifts" class="oe_highlight"
+                            string="Dump offer" type="object" colspan="4" />
+                        <separator string="Sale final gifts" colspan="4" />
+                        <field name="sale_final_gifts" />
+                    </page>
+                </page>
+            </field>
+        </record>
+
+    </data>
+</openerp>

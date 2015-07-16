@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_promotion_gift_sale_manager,access_sale_promotion_gift_sale_manager,model_sale_promotion_gift,base.group_sale_manager,1,1,1,1
+access_sale_final_gift_sale_manager,access_sale_final_gift_sale_manager,model_sale_final_gift,base.group_sale_manager,1,1,1,1
+

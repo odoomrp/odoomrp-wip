@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="pricelist_item_offer_tree_view_inh_promotiongift" model="ir.ui.view">
+            <field name="name">pricelist.item.offer.tree.view.inh.promotiongift</field>
+            <field name="model">product.pricelist.item.offer</field>
+            <field name="inherit_id" ref="product_pricelist_rules.pricelist_item_offer_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="free_qty" position="after">
+                    <field name="sale_promotion_gifts" />
+                </field>
+            </field>
+        </record>
+        <record id="pricelist_item_offer_form_view_inh_promotiongift" model="ir.ui.view">
+            <field name="name">pricelist.item.offer.form.view.inh.promotiongift</field>
+            <field name="model">product.pricelist.item.offer</field>
+            <field name="inherit_id" ref="product_pricelist_rules.pricelist_item_offer_form_view"/>
+            <field name="arch" type="xml">
+                <field name="free_qty" position="after">
+                    <separator string="Sale promotion gifts" colspan="4"/>
+                    <field name="sale_promotion_gifts" nolabel="1" colspan="4">
+                        <tree string="Sale promotion gifts" editable="bottom">
+                            <field name="product_pricelist_item_offer" invisible="1" />
+                            <field name="product" />
+                            <field name="category" />
+                            <field name="quantity" />
+                        </tree>
+                    </field>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
