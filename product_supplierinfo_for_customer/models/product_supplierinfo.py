@@ -35,19 +35,23 @@ class ProductSupplierinfo(models.Model):
             return {'domain': {'name': [('customer', '=', True)]}}
         return {'domain': {'name': []}}
 
-    def _custumer_sequence_wa(self, vals):
-        si_type = vals['type'] if 'type' in vals else self.type
-        si_sequence = vals['sequence'] if 'sequence' in vals else self.sequence
+    def _custumer_sequence_wa(self, vals, si_type, si_sequence):
         if si_type == 'customer' and si_sequence < 100:
-            vals['sequence'] += 100
+            si_sequence += 100
+        vals['type'] = si_type
+        vals['sequence'] = si_sequence
         return vals
 
     @api.multi
     def write(self, vals):
-        vals = self._custumer_sequence_wa(vals)
+        si_type = vals.get('type', self.type)
+        si_sequence = vals.get('sequence', self.sequence)
+        vals = self._custumer_sequence_wa(vals, si_type, si_sequence)
         return super(ProductSupplierinfo, self).write(vals)
 
     @api.model
     def create(self, vals):
-        vals = self._custumer_sequence_wa(vals)
+        si_type = vals.get('type', 'supplier')
+        si_sequence = vals.get('sequence', 1)
+        vals = self._custumer_sequence_wa(vals, si_type, si_sequence)
         return super(ProductSupplierinfo, self).create(vals)
