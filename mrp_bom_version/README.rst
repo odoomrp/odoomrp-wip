@@ -3,6 +3,7 @@
 
 Module name
 ===========
+
 MRP - BoM version
 -----------------
 
@@ -60,6 +61,7 @@ To use this module, you need to:
 
 Credits
 =======
+
 Contributors
 ------------
 ** to do **
