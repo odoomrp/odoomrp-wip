@@ -16,31 +16,18 @@
 #
 ##############################################################################
 {
-    "name": "MRP Bom By Percentage",
+    "name": "MRP BoM By Percentage",
     "version": "1.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    "category": "MRP",
+    "category": "Manufacturing",
     "website": "http://www.odoomrp.com",
-    "description": """
-    This module performs the following:
-
-    Include in the header of the Bom list, two new fields:
-
-        1.- Produce by percentage: Type boolean, when you check this new field,
-            the quantity to be produced is 100, and the field 'amount to
-            produce' will be invisible.
-
-        2.- QTY to consume. Calculated field. Displays the sum of all amounts
-            to consume.
-
-    If the BoM list is by_percentage, will be validated that the new field
-    'QTY to consume' is not greater than 100.
-    """,
-    "depends": ['mrp',
-                ],
-    "data": ['views/mrp_bom_view.xml',
-             ],
+    "depends": [
+        "mrp",
+    ],
+    "data": [
+        "views/mrp_bom_view.xml",
+    ],
     "installable": True
 }
