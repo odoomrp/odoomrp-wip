@@ -11,10 +11,12 @@ Short Description
 
 This module is intended to add a version control to BoM (Bill of Materials) and to allow to control his life cycle.
 
+[es_ES] Este módulo tiene como objetivo el añadir el control de versiones a la LdM (Lista de Materiales) y permitir el control de su ciclo de vida.
+
 Long Description
 ----------------
 
-This module provides a state in the LdM whether to allow their use in
+This module provides a state in the BoM whether to allow their use in
 manufacturing, to do the following states are defined:
 
 * **Draft**:
@@ -75,7 +77,7 @@ To use this module, you need to:
 Credits
 =======
 
-* odooMRP
+* odooMRP Project, www.odoomrp.com
 
 Contributors
 ------------
