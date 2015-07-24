@@ -4,8 +4,15 @@
 Module name
 ===========
 
-MRP - BoM version
+mrp_bom_version, MRP - BoM version
+
+Short Description
 -----------------
+
+This module is intended to add a version control to BoM (Bill of Materials) and to allow to control his life cycle.
+
+Long Description
+----------------
 
 This module provides a state in the LdM whether to allow their use in
 manufacturing, to do the following states are defined:
@@ -33,35 +40,44 @@ to be unique.
 
 Installation
 ============
+
 To install this module, you need to:
 ** to do **
 
 Configuration
 =============
+
 To configure this module, you need to:
 ** to do **
 
 Usage
 =====
+
 ** to do **
 
 Installation
 ============
+
 ** to do **
 
 Configuration
 =============
+
 To configure this module, you need to:
 ** to do **
 
 Usage
 =====
+
 To use this module, you need to:
 ** to do **
 
 Credits
 =======
 
+* odooMRP
+
 Contributors
 ------------
+
 ** to do **
