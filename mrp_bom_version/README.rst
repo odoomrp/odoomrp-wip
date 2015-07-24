@@ -1,5 +1,10 @@
+.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+    :alt: License: AGPL-3
+
+Module name
+===========
 MRP - BoM version
-=================
+-----------------
 
 This module provides a state in the LdM whether to allow their use in
 manufacturing, to do the following states are defined:
@@ -24,3 +29,37 @@ to be unique.
   By clicking the button version, current BOM is moved to historical state,
   and a new BOM is creating based on this  but with version number +1 and
   changing state to draft
+
+Installation
+============
+To install this module, you need to:
+** to do **
+
+Configuration
+=============
+To configure this module, you need to:
+** to do **
+
+Usage
+=====
+** to do **
+
+Installation
+============
+** to do **
+
+Configuration
+=============
+To configure this module, you need to:
+** to do **
+
+Usage
+=====
+To use this module, you need to:
+** to do **
+
+Credits
+=======
+Contributors
+------------
+** to do **
