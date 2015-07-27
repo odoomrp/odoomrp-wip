@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="stock_planning_tree_view_inh_proclevel1">
+            <field name="name">stock.planning.tree.view.inh.proclevel1</field>
+            <field name="model">stock.planning</field>
+            <field name="inherit_id" ref="stock_planning.stock_planning_tree_view" />
+            <field name="arch" type="xml">
+                <field name="procurement_incoming_to_date" position="after" >
+                    <field name="procurement_plan_incoming_to_date"
+                           string="Incoming to date from procurements plan"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
