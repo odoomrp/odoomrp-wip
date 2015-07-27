@@ -39,16 +39,17 @@
                         <field name="location" />
                         <field name="scheduled_date" />
                         <field name="product" />
-                        <field name="qty_available" />
-                        <field name="virtual_available" />
-                        <field name="incoming_qty" />
-                        <field name="outgoing_qty" />
-                        <field name="incoming_to_date" />
-                        <field name="outgoing_to_date" />
-                        <field name="scheduled_to_date" />
-                        <field name="rule_min_qty" />
-                        <field name="rule_max_qty" />
-                        <field name="required_increase" />
+                        <field name="qty_available" string="Quantity On Hand"/>
+                        <field name="virtual_available" string="Forecast Quantity"/>
+                        <field name="incoming_qty" string="Incoming"/>
+                        <field name="outgoing_qty" string="Outgoing"/>
+                        <field name="move_incoming_to_date" string="Incoming to date from moves"/>
+                        <field name="procurement_incoming_to_date" string="Incoming to date from procurements"/>
+                        <field name="outgoing_to_date" string="Outgoing to date"/>
+                        <field name="scheduled_to_date" string="Scheduled to date"/>
+                        <field name="rule_min_qty" string="Rule min. qty"/>
+                        <field name="rule_max_qty" string="Rule max. qty"/>
+                        <field name="required_increase" string="Required increase"/>
                         <button string="Show procurements" name="show_procurements"
                                 type="object" icon="gtk-convert" />
                         <button string="Generate procurement" name="generate_procurement"

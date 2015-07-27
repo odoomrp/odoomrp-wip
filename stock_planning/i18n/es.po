@@ -1,19 +1,20 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_planning
+# 	* stock_planning
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-17 11:52+0000\n"
-"PO-Revision-Date: 2015-06-17 13:59+0100\n"
-"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"POT-Creation-Date: 2015-07-27 13:15+0000\n"
+"PO-Revision-Date: 2015-07-27 15:22+0100\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. module: stock_planning
 #: view:wiz.stock.planning:stock_planning.wiz_stock_planning_form_view
@@ -33,20 +34,17 @@ msgstr "Categoría"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
-#: field:stock.planning,company:0
-#: field:wiz.stock.planning,company:0
+#: field:stock.planning,company:0 field:wiz.stock.planning,company:0
 msgid "Company"
 msgstr "Compañía"
 
 #. module: stock_planning
-#: field:stock.planning,create_uid:0
-#: field:wiz.stock.planning,create_uid:0
+#: field:stock.planning,create_uid:0 field:wiz.stock.planning,create_uid:0
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: stock_planning
-#: field:stock.planning,create_date:0
-#: field:wiz.stock.planning,create_date:0
+#: field:stock.planning,create_date:0 field:wiz.stock.planning,create_date:0
 msgid "Created on"
 msgstr "Creado el"
 
@@ -81,6 +79,11 @@ msgid "Enter this field if you want to filter by template"
 msgstr "Introduzca este campo si quiere filtrar por platilla"
 
 #. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Forecast Quantity"
+msgstr "Cantidad prevista"
+
+#. module: stock_planning
 #: field:stock.planning,from_date:0
 msgid "From Date"
 msgstr "Desde fecha"
@@ -101,10 +104,24 @@ msgid "Group By"
 msgstr "Agrupar por"
 
 #. module: stock_planning
-#: field:stock.planning,id:0
-#: field:wiz.stock.planning,id:0
+#: field:stock.planning,id:0 field:wiz.stock.planning,id:0
 msgid "ID"
 msgstr "ID"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Incoming"
+msgstr "Entrada"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Incoming to date from moves"
+msgstr "Entrada a fecha desde movimientos"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Incoming to date from procurements"
+msgstr "Entrada a fecha desde abastecimientos"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
@@ -117,14 +134,12 @@ msgid "Increase number of days starting from the date from"
 msgstr "Número de días a incrementar a partir de la fecha desde"
 
 #. module: stock_planning
-#: field:stock.planning,write_uid:0
-#: field:wiz.stock.planning,write_uid:0
+#: field:stock.planning,write_uid:0 field:wiz.stock.planning,write_uid:0
 msgid "Last Updated by"
 msgstr "Última actualización por"
 
 #. module: stock_planning
-#: field:stock.planning,write_date:0
-#: field:wiz.stock.planning,write_date:0
+#: field:stock.planning,write_date:0 field:wiz.stock.planning,write_date:0
 msgid "Last Updated on"
 msgstr "Última actualización el"
 
@@ -140,22 +155,52 @@ msgid "Month"
 msgstr "Mes"
 
 #. module: stock_planning
-#: code:addons/stock_planning/models/stock_planning.py:185
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Outgoing"
+msgstr "Salida"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Outgoing to date"
+msgstr "Salida a fecha"
+
+#. module: stock_planning
+#: code:addons/stock_planning/models/stock_planning.py:184
+#: code:addons/stock_planning/models/stock_planning.py:191
 #, python-format
 msgid "Procurement orders"
 msgstr "Órdenes de abastecimientos"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
-#: field:stock.planning,product:0
-#: field:wiz.stock.planning,product:0
+#: field:stock.planning,product:0 field:wiz.stock.planning,product:0
 msgid "Product"
 msgstr "Producto"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Quantity On Hand"
+msgstr "Cantidad a mano"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Required increase"
+msgstr "Incremento requerido"
 
 #. module: stock_planning
 #: field:stock.planning,required_qty:0
 msgid "Required quantity"
 msgstr "Cantidad requerida"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Rule max. qty"
+msgstr "Regla cantidad max."
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Rule min. qty"
+msgstr "Regla cantidad min."
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
@@ -164,9 +209,19 @@ msgid "Scheduled date"
 msgstr "Fecha planificada"
 
 #. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Scheduled to date"
+msgstr "Planificado a fecha"
+
+#. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
 msgid "Search Stock Planning"
 msgstr "Buscar planificación stock"
+
+#. module: stock_planning
+#: help:stock.planning,category:0
+msgid "Select category for the current product"
+msgstr "Seleccione la categoría para el producto actual"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
@@ -174,8 +229,9 @@ msgid "Show procurements"
 msgstr "Mostrar abastecimientos"
 
 #. module: stock_planning
-#: code:addons/stock_planning/models/stock_planning.py:232
-#: code:addons/stock_planning/wizard/wiz_stock_planning.py:120
+#: code:addons/stock_planning/models/stock_planning.py:229
+#: code:addons/stock_planning/models/stock_planning.py:236
+#: code:addons/stock_planning/wizard/wiz_stock_planning.py:118
 #: model:ir.actions.act_window,name:stock_planning.action_stock_planning
 #: model:ir.model,name:stock_planning.model_stock_planning
 #: model:ir.ui.menu,name:stock_planning.stock_planning_option_view
@@ -192,6 +248,7 @@ msgstr "Plantilla"
 
 #. module: stock_planning
 #: code:addons/stock_planning/models/stock_planning.py:183
+#: code:addons/stock_planning/models/stock_planning.py:190
 #, python-format
 msgid "There are no procurements to show"
 msgstr "No hay abastecimientos para mostrar"
@@ -232,4 +289,3 @@ msgstr "Categoría"
 #: view:wiz.stock.planning:stock_planning.wiz_stock_planning_form_view
 msgid "or"
 msgstr "o"
-
