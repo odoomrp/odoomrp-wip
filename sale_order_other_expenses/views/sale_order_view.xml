@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_order_withcarrier_form_inh_saleexpenses" model="ir.ui.view" >
+            <field name="name">view.order.withcarrier.form.inh.saleexpenses</field>
+            <field name="inherit_id" ref="delivery.view_order_withcarrier_form"/>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <field name="carrier_id" position="attributes">
+                    <attribute name="domain">[('transport','=',True)]</attribute>
+                </field>
+                <field name="note" position="before">
+                    <group name="group_other_expenses">
+                        <label for="other_expenses"/>
+                        <div>
+                            <field name="other_expenses" context="{'default_sale':active_id or False}" >
+                                <tree string="Other expenses" editable="bottom">
+                                    <field name="sale" invisible="1"/>
+                                    <field name="expense" context="{'order_id':sale}" domain="[('transport','=',False)]" />
+                                </tree>
+                            </field>
+                        </div>
+                    </group>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
