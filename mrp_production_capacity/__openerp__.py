@@ -18,20 +18,23 @@
 {
     "name": "MRP Production Capacity",
     "version": "1.0",
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "contributors": [
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <anajuaristi@avanzosc.es>",
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
     "category": "Manufacturing",
-    "depends": ['mrp',
-                ],
-    "data": ['wizard/wiz_split_production_view.xml',
-             'views/mrp_view.xml',
-             ],
+    "depends": [
+        "mrp",
+    ],
+    "data": [
+        "wizard/wiz_split_production_view.xml",
+        "views/mrp_view.xml",
+    ],
     "installable": True
 }
