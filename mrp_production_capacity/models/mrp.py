@@ -29,10 +29,10 @@ class MrpProduction(models.Model):
     def _calc_capacity(self):
         limited_lines = self.routing_id.workcenter_lines.filtered(
             'limited_production_capacity')
-        self.capacity_min = min(limited_lines.workcenter_id.mapped(
-            'capacity_per_cycle_min')) or 0
-        self.capacity_max = max(limited_lines.workcenter_id.mapped(
-            'capacity_per_cycle')) or 0
+        self.capacity_min = limited_lines and min(
+            limited_lines.workcenter_id.mapped('capacity_per_cycle_min')) or 0
+        self.capacity_max = limited_lines and max(
+            limited_lines.workcenter_id.mapped('capacity_per_cycle')) or 0
         self.show_split_button = self.product_qty > self.capacity_max
 
     show_split_button = fields.Boolean(
