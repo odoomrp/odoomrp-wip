@@ -21,6 +21,7 @@
                             <group>
                                 <field name="warehouse_id"/>
                                 <field name="sequence_id"/>
+                                <field name="proof" />
                             </group>
                             <group>
                                 <field name="journal_id"/>
@@ -45,6 +46,7 @@
                     <field name="sequence_id"/>
                     <field name="journal_id"/>
                     <field name="refund_journal_id"/>
+                    <field name="proof" />
                     <field name="description"/>
                 </tree>
             </field>
