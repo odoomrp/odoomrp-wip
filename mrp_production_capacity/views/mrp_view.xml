@@ -37,7 +37,7 @@
             <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
             <field name="arch" type="xml">
                 <field name="product_qty" position="attributes">
-                    <attribute name="on_change"></attribute>
+                    <attribute name="on_change" />
                 </field>
                 <field name="product_qty" position="after">
                     <field name="show_split_button" invisible="1" />
@@ -46,9 +46,6 @@
                     <button name="button_split_quantity" string="Split quantity" type="object"
                             attrs="{'invisible':[('show_split_button','=',False)]}"/>
                 </field>
-                <xpath expr="//form[@string='Production Work Centers']/group/field[@name='workcenter_id']" position="attributes">
-                    <attribute name="on_change">workcenter_change_production_capacity(parent.product_qty, workcenter_id)</attribute>
-                </xpath>
             </field>
         </record>
 
