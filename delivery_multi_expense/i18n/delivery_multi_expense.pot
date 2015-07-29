@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_order_other_expenses
+#	* delivery_multi_expense
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 14:38+0000\n"
-"PO-Revision-Date: 2015-07-28 14:38+0000\n"
+"POT-Creation-Date: 2015-07-29 13:12+0000\n"
+"PO-Revision-Date: 2015-07-29 13:12+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,76 +15,76 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: sale_order_other_expenses
-#: model:ir.model,name:sale_order_other_expenses.model_delivery_carrier
+#. module: delivery_multi_expense
+#: model:ir.model,name:delivery_multi_expense.model_delivery_carrier
 msgid "Carrier"
 msgstr ""
 
-#. module: sale_order_other_expenses
+#. module: delivery_multi_expense
 #: field:sale.order.other.expense,create_uid:0
 msgid "Created by"
 msgstr ""
 
-#. module: sale_order_other_expenses
+#. module: delivery_multi_expense
 #: field:sale.order.other.expense,create_date:0
 msgid "Created on"
 msgstr ""
 
-#. module: sale_order_other_expenses
+#. module: delivery_multi_expense
 #: help:delivery.carrier,transport:0
-msgid "Determines whether the expense is a transportation"
+msgid "Determines whether the carrier method"
 msgstr ""
 
-#. module: sale_order_other_expenses
+#. module: delivery_multi_expense
 #: field:sale.order.other.expense,expense:0
 msgid "Expense"
 msgstr ""
 
-#. module: sale_order_other_expenses
+#. module: delivery_multi_expense
 #: field:sale.order.other.expense,id:0
 msgid "ID"
 msgstr ""
 
-#. module: sale_order_other_expenses
+#. module: delivery_multi_expense
 #: field:delivery.carrier,transport:0
 msgid "Is transport"
 msgstr ""
 
-#. module: sale_order_other_expenses
+#. module: delivery_multi_expense
 #: field:sale.order.other.expense,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
-#. module: sale_order_other_expenses
+#. module: delivery_multi_expense
 #: field:sale.order.other.expense,write_date:0
 msgid "Last Updated on"
 msgstr ""
 
-#. module: sale_order_other_expenses
-#: code:addons/sale_order_other_expenses/models/sale_order.py:35
+#. module: delivery_multi_expense
+#: code:addons/delivery_multi_expense/models/sale_order.py:35
 #, python-format
 msgid "No Grid Available!"
 msgstr ""
 
-#. module: sale_order_other_expenses
-#: code:addons/sale_order_other_expenses/models/sale_order.py:36
+#. module: delivery_multi_expense
+#: code:addons/delivery_multi_expense/models/sale_order.py:36
 #, python-format
 msgid "No grid matching for this expense: %s"
 msgstr ""
 
-#. module: sale_order_other_expenses
-#: view:sale.order:sale_order_other_expenses.view_order_withcarrier_form_inh_saleexpenses
+#. module: delivery_multi_expense
+#: view:sale.order:delivery_multi_expense.view_order_withcarrier_form_inh_deliverymultiexpenses
 #: field:sale.order,other_expenses:0
 msgid "Other expenses"
 msgstr ""
 
-#. module: sale_order_other_expenses
+#. module: delivery_multi_expense
 #: field:sale.order.other.expense,sale:0
 msgid "Sale order"
 msgstr ""
 
-#. module: sale_order_other_expenses
-#: model:ir.model,name:sale_order_other_expenses.model_sale_order
+#. module: delivery_multi_expense
+#: model:ir.model,name:delivery_multi_expense.model_sale_order
 msgid "Sales Order"
 msgstr ""
 

@@ -1,5 +1,5 @@
-Sale order other expenses
-=========================
+Delivery multi expense
+======================
 
 This module allows you to define in sales orders, other expenses that are not
 transportation.

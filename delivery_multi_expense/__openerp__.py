@@ -16,7 +16,7 @@
 #
 ##############################################################################
 {
-    "name": "Sale Order Other Expenses",
+    "name": "Delivery Multi Expense",
     "version": "1.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
