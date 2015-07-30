@@ -9,7 +9,7 @@ class WizCreateFictitiousOf(models.TransientModel):
     _name = "wiz.create.fictitious.of"
 
     date_planned = fields.Datetime(
-        string='Scheduled Date', required=True, default=fields.Datetime.now())
+        string='Scheduled Date', required=True, default=fields.Datetime.now)
     load_on_product = fields.Boolean("Load cost on product")
     project_id = fields.Many2one("project.project", string="Project")
 
