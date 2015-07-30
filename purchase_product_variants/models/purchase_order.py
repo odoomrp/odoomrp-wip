@@ -34,7 +34,13 @@ class PurchaseOrder(models.Model):
                 domain = [('product_tmpl_id', '=', line.product_template.id)]
                 for value in att_values_ids:
                     domain.append(('attribute_value_ids', '=', value))
-                product = product_obj.search(domain)
+                products = product_obj.search(domain)
+                # Filter the product with the exact number of attributes values
+                product = False
+                for prod in products:
+                    if len(prod.attribute_value_ids) == len(att_values_ids):
+                        product = prod
+                        break
                 if not product:
                     product = product_obj.create(
                         {'product_tmpl_id': line.product_template.id,

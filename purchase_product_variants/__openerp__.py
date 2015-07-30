@@ -29,6 +29,7 @@
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "David Díaz <d.diazp@gmail.com>",
     ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
