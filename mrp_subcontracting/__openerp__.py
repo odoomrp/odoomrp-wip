@@ -34,7 +34,6 @@
                 'mrp',
                 'mrp_operations',
                 'mrp_operations_extension',
-                'mrp_production_add_middle_stuff_operations'
                 ],
     "data": ['views/stock_picking_view.xml',
              'views/purchase_order_view.xml',

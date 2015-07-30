@@ -11,5 +11,3 @@ class MrpRoutingWorkcenter(models.Model):
     external = fields.Boolean('External', help="Is Subcontract Operation")
     semifinished_id = fields.Many2one(
         comodel_name='product.product', string='Semifinished Subcontracting')
-    picking_type_id = fields.Many2one('stock.picking.type', 'Picking Type',
-                                      domain=[('code', '=', 'outgoing')])
