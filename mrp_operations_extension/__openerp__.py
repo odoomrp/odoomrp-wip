@@ -38,6 +38,7 @@
         "hr",
     ],
     "data": [
+        "data/mrp_operations_extension_data.xml",
         "wizard/mrp_workorder_produce_view.xml",
         "views/mrp_workcenter_view.xml",
         "views/mrp_routing_operation_view.xml",
