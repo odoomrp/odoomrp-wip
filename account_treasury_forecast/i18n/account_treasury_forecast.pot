@@ -4,54 +4,54 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-09 10:28+0000\n"
-"PO-Revision-Date: 2014-09-09 12:29+0100\n"
+"POT-Creation-Date: 2015-07-09 09:20+0000\n"
+"PO-Revision-Date: 2015-07-09 09:20+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
 #: model:ir.ui.menu,name:account_treasury_forecast.menu_account_treasury_forecast
 msgid "Account Treasury Forecast"
-msgstr "Account Treasury Forecast"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast.template:account_treasury_forecast.account_treasury_forecast_template_form_view
 msgid "Account Treasury Forecast Template"
-msgstr "Account Treasury Forecast Template"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.line,amount:0
 #: field:account.treasury.forecast.line.template,amount:0
 #: field:wiz.create.invoice,amount:0
 msgid "Amount"
-msgstr "Amount"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.invoice,base_amount:0
 msgid "Base Amount"
-msgstr "Base Amount"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
 msgid "Calculate"
-msgstr "Calculate"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:wiz.create.invoice:account_treasury_forecast.wiz_create_invoice_form_view
 msgid "Cancel"
-msgstr "Cancel"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: selection:account.treasury.forecast.invoice,state:0
 msgid "Canceled"
-msgstr "Canceled"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast.line.template:account_treasury_forecast.account_treasury_forecast_line_template_tree_view
@@ -60,7 +60,7 @@ msgstr "Canceled"
 #: view:wiz.create.invoice:account_treasury_forecast.wiz_create_invoice_form_view
 #, python-format
 msgid "Create Invoice"
-msgstr "Create Invoice"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,create_uid:0
@@ -70,7 +70,7 @@ msgstr "Create Invoice"
 #: field:account.treasury.forecast.template,create_uid:0
 #: field:wiz.create.invoice,create_uid:0
 msgid "Created by"
-msgstr "Created by"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,create_date:0
@@ -80,13 +80,13 @@ msgstr "Created by"
 #: field:account.treasury.forecast.template,create_date:0
 #: field:wiz.create.invoice,create_date:0
 msgid "Created on"
-msgstr "Created on"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.line,date:0
 #: field:account.treasury.forecast.line.template,date:0
 msgid "Date"
-msgstr "Date"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,name:0
@@ -95,45 +95,45 @@ msgstr "Date"
 #: field:account.treasury.forecast.template,name:0
 #: field:wiz.create.invoice,description:0
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,check_draft:0
 #: selection:account.treasury.forecast.invoice,state:0
 msgid "Draft"
-msgstr "Draft"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.invoice,date_due:0
 msgid "Due Date"
-msgstr "Due Date"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,end_date:0
 msgid "End Date"
-msgstr "End Date"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: code:addons/account_treasury_forecast/models/account_treasury_forecast.py:101
 #, python-format
 msgid "Error!:: End date is lower than start date."
-msgstr "Error!:: End date is lower than start date."
+msgstr ""
 
 #. module: account_treasury_forecast
 #: code:addons/account_treasury_forecast/models/account_treasury_forecast.py:109
 #, python-format
 msgid "Error!:: There is no any filter checked."
-msgstr "Error!:: There is no any filter checked."
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
 msgid "Filters"
-msgstr "Filters"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
 msgid "Get Data"
-msgstr "Get Data"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,id:0
@@ -143,40 +143,40 @@ msgstr "Get Data"
 #: field:account.treasury.forecast.template,id:0
 #: field:wiz.create.invoice,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,in_invoice_ids:0
 msgid "In Invoices"
-msgstr "In Invoices"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
 msgid "In invoices"
-msgstr "In invoices"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.invoice,invoice_id:0
 #: field:account.treasury.forecast.line.template,invoice_id:0
 msgid "Invoice"
-msgstr "Invoice"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.line.template,paid:0
 msgid "Invoiced/Paid"
-msgstr "Invoiced/Paid"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast.invoice:account_treasury_forecast.account_treasury_forecast_invoice_tree_view
 msgid "Invoices"
-msgstr "Invoices"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.invoice,journal_id:0
 #: field:account.treasury.forecast.line.template,journal_id:0
 #: field:wiz.create.invoice,journal_id:0
 msgid "Journal"
-msgstr "Journal"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,write_uid:0
@@ -186,7 +186,7 @@ msgstr "Journal"
 #: field:account.treasury.forecast.template,write_uid:0
 #: field:wiz.create.invoice,write_uid:0
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,write_date:0
@@ -196,28 +196,28 @@ msgstr "Last Updated by"
 #: field:account.treasury.forecast.template,write_date:0
 #: field:wiz.create.invoice,write_date:0
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,check_open:0
 #: selection:account.treasury.forecast.invoice,state:0
 msgid "Opened"
-msgstr "Opened"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,out_invoice_ids:0
 msgid "Out Invoices"
-msgstr "Out Invoices"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
 msgid "Out invoices"
-msgstr "Out invoices"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: selection:account.treasury.forecast.invoice,state:0
 msgid "Paid"
-msgstr "Paid"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.invoice,partner_id:0
@@ -225,116 +225,121 @@ msgstr "Paid"
 #: field:account.treasury.forecast.line.template,partner_id:0
 #: field:wiz.create.invoice,partner_id:0
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:wiz.create.invoice,line_id:0
 msgid "Payment"
-msgstr "Payment"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: selection:account.treasury.forecast.invoice,state:0
 msgid "Pro-forma"
-msgstr "Pro-forma"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,check_proforma:0
 msgid "Proforma"
-msgstr "Proforma"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: selection:account.treasury.forecast.line,line_type:0
 #: selection:account.treasury.forecast.line.template,line_type:0
 msgid "Receivable"
-msgstr "Receivable"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: selection:account.treasury.forecast.line,line_type:0
 #: selection:account.treasury.forecast.line.template,line_type:0
 msgid "Recurring"
-msgstr "Recurring"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.template,recurring_line_ids:0
 msgid "Recurring Line"
-msgstr "Recurring Line"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,recurring_line_ids:0
 msgid "Recurring Lines"
-msgstr "Recurring Lines"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
 #: view:account.treasury.forecast.template:account_treasury_forecast.account_treasury_forecast_template_form_view
 msgid "Recurring Payments"
-msgstr "Recurring Payments"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.invoice,residual_amount:0
 msgid "Residual Amount"
-msgstr "Residual Amount"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,start_amount:0
 msgid "Start Amount"
-msgstr "Start Amount"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,start_date:0
 msgid "Start Date"
-msgstr "Start Date"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.invoice,state:0
 msgid "State"
-msgstr "State"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.invoice,tax_amount:0
 msgid "Tax Amount"
-msgstr "Tax Amount"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,template_id:0
 msgid "Template"
-msgstr "Template"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.line,template_line_id:0
 msgid "Template Line"
-msgstr "Template Line"
+msgstr ""
+
+#. module: account_treasury_forecast
+#: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
+msgid "This button will do some actions. First, removes all lines. Next, loads invoices by selected states and dates. If there is not any state checked, the system will not load any invoice. By last, loads template lines by dates or lines without date."
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast.invoice:account_treasury_forecast.account_treasury_forecast_invoice_tree_view
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.invoice,total_amount:0
 #: view:account.treasury.forecast.line:account_treasury_forecast.account_treasury_forecast_line_tree_view
 msgid "Total Amount"
-msgstr "Total Amount"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast.invoice:account_treasury_forecast.account_treasury_forecast_invoice_tree_view
 msgid "Total Base"
-msgstr "Total Base"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast.invoice:account_treasury_forecast.account_treasury_forecast_invoice_tree_view
 msgid "Total Residual"
-msgstr "Total Residual"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast.invoice:account_treasury_forecast.account_treasury_forecast_invoice_tree_view
 msgid "Total Taxes"
-msgstr "Total Taxes"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.line,treasury_id:0
 msgid "Treasury"
-msgstr "Treasury"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
@@ -345,12 +350,12 @@ msgstr "Treasury"
 #: model:ir.model,name:account_treasury_forecast.model_account_treasury_forecast
 #: model:ir.ui.menu,name:account_treasury_forecast.menu_account_treasury_forecast_form
 msgid "Treasury Forecast"
-msgstr "Treasury Forecast"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: model:ir.model,name:account_treasury_forecast.model_account_treasury_forecast_invoice
 msgid "Treasury Forecast Invoice"
-msgstr "Treasury Forecast Invoice"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast.line:account_treasury_forecast.account_treasury_forecast_line_tree_view
@@ -358,12 +363,12 @@ msgstr "Treasury Forecast Invoice"
 #: view:account.treasury.forecast.line.template:account_treasury_forecast.account_treasury_forecast_line_template_tree_view
 #: model:ir.model,name:account_treasury_forecast.model_account_treasury_forecast_line
 msgid "Treasury Forecast Line"
-msgstr "Treasury Forecast Line"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: model:ir.model,name:account_treasury_forecast.model_account_treasury_forecast_line_template
 msgid "Treasury Forecast Line Template"
-msgstr "Treasury Forecast Line Template"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast.template:account_treasury_forecast.account_treasury_forecast_template_form_view
@@ -374,43 +379,43 @@ msgstr "Treasury Forecast Line Template"
 #: model:ir.model,name:account_treasury_forecast.model_account_treasury_forecast_template
 #: model:ir.ui.menu,name:account_treasury_forecast.menu_account_treasury_forecast_template_form
 msgid "Treasury Forecast Template"
-msgstr "Treasury Forecast Template"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.line,line_type:0
 #: field:account.treasury.forecast.line.template,line_type:0
 msgid "Treasury Line Type"
-msgstr "Treasury Line Type"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.line.template,treasury_template_id:0
 msgid "Treasury Template"
-msgstr "Treasury Template"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: selection:account.treasury.forecast.line,line_type:0
 #: selection:account.treasury.forecast.line.template,line_type:0
 msgid "Variable"
-msgstr "Variable"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.template,variable_line_ids:0
 msgid "Variable Line"
-msgstr "Variable Line"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,variable_line_ids:0
 msgid "Variable Lines"
-msgstr "Variable Lines"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
 #: view:account.treasury.forecast.template:account_treasury_forecast.account_treasury_forecast_template_form_view
 msgid "Variable Payments"
-msgstr "Variable Payments"
+msgstr ""
 
 #. module: account_treasury_forecast
 #: model:ir.model,name:account_treasury_forecast.model_wiz_create_invoice
 msgid "Wizard to create invoices"
-msgstr "Wizard to create invoices"
+msgstr ""
 
