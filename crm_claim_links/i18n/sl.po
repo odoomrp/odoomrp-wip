@@ -1,0 +1,86 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* crm_claim_links
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-01 21:00+0200\n"
+"PO-Revision-Date: 2015-08-01 21:02+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"X-Generator: Poedit 1.8.2\n"
+"Language: sl\n"
+
+#. module: crm_claim_links
+#: view:res.partner:crm_claim_links.view_partner_form_inherit
+msgid "CRM Claims"
+msgstr "CRM zahtevki"
+
+#. module: crm_claim_links
+#: model:ir.model,name:crm_claim_links.model_crm_claim
+#: field:mrp.repair,claim_id:0 field:stock.picking,claim_id:0
+msgid "Claim"
+msgstr "Zahtevek"
+
+#. module: crm_claim_links
+#: field:res.partner,claims:0
+msgid "Claims"
+msgstr "Reklamacije"
+
+#. module: crm_claim_links
+#: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
+msgid "Related Extra Information"
+msgstr "Povezane dodatne informacije"
+
+#. module: crm_claim_links
+#: model:ir.model,name:crm_claim_links.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: crm_claim_links
+#: model:ir.model,name:crm_claim_links.model_stock_picking
+msgid "Picking List"
+msgstr "Zbirnik"
+
+#. module: crm_claim_links
+#: model:ir.model,name:crm_claim_links.model_mrp_repair
+msgid "Repair Order"
+msgstr "Servisni nalog"
+
+#. module: crm_claim_links
+#: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
+msgid "Related Repairs"
+msgstr "Povezana popravila"
+
+#. module: crm_claim_links
+#: code:addons/crm_claim_links/models/stock_picking.py:44
+#, python-format
+msgid "Return Shipment"
+msgstr "Vračilo pošiljke"
+
+#. module: crm_claim_links
+#: view:stock.picking:crm_claim_links.picking_in_form_pack
+msgid "Reverse Transfer"
+msgstr "Obratni premik"
+
+#. module: crm_claim_links
+#: code:addons/crm_claim_links/models/stock_picking.py:37
+#, python-format
+msgid "Selected Picking has no claim order assigned"
+msgstr "Izbranemu zbirniku ni dodeljen reklamacijski nalog"
+
+#. module: crm_claim_links
+#: field:crm.claim,pickings:0 field:crm.claim,repairs:0
+msgid "Stock Picking"
+msgstr "Zbirnik zaloge"
+
+#. module: crm_claim_links
+#: view:crm.claim:crm_claim_links.crm_case_claims_form_view_inherit
+msgid "Related Stock Pickings"
+msgstr "Povezani zbirniki zaloge"

@@ -1,0 +1,73 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* quality_control_tolerance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-01 20:53+0200\n"
+"PO-Revision-Date: 2015-08-01 20:54+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"X-Generator: Poedit 1.8.2\n"
+"Language: sl\n"
+
+#. module: quality_control_tolerance
+#: field:qc.inspection.line,tolerance_percent_above:0
+#: field:qc.test.question,tolerance_percent_above:0
+msgid "% tolerance (above)"
+msgstr "% toleranca (nad)"
+
+#. module: quality_control_tolerance
+#: field:qc.inspection.line,tolerance_percent_below:0
+#: field:qc.test.question,tolerance_percent_below:0
+msgid "% tolerance (below)"
+msgstr "% toleranca (pod)"
+
+#. module: quality_control_tolerance
+#: code:addons/quality_control_tolerance/models/qc_inspection.py:63
+#, python-format
+msgid "%s (tolerable)"
+msgstr "%s (v toleranci)"
+
+#. module: quality_control_tolerance
+#: selection:qc.test.question.value,tolerance_status:0
+msgid "Not tolerable"
+msgstr "Izven tolerance"
+
+#. module: quality_control_tolerance
+#: selection:qc.test.question.value,tolerance_status:0
+msgid "Optimal"
+msgstr "Optimalno"
+
+#. module: quality_control_tolerance
+#: field:qc.test.question,same_tolerance:0
+msgid "Same tolerance above/below"
+msgstr "Ista toleranca zgoraj/spodaj"
+
+#. module: quality_control_tolerance
+#: selection:qc.test.question.value,tolerance_status:0
+msgid "Tolerable"
+msgstr "V toleranci"
+
+#. module: quality_control_tolerance
+#: field:qc.inspection.line,tolerance_above:0
+#: field:qc.test.question,tolerance_above:0
+msgid "Tolerance (above)"
+msgstr "Toleranca (nad)"
+
+#. module: quality_control_tolerance
+#: field:qc.inspection.line,tolerance_below:0
+#: field:qc.test.question,tolerance_below:0
+msgid "Tolerance (below)"
+msgstr "Toleranca (pod)"
+
+#. module: quality_control_tolerance
+#: field:qc.test.question.value,tolerance_status:0
+msgid "Tolerance status"
+msgstr "Status tolerance"
