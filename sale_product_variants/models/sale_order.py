@@ -62,11 +62,15 @@ class ProductAttributeValueSaleLine(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    product_template = fields.Many2one(comodel_name='product.template',
-                                       string='Product Template')
+    product_template = fields.Many2one(
+        comodel_name='product.template', string='Product Template',
+        readonly=True, states={'draft': [('readonly', False)],
+                               'sent': [('readonly', False)]})
     product_attributes = fields.One2many(
         comodel_name='sale.order.line.attribute', inverse_name='sale_line',
-        string='Product attributes', copy=True)
+        string='Product attributes', copy=True,
+        readonly=True, states={'draft': [('readonly', False)],
+                               'sent': [('readonly', False)]})
     # Neeeded because one2many result type is not constant when evaluating
     # visibility in XML
     product_attributes_count = fields.Integer(
