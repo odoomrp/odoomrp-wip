@@ -14,10 +14,10 @@
                     <group name="group_other_expenses">
                         <label for="other_expenses"/>
                         <div>
-                            <field name="other_expenses" context="{'default_sale':active_id or False}" >
+                            <field name="other_expenses" widget="many2many_tags"
+                                   context="{'order_id': parent}" domain="[('transport','=',False)]" >
                                 <tree string="Other expenses" editable="bottom">
-                                    <field name="sale" invisible="1"/>
-                                    <field name="expense" context="{'order_id':sale}" domain="[('transport','=',False)]" />
+                                    <field name="name"/>
                                 </tree>
                             </field>
                         </div>
