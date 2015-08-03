@@ -10,7 +10,6 @@ class SaleOrder(models.Model):
 
     @api.one
     def action_button_confirm(self):
-        print '*** ESTOY EN MI ACTION_CONFIRM'
         procurement_obj = self.env['procurement.order']
         procurement_group_obj = self.env['procurement.group']
         res = super(SaleOrder, self).action_button_confirm()
@@ -18,17 +17,12 @@ class SaleOrder(models.Model):
             valid = self._validate_service_product_for_procurement(
                 line.product_id)
             if valid:
-                print '*** entro en if, procurement_group_id: ' + str(self.procurement_group_id)
                 if not self.procurement_group_id:
-                    print '*** voy a prepare_procurement_group'
                     vals = self._prepare_procurement_group(self)
-                    print '*** vengo de prepare_procurement_group'
                     group = procurement_group_obj.create(vals)
                     self.write({'procurement_group_id': group.id})
-                print '*** voy a prepare_order_line_procurement'
                 vals = self._prepare_order_line_procurement(
                     self, line, group_id=self.procurement_group_id.id)
-                print '*** vengo de prepare_order_line_procurement'
                 vals.update({'name': self.name + ' - ' + line.product_id.name,
                              'warehouse_id': self.warehouse_id.id})
                 proc_vals = procurement_obj.onchange_product_id(
