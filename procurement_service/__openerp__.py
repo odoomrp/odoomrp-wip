@@ -16,20 +16,19 @@
 #
 ##############################################################################
 {
-    "name": "Procurement Not Group Purchase Line",
+    "name": "Procurement Service",
     "version": "1.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "category": "Procurements",
-    "depends": ['purchase',
+    "depends": ['product',
                 'sale',
+                'purchase',
                 'stock',
-                'procurement',
-                'product'
+                'procurement'
                 ],
-    "data": ['views/product_category_view.xml',
-             ],
+    "data": [],
     "installable": True
 }

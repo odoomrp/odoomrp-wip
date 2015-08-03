@@ -2,14 +2,11 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields, api
+from openerp import models, api
 
 
 class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
-
-    service_sale_line_id = fields.Many2one(
-        'sale.order.line', string='Sale order line')
 
     @api.model
     def _assign(self, procurement):
