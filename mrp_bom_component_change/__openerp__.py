@@ -30,7 +30,8 @@
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     'website': "http://www.odoomrp.com",
-    "depends": ['mrp'],
+    "depends": ['mrp',
+                'mrp_bom_version'],
     "category": "Manufacturing",
     "data": ['views/mrp_bom_change_view.xml',
              'security/ir.model.access.csv'
