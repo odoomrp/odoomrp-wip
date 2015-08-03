@@ -26,7 +26,8 @@ class MrpProduction(models.Model):
 
     def _get_workorder_in_product_lines(
             self, workcenter_lines, product_lines, properties=None):
-        super(MrpProduction, self)._get_workorder_in_product_lines
+        super(MrpProduction, self)._get_workorder_in_product_lines(
+            workcenter_lines, product_lines, properties=properties)
         for workorder in workcenter_lines:
             wc = workorder.routing_wc_line
             cycle = wc.cycle_nbr and (self.product_qty / wc.cycle_nbr) or 0
