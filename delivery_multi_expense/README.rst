@@ -6,11 +6,16 @@ delivery.
 
 Usage
 =====
-We may indicate in the "Delivery Method" object, if it is a transporter or not.
-In the sales order in the "Delivery method" field, we will leave only select
-those whose "Is transporter" this checked.
-In the sales order in the "Other expenses" field, we vill leave only select
-those whose "Is transporter" this not checked.
+We may indicate in the "Delivery Method" object, if it is a transport or not.
+In the "Delivery method" field of the sales order, we will only be able to
+select those whose "Is transport" flag is checked.
+In the "Other expenses" field of the sales order, we will only be able to 
+select those whose "Is transport" flag is not checked.
+
+Known issues / Roadmap
+======================
+* These other expenses are not propagated nor handled on stock pickings, so 
+  you have to add them as sale order lines (with the button) for using them.
 
 Credits
 =======
