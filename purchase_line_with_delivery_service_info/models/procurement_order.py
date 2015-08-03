@@ -18,7 +18,7 @@ class ProcurementOrder(models.Model):
                 if (proc.sale_line_id and
                     proc.sale_line_id.delivery_standard_price and
                     proc.purchase_line_id and proc.product_id.type == 'service'
-                    and len(routes) == 2):
+                        and len(routes) == 2):
                     name = proc.purchase_line_id.name
                     name += ', ' + proc.origin + ', ' + str(proc.date_planned)
                     proc.purchase_line_id.write(
