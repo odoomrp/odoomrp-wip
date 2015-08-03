@@ -25,7 +25,6 @@
     "category": "Procurements",
     "depends": ['product',
                 'sale',
-                'purchase',
                 'stock',
                 'procurement'
                 ],

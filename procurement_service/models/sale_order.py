@@ -2,7 +2,7 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, api, exceptions, _
+from openerp import models, api
 
 
 class SaleOrder(models.Model):
@@ -23,22 +23,7 @@ class SaleOrder(models.Model):
                     self.write({'procurement_group_id': group.id})
                 vals = self._prepare_order_line_procurement(
                     self, line, group_id=self.procurement_group_id.id)
-                vals.update({'name': self.name + ' - ' + line.product_id.name,
-                             'warehouse_id': self.warehouse_id.id})
-                proc_vals = procurement_obj.onchange_product_id(
-                    line.product_id.id)
-                if 'value' not in proc_vals:
-                    raise exceptions.Warning(
-                        _('Product UOM or Product UOS not found for product:'
-                          ' %s') % (line.product_id.name))
-                vals.update(proc_vals['value'])
-                proc_vals = procurement_obj.change_warehouse_id(
-                    self.warehouse_id.id)
-                if 'value' not in proc_vals:
-                    raise exceptions.Warning(
-                        _('No location found for warehouse:'
-                          ' %s') % (self.warehouse_id.name))
-                vals.update(proc_vals['value'])
+                vals['name'] = self.name + ' - ' + line.product_id.name
                 proc = procurement_obj.create(vals)
                 proc.write(
                     {'rule_id': procurement_obj._find_suitable_rule(proc)})
