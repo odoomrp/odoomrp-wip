@@ -154,6 +154,6 @@ class MrpProductionWorkcenterLine(models.Model):
                                                  'done']):
             raise exceptions.Warning(
                 _("Missing materials to start the production"))
-        if self.production_id.state == 'confirmed':
-            self.production_id.state = 'ready'
+        if self.production_id.state in ('confirmed', 'ready'):
+            self.production_id.state = 'in_production'
         return super(MrpProductionWorkcenterLine, self).action_start_working()
