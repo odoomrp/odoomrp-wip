@@ -9,5 +9,5 @@ class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
     transport = fields.Boolean(
-        'Is transport', default=True, help="Determines whether the carrier"
+        'Is transporter', default=True, help="Determines whether the carrier"
         " method")

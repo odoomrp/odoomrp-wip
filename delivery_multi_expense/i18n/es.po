@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 13:13+0000\n"
-"PO-Revision-Date: 2015-07-29 15:17+0100\n"
+"POT-Creation-Date: 2015-08-03 09:43+0000\n"
+"PO-Revision-Date: 2015-08-03 11:44+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,67 +22,36 @@ msgid "Carrier"
 msgstr "Transportista"
 
 #. module: delivery_multi_expense
-#: field:sale.order.other.expense,create_uid:0
-msgid "Created by"
-msgstr "Creado por"
-
-#. module: delivery_multi_expense
-#: field:sale.order.other.expense,create_date:0
-msgid "Created on"
-msgstr "Creado el"
-
-#. module: delivery_multi_expense
 #: help:delivery.carrier,transport:0
 msgid "Determines whether the carrier method"
 msgstr "Determina si es métod de transporte"
 
 #. module: delivery_multi_expense
-#: field:sale.order.other.expense,expense:0
+#: field:sale.order,other_expenses:0
 msgid "Expense"
-msgstr "Gasto"
-
-#. module: delivery_multi_expense
-#: field:sale.order.other.expense,id:0
-msgid "ID"
-msgstr "ID"
+msgstr "Expense"
 
 #. module: delivery_multi_expense
 #: field:delivery.carrier,transport:0
-msgid "Is transport"
-msgstr "Es transporte"
+msgid "Is transporter"
+msgstr "Es transportista"
 
 #. module: delivery_multi_expense
-#: field:sale.order.other.expense,write_uid:0
-msgid "Last Updated by"
-msgstr "Última actualización por"
-
-#. module: delivery_multi_expense
-#: field:sale.order.other.expense,write_date:0
-msgid "Last Updated on"
-msgstr "Última actualización el"
-
-#. module: delivery_multi_expense
-#: code:addons/delivery_multi_expense/models/sale_order.py:35
+#: code:addons/delivery_multi_expense/models/sale_order.py:39
 #, python-format
 msgid "No Grid Available!"
 msgstr "Grid no disponible"
 
 #. module: delivery_multi_expense
-#: code:addons/delivery_multi_expense/models/sale_order.py:36
+#: code:addons/delivery_multi_expense/models/sale_order.py:40
 #, python-format
 msgid "No grid matching for this expense: %s"
 msgstr "Grid no coincidente para este gasto: %s"
 
 #. module: delivery_multi_expense
 #: view:sale.order:delivery_multi_expense.view_order_withcarrier_form_inh_deliverymultiexpenses
-#: field:sale.order,other_expenses:0
 msgid "Other expenses"
 msgstr "Otros gastos"
-
-#. module: delivery_multi_expense
-#: field:sale.order.other.expense,sale:0
-msgid "Sale order"
-msgstr "Pedido de venta"
 
 #. module: delivery_multi_expense
 #: model:ir.model,name:delivery_multi_expense.model_sale_order
