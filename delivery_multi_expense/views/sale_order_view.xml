@@ -10,6 +10,9 @@
                 <field name="carrier_id" position="attributes">
                     <attribute name="domain">[('transport','=',True)]</attribute>
                 </field>
+                <button name="delivery_set" position="attributes">
+                    <attribute name="attrs">{'invisible':[('state','not in',('draft','sent'))]}</attribute>
+                </button>
                 <field name="note" position="before">
                     <group name="group_other_expenses">
                         <label for="other_expenses"/>

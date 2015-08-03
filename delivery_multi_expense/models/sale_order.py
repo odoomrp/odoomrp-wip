@@ -18,7 +18,9 @@ class SaleOrder(models.Model):
     @api.multi
     def delivery_set(self):
         self.ensure_one()
-        line_ids = super(SaleOrder, self).delivery_set()
+        line_ids = []
+        if self.carrier_id:
+            line_ids = super(SaleOrder, self).delivery_set()
         for other_expense in self.other_expenses:
             line_ids += self.delivery_set_other_expense(other_expense)
         return line_ids
