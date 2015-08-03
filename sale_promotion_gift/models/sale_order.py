@@ -93,7 +93,7 @@ class SaleOrder(models.Model):
                 total_packs += qty // total
         vals = {'sale': self.id,
                 'product': gift_product.product.id,
-                'quantity': total_packs
+                'quantity': total_packs * gift_product.quantity
                 }
         return vals
 
