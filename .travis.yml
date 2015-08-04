@@ -23,8 +23,11 @@ virtualenv:
   system_site_packages: true
 
 install:
+  - git clone https://github.com/OCA/web.git ${HOME}/oca-web
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
-  - git clone --depth=1 https://github.com/odoomrp/odoomrp-utils ${HOME}/odoomrp-utils
+  - git clone https://github.com/odoomrp/odoomrp-wip ${HOME}/odoomrp-wip -b ${VERSION}
+  - git clone https://github.com/OCA/stock-logistics-workflow.git ${HOME}/stock-logistics-workflow -b ${VERSION} 
+  - git clone https://github.com/OCA/manufacture ${HOME}/manufacture -b ${VERSION}
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
 
