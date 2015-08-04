@@ -27,6 +27,19 @@ class MrpBomChange(models.Model):
     _name = 'mrp.bom.change'
     _description = 'Mrp BoM Component Change'
 
+    @api.one
+    @api.depends('old_component')
+    def _calc_boms(self):
+        self.boms = [(6, 0, [])]
+        if self.old_component:
+            for bom in self.env['mrp.bom'].search([]):
+                bom_lines = bom.bom_line_ids.filtered(
+                    lambda x: x.product_id.id == self.old_component.id)
+                if bom_lines:
+                    self.boms = [(4, bom.id)]
+            if self.state != 'process':
+                self.state = 'process'
+
     name = fields.Char('Name', required=True)
     new_component = fields.Many2one('product.product', 'New Component',
                                     required=True)
@@ -38,29 +51,14 @@ class MrpBomChange(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('process', 'In Process'),
                               ('done', 'Done')], 'State', default='draft',
                              required=True)
-    boms = fields.Many2many('mrp.bom', 'mrp_bom_change_rel', 'bom_change',
-                            'bom_id')
+    boms = fields.Many2many(
+        comodel_name='mrp.bom',
+        relation='rel_mrp_bom_change', column1='bom_change_id',
+        column2='bom_id', string='BoMs', copy=False, store=True,
+        compute='_calc_boms')
     date = fields.Date('Change Date', readonly=True)
     user = fields.Many2one('res.users', 'Changed By', readonly=True)
     reason = fields.Char('Reason')
-
-    @api.multi
-    @api.onchange('old_component')
-    def onchange_operation(self):
-        if self.old_component:
-            bom_obj = self.env['mrp.bom']
-            bom_lst = []
-            for bom in bom_obj.search([]):
-                bom_lines = bom.bom_line_ids.filtered(
-                    lambda x: x.product_id.id == self.old_component.id)
-                if bom_lines:
-                    bom_lst.append(bom.id)
-                    break
-            self.boms = bom_lst
-            if self.state != 'process':
-                self.state = 'process'
-            return {'domain': {'boms': [('id', 'in', bom_lst)]}}
-        return {}
 
     @api.one
     def do_component_change(self):
@@ -69,21 +67,19 @@ class MrpBomChange(models.Model):
         if not self.boms:
             raise exceptions.Warning(_("There isn't any BoM for selected "
                                        "component"))
-        if self.create_new_version:
-            bom_ids = self.boms
-            for bom in bom_ids:
-                bom_lines = bom.bom_line_ids.filtered(
-                    lambda x: x.product_id.id == self.old_component.id)
-                if bom_lines:
+        for bom in self.boms:
+            bom_lines = bom.bom_line_ids.filtered(
+                lambda x: x.product_id.id == self.old_component.id)
+            if bom_lines:
+                if self.create_new_version:
                     new_bom = bom._copy_bom()
                     bom._update_bom_state_after_copy()
                     new_bom.button_activate()
                     self.boms = [(3, bom.id)]
                     self.boms = [(4, new_bom.id)]
-        for bom in self.boms:
-            bom_lines = bom.bom_line_ids.filtered(
-                lambda x: x.product_id.id == self.old_component.id)
-            bom_lines.write({'product_id': self.new_component.id})
+                    bom_lines = new_bom.bom_line_ids.filtered(
+                        lambda x: x.product_id.id == self.old_component.id)
+                bom_lines.write({'product_id': self.new_component.id})
         self.write({'state': 'done', 'date': dt.now(), 'user': self.env.uid})
 
     @api.one
@@ -98,5 +94,4 @@ class MrpBomChange(models.Model):
 
     @api.one
     def clear_list(self):
-        for bom_id in self.boms.ids:
-            self.boms = [(5, bom_id)]
+        self.boms = [(6, 0, [])]
