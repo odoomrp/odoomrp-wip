@@ -24,15 +24,10 @@ class SaleOrder(models.Model):
                 vals = self._prepare_order_line_procurement(
                     self, line, group_id=self.procurement_group_id.id)
                 vals['name'] = self.name + ' - ' + line.product_id.name
-                proc = procurement_obj.create(vals)
-                proc.write(
-                    {'rule_id': procurement_obj._find_suitable_rule(proc)})
+                procurement_obj.create(vals)
         return res
 
     def _validate_service_product_for_procurement(self, product):
-        valid = False
         routes = product.route_ids.filtered(
             lambda r: r.name in ('Make To Order', 'Buy'))
-        if product.type == 'service' and len(routes) == 2:
-            valid = True
-        return valid
+        return product.type == 'service' and len(routes) == 2
