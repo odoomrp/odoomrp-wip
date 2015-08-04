@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name" />
+                    <field name="create_new_version" />
                     <field name="old_component"/>
                     <field name="new_component"/>
                     <field name="date"/>
@@ -35,7 +36,8 @@
                             <field name="user"/>
                             <field name="reason" colspan="6" />
                     </group>
-                    <group col="4">
+                    <group col="6">
+                        <field name="create_new_version" attrs="{'readonly':[('state','=',('done'))]}"/>
                         <field name="old_component" attrs="{'readonly':[('state','=',('done'))]}"/>
                         <field name="new_component" attrs="{'readonly':[('state','=',('done'))]}"/>
                     </group>

@@ -32,6 +32,9 @@ class MrpBomChange(models.Model):
                                     required=True)
     old_component = fields.Many2one('product.product', 'Old Component',
                                     required=True)
+    create_new_version = fields.Boolean(
+        string="Create new BoM version", help='Check this field if you want to'
+        ' create a new version of the BOM before modifying the component')
     state = fields.Selection([('draft', 'Draft'), ('process', 'In Process'),
                               ('done', 'Done')], 'State', default='draft',
                              required=True)
@@ -48,10 +51,11 @@ class MrpBomChange(models.Model):
             bom_obj = self.env['mrp.bom']
             bom_lst = []
             for bom in bom_obj.search([]):
-                for bom_line in bom.bom_line_ids:
-                    if bom_line.product_id.id == self.old_component.id:
-                        bom_lst.append(bom.id)
-                        break
+                bom_lines = bom.bom_line_ids.filtered(
+                    lambda x: x.product_id.id == self.old_component.id)
+                if bom_lines:
+                    bom_lst.append(bom.id)
+                    break
             self.boms = bom_lst
             if self.state != 'process':
                 self.state = 'process'
@@ -65,25 +69,21 @@ class MrpBomChange(models.Model):
         if not self.boms:
             raise exceptions.Warning(_("There isn't any BoM for selected "
                                        "component"))
-        bom_ids = []
+        if self.create_new_version:
+            bom_ids = self.boms
+            for bom in bom_ids:
+                bom_lines = bom.bom_line_ids.filtered(
+                    lambda x: x.product_id.id == self.old_component.id)
+                if bom_lines:
+                    new_bom = bom._copy_bom()
+                    bom._update_bom_state_after_copy()
+                    new_bom.button_activate()
+                    self.boms = [(3, bom.id)]
+                    self.boms = [(4, new_bom.id)]
         for bom in self.boms:
-            change_bom = False
-            for bom_line in bom.bom_line_ids:
-                if bom_line.product_id.id == self.old_component.id:
-                    change_bom = True
-                    break
-            if not change_bom:
-                bom_ids.append(bom.id)
-            else:
-                new_bom = bom._copy_bom()
-                bom._update_bom_state_after_copy()
-                new_bom.button_activate()
-                bom_ids.append(new_bom.id)
-        self.boms = [(6, 0, bom_ids)]
-        for bom in self.boms:
-            for bom_line in bom.bom_line_ids:
-                if bom_line.product_id.id == self.old_component.id:
-                    bom_line.product_id = self.new_component.id
+            bom_lines = bom.bom_line_ids.filtered(
+                lambda x: x.product_id.id == self.old_component.id)
+            bom_lines.write({'product_id': self.new_component.id})
         self.write({'state': 'done', 'date': dt.now(), 'user': self.env.uid})
 
     @api.one

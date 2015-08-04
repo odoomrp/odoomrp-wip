@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-22 08:58+0000\n"
-"PO-Revision-Date: 2015-05-22 08:58+0000\n"
+"POT-Creation-Date: 2015-08-04 10:03+0000\n"
+"PO-Revision-Date: 2015-08-04 10:03+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -46,8 +46,18 @@ msgid "Changed By"
 msgstr ""
 
 #. module: mrp_bom_component_change
+#: help:mrp.bom.change,create_new_version:0
+msgid "Check this field if you want to create a new version of the BOM before modifying the component"
+msgstr ""
+
+#. module: mrp_bom_component_change
 #: view:mrp.bom.change:mrp_bom_component_change.mrp_bom_change_form_view
 msgid "Clear List"
+msgstr ""
+
+#. module: mrp_bom_component_change
+#: field:mrp.bom.change,create_new_version:0
+msgid "Create new BoM version"
 msgstr ""
 
 #. module: mrp_bom_component_change
@@ -91,6 +101,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: mrp_bom_component_change
+#: model:ir.model,name:mrp_bom_component_change.model_mrp_bom_change
+msgid "Mrp BoM Component Change"
+msgstr ""
+
+#. module: mrp_bom_component_change
 #: field:mrp.bom.change,name:0
 msgid "Name"
 msgstr ""
@@ -102,6 +117,7 @@ msgstr ""
 
 #. module: mrp_bom_component_change
 #: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:64
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:68
 #, python-format
 msgid "Not Components selected!"
 msgstr ""
@@ -123,6 +139,7 @@ msgstr ""
 
 #. module: mrp_bom_component_change
 #: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:77
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:92
 #, python-format
 msgid "Revert - "
 msgstr ""
@@ -134,6 +151,7 @@ msgstr ""
 
 #. module: mrp_bom_component_change
 #: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:66
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:70
 #, python-format
 msgid "There isn't any BoM for selected component"
 msgstr ""
