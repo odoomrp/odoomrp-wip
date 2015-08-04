@@ -43,8 +43,8 @@
                         <field name="virtual_available" string="Forecast Quantity"/>
                         <field name="incoming_qty" string="Incoming"/>
                         <field name="outgoing_qty" string="Outgoing"/>
-                        <field name="move_incoming_to_date" string="Incoming to date from moves"/>
-                        <field name="procurement_incoming_to_date" string="Incoming to date from procurements"/>
+                        <field name="move_incoming_to_date" string="Incoming up to date from moves"/>
+                        <field name="procurement_incoming_to_date" string="Incoming up to date from procurements"/>
                         <field name="outgoing_to_date" string="Outgoing to date"/>
                         <field name="scheduled_to_date" string="Scheduled to date"/>
                         <field name="rule_min_qty" string="Rule min. qty"/>
