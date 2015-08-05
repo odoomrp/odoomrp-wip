@@ -7,9 +7,9 @@
             <field name="priority" eval="30"/>
             <field name="inherit_id" ref="product.product_normal_form_view" />
             <field name="arch" type="xml">
-                <field name="standard_price" position="after">
+                <group name="general" position="inside">
                     <field name="cost_price" />
-                </field>
+                </group>
             </field>
         </record>
     </data>
