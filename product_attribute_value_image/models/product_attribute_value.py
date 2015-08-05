@@ -8,4 +8,4 @@ from openerp import models, fields
 class ProductAttributeValue(models.Model):
     _inherit = 'product.attribute.value'
 
-    image = fields.Binary('Image', filters='*.png,*.jpg')
+    image = fields.Binary('Image')
