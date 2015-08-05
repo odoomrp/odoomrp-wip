@@ -43,7 +43,8 @@ class MrpProduction(models.Model):
     def action_confirm(self):
         res = super(MrpProduction, self).action_confirm()
         for move in self.move_lines:
-            if move.work_order.routing_wc_line.external:
+            if (move.work_order.routing_wc_line.external and
+                    move.work_order.routing_wc_line.picking_type_id):
                 ptype = move.work_order.routing_wc_line.picking_type_id
                 move.location_id = ptype.default_location_src_id.id
                 move.location_dest_id = ptype.default_location_dest_id.id
@@ -61,7 +62,8 @@ class MrpProduction(models.Model):
             production, product, uom_id, qty, uos_id, uos_qty)
         if 'work_order' in self.env.context:
             work_order = self.env.context.get('work_order')
-            if work_order.routing_wc_line.external:
+            if (work_order.routing_wc_line.external and
+                    work_order.routing_wc_line.picking_type_id):
                 picking_type = work_order.routing_wc_line.picking_type_id
                 vals = {'location_id': picking_type.default_location_src_id.id,
                         'location_dest_id':
