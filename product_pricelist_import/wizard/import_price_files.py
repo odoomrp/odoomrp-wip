@@ -1,22 +1,6 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    Avanzosc - Avanced Open Source Consulting
-#    Copyright (C) 2011 - 2012 Avanzosc <http://www.avanzosc.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
 
 from openerp import fields, models, api, exceptions, _
@@ -37,6 +21,9 @@ class ImportPriceFile(models.TransientModel):
     file_type = fields.Selection([('csv', 'CSV'), ('xls', 'XLS')], 'File Type',
                                  required=True, default='csv')
 
+    def _prepare_data_dict(self, data_dict):
+        return data_dict
+
     def _import_csv(self, load_id, file_data, delimeter=';'):
         """ Imports data from a CSV file in defined object.
         @param load_id: Loading id
@@ -44,7 +31,7 @@ class ImportPriceFile(models.TransientModel):
         @param delimeter: CSV file data delimeter
         @return: Imported file number
         """
-        file_line_obj = self.env['product.pricelist.load.line']
+        file_line_obj = self.env['product.supplierinfo.load.line']
         data = base64.b64decode(file_data)
         file_input = cStringIO.StringIO(data)
         file_input.seek(0)
@@ -55,27 +42,32 @@ class ImportPriceFile(models.TransientModel):
             reader_info.extend(reader)
         except Exception:
             raise exceptions.Warning(_("Not a valid file!"))
-        # keys2 = reader_info[0]
+        keys = reader_info[0]
         counter = 0
-        keys = ['code', 'info', 'price', 'discount_1', 'discount_2',
-                'retail', 'pdv1', 'pdv2']
+#         keys = ['code', 'info', 'price', 'discount_1', 'discount_2',
+#                 'retail', 'pdv1', 'pdv2']
         if not isinstance(keys, list):
             raise exceptions.Warning(_("Not a valid file!"))
         del reader_info[0]
         for i in range(len(reader_info)):
             field = reader_info[i]
             values = dict(zip(keys, field))
-            file_line_obj.create(
-                {'code': values['code'], 'info': values['info'],
-                 'price': values['price'].replace(',', '.'),
-                 'discount_1': float(values['discount_1'].replace(',', '.')),
-                 'discount_2': float(values['discount_2'].replace(',', '.')),
-                 'retail': float(values['retail'].replace(',', '.')),
-                 'pdv1': float(values['pdv1'].replace(',', '.')),
-                 'pdv2': float(values['pdv2'].replace(',', '.')),
-                 'fail': True, 'fail_reason': _('No Processed'),
-                 'file_load': load_id
-                 })
+            data_dict = self._prepare_data_dict(
+                {'supplier': 'Supplier' in values and values['Supplier'],
+                 'code': 'ProductCode' in values and values['ProductCode'],
+                 'sequence': 'Sequence' in values and values['Sequence'],
+                 'supplier_code': 'ProductSupplierCode' in values and
+                 values['ProductSupplierCode'],
+                 'info': 'ProductSupplierName' in values and
+                 values['ProductSupplierName'],
+                 'delay': 'Delay' in values and values['Delay'],
+                 'price': 'Price' in values and
+                    values['Price'].replace(',', '.'),
+                 'min_qty': 'MinQty' in values and values['MinQty'],
+                 'fail': True,
+                 'fail_reason': _('No Processed'),
+                 'file_load': load_id})
+            file_line_obj.create(data_dict)
             counter += 1
         return counter
 
@@ -89,7 +81,7 @@ class ImportPriceFile(models.TransientModel):
             import xlrd
         except ImportError:
             exceptions.Warning(_("xlrd python lib  not installed"))
-        file_line_obj = self.env['product.pricelist.load.line']
+        file_line_obj = self.env['product.supplierinfo.load.line']
         file_1 = base64.decodestring(file_data)
         (fileno, fp_name) = tempfile.mkstemp('.xls', 'openerp_')
         openfile = open(fp_name, "w")
@@ -97,26 +89,43 @@ class ImportPriceFile(models.TransientModel):
         book = xlrd.open_workbook(fp_name)
         sheet = book.sheet_by_index(0)
         values = {}
-        keys = ['code', 'info', 'price', 'discount_1',
-                'discount_2', 'retail', 'pdv1', 'pdv2']
-        # keys2 = sheet.row_values(0,0, end_colx=sheet.ncols)
+        keys = sheet.row_values(0, 0, end_colx=sheet.ncols)
         for counter in range(sheet.nrows - 1):
             # grab the current row
             rowValues = sheet.row_values(counter + 1, 0,
                                          end_colx=sheet.ncols)
-            row = map(lambda x: str(x), rowValues)
+            row_lst = []
+            for val in rowValues:  # codification format control
+                if isinstance(val, unicode):
+                    valor = val.encode('utf8')
+                    row_lst.append(valor)
+                elif isinstance(val, float):
+                    if float(val) % 1 == 0.0:
+                        row_lst.append(
+                            '{0:.5f}'.format(float(val)).split('.')[0])
+                    else:
+                        row_lst.append('{0:g}'.format(float(val)))
+                else:
+                    row_lst.append(val)
+            row = map(lambda x: str(x), row_lst)
             values = dict(zip(keys, row))
-            file_line_obj.create(
-                {'code': values['code'], 'info': values['info'],
-                 'price': values['price'].replace(',', '.'),
-                 'discount_1': float(values['discount_1'].replace(',', '.')),
-                 'discount_2': float(values['discount_2'].replace(',', '.')),
-                 'retail': float(values['retail'].replace(',', '.')),
-                 'pdv1': float(values['pdv1'].replace(',', '.')),
-                 'pdv2': float(values['pdv2'].replace(',', '.')),
-                 'fail': True, 'fail_reason': _('No Processed'),
+            data_dict = self._prepare_data_dict(
+                {'supplier': 'Supplier' in values and values['Supplier'],
+                 'code': 'ProductCode' in values and values['ProductCode'],
+                 'sequence': 'Sequence' in values and values['Sequence'],
+                 'supplier_code': 'ProductSupplierCode' in values and
+                 values['ProductSupplierCode'],
+                 'info': 'ProductSupplierName' in values and
+                 values['ProductSupplierName'],
+                 'delay': 'Delay' in values and values['Delay'],
+                 'price': 'Price' in values and
+                 values['Price'].replace(',', '.'),
+                 'min_qty': 'MinQty' in values and values['MinQty'],
+                 'fail': True,
+                 'fail_reason': _('No Processed'),
                  'file_load': load_id
                  })
+            file_line_obj.create(data_dict)
             counter += 1
         return counter
 

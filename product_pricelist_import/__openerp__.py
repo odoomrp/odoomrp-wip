@@ -1,8 +1,5 @@
-
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    Daniel Campos (danielcampos@avanzosc.es) Date: 08/10/2014
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -22,13 +19,6 @@
 {
     "name": "Product Pricelist Import",
     "version": "1.0",
-    "description": """
-    This module allows to load product price list from a file.
-    The file format must have these colummns:
-
-    keys = ['code', 'info', 'price', 'discount_1', 'discount_2', 'retail',
-    'pdv1', 'pdv2']
-    """,
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",

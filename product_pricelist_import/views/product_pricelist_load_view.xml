@@ -35,14 +35,14 @@
                     </group>
                     <field name="file_lines" nolabel="1">
                     <tree string="Import Lines" colors="red:fail==True;green:fail==False" editable="bottom">
+                        <field name="supplier" />
                         <field name="code" />
-                        <field name="info" />
+                        <field name="sequence"/>
+                        <field name="supplier_code"/>
+                        <field name="info"/>
+                        <field name="delay"/>
                         <field name="price"/>
-                        <field name="discount_1"/>
-                        <field name="discount_2"/>
-                        <field name="retail"/>
-                        <field name="pdv1"/>
-                        <field name="pdv2"/>
+                        <field name="min_qty"/>
                         <field name="fail"/>
                         <field name="fail_reason" />
                     </tree>
@@ -72,12 +72,12 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
        </record>
-       
+
        <act_window name="Fail Lines"
             domain="[('file_load', '=', active_id),
                        ('fail', '=', True)]"
             context="{'file_load':active_id}"
-            res_model="product.pricelist.load.line"
+            res_model="product.supplierinfo.load.line"
             src_model="product.pricelist.load"
             id="act_fail_lines"/>
 
