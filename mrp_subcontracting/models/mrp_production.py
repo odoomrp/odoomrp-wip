@@ -54,24 +54,6 @@ class MrpProduction(models.Model):
                     self._create_external_procurement(wc_line))
         return res
 
-    @api.model
-    def _make_consume_line_from_data(self, production, product, uom_id, qty,
-                                     uos_id, uos_qty):
-        move_obj = self.env['stock.move']
-        move_id = super(MrpProduction, self)._make_consume_line_from_data(
-            production, product, uom_id, qty, uos_id, uos_qty)
-        if 'work_order' in self.env.context:
-            work_order = self.env.context.get('work_order')
-            if (work_order.routing_wc_line.external and
-                    work_order.routing_wc_line.picking_type_id):
-                picking_type = work_order.routing_wc_line.picking_type_id
-                vals = {'location_id': picking_type.default_location_src_id.id,
-                        'location_dest_id':
-                        picking_type.default_location_dest_id.id}
-                move = move_obj.browse(move_id)
-                move.write(vals)
-        return move_id
-
     def _prepare_extenal_procurement(self, wc_line):
         wc = wc_line.routing_wc_line
         name = "%s: %s" % (wc_line.production_id.name, wc_line.name)

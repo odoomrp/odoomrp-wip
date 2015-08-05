@@ -17,7 +17,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class WizProductionProductLine(models.TransientModel):
@@ -57,3 +57,9 @@ class WizProductionProductLine(models.TransientModel):
         if self.work_order:
             addition_vals['work_order'] = self.work_order.id
         return addition_vals
+
+    @api.multi
+    def add_product(self):
+        return super(
+            WizProductionProductLine,
+            self.with_context(work_order=self.work_order)).add_product()
