@@ -29,5 +29,5 @@ class StockPlanning(models.Model):
             self.scheduled_to_date -= self.procurement_plan_incoming_to_date
 
     procurement_plan_incoming_to_date = fields.Float(
-        'Incoming up to date from procurements plan', compute=_get_to_date,
+        'Incoming up to date from procurements plan', compute='_get_to_date',
         digits_compute=dp.get_precision('Product Unit of Measure'))
