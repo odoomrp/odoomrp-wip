@@ -1,21 +1,7 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-
 from openerp import models, fields, api
 
 
@@ -57,7 +43,8 @@ class MrpProduction(models.Model):
     def action_confirm(self):
         res = super(MrpProduction, self).action_confirm()
         for move in self.move_lines:
-            if move.work_order.routing_wc_line.external:
+            if (move.work_order.routing_wc_line.external and
+                    move.work_order.routing_wc_line.picking_type_id):
                 ptype = move.work_order.routing_wc_line.picking_type_id
                 move.location_id = ptype.default_location_src_id.id
                 move.location_dest_id = ptype.default_location_dest_id.id
@@ -66,6 +53,24 @@ class MrpProduction(models.Model):
                 wc_line.procurement_order = (
                     self._create_external_procurement(wc_line))
         return res
+
+    @api.model
+    def _make_consume_line_from_data(self, production, product, uom_id, qty,
+                                     uos_id, uos_qty):
+        move_obj = self.env['stock.move']
+        move_id = super(MrpProduction, self)._make_consume_line_from_data(
+            production, product, uom_id, qty, uos_id, uos_qty)
+        if 'work_order' in self.env.context:
+            work_order = self.env.context.get('work_order')
+            if (work_order.routing_wc_line.external and
+                    work_order.routing_wc_line.picking_type_id):
+                picking_type = work_order.routing_wc_line.picking_type_id
+                vals = {'location_id': picking_type.default_location_src_id.id,
+                        'location_dest_id':
+                        picking_type.default_location_dest_id.id}
+                move = move_obj.browse(move_id)
+                move.write(vals)
+        return move_id
 
     def _prepare_extenal_procurement(self, wc_line):
         wc = wc_line.routing_wc_line
