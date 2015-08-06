@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-04 10:04+0000\n"
-"PO-Revision-Date: 2015-08-04 12:08+0100\n"
+"POT-Creation-Date: 2015-08-06 09:43+0000\n"
+"PO-Revision-Date: 2015-08-06 11:51+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,18 +17,24 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 #. module: mrp_bom_component_change
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:79
+#, python-format
+msgid "Bill of Material"
+msgstr "Lista de materiales"
+
+#. module: mrp_bom_component_change
 #: model:ir.actions.act_window,name:mrp_bom_component_change.action_bom_change_view
 msgid "BoM Component Change"
-msgstr "Cambio de componentes de LdM"
+msgstr "LdM cambio componente"
 
 #. module: mrp_bom_component_change
 #: model:ir.ui.menu,name:mrp_bom_component_change.mrp_bom_change_menu
 msgid "BoM Component Modifications"
-msgstr "Modificaciones de componentes de LdM"
+msgstr "LdM modificaciones de componentes"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,boms:0
-msgid "Boms"
+msgid "BoMs"
 msgstr "LdMs"
 
 #. module: mrp_bom_component_change
@@ -52,18 +58,13 @@ msgid ""
 "Check this field if you want to create a new version of the BOM before "
 "modifying the component"
 msgstr ""
-"Marque este campo si desea crear una nueva versión de la LdM antes de "
-"modificar el componente"
-
-#. module: mrp_bom_component_change
-#: view:mrp.bom.change:mrp_bom_component_change.mrp_bom_change_form_view
-msgid "Clear List"
-msgstr "Limpiar lista"
+"Marque este campo si desea crear una nueva versión de la lista de materiales "
+"antes de modificar el componente"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,create_new_version:0
 msgid "Create new BoM version"
-msgstr "Crear nueva version LdM"
+msgstr "Crear una nueva LdM versión "
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,create_uid:0
@@ -73,27 +74,12 @@ msgstr "Creado por"
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,create_date:0
 msgid "Created on"
-msgstr "Creado en"
-
-#. module: mrp_bom_component_change
-#: selection:mrp.bom.change,state:0
-msgid "Done"
-msgstr "Realizado"
-
-#. module: mrp_bom_component_change
-#: selection:mrp.bom.change,state:0
-msgid "Draft"
-msgstr "Borrador"
+msgstr "Creado el"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,id:0
 msgid "ID"
 msgstr "ID"
-
-#. module: mrp_bom_component_change
-#: selection:mrp.bom.change,state:0
-msgid "In Process"
-msgstr "En proceso"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,write_uid:0
@@ -103,34 +89,34 @@ msgstr "Última actualización por"
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,write_date:0
 msgid "Last Updated on"
-msgstr "Última actualización en"
+msgstr "Última actualización el"
 
 #. module: mrp_bom_component_change
 #: model:ir.model,name:mrp_bom_component_change.model_mrp_bom_change
 msgid "Mrp BoM Component Change"
-msgstr "Mrp BoM Component Change"
+msgstr "MRP LdM cambio componente"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,name:0
 msgid "Name"
-msgstr "Nombre"
+msgstr "Descripción"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,new_component:0
 msgid "New Component"
-msgstr "Componente nuevo"
+msgstr "Nuevo componente"
 
 #. module: mrp_bom_component_change
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:62
 #: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:64
-#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:68
 #, python-format
 msgid "Not Components selected!"
-msgstr "¡Componentes no seleccionados!"
+msgstr "No componentes seleccionados!"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,old_component:0
 msgid "Old Component"
-msgstr "Componente antiguo"
+msgstr "Componente viejo"
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,reason:0
@@ -138,25 +124,8 @@ msgid "Reason"
 msgstr "Razón"
 
 #. module: mrp_bom_component_change
-#: view:mrp.bom.change:mrp_bom_component_change.mrp_bom_change_form_view
-msgid "Revert"
-msgstr "Revertir"
-
-#. module: mrp_bom_component_change
-#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:77
-#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:92
-#, python-format
-msgid "Revert - "
-msgstr "Revertir - "
-
-#. module: mrp_bom_component_change
-#: field:mrp.bom.change,state:0
-msgid "State"
-msgstr "Estado"
-
-#. module: mrp_bom_component_change
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:64
 #: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:66
-#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:70
 #, python-format
 msgid "There isn't any BoM for selected component"
-msgstr "No existe LdM con el componente seleccionsado"
+msgstr "No hay ninguna LdM para el componente seleccionado"

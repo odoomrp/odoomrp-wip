@@ -37,8 +37,6 @@ class MrpBomChange(models.Model):
                     lambda x: x.product_id.id == self.old_component.id)
                 if bom_lines:
                     self.boms = [(4, bom.id)]
-            if self.state != 'process':
-                self.state = 'process'
 
     name = fields.Char('Name', required=True)
     new_component = fields.Many2one('product.product', 'New Component',
@@ -48,20 +46,18 @@ class MrpBomChange(models.Model):
     create_new_version = fields.Boolean(
         string="Create new BoM version", help='Check this field if you want to'
         ' create a new version of the BOM before modifying the component')
-    state = fields.Selection([('draft', 'Draft'), ('process', 'In Process'),
-                              ('done', 'Done')], 'State', default='draft',
-                             required=True)
     boms = fields.Many2many(
         comodel_name='mrp.bom',
         relation='rel_mrp_bom_change', column1='bom_change_id',
-        column2='bom_id', string='BoMs', copy=False, store=True,
+        column2='bom_id', string='BoMs', copy=False, store=True, readonly=True,
         compute='_calc_boms')
     date = fields.Date('Change Date', readonly=True)
     user = fields.Many2one('res.users', 'Changed By', readonly=True)
     reason = fields.Char('Reason')
 
-    @api.one
+    @api.multi
     def do_component_change(self):
+        self.ensure_one()
         if not self.old_component or not self.new_component:
             raise exceptions.Warning(_("Not Components selected!"))
         if not self.boms:
@@ -70,28 +66,20 @@ class MrpBomChange(models.Model):
         for bom in self.boms:
             bom_lines = bom.bom_line_ids.filtered(
                 lambda x: x.product_id.id == self.old_component.id)
-            if bom_lines:
-                if self.create_new_version:
-                    new_bom = bom._copy_bom()
-                    bom._update_bom_state_after_copy()
-                    new_bom.button_activate()
-                    self.boms = [(3, bom.id)]
-                    self.boms = [(4, new_bom.id)]
-                    bom_lines = new_bom.bom_line_ids.filtered(
-                        lambda x: x.product_id.id == self.old_component.id)
-                bom_lines.write({'product_id': self.new_component.id})
-        self.write({'state': 'done', 'date': dt.now(), 'user': self.env.uid})
-
-    @api.one
-    def do_revert(self):
-        data = self.copy()
-        data.write({'name': _('Revert - ') + self.name,
-                    'state': 'process',
-                    'old_component': self.new_component.id,
-                    'new_component': self.old_component.id,
-                    'user': None, 'date': None})
-        return True
-
-    @api.one
-    def clear_list(self):
-        self.boms = [(6, 0, [])]
+            if self.create_new_version:
+                new_bom = bom._copy_bom()
+                bom._update_bom_state_after_copy()
+                new_bom.button_activate()
+                self.boms = [(3, bom.id)]
+                self.boms = [(4, new_bom.id)]
+                bom_lines = new_bom.bom_line_ids.filtered(
+                    lambda x: x.product_id.id == self.old_component.id)
+            bom_lines.write({'product_id': self.new_component.id})
+        self.write({'date': dt.now(), 'user': self.env.uid})
+        return {'name': _('Bill of Material'),
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'mrp.bom',
+                'type': 'ir.actions.act_window',
+                'domain': [('id', 'in', self.boms.mapped('id'))]
+                }

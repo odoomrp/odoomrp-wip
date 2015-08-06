@@ -13,7 +13,6 @@
                     <field name="date"/>
                     <field name="user"/>
                     <field name="reason" />
-                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -25,23 +24,20 @@
                 <form>
                     <header>
                     <button class="oe_highlight" name="do_component_change" string="Change Component" type="object"
-                         states="process"/>
-                    <button class="oe_highlight" name="clear_list" string="Clear List" type="object" states="process"/>
-                    <button class="oe_highlight" name="do_revert" string="Revert" type="object" states="done"/>
-                        <field name="state" widget="statusbar"/>
+                            attrs="{'invisible':[('old_component','=',False)]}"/>
                     </header>
                     <group col="6">
-                            <field name="name" attrs="{'readonly':[('state','=',('done'))]}"/>
+                            <field name="name" />
                             <field name="date"/>
                             <field name="user"/>
                             <field name="reason" colspan="6" />
                     </group>
                     <group col="6">
-                        <field name="create_new_version" attrs="{'readonly':[('state','=',('done'))]}"/>
-                        <field name="old_component" attrs="{'readonly':[('state','=',('done'))]}"/>
-                        <field name="new_component" attrs="{'readonly':[('state','=',('done'))]}"/>
+                        <field name="create_new_version" />
+                        <field name="old_component" />
+                        <field name="new_component" />
                     </group>
-                    <field name="boms" attrs="{'readonly':[('state','=',('done'))]}"/>
+                    <field name="boms" />
                 </form>
             </field>
         </record>
