@@ -85,4 +85,7 @@ Credits
 Contributors
 ------------
 
-* Eficent, www.eficent.com
+* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+* Ana Juaristi <anajuaristi@avanzosc.es>
+* Alfredo de la Fuente <alfredodelafuente@avanzosc.es
+* Jordi Ballester <jordi.ballester@eficent.com>
