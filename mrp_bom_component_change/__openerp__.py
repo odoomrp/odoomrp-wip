@@ -22,15 +22,12 @@
 {
     "name": "MRP BoM component massive change",
     "version": "1.0",
-    "description": """
-    This module allows to change massively one component by another on a list
-    of BoMs.
-    """,
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     'website': "http://www.odoomrp.com",
-    "depends": ['mrp'],
+    "depends": ['mrp',
+                'mrp_bom_version'],
     "category": "Manufacturing",
     "data": ['views/mrp_bom_change_view.xml',
              'security/ir.model.access.csv'

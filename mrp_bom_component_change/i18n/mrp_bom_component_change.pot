@@ -6,14 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-22 08:58+0000\n"
-"PO-Revision-Date: 2015-05-22 08:58+0000\n"
+"POT-Creation-Date: 2015-08-06 09:42+0000\n"
+"PO-Revision-Date: 2015-08-06 09:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: mrp_bom_component_change
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:79
+#, python-format
+msgid "Bill of Material"
+msgstr ""
 
 #. module: mrp_bom_component_change
 #: model:ir.actions.act_window,name:mrp_bom_component_change.action_bom_change_view
@@ -27,7 +33,7 @@ msgstr ""
 
 #. module: mrp_bom_component_change
 #: field:mrp.bom.change,boms:0
-msgid "Boms"
+msgid "BoMs"
 msgstr ""
 
 #. module: mrp_bom_component_change
@@ -46,8 +52,13 @@ msgid "Changed By"
 msgstr ""
 
 #. module: mrp_bom_component_change
-#: view:mrp.bom.change:mrp_bom_component_change.mrp_bom_change_form_view
-msgid "Clear List"
+#: help:mrp.bom.change,create_new_version:0
+msgid "Check this field if you want to create a new version of the BOM before modifying the component"
+msgstr ""
+
+#. module: mrp_bom_component_change
+#: field:mrp.bom.change,create_new_version:0
+msgid "Create new BoM version"
 msgstr ""
 
 #. module: mrp_bom_component_change
@@ -61,23 +72,8 @@ msgid "Created on"
 msgstr ""
 
 #. module: mrp_bom_component_change
-#: selection:mrp.bom.change,state:0
-msgid "Done"
-msgstr ""
-
-#. module: mrp_bom_component_change
-#: selection:mrp.bom.change,state:0
-msgid "Draft"
-msgstr ""
-
-#. module: mrp_bom_component_change
 #: field:mrp.bom.change,id:0
 msgid "ID"
-msgstr ""
-
-#. module: mrp_bom_component_change
-#: selection:mrp.bom.change,state:0
-msgid "In Process"
 msgstr ""
 
 #. module: mrp_bom_component_change
@@ -91,6 +87,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: mrp_bom_component_change
+#: model:ir.model,name:mrp_bom_component_change.model_mrp_bom_change
+msgid "Mrp BoM Component Change"
+msgstr ""
+
+#. module: mrp_bom_component_change
 #: field:mrp.bom.change,name:0
 msgid "Name"
 msgstr ""
@@ -101,6 +102,7 @@ msgid "New Component"
 msgstr ""
 
 #. module: mrp_bom_component_change
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:62
 #: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:64
 #, python-format
 msgid "Not Components selected!"
@@ -117,22 +119,7 @@ msgid "Reason"
 msgstr ""
 
 #. module: mrp_bom_component_change
-#: view:mrp.bom.change:mrp_bom_component_change.mrp_bom_change_form_view
-msgid "Revert"
-msgstr ""
-
-#. module: mrp_bom_component_change
-#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:77
-#, python-format
-msgid "Revert - "
-msgstr ""
-
-#. module: mrp_bom_component_change
-#: field:mrp.bom.change,state:0
-msgid "State"
-msgstr ""
-
-#. module: mrp_bom_component_change
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:64
 #: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:66
 #, python-format
 msgid "There isn't any BoM for selected component"
