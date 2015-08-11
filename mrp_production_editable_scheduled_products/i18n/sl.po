@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_production_editable_scheduled_products
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-04 11:48+0000\n"
+"PO-Revision-Date: 2015-08-11 10:33+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.2\n"
+
+#. module: mrp_production_editable_scheduled_products
+#: model:ir.model,name:mrp_production_editable_scheduled_products.model_mrp_production_product_line
+msgid "Production Scheduled Product"
+msgstr "Načrtovani izdelek za proizvodnjo"
+
+#. module: mrp_production_editable_scheduled_products
+#: view:mrp.production.product.line:mrp_production_editable_scheduled_products.mrp_production_product_form_view_inherit
+msgid "onchange_product(product_id)"
+msgstr "onchange_product(product_id)"
+
+#. module: mrp_production_editable_scheduled_products
+#: view:mrp.production:mrp_production_editable_scheduled_products.mrp_production_form_view_inherit
+msgid "{'readonly':[('state', '!=', ('draft'))]}"
+msgstr "{'readonly':[('state', '!=', ('draft'))]}"
