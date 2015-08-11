@@ -1,0 +1,157 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_product_variants
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-15 11:28+0000\n"
+"PO-Revision-Date: 2015-08-11 10:37+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.2\n"
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,attribute:0
+#: field:mrp.production.product.line.attribute,attribute:0
+msgid "Attribute"
+msgstr "Atribut"
+
+#. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Kosovnica"
+
+#. module: mrp_product_variants
+#: view:mrp.bom.line:mrp_product_variants.mrp_bom_line_form_view
+msgid "Bill of Material Lines"
+msgstr "Postavke kosovnice"
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,create_uid:0
+#: field:mrp.production.product.line.attribute,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,create_date:0
+#: field:mrp.production.product.line.attribute,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: mrp_product_variants
+#: code:addons/mrp_product_variants/models/mrp_production.py:155
+#, python-format
+msgid "Error! Cannot find a bill of material for this product."
+msgstr "Napaka! Za ta proizvod ni najdene kosovnice."
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,id:0
+#: field:mrp.production.product.line.attribute,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: mrp_product_variants
+#: field:product.attribute,parent_inherited:0
+msgid "Inherits from parent"
+msgstr "Deduje od nadrejenega"
+
+#. module: mrp_product_variants
+#: code:addons/mrp_product_variants/models/mrp_bom.py:170
+#, python-format
+msgid "Invalid Action! BoM \"%s\" contains a BoM line with a product recursion: \"%s\"."
+msgstr "Neveljavno dejanje! Kosovnica '%s' vsebuje postavko z rekurzivnim proizvodom: '%s\"."
+
+#. module: mrp_product_variants
+#: code:addons/mrp_product_variants/models/mrp_bom.py:244
+#, python-format
+msgid "Invalid Action! BoM \"%s\" contains a phantom BoM line but the product \"%s\" does not have any BoM defined."
+msgstr "Neveljavno dejanje! Kosovnica \"%s\" vsebuje postavko navidezne kosovnice, a proizvod \"%s\" nima določene nobene kosovnice."
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,write_uid:0
+#: field:mrp.production.product.line.attribute,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnjič posodobil"
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,write_date:0
+#: field:mrp.production.product.line.attribute,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_mrp_production
+#: field:mrp.production.attribute,mrp_production:0
+msgid "Manufacturing Order"
+msgstr "Proizvodni nalog"
+
+#. module: mrp_product_variants
+#: field:mrp.bom.line,product_template:0
+#: field:mrp.production,product_template:0
+#: field:mrp.production.product.line,product_template:0
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_product_attribute
+msgid "Product Attribute"
+msgstr "Atribut proizvoda"
+
+#. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_product_template
+msgid "Product Template"
+msgstr "Predloga izdelka"
+
+#. module: mrp_product_variants
+#: view:mrp.production:mrp_product_variants.mrp_production_extended_form_view
+#: view:mrp.production.product.line:mrp_product_variants.mrp_production_product_line_extended_form_view
+#: view:mrp.production.product.line:mrp_product_variants.mrp_production_product_line_extended_tree_view
+msgid "Product Variants"
+msgstr "Variante proizvoda"
+
+#. module: mrp_product_variants
+#: field:mrp.production,product_attributes:0
+#: field:mrp.production.product.line,product_attributes:0
+msgid "Product attributes"
+msgstr "Atributi proizvoda"
+
+#. module: mrp_product_variants
+#: field:mrp.production.product.line.attribute,product_line:0
+msgid "Product line"
+msgstr "Postavka proizvoda"
+
+#. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_mrp_production_product_line
+msgid "Production Scheduled Product"
+msgstr "Načrtovani izdelek za proizvodnjo"
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,value:0
+#: field:mrp.production.product.line.attribute,value:0
+msgid "Value"
+msgstr "Vrednost"
+
+#. module: mrp_product_variants
+#: view:mrp.bom:mrp_product_variants.mrp_bom_extended_form_view
+#: view:mrp.bom.line:mrp_product_variants.mrp_bom_line_form_view
+msgid "Variant"
+msgstr "Varianta"
+
+#. module: mrp_product_variants
+#: code:addons/mrp_product_variants/models/mrp_production.py:190
+#: code:addons/mrp_product_variants/models/mrp_production.py:213
+#, python-format
+msgid "You can not confirm before configuring all attribute values."
+msgstr "Ne morete potrditi preden nastavite vse vrednosti atributov."
+
+#. module: mrp_product_variants
+#: view:mrp.bom:mrp_product_variants.mrp_bom_extended_form_view
+msgid "{'no_create': True}"
+msgstr "{'no_create': True}"

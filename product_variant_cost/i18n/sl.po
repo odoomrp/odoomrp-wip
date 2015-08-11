@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_variant_cost
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-28 15:49+0000\n"
+"PO-Revision-Date: 2015-08-11 10:48+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.2\n"
+
+#. module: product_variant_cost
+#: field:stock.quant,variant_inventory_value:0
+msgid "Inventory Value"
+msgstr "Vrednost inventarja"
+
+#. module: product_variant_cost
+#: model:ir.model,name:product_variant_cost.model_product_product
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: product_variant_cost
+#: model:ir.model,name:product_variant_cost.model_stock_quant
+msgid "Quants"
+msgstr "Kvant"
+
+#. module: product_variant_cost
+#: model:ir.model,name:product_variant_cost.model_stock_move
+msgid "Stock Move"
+msgstr "Premik zaloge"
+
+#. module: product_variant_cost
+#: field:product.product,cost_price:0
+msgid "Variant Cost Price"
+msgstr "Lastna cena variante"

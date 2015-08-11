@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_operations_project
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-11 08:31+0000\n"
+"PO-Revision-Date: 2015-08-11 10:32+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.2\n"
+
+#. module: mrp_operations_project
+#: model:ir.model,name:mrp_operations_project.model_mrp_routing_operation
+msgid "MRP Routing Operation"
+msgstr "MRP operacije usmerjanja"
+
+#. module: mrp_operations_project
+#: field:mrp.routing.operation,project_states:0
+msgid "Project States"
+msgstr "Projektna stanja"
+
+#. module: mrp_operations_project
+#: view:mrp.routing.operation:mrp_operations_project.mrp_routing_op_projec_form_view
+msgid "Routing Project States"
+msgstr "Projektna stanja usmerjanja"
+
+#. module: mrp_operations_project
+#: model:ir.model,name:mrp_operations_project.model_project_task
+msgid "Task"
+msgstr "Opravilo"
+
+#. module: mrp_operations_project
+#: field:project.task,wk_order:0
+msgid "Work Order"
+msgstr "Delovni nalog"

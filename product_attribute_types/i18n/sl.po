@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_attribute_types
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-30 08:55+0000\n"
+"PO-Revision-Date: 2015-08-11 10:47+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.2\n"
+
+#. module: product_attribute_types
+#: field:product.attribute.line,default:0
+msgid "Default"
+msgstr "Privzeto"
+
+#. module: product_attribute_types
+#: field:product.attribute.value,max_range:0
+msgid "Max"
+msgstr "Maks"
+
+#. module: product_attribute_types
+#: field:product.attribute.value,min_range:0
+msgid "Min"
+msgstr "Min"
+
+#. module: product_attribute_types
+#: selection:product.attribute,attr_type:0
+msgid "Numeric"
+msgstr "Numerično"
+
+#. module: product_attribute_types
+#: field:product.attribute.value,numeric_value:0
+msgid "Numeric Value"
+msgstr "Numerična vrednost"
+
+#. module: product_attribute_types
+#: model:ir.model,name:product_attribute_types.model_product_attribute
+msgid "Product Attribute"
+msgstr "Atribut proizvoda"
+
+#. module: product_attribute_types
+#: selection:product.attribute,attr_type:0
+msgid "Range"
+msgstr "Območje"
+
+#. module: product_attribute_types
+#: field:product.attribute.line,required:0
+msgid "Required"
+msgstr "Obvezno"
+
+#. module: product_attribute_types
+#: selection:product.attribute,attr_type:0
+msgid "Select"
+msgstr "Izbira"
+
+#. module: product_attribute_types
+#: field:product.attribute,attr_type:0
+msgid "Type"
+msgstr "Tip"
