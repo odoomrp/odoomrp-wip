@@ -31,7 +31,7 @@ class TestProcurementService(common.TransactionCase):
         line = self.sale_line_model.product_id_change(
             pricelist=vals.get('pricelist_id'),
             product=self.new_service_product.id, qty=1, qty_uos=1,
-            partner_id=self.env.ref('base.res_partner_1').id).get('value')
+            partner_id=self.env.ref('base.res_partner_1').id)
         line['product_id'] = self.new_service_product.id
         vals['order_line'] = [(0, 0, line)]
         self.new_sale_order = self.sale_model.create(vals)
