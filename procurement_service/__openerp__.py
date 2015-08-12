@@ -26,8 +26,9 @@
     "depends": ['product',
                 'sale',
                 'stock',
-                'procurement'
+                'procurement_purchase_no_grouping'
                 ],
-    "data": [],
+    "data": ['views/product_template_view.xml',
+             ],
     "installable": True
 }
