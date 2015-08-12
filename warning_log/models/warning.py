@@ -137,16 +137,16 @@ class SaleOrderLine(orm.Model):
 class PurchaseOrderLine(orm.Model):
     _inherit = 'purchase.order.line'
 
-    def onchange_product_id(self, cr, uid, ids, pricelist, product, qty, uom,
-                            partner_id, date_order=False,
-                            fiscal_position_id=False, date_planned=False,
-                            name=False, price_unit=False, state='draft',
-                            notes=False, context=None):
+    def onchange_product_id(
+            self, cr, uid, ids, pricelist_id, product_id, qty, uom_id,
+            partner_id, date_order=False, fiscal_position_id=False,
+            date_planned=False, name=False, price_unit=False, state='draft',
+            context=None):
         vals = super(PurchaseOrderLine, self).onchange_product_id(
-            cr, uid, ids, pricelist, product, qty, uom, partner_id,
+            cr, uid, ids, pricelist_id, product_id, qty, uom_id, partner_id,
             date_order=date_order, fiscal_position_id=fiscal_position_id,
             date_planned=date_planned, name=name, price_unit=price_unit,
-            state='draft', notes=notes, context=context)
+            state=state, context=context)
         self.pool['warning.log'].create_warning_log(
             cr, uid, ids, self._name, vals.get('warning'), context=context)
         return vals
