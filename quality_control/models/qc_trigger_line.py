@@ -14,8 +14,12 @@ class QcTriggerLine(models.AbstractModel):
     user = fields.Many2one(
         comodel_name='res.users', string='Responsible',
         track_visibility='always', default=lambda self: self.env.user)
+    partners = fields.Many2many(
+        comodel_name='res.partner', string='Partners',
+        help='If this field is empty it will consider for all the possible'
+        ' partners')
 
-    def get_trigger_line_for_product(self, trigger, product):
+    def get_trigger_line_for_product(self, trigger, product, partners=None):
         """Overridable method for getting trigger_line associated to a product.
         Each inherited model will complete this module to make the search by
         product, template or category.
@@ -33,15 +37,18 @@ class QcTriggerProductCategoryLine(models.Model):
 
     product_category = fields.Many2one(comodel_name="product.category")
 
-    def get_trigger_line_for_product(self, trigger, product):
-        trigger_lines = super(QcTriggerProductCategoryLine,
-                              self).get_trigger_line_for_product(trigger,
-                                                                 product)
+    def get_trigger_line_for_product(self, trigger, product, partners=None):
+        if partners is None:
+            partners = []
+        trigger_lines = super(
+            QcTriggerProductCategoryLine,
+            self).get_trigger_line_for_product(trigger, product,
+                                               partners=partners)
         category = product.categ_id
         while category:
-            for trigger_line in category.qc_triggers:
-                if trigger_line.trigger.id == trigger.id:
-                    trigger_lines.add(trigger_line)
+            for trigger_line in category.qc_triggers.filtered(
+                    lambda r: r.trigger.id == trigger.id):
+                trigger_lines.add(trigger_line)
             category = category.parent_id
         return trigger_lines
 
@@ -52,13 +59,16 @@ class QcTriggerProductTemplateLine(models.Model):
 
     product_template = fields.Many2one(comodel_name="product.template")
 
-    def get_trigger_line_for_product(self, trigger, product):
-        trigger_lines = super(QcTriggerProductTemplateLine,
-                              self).get_trigger_line_for_product(trigger,
-                                                                 product)
-        for trigger_line in product.product_tmpl_id.qc_triggers:
-            if trigger_line.trigger.id == trigger.id:
-                trigger_lines.add(trigger_line)
+    def get_trigger_line_for_product(self, trigger, product, partners=None):
+        if partners is None:
+            partners = []
+        trigger_lines = super(
+            QcTriggerProductTemplateLine,
+            self).get_trigger_line_for_product(trigger, product,
+                                               partners=partners)
+        for trigger_line in product.product_tmpl_id.qc_triggers.filtered(
+                lambda r: r.trigger.id == trigger.id):
+            trigger_lines.add(trigger_line)
         return trigger_lines
 
 
@@ -68,11 +78,14 @@ class QcTriggerProductLine(models.Model):
 
     product = fields.Many2one(comodel_name="product.product")
 
-    def get_trigger_line_for_product(self, trigger, product):
-        trigger_lines = super(QcTriggerProductLine,
-                              self).get_trigger_line_for_product(trigger,
-                                                                 product)
-        for trigger_line in product.qc_triggers:
-            if trigger_line.trigger.id == trigger.id:
-                trigger_lines.add(trigger_line)
+    def get_trigger_line_for_product(self, trigger, product, partners=None):
+        if partners is None:
+            partners = []
+        trigger_lines = super(
+            QcTriggerProductLine,
+            self).get_trigger_line_for_product(trigger, product,
+                                               partners=partners)
+        for trigger_line in product.qc_triggers.filtered(
+                lambda r: r.trigger.id == trigger.id):
+            trigger_lines.add(trigger_line)
         return trigger_lines
