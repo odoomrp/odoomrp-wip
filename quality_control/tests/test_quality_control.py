@@ -30,8 +30,12 @@ class TestQualityControl(TransactionCase):
                 line.quantitative_value = 5.0
         self.inspection1.action_confirm()
         for line in self.inspection1.inspection_lines:
-            self.assertTrue(line.success, 'Incorrect')
-        self.assertTrue(self.inspection1.success, 'Incorrect')
+            self.assertTrue(
+                line.success,
+                'Incorrect state in inspection line %s' % line.name)
+        self.assertTrue(
+            self.inspection1.success,
+            'Incorrect state in inspection %s' % self.inspection1.name)
 
     def test_inspection_incorrect(self):
         for line in self.inspection1.inspection_lines:
@@ -41,5 +45,9 @@ class TestQualityControl(TransactionCase):
                 line.quantitative_value = 15.0
         self.inspection1.action_confirm()
         for line in self.inspection1.inspection_lines:
-            self.assertFalse(line.success, 'Incorrect')
-        self.assertFalse(self.inspection1.success, 'Incorrect')
+            self.assertFalse(
+                line.success,
+                'Incorrect state in inspection line %s' % line.name)
+        self.assertFalse(
+            self.inspection1.success,
+            'Incorrect state in inspection %s' % self.inspection1.name)
