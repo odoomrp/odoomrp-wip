@@ -26,6 +26,7 @@
     "depends": ['product',
                 'sale',
                 'stock',
+                'purchase',
                 ],
     "data": ['views/product_template_view.xml',
              ],

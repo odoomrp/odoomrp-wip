@@ -23,19 +23,19 @@ class TestProcurementService(common.TransactionCase):
                            [self.env.ref('stock.route_warehouse0_mto').id,
                             self.env.ref('purchase.route_warehouse0_buy').id
                             ])]}
-        self.new_service_product = self.product_model.create(product_vals)
+        self.service_product = self.product_model.create(product_vals)
         partner_vals = {'name': 'Customer for procurement service',
                         'customer': True}
-        self.new_partner = self.partner_model.create(partner_vals)
-        sale_vals = {'partner_id': self.new_partner.id,
-                     'partner_shipping_id': self.new_partner.id,
-                     'partner_invoice_id': self.new_partner.id,
+        self.partner = self.partner_model.create(partner_vals)
+        sale_vals = {'partner_id': self.partner.id,
+                     'partner_shipping_id': self.partner.id,
+                     'partner_invoice_id': self.partner.id,
                      'pricelist_id': self.env.ref('product.list0').id}
-        sale_line_vals = {'product_id': self.new_service_product.id,
-                          'name': self.new_service_product.name,
+        sale_line_vals = {'product_id': self.service_product.id,
+                          'name': self.service_product.name,
                           'product_uos_qty': 1,
-                          'product_uom': self.new_service_product.uom_id.id,
-                          'price_unit': self.new_service_product.list_price}
+                          'product_uom': self.service_product.uom_id.id,
+                          'price_unit': self.service_product.list_price}
         sale_vals['order_line'] = [(0, 0, sale_line_vals)]
         self.sale_order = self.sale_model.create(sale_vals)
 
