@@ -10,35 +10,38 @@ class TestProcurementService(common.TransactionCase):
     def setUp(self):
         super(TestProcurementService, self).setUp()
         self.product_model = self.env['product.product']
-        self.route_model = self.env['stock.location.route']
+        self.partner_model = self.env['res.partner']
         self.sale_model = self.env['sale.order']
         self.sale_line_model = self.env['sale.order.line']
         self.procurement_model = self.env['procurement.order']
-        routes = self.route_model.search(
-            [('name', 'in', ('Make To Order', 'Buy'))])
-        self.assertEqual(len(routes), 2,
-                         "Make to order, and buy routes not found")
-        vals = {'name': 'Service Generated Procurement',
-                'standard_price': 20.5,
-                'list_price': 30.75,
-                'type': 'service',
-                'route_ids': [(6, 0, routes.mapped('id'))],
-                }
-        self.new_service_product = self.product_model.create(vals)
-        vals = self.sale_model.onchange_partner_id(
-            self.env.ref('base.res_partner_1').id).get('value')
-        vals['partner_id'] = self.env.ref('base.res_partner_1').id
-        line = self.sale_line_model.product_id_change(
-            pricelist=vals.get('pricelist_id'),
-            product=self.new_service_product.id, qty=1, qty_uos=1,
-            partner_id=self.env.ref('base.res_partner_1').id).get('value')
-        line['product_id'] = self.new_service_product.id
-        vals['order_line'] = [(0, 0, line)]
-        self.new_sale_order = self.sale_model.create(vals)
+        product_vals = {
+            'name': 'Service Generated Procurement',
+            'standard_price': 20.5,
+            'list_price': 30.75,
+            'type': 'service',
+            'route_ids': [(6, 0,
+                           [self.env.ref('stock.route_warehouse0_mto').id,
+                            self.env.ref('purchase.route_warehouse0_buy').id
+                            ])]}
+        self.new_service_product = self.product_model.create(product_vals)
+        partner_vals = {'name': 'Customer for procurement service',
+                        'customer': True}
+        self.new_partner = self.partner_model.create(partner_vals)
+        sale_vals = {'partner_id': self.new_partner.id,
+                     'partner_shipping_id': self.new_partner.id,
+                     'partner_invoice_id': self.new_partner.id,
+                     'pricelist_id': self.env.ref('product.list0').id}
+        sale_line_vals = {'product_id': self.new_service_product.id,
+                          'name': self.new_service_product.name,
+                          'product_uos_qty': 1,
+                          'product_uom': self.new_service_product.uom_id.id,
+                          'price_unit': self.new_service_product.list_price}
+        sale_vals['order_line'] = [(0, 0, sale_line_vals)]
+        self.sale_order = self.sale_model.create(sale_vals)
 
     def test_confirm_sale_and_generate_procurement_service(self):
-        self.new_sale_order.action_button_confirm()
-        for line in self.new_sale_order.order_line:
+        self.sale_order.action_button_confirm()
+        for line in self.sale_order.order_line:
             cond = [('sale_line_id', '=', line.id)]
             procs = self.procurement_model.search(cond)
             self.assertEqual(
