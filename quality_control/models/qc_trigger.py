@@ -17,4 +17,6 @@ class QcTrigger(models.Model):
         default=lambda self: self.env['res.company']._company_default_get(
             'qc.test'))
     partner_selectable = fields.Boolean(
-        string='Select by partner', default=False)
+        string='Selectable by partner', default=False,
+        help='This technical field is to allow to filter by partner in'
+        ' triggers')
