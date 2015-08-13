@@ -16,3 +16,5 @@ class QcTrigger(models.Model):
         comodel_name='res.company', string='Company',
         default=lambda self: self.env['res.company']._company_default_get(
             'qc.test'))
+    partner_selectable = fields.Boolean(
+        string='Select by partner', default=False)
