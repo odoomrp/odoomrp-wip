@@ -13,7 +13,8 @@ class TestQualityControl(TransactionCase):
         self.operation_model = self.env['stock.pack.operation']
         self.qc_trigger_model = self.env['qc.trigger']
         self.product = self.env.ref('product.product_product_4')
-        self.partner = self.env.ref('base.res_partner_2')
+        self.partner1 = self.env.ref('base.res_partner_2')
+        self.partner2 = self.env.ref('base.res_partner_4')
         self.test = self.env.ref('quality_control.qc_test_1')
         self.picking_type = self.env.ref('stock.picking_type_out')
         self.trigger = self.qc_trigger_model.search(
@@ -26,7 +27,7 @@ class TestQualityControl(TransactionCase):
             'location_dest_id': self.picking_type.default_location_dest_id.id,
         }
         self.picking1 = self.picking_model.create({
-            'partner_id': self.partner.id,
+            'partner_id': self.partner1.id,
             'picking_type_id': self.picking_type.id,
             'move_lines': [(0, 0, move_vals)],
         })
@@ -51,8 +52,8 @@ class TestQualityControl(TransactionCase):
             }
         )]
         self.picking1.do_transfer()
-        self.assertGreater(self.picking1.created_inspections, 0,
-                           'Inspections not created')
+        self.assertEqual(self.picking1.created_inspections, 1,
+                         'Only one inspection must be created')
 
     def test_inspection_create_for_template(self):
         self.product.product_tmpl_id.qc_triggers = [(
@@ -62,8 +63,8 @@ class TestQualityControl(TransactionCase):
             }
         )]
         self.picking1.do_transfer()
-        self.assertGreater(self.picking1.created_inspections, 0,
-                           'Inspections not created')
+        self.assertEqual(self.picking1.created_inspections, 1,
+                         'Only one inspection must be created')
 
     def test_inspection_create_for_category(self):
         self.product.categ_id.qc_triggers = [(
@@ -73,5 +74,94 @@ class TestQualityControl(TransactionCase):
             }
         )]
         self.picking1.do_transfer()
-        self.assertGreater(self.picking1.created_inspections, 0,
-                           'Inspections not created')
+        self.assertEqual(self.picking1.created_inspections, 1,
+                         'Only one inspection must be created')
+
+    def test_inspection_create_for_product_partner(self):
+        self.product.qc_triggers = [(
+            0, 0, {
+                'trigger': self.trigger.id,
+                'test': self.test.id,
+                'partners': [(6, 0, [self.partner1.id])],
+            }
+        )]
+        self.picking1.do_transfer()
+        self.assertEqual(self.picking1.created_inspections, 1,
+                         'Only one inspection must be created')
+
+    def test_inspection_create_for_template_partner(self):
+        self.product.product_tmpl_id.qc_triggers = [(
+            0, 0, {
+                'trigger': self.trigger.id,
+                'test': self.test.id,
+                'partners': [(6, 0, [self.partner1.id])],
+            }
+        )]
+        self.picking1.do_transfer()
+        self.assertEqual(self.picking1.created_inspections, 1,
+                         'Only one inspection must be created')
+
+    def test_inspection_create_for_category_partner(self):
+        self.product.categ_id.qc_triggers = [(
+            0, 0, {
+                'trigger': self.trigger.id,
+                'test': self.test.id,
+                'partners': [(6, 0, [self.partner1.id])],
+            }
+        )]
+        self.picking1.do_transfer()
+        self.assertEqual(self.picking1.created_inspections, 1,
+                         'Only one inspection must be created')
+
+    def test_inspection_create_for_product_wrong_partner(self):
+        self.product.qc_triggers = [(
+            0, 0, {
+                'trigger': self.trigger.id,
+                'test': self.test.id,
+                'partners': [(6, 0, [self.partner2.id])],
+            }
+        )]
+        self.picking1.do_transfer()
+        self.assertEqual(self.picking1.created_inspections, 0,
+                         'No inspection must be created')
+
+    def test_inspection_create_for_template_wrong_partner(self):
+        self.product.product_tmpl_id.qc_triggers = [(
+            0, 0, {
+                'trigger': self.trigger.id,
+                'test': self.test.id,
+                'partners': [(6, 0, [self.partner2.id])],
+            }
+        )]
+        self.picking1.do_transfer()
+        self.assertEqual(self.picking1.created_inspections, 0,
+                         'No inspection must be created')
+
+    def test_inspection_create_for_category_wrong_partner(self):
+        self.product.categ_id.qc_triggers = [(
+            0, 0, {
+                'trigger': self.trigger.id,
+                'test': self.test.id,
+                'partners': [(6, 0, [self.partner2.id])],
+            }
+        )]
+        self.picking1.do_transfer()
+        self.assertEqual(self.picking1.created_inspections, 0,
+                         'No inspection must be created')
+
+    def test_inspection_create_only_one(self):
+        self.product.qc_triggers = [(
+            0, 0, {
+                'trigger': self.trigger.id,
+                'test': self.test.id,
+            }
+        )]
+        self.product.categ_id.qc_triggers = [(
+            0, 0, {
+                'trigger': self.trigger.id,
+                'test': self.test.id,
+            }
+        )]
+        self.picking1.do_transfer()
+        self.assertEqual(self.picking1.created_inspections, 1,
+                         'Only one inspection must be created')
