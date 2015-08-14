@@ -5,6 +5,16 @@
 from openerp import models, fields
 
 
+def _filter_trigger_lines(trigger_lines):
+    filtered_trigger_lines = []
+    unique_tests = []
+    for trigger_line in trigger_lines:
+        if trigger_line.test not in unique_tests:
+            filtered_trigger_lines.append(trigger_line)
+            unique_tests.append(trigger_line.test)
+    return filtered_trigger_lines
+
+
 class QcTriggerLine(models.AbstractModel):
     _name = "qc.trigger.line"
     _description = "Abstract line for defining triggers"
