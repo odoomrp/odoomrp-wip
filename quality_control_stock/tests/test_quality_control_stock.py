@@ -11,6 +11,7 @@ class TestQualityControl(TransactionCase):
         super(TestQualityControl, self).setUp()
         self.picking_model = self.env['stock.picking']
         self.operation_model = self.env['stock.pack.operation']
+        self.transfer_details_model = self.env['stock.transfer_details']
         self.qc_trigger_model = self.env['qc.trigger']
         self.product = self.env.ref('product.product_product_4')
         self.partner1 = self.env.ref('base.res_partner_2')
@@ -32,17 +33,8 @@ class TestQualityControl(TransactionCase):
             'move_lines': [(0, 0, move_vals)],
         })
         self.picking1.action_confirm()
-        self.picking1.action_assign()
+        self.picking1.force_assign()
         self.picking1.do_prepare_partial()
-        for line in self.picking1.move_lines:
-            self.operation_model.create({
-                'product_id': line.product_id.id,
-                'product_qty': line.product_uom_qty,
-                'product_uom_id': line.product_uom.id,
-                'location_id': line.location_id.id,
-                'location_dest_id': line.location_dest_id.id,
-                'picking_id': self.picking1.id,
-            })
 
     def test_inspection_create_for_product(self):
         self.product.qc_triggers = [(
