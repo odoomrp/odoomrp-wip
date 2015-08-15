@@ -1,0 +1,436 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* procurement_plan
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-18 17:46+0000\n"
+"PO-Revision-Date: 2015-08-15 13:59+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Cancelled"
+msgstr "Preklicano"
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,product_categ_id:0
+#: field:wiz.load.sale.from.plan,product_categ_id:0
+msgid "Category"
+msgstr "Kategorija"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Check Procurements"
+msgstr "Preveri oskrbovanja"
+
+#. module: procurement_plan
+#: field:procurement.plan,create_uid:0
+#: field:wiz.import.procurement.from.plan,create_uid:0
+#: field:wiz.load.purchase.from.plan,create_uid:0
+#: field:wiz.load.sale.from.plan,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: procurement_plan
+#: field:procurement.plan,create_date:0
+#: field:wiz.import.procurement.from.plan,create_date:0
+#: field:wiz.load.purchase.from.plan,create_date:0
+#: field:wiz.load.sale.from.plan,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: procurement_plan
+#: field:wiz.load.sale.from.plan,partner_id:0
+msgid "Customer"
+msgstr "Kupec"
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,date_from:0
+#: field:wiz.load.sale.from.plan,date_from:0
+msgid "Date from"
+msgstr "Datum od"
+
+#. module: procurement_plan
+#: help:procurement.plan,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Datum zadnjega sporočila pri tem zapisu."
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,date_to:0
+#: field:wiz.load.sale.from.plan,date_to:0
+msgid "Date to"
+msgstr "Datum do"
+
+#. module: procurement_plan
+#: field:procurement.plan,name:0
+msgid "Description"
+msgstr "Opis"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Done"
+msgstr "Opravljeno"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Draft"
+msgstr "Osnutek"
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:87
+#: code:addons/procurement_plan/models/procurement_plan.py:112
+#, python-format
+msgid "Error!: End date is lower than start date."
+msgstr "Napaka!: Zaključni datum je nižji od začetnega."
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:81
+#: code:addons/procurement_plan/models/procurement_plan.py:106
+#, python-format
+msgid "Error!: You must enter from date."
+msgstr "Napaka!: Vnesite 'datum od'."
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:84
+#: code:addons/procurement_plan/models/procurement_plan.py:109
+#, python-format
+msgid "Error!: You must enter to date."
+msgstr "Napaka!: Vnesite datum."
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,factor:0
+#: field:wiz.load.sale.from.plan,factor:0
+msgid "Factor"
+msgstr "Faktor"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_follower_ids:0
+msgid "Followers"
+msgstr "Sledilci"
+
+#. module: procurement_plan
+#: field:procurement.plan,from_date:0
+#: field:wiz.import.procurement.from.plan,from_date:0
+msgid "From Date"
+msgstr "Od datuma"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "Group By"
+msgstr "Združi po"
+
+#. module: procurement_plan
+#: help:procurement.plan,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr "Povzetek pogovorov (število sporočil,..). Povzetek je neposredno v html formatu, da se lahko neposredno vstavi v poglede tipa kanban."
+
+#. module: procurement_plan
+#: field:procurement.plan,id:0 field:wiz.import.procurement.from.plan,id:0
+#: field:wiz.load.purchase.from.plan,id:0 field:wiz.load.sale.from.plan,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: procurement_plan
+#: help:procurement.plan,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "Če označeno, zahtevajo nova sporočila vašo pozornost."
+
+#. module: procurement_plan
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+msgid "Import"
+msgstr "Uvoz"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Import Procurements"
+msgstr "Uvoz oskrbovanj"
+
+#. module: procurement_plan
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+msgid "Import procurements"
+msgstr "Uvoz oskrbovanj"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Je sledilec"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_last_post:0
+msgid "Last Message Date"
+msgstr "Datum zadnjega sporočila"
+
+#. module: procurement_plan
+#: field:procurement.plan,write_uid:0
+#: field:wiz.import.procurement.from.plan,write_uid:0
+#: field:wiz.load.purchase.from.plan,write_uid:0
+#: field:wiz.load.sale.from.plan,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: procurement_plan
+#: field:procurement.plan,write_date:0
+#: field:wiz.import.procurement.from.plan,write_date:0
+#: field:wiz.load.purchase.from.plan,write_date:0
+#: field:wiz.load.sale.from.plan,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: procurement_plan
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
+msgid "Load"
+msgstr "Naloži"
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:117
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#, python-format
+msgid "Load Purchases"
+msgstr "Naloži nabave"
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:92
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
+#, python-format
+msgid "Load Sales"
+msgstr "Naloži prodaje"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Location"
+msgstr "Lokacija"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:procurement.order,location_type:0
+msgid "Location Type"
+msgstr "Tip lokacije"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_ids:0
+msgid "Messages"
+msgstr "Sporočila"
+
+#. module: procurement_plan
+#: help:procurement.plan,message_ids:0
+msgid "Messages and communication history"
+msgstr "Komunikacije in kronologija komunikacij"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Origin"
+msgstr "Izvor"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.procurement_form_view_inh_withplan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:procurement.order,plan:0
+msgid "Plan"
+msgstr "Plan"
+
+#. module: procurement_plan
+#: model:ir.model,name:procurement_plan.model_procurement_order
+msgid "Procurement"
+msgstr "Oskrbovanje"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Procurement Lines"
+msgstr "Postavke oskrbovanja"
+
+#. module: procurement_plan
+#: model:ir.model,name:procurement_plan.model_procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: model:res.groups,name:procurement_plan.group_procurement_plan
+msgid "Procurement Plan"
+msgstr "Oskrbovalni plan"
+
+#. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_tree_view
+msgid "Procurement Plans"
+msgstr "Oskrbovalni plani"
+
+#. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_procurement_plan_procurements
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: field:procurement.plan,procurement_ids:0
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+#: field:wiz.import.procurement.from.plan,procurement_ids:0
+msgid "Procurements"
+msgstr "Oskrbovanja"
+
+#. module: procurement_plan
+#: model:ir.ui.menu,name:procurement_plan.procurement_plan_menu_view
+msgid "Procurements Plans"
+msgstr "Oskrbovalni plani"
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,product_id:0
+#: field:wiz.load.sale.from.plan,product_id:0
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: procurement_plan
+#: field:procurement.plan,project_id:0
+msgid "Project"
+msgstr "Projekt"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:wiz.load.purchase.from.plan,purchase_id:0
+msgid "Purchase"
+msgstr "Nabava"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: field:procurement.plan,purchase_ids:0
+msgid "Purchase Orders"
+msgstr "Nabavni nalogi"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Remove of the Plan"
+msgstr "Odstrani iz plana"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Reset to confirm"
+msgstr "Ponastavi za potrditev"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Rule"
+msgstr "Pravilo"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Run"
+msgstr "Zagon"
+
+#. module: procurement_plan
+#: selection:procurement.plan,state:0
+msgid "Running"
+msgstr "Se izvaja"
+
+#. module: procurement_plan
+#: field:wiz.load.sale.from.plan,sale_id:0
+msgid "Sale"
+msgstr "Prodaja"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "Search Procurement Plan"
+msgstr "Iskanje oskrbovalnega plana"
+
+#. module: procurement_plan
+#: field:procurement.plan,sequence:0
+msgid "Sequence"
+msgstr "Zaporedje"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_search_view
+msgid "State"
+msgstr "Stanje"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+#: field:procurement.plan,state:0
+msgid "Status"
+msgstr "Status"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_summary:0
+msgid "Summary"
+msgstr "Povzetek"
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,partner_id:0
+msgid "Supplier"
+msgstr "Dobavitelj"
+
+#. module: procurement_plan
+#: field:wiz.load.purchase.from.plan,product_tmpl_id:0
+#: field:wiz.load.sale.from.plan,product_tmpl_id:0
+msgid "Template"
+msgstr "Predloga"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "Unit of Measure"
+msgstr "Enota mere"
+
+#. module: procurement_plan
+#: field:procurement.plan,message_unread:0
+msgid "Unread Messages"
+msgstr "Neprebrana sporočila"
+
+#. module: procurement_plan
+#: field:procurement.plan,warehouse_id:0
+#: field:wiz.import.procurement.from.plan,warehouse_id:0
+msgid "Warehouse"
+msgstr "Skladišče"
+
+#. module: procurement_plan
+#: field:procurement.plan,website_message_ids:0
+msgid "Website Messages"
+msgstr "Sporočila iz spletne strani"
+
+#. module: procurement_plan
+#: help:procurement.plan,website_message_ids:0
+msgid "Website communication history"
+msgstr "Kronologija komunikacij spletne strani"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "With plan"
+msgstr "S planom"
+
+#. module: procurement_plan
+#: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
+msgid "Without plan"
+msgstr "Brez plana"
+
+#. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_import_procurement_plan
+msgid "Wizar import procurements from plan"
+msgstr "Čarovnik za uvoz oskrbovanj iz plana"
+
+#. module: procurement_plan
+#: view:procurement.plan:procurement_plan.procurement_plan_form_view
+msgid "name"
+msgstr "naziv"
+
+#. module: procurement_plan
+#: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
+#: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
+#: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
+msgid "or"
+msgstr "ali"
+
+#. module: procurement_plan
+#: field:procurement.plan,to_date:0
+#: field:wiz.import.procurement.from.plan,to_date:0
+msgid "to Date"
+msgstr "Do datuma"

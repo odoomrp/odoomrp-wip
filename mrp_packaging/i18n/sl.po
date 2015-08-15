@@ -1,0 +1,178 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_packaging
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-28 09:12+0000\n"
+"PO-Revision-Date: 2015-08-15 08:27+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Cancel Production"
+msgstr "Preklic izdelave"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Check Availability"
+msgstr "Preveri razpoložljivost"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Confirm Production"
+msgstr "Potrdi izdelavo"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Create Pack Manufacturing Orders"
+msgstr "Ustvari proizvodne naloge pakiranja"
+
+#. module: mrp_packaging
+#: field:packaging.operation,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: mrp_packaging
+#: field:packaging.operation,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+#: field:mrp.production,expected_production:0
+msgid "Expected Production"
+msgstr "Pričakovana izdelava"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Extra Information"
+msgstr "Dodatne informacije"
+
+#. module: mrp_packaging
+#: field:packaging.operation,fill:0
+msgid "Fill"
+msgstr "Izpolni"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Force Reservation"
+msgstr "Vsili rezervacijo"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Get packages"
+msgstr "Pridobi pakiranja"
+
+#. module: mrp_packaging
+#: field:packaging.operation,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: mrp_packaging
+#: field:packaging.operation,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: mrp_packaging
+#: field:packaging.operation,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: mrp_packaging
+#: model:ir.model,name:mrp_packaging.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Proizvodni nalog"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Mark as Started"
+msgstr "Označi kot zagnano"
+
+#. module: mrp_packaging
+#: field:packaging.operation,operation:0
+msgid "Operation"
+msgstr "Operacija"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+#: field:mrp.production,pack:0
+msgid "Pack"
+msgstr "Pakiranje"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Packaging"
+msgstr "Pakiranje"
+
+#. module: mrp_packaging
+#: field:packaging.operation,packaging_production:0
+msgid "Packing manufacturing order"
+msgstr "Proizvodni nalog pakiranja"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Produce"
+msgstr "Izdelava"
+
+#. module: mrp_packaging
+#: field:packaging.operation,product:0
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: mrp_packaging
+#: help:packaging.operation,qty:0
+msgid "Product Quantity. It will be the new manufacturing order quantity if dump uom is equal to product uom"
+msgstr "Količina proizvodov. Če je EM odlagališča enaka EM proizvoda, bo to količina na novem proizvodnem nalogu"
+
+#. module: mrp_packaging
+#: help:packaging.operation,fill:0
+msgid "Product linked Raw Material value * Product Quantity. It will be the new manufacturing order quantity if dump UoM is not equal to product UoM"
+msgstr "Proizvod povezan z 'vrednost surovin * količina proizvodov'. Če EM odlagališča ni enaka EM proizvoda, bo to količina novega proizvodnega naloga"
+
+#. module: mrp_packaging
+#: help:packaging.operation,product:0
+msgid "Product that is going to be manufactured"
+msgstr "Proizvod, ki bo proizveden"
+
+#. module: mrp_packaging
+#: field:mrp.production,production:0
+msgid "Production"
+msgstr "Izdelava"
+
+#. module: mrp_packaging
+#: field:packaging.operation,qty:0
+msgid "Qty"
+msgstr "Kol"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Total Qty"
+msgstr "Skupna kol"
+
+#. module: mrp_packaging
+#: code:addons/mrp_packaging/models/mrp_production.py:194
+#, python-format
+msgid "Warning"
+msgstr "Opozorilo"
+
+#. module: mrp_packaging
+#: code:addons/mrp_packaging/models/mrp_production.py:171
+#, python-format
+msgid "You can not compute again the list."
+msgstr "Ne morete obračunati po tem seznamu"
+
+#. module: mrp_packaging
+#: code:addons/mrp_packaging/models/mrp_production.py:197
+#, python-format
+msgid "You won't be able to pack %f, there is only %f left"
+msgstr "Ne boste mogli pakirati %f, če je ostalo le še %f"

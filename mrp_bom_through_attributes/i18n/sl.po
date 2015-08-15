@@ -1,0 +1,63 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_through_attributes
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-15 08:40+0000\n"
+"PO-Revision-Date: 2015-08-15 08:30+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#. module: mrp_bom_through_attributes
+#: model:ir.model,name:mrp_bom_through_attributes.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Kosovnica"
+
+#. module: mrp_bom_through_attributes
+#: view:mrp.production:mrp_bom_through_attributes.mrp_production_raw_product_form_view
+msgid "Extra Information"
+msgstr "Dodatne informacije"
+
+#. module: mrp_bom_through_attributes
+#: model:ir.model,name:mrp_bom_through_attributes.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Proizvodni nalog"
+
+#. module: mrp_bom_through_attributes
+#: field:mrp.production.product.line,raw_production:0
+msgid "Production"
+msgstr "Izdelava"
+
+#. module: mrp_bom_through_attributes
+#: model:ir.model,name:mrp_bom_through_attributes.model_mrp_production_product_line
+msgid "Production Scheduled Product"
+msgstr "Načrtovani izdelek za proizvodnjo"
+
+#. module: mrp_bom_through_attributes
+#: field:product.attribute.value,raw_product:0
+msgid "Raw Product"
+msgstr "Surovina"
+
+#. module: mrp_bom_through_attributes
+#: field:product.attribute.value,raw_qty:0
+msgid "Raw Product QTY"
+msgstr "Kol. surovine"
+
+#. module: mrp_bom_through_attributes
+#: field:mrp.production,raw_products:0
+msgid "Raw Products"
+msgstr "Surovine"
+
+#. module: mrp_bom_through_attributes
+#: view:mrp.production:mrp_bom_through_attributes.mrp_production_raw_product_form_view
+msgid "Raw Products Info"
+msgstr "Podatki o surovinah"

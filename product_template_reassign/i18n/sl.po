@@ -1,0 +1,98 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_template_reassign
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-25 12:11+0000\n"
+"PO-Revision-Date: 2015-08-15 13:09+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,attributes:0
+msgid "Attributes"
+msgstr "Atributi"
+
+#. module: product_template_reassign
+#: view:reassign.products:product_template_reassign.reassign_product_form_view
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: product_template_reassign
+#: view:reassign.products:product_template_reassign.reassign_product_form_view
+msgid "Confirm"
+msgstr "Potrdi"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,create_uid:0
+#: field:reassign.products,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,create_date:0
+#: field:reassign.products,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,id:0 field:reassign.products,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,write_uid:0
+#: field:reassign.products,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,write_date:0
+#: field:reassign.products,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,old_product:0
+#: field:reassign.product.lines,product:0
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: product_template_reassign
+#: field:reassign.products,products:0
+msgid "Products by attributes"
+msgstr "Proizvodi po atributih"
+
+#. module: product_template_reassign
+#: view:reassign.products:product_template_reassign.reassign_product_form_view
+msgid "Reassign Products"
+msgstr "Premestitev proizvodov"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,wizard:0
+msgid "Reassign Wizard"
+msgstr "Čarovnik za premestitve"
+
+#. module: product_template_reassign
+#: view:reassign.products:product_template_reassign.reassign_product_form_view
+msgid "Reassign product lines"
+msgstr "Premestitev postavk proizvoda"
+
+#. module: product_template_reassign
+#: model:ir.actions.act_window,name:product_template_reassign.reassign_products_action
+msgid "Reassign products"
+msgstr "Premestitev proizvodov"
+
+#. module: product_template_reassign
+#: view:reassign.products:product_template_reassign.reassign_product_form_view
+msgid "or"
+msgstr "ali"

@@ -1,0 +1,864 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* machine_manager_preventive
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-22 10:14+0000\n"
+"PO-Revision-Date: 2015-08-15 18:52+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+msgid "1st Alert"
+msgstr "Prvo opozorilo"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,alert:0
+msgid "1st alert"
+msgstr "Prvo opozorilo"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,check_al1:0
+msgid "1st alert check"
+msgstr "Preverjanje prvega opozorila"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+msgid "2nd Alert"
+msgstr "Drugo opozorilo"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,extra_alert:0
+msgid "2nd alert"
+msgstr "Drugo opozorilo"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,check_al2:0
+msgid "2nd alert check"
+msgstr "Preverjanje drugega opozorila"
+
+#. module: machine_manager_preventive
+#: help:preventive.machine.operation,margin_fre1:0
+#: help:preventive.machine.operation,margin_fre2:0
+#: help:preventive.operation.type,margin_fre1:0
+#: help:preventive.operation.type,margin_fre2:0
+msgid "A negative number means that the alarm will be activated before the compliance date"
+msgstr "Negativna številka pomeni, da bo alarm aktiviran pred datumom ustrezanja"
+
+#. module: machine_manager_preventive
+#: help:preventive.machine.operation,first_margin:0
+#: help:preventive.machine.operation,second_margin:0
+#: help:preventive.operation.type,margin_cy1:0
+msgid "A negative number means that the alarm will be activated before the condition is met"
+msgstr "Negativna številka pomeni, da bo alarm aktiviran preden bo pogoj izpolnjen"
+
+#. module: machine_manager_preventive
+#: view:preventive.create.wizard:machine_manager_preventive.create_preventive_form
+#: view:preventive.list:machine_manager_preventive.view_preventive_list
+#: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
+msgid "Accept"
+msgstr "Sprejem"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+msgid "Alarm"
+msgstr "Alarm"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "Alert"
+msgstr "Opozorilo"
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_preventive_proceed
+msgid "All preventive operations scheduled to be done."
+msgstr "Vse načrtovane preventivne operacije, ki bodo izvedene."
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.type,basedoncy:0
+msgid "Based on Cycles"
+msgstr "Na osnovi ciklov"
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.type,basedontime:0
+msgid "Based on Time"
+msgstr "Na osnovi časa"
+
+#. module: machine_manager_preventive
+#: view:preventive.create.wizard:machine_manager_preventive.create_preventive_form
+#: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: machine_manager_preventive
+#: model:ir.ui.menu,name:machine_manager_preventive.menu_preven_operation_config
+msgid "Configuration"
+msgstr "Nastavitve"
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_create_preventive
+#: model:ir.model,name:machine_manager_preventive.model_preventive_create_wizard
+msgid "Create Machine Preventive operations"
+msgstr "Ustvari preventivne operacije naprave"
+
+#. module: machine_manager_preventive
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:69
+#, python-format
+msgid "Create Order"
+msgstr "Ustvari nalog"
+
+#. module: machine_manager_preventive
+#: view:preventive.create.wizard:machine_manager_preventive.create_preventive_form
+#: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
+msgid "Create Preventive"
+msgstr "Ustvari preventivo"
+
+#. module: machine_manager_preventive
+#: view:preventive.master:machine_manager_preventive.ope_master_form_view
+msgid "Create Preventive Orders"
+msgstr "Ustvari preventivne naloge"
+
+#. module: machine_manager_preventive
+#: model:ir.actions.act_window,name:machine_manager_preventive.act_create_preventive
+msgid "Create Preventives"
+msgstr "Ustvari preventive"
+
+#. module: machine_manager_preventive
+#: model:ir.actions.act_window,name:machine_manager_preventive.act_prevmach_repair_order
+msgid "Create Repair Order"
+msgstr "Ustvari servisni nalog"
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_preventive_repair_order
+msgid "Create machine Preventive repair order"
+msgstr "Ustvari preventivni servisni nalog naprave"
+
+#. module: machine_manager_preventive
+#: view:preventive.create.wizard:machine_manager_preventive.create_preventive_form
+msgid "Create preventive operations for defined parameters?"
+msgstr "Naj ustvarim preventivne operacije za določene parametre?"
+
+#. module: machine_manager_preventive
+#: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
+msgid "Create repair order for current Machine?"
+msgstr "Naj ustvarim servisni nalog za trenutno napravo?"
+
+#. module: machine_manager_preventive
+#: view:preventive.list:machine_manager_preventive.view_preventive_list
+msgid "Created Preventive List"
+msgstr "Ustvarjeni preventivni seznam"
+
+#. module: machine_manager_preventive
+#: field:preventive.create.wizard,create_uid:0
+#: field:preventive.list,create_uid:0
+#: field:preventive.machine.operation,create_uid:0
+#: field:preventive.master,create_uid:0
+#: field:preventive.master.type,create_uid:0
+#: field:preventive.operation.material,create_uid:0
+#: field:preventive.operation.matmach,create_uid:0
+#: field:preventive.operation.type,create_uid:0
+#: field:preventive.repair.order,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: machine_manager_preventive
+#: field:preventive.create.wizard,create_date:0
+#: field:preventive.list,create_date:0
+#: field:preventive.machine.operation,create_date:0
+#: field:preventive.master,create_date:0
+#: field:preventive.master.type,create_date:0
+#: field:preventive.operation.material,create_date:0
+#: field:preventive.operation.matmach,create_date:0
+#: field:preventive.operation.type,create_date:0
+#: field:preventive.repair.order,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: machine_manager_preventive
+#: field:preventive.repair.order,location_id:0
+msgid "Current Location"
+msgstr "Trenutna lokacija"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,lastcycles:0
+#: field:preventive.operation.type,cycles:0
+msgid "Cycles"
+msgstr "Cikli"
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.type,margin_cy1:0
+msgid "Cycles Margin 1"
+msgstr "Razlika ciklov 1"
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.type,margin_cy2:0
+msgid "Cycles Margin 2"
+msgstr "Razlika ciklov 2"
+
+#. module: machine_manager_preventive
+#: help:preventive.machine.operation,cycles:0
+msgid "Cycles increment for the next operation."
+msgstr "Povečanje ciklov za naslednjo operacijo."
+
+#. module: machine_manager_preventive
+#: help:preventive.machine.operation,lastcycles:0
+msgid "Cycles of the machine on last operation."
+msgstr "Cikli naprave na zadnji operaciji."
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,lastdate:0
+#: field:preventive.machine.operation,nextdate:0
+msgid "Date"
+msgstr "Datum"
+
+#. module: machine_manager_preventive
+#: selection:preventive.machine.operation,interval_unit:0
+#: selection:preventive.machine.operation,interval_unit1:0
+#: selection:preventive.machine.operation,interval_unit2:0
+#: selection:preventive.operation.type,interval_unit:0
+#: selection:preventive.operation.type,interval_unit1:0
+#: selection:preventive.operation.type,interval_unit2:0
+msgid "Days"
+msgstr "Dni"
+
+#. module: machine_manager_preventive
+#: field:preventive.repair.order,location_dest_id:0
+msgid "Delivery Location"
+msgstr "Lokacija dostave"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+#: field:preventive.machine.operation,opdescription:0
+#: view:preventive.master:machine_manager_preventive.ope_master_form_view
+#: field:preventive.master,opdescription:0
+#: field:preventive.operation.matmach,description:0
+#: view:preventive.operation.type:machine_manager_preventive.optype_form_view
+#: field:preventive.operation.type,description:0
+msgid "Description"
+msgstr "Opis"
+
+#. module: machine_manager_preventive
+#: help:preventive.machine.operation,frequency:0
+#: help:preventive.operation.type,frequency:0
+msgid "Estimated time for the next operation."
+msgstr "Ocenjeni čas do naslednje operacije."
+
+#. module: machine_manager_preventive
+#: help:preventive.machine.operation,nextdate:0
+msgid "Expected date for next operation."
+msgstr "Pričakovani datum naslednje operacije."
+
+#. module: machine_manager_preventive
+#: help:preventive.machine.operation,hours_qty:0
+msgid "Expected time for execution the operation. hh:mm"
+msgstr "Pričakovani čas za izvedbo operacije. hh:mm"
+
+#. module: machine_manager_preventive
+#: help:preventive.operation.type,hours_qty:0
+msgid "Expected time for the execution of the operation. hh:mm"
+msgstr "Pričakovani čas za izvedbo operacije. hh:mm"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "Extra Alert"
+msgstr "Dodatno opozorilo"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "Filter by..."
+msgstr "Filtriraj po:"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,first_margin:0
+msgid "First Cycle Margin"
+msgstr "Razlika prvega cikla"
+
+#. module: machine_manager_preventive
+#: code:addons/machine_manager_preventive/models/preventive_machine_operation.py:94
+#: code:addons/machine_manager_preventive/models/preventive_machine_operation.py:108
+#: code:addons/machine_manager_preventive/models/preventive_operation.py:88
+#: code:addons/machine_manager_preventive/models/preventive_operation.py:103
+#, python-format
+msgid "First margin must be before second"
+msgstr "Prvi cikel mora biti pred drugim"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,frequency:0
+#: field:preventive.operation.type,frequency:0
+msgid "Frequency"
+msgstr "Frekvenca"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,margin_fre1:0
+#: field:preventive.machine.operation,margin_fre2:0
+msgid "Frequency Margin"
+msgstr "Razlika frekvence"
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.type,margin_fre1:0
+msgid "Frequency Margin 1"
+msgstr "Razlika frekvence 1"
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.type,margin_fre2:0
+msgid "Frequency Margin 2"
+msgstr "Razlika frekvence 2"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "Group By..."
+msgstr "Združi po..."
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_machinery
+msgid "Holds records of Machines"
+msgstr "Vsebuje zapise naprav"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+#: view:preventive.operation.matmach:machine_manager_preventive.operation_machine_materials_form_view
+msgid "Hours"
+msgstr "Ure"
+
+#. module: machine_manager_preventive
+#: field:preventive.create.wizard,id:0 field:preventive.list,id:0
+#: field:preventive.machine.operation,id:0 field:preventive.master,id:0
+#: field:preventive.master.type,id:0 field:preventive.operation.material,id:0
+#: field:preventive.operation.matmach,id:0
+#: field:preventive.operation.type,id:0 field:preventive.repair.order,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: machine_manager_preventive
+#: help:preventive.machine.operation,check_al1:0
+#: help:preventive.machine.operation,check_al2:0
+msgid "If checked the alarm will be test at the specified parameters."
+msgstr "Če je označeno, bo alarm preskušan pri določenih parametrih."
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+msgid "Information"
+msgstr "Informacije"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,interval_unit1:0
+#: field:preventive.machine.operation,interval_unit2:0
+#: field:preventive.operation.type,interval_unit:0
+#: field:preventive.operation.type,interval_unit1:0
+#: field:preventive.operation.type,interval_unit2:0
+msgid "Interval Unit"
+msgstr "Enota intervala"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,interval_unit:0
+msgid "Interval unit"
+msgstr "Enota intervala"
+
+#. module: machine_manager_preventive
+#: field:mrp.repair,preventive:0
+msgid "Is preventive"
+msgstr "Je preventiva"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,last_hours_qty:0
+msgid "Last Quantity Hours"
+msgstr "Zadnja količina ur"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+msgid "Last Revision"
+msgstr "Zadnja revizija"
+
+#. module: machine_manager_preventive
+#: field:preventive.create.wizard,write_uid:0
+#: field:preventive.list,write_uid:0
+#: field:preventive.machine.operation,write_uid:0
+#: field:preventive.master,write_uid:0
+#: field:preventive.master.type,write_uid:0
+#: field:preventive.operation.material,write_uid:0
+#: field:preventive.operation.matmach,write_uid:0
+#: field:preventive.operation.type,write_uid:0
+#: field:preventive.repair.order,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: machine_manager_preventive
+#: field:preventive.create.wizard,write_date:0
+#: field:preventive.list,write_date:0
+#: field:preventive.machine.operation,write_date:0
+#: field:preventive.master,write_date:0
+#: field:preventive.master.type,write_date:0
+#: field:preventive.operation.material,write_date:0
+#: field:preventive.operation.matmach,write_date:0
+#: field:preventive.operation.type,write_date:0
+#: field:preventive.repair.order,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: machine_manager_preventive
+#: help:preventive.machine.operation,lastdate:0
+msgid "Last date on which the operation was done."
+msgstr "Zadnji datum izvedbe operacije."
+
+#. module: machine_manager_preventive
+#: field:mrp.repair,idmachine:0
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+#: field:preventive.machine.operation,machine:0
+msgid "Machine"
+msgstr "Naprava"
+
+#. module: machine_manager_preventive
+#: field:preventive.master,machinemodel:0
+msgid "Machine Model"
+msgstr "Model naprave"
+
+#. module: machine_manager_preventive
+#: model:ir.ui.menu,name:machine_manager_preventive.machine_op_tree_view
+msgid "Machine Operations"
+msgstr "Operacije naprave"
+
+#. module: machine_manager_preventive
+#: field:preventive.list,machi_prevs:0
+msgid "Machine Preventive Operations"
+msgstr "Preventivne operacije naprave"
+
+#. module: machine_manager_preventive
+#: view:preventive.master:machine_manager_preventive.ope_master_form_view
+msgid "Machine list for the preventive operations"
+msgstr "Seznam naprav za preventivne operacije"
+
+#. module: machine_manager_preventive
+#: model:ir.actions.act_window,name:machine_manager_preventive.action_machine_operations
+msgid "Machine operations"
+msgstr "Operacije naprave"
+
+#. module: machine_manager_preventive
+#: field:preventive.master,machinery_ids:0
+msgid "Machinery ids"
+msgstr "ID-ji sistemov naprav"
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_preventive_operation_type
+msgid "Machinery preventive operation template type"
+msgstr "Tip predloge preventivne operacije sistema naprav"
+
+#. module: machine_manager_preventive
+#: field:preventive.master,pmo_type:0
+msgid "Maintenance type"
+msgstr "Tip vzdrževanja"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+msgid "Make Repair Order"
+msgstr "Naredi servisni nalog"
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.matmach,opmaster:0
+msgid "Master Operation"
+msgstr "Glavna operacija"
+
+#. module: machine_manager_preventive
+#: view:preventive.master:machine_manager_preventive.ope_master_tree_view
+msgid "Master Operations"
+msgstr "Glavne operacije"
+
+#. module: machine_manager_preventive
+#: model:ir.actions.act_window,name:machine_manager_preventive.action_preventive_master_type_view
+msgid "Master Type"
+msgstr "Tip glavne"
+
+#. module: machine_manager_preventive
+#: field:preventive.master,ope_material:0
+#: view:preventive.operation.material:machine_manager_preventive.operation_material_form
+#: view:preventive.operation.material:machine_manager_preventive.operation_material_tree
+#: field:preventive.operation.matmach,material:0
+msgid "Material"
+msgstr "Material"
+
+#. module: machine_manager_preventive
+#: view:preventive.operation.matmach:machine_manager_preventive.operation_machine_materials_form_view
+msgid "Materials"
+msgstr "Materials"
+
+#. module: machine_manager_preventive
+#: selection:preventive.machine.operation,interval_unit:0
+#: selection:preventive.machine.operation,interval_unit1:0
+#: selection:preventive.machine.operation,interval_unit2:0
+#: selection:preventive.operation.type,interval_unit:0
+#: selection:preventive.operation.type,interval_unit1:0
+#: selection:preventive.operation.type,interval_unit2:0
+msgid "Months"
+msgstr "Meseci"
+
+#. module: machine_manager_preventive
+#: field:preventive.master,name:0 field:preventive.master.type,name:0
+#: field:preventive.operation.matmach,name:0
+#: field:preventive.operation.type,name:0
+msgid "Name"
+msgstr "Naziv"
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_preventive_operation_material
+msgid "New material line."
+msgstr "Nova postavka materiala"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+msgid "Next Revision"
+msgstr "Naslednja revizija"
+
+#. module: machine_manager_preventive
+#: view:machinery:machine_manager_preventive.view_product_form_preventive
+#: field:machinery,prev_mach_op:0
+msgid "Next Revisions"
+msgstr "Naslednje revizije"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_tree
+msgid "Next revision Cycles"
+msgstr "Cikli naslednje revizije"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_tree
+msgid "Next revision date"
+msgstr "Datum naslednje revizije"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "Next revision date Day"
+msgstr "Datum/dan naslednje revizije"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "Next revision date Week"
+msgstr "Datum/teden naslednje revizije"
+
+#. module: machine_manager_preventive
+#: field:preventive.list,op_count:0
+msgid "Number of operations"
+msgstr "Število operacij"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "NxRevision Day"
+msgstr "N-ti dan revizije"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "NxRevision Month"
+msgstr "N-ti mesec revizije"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+msgid "NxRevision Week"
+msgstr "N-ti teden revizije"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,cycles:0
+msgid "Op. Cycles Increment"
+msgstr "Povečanje operativnih ciklov"
+
+#. module: machine_manager_preventive
+#: view:preventive.operation.matmach:machine_manager_preventive.operation_machine_materials_form_view
+msgid "Op. Description"
+msgstr "Opis operacije"
+
+#. module: machine_manager_preventive
+#: view:preventive.operation.matmach:machine_manager_preventive.operation_machine_materials_form_view
+msgid "Op. Frecuency"
+msgstr "Frekvenca operacij"
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.material,op_machi_mat:0
+#: field:preventive.operation.matmach,optype_id:0
+msgid "Operation"
+msgstr "Operacija"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+msgid "Operation - Material"
+msgstr "Operacija - material"
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_preventive_operation_matmach
+msgid "Operation - Material - Machine Relation"
+msgstr "Operacija - material - relacija naprave"
+
+#. module: machine_manager_preventive
+#: view:preventive.operation.matmach:machine_manager_preventive.operation_machine_materials_form_view
+msgid "Operation Cycle frequency"
+msgstr "Frekvenca operativnega cikla"
+
+#. module: machine_manager_preventive
+#: view:preventive.operation.matmach:machine_manager_preventive.operation_machine_materials_form_view
+msgid "Operation Machine Material"
+msgstr "Material operativne naprave"
+
+#. module: machine_manager_preventive
+#: model:ir.actions.act_window,name:machine_manager_preventive.act_operation_mat
+msgid "Operation Material"
+msgstr "Operativni material"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,opname_omm:0
+msgid "Operation Material Machine"
+msgstr "Material operativne naprave"
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.type,ref:0
+msgid "Operation Reference"
+msgstr "Sklic operacije"
+
+#. module: machine_manager_preventive
+#: model:ir.actions.act_window,name:machine_manager_preventive.action_optype_view
+#: view:preventive.operation.type:machine_manager_preventive.optype_form_view
+msgid "Operation Type"
+msgstr "Tip operacije"
+
+#. module: machine_manager_preventive
+#: view:preventive.operation.type:machine_manager_preventive.optype_form_view
+msgid "Operation by Cycles frequency"
+msgstr "Operacija po frekvenci ciklov"
+
+#. module: machine_manager_preventive
+#: view:preventive.operation.type:machine_manager_preventive.optype_form_view
+msgid "Operation by time frequency"
+msgstr "Operacija po frekvenci časa"
+
+#. module: machine_manager_preventive
+#: view:preventive.operation.matmach:machine_manager_preventive.operation_machine_materials_form_view
+msgid "Operation time frequency"
+msgstr "Časovna frekvenca operacije"
+
+#. module: machine_manager_preventive
+#: view:preventive.operation.type:machine_manager_preventive.optype_form_view
+msgid "Operation type"
+msgstr "Tip operacije"
+
+#. module: machine_manager_preventive
+#: view:preventive.operation.matmach:machine_manager_preventive.operation_machine_materials_tree_view
+msgid "Operations"
+msgstr "Operacije"
+
+#. module: machine_manager_preventive
+#: code:addons/machine_manager_preventive/models/preventive_operation.py:63
+#, python-format
+msgid "Operations based on cycles must have a positive cycle frequency"
+msgstr "Operacije na osnovi ciklov morajo imeti pozitivno frekvenco cikla"
+
+#. module: machine_manager_preventive
+#: code:addons/machine_manager_preventive/models/preventive_operation.py:72
+#, python-format
+msgid "Operations based on time must have a positive time  frequency"
+msgstr "Operacije na osnovi časa morajo imeti pozitivno časovno frekvenco"
+
+#. module: machine_manager_preventive
+#: view:preventive.master:machine_manager_preventive.ope_master_form_view
+msgid "Preventive Description"
+msgstr "Opis preventive"
+
+#. module: machine_manager_preventive
+#: view:preventive.master:machine_manager_preventive.ope_master_form_view
+msgid "Preventive Info"
+msgstr "Podatki o preventivi"
+
+#. module: machine_manager_preventive
+#: model:ir.ui.menu,name:machine_manager_preventive.menu_preventive_maintenance
+msgid "Preventive Maintenance"
+msgstr "Preventivno vzdrževanje"
+
+#. module: machine_manager_preventive
+#: model:res.groups,name:machine_manager_preventive.preventive_manager
+msgid "Preventive Manager / Manager"
+msgstr "Upravitelj preventive / upravitelj"
+
+#. module: machine_manager_preventive
+#: model:ir.actions.act_window,name:machine_manager_preventive.action_ope_master_view
+msgid "Preventive Master"
+msgstr "Glavna preventiva"
+
+#. module: machine_manager_preventive
+#: view:preventive.master:machine_manager_preventive.ope_master_form_view
+msgid "Preventive Master Data"
+msgstr "Glavni podatki preventive"
+
+#. module: machine_manager_preventive
+#: model:ir.ui.menu,name:machine_manager_preventive.menu_preventive_operation
+#: view:mrp.repair:machine_manager_preventive.view_repair_order_form_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_tree
+#: view:preventive.operation.type:machine_manager_preventive.optype_tree_view
+msgid "Preventive Operations"
+msgstr "Preventivne operacije"
+
+#. module: machine_manager_preventive
+#: model:ir.ui.menu,name:machine_manager_preventive.optype_menu
+msgid "Preventive Operations type"
+msgstr "Tip preventivnih operacij"
+
+#. module: machine_manager_preventive
+#: field:machinery,repair_orders:0
+msgid "Preventive Repair Orders"
+msgstr "Preventivni servisni nalogi"
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_preventive_list
+msgid "Preventive list"
+msgstr "Preventivni seznam"
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_preventive_master
+#: model:ir.model,name:machine_manager_preventive.model_preventive_master_type
+#: model:ir.ui.menu,name:machine_manager_preventive.preventive_master_menu
+msgid "Preventive master data"
+msgstr "Glavni podatki preventive"
+
+#. module: machine_manager_preventive
+#: model:ir.ui.menu,name:machine_manager_preventive.preventive_master_type
+msgid "Preventive master type"
+msgstr "Tip glavne preventive"
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_preventive_machine_operation
+msgid "Preventive operation for machine."
+msgstr "Preventivne operacije za napravo"
+
+#. module: machine_manager_preventive
+#: field:mrp.repair,preventive_operations:0
+msgid "Preventive operations"
+msgstr "Preventivne operacije"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.preventive_machine_calendar_view
+msgid "Preventive orders"
+msgstr "Preventivni nalogi"
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.material,product_id:0
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_product_template
+msgid "Product Template"
+msgstr "Predloga proizvoda"
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.material,product_uom_qty:0
+msgid "Quantity"
+msgstr "Količina"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,hours_qty:0
+#: field:preventive.operation.type,hours_qty:0
+msgid "Quantity Hours"
+msgstr "Količina ur"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,name:0
+msgid "REF"
+msgstr "SKLIC"
+
+#. module: machine_manager_preventive
+#: model:ir.model,name:machine_manager_preventive.model_mrp_repair
+#: field:preventive.machine.operation,repair_order:0
+msgid "Repair Order"
+msgstr "Servisni nalog"
+
+#. module: machine_manager_preventive
+#: view:machinery:machine_manager_preventive.view_product_form_preventive
+msgid "Repair Orders"
+msgstr "Servisni nalogi"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
+msgid "Revision Frecuency"
+msgstr "Frekvenca revizij"
+
+#. module: machine_manager_preventive
+#: field:preventive.machine.operation,second_margin:0
+msgid "Second Cycle Margin"
+msgstr "Razlika drugega cikla"
+
+#. module: machine_manager_preventive
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:85
+#, python-format
+msgid "There is no product defined for current machine"
+msgstr "Za trenutno napravo ni določenega proizvoda"
+
+#. module: machine_manager_preventive
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:81
+#, python-format
+msgid "There is no product defined for machine: %s"
+msgstr "Za napravo: %s ni določenega proizvoda"
+
+#. module: machine_manager_preventive
+#: help:preventive.machine.operation,last_hours_qty:0
+msgid "Time takes to do the operation. hh:mm"
+msgstr "Čas potreben za izvedbo operacije. hh:mm"
+
+#. module: machine_manager_preventive
+#: view:machinery:machine_manager_preventive.view_product_form_preventive
+msgid "True"
+msgstr "Pravilno"
+
+#. module: machine_manager_preventive
+#: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
+#: field:preventive.master.type,master_type:0
+msgid "Type"
+msgstr "Tip"
+
+#. module: machine_manager_preventive
+#: field:preventive.operation.material,product_uom:0
+msgid "Unit of Measure"
+msgstr "Enota mere"
+
+#. module: machine_manager_preventive
+#: selection:preventive.machine.operation,interval_unit:0
+#: selection:preventive.machine.operation,interval_unit1:0
+#: selection:preventive.machine.operation,interval_unit2:0
+#: selection:preventive.operation.type,interval_unit:0
+#: selection:preventive.operation.type,interval_unit1:0
+#: selection:preventive.operation.type,interval_unit2:0
+msgid "Weeks"
+msgstr "Tedni"
+
+#. module: machine_manager_preventive
+#: selection:preventive.machine.operation,interval_unit:0
+#: selection:preventive.machine.operation,interval_unit1:0
+#: selection:preventive.machine.operation,interval_unit2:0
+#: selection:preventive.operation.type,interval_unit:0
+#: selection:preventive.operation.type,interval_unit1:0
+#: selection:preventive.operation.type,interval_unit2:0
+msgid "Years"
+msgstr "Leta"
+
+#. module: machine_manager_preventive
+#: model:ir.actions.act_window,name:machine_manager_preventive.action_create_preventive
+#: model:ir.actions.act_window,name:machine_manager_preventive.action_machine_operation
+msgid "create preventives"
+msgstr "ustvari preventive"
+
+#. module: machine_manager_preventive
+#: view:preventive.create.wizard:machine_manager_preventive.create_preventive_form
+#: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
+msgid "or"
+msgstr "ali"
+
+#. module: machine_manager_preventive
+#: view:preventive.master.type:machine_manager_preventive.master_type_tree_view
+msgid "tree_string"
+msgstr "tree_string"

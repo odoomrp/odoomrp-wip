@@ -1,0 +1,97 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* purchase_product_variants
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-19 05:57+0000\n"
+"PO-Revision-Date: 2015-08-15 13:10+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,attribute:0
+msgid "Attribute"
+msgstr "Atribut"
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: purchase_product_variants
+#: view:purchase.order:purchase_product_variants.purchase_order_extended_form_view
+msgid "Duplicate"
+msgstr "Duplikat"
+
+#. module: purchase_product_variants
+#: view:purchase.order:purchase_product_variants.purchase_order_extended_form_view
+msgid "Duplicate line"
+msgstr "Postavka duplikata"
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,purchase_line:0
+msgid "Order line"
+msgstr "Postavka naloga"
+
+#. module: purchase_product_variants
+#: field:purchase.order.line,product_template:0
+msgid "Product Template"
+msgstr "Predloga proizvoda"
+
+#. module: purchase_product_variants
+#: field:purchase.order.line,product_attributes:0
+msgid "Product attributes"
+msgstr "Atributi proizvoda"
+
+#. module: purchase_product_variants
+#: code:addons/purchase_product_variants/models/purchase_order.py:136
+#, python-format
+msgid "The selected supplier has a minimal quantity set to %s %s, you should not purchase less."
+msgstr "Izbrani dobavitelj ima minimalno količino nastavljeno na %s %s, manj ne smete nabavljati."
+
+#. module: purchase_product_variants
+#: code:addons/purchase_product_variants/models/purchase_order.py:121
+#, python-format
+msgid "The selected supplier only sells this product by %s"
+msgstr "Izbrani dobavitelj prodaja ta proizvod v %s"
+
+#. module: purchase_product_variants
+#: field:purchase.order.line.attribute,value:0
+msgid "Value"
+msgstr "Vrednost"
+
+#. module: purchase_product_variants
+#: code:addons/purchase_product_variants/models/purchase_order.py:120
+#: code:addons/purchase_product_variants/models/purchase_order.py:135
+#, python-format
+msgid "Warning!"
+msgstr "Opozorilo!"

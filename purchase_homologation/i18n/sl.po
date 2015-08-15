@@ -1,0 +1,128 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* purchase_homologation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-03 22:48+0000\n"
+"PO-Revision-Date: 2015-08-15 13:34+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#. module: purchase_homologation
+#: model:ir.actions.act_window,help:purchase_homologation.purchase_homologation_action
+msgid ""
+"<p class=\"oe_view_nocontent_create\">Click here to set a new supplier homologation for certain product or category.</p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">Kliknite za nastavitev nove homologacije dobavitelja za določen proizvod ali kategorijo.</p>\n"
+"            "
+
+#. module: purchase_homologation
+#: field:purchase.homologation,start_date:0
+msgid "Beginning date"
+msgstr "Začetni datum"
+
+#. module: purchase_homologation
+#: model:res.groups,name:purchase_homologation.group_purchase_homologation
+msgid "Bypass purchase homologation"
+msgstr "Zaobidi nabavno homologacijo"
+
+#. module: purchase_homologation
+#: field:purchase.homologation,category_id:0
+msgid "Category"
+msgstr "Kategorija"
+
+#. module: purchase_homologation
+#: field:purchase.homologation,comments:0
+msgid "Comments"
+msgstr "Komentarji"
+
+#. module: purchase_homologation
+#: field:purchase.homologation,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: purchase_homologation
+#: field:purchase.homologation,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: purchase_homologation
+#: code:addons/purchase_homologation/models/purchase_homologation.py:46
+#: code:addons/purchase_homologation/models/purchase_homologation.py:50
+#, python-format
+msgid "Error!"
+msgstr "Napaka!"
+
+#. module: purchase_homologation
+#: field:purchase.homologation,end_date:0
+msgid "Finishing date"
+msgstr "Zaključni datum"
+
+#. module: purchase_homologation
+#: model:ir.model,name:purchase_homologation.model_purchase_homologation
+msgid "Homologation for suppliers and categories"
+msgstr "Homologacija dobaviteljev in kategorij"
+
+#. module: purchase_homologation
+#: field:purchase.homologation,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: purchase_homologation
+#: field:purchase.homologation,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: purchase_homologation
+#: field:purchase.homologation,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: purchase_homologation
+#: field:purchase.homologation,product_id:0
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: purchase_homologation
+#: model:ir.model,name:purchase_homologation.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Postavka nabavnega naloga"
+
+#. module: purchase_homologation
+#: field:purchase.homologation,partner_id:0
+msgid "Supplier"
+msgstr "Dobavitelj"
+
+#. module: purchase_homologation
+#: model:ir.actions.act_window,name:purchase_homologation.purchase_homologation_action
+#: view:purchase.homologation:purchase_homologation.purchase_homologation_tree_view
+msgid "Purchase homologation"
+msgstr "Nabavna homologacija"
+
+#. module: purchase_homologation
+#: code:addons/purchase_homologation/models/purchase_homologation.py:51
+#, python-format
+msgid "You must only select one of these: category or product."
+msgstr "Izbrati morate eno izmed teh opcij: kategorija ali proizvod."
+
+#. module: purchase_homologation
+#: code:addons/purchase_homologation/models/purchase_homologation.py:47
+#, python-format
+msgid "You must select a category or product."
+msgstr "Izbrati morate kategorijo ali proizvod."
+
+#. module: purchase_homologation
+#: code:addons/purchase_homologation/models/purchase_homologation.py:59
+#, python-format
+msgid "This product is not homologated for purchasing it."
+msgstr "Ta proizvod ni homologiran za nabavo."
