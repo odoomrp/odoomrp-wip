@@ -1,0 +1,110 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_product_variants
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-11 14:39+0000\n"
+"PO-Revision-Date: 2015-08-15 13:15+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#. module: sale_product_variants
+#: view:sale.order:sale_product_variants.sale_order_extended_form_view
+msgid "(update)"
+msgstr "(posodobi)"
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,attribute:0
+msgid "Attribute"
+msgstr "Atribut"
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: sale_product_variants
+#: view:sale.order:sale_product_variants.sale_order_extended_form_view
+msgid "Duplicate"
+msgstr "Duplikat"
+
+#. module: sale_product_variants
+#: view:sale.order:sale_product_variants.sale_order_extended_form_view
+msgid "Duplicate line"
+msgstr "Postavka duplikata"
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,sale_line:0
+msgid "Order line"
+msgstr "Postavka naloga"
+
+#. module: sale_product_variants
+#: view:sale.order.line:sale_product_variants.sale_order_line_extended_search_view
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: sale_product_variants
+#: field:sale.order.line,product_template:0
+msgid "Product Template"
+msgstr "Predloga izdelka"
+
+#. module: sale_product_variants
+#: field:sale.order.line,product_attributes:0
+msgid "Product attributes"
+msgstr "Atributi proizvoda"
+
+#. module: sale_product_variants
+#: model:ir.model,name:sale_product_variants.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Postavka prodajnega naloga"
+
+#. module: sale_product_variants
+#: view:sale.order.line:sale_product_variants.sale_order_line_extended_search_view
+msgid "Template"
+msgstr "Predloga"
+
+#. module: sale_product_variants
+#: model:res.groups,name:sale_product_variants.group_product_variant_extended_description
+#: field:sale.config.settings,group_product_variant_extended_description:0
+msgid "Use extended description when having product attributes"
+msgstr "Uporaba razširjenega opisa, kadar ima proizvod atribute"
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,value:0
+msgid "Value"
+msgstr "Vrednost"
+
+#. module: sale_product_variants
+#: code:addons/sale_product_variants/models/sale_order.py:179
+#, python-format
+msgid "You can not confirm before configuring all attribute values."
+msgstr "Ne morete potrjevati pred nastavitvijo vseh vrednosti atributa."

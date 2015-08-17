@@ -1,0 +1,513 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* machine_manager
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-16 14:36+0000\n"
+"PO-Revision-Date: 2015-08-15 14:12+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#. module: machine_manager
+#: field:machinery,warrexpcy:0
+msgid "(or) cycles"
+msgstr "(ali) ciklov"
+
+#. module: machine_manager
+#: selection:machinery,status:0
+msgid "Active"
+msgstr "Aktivno"
+
+#. module: machine_manager
+#: field:machinery,actcycles:0
+msgid "Actual Cycles"
+msgstr "Dejanskih ciklov"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Additional Details"
+msgstr "Dodatne podrobnosti"
+
+#. module: machine_manager
+#: field:machinery,ambit:0
+msgid "Ambit"
+msgstr "Področje"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Analysis Information"
+msgstr "Podatki o analizi"
+
+#. module: machine_manager
+#: field:machinery,assetacc:0
+msgid "Asset Account"
+msgstr "Konto osnovnega sredstva"
+
+#. module: machine_manager
+#: field:machinery,product:0
+msgid "Associated product"
+msgstr "Povezani proizvod"
+
+#. module: machine_manager
+#: field:machinery,bcyl:0
+msgid "Base Cycles"
+msgstr "Osnovni cikli"
+
+#. module: machine_manager
+#: selection:machinery,primarymeter:0
+msgid "Calendar"
+msgstr "Koledar"
+
+#. module: machine_manager
+#: field:product.template,machine_ok:0
+msgid "Can be a Machine"
+msgstr "Lahko je naprava"
+
+#. module: machine_manager
+#: field:machinery,card:0
+msgid "Card"
+msgstr "Kartica"
+
+#. module: machine_manager
+#: field:machinery,cardexp:0
+msgid "Card Expiration"
+msgstr "Zapadlost kartice"
+
+#. module: machine_manager
+#: field:machinery,company:0
+msgid "Company"
+msgstr "Družba"
+
+#. module: machine_manager
+#: model:ir.ui.menu,name:machine_manager.menu_machinery_config
+msgid "Configuration"
+msgstr "Nastavitve"
+
+#. module: machine_manager
+#: field:machine.model,create_uid:0 field:machinery,create_uid:0
+#: field:machinery.users,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: machine_manager
+#: field:machine.model,create_date:0 field:machinery,create_date:0
+#: field:machinery.users,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Current Details"
+msgstr "Trenutne podrobnosti"
+
+#. module: machine_manager
+#: selection:machinery,primarymeter:0
+msgid "Cycles"
+msgstr "Cikli"
+
+#. module: machine_manager
+#: field:machinery,purch_cycles:0
+msgid "Cycles at Purchase"
+msgstr "Cikli ob nabavi"
+
+#. module: machine_manager
+#: field:machinery,warrexp:0
+msgid "Date"
+msgstr "Datum"
+
+#. module: machine_manager
+#: help:machinery,bdate:0
+msgid "Date on which the cycles is recorded"
+msgstr "Datum na katerega se cikli vknjižijo"
+
+#. module: machine_manager
+#: field:machinery,deprecperiod:0
+msgid "Depr. period"
+msgstr "Amortizacijsko obdobje"
+
+#. module: machine_manager
+#: field:machinery,depracc:0
+msgid "Depreciation Account"
+msgstr "Konto amortizacije"
+
+#. module: machine_manager
+#: field:machinery,deprecperc:0
+msgid "Depreciation in %"
+msgstr "Amortizacija v %"
+
+#. module: machine_manager
+#: help:product.template,machine_ok:0
+msgid "Determines if the product is related with a machine."
+msgstr "Določi, če je proizvod povezan z napravo"
+
+#. module: machine_manager
+#: field:machinery,enrolldate:0
+msgid "Enrollment date"
+msgstr "Datum vpisa"
+
+#. module: machine_manager
+#: help:machinery,warrexpcy:0
+msgid "Expiry cycles for warranty of product"
+msgstr "Cikli zapadlosti za garancijo proizvoda"
+
+#. module: machine_manager
+#: help:machinery,warrexp:0
+msgid "Expiry date for warranty of product"
+msgstr "Datum zapadlosti za garancijo proizvoda"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Extra Information"
+msgstr "Dodatne informacije"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Financial Details"
+msgstr "Finančne podrobnosti"
+
+#. module: machine_manager
+#: field:machinery,frame:0
+msgid "Frame Number"
+msgstr "Številka okvirja"
+
+#. module: machine_manager
+#: selection:machinery,deprecperiod:0
+msgid "Half Yearly"
+msgstr "Pol letno"
+
+#. module: machine_manager
+#: model:ir.model,name:machine_manager.model_machinery
+msgid "Holds records of Machines"
+msgstr "Vsebuje zapise za naprave"
+
+#. module: machine_manager
+#: field:machinery.users,end_date:0
+msgid "Homologation End Date"
+msgstr "Zaključni datum homologacije"
+
+#. module: machine_manager
+#: field:machinery.users,start_date:0
+msgid "Homologation Start Date"
+msgstr "Začetni datum homologacije"
+
+#. module: machine_manager
+#: selection:machinery,primarymeter:0
+msgid "Hour Meter"
+msgstr "Merilnik ur"
+
+#. module: machine_manager
+#: field:machine.model,id:0 field:machinery,id:0 field:machinery.users,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: machine_manager
+#: selection:machinery,status:0
+msgid "InActive"
+msgstr "Nedejavno"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Insurance"
+msgstr "Zavarovanje"
+
+#. module: machine_manager
+#: field:machinery,insurance:0
+msgid "Insurance Name"
+msgstr "Naziv zavarovanja"
+
+#. module: machine_manager
+#: selection:machinery,ambit:0
+msgid "International"
+msgstr "Mednarodno"
+
+#. module: machine_manager
+#: field:machine.model,write_uid:0 field:machinery,write_uid:0
+#: field:machinery.users,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: machine_manager
+#: field:machine.model,write_date:0 field:machinery,write_date:0
+#: field:machinery.users,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: machine_manager
+#: help:machinery,bcyl:0
+msgid "Last recorded cycles"
+msgstr "Zadnji vknjiženi cikli"
+
+#. module: machine_manager
+#: selection:machinery,ownership:0
+msgid "Lease"
+msgstr "Najem"
+
+#. module: machine_manager
+#: selection:machinery,ambit:0
+msgid "Local"
+msgstr "Lokalno"
+
+#. module: machine_manager
+#: field:machinery,mac:0
+msgid "MAC Address"
+msgstr "MAC naslov"
+
+#. module: machine_manager
+#: field:machinery.users,machine:0
+msgid "Machine"
+msgstr "Naprava"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Machine Details"
+msgstr "Podrobnosti o napravi"
+
+#. module: machine_manager
+#: model:ir.actions.act_window,name:machine_manager.action_machinemodel_view
+#: model:ir.ui.menu,name:machine_manager.machinemodel_menu
+msgid "Machine Model"
+msgstr "Model naprave"
+
+#. module: machine_manager
+#: field:machinery,name:0
+msgid "Machine Name"
+msgstr "Naziv naprave"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form field:machinery,users:0
+#: view:machinery.users:machine_manager.machine_user_form_view
+#: view:machinery.users:machine_manager.machine_user_tree_view
+msgid "Machine Users"
+msgstr "Uporabniki naprave"
+
+#. module: machine_manager
+#: model:ir.model,name:machine_manager.model_machine_model
+msgid "Machine model"
+msgstr "Model naprave"
+
+#. module: machine_manager
+#: field:machinery,policy:0
+msgid "Machine policy"
+msgstr "Pravila naprave"
+
+#. module: machine_manager
+#: help:machinery,purch_date:0
+msgid "Machine's date of purchase"
+msgstr "Datum nabave naprave"
+
+#. module: machine_manager
+#: model:ir.module.category,name:machine_manager.module_machinery_category
+msgid "Machinery"
+msgstr "Sistem naprav"
+
+#. module: machine_manager
+#: model:ir.ui.menu,name:machine_manager.menu_machinery_manager
+msgid "Machinery Manager"
+msgstr "Upravitelj sistema naprav"
+
+#. module: machine_manager
+#: model:ir.actions.act_window,name:machine_manager.machine_form_act
+#: model:ir.actions.act_window,name:machine_manager.machine_user_action
+#: model:ir.ui.menu,name:machine_manager.menu_machines
+#: view:machinery:machine_manager.machine_tree
+#: view:machinery:machine_manager.machines_form field:res.users,machines:0
+msgid "Machines"
+msgstr "Naprave"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Maintenance"
+msgstr "Vzdrževanje"
+
+#. module: machine_manager
+#: model:res.groups,name:machine_manager.group_machine_manager
+msgid "Manager"
+msgstr "Upravitelj"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Manufacture Details"
+msgstr "Podrobnosti o proizvodnji"
+
+#. module: machine_manager
+#: field:machinery,model:0
+msgid "Model"
+msgstr "Model"
+
+#. module: machine_manager
+#: selection:machinery,deprecperiod:0
+msgid "Monthly"
+msgstr "Mesečno"
+
+#. module: machine_manager
+#: field:machine.model,name:0
+msgid "Name"
+msgstr "Naziv"
+
+#. module: machine_manager
+#: selection:machinery,ambit:0
+msgid "National"
+msgstr "Nacionalno"
+
+#. module: machine_manager
+#: selection:machinery,status:0
+msgid "Out of Service"
+msgstr "Ne obratuje"
+
+#. module: machine_manager
+#: selection:machinery,ownership:0
+msgid "Own"
+msgstr "Lastna"
+
+#. module: machine_manager
+#: field:machinery,ownership:0
+msgid "Ownership"
+msgstr "Lastništvo"
+
+#. module: machine_manager
+#: field:machinery,phone:0
+msgid "Phone number"
+msgstr "Telefonska številka"
+
+#. module: machine_manager
+#: field:machinery,power:0
+msgid "Power (Kw)"
+msgstr "Moč (kW)"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Preventive Maintenance"
+msgstr "Preventivno vzdrževanje"
+
+#. module: machine_manager
+#: field:machinery,primarymeter:0
+msgid "Primary Meter"
+msgstr "Primarni merilnik"
+
+#. module: machine_manager
+#: field:machinery,serial:0 field:machinery,serial_char:0
+msgid "Product Serial #"
+msgstr "Serijska št. proizvoda #"
+
+#. module: machine_manager
+#: model:ir.model,name:machine_manager.model_product_template
+msgid "Product Template"
+msgstr "Predloga proizvoda"
+
+#. module: machine_manager
+#: field:machinery,purch_date:0
+msgid "Purchase Date"
+msgstr "Datum nabave"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Purchase Info"
+msgstr "Podatki o nabavi"
+
+#. module: machine_manager
+#: field:machinery,purch_inv:0
+msgid "Purchase Invoice"
+msgstr "Nabavni račun"
+
+#. module: machine_manager
+#: field:machinery,purch_cost:0
+msgid "Purchase Value"
+msgstr "Nabavna vrednost"
+
+#. module: machine_manager
+#: field:machinery,purch_partner:0
+msgid "Purchased From"
+msgstr "Nabavljeno od"
+
+#. module: machine_manager
+#: selection:machinery,deprecperiod:0
+msgid "Quarterly"
+msgstr "Četrtletno"
+
+#. module: machine_manager
+#: field:machinery,bdate:0
+msgid "Record Date"
+msgstr "Datum vknjižbe"
+
+#. module: machine_manager
+#: selection:machinery,ownership:0
+msgid "Rental"
+msgstr "Najem"
+
+#. module: machine_manager
+#: field:machinery,status:0
+msgid "Status"
+msgstr "Status"
+
+#. module: machine_manager
+#: field:machinery,location:0
+msgid "Stk Location"
+msgstr "Stk lokacija"
+
+#. module: machine_manager
+#: help:machinery,location:0
+msgid "This association is necessary if you want to make repair orders with the machine"
+msgstr "To združenje je potrebno, če želite izvajati servisne naloge z naparavo"
+
+#. module: machine_manager
+#: help:machinery,product:0
+msgid "This product will contain information about the machine such as the manufacturer."
+msgstr "Ta proizvod bo vseboval podatke o napravi, kot npr. proizvajalec."
+
+#. module: machine_manager
+#: help:machinery,manufacturer:0
+msgid "Manufacturer is related to the associated product defined for the machine."
+msgstr "Proizvajalec je povezan s proizvodom določenim za napravo."
+
+#. module: machine_manager
+#: field:machine.model,model_type:0 field:machinery,model_type:0
+msgid "Type"
+msgstr "Tip"
+
+#. module: machine_manager
+#: field:machinery.users,m_user:0
+#: model:res.groups,name:machine_manager.group_machine_user
+msgid "User"
+msgstr "Uporabnik"
+
+#. module: machine_manager
+#: code:addons/machine_manager/models/machinery.py:105
+#: code:addons/machine_manager/models/machinery.py:111
+#: sql_constraint:machinery.users:0
+#, python-format
+msgid "User already defined for the machine"
+msgstr "Uporabnik naprave je že določen"
+
+#. module: machine_manager
+#: model:ir.model,name:machine_manager.model_res_users
+msgid "Users"
+msgstr "Uporabniki"
+
+#. module: machine_manager
+#: view:machinery:machine_manager.machines_form
+msgid "Warranty Expiry"
+msgstr "Zapadlost garancije"
+
+#. module: machine_manager
+#: field:machinery,year:0
+msgid "Year"
+msgstr "Leto"
+
+#. module: machine_manager
+#: selection:machinery,deprecperiod:0
+msgid "Yearly"
+msgstr "Letno"
+
+#. module: machine_manager
+#: view:machine.model:machine_manager.machinemodel_tree_view
+msgid "tree_string"
+msgstr "tree_string"

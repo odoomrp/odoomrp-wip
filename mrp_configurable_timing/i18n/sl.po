@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_configurable_timing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-10 10:30+0000\n"
+"PO-Revision-Date: 2015-08-15 09:00+0200\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#. module: mrp_configurable_timing
+#: model:ir.model,name:mrp_configurable_timing.model_res_company
+msgid "Companies"
+msgstr "Družbe"
+
+#. module: mrp_configurable_timing
+#: field:mrp.config.settings,complete_cycle:0
+#: field:res.company,complete_cycle:0
+msgid "Force complete cycles"
+msgstr "Vsili cikle dokončanja"
+
+#. module: mrp_configurable_timing
+#: field:mrp.workorder,hour:0
+msgid "Hour"
+msgstr "Ura"
+
+#. module: mrp_configurable_timing
+#: model:ir.model,name:mrp_configurable_timing.model_mrp_operation_workcenter
+msgid "MRP Operation Workcenter"
+msgstr "Delovni center proizvodnih operacij"
+
+#. module: mrp_configurable_timing
+#: model:ir.model,name:mrp_configurable_timing.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Proizvodni nalog"
+
+#. module: mrp_configurable_timing
+#: field:mrp.production,total_hours:0
+msgid "Total hours"
+msgstr "Skupaj ur"
+
+#. module: mrp_configurable_timing
+#: model:ir.model,name:mrp_configurable_timing.model_mrp_workcenter
+msgid "Work Center"
+msgstr "Delovni center"
+
+#. module: mrp_configurable_timing
+#: model:ir.model,name:mrp_configurable_timing.model_mrp_production_workcenter_line
+msgid "Work Order"
+msgstr "Delovni nalog"
+
+#. module: mrp_configurable_timing
+#: model:ir.model,name:mrp_configurable_timing.model_mrp_workorder
+msgid "Work Order Report"
+msgstr "Poročilo delovnega naloga"
