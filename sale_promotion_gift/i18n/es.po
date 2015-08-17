@@ -68,6 +68,11 @@ msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: sale_promotion_gift
+#: field:product.pricelist.item.offer,not_combinable:0
+msgid "Offer not combinable"
+msgstr "Oferta no acumulable"
+
+#. module: sale_promotion_gift
 #: view:sale.order:sale_promotion_gift.view_order_form_inh_promotiongift
 msgid "Other Information"
 msgstr "Otra información"
@@ -100,6 +105,7 @@ msgid "Sale Order"
 msgstr "Pedido de venta"
 
 #. module: sale_promotion_gift
+#: model:ir.model,name:sale_promotion_gift.model_sale_final_gift
 #: view:sale.final.gift:sale_promotion_gift.sale_final_gift_tree_view
 msgid "Sale final gift"
 msgstr "Regalo final venta"
@@ -129,7 +135,13 @@ msgid "Sales Order"
 msgstr "Pedidos de venta"
 
 #. module: sale_promotion_gift
-#: code:addons/sale_promotion_gift/models/sale_order.py:81
+#: help:sale.final.gift,category:0
+#: help:sale.promotion.gift,category:0
+msgid "Select category for the current product"
+msgstr "Selecciona la categoria del producto actual"
+
+#. module: sale_promotion_gift
+#: code:addons/sale_promotion_gift/models/sale_order.py:122
 #, python-format
 msgid "Total Quantity %s, in final gift products with category %s, exceeds in gift products of the same category with amount %s"
 msgstr "Cantidad total %s, en productos regalo finales con categoría %s, exceden en productos regalo de la misma categoría con cantidad %s"

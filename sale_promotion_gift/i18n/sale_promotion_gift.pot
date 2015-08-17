@@ -39,7 +39,7 @@ msgid "Dump offer"
 msgstr ""
 
 #. module: sale_promotion_gift
-#: code:addons/sale_promotion_gift/models/sale_order.py:123
+#: code:addons/sale_promotion_gift/models/sale_order.py:164
 #, python-format
 msgid "Error!: This product is not in a allowed category."
 msgstr ""
@@ -65,6 +65,11 @@ msgstr ""
 #: field:sale.final.gift,write_date:0
 #: field:sale.promotion.gift,write_date:0
 msgid "Last Updated on"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: field:product.pricelist.item.offer,not_combinable:0
+msgid "Offer not combinable"
 msgstr ""
 
 #. module: sale_promotion_gift
@@ -100,6 +105,7 @@ msgid "Sale Order"
 msgstr ""
 
 #. module: sale_promotion_gift
+#: model:ir.model,name:sale_promotion_gift.model_sale_final_gift
 #: view:sale.final.gift:sale_promotion_gift.sale_final_gift_tree_view
 msgid "Sale final gift"
 msgstr ""
@@ -129,7 +135,13 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: sale_promotion_gift
-#: code:addons/sale_promotion_gift/models/sale_order.py:81
+#: help:sale.final.gift,category:0
+#: help:sale.promotion.gift,category:0
+msgid "Select category for the current product"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: code:addons/sale_promotion_gift/models/sale_order.py:122
 #, python-format
 msgid "Total Quantity %s, in final gift products with category %s, exceeds in gift products of the same category with amount %s"
 msgstr ""
