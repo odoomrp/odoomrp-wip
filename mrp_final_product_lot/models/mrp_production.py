@@ -17,7 +17,7 @@ class MrpProduction(models.Model):
     def action_produce(
             self, production_id, production_qty, production_mode, wiz=False):
         lot_obj = self.env['stock.production.lot']
-        if production_mode == 'consume_produce' and wiz:
+        if production_mode == 'consume_produce' and wiz and not wiz.lot_id:
             production = self.browse(production_id)
             if (production.product_id.track_all or
                     production.product_id.track_production or
@@ -39,7 +39,7 @@ class MrpProduction(models.Model):
                     vals = {'name': code,
                             'product_id': production.product_id.id}
                     new_lot = lot_obj.create(vals)
-                vals = {'lot_id': new_lot.id}
-                wiz.write(vals)
+                    vals = {'lot_id': new_lot.id}
+                    wiz.write(vals)
         return super(MrpProduction, self).action_produce(
             production_id, production_qty, production_mode, wiz=wiz)
