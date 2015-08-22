@@ -73,6 +73,11 @@ msgid "Product Template"
 msgstr "Plantilla de producto"
 
 #. module: product_variants_no_automatic_creation
+#: sql_constraint:product.attribute.line:0
+msgid "The attribute already exists for this product"
+msgstr "El atributo ya existe para este producto"
+
+#. module: product_variants_no_automatic_creation
 #: help:product.category,no_create_variants:0
 msgid "This check disables the automatic creation of product variants for all the products of this category."
 msgstr "Esta casilla deshabilita la creación automática de las variantes de producto para todos los productos de esta categoría."

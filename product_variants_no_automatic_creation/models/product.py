@@ -169,6 +169,15 @@ class ProductProduct(models.Model):
         return False
 
 
+class ProductAttributeLine(models.Model):
+    _inherit = 'product.attribute.line'
+
+    _sql_constraints = [
+        ('product_attribute_uniq', 'unique(product_tmpl_id, attribute_id)',
+         'The attribute already exists for this product')
+    ]
+
+
 class ProductAttributePrice(models.Model):
     _inherit = 'product.attribute.price'
 
