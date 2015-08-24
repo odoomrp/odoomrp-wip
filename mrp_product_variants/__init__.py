@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -18,3 +17,18 @@
 ##############################################################################
 
 from . import models
+from openerp import SUPERUSER_ID, api
+
+
+def assign_product_template(cr, registry):
+    """
+    This post-init-hook will update all existing mrp.bom.line
+    """
+    with api.Environment.manage():
+        env = api.Environment(cr, SUPERUSER_ID, {})
+    for line in env['mrp.bom.line'].search([]):
+        line.product_template = line.product_id.product_tmpl_id
+    for production in env['mrp.production'].search([]):
+        production.product_template = line.product_id.product_tmpl_id
+    for product_line in env['mrp.production.product.line'].search([]):
+        product_line.product_template = product_line.product_id.product_tmpl_id
