@@ -17,7 +17,6 @@
 ##############################################################################
 
 from . import models
-from openerp import SUPERUSER_ID
 
 
 def assign_product_template(cr, registry):
@@ -27,4 +26,4 @@ def assign_product_template(cr, registry):
     cr.execute('UPDATE purchase_order_line AS line'
                '   SET product_template = product_product.product_tmpl_id'
                '  FROM product_product'
-               ' WHERE line.product_id = product_product.id;')
+               ' WHERE line.product_id = product_product.id')
