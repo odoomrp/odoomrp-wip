@@ -72,20 +72,20 @@ class SaleOrder(models.Model):
                 if item.product_id:
                     qty = sum(
                         x.product_uom_qty for line in self.order_line.filtered(
-                            lambda x: x.product_id == item.product_id
-                            and not x.offer_id.not_combinable))
+                            lambda x: x.product_id == item.product_id and
+                            not x.offer_id.not_combinable))
                 elif item.product_tmpl_id:
                     qty = sum(
                         x.product_uom_qty for line in self.order_line.filtered(
                             lambda x: x.product_template ==
-                            item.product_tmpl_id
-                            and not x.offer_id.not_combinable))
+                            item.product_tmpl_id and
+                            not x.offer_id.not_combinable))
                 elif item.categ_id:
                     qty = sum(
                         x.product_uom_qty for line in self.order_line.filtered(
                             lambda x: x.product_id.categ_id ==
-                            item.categ_id
-                            and not x.offer_id.not_combinable))
+                            item.categ_id and
+                            not x.offer_id.not_combinable))
                 else:
                     qty = sum(
                         x.product_uom_qty for line in sale_lines.filtered(
