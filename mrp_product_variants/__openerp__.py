@@ -42,4 +42,5 @@
         "views/product_attribute_view.xml",
     ],
     "installable": True,
+    "post_init_hook": "assign_product_template",
 }
