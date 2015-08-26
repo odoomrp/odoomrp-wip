@@ -30,16 +30,16 @@
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "David Díaz <d.diazp@gmail.com>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <ajuaristio@gmail.com>",
     ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
     "summary": "",
-    "description": """
-Create custom product from a purchase order
-    """,
     "data": [
         "security/ir.model.access.csv",
         "views/purchase_view.xml",
     ],
     "installable": True,
+    "post_init_hook": "assign_product_template",
 }
