@@ -24,17 +24,12 @@
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
-    "contributors": [
-        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com",
-        "Ana Juaristi <anajuaristi@avanzosc.es>",
-        "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
-    ],
+    "contributors": ["Pedro M. Baeza <pedro.baeza@serviciosbaeza.com",
+                     "Ana Juaristi <anajuaristi@avanzosc.es>",
+                     "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>"],
     "category": "Manufacturing",
     "depends": ["mrp",
-                "stock",
-    ],
-    "data": [
-        "views/mrp_production_view.xml",
-    ],
+                "stock"],
+    "data": ["views/mrp_production_view.xml"],
     "installable": True,
 }
