@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="mrp_production_tree_view_inh_qtyproduceinfo" model="ir.ui.view">
+            <field name="name">mrp.production.tree.view.inh.qtyproduceinfo</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="product_uom" position="after">
+                    <field name="quantity_produced" string="Quantity produced"/>
+                    <field name="pending_quantity_to_produce" string="Pending quantity to produce"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
