@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+        <record id="sale_order_mrp_tree_view" model="ir.ui.view">
+            <field name="name">sale.order.mrp.tree</field>
+            <field name="model">mrp.bom</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_mrp_bom_sale_pack" model="ir.actions.act_window">
+            <field name="name">Set Type BoM</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.bom</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('type','=','phantom')]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_mrp_bom_sale_pack" id="menu_mrp_bom_sale_pack"
+                  parent="base.menu_base_config" sequence="5"/>
+    </data>
+</openerp>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="sale_order_mrp_form_view" model="ir.ui.view" >
+            <field name="name">sale.order.mrp.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="before">
+                    <field name="mrp_boms" invisible="1"/>
+                    <field name="virtual_stock"/>
+                </xpath>
+                <field name="address_allotment_id" position="after">
+                    <field name="virtual_stock" invisible="1"/>
+                </field>
+                <xpath expr="//field[@name='order_line']/form//field[@name='product_uom_qty']" position="attributes">
+                    <attribute name="on_change">product_id_change_with_wh_with_bom(parent.pricelist_id,
+                        product_id, product_uom_qty, product_uom, product_uos_qty, False, name,
+                        parent.partner_id, False, True, parent.date_order, product_packaging,
+                        parent.fiscal_position, False, parent.warehouse_id, mrp_boms, virtual_stock, context)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/form//field[@name='name']" position="after">
+                    <field name="mrp_boms">
+                        <tree>
+                            <field name="product_id"/>
+                            <field name="product_uom"/>
+                            <field name="product_uom_qty"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
