@@ -83,8 +83,8 @@
                     position="before">
                     <separator string="Customers" />
                     <field name="customer_ids"
-                        context="{'default_search_type':'customer','default_type':'customer','default_product_tmpl_id':id}">
-                    </field>
+                        context="{'default_search_type':'customer','default_type':'customer','default_product_tmpl_id':id}"
+                        domain="[('type','=','customer')]" />
                 </xpath>
             </field>
         </record>
