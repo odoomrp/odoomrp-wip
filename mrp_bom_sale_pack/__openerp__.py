@@ -27,8 +27,9 @@
                      "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
                      "Ana Juaristi <anajuaristi@avanzosc.es>",
                      "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>"],
-    "depends": ["base", "sale", "mrp", "sale_product_variants"],
-    "data": ["views/mrp_bom_sale_pack_view.xml",
+    "depends": ["base", "sale", "mrp", "sale_stock"],
+    "data": ["security/ir.model.access.csv",
+             "views/mrp_bom_sale_pack_view.xml",
              "views/sale_order_mrp_view.xml"],
     "installable": True
 }
