@@ -52,7 +52,7 @@ class SaleOrderLine(models.Model):
             stock = []
             for oline in line.mrp_boms:
                 stock.append(oline.bom_line.product_id.virtual_available -
-                            (oline.product_uom_qty))
+                             (oline.product_uom_qty))
             if stock:
                 line.virtual_stock = min(stock)
 
