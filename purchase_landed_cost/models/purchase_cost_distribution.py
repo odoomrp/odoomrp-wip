@@ -243,7 +243,7 @@ class PurchaseCostDistribution(models.Model):
                      product.product_tmpl_id.product_variant_ids.ids),
                     ('id', 'not in', move.quant_ids.ids)]
                 quants = self.env['stock.quant'].read_group(
-                    domain_quant, ['product_id', 'qty', 'cost'], [])[0]
+                    domain_quant, ['product_id', 'qty', 'cost'], ['cost'])[0]
                 # Get the standard price
                 new_std_price = ((quants['cost'] * quants['qty'] +
                                   new_price * move.product_qty) /
