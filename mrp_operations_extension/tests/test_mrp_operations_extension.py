@@ -51,9 +51,6 @@ class TestMrpOperationsExtension(common.TransactionCase):
             self.assertEqual(
                 line.state, 'done',
                 'Error work center line not in done state')
-        self.assertEqual(
-            self.production_case1.state, 'done',
-            'Error MRP production not in done state')
 
     def test_confirm_production_operation_extension_case2(self):
         workflow.trg_validate(
