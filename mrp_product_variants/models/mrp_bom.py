@@ -18,6 +18,8 @@
 
 from openerp import models, fields, api, exceptions, tools, _
 from openerp.addons.product import _common
+from itertools import groupby
+from operator import attrgetter
 
 
 class MrpBomLine(models.Model):
@@ -85,6 +87,18 @@ class MrpBom(models.Model):
             routing_id=routing_id, previous_products=previous_products,
             master_bom=master_bom, production=production)
         return result, result2
+
+    def _check_product_suitable(self, check_attribs, component_attribs):
+        """ Check if component is suitable for given attributes
+        @param check_attribs: Attribute id list
+        @param component_attribs: Component defined attributes to check
+        @return: Component validity
+        """
+        getattr = attrgetter('attribute_id')
+        for key, group in groupby(component_attribs, getattr):
+            if not set(check_attribs).intersection([x.id for x in group]):
+                return False
+        return True
 
     @api.model
     def _bom_explode_variants(
@@ -157,12 +171,13 @@ class MrpBom(models.Model):
                 if not product and production:
                     for attr_value in production.product_attributes:
                         production_attr_values.append(attr_value.value.id)
-                    if (set(map(int, bom_line_id.attribute_value_ids or [])) -
-                            set(map(int, production_attr_values))):
+                    if not self._check_product_suitable(
+                            production_attr_values,
+                            bom_line_id.attribute_value_ids):
                         continue
-                elif not product or\
-                        (set(map(int, bom_line_id.attribute_value_ids or [])) -
-                         set(map(int, product.attribute_value_ids))):
+                elif not product or not self._check_product_suitable(
+                        product.attribute_value_ids.ids,
+                        bom_line_id.attribute_value_ids):
                     continue
             if previous_products and (bom_line_id.product_id.product_tmpl_id.id
                                       in previous_products):
@@ -194,17 +209,17 @@ class MrpBom(models.Model):
                         bom_line_id.product_template.
                         _get_product_attributes_inherit_dict(
                             production.product_attributes))
-                    product = self.env['product.product']._product_find(
+                    comp_product = self.env['product.product']._product_find(
                         bom_line_id.product_template, product_attributes)
                 else:
-                    product = bom_line_id.product_id
+                    comp_product = bom_line_id.product_id
                     product_attributes = (
                         bom_line_id.product_id.
                         _get_product_attributes_values_dict())
                 result.append({
                     'name': (bom_line_id.product_id.name or
                              bom_line_id.product_template.name),
-                    'product_id': product and product.id,
+                    'product_id': comp_product and comp_product.id,
                     'product_template': (
                         bom_line_id.product_template.id or
                         bom_line_id.product_id.product_tmpl_id.id),
