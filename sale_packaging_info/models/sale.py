@@ -70,7 +70,7 @@ class SaleOrderLine(models.Model):
                     self.product_uom_qty / package_attr.numeric_value)
             if self.pri_pack:
                 packaging = self.sec_pack.packagings.filtered(
-                    lambda x: x.product == self.pri_pack)
+                    lambda x: x.product == self.pri_pack)[:1]
                 if packaging.ul_qty and packaging.rows:
                     self.sec_pack_qty = (self.pri_pack_qty /
                                          (packaging.ul_qty * packaging.rows))
