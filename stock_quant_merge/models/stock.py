@@ -11,30 +11,28 @@ class StockQuant(models.Model):
 
     @api.multi
     def merge_stock_quants(self):
-        pending_quants = self.filtered(lambda x: True)
-        for quant2merge in self:
-            if (quant2merge in pending_quants and
-                    not quant2merge.reservation_id):
-                quants = self.search(
-                    [('id', '!=', quant2merge.id),
-                     ('product_id', '=', quant2merge.product_id.id),
-                     ('lot_id', '=', quant2merge.lot_id.id),
-                     ('package_id', '=', quant2merge.package_id.id),
-                     ('location_id', '=', quant2merge.location_id.id),
-                     ('reservation_id', '=', False),
-                     ('propagated_from_id', '=',
-                      quant2merge.propagated_from_id.id)])
-                cont = 1
-                cost = quant2merge.cost
-                for quant in quants:
-                    if (self._get_latest_move(quant2merge) ==
-                            self._get_latest_move(quant)):
-                        quant2merge.sudo().qty += quant.qty
-                        cost += quant.cost
-                        cont += 1
-                        pending_quants -= quant
-                        quant.sudo().unlink()
-                quant2merge.sudo().cost = cost / cont
+        pending_quants = {q for q in self if not q.reservation_id and q.qty > 0}
+        while pending_quants:
+            quant2merge = pending_quants.pop()
+            history_ids = set(quant2merge.history_ids.ids)
+            # Quants must share product, lot, package, location and history
+            quants = self.search(
+                [('id', '!=', quant2merge.id),
+                 ('product_id', '=', quant2merge.product_id.id),
+                 ('lot_id', '=', quant2merge.lot_id.id),
+                 ('package_id', '=', quant2merge.package_id.id),
+                 ('qty', '>', 0),
+                 ('location_id', '=', quant2merge.location_id.id),
+                 ('reservation_id', '=', False),
+                 ('propagated_from_id', '=', quant2merge.propagated_from_id.id)]
+                ).filtered(lambda q: set(q.history_ids.ids) == history_ids)
+            qty = quant2merge.qty + sum(q.qty for q in quants)
+            value = quant2merge.qty * quant2merge.cost + sum(q.qty*q.cost for q in quants)
+            cost = value / qty
+            quant2merge.sudo().write({'qty': qty, 'cost': cost})
+            for q in quants:
+                pending_quants.discard(q)
+            quants.sudo().unlink()
 
     @api.model
     def quants_unreserve(self, move):
