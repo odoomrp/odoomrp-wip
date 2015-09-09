@@ -5,6 +5,7 @@
             <field name="name">Repairs workshop</field>
             <field name="calendar_id" ref="resource.timesheet_group1"/>
             <field name="capacity_per_cycle">5.0</field>
+            <field name="capacity_per_cycle_min">5.0</field>
             <field name="time_cycle">1.0</field>
             <field name="time_start">0.2</field>
             <field name="time_stop">0.2</field>
