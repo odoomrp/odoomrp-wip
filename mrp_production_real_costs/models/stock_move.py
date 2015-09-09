@@ -39,12 +39,13 @@ class StockMove(models.Model):
                             '-' + (product.default_code or ''))
                     vals = production._prepare_cost_analytic_line(
                         journal_id, name, production, product,
-                        qty=record.product_qty, amount=amount)
+                        qty=record.product_qty)
                     task = task_obj.search(
                         [('mrp_production_id', '=', production.id),
                          ('wk_order', '=', False)])
                     vals['task_id'] = task and task[0].id or False
-                    analytic_line_obj.create(vals)
+                    line = analytic_line_obj.create(vals)
+                    line.amount = amount
 
     @api.multi
     def action_consume(self, product_qty, location_id=False,
@@ -71,13 +72,13 @@ class StockMove(models.Model):
                          '') + '-' + (product.default_code or ''))
                     analytic_vals = production._prepare_cost_analytic_line(
                         journal_id, name, production, product,
-                        workorder=record.work_order, qty=record.product_qty,
-                        amount=(-price * record.product_qty))
+                        workorder=record.work_order, qty=record.product_qty)
                     task = task_obj.search(
                         [('mrp_production_id', '=', production.id),
                          ('wk_order', '=', False)])
                     analytic_vals['task_id'] = task and task[0].id or False
-                    analytic_line_obj.create(analytic_vals)
+                    line = analytic_line_obj.create(analytic_vals)
+                    line.amount = (-price * record.product_qty)
         return result
 
     @api.multi
