@@ -25,10 +25,13 @@ class StockMove(models.Model):
 
     @api.multi
     def create_produce_cost_line(self, amount):
+        print '*************************************************'
+        print '*** ESTOY EN CREAR ANALITICA PARA PRODUCTO FINAL, amount: ' + str(amount)
         task_obj = self.env['project.task']
         analytic_line_obj = self.env['account.analytic.line']
         for record in self:
             if amount > 0.0:
+                print '*** production_id: ' + str(record.production_id)
                 if record.production_id:
                     product = record.product_id
                     production = record.production_id
@@ -44,13 +47,18 @@ class StockMove(models.Model):
                         [('mrp_production_id', '=', production.id),
                          ('wk_order', '=', False)])
                     vals['task_id'] = task and task[0].id or False
+                    print '*** creo analitica con: ' + str(vals)
                     line = analytic_line_obj.create(vals)
                     line.amount = amount
+                    print '*** amount de analitica: ' + str(line.amount)
+        print '*** SALGO DE CREAR ANALITICA PARA PRODUCTO FINAL'
 
     @api.multi
     def action_consume(self, product_qty, location_id=False,
                        restrict_lot_id=False, restrict_partner_id=False,
                        consumed_for=False):
+        print '**********************************************************'
+        print '*** ESTOY EN ACTION_CONSUME'
         task_obj = self.env['project.task']
         analytic_line_obj = self.env['account.analytic.line']
         result = super(StockMove, self).action_consume(
@@ -58,9 +66,12 @@ class StockMove(models.Model):
             restrict_lot_id=restrict_lot_id,
             restrict_partner_id=restrict_partner_id, consumed_for=consumed_for)
         for record in self:
+            print '*** producto: ' + str(record.product_id.name) + ', cost_price: ' + str(record.product_id.cost_price)
+            print '*** raw_material_production_id: ' + str(record.raw_material_production_id)
             price = record.product_id.cost_price
             if price > 0.0:
                 if record.raw_material_production_id:
+                    print '*** entro en if'
                     product = record.product_id
                     journal_id = self.env.ref(
                         'mrp_production_project_estimated_cost.analytic_'
@@ -77,8 +88,11 @@ class StockMove(models.Model):
                         [('mrp_production_id', '=', production.id),
                          ('wk_order', '=', False)])
                     analytic_vals['task_id'] = task and task[0].id or False
+                    print '*** creo línea analitica con: ' + str(analytic_vals)
                     line = analytic_line_obj.create(analytic_vals)
                     line.amount = (-price * record.product_qty)
+                    print '*** amount de analitica: ' + str(line.amount)
+        print '*** SALGO DE ACTION_CONSUME'
         return result
 
     @api.multi
