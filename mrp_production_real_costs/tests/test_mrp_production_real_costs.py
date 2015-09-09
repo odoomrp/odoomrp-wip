@@ -41,30 +41,6 @@ class TestMrpProductionRealCosts(common.TransactionCase):
         self.produce = self.produce_model.create(produce_vals)
         self.produce.with_context(
             active_id=self.production_realcost.id).do_produce()
-        done_lines = self.production_realcost.move_created_ids2.filtered(
-            lambda l: l.state == 'done')
-        for line in done_lines:
-            name = ('Final product - ' + (line.production_id.name or '') +
-                    '-' + (line.product_id.default_code or ''))
-            general_account = (
-                line.product_id.property_account_income or
-                line.product_id.categ_id.property_account_income_categ or
-                self.property_model.get('property_account_expense_categ',
-                                        'product.category'))
-            cond = [('name', '=', name),
-                    ('mrp_production_id', '=', line.production_id.id),
-                    ('workorder', '=', False),
-                    ('product_id', '=', line.product_id.id),
-                    ('unit_amount', '=', line.product_qty),
-                    ('account_id', '=',
-                     self.production_realcost.analytic_account_id.id),
-                    ('journal_id', '=', self.journal_materials.id),
-                    ('general_account_id', '=', general_account.id)]
-            analytic_lines = self.analytic_line_model.search(cond, limit=1)
-            self.assertEqual(
-                len(analytic_lines), 1,
-                ('Analytic line not found for final product %s' %
-                 (line.product_id.name)))
         for line in self.production_realcost.workcenter_lines:
             name = ((line.production_id.name or '') + '-' +
                     (line.routing_wc_line.operation.code or '') + '-' +
