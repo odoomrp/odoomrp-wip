@@ -31,6 +31,8 @@
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
     "depends": [
+        "account",
+        "resource",
         "product",
         "analytic",
         "mrp",
@@ -46,6 +48,11 @@
         "views/mrp_production_view.xml",
         "views/product_view.xml",
         "views/mrp_bom_view.xml"
+    ],
+    "demo": [
+        "demo/account_demo.xml",
+        "demo/product_demo.xml",
+        "demo/mrp_workcenter_demo.xml",
     ],
     "installable": True,
 }

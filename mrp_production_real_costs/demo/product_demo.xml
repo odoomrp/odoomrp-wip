@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="product.product_product_14" model="product.product">
+            <field name="cost_price">87.0</field>
+        </record>
+        <record id="product.product_product_23" model="product.product">
+            <field name="cost_price">1910.0</field>
+        </record>
+    </data>
+</openerp>

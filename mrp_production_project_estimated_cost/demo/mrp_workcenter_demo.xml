@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="mrp.mrp_workcenter_1" model="mrp.workcenter">
+            <field name="name">Repairs workshop</field>
+            <field name="calendar_id" ref="resource.timesheet_group1"/>
+            <field name="capacity_per_cycle">5.0</field>
+            <field name="capacity_per_cycle_min">5.0</field>
+            <field name="time_cycle">1.0</field>
+            <field name="time_start">0.2</field>
+            <field name="time_stop">0.2</field>
+            <field name="time_efficiency">0.55</field>
+            <field name="product_id" ref="mrp_production_project_estimated_cost.product_repair"/>
+            <field name="costs_hour">0.3</field>
+            <field name="costs_hour_account_id" ref="mrp_production_project_estimated_cost.account_repair_hours"/>
+            <field name="costs_cycle">0.15</field>
+            <field name="costs_cycle_account_id" ref="mrp_production_project_estimated_cost.account_repair_cycle"/>
+            <field name="costs_journal_id" ref="account.exp"/>
+            <field name="costs_general_account_id" ref="account.a_expense"/>
+        </record>
+    </data>
+</openerp>

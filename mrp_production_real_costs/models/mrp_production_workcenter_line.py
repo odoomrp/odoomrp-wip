@@ -45,12 +45,13 @@ class MrpProductionWorkcenterLine(models.Model):
             analytic_vals = production._prepare_cost_analytic_line(
                 journal_id, name, production, product,
                 general_account=general_acc, workorder=self,
-                qty=operation_line.uptime, amount=price)
+                qty=operation_line.uptime)
             task = task_obj.search([('mrp_production_id', '=', production.id),
                                     ('wk_order', '=', False)])
             analytic_vals['task_id'] = task and task[0].id or False
             analytic_vals['product_uom_id'] = hour_uom.id
             analytic_line = analytic_line_obj.create(analytic_vals)
+            analytic_line.amount = price
             return analytic_line
 
     @api.multi
