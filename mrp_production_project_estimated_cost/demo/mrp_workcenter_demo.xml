@@ -4,7 +4,7 @@
         <record id="mrp.mrp_workcenter_1" model="mrp.workcenter">
             <field name="name">Repairs workshop</field>
             <field name="calendar_id" ref="resource.timesheet_group1"/>
-            <field name="capacity_per_cycle">5</field>
+            <field name="capacity_per_cycle">1</field>
             <field name="time_cycle">1</field>
             <field name="time_start">0.2</field>
             <field name="time_stop">0.2</field>
