@@ -19,7 +19,8 @@
 {
     "name": "MRP real costs",
     "version": "1.0",
-    "depends": ["analytic",
+    "depends": ["product",
+                "analytic",
                 "project_timesheet",
                 "mrp_project_link",
                 "mrp_operations_time_control",
@@ -30,6 +31,9 @@
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "MRP",
     'data': ["views/mrp_production_view.xml"],
+    "demo": [
+        "demo/product_demo.xml",
+    ],
     'installable': True,
     'auto_install': False,
 }
