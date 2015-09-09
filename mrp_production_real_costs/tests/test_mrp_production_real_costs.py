@@ -43,7 +43,6 @@ class TestMrpProductionRealCosts(common.TransactionCase):
             active_id=self.production_realcost.id).do_produce()
         done_lines = self.production_realcost.move_created_ids2.filtered(
             lambda l: l.state == 'done')
-        print '******* ESTOY EN EL TEST, done_lines: ' + str(done_lines)
         for line in done_lines:
             name = ('Final product - ' + (line.production_id.name or '') +
                     '-' + (line.product_id.default_code or ''))
@@ -61,7 +60,6 @@ class TestMrpProductionRealCosts(common.TransactionCase):
                      self.production_realcost.analytic_account_id.id),
                     ('journal_id', '=', self.journal_materials.id),
                     ('general_account_id', '=', general_account.id)]
-            print '*** voy a buscar analitica para producto final con: ' + str(cond)
             analytic_lines = self.analytic_line_model.search(cond, limit=1)
             self.assertEqual(
                 len(analytic_lines), 1,

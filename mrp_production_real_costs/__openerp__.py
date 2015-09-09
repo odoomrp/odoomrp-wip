@@ -21,10 +21,13 @@
     "version": "1.0",
     "depends": ["product",
                 "analytic",
+                "account",
                 "project_timesheet",
+                "mrp",
                 "mrp_project_link",
                 "mrp_operations_time_control",
                 "stock_account",
+                "mrp_operations_extension",
                 "mrp_production_project_estimated_cost"],
     "author": "OdooMRP team,"
               "AvanzOSC,"
