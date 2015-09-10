@@ -13,19 +13,20 @@ addons:
 
 env:
   global:
-  - VERSION="8.0" TESTS="0" LINT_CHECK="0"
+  - VERSION="8.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
+  - TRANSIFEX_USER='transbot@odoo-community.org' TRANSIFEX_ORGANIZATION="oca" TRANSIFEX_PROJECT_SLUG="odoomrp-wip-8-0"
+  - secure: LnjBDPHr+MIvjLkedoMFi1O7+3yeAP+phP3qQq1aFgrmOqYxKmvmKwwRZec+nG3N5ow8a18eB6XXPvMMaUW4gZtlbLLih+bpywaEZWKzMOh0wBo8DDJCala0646Ofi3af7udpysqKm70P6kdJYxtvq7s8q1lyYan8CeHmIwyTcY=
   matrix:
   - LINT_CHECK="1"
-  - TESTS="1" ODOO_REPO="odoo/odoo" EXCLUDE="mrp_bom_state"
-  - TESTS="1" ODOO_REPO="OCA/OCB" EXCLUDE="mrp_bom_state"
+  - TRANSIFEX="1"
+  - TESTS="1" ODOO_REPO="odoo/odoo"
+  - TESTS="1" ODOO_REPO="OCA/OCB"
 
 virtualenv:
   system_site_packages: true
 
 install:
-  - git clone https://github.com/OCA/web.git ${HOME}/oca-web
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
-  - git clone --depth=1 https://github.com/odoomrp/odoomrp-utils ${HOME}/odoomrp-utils
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
 
