@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="account_repair_hours" model="account.analytic.account">
+            <field name="type">normal</field>
+            <field name="code">ASML - HOUR</field>
+            <field name="name">Costing Account For Hours of Repair.</field>
+        </record>
+
+        <record id="account_repair_cycle" model="account.analytic.account">
+            <field name="type">normal</field>
+            <field name="code">ASML - Cycle</field>
+            <field name="name">Costing Account For Cycle of Repair.</field>
+        </record>
+    </data>
+</openerp>
