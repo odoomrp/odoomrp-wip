@@ -8,3 +8,7 @@ OdooMRP WIP
 Work in progress of modules made under the umbrella of OdooMRP project.
 
 Utility modules available in https://github.com/odoomrp/odoomrp-utils
+
+Translation Status
+------------------
+[![Transifex Status](https://www.transifex.com/projects/p/odoomrp-wip-8-0/chart/image_png)](https://www.transifex.com/projects/p/odoomrp-wip-8-0)

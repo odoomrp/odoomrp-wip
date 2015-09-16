@@ -20,20 +20,24 @@
 ##############################################################################
 
 {
-    'name': 'MRP Operations Project',
-    'version': '1.0',
-    'category': 'MRP',
-    'description': """The module adds:
+    "name": "MRP Operations Project",
+    "version": "8.0.1.0.0",
+    "category": "Manufacturing",
+    "description": """The module adds:
 
     - Links Mrp Operations extension with project states.
     - Links Project tasks with Work Orders""",
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    'website': 'http://www.avanzosc.com',
-    "depends": ['mrp_operations_extension', 'project'],
-    "category": "Manufacturing",
-    "data": ['views/mrp_routing_operation_view.xml',
-             'views/project_task_view.xml'],
-    "installable": True
+    "website": "http://www.odoomrp.com",
+    "depends": [
+        "mrp_operations_extension",
+        "project",
+    ],
+    "data": [
+        "views/mrp_routing_operation_view.xml",
+        "views/project_task_view.xml",
+    ],
+    "installable": True,
 }
