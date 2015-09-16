@@ -1,8 +1,8 @@
 Mrp Bom Sale Pack
 =================
 
-This module allows you to on the sale order, if a product has a 'set' type
-material list it shows you the list of the components.
+This module allows shows on sales orders the list of components for products
+with bill of materials of type 'set'.
 On sale order line it shows you a compute field who shows the virtual stock of
 the component with less stock.
 This module create a new menu on Sales to configurate 'Set' type BoM.

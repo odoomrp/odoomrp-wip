@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-28 11:17+0000\n"
-"PO-Revision-Date: 2015-08-28 13:19+0100\n"
+"POT-Creation-Date: 2015-09-16 09:52+0000\n"
+"PO-Revision-Date: 2015-09-16 11:52+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,6 +15,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "X-Generator: Poedit 1.5.4\n"
+
+#. module: mrp_bom_sale_pack
+#: field:mrp.bom.sale.order,bom_line:0
+msgid "Bom line"
+msgstr "Bom line"
 
 #. module: mrp_bom_sale_pack
 #: field:mrp.bom.sale.order,create_uid:0
@@ -47,9 +52,15 @@ msgid "Mrp BoM"
 msgstr "Mrp LdM"
 
 #. module: mrp_bom_sale_pack
-#: field:mrp.bom.sale.order,product_id:0
-msgid "Product"
-msgstr "Producto"
+#: model:ir.model,name:mrp_bom_sale_pack.model_procurement_order
+msgid "Procurement"
+msgstr "Abastecimiento"
+
+#. module: mrp_bom_sale_pack
+#: code:addons/mrp_bom_sale_pack/models/mrp_bom_sale_pack.py:24
+#, python-format
+msgid "Product: \"%s\" \n"
+msgstr "Producto: \"%s\" \n"
 
 #. module: mrp_bom_sale_pack
 #: field:mrp.bom.sale.order,product_uom_qty:0
@@ -57,8 +68,13 @@ msgid "Quantity (UoS)"
 msgstr "Cantidad (UoS)"
 
 #. module: mrp_bom_sale_pack
-#: field:mrp.bom.sale.order,sale_orders:0
+#: field:mrp.bom.sale.order,sale_order:0
 msgid "Sale order"
+msgstr "Pedido de venta"
+
+#. module: mrp_bom_sale_pack
+#: model:ir.model,name:mrp_bom_sale_pack.model_sale_order
+msgid "Sales Order"
 msgstr "Pedido de venta"
 
 #. module: mrp_bom_sale_pack
@@ -71,13 +87,3 @@ msgstr "Línea de pedido de venta"
 #: model:ir.ui.menu,name:mrp_bom_sale_pack.menu_mrp_bom_sale_pack
 msgid "Set Type BoM"
 msgstr "LdM tipo Set"
-
-#. module: mrp_bom_sale_pack
-#: field:mrp.bom.sale.order,product_uom:0
-msgid "Unit of Measure "
-msgstr "Unidad de medida"
-
-#. module: mrp_bom_sale_pack
-#: field:sale.order.line,virtual_stock:0
-msgid "Virtual stock"
-msgstr "Stock virtual"

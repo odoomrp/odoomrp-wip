@@ -3,7 +3,7 @@
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class ProcurementOrder(models.Model):
@@ -14,16 +14,14 @@ class ProcurementOrder(models.Model):
         sale_obj = self.env['sale.order']
         res = super(ProcurementOrder, self).run(autocommit=autocommit)
         for rec in self:
-            for stock_move in rec.move_ids:
+            for oline in rec.move_ids:
                 orders = sale_obj.search([('procurement_group_id', '=',
-                                           stock_move.group_id.id)])
-        if orders:
-            for line in orders.order_line:
-                if line.mrp_boms:
-                    picking = stock_move.picking_id
-                    picking.note = (
-                        (picking.note or '') +
-                        (line.product_id.name_template + '\n'))
+                                           oline.group_id.id)])
+        for line in orders.order_line:
+            if line.mrp_boms:
+                picking = oline.picking_id
+                picking.note = (
+                    _('Product: "%s" \n') % (line.product_id.name_template))
         return res
 
 
@@ -45,19 +43,23 @@ class SaleOrderLine(models.Model):
     mrp_boms = fields.One2many(comodel_name='mrp.bom.sale.order',
                                inverse_name='sale_order', string='Mrp BoM')
 
-    @api.multi
+    @api.one
     @api.depends('product_uom_qty', 'product_id')
-    def _calc_virtual_stock(self):
+    def _calc_stock(self):
         for line in self:
-            stock = []
+            v_stock = []
+            r_stock = []
             for oline in line.mrp_boms:
-                stock.append(oline.bom_line.product_id.virtual_available -
-                             (oline.product_uom_qty))
-            if stock:
-                line.virtual_stock = min(stock)
+                v_stock.append(oline.bom_line.product_id.virtual_available /
+                               (oline.product_uom_qty))
+                r_stock.append(oline.bom_line.product_id.qty_available /
+                               (oline.product_uom_qty))
+            line.virtual_stock = min(v_stock or [0])
+            line.real_stock = min(r_stock or [0])
 
     virtual_stock = fields.Float(string='Virtual stock',
-                                 compute='_calc_virtual_stock')
+                                 compute='_calc_stock')
+    real_stock = fields.Float(string='Stock', compute='_calc_stock')
 
     @api.multi
     def product_id_change_with_bom(
@@ -78,11 +80,11 @@ class SaleOrderLine(models.Model):
             ('product_tmpl_id', '=', product_id.product_tmpl_id.id),
             ('type', '=', 'phantom')])
         order_lines = []
-        for line_ids in mrp_bom.bom_line_ids:
+        for line in mrp_bom.bom_line_ids:
             order_line = {
-                'bom_line': line_ids,
+                'bom_line': line,
                 'product_uom_qty':
-                line_ids.product_qty * qty,
+                line.product_qty * qty,
             }
             order_lines.append(order_line)
         res['value'].update({'mrp_boms': ([(0, 0, oline)

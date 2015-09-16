@@ -9,6 +9,7 @@
                 <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="after">
                     <field name="mrp_boms" invisible="1"/>
                     <field name="virtual_stock"/>
+                    <field name="real_stock"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree" position="attributes">
                     <attribute name="editable"/>
@@ -37,6 +38,7 @@
                 </xpath>
                 <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
                     <field name="virtual_stock"/>
+                    <field name="real_stock"/>
                 </xpath>
             </field>
         </record>
