@@ -70,8 +70,10 @@ class PricelistItem(models.Model):
 
     @api.model
     def domain_by_pricelist(self, pricelist_id, product_id=False,
-                            product_tmpl_id=False, categ_id=False, qty=0):
+                            product_tmpl_id=False, categ_id=False, qty=0,
+                            partner_id=False):
         vers_obj = self.env['product.pricelist.version']
+        suppinfo_obj = self.env['product.supplierinfo']
         today = fields.Date.context_today(self)
         vers_ids = vers_obj.search([('pricelist_id', '=', pricelist_id),
                                     '|', ('date_start', '=', False),
@@ -112,17 +114,30 @@ class PricelistItem(models.Model):
                 new_item_ids = self.domain_by_pricelist(
                     item.base_pricelist_id.id, product_id=product_id,
                     product_tmpl_id=product_tmpl_id, categ_id=categ_id,
-                    qty=qty)
+                    qty=qty, partner_id=partner_id)
                 item_ids += new_item_ids
+            if item.base == -2:
+                type = 'supplier'
+                if item.pricelist.type == 'sale':
+                    type = 'customer'
+                tmpl_id = product_tmpl_id
+                if not tmpl_id and product_id:
+                    tmpl_id = product_obj.browse(product_id).product_tmpl_id.id
+                if not suppinfo_obj.search([('product_tmpl_id', '=', tmpl_id),
+                                            ('name', '=', partner_id),
+                                            ('type', '=', type)]):
+                    item_ids.remove(item.id)
         return item_ids
 
     @api.model
     def get_best_pricelist_item(self, pricelist_id, product_id=False,
-                                product_tmpl_id=False, categ_id=False, qty=0):
+                                product_tmpl_id=False, categ_id=False, qty=0,
+                                partner_id=False):
         pricelist_item_id = False
         pricelist_item_ids = self.domain_by_pricelist(
             pricelist_id, product_id=product_id,
-            product_tmpl_id=product_tmpl_id, categ_id=categ_id, qty=qty)
+            product_tmpl_id=product_tmpl_id, categ_id=categ_id, qty=qty,
+            partner_id=partner_id)
         if pricelist_item_ids:
             pricelist_item_id = pricelist_item_ids[0]
         return pricelist_item_id
@@ -145,13 +160,16 @@ class PricelistItem(models.Model):
                 price = ptype_src.compute(
                     price_tmp, self.pricelist.currency_id, round=False)
         elif self.base == -2:
+            partner_lst = product.supplier_ids
+            if self.pricelist.type == 'sale':
+                partner_lst = product.customer_ids
             seller = False
-            for seller_id in product.seller_ids:
+            for seller_id in partner_lst:
                 if (not partner_id) or (seller_id.name.id != partner_id):
                     continue
                 seller = seller_id
-            if not seller and product.seller_ids:
-                seller = product.seller_ids[0]
+            if not seller and partner_lst:
+                seller = partner_lst[0]
             if seller:
                 qty_in_seller_uom = qty
                 for line in seller.pricelist_ids:

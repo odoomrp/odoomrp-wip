@@ -169,7 +169,7 @@ class SaleOrderLine(models.Model):
         item_obj = self.env['product.pricelist.item']
         if product:
             item_id = item_obj.get_best_pricelist_item(
-                pricelist, product_id=product, qty=qty)
+                pricelist, product_id=product, qty=qty, partner_id=partner_id)
             if not item_id:
                 warn_msg = _('Cannot find a pricelist line matching this '
                              'product and quantity.\nYou have to change either'
@@ -250,7 +250,8 @@ class SaleOrder(models.Model):
             for line in self.order_line:
                 line.item_id = item_obj.get_best_pricelist_item(
                     pricelist_id, product_id=line.product_id.id,
-                    qty=line.product_uom_qty)
+                    qty=line.product_uom_qty,
+                    partner_id=line.order_id.partner_id.id)
         return res
 
     subtotal_ids = fields.One2many(

@@ -144,7 +144,8 @@ class PurchaseOrderLine(models.Model):
         if product_id:
             item_obj = self.env['product.pricelist.item']
             item_id = item_obj.get_best_pricelist_item(
-                pricelist_id, product_id=product_id, qty=qty)
+                pricelist_id, product_id=product_id, qty=qty,
+                partner_id=partner_id)
             res['value'].update({'item_id': item_id})
             res['value']['price_unit'] = item_obj.browse(
                 item_id).price_get(product_id, qty, partner_id, uom_id)[0]
@@ -216,7 +217,8 @@ class PurchaseOrder(models.Model):
             for line in self.order_line:
                 line.item_id = item_obj.get_best_pricelist_item(
                     pricelist_id, product_id=line.product_id.id,
-                    qty=line.product_qty)
+                    qty=line.product_qty,
+                    partner_id=line.order_id.partner_id.id)
         return res
 
     subtotal_ids = fields.One2many(
