@@ -62,11 +62,11 @@ class SaleOrderLine(models.Model):
     real_stock = fields.Float(string='Stock', compute='_calc_stock')
 
     @api.multi
-    def product_id_change_with_bom(
+    def product_id_change(
             self, pricelist, product, qty=0, uom=False, qty_uos=0,
             uos=False, name='', partner_id=False, lang=False, update_tax=True,
             date_order=False, packaging=False, fiscal_position=False,
-            flag=False, mrp_boms=False):
+            flag=False):
         res = super(SaleOrderLine, self).product_id_change(
             pricelist, product, qty=qty, uom=uom, qty_uos=qty_uos, uos=uos,
             name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
