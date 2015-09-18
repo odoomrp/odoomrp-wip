@@ -117,15 +117,14 @@ class PricelistItem(models.Model):
                     qty=qty, partner_id=partner_id)
                 item_ids += new_item_ids
             if item.base == -2:
-                type = 'supplier'
                 if item.pricelist.type == 'sale':
-                    type = 'customer'
+                    suppinfo_obj = suppinfo_obj.with_context(
+                        supplierinfo_type='customer')
                 tmpl_id = product_tmpl_id
                 if not tmpl_id and product_id:
                     tmpl_id = product_obj.browse(product_id).product_tmpl_id.id
                 if not suppinfo_obj.search([('product_tmpl_id', '=', tmpl_id),
-                                            ('name', '=', partner_id),
-                                            ('type', '=', type)]):
+                                            ('name', '=', partner_id)]):
                     item_ids.remove(item.id)
         return item_ids
 
