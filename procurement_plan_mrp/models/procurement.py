@@ -27,7 +27,7 @@ class ProcurementOrder(models.Model):
             else:
                 self.show_button_create = bool(boms)
 
-    level = fields.Integer(string='Level')
+    level = fields.Integer(string='Level', default=0)
     parent_procurement_id = fields.Many2one(
         'procurement.order', string='Procurement Parent')
     show_button_create = fields.Boolean(
