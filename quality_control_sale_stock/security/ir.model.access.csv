@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_user_qc_inspection,qc_inspection,quality_control.model_qc_inspection,base.group_sale_salesman,1,0,0,0
