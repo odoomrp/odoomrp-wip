@@ -51,7 +51,7 @@ class MrpBomChange(models.Model):
                 lambda x: x.product_id.id == self.old_component.id)
             if self.create_new_version:
                 new_bom = bom._copy_bom()
-                bom._update_bom_state_after_copy()
+                bom.button_historical()
                 new_bom.button_activate()
                 self.boms = [(3, bom.id)]
                 self.boms = [(4, new_bom.id)]
