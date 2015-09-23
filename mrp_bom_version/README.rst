@@ -1,20 +1,9 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-Module name
-===========
-
-mrp_bom_version, MRP - BoM version
-
-Short Description
------------------
-
-This module is intended to add a version control to BoM (Bill of Materials) and to allow to control his life cycle.
-
-[es_ES] Este módulo tiene como objetivo el añadir el control de versiones a la LdM (Lista de Materiales) y permitir el control de su ciclo de vida.
-
-Long Description
-----------------
+=================
+MRP - BoM Version
+=================
 
 This module provides a state in the BoM whether to allow their use in
 manufacturing, to do the following states are defined:
@@ -40,46 +29,30 @@ to be unique.
   and a new BOM is creating based on this  but with version number +1 and
   changing state to draft
 
-Installation
-============
-
-To install this module, you need to:
-** to do **
-
-Configuration
-=============
-
-To configure this module, you need to:
-** to do **
 
 Usage
 =====
 
-** to do **
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.odoo-community.org/runbot/188/8.0
 
-Installation
-============
 
-** to do **
+Bug Tracker
+===========
 
-Configuration
-=============
+Bugs are tracked on `GitHub Issues <https://github.com/odoomrp/odoomrp-wip/issues>`_.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
+`here <https://github.com/odoomrp/odoomrp-wip/issues/new?body=module:%20mrp_bom_version%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
-To configure this module, you need to:
-** to do **
-
-Usage
-=====
-
-To use this module, you need to:
-** to do **
 
 Credits
 =======
 
-* odooMRP Project, www.odoomrp.com
-
 Contributors
 ------------
-
-** to do **
+* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+* Ana Juaristi <anajuaristi@avanzosc.es>
+* Alfredo de la Fuente <alfredodelafuente@avanzosc.es>
+* Oihane Crucelaegui <oihanecrucelaegui@avanzosc.es>
