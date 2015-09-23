@@ -2,7 +2,7 @@
 # (c) 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import api, fields, models
+from openerp import fields, models
 
 
 class MrpConfigSettings(models.TransientModel):
@@ -29,8 +29,3 @@ class MrpConfigSettings(models.TransientModel):
         string='Keep re-editing BoM active',
         help='This will allow you to define if those BoM passed back to draft'
         ' are still activated or not', related='company_id.active_draft')
-
-    @api.one
-    @api.onchange('company_id')
-    def _onchange_company_id(self):
-        self.active_draft = self.company_id.active_draft

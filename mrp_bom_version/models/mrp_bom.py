@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
+# (c) 2015 Oihane Crucelaegui - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+
 from openerp import models, fields, api
 
 
@@ -86,30 +86,24 @@ class MrpBom(models.Model):
     def button_new_version(self):
         self.ensure_one()
         new_bom = self._copy_bom()
-        self._update_bom_state_after_copy()
+        self.button_historical()
         return {
             'type': 'ir.actions.act_window',
             'view_type': 'form, tree',
             'view_mode': 'form',
             'res_model': 'mrp.bom',
             'res_id': new_bom.id,
-            'target': 'new',
+            'target': 'current',
         }
 
     def _copy_bom(self):
         new_bom = self.copy({
             'version': self.version + 1,
-            'active': True,
+            'active': (self.company_id.active_draft if self.company_id else
+                       self.env.user.company_id.active_draft),
             'parent_bom': self.id,
         })
         return new_bom
-
-    def _update_bom_state_after_copy(self):
-        self.write({
-            'active': False,
-            'state': 'historical',
-            'historical_date': fields.Date.today(),
-        })
 
     @api.one
     def button_activate(self):
