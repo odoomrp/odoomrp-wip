@@ -76,8 +76,9 @@ class MrpBom(models.Model):
         comodel_name='mrp.bom', string='Old Versions',
         compute='_get_old_versions')
 
-    @api.one
+    @api.multi
     def button_draft(self):
+        self.ensure_one()
         self.active = (self.company_id.active_draft if self.company_id else
                        self.env.user.company_id.active_draft)
         self.state = 'draft'
@@ -105,15 +106,17 @@ class MrpBom(models.Model):
         })
         return new_bom
 
-    @api.one
+    @api.multi
     def button_activate(self):
+        self.ensure_one()
         self.write({
             'active': True,
             'state': 'active'
         })
 
-    @api.one
+    @api.multi
     def button_historical(self):
+        self.ensure_one()
         self.write({
             'active': False,
             'state': 'historical',
