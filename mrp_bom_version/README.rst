@@ -15,7 +15,8 @@ manufacturing, to do the following states are defined:
   lines, and the new field Active, for false default when you create a new BoM.
   The "active" state may be passed back to state "draft", if we mark the new
   field "Allow re-edit the BoM list", this new field is defined in 
-  *Configuration > Configuration > Manufacturing*.
+  *Configuration > Configuration > Manufacturing*. You can configure there also
+  if those BoM will continue with active check marked as True or not.
   The active state may move to state "Historical".
 * **Historical**: 
   This is the last state of the LdM, you can not change any field on the form.
@@ -26,7 +27,7 @@ to be unique.
 
 * **New version** :
   By clicking the button version, current BOM is moved to historical state,
-  and a new BOM is creating based on this  but with version number +1 and
+  and a new BOM is creating based on this but with version number +1 and
   changing state to draft
 
 
