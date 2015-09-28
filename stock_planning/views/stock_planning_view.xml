@@ -43,15 +43,26 @@
                         <field name="virtual_available" string="Forecast Quantity"/>
                         <field name="incoming_qty" string="Incoming"/>
                         <field name="outgoing_qty" string="Outgoing"/>
-                        <field name="move_incoming_to_date" string="Incoming up to date from moves"/>
                         <field name="procurement_incoming_to_date" string="Incoming up to date from procurements"/>
+                        <field name="incoming_in_po" string="Incoming in PO"/>
+                        <field name="move_incoming_to_date" string="Incoming up to date from moves"/>
                         <field name="outgoing_to_date" string="Outgoing to date"/>
                         <field name="scheduled_to_date" string="Scheduled to date"/>
                         <field name="rule_min_qty" string="Rule min. qty"/>
                         <field name="rule_max_qty" string="Rule max. qty"/>
                         <field name="required_increase" string="Required increase"/>
+                        <field name="purchases" invisible="1"/>
+                        <field name="procurements" invisible="1" />
+                        <field name="moves" invisible="1" />
+                        <button string="Show purchases" name="show_purchases"
+                                type="object" icon="terp-purchase" 
+                                attrs="{'invisible':[('purchases', '=', [])]}"/>
                         <button string="Show procurements" name="show_procurements"
-                                type="object" icon="gtk-convert" />
+                                type="object" icon="gtk-convert" 
+                                attrs="{'invisible':[('procurements', '=', [])]}"/>
+                        <button string="Show moves" name="show_moves"
+                                type="object" icon="gtk-index" 
+                                attrs="{'invisible':[('moves', '=', [])]}"/>
                         <button string="Generate procurement" name="generate_procurement"
                                 type="object" icon="gtk-execute"
                                 attrs="{'invisible':[('required_increase', '&lt;=', 0)]}" />

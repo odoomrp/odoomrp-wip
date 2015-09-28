@@ -1,6 +1,5 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -17,17 +16,18 @@
 ##############################################################################
 {
     'name': 'Stock Planning',
-    'version': "1.0",
+    "version": "8.0.1.0.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     'website': "http://www.odoomrp.com",
+    'category': 'Warehouse Management',
+    "license": 'AGPL-3',
     "contributors": [
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <anajuaristi@avanzosc.es>",
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
     ],
-    'category': 'Warehouse Management',
     'depends': ['sale',
                 'purchase',
                 'stock'

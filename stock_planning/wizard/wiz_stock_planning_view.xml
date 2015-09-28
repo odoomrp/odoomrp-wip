@@ -9,7 +9,7 @@
                 <form string="Calculate stock planning">
                     <group colspan="4" col="6" >
                         <field name="company" colspan="6" />
-                        <field name="from_date" colspan="2" />
+                        <field name="from_date" colspan="2" invisible="1"/>
                         <field name="days" colspan="2" />
                         <field name="to_date" colspan="2" />
                         <field name="category" colspan="2" />

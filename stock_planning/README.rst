@@ -1,3 +1,4 @@
+==============
 Stock planning
 ==============
 This module shows a prevision of stock and allows you to generate their
