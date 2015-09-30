@@ -24,7 +24,7 @@
                 "mrp_project_link",
                 "mrp_operations_time_control",
                 "stock_account",
-                "mrp_production_project_estimated_cost"],
+                "product_variant_cost"],
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",

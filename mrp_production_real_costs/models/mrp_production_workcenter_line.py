@@ -42,7 +42,7 @@ class MrpProductionWorkcenterLine(models.Model):
                     (product.default_code or ''))
             general_acc = workcenter.costs_general_account_id or False
             price = -(workcenter.costs_hour * operation_line.uptime)
-            analytic_vals = production._prepare_cost_analytic_line(
+            analytic_vals = production._prepare_real_cost_analytic_line(
                 journal_id, name, production, product,
                 general_account=general_acc, workorder=self,
                 qty=operation_line.uptime, amount=price)

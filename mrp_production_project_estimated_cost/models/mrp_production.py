@@ -149,9 +149,9 @@ class MrpProduction(models.Model):
             }
 
     @api.model
-    def _prepare_cost_analytic_line(
+    def _prepare_estimated_cost_analytic_line(
             self, journal, name, production, product, general_account=None,
-            workorder=None, qty=1, std_cost=0, avg_cost=0, amount=0):
+            workorder=None, qty=1, std_cost=0, avg_cost=0):
         """
         Prepare the vals for creating an analytic entry for stimated cost
         :param journal: Journal of the entry
@@ -190,7 +190,7 @@ class MrpProduction(models.Model):
             'date': analytic_line_obj._get_default_date(),
             'product_id': product and product.id or False,
             'unit_amount': qty,
-            'amount': amount,
+            'amount': 0,
             'product_uom_id': product.uom_id.id,
             'general_account_id': general_account.id,
             'estim_std_cost': -qty * (std_cost or
@@ -208,7 +208,7 @@ class MrpProduction(models.Model):
         name = _('%s-%s' % (prod.name, product_line.work_order.name or ''))
         product = product_line.product_id
         qty = product_line.product_qty
-        vals = self._prepare_cost_analytic_line(
+        vals = self._prepare_estimated_cost_analytic_line(
             journal, name, prod, product, workorder=product_line.work_order,
             qty=qty)
         return self.env['account.analytic.line'].create(vals)
@@ -225,7 +225,7 @@ class MrpProduction(models.Model):
                                    'analytic_journal_machines', False)
             name = (_('%s-%s Pre-operation') %
                     (prod.name, workorder.workcenter_id.name))
-            vals = self._prepare_cost_analytic_line(
+            vals = self._prepare_estimated_cost_analytic_line(
                 journal, name, prod, product, workorder=workorder,
                 qty=wc.time_start)
             return self.env['account.analytic.line'].create(vals)
@@ -242,7 +242,7 @@ class MrpProduction(models.Model):
                                    'analytic_journal_machines', False)
             name = (_('%s-%s Post-operation') %
                     (prod.name, workorder.workcenter_id.name))
-            vals = self._prepare_cost_analytic_line(
+            vals = self._prepare_estimated_cost_analytic_line(
                 journal, name, prod, product, workorder=workorder,
                 qty=wc.time_stop)
             return self.env['account.analytic.line'].create(vals)
@@ -261,7 +261,7 @@ class MrpProduction(models.Model):
                     (prod.name, workorder.routing_wc_line.operation.code,
                      workorder.workcenter_id.name))
             cost = workorder.workcenter_id.costs_cycle
-            vals = self._prepare_cost_analytic_line(
+            vals = self._prepare_estimated_cost_analytic_line(
                 journal, name, prod, product, workorder=workorder,
                 qty=workorder.cycle, std_cost=cost, avg_cost=cost)
             return self.env['account.analytic.line'].create(vals)
@@ -280,7 +280,7 @@ class MrpProduction(models.Model):
                     (prod.name, workorder.routing_wc_line.operation.code,
                      workorder.workcenter_id.name))
             cost = workorder.workcenter_id.costs_hour
-            vals = self._prepare_cost_analytic_line(
+            vals = self._prepare_estimated_cost_analytic_line(
                 journal, name, prod, product, workorder=workorder,
                 qty=workorder.hour, std_cost=cost, avg_cost=cost)
             return self.env['account.analytic.line'].create(vals)
@@ -301,7 +301,7 @@ class MrpProduction(models.Model):
                      product.name))
             cost = wc.op_avg_cost
             qty = workorder.hour * wc.op_number
-            vals = self._prepare_cost_analytic_line(
+            vals = self._prepare_estimated_cost_analytic_line(
                 journal, name, prod, product, workorder=workorder, qty=qty,
                 std_cost=cost, avg_cost=cost)
             return self.env['account.analytic.line'].create(vals)
