@@ -37,7 +37,7 @@ class StockMove(models.Model):
                         'journal_materials', False)
                     name = ('Final product - ' + (production.name or '') +
                             '-' + (product.default_code or ''))
-                    vals = production._prepare_cost_analytic_line(
+                    vals = production._prepare_real_cost_analytic_line(
                         journal_id, name, production, product,
                         qty=record.product_qty, amount=amount)
                     task = task_obj.search(
@@ -69,10 +69,12 @@ class StockMove(models.Model):
                         (production.name or '') + '-' +
                         (record.work_order.routing_wc_line.operation.code or
                          '') + '-' + (product.default_code or ''))
-                    analytic_vals = production._prepare_cost_analytic_line(
-                        journal_id, name, production, product,
-                        workorder=record.work_order, qty=record.product_qty,
-                        amount=(-price * record.product_qty))
+                    analytic_vals = (
+                        production._prepare_real_cost_analytic_line(
+                            journal_id, name, production, product,
+                            workorder=record.work_order,
+                            qty=record.product_qty,
+                            amount=(-price * record.product_qty)))
                     task = task_obj.search(
                         [('mrp_production_id', '=', production.id),
                          ('wk_order', '=', False)])
