@@ -34,7 +34,7 @@ class StockPlanning(models.Model):
         purchase_line_obj = self.env['purchase.order.line']
         moves = move_obj._find_moves_from_stock_planning(
             self.company, self.scheduled_date, product=self.product,
-            warehouse=self.warehouse, location_dest_id=self.location)
+            location_dest_id=self.location)
         self.move_incoming_to_date = sum(moves.mapped('product_uom_qty'))
         moves = moves.filtered(lambda x: x.date <= self.scheduled_date)
         if self.from_date:
@@ -43,7 +43,7 @@ class StockPlanning(models.Model):
         states = ('confirmed', 'exception')
         procurements = proc_obj._find_procurements_from_stock_planning(
             self.company, self.scheduled_date, states, product=self.product,
-            warehouse=self.warehouse, location_id=self.location,
+            location_id=self.location,
             without_purchases=True)
         self.procurement_incoming_to_date = sum(
             procurements.mapped('product_qty'))
@@ -55,7 +55,7 @@ class StockPlanning(models.Model):
         self.procurements = [(6, 0, procurements.ids)]
         moves = move_obj._find_moves_from_stock_planning(
             self.company, self.scheduled_date, product=self.product,
-            warehouse=self.warehouse, location_id=self.location)
+            location_id=self.location)
         self.outgoing_to_date = sum(moves.mapped('product_uom_qty'))
         lines = purchase_line_obj._find_purchase_lines_from_stock_planning(
             self.company, self.scheduled_date, self.product, self.warehouse,
@@ -67,10 +67,11 @@ class StockPlanning(models.Model):
         purchase_orders = self.env['purchase.order']
         purchase_orders |= lines.mapped('order_id')
         self.purchases = [(6, 0, purchase_orders.ids)]
-        self.scheduled_to_date = (
+        scheduled_to_date = (
             self.qty_available + self.move_incoming_to_date +
             self.procurement_incoming_to_date + self.incoming_in_po -
             self.outgoing_to_date)
+        self.scheduled_to_date = scheduled_to_date
 
     @api.one
     def _get_rule(self):
@@ -214,7 +215,7 @@ class StockPlanning(models.Model):
         procurement_obj = self.env['procurement.order']
         cond = [('warehouse', '=', self.warehouse.id),
                 ('location', '=', self.location.id),
-                ('scheduled_date', '<=', self.scheduled_date),
+                ('scheduled_date', '=', self.scheduled_date),
                 ('product', '=', self.product.id),
                 ('required_qty', '!=', 0)]
         lines = self.search(cond)
