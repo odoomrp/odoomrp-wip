@@ -203,8 +203,7 @@ class MrpProduction(models.Model):
         if not product_line.product_id:
             raise exceptions.Warning(
                 _("One consume line has no product assigned."))
-        journal = self.env.ref('mrp_production_project_estimated_cost.'
-                               'analytic_journal_materials', False)
+        journal = self.env.ref('mrp.analytic_journal_materials', False)
         name = _('%s-%s' % (prod.name, product_line.work_order.name or ''))
         product = product_line.product_id
         qty = product_line.product_qty
@@ -221,8 +220,7 @@ class MrpProduction(models.Model):
                 raise exceptions.Warning(
                     _("Workcenter '%s' doesn't have pre-operation costing "
                       "product.") % workorder.workcenter_id.name)
-            journal = self.env.ref('mrp_production_project_estimated_cost.'
-                                   'analytic_journal_machines', False)
+            journal = self.env.ref('mrp.analytic_journal_machines', False)
             name = (_('%s-%s Pre-operation') %
                     (prod.name, workorder.workcenter_id.name))
             vals = self._prepare_estimated_cost_analytic_line(
@@ -238,8 +236,7 @@ class MrpProduction(models.Model):
                 raise exceptions.Warning(
                     _("Workcenter '%s' doesn't have post-operation costing "
                       "product.") % workorder.workcenter_id.name)
-            journal = self.env.ref('mrp_production_project_estimated_cost.'
-                                   'analytic_journal_machines', False)
+            journal = self.env.ref('mrp.analytic_journal_machines', False)
             name = (_('%s-%s Post-operation') %
                     (prod.name, workorder.workcenter_id.name))
             vals = self._prepare_estimated_cost_analytic_line(
@@ -250,8 +247,7 @@ class MrpProduction(models.Model):
     @api.model
     def _create_worcenter_cycles_estimated_cost(self, prod, wc, workorder):
         if workorder.cycle and workorder.workcenter_id.costs_cycle:
-            journal = prod.env.ref('mrp_production_project_estimated_cost.'
-                                   'analytic_journal_machines', False)
+            journal = prod.env.ref('mrp.analytic_journal_machines', False)
             product = workorder.workcenter_id.product_id
             if not product:
                 raise exceptions.Warning(
@@ -274,8 +270,7 @@ class MrpProduction(models.Model):
                 raise exceptions.Warning(
                     _("There is at least this workcenter without "
                       "product: %s") % workorder.workcenter_id.name)
-            journal = self.env.ref('mrp_production_project_estimated_cost.'
-                                   'analytic_journal_machines', False)
+            journal = self.env.ref('mrp.analytic_journal_machines', False)
             name = (_('%s-%s-H-%s') %
                     (prod.name, workorder.routing_wc_line.operation.code,
                      workorder.workcenter_id.name))
@@ -293,9 +288,7 @@ class MrpProduction(models.Model):
                 raise exceptions.Warning(
                     _("There is at least this workcenter without "
                       "product: %s") % workorder.workcenter_id.name)
-            journal = self.env.ref(
-                'mrp_production_project_estimated_cost.'
-                'analytic_journal_operators', False)
+            journal = self.env.ref('mrp.analytic_journal_operators', False)
             name = (_('%s-%s-%s') %
                     (prod.name, workorder.routing_wc_line.operation.code,
                      product.name))
