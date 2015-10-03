@@ -67,7 +67,7 @@ class MrpProduction(models.Model):
             self, journal, name, production, product, general_account=None,
             workorder=None, qty=1, amount=0):
         """
-        Prepare the vals for creating an analytic entry for stimated cost
+        Prepare the vals for creating an analytic entry for real cost
         :param journal: Journal of the entry
         :param name: Name of the entry
         :param production: Origin product
