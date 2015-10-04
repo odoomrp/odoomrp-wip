@@ -102,18 +102,18 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def product_id_change(
-            self, pricelist, product_id, qty=0, uom=False, qty_uos=0,
+            self, pricelist, product, qty=0, uom=False, qty_uos=0,
             uos=False, name='', partner_id=False, lang=False, update_tax=True,
             date_order=False, packaging=False, fiscal_position=False,
             flag=False):
         product_obj = self.env['product.product']
         res = super(SaleOrderLine, self).product_id_change(
-            pricelist, product_id, qty=qty, uom=uom, qty_uos=qty_uos, uos=uos,
+            pricelist, product, qty=qty, uom=uom, qty_uos=qty_uos, uos=uos,
             name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
             date_order=date_order, packaging=packaging,
             fiscal_position=fiscal_position, flag=flag)
-        if product_id:
-            product = product_obj.browse(product_id)
+        if product:
+            product = product_obj.browse(product)
             res['value']['product_attributes'] = (
                 product._get_product_attributes_values_dict())
             res['value']['name'] = self._get_product_description(
