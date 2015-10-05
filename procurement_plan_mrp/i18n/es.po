@@ -1,22 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* procurement_plan_mrp
+# 	* procurement_plan_mrp
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-06 13:00+0000\n"
-"PO-Revision-Date: 2015-07-06 15:02+0100\n"
-"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"POT-Creation-Date: 2015-10-06 08:00+0000\n"
+"PO-Revision-Date: 2015-10-06 10:01+0100\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. module: procurement_plan_mrp
 #: code:addons/procurement_plan_mrp/models/procurement.py:119
+#: code:addons/procurement_plan_mrp/models/procurement.py:155
 #, python-format
 msgid "BoM not found, for product: %s"
 msgstr "LdM no encontrada, para el producto: %s"
@@ -37,6 +39,12 @@ msgid "Generate procurements"
 msgstr "Generar abastecimientos"
 
 #. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/models/procurement.py:105
+#, python-format
+msgid "Generated from sale order: "
+msgstr "Generado desde el pedido de venta: "
+
+#. module: procurement_plan_mrp
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
 msgid "Import Procurements"
 msgstr "Importar abastecimientos"
@@ -54,13 +62,18 @@ msgstr "Órdenes de Producción"
 #. module: procurement_plan_mrp
 #: model:ir.model,name:procurement_plan_mrp.model_mrp_production
 msgid "Manufacturing Order"
-msgstr "Órden de producción"
+msgstr "Orden de fabricación"
 
 #. module: procurement_plan_mrp
 #: code:addons/procurement_plan_mrp/models/procurement.py:171
+#: code:addons/procurement_plan_mrp/models/procurement.py:208
 #, python-format
-msgid "No product defined for BoM line with template: %s, on the list of materials %s"
-msgstr "Producto no definido para línea de LdM con plantilla: %s, en la lista de materiales %s"
+msgid ""
+"No product defined for BoM line with template: %s, on the list of materials "
+"%s"
+msgstr ""
+"Producto no definido para línea de LdM con plantilla: %s, en la lista de "
+"materiales %s"
 
 #. module: procurement_plan_mrp
 #: view:mrp.production:procurement_plan_mrp.view_mrp_production_filter_inh_mrpprocurementplan
@@ -84,12 +97,18 @@ msgid "Procurement Plan"
 msgstr "Plan abastecimientos"
 
 #. module: procurement_plan_mrp
+#: field:stock.reservation,procurement_from_plan:0
+msgid "Procurement from plan"
+msgstr "Abastecimiento desde plan"
+
+#. module: procurement_plan_mrp
 #: view:mrp.production:procurement_plan_mrp.view_mrp_production_filter_inh_mrpprocurementplan
 msgid "Product"
 msgstr "Producto"
 
 #. module: procurement_plan_mrp
 #: code:addons/procurement_plan_mrp/models/procurement.py:157
+#: code:addons/procurement_plan_mrp/models/procurement.py:193
 #, python-format
 msgid "Product has not been found on the list of materials %s, Level %s"
 msgstr "Producto no se ha encontrado en la lista de materiales %s, Nivel %s"
@@ -105,8 +124,23 @@ msgid "Purchase Orders"
 msgstr "Pedido de compra"
 
 #. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea pedido de venta"
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_stock_reservation
+msgid "Stock Reservation"
+msgstr "Reserva de existencias"
+
+#. module: procurement_plan_mrp
 #: code:addons/procurement_plan_mrp/models/procurement.py:142
+#: code:addons/procurement_plan_mrp/models/procurement.py:178
 #, python-format
 msgid "THEY HAVE NOT GENERATED ALL PROCUREMENTS"
 msgstr "NO SE HAN GENERADO TODOS LOS ABASTECIMIENTOS"
-

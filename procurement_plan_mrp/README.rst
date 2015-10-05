@@ -9,6 +9,10 @@ You can import procurements with "Internal" location, and then click the
 button "Generate procurements", what it does is generate procurements for all
 products that are needed in the production of this final product.
 
+Also, by confirming a sales order, if a procurement order of a product to
+produce is generated, procurement plan is automatically created for that
+procurement order, and also automatically creates lower levels of the same.
+
 Credits
 =======
 

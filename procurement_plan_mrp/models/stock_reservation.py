@@ -2,7 +2,10 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from . import procurement
-from . import mrp_production
-from . import stock_reservation
-from . import sale_order
+from openerp import models, fields
+
+
+class StockReservation(models.Model):
+    _inherit = 'stock.reservation'
+    procurement_from_plan = fields.Many2one(
+        'procurement.order', string='Procurement from plan')

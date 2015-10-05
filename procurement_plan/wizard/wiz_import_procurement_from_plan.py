@@ -32,6 +32,7 @@ class WizImportProcurementFromPlan(models.TransientModel):
         self.ensure_one()
         cond = [('warehouse_id', '=', self.warehouse_id.id),
                 ('state', 'not in', ('cancel', 'done')),
+                ('location_type', '=', 'internal'),
                 ('plan', '=', False)]
         if self.from_date:
             cond.append(('date_planned', '>=', self.from_date))

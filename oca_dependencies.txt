@@ -1,6 +1,7 @@
 # List the OdooMRP project dependencies, one per line
 odoomrp-utils
 # List the OCA project dependencies, one per line
+stock-logistics-warehouse https://github.com/OCA/stock-logistics-warehouse.git
 crm https://github.com/OCA/crm
 manufacture https://github.com/OCA/manufacture
 sale-workflow https://github.com/OCA/sale-workflow

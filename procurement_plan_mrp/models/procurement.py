@@ -47,12 +47,16 @@ class ProcurementOrder(models.Model):
 
     @api.multi
     def button_erase_lower_levels(self):
+        reservation_obj = self.env['stock.reservation']
         self.ensure_one()
         cond = [('parent_procurement_id', 'child_of', self.id),
                 ('id', '!=', self.id)]
         procs = self.search(cond)
+        cond = [('procurement_from_plan', 'in', procs.ids)]
+        reservations = reservation_obj.search(cond)
         procs.cancel()
         procs.unlink()
+        reservations.unlink()
         return {'view_type': 'form,tree',
                 'view_mode': 'form',
                 'res_model': 'procurement.plan',
@@ -93,6 +97,36 @@ class ProcurementOrder(models.Model):
                 'type': 'ir.actions.act_window',
                 'target': 'current',
                 }
+
+    @api.one
+    def _create_procurement_plan_from_procurement(self, sale):
+        plan_obj = self.env['procurement.plan']
+        project_obj = self.env['project.project']
+        vals = {'name': _('Generated from sale order: ') + sale.name,
+                'warehouse_id': self.warehouse_id.id,
+                'from_date': self.date_planned,
+                'to_date': self.date_planned,
+                'procurement_ids': [(4, self.id)]}
+        if sale.main_project_id:
+            vals['project_id'] = sale.main_project_id.id
+        else:
+            project = project_obj.create({'name': sale.name})
+            vals['project_id'] = project.id
+        procurement_plan = plan_obj.create(vals)
+        self._create_procurement_lower_levels(procurement_plan.id)
+        for proc in procurement_plan.procurement_ids:
+            if proc.show_button_create:
+                proc.button_create_lower_levels()
+
+    @api.one
+    def _create_procurement_lower_levels(self, plan_id):
+        plan_obj = self.env['procurement.plan']
+        plan = plan_obj.browse(plan_id)
+        procurements = plan.procurement_ids.filtered('show_button_create')
+        while procurements:
+            procurements.button_create_lower_levels()
+            plan.refresh()
+            procurements = plan.procurement_ids.filtered('show_button_create')
 
 
 class ProcurementPlan(models.Model):
@@ -160,6 +194,7 @@ class ProcurementPlan(models.Model):
         else:
             procurement = self._create_procurement_from_bom_line(
                 level, line.product_id, qty, procurement)
+            self._create_stock_reservation(procurement)
         for child in line.child_line_ids:
             if child.child_line_ids:
                 self._calculate_bom_line_details(
@@ -174,6 +209,7 @@ class ProcurementPlan(models.Model):
                 procurement = self._create_procurement_from_bom_line(
                     level+1, child.product_id, child.product_qty * qty,
                     procurement)
+                self._create_stock_reservation(procurement)
         return product_errors
 
     def _create_procurement_from_bom_line(self, level, product, qty,
@@ -218,3 +254,20 @@ class ProcurementPlan(models.Model):
         res = procurement_obj.onchange_product_id(product.id)
         vals.update('value' in res and res['value'] or {})
         return vals
+
+    def _create_stock_reservation(self, procurement):
+        reservation_obj = self.env['stock.reservation']
+        dest_location_id = self.env.ref(
+            'stock_reserve.stock_location_reservation').id
+        vals = {'name': procurement.product_id.name,
+                'product_id': procurement.product_id.id,
+                'product_uom_qty': procurement.product_qty,
+                'product_uom': procurement.product_uom.id,
+                'company_id': procurement.company_id.id,
+                'location_id': procurement.location_id.id,
+                'dest_location_id': dest_location_id,
+                'procurement_from_plan': procurement.id,
+                'origin': self.sequence,
+                'date_expected': procurement.date_planned
+                }
+        reservation_obj.create(vals)
