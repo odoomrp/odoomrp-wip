@@ -10,7 +10,7 @@
                     <field name="to_date" invisible="1" />
                     <field name="warehouse_id" invisible="1" />
                     <separator string="Procurements"/>
-                    <field name="procurement_ids" height="300" width="700" />
+                    <field name="procurement_ids" height="300" width="700"/>
                     <footer>
                         <button name="import_procurements" type="object" 
                                 string="Import" class="oe_highlight" />

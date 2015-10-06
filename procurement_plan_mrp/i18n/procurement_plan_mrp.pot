@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-06 13:00+0000\n"
-"PO-Revision-Date: 2015-07-06 13:00+0000\n"
+"POT-Creation-Date: 2015-10-06 08:00+0000\n"
+"PO-Revision-Date: 2015-10-06 08:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 
 #. module: procurement_plan_mrp
 #: code:addons/procurement_plan_mrp/models/procurement.py:119
+#: code:addons/procurement_plan_mrp/models/procurement.py:155
 #, python-format
 msgid "BoM not found, for product: %s"
 msgstr ""
@@ -34,6 +35,12 @@ msgstr ""
 #. module: procurement_plan_mrp
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
 msgid "Generate procurements"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/models/procurement.py:105
+#, python-format
+msgid "Generated from sale order: "
 msgstr ""
 
 #. module: procurement_plan_mrp
@@ -58,6 +65,7 @@ msgstr ""
 
 #. module: procurement_plan_mrp
 #: code:addons/procurement_plan_mrp/models/procurement.py:171
+#: code:addons/procurement_plan_mrp/models/procurement.py:208
 #, python-format
 msgid "No product defined for BoM line with template: %s, on the list of materials %s"
 msgstr ""
@@ -84,12 +92,18 @@ msgid "Procurement Plan"
 msgstr ""
 
 #. module: procurement_plan_mrp
+#: field:stock.reservation,procurement_from_plan:0
+msgid "Procurement from plan"
+msgstr ""
+
+#. module: procurement_plan_mrp
 #: view:mrp.production:procurement_plan_mrp.view_mrp_production_filter_inh_mrpprocurementplan
 msgid "Product"
 msgstr ""
 
 #. module: procurement_plan_mrp
 #: code:addons/procurement_plan_mrp/models/procurement.py:157
+#: code:addons/procurement_plan_mrp/models/procurement.py:193
 #, python-format
 msgid "Product has not been found on the list of materials %s, Level %s"
 msgstr ""
@@ -105,7 +119,23 @@ msgid "Purchase Orders"
 msgstr ""
 
 #. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_stock_reservation
+msgid "Stock Reservation"
+msgstr ""
+
+#. module: procurement_plan_mrp
 #: code:addons/procurement_plan_mrp/models/procurement.py:142
+#: code:addons/procurement_plan_mrp/models/procurement.py:178
 #, python-format
 msgid "THEY HAVE NOT GENERATED ALL PROCUREMENTS"
 msgstr ""
