@@ -6,25 +6,6 @@
 from openerp import models, fields, api, _
 
 
-class ProcurementOrder(models.Model):
-    _inherit = 'procurement.order'
-
-    @api.multi
-    def run(self, autocommit=False):
-        sale_obj = self.env['sale.order']
-        res = super(ProcurementOrder, self).run(autocommit=autocommit)
-        for rec in self:
-            for oline in rec.move_ids:
-                orders = sale_obj.search([('procurement_group_id', '=',
-                                           oline.group_id.id)])
-        for line in orders.order_line:
-            if line.mrp_boms:
-                picking = oline.picking_id
-                picking.note = (
-                    _('Product: "%s" \n') % (line.product_id.name_template))
-        return res
-
-
 class MrpBomSaleOrder(models.Model):
     _name = 'mrp.bom.sale.order'
 
@@ -41,7 +22,8 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     mrp_boms = fields.One2many(comodel_name='mrp.bom.sale.order',
-                               inverse_name='sale_order', string='Mrp BoM')
+                               inverse_name='sale_order', string='Mrp BoM',
+                               copy=True)
 
     @api.one
     @api.depends('product_uom_qty', 'product_id')
@@ -82,11 +64,46 @@ class SaleOrderLine(models.Model):
         order_lines = []
         for line in mrp_bom.bom_line_ids:
             order_line = {
-                'bom_line': line,
+                'bom_line': line.id,
                 'product_uom_qty':
                 line.product_qty * qty,
             }
             order_lines.append(order_line)
         res['value'].update({'mrp_boms': ([(0, 0, oline)
                                            for oline in order_lines])})
+        return res
+
+
+class StockMove(models.Model):
+    _inherit = 'stock.move'
+
+    @api.model
+    def _action_explode(self, move):
+        res = super(StockMove, self)._action_explode(move)
+        bom_obj = self.env['mrp.bom']
+        product_obj = self.env['product.product']
+        for new_move in self.env['stock.move'].browse(res):
+            product = product_obj.search([(
+                'id', '=', new_move.procurement_id.product_id.id)])
+            if bom_obj.search([
+                '&', ('product_tmpl_id', '=', product.product_tmpl_id.id),
+                    ('type', '=', 'phantom')]):
+                    new_move.note = (
+                        _('Product: "%s" \n') % (new_move.procurement_id.name))
+        return res
+
+    @api.multi
+    def _picking_assign(self, procurement_group, location_from,
+                        location_to):
+        res = super(StockMove, self)._picking_assign(
+            procurement_group, location_from, location_to)
+        pick_obj = self.env['stock.picking']
+        notes = []
+        for move in self:
+            for procurement in move.procurement_id:
+                if procurement not in notes and move.note:
+                    notes.append(procurement)
+                    picking = pick_obj.search(
+                        [('id', '=', move.picking_id.id)])
+                    picking.note = (picking.note or '') + move.note
         return res

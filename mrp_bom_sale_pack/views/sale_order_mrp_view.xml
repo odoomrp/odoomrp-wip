@@ -15,7 +15,7 @@
                     <attribute name="editable"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/form//field[@name='name']" position="after">
-                    <field name="mrp_boms" attrs="{'invisible':[('mrp_boms','=',[])]}">
+                    <field name="mrp_boms" readonly="1" attrs="{'invisible':[('mrp_boms','=',[])]}">
                         <tree>
                             <field name="product_id"/>
                             <field name="product_uom"/>
