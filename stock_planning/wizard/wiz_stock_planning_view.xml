@@ -15,6 +15,9 @@
                         <field name="category" colspan="2" />
                         <field name="template" colspan="2" />
                         <field name="product" colspan="2" />
+                        <separator string="Locations" colspan="6"/>
+                        <field name="locations" colspan="6" nolabel="1"
+                               domain="[('company_id', '=', company), ('usage', '=', 'internal')]"/>
                     </group>
                     <footer>
                         <button name="calculate_stock_planning" type="object" 

@@ -11,8 +11,7 @@ class StockMove(models.Model):
 
     def _find_moves_from_stock_planning(
         self, company, to_date, from_date=None, category=None, template=None,
-        product=None, warehouse=None, location_id=None,
-            location_dest_id=None):
+            product=None, location_id=None, location_dest_id=None):
         cond = [('company_id', '=', company.id),
                 ('date', '<=', to_date),
                 ('state', 'not in', ('done', 'cancel'))]
@@ -24,8 +23,6 @@ class StockMove(models.Model):
             cond.append(('location_id', '=', location_id.id))
         if location_dest_id:
             cond.append(('location_dest_id', '=', location_dest_id.id))
-        if warehouse:
-            cond.append(('warehouse_id', '=', warehouse.id))
         moves = self.search(cond)
         if category:
             moves = moves.filtered(

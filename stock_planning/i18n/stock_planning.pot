@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-15 09:58+0000\n"
-"PO-Revision-Date: 2015-09-15 09:58+0000\n"
+"POT-Creation-Date: 2015-10-05 09:14+0000\n"
+"PO-Revision-Date: 2015-10-05 09:14+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -160,8 +160,21 @@ msgid "Location"
 msgstr ""
 
 #. module: stock_planning
+#: view:wiz.stock.planning:stock_planning.wiz_stock_planning_form_view
+#: field:wiz.stock.planning,locations:0
+msgid "Locations"
+msgstr ""
+
+#. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
 msgid "Month"
+msgstr ""
+
+#. module: stock_planning
+#: code:addons/stock_planning/models/stock_planning.py:202
+#: code:addons/stock_planning/models/stock_planning.py:204
+#, python-format
+msgid "Moves"
 msgstr ""
 
 #. module: stock_planning
@@ -175,8 +188,13 @@ msgid "Outgoing to date"
 msgstr ""
 
 #. module: stock_planning
-#: code:addons/stock_planning/models/stock_planning.py:191
-#: code:addons/stock_planning/models/stock_planning.py:264
+#: model:ir.model,name:stock_planning.model_procurement_order
+msgid "Procurement"
+msgstr ""
+
+#. module: stock_planning
+#: code:addons/stock_planning/models/stock_planning.py:180
+#: code:addons/stock_planning/models/stock_planning.py:182
 #, python-format
 msgid "Procurement orders"
 msgstr ""
@@ -189,7 +207,13 @@ msgid "Product"
 msgstr ""
 
 #. module: stock_planning
-#: code:addons/stock_planning/models/stock_planning.py:275
+#: model:ir.model,name:stock_planning.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: stock_planning
+#: code:addons/stock_planning/models/stock_planning.py:191
+#: code:addons/stock_planning/models/stock_planning.py:193
 #, python-format
 msgid "Purchase orders"
 msgstr ""
@@ -242,6 +266,11 @@ msgstr ""
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Show moves"
+msgstr ""
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Show procurements"
 msgstr ""
 
@@ -251,10 +280,15 @@ msgid "Show purchases"
 msgstr ""
 
 #. module: stock_planning
-#: code:addons/stock_planning/models/stock_planning.py:236
-#: code:addons/stock_planning/models/stock_planning.py:320
-#: code:addons/stock_planning/wizard/wiz_stock_planning.py:118
-#: code:addons/stock_planning/wizard/wiz_stock_planning.py:152
+#: model:ir.model,name:stock_planning.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_planning
+#: code:addons/stock_planning/models/stock_planning.py:224
+#: code:addons/stock_planning/models/stock_planning.py:227
+#: code:addons/stock_planning/wizard/wiz_stock_planning.py:74
+#: code:addons/stock_planning/wizard/wiz_stock_planning.py:82
 #: model:ir.actions.act_window,name:stock_planning.action_stock_planning
 #: model:ir.model,name:stock_planning.model_stock_planning
 #: model:ir.ui.menu,name:stock_planning.stock_planning_option_view
@@ -270,21 +304,8 @@ msgid "Template"
 msgstr ""
 
 #. module: stock_planning
-#: code:addons/stock_planning/models/stock_planning.py:190
-#: code:addons/stock_planning/models/stock_planning.py:263
-#, python-format
-msgid "There are no procurements to show"
-msgstr ""
-
-#. module: stock_planning
 #: field:wiz.stock.planning,to_date:0
 msgid "To date"
-msgstr ""
-
-#. module: stock_planning
-#: view:stock.planning:stock_planning.stock_planning_search_view
-#: field:stock.planning,warehouse:0
-msgid "Warehouse"
 msgstr ""
 
 #. module: stock_planning

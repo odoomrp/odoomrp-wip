@@ -8,7 +8,6 @@
             <field name="arch" type="xml">
                 <search string="Search Stock Planning">
                     <field name="company" />
-                    <field name="warehouse" />
                     <field name="location" />
                     <field name="scheduled_date" />
                     <field name="category" />
@@ -19,7 +18,6 @@
                         <filter string="Month" context="{'group_by':'scheduled_date:month'}"/>
                         <filter string="Week" context="{'group_by':'scheduled_date:week'}"/>
                         <filter string="Company" domain="[]" context="{'group_by':'company'}" />
-                        <filter string="Warehouse" domain="[]" context="{'group_by':'warehouse'}"/>
                         <filter string="Location" domain="[]" context="{'group_by':'location'}"/>
                         <filter string="Scheduled date" domain="[]" context="{'group_by':'scheduled_date'}"/>
                         <filter string="Category" domain="[]" context="{'group_by':'category'}"/>
@@ -35,7 +33,6 @@
             <field name="arch" type="xml">
                 <tree colors="orange:required_increase&lt;0;red:required_increase&gt;0;green:required_increase==0" string="Stock Planning">
                         <field name="company" />
-                        <field name="warehouse" />
                         <field name="location" />
                         <field name="scheduled_date" />
                         <field name="product" />

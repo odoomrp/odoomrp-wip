@@ -42,8 +42,8 @@ class StockPlanning(models.Model):
         self.moves = [(6, 0, moves.ids)]
         states = ('confirmed', 'exception')
         procurements = proc_obj._find_procurements_from_stock_planning(
-            self.company, self.scheduled_date, states, product=self.product,
-            location_id=self.location,
+            self.company, self.scheduled_date, states=states,
+            product=self.product, location_id=self.location,
             without_purchases=True)
         self.procurement_incoming_to_date = sum(
             procurements.mapped('product_qty'))
@@ -58,8 +58,7 @@ class StockPlanning(models.Model):
             location_id=self.location)
         self.outgoing_to_date = sum(moves.mapped('product_uom_qty'))
         lines = purchase_line_obj._find_purchase_lines_from_stock_planning(
-            self.company, self.scheduled_date, self.product, self.warehouse,
-            self.location)
+            self.company, self.scheduled_date, self.product, self.location)
         self.incoming_in_po = sum(lines.mapped('product_qty'))
         lines = lines.filtered(lambda x: x.date_planned <= self.scheduled_date)
         if self.from_date:
@@ -115,7 +114,6 @@ class StockPlanning(models.Model):
                     (self.scheduled_to_date - self.rule_min_qty) * -1)
 
     company = fields.Many2one('res.company', 'Company')
-    warehouse = fields.Many2one('stock.warehouse', 'Warehouse')
     location = fields.Many2one('stock.location', 'Location', translate=True)
     from_date = fields.Date('From Date')
     scheduled_date = fields.Date('Scheduled date')
@@ -213,8 +211,7 @@ class StockPlanning(models.Model):
     def generate_procurement(self):
         self.ensure_one()
         procurement_obj = self.env['procurement.order']
-        cond = [('warehouse', '=', self.warehouse.id),
-                ('location', '=', self.location.id),
+        cond = [('location', '=', self.location.id),
                 ('scheduled_date', '=', self.scheduled_date),
                 ('product', '=', self.product.id),
                 ('required_qty', '!=', 0)]
@@ -238,7 +235,6 @@ class StockPlanning(models.Model):
                 'origin': 'From stock scheduler',
                 'product_id': line.product.id,
                 'product_qty': line.required_qty,
-                'warehouse_id': line.warehouse.id or False,
                 'location_id':  line.location.id,
                 'company_id': line.company.id,
                 }

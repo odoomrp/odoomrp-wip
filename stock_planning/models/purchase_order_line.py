@@ -10,8 +10,7 @@ class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
     def _find_purchase_lines_from_stock_planning(
-            self, company, to_date, product, warehouse, location,
-            from_date=None):
+            self, company, to_date, product, location, from_date=None):
         cond = [('company_id', '=', company.id),
                 ('product_id', '=', product.id),
                 ('date_planned', '<=', to_date),
@@ -24,12 +23,5 @@ class PurchaseOrderLine(models.Model):
                                                'except_invoice', 'done',
                                                'approved'))
         purchase_lines = purchase_lines.filtered(
-            lambda x: x.order_id.picking_type_id.warehouse_id.id ==
-            warehouse.id)
-        purchase_lines = purchase_lines.filtered(
             lambda x: x.order_id.location_id.id == location.id)
-        lines = self.env['purchase.order.line']
-        for purchase_line in purchase_lines:
-            if not purchase_line.procurement_ids:
-                lines |= purchase_line
-        return lines
+        return purchase_lines
