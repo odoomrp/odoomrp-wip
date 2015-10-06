@@ -17,14 +17,13 @@ class StockPlanning(models.Model):
         super(StockPlanning, self)._get_to_date()
         states = ('confirmed', 'exception')
         procurements = proc_obj._find_procurements_from_stock_planning(
-            self.company, self.scheduled_date, states, product=self.product,
-            warehouse=self.warehouse, location_id=self.location,
+            self.company, self.scheduled_date, states=states,
+            product=self.product, location_id=self.location,
             without_purchases=True, without_productions=True)
         self.procurement_incoming_to_date = sum(
             procurements.mapped('product_qty'))
         productions = production_obj._find_productions_from_stock_planning(
-            self.company, self.scheduled_date, self.product, self.warehouse,
-            self.location)
+            self.company, self.scheduled_date, self.product, self.location)
         self.incoming_in_mo = sum(productions.mapped('product_qty'))
         productions = productions.filtered(
             lambda x: x.date_planned <= self.scheduled_date)

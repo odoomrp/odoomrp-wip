@@ -1,20 +1,19 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* stock_planning_mrp
+#	* stock_planning_mrp
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-15 10:02+0000\n"
-"PO-Revision-Date: 2015-09-15 12:03+0100\n"
+"POT-Creation-Date: 2015-10-05 09:18+0000\n"
+"PO-Revision-Date: 2015-10-05 09:18+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"X-Generator: Poedit 1.5.4\n"
 
 #. module: stock_planning_mrp
 #: view:stock.planning:stock_planning_mrp.stock_planning_tree_view_inh_mrp
@@ -22,10 +21,21 @@ msgid "Incoming in MO"
 msgstr "Entrante en OF"
 
 #. module: stock_planning_mrp
-#: code:addons/stock_planning_mrp/models/stock_planning.py:57
+#: code:addons/stock_planning_mrp/models/stock_planning.py:51
+#: code:addons/stock_planning_mrp/models/stock_planning.py:52
 #, python-format
 msgid "MRP Productions"
 msgstr "MRP Producciones"
+
+#. module: stock_planning_mrp
+#: model:ir.model,name:stock_planning_mrp.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Orden de fabricación"
+
+#. module: stock_planning_mrp
+#: model:ir.model,name:stock_planning_mrp.model_procurement_order
+msgid "Procurement"
+msgstr "Abastecimiento"
 
 #. module: stock_planning_mrp
 #: view:stock.planning:stock_planning_mrp.stock_planning_tree_view_inh_mrp
@@ -37,7 +47,3 @@ msgstr "Mostrar producciones MRP"
 msgid "Stock Planning"
 msgstr "Planificación stock"
 
-#. module: stock_planning_mrp
-#: model:ir.model,name:stock_planning_mrp.model_wiz_stock_planning
-msgid "Wiz Stock Planning"
-msgstr "Wiz planificación stock"
