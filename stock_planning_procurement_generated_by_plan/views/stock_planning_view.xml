@@ -7,8 +7,12 @@
             <field name="inherit_id" ref="stock_planning.stock_planning_tree_view" />
             <field name="arch" type="xml">
                 <field name="procurement_incoming_to_date" position="after" >
-                    <field name="procurement_plan_incoming_to_date"
-                           string="Incoming up to date from procurements plan"/>
+                    <field name="procurement_plan_incoming_to_date_levelgreater0"
+                           string="Incoming up to date from procurements plan level > 0"/>
+                </field>
+                <field name="outgoing_to_date" position="after">
+                    <field name="outgoing_to_date_reserve_destination" 
+                           string="Outgoing to date reserve destination"/>
                 </field>
             </field>
         </record>

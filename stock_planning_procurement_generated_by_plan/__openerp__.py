@@ -29,7 +29,8 @@
         ],
     'category': 'Warehouse Management',
     'depends': ['procurement_plan_mrp',
-                'stock_planning_mrp'
+                'stock_planning_mrp',
+                'stock_reserve'
                 ],
     'data': ['views/stock_planning_view.xml',
              ],

@@ -10,19 +10,20 @@ class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
     def _find_procurements_from_stock_planning(
-        self, company, to_date, states, from_date=None, category=None,
-        template=None, product=None, warehouse=None, location_id=None,
-            without_purchases=False, without_productions=False, level=None):
+        self, company, to_date, states=None, from_date=None, category=None,
+        template=None, product=None, location_id=None, periods=False,
+            without_purchases=False, without_productions=False, level=0):
         procurements = super(
             ProcurementOrder, self)._find_procurements_from_stock_planning(
-            company, to_date, states, from_date=from_date, category=category,
-            template=template, product=product, warehouse=warehouse,
-            location_id=location_id, without_purchases=without_purchases)
-        if not level:
+            company, to_date, states=states, from_date=from_date,
+            category=category, template=template, product=product,
+            location_id=location_id, periods=periods,
+            without_purchases=without_purchases,
+            without_productions=without_productions)
+        if periods:
             return procurements
-        procs = self.env['procurement.order']
-        for procurement in procurements:
-            if ((level == 0 and procurement.level == 0) or
-                    (level != 0 and procurement.level >= level)):
-                procs |= procurement
-        return procs
+        if level == 0:
+            procurements = procurements.filtered(lambda x: x.level == 0)
+        else:
+            procurements = procurements.filtered(lambda x: x.level >= level)
+        return procurements
