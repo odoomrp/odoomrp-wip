@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_stock_reservation_form_inh_mrpprocurementplan" >
+            <field name="name">view.stock.reservation.form.inh.mrpprocurementplan</field>
+            <field name="model">stock.reservation</field>
+            <field name="inherit_id" ref="stock_reserve.view_stock_reservation_form"/>
+            <field name="arch" type="xml">
+                <field name="date_validity" position="before">
+                    <field name="date_expected" />
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_stock_reservation_tree_inh_mrpprocurementplan" >
+            <field name="name">view.stock.reservation.tree.inh.mrpprocurementplan</field>
+            <field name="model">stock.reservation</field>
+            <field name="inherit_id" ref="stock_reserve.view_stock_reservation_tree"/>
+            <field name="arch" type="xml">
+                <field name="date_validity" position="before">
+                    <field name="date_expected" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

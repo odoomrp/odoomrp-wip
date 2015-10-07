@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="procurement_tree_view_inh_mrpprocurementplan" >
+            <field name="name">procurement.tree.view.inh.mrpprocurementplan</field>
+            <field name="model">procurement.order</field>
+            <field name="inherit_id" ref="procurement_plan.procurement_tree_view_inh_withplan"/>
+            <field name="arch" type="xml">
+                <field name="plan" position="after">
+                    <field name="level" />
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="procurement_form_view_inh_mrpprocurementplan" >
+            <field name="name">procurement.form.view.inh.mrpprocurementplan</field>
+            <field name="model">procurement.order</field>
+            <field name="inherit_id" ref="procurement_plan.procurement_form_view_inh_withplan"/>
+            <field name="arch" type="xml">
+                <field name="plan" position="after">
+                    <field name="level" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
