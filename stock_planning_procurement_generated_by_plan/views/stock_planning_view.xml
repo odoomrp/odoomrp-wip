@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <field name="procurement_incoming_to_date" position="after" >
                     <field name="procurement_plan_incoming_to_date_levelgreater0"
-                           string="Incoming up to date from procurements plan level > 0"/>
+                           string="Incoming up to date from procurements level > 0"/>
                 </field>
                 <field name="outgoing_to_date" position="after">
                     <field name="outgoing_to_date_reserve_destination" 

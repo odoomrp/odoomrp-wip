@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-06 14:52+0000\n"
-"PO-Revision-Date: 2015-10-06 16:53+0100\n"
+"POT-Creation-Date: 2015-10-07 14:16+0000\n"
+"PO-Revision-Date: 2015-10-07 16:17+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,13 +18,8 @@ msgstr ""
 
 #. module: stock_planning_procurement_generated_by_plan
 #: view:stock.planning:stock_planning_procurement_generated_by_plan.stock_planning_tree_view_inh_proclevel1
-msgid "Incoming up to date from procurements plan level = 0"
-msgstr "Entrante a fecha desde plan abastecimientos nivel = 0"
-
-#. module: stock_planning_procurement_generated_by_plan
-#: view:stock.planning:stock_planning_procurement_generated_by_plan.stock_planning_tree_view_inh_proclevel1
-msgid "Incoming up to date from procurements plan level > 0"
-msgstr "Entrante a fecha desde plan abastecimientos nivel > 0"
+msgid "Incoming up to date from procurements level > 0"
+msgstr "Entrante hasta la fecha desde abastecimientos nivel > 0"
 
 #. module: stock_planning_procurement_generated_by_plan
 #: view:stock.planning:stock_planning_procurement_generated_by_plan.stock_planning_tree_view_inh_proclevel1
@@ -35,6 +30,11 @@ msgstr "Salida a fecha destino reserva"
 #: model:ir.model,name:stock_planning_procurement_generated_by_plan.model_procurement_order
 msgid "Procurement"
 msgstr "Abastecimiento"
+
+#. module: stock_planning_procurement_generated_by_plan
+#: model:ir.model,name:stock_planning_procurement_generated_by_plan.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
 
 #. module: stock_planning_procurement_generated_by_plan
 #: model:ir.model,name:stock_planning_procurement_generated_by_plan.model_stock_planning

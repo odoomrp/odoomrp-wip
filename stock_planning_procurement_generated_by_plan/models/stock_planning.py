@@ -18,6 +18,9 @@ class StockPlanning(models.Model):
             self.company, self.scheduled_date, product=self.product,
             location_id=self.location, without_reservation=True)
         self.outgoing_to_date = sum(moves.mapped('product_uom_qty'))
+        if self.from_date:
+            moves = moves.filtered(lambda x: x.date >= self.from_date)
+        self.outgoing_to_date_moves = [(6, 0, moves.ids)]
         moves = move_obj._find_moves_from_stock_planning(
             self.company, self.scheduled_date, product=self.product,
             location_id=self.location, location_dest_id=self.env.ref(
@@ -38,11 +41,11 @@ class StockPlanning(models.Model):
         self.procurement_plan_incoming_to_date_levelgreater0 = sum(
             procurements.mapped('product_qty'))
         self.scheduled_to_date = (
-            self.qty_available + self.move_incoming_to_date +
-            self.procurement_incoming_to_date + self.incoming_in_po -
-            self.outgoing_to_date - self.outgoing_to_date_reserve_destination +
-            self.incoming_in_mo -
-            self.procurement_plan_incoming_to_date_levelgreater0)
+            self.qty_available + self.procurement_incoming_to_date +
+            self.procurement_plan_incoming_to_date_levelgreater0 +
+            self.incoming_in_po + self.incoming_in_mo +
+            self.move_incoming_to_date - self.outgoing_to_date -
+            self.outgoing_to_date_reserve_destination)
 
     procurement_plan_incoming_to_date_levelgreater0 = fields.Float(
         'Incoming up to date from procurements plan level greater than 0',
