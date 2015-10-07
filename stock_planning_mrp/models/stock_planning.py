@@ -32,9 +32,9 @@ class StockPlanning(models.Model):
                 lambda x: x.date_planned >= self.from_date)
         self.productions = [(6, 0, productions.ids)]
         self.scheduled_to_date = (
-            self.qty_available + self.move_incoming_to_date +
-            self.procurement_incoming_to_date + self.incoming_in_po -
-            self.outgoing_to_date + self.incoming_in_mo)
+            self.qty_available + self.procurement_incoming_to_date +
+            self.incoming_in_po + + self.incoming_in_mo +
+            self.move_incoming_to_date - self.outgoing_to_date)
 
     incoming_in_mo = fields.Float(
         'Incoming in MO', compute='_get_to_date',

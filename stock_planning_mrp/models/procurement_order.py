@@ -22,6 +22,5 @@ class ProcurementOrder(models.Model):
         if periods:
             return procurements
         if without_productions:
-            procurements = procurements.filtered(
-                lambda x: x.production_id is False)
+            procurements = procurements.filtered(lambda x: not x.production_id)
         return procurements
