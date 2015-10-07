@@ -30,12 +30,14 @@
     ],
     'depends': ['sale',
                 'purchase',
-                'stock'
+                'stock',
+                'product_variant_cost'
                 ],
     'data': ['security/stock_planning.xml',
              'security/ir.model.access.csv',
              'wizard/wiz_stock_planning_view.xml',
              'views/stock_planning_view.xml',
+             'views/stock_config_settings_view.xml',
              ],
     'installable': True,
 }

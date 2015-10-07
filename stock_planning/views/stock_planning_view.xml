@@ -36,6 +36,11 @@
                         <field name="location" />
                         <field name="scheduled_date" />
                         <field name="product" />
+                        <field name="unit_cost_price" string="Variant Cost Price"
+                               groups="stock_planning.group_stock_planning_show_costs" />
+                        <field name="cost_price" invisible="1" />
+                        <field name="cost_price_required_increase" sum="sum_cost_price" 
+                               groups="stock_planning.group_stock_planning_show_costs"/>
                         <field name="qty_available" string="Quantity On Hand"/>
                         <field name="virtual_available" string="Forecast Quantity"/>
                         <field name="incoming_qty" string="Incoming"/>
@@ -51,6 +56,7 @@
                         <field name="purchases" invisible="1"/>
                         <field name="procurements" invisible="1" />
                         <field name="moves" invisible="1" />
+                        <field name="outgoing_to_date_moves" invisible="1" />
                         <button string="Show purchases" name="show_purchases"
                                 type="object" icon="terp-purchase" 
                                 attrs="{'invisible':[('purchases', '=', [])]}"/>
@@ -60,6 +66,9 @@
                         <button string="Show moves" name="show_moves"
                                 type="object" icon="gtk-index" 
                                 attrs="{'invisible':[('moves', '=', [])]}"/>
+                        <button string="Show outgoing to date moves" name="show_outgoing_to_date_moves"
+                                type="object" icon="gtk-index" 
+                                attrs="{'invisible':[('outgoing_to_date_moves', '=', [])]}"/>
                         <button string="Generate procurement" name="generate_procurement"
                                 type="object" icon="gtk-execute"
                                 attrs="{'invisible':[('required_increase', '&lt;=', 0)]}" />

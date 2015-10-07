@@ -57,6 +57,9 @@ class StockPlanning(models.Model):
             self.company, self.scheduled_date, product=self.product,
             location_id=self.location)
         self.outgoing_to_date = sum(moves.mapped('product_uom_qty'))
+        if self.from_date:
+            moves = moves.filtered(lambda x: x.date >= self.from_date)
+        self.outgoing_to_date_moves = [(6, 0, moves.ids)]
         lines = purchase_line_obj._find_purchase_lines_from_stock_planning(
             self.company, self.scheduled_date, self.product, self.location)
         self.incoming_in_po = sum(lines.mapped('product_qty'))
@@ -66,11 +69,10 @@ class StockPlanning(models.Model):
         purchase_orders = self.env['purchase.order']
         purchase_orders |= lines.mapped('order_id')
         self.purchases = [(6, 0, purchase_orders.ids)]
-        scheduled_to_date = (
-            self.qty_available + self.move_incoming_to_date +
-            self.procurement_incoming_to_date + self.incoming_in_po -
+        self.scheduled_to_date = (
+            self.qty_available + self.procurement_incoming_to_date +
+            self.incoming_in_po + self.move_incoming_to_date -
             self.outgoing_to_date)
-        self.scheduled_to_date = scheduled_to_date
 
     @api.one
     def _get_rule(self):
@@ -113,11 +115,20 @@ class StockPlanning(models.Model):
                 self.required_increase = (
                     (self.scheduled_to_date - self.rule_min_qty) * -1)
 
+    @api.one
+    def _get_cost_price(self):
+        self.cost_price = 0
+        if self.required_increase > 0:
+            self.cost_price = self.required_increase * self.unit_cost_price
+
     company = fields.Many2one('res.company', 'Company')
     location = fields.Many2one('stock.location', 'Location', translate=True)
     from_date = fields.Date('From Date')
     scheduled_date = fields.Date('Scheduled date')
     product = fields.Many2one('product.product', 'Product', translate=True)
+    unit_cost_price = fields.Float(
+        'Variant Cost Price', related='product.cost_price',
+        digits_compute=dp.get_precision('Product Price'))
     category = fields.Many2one(
         'product.category', 'category', related='product.categ_id',
         store=True, translate=True)
@@ -157,6 +168,10 @@ class StockPlanning(models.Model):
     outgoing_to_date = fields.Float(
         'Outgoing to date', compute='_get_to_date',
         digits_compute=dp.get_precision('Product Unit of Measure'))
+    outgoing_to_date_moves = fields.Many2many(
+        comodel_name='stock.move', relation='rel_outgoing_to_date_planning',
+        column1='stock_planning_id', column2='move_id',
+        string='Outgoin to date moves', compute='_get_to_date')
     scheduled_to_date = fields.Float(
         'Scheduled to date', compute='_get_to_date',
         digits_compute=dp.get_precision('Product Unit of Measure'))
@@ -173,6 +188,12 @@ class StockPlanning(models.Model):
         'Required quantity', related='required_increase',
         digits_compute=dp.get_precision('Product Unit of Measure'),
         store=True)
+    cost_price = fields.Float(
+        'Cost Price', compute='_get_cost_price',
+        digits_compute=dp.get_precision('Product Price'))
+    cost_price_required_increase = fields.Float(
+        'Required increment Cost Price', related='cost_price', store=True,
+        digits_compute=dp.get_precision('Product Price'))
 
     @api.multi
     def show_procurements(self):
@@ -205,6 +226,17 @@ class StockPlanning(models.Model):
                 'res_model': 'stock.move',
                 'type': 'ir.actions.act_window',
                 'domain': [('id', 'in', self.moves.ids)]
+                }
+
+    @api.multi
+    def show_outgoing_to_date_moves(self):
+        self.ensure_one()
+        return {'name': _('Outgoing to date moves'),
+                'view_type': 'form',
+                "view_mode": 'tree,form',
+                'res_model': 'stock.move',
+                'type': 'ir.actions.act_window',
+                'domain': [('id', 'in', self.outgoing_to_date_moves.ids)]
                 }
 
     @api.multi

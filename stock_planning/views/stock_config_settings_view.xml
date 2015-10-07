@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_stock_config_settings_inh_stockplanning" >
+            <field name="name">view.stock.config.settings.inh.stockplanning</field>
+            <field name="model">stock.config.settings</field>
+            <field name="inherit_id" ref="stock.view_stock_config_settings" />
+            <field name="arch" type="xml">
+                <group name="traceability" position="after">
+                    <separator string="Stock planning"/>
+                    <group name="stock_planning">
+                        <div>
+                            <div>
+                                <field name="group_cost_in_stock_planning" class="oe_inline"/>
+                                <label for="group_cost_in_stock_planning"/>
+                            </div>
+                        </div>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</openerp>

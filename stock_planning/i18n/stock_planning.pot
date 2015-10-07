@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-05 09:14+0000\n"
-"PO-Revision-Date: 2015-10-05 09:14+0000\n"
+"POT-Creation-Date: 2015-10-08 07:52+0000\n"
+"PO-Revision-Date: 2015-10-08 07:52+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -78,6 +78,12 @@ msgstr ""
 #. module: stock_planning
 #: help:wiz.stock.planning,template:0
 msgid "Enter this field if you want to filter by template"
+msgstr ""
+
+#. module: stock_planning
+#: code:addons/stock_planning/wizard/wiz_stock_planning.py:51
+#, python-format
+msgid "Error!: Increase number of days must be greater than zero"
 msgstr ""
 
 #. module: stock_planning
@@ -172,7 +178,7 @@ msgstr ""
 
 #. module: stock_planning
 #: code:addons/stock_planning/models/stock_planning.py:202
-#: code:addons/stock_planning/models/stock_planning.py:204
+#: code:addons/stock_planning/models/stock_planning.py:223
 #, python-format
 msgid "Moves"
 msgstr ""
@@ -188,13 +194,19 @@ msgid "Outgoing to date"
 msgstr ""
 
 #. module: stock_planning
+#: code:addons/stock_planning/models/stock_planning.py:234
+#, python-format
+msgid "Outgoing to date moves"
+msgstr ""
+
+#. module: stock_planning
 #: model:ir.model,name:stock_planning.model_procurement_order
 msgid "Procurement"
 msgstr ""
 
 #. module: stock_planning
 #: code:addons/stock_planning/models/stock_planning.py:180
-#: code:addons/stock_planning/models/stock_planning.py:182
+#: code:addons/stock_planning/models/stock_planning.py:201
 #, python-format
 msgid "Procurement orders"
 msgstr ""
@@ -213,7 +225,7 @@ msgstr ""
 
 #. module: stock_planning
 #: code:addons/stock_planning/models/stock_planning.py:191
-#: code:addons/stock_planning/models/stock_planning.py:193
+#: code:addons/stock_planning/models/stock_planning.py:212
 #, python-format
 msgid "Purchase orders"
 msgstr ""
@@ -226,6 +238,11 @@ msgstr ""
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Required increase"
+msgstr ""
+
+#. module: stock_planning
+#: field:stock.planning,cost_price_required_increase:0
+msgid "Required increment Cost Price"
 msgstr ""
 
 #. module: stock_planning
@@ -265,8 +282,18 @@ msgid "Select category for the current product"
 msgstr ""
 
 #. module: stock_planning
+#: field:stock.config.settings,group_cost_in_stock_planning:0
+msgid "Show costs in stock planning"
+msgstr ""
+
+#. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Show moves"
+msgstr ""
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Show outgoing to date moves"
 msgstr ""
 
 #. module: stock_planning
@@ -286,9 +313,8 @@ msgstr ""
 
 #. module: stock_planning
 #: code:addons/stock_planning/models/stock_planning.py:224
-#: code:addons/stock_planning/models/stock_planning.py:227
-#: code:addons/stock_planning/wizard/wiz_stock_planning.py:74
-#: code:addons/stock_planning/wizard/wiz_stock_planning.py:82
+#: code:addons/stock_planning/models/stock_planning.py:256
+#: code:addons/stock_planning/wizard/wiz_stock_planning.py:87
 #: model:ir.actions.act_window,name:stock_planning.action_stock_planning
 #: model:ir.model,name:stock_planning.model_stock_planning
 #: model:ir.ui.menu,name:stock_planning.stock_planning_option_view
@@ -299,6 +325,16 @@ msgid "Stock Planning"
 msgstr ""
 
 #. module: stock_planning
+#: model:res.groups,name:stock_planning.group_stock_planning_show_costs
+msgid "Stock Planning show costs"
+msgstr ""
+
+#. module: stock_planning
+#: view:stock.config.settings:stock_planning.view_stock_config_settings_inh_stockplanning
+msgid "Stock planning"
+msgstr ""
+
+#. module: stock_planning
 #: field:wiz.stock.planning,template:0
 msgid "Template"
 msgstr ""
@@ -306,6 +342,11 @@ msgstr ""
 #. module: stock_planning
 #: field:wiz.stock.planning,to_date:0
 msgid "To date"
+msgstr ""
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Variant Cost Price"
 msgstr ""
 
 #. module: stock_planning
