@@ -33,6 +33,8 @@
                 ],
     "data": ['views/mrp_production_view.xml',
              'views/procurement_plan_view.xml',
+             'views/procurement_order_view.xml',
+             'views/stock_reservation_view.xml',
              ],
     "installable": True
 }
