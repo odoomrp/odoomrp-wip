@@ -1,21 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* sale_promotion_gift
-#
+# * sale_promotion_gift
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-27 08:09+0000\n"
-"PO-Revision-Date: 2015-08-15 13:30+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-09-20 19:05+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: sale_promotion_gift
 #: field:sale.final.gift,category:0 field:sale.promotion.gift,category:0
@@ -38,15 +39,10 @@ msgid "Dump offer"
 msgstr "Zavrzi ponudbo"
 
 #. module: sale_promotion_gift
-#: code:addons/sale_promotion_gift/models/sale_order.py:123
+#: code:addons/sale_promotion_gift/models/sale_order.py:161
 #, python-format
 msgid "Error!: This product is not in a allowed category."
 msgstr "Napaka!: Ta proizvod ni v dovoljeni kategoriji."
-
-#. module: sale_promotion_gift
-#: model:ir.model,name:sale_promotion_gift.model_gift_product
-msgid "Gift product"
-msgstr "Darilni proizvod"
 
 #. module: sale_promotion_gift
 #: field:sale.final.gift,id:0 field:sale.promotion.gift,id:0
@@ -64,6 +60,11 @@ msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
 
 #. module: sale_promotion_gift
+#: field:product.pricelist.item.offer,not_combinable:0
+msgid "Offer not combinable"
+msgstr "Ponudba ni združljiva"
+
+#. module: sale_promotion_gift
 #: view:sale.order:sale_promotion_gift.view_order_form_inh_promotiongift
 msgid "Other Information"
 msgstr "Ostale informacije"
@@ -79,11 +80,6 @@ msgid "Product"
 msgstr "Proizvod"
 
 #. module: sale_promotion_gift
-#: model:ir.model,name:sale_promotion_gift.model_promotion_gift_product
-msgid "Promotion gift product"
-msgstr "Proizvod promocijskega darila"
-
-#. module: sale_promotion_gift
 #: field:sale.final.gift,quantity:0 field:sale.promotion.gift,quantity:0
 msgid "Quantity"
 msgstr "Količina"
@@ -94,6 +90,7 @@ msgid "Sale Order"
 msgstr "Prodajni nalog"
 
 #. module: sale_promotion_gift
+#: model:ir.model,name:sale_promotion_gift.model_sale_final_gift
 #: view:sale.final.gift:sale_promotion_gift.sale_final_gift_tree_view
 msgid "Sale final gift"
 msgstr "Darilo končne prodaje"
@@ -123,7 +120,14 @@ msgid "Sales Order"
 msgstr "Prodajni nalog"
 
 #. module: sale_promotion_gift
-#: code:addons/sale_promotion_gift/models/sale_order.py:81
+#: help:sale.final.gift,category:0 help:sale.promotion.gift,category:0
+msgid "Select category for the current product"
+msgstr "Izbira kategorije trenutnega proizvoda"
+
+#. module: sale_promotion_gift
+#: code:addons/sale_promotion_gift/models/sale_order.py:119
 #, python-format
-msgid "Total Quantity %s, in final gift products with category %s, exceeds in gift products of the same category with amount %s"
+msgid ""
+"Total Quantity %s, in final gift products with category %s, exceeds in gift "
+"products of the same category with amount %s"
 msgstr "Skupna količina %s, v končnih darilnih proizvodih kategorije %s, presega darilne proizvode iste kategorije za znesek %s"

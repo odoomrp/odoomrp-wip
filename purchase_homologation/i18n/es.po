@@ -1,31 +1,38 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* purchase_homologation
-#
+# * purchase_homologation
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-02 10:37+0000\n"
-"PO-Revision-Date: 2014-09-02 10:37+0000\n"
-"Last-Translator: Carlos Sánchez Cifuentes <csanchez@grupovermon.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-10-09 10:50+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: purchase_homologation
 #: model:ir.actions.act_window,help:purchase_homologation.purchase_homologation_action
-msgid "<p class=\"oe_view_nocontent_create\">Click here to set a new supplier homologation for certain product or category.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\">Click here to set a new supplier homologation for certain product or category.</p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\">Pulse aquí para añadir una nueva homologación de proveedor para productos o categorías.</p>\n"
-"            "
+msgstr "<p class=\"oe_view_nocontent_create\">Pulse aquí para añadir una nueva homologación de proveedor para productos o categorías.</p>\n            "
 
 #. module: purchase_homologation
 #: field:purchase.homologation,start_date:0
 msgid "Beginning date"
 msgstr "Fecha de inicio"
+
+#. module: purchase_homologation
+#: model:res.groups,name:purchase_homologation.group_purchase_homologation
+msgid "Bypass purchase homologation"
+msgstr ""
 
 #. module: purchase_homologation
 #: field:purchase.homologation,category_id:0
@@ -48,8 +55,8 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: purchase_homologation
-#: code:addons/purchase_homologation/models/purchase_homologation.py:46
-#: code:addons/purchase_homologation/models/purchase_homologation.py:50
+#: code:addons/purchase_homologation/models/purchase_homologation.py:44
+#: code:addons/purchase_homologation/models/purchase_homologation.py:48
 #, python-format
 msgid "Error!"
 msgstr "¡Error!"
@@ -96,32 +103,25 @@ msgstr "Proveedor"
 
 #. module: purchase_homologation
 #: model:ir.actions.act_window,name:purchase_homologation.purchase_homologation_action
-#: view:purchase.homologation:purchase_homologation.purchase_homologation_form_view
+#: model:ir.ui.menu,name:purchase_homologation.purchase_homologation_menu
 #: view:purchase.homologation:purchase_homologation.purchase_homologation_tree_view
-msgid "Purchase homologation"
-msgstr "Homologación de compras"
+msgid "Supplier homologation"
+msgstr ""
 
 #. module: purchase_homologation
-#: code:addons/purchase_homologation/models/purchase_order_line.py:83
+#: code:addons/purchase_homologation/models/purchase_order_line.py:65
 #, python-format
-msgid "Warning!"
-msgstr "¡Advertencia!"
+msgid "This product is not homologated for purchasing it."
+msgstr "Este producto no está homologado para su compra."
 
 #. module: purchase_homologation
-#: code:addons/purchase_homologation/models/purchase_homologation.py:51
+#: code:addons/purchase_homologation/models/purchase_homologation.py:49
 #, python-format
 msgid "You must only select one of these: category or product."
 msgstr "Debe seleccionar sólo uno de éstos: categoría o producto."
 
 #. module: purchase_homologation
-#: code:addons/purchase_homologation/models/purchase_homologation.py:47
+#: code:addons/purchase_homologation/models/purchase_homologation.py:45
 #, python-format
 msgid "You must select a category or product."
 msgstr "Debe seleccionar una categoría o producto."
-
-
-#. module: purchase_homologation
-#: code:addons/purchase_homologation/models/purchase_homologation.py:59
-#, python-format
-msgid "This product is not homologated for purchasing it."
-msgstr "Este producto no está homologado para su compra."

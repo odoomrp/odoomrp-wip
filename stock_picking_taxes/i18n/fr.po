@@ -1,0 +1,83 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_picking_taxes
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-09-10 16:37+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: French (http://www.transifex.com/oca/odoomrp-wip-8-0/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,amount:0
+msgid "Amount"
+msgstr ""
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,base:0
+msgid "Base"
+msgstr ""
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: stock_picking_taxes
+#: help:stock.picking.tax,sequence:0
+msgid "Gives the sequence order when displaying a list of picking tax."
+msgstr ""
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,id:0
+msgid "ID"
+msgstr "Id."
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,write_uid:0
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,write_date:0
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,picking:0
+msgid "Picking"
+msgstr ""
+
+#. module: stock_picking_taxes
+#: model:ir.model,name:stock_picking_taxes.model_stock_picking
+msgid "Picking List"
+msgstr ""
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,sequence:0
+msgid "Sequence"
+msgstr ""
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,name:0
+msgid "Tax Description"
+msgstr ""
+
+#. module: stock_picking_taxes
+#: view:stock.picking:stock_picking_taxes.view_picking_form
+msgid "Taxes"
+msgstr ""

@@ -1,19 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* machine_manager
-#
+# * machine_manager
+# 
+# Translators:
+# Oihane Crucelaegui <oihanecruce@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-16 14:41+0000\n"
-"PO-Revision-Date: 2015-02-16 14:41+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:43+0000\n"
+"PO-Revision-Date: 2015-10-09 10:50+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: machine_manager
 #: field:machinery,warrexpcy:0
@@ -91,15 +94,13 @@ msgid "Configuration"
 msgstr "Configuración"
 
 #. module: machine_manager
-#: field:machine.model,create_uid:0
-#: field:machinery,create_uid:0
+#: field:machine.model,create_uid:0 field:machinery,create_uid:0
 #: field:machinery.users,create_uid:0
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: machine_manager
-#: field:machine.model,create_date:0
-#: field:machinery,create_date:0
+#: field:machine.model,create_date:0 field:machinery,create_date:0
 #: field:machinery.users,create_date:0
 msgid "Created on"
 msgstr "Creado en"
@@ -205,9 +206,7 @@ msgid "Hour Meter"
 msgstr "Por hora"
 
 #. module: machine_manager
-#: field:machine.model,id:0
-#: field:machinery,id:0
-#: field:machinery.users,id:0
+#: field:machine.model,id:0 field:machinery,id:0 field:machinery.users,id:0
 msgid "ID"
 msgstr "ID"
 
@@ -232,15 +231,13 @@ msgid "International"
 msgstr "Internacional"
 
 #. module: machine_manager
-#: field:machine.model,write_uid:0
-#: field:machinery,write_uid:0
+#: field:machine.model,write_uid:0 field:machinery,write_uid:0
 #: field:machinery.users,write_uid:0
 msgid "Last Updated by"
 msgstr "Último en actualizar"
 
 #. module: machine_manager
-#: field:machine.model,write_date:0
-#: field:machinery,write_date:0
+#: field:machine.model,write_date:0 field:machinery,write_date:0
 #: field:machinery.users,write_date:0
 msgid "Last Updated on"
 msgstr "Última actualización"
@@ -287,8 +284,7 @@ msgid "Machine Name"
 msgstr "Nombre máquina"
 
 #. module: machine_manager
-#: view:machinery:machine_manager.machines_form
-#: field:machinery,users:0
+#: view:machinery:machine_manager.machines_form field:machinery,users:0
 #: view:machinery.users:machine_manager.machine_user_form_view
 #: view:machinery.users:machine_manager.machine_user_tree_view
 msgid "Machine Users"
@@ -311,8 +307,8 @@ msgstr "Fecha de compra de la máquina"
 
 #. module: machine_manager
 #: model:ir.module.category,name:machine_manager.module_machinery_category
-msgid "Machinery"
-msgstr "Maquinaria"
+msgid "Machinery Management"
+msgstr ""
 
 #. module: machine_manager
 #: model:ir.ui.menu,name:machine_manager.menu_machinery_manager
@@ -324,8 +320,7 @@ msgstr "Gestor de máquinas"
 #: model:ir.actions.act_window,name:machine_manager.machine_user_action
 #: model:ir.ui.menu,name:machine_manager.menu_machines
 #: view:machinery:machine_manager.machine_tree
-#: view:machinery:machine_manager.machines_form
-#: field:res.users,machines:0
+#: view:machinery:machine_manager.machines_form field:res.users,machines:0
 msgid "Machines"
 msgstr "Máquinas"
 
@@ -400,8 +395,7 @@ msgid "Primary Meter"
 msgstr "Medidor primario"
 
 #. module: machine_manager
-#: field:machinery,serial:0
-#: field:machinery,serial_char:0
+#: field:machinery,serial:0 field:machinery,serial_char:0
 msgid "Product Serial #"
 msgstr "Número serie producto"
 
@@ -462,22 +456,20 @@ msgstr "Localización de Stock"
 
 #. module: machine_manager
 #: help:machinery,location:0
-msgid "This association is necessary if you want to make repair orders with the machine"
+msgid ""
+"This association is necessary if you want to make repair orders with the "
+"machine"
 msgstr "Asociación necesaría si se desean realizar ordenes de reparación de máquinas."
 
 #. module: machine_manager
 #: help:machinery,product:0
-msgid "This product will contain information about the machine such as the manufacturer."
+msgid ""
+"This product will contain information about the machine such as the "
+"manufacturer."
 msgstr "Este producto contendrá la información relativa a la maquina, p.e. el fabricante."
 
 #. module: machine_manager
-#: help:machinery,manufacturer:0
-msgid "Manufacturer is related to the associated product defined for the machine."
-msgstr "Fabricante relacionado con el producto asociado a la máquina."
-
-#. module: machine_manager
-#: field:machine.model,model_type:0
-#: field:machinery,model_type:0
+#: field:machine.model,model_type:0 field:machinery,model_type:0
 msgid "Type"
 msgstr "Tipo"
 
@@ -488,7 +480,6 @@ msgid "User"
 msgstr "Usuario"
 
 #. module: machine_manager
-#: code:addons/machine_manager/models/machinery.py:105
 #: code:addons/machine_manager/models/machinery.py:111
 #: sql_constraint:machinery.users:0
 #, python-format
@@ -519,4 +510,3 @@ msgstr "Anual"
 #: view:machine.model:machine_manager.machinemodel_tree_view
 msgid "tree_string"
 msgstr "tree_string"
-

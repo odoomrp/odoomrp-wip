@@ -1,0 +1,94 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * product_suppliers_from_category
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-09-10 16:38+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: French (http://www.transifex.com/oca/odoomrp-wip-8-0/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: product_suppliers_from_category
+#: model:ir.actions.act_window,name:product_suppliers_from_category.act_add_suppliers
+msgid "Add suppliers"
+msgstr ""
+
+#. module: product_suppliers_from_category
+#: view:add.suppliers:product_suppliers_from_category.add_suppliers_form_view
+msgid "Adds suppliers assigned to the category of the product"
+msgstr ""
+
+#. module: product_suppliers_from_category
+#: view:add.suppliers:product_suppliers_from_category.add_suppliers_form_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: product_suppliers_from_category
+#: view:add.suppliers:product_suppliers_from_category.add_suppliers_form_view
+msgid "Confirm"
+msgstr ""
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: product_suppliers_from_category
+#: view:product.template:product_suppliers_from_category.get_supplier_form_view
+msgid "Get suppliers from category"
+msgstr ""
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,id:0
+msgid "ID"
+msgstr "Id."
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,write_uid:0
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,write_date:0
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: product_suppliers_from_category
+#: model:ir.model,name:product_suppliers_from_category.model_product_category
+msgid "Product Category"
+msgstr "Catégorie d'articles"
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,remove_others:0
+msgid "Remove providers who are not in the category of the product"
+msgstr ""
+
+#. module: product_suppliers_from_category
+#: view:product.category:product_suppliers_from_category.category_supplier_form_view
+#: field:product.category,suppliers:0
+msgid "Suppliers"
+msgstr ""
+
+#. module: product_suppliers_from_category
+#: view:add.suppliers:product_suppliers_from_category.add_suppliers_form_view
+msgid "form_string"
+msgstr ""
+
+#. module: product_suppliers_from_category
+#: view:add.suppliers:product_suppliers_from_category.add_suppliers_form_view
+msgid "or"
+msgstr "ou"

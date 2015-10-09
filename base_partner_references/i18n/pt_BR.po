@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * base_partner_references
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:43+0000\n"
+"PO-Revision-Date: 2015-10-09 03:41+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: base_partner_references
+#: field:res.partner,ref_customer:0
+msgid "Customer Reference"
+msgstr ""
+
+#. module: base_partner_references
+#: model:ir.model,name:base_partner_references.model_res_partner
+msgid "Partner"
+msgstr "Parceiro"
+
+#. module: base_partner_references
+#: field:res.partner,ref_supplier:0
+msgid "Supplier Reference"
+msgstr ""
+
+#. module: base_partner_references
+#: help:res.partner,ref_customer:0
+msgid "This is my customer reference for the supplier"
+msgstr ""
+
+#. module: base_partner_references
+#: help:res.partner,ref_supplier:0
+msgid "This is my supplier reference for the customer"
+msgstr ""

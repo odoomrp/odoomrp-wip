@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * machine_purchase_asset
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:43+0000\n"
+"PO-Revision-Date: 2015-10-09 03:39+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: machine_purchase_asset
+#: field:machinery,asset:0
+msgid "Asset"
+msgstr ""
+
+#. module: machine_purchase_asset
+#: model:ir.model,name:machine_purchase_asset.model_machinery
+msgid "Holds records of Machines"
+msgstr ""
+
+#. module: machine_purchase_asset
+#: model:ir.model,name:machine_purchase_asset.model_account_invoice
+msgid "Invoice"
+msgstr "Fatura"
+
+#. module: machine_purchase_asset
+#: view:machinery:machine_purchase_asset.machines_form_inherit
+msgid "True"
+msgstr ""

@@ -1,21 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* machine_manager_preventive
-#
+# * machine_manager_preventive
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-22 10:14+0000\n"
-"PO-Revision-Date: 2015-08-15 18:52+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:43+0000\n"
+"PO-Revision-Date: 2015-09-20 18:55+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: machine_manager_preventive
 #: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
@@ -52,14 +53,18 @@ msgstr "Preverjanje drugega opozorila"
 #: help:preventive.machine.operation,margin_fre2:0
 #: help:preventive.operation.type,margin_fre1:0
 #: help:preventive.operation.type,margin_fre2:0
-msgid "A negative number means that the alarm will be activated before the compliance date"
+msgid ""
+"A negative number means that the alarm will be activated before the "
+"compliance date"
 msgstr "Negativna številka pomeni, da bo alarm aktiviran pred datumom ustrezanja"
 
 #. module: machine_manager_preventive
 #: help:preventive.machine.operation,first_margin:0
 #: help:preventive.machine.operation,second_margin:0
 #: help:preventive.operation.type,margin_cy1:0
-msgid "A negative number means that the alarm will be activated before the condition is met"
+msgid ""
+"A negative number means that the alarm will be activated before the "
+"condition is met"
 msgstr "Negativna številka pomeni, da bo alarm aktiviran preden bo pogoj izpolnjen"
 
 #. module: machine_manager_preventive
@@ -68,6 +73,11 @@ msgstr "Negativna številka pomeni, da bo alarm aktiviran preden bo pogoj izpoln
 #: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
 msgid "Accept"
 msgstr "Sprejem"
+
+#. module: machine_manager_preventive
+#: selection:preventive.repair.order,invoice_method:0
+msgid "After Repair"
+msgstr "Po popravilu"
 
 #. module: machine_manager_preventive
 #: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_form
@@ -80,11 +90,6 @@ msgid "Alert"
 msgstr "Opozorilo"
 
 #. module: machine_manager_preventive
-#: model:ir.model,name:machine_manager_preventive.model_preventive_proceed
-msgid "All preventive operations scheduled to be done."
-msgstr "Vse načrtovane preventivne operacije, ki bodo izvedene."
-
-#. module: machine_manager_preventive
 #: field:preventive.operation.type,basedoncy:0
 msgid "Based on Cycles"
 msgstr "Na osnovi ciklov"
@@ -95,10 +100,20 @@ msgid "Based on Time"
 msgstr "Na osnovi časa"
 
 #. module: machine_manager_preventive
+#: selection:preventive.repair.order,invoice_method:0
+msgid "Before Repair"
+msgstr "Pred popravilom"
+
+#. module: machine_manager_preventive
 #: view:preventive.create.wizard:machine_manager_preventive.create_preventive_form
 #: view:preventive.repair.order:machine_manager_preventive.wizard_prev_repair_order_form
 msgid "Cancel"
 msgstr "Preklic"
+
+#. module: machine_manager_preventive
+#: help:preventive.repair.order,partner:0
+msgid "Choose partner for whom the order will be invoiced and delivered."
+msgstr "Izbira partnerja, ki mu bo nalog zaračunan in dostavljen."
 
 #. module: machine_manager_preventive
 #: model:ir.ui.menu,name:machine_manager_preventive.menu_preven_operation_config
@@ -106,13 +121,12 @@ msgid "Configuration"
 msgstr "Nastavitve"
 
 #. module: machine_manager_preventive
-#: model:ir.model,name:machine_manager_preventive.model_create_preventive
 #: model:ir.model,name:machine_manager_preventive.model_preventive_create_wizard
 msgid "Create Machine Preventive operations"
 msgstr "Ustvari preventivne operacije naprave"
 
 #. module: machine_manager_preventive
-#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:69
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:83
 #, python-format
 msgid "Create Order"
 msgstr "Ustvari nalog"
@@ -365,6 +379,16 @@ msgid "Interval unit"
 msgstr "Enota intervala"
 
 #. module: machine_manager_preventive
+#: field:preventive.repair.order,invoice_method:0
+msgid "Invoice Method"
+msgstr "Obračunska metoda"
+
+#. module: machine_manager_preventive
+#: field:preventive.repair.order,invoice_address:0
+msgid "Invoicing Address"
+msgstr "Naslov za račun"
+
+#. module: machine_manager_preventive
 #: field:mrp.repair,preventive:0
 msgid "Is preventive"
 msgstr "Je preventiva"
@@ -519,7 +543,7 @@ msgstr "Naslednja revizija"
 
 #. module: machine_manager_preventive
 #: view:machinery:machine_manager_preventive.view_product_form_preventive
-#: field:machinery,prev_mach_op:0
+#: field:machinery,preventive_operations:0
 msgid "Next Revisions"
 msgstr "Naslednje revizije"
 
@@ -544,6 +568,11 @@ msgstr "Datum/dan naslednje revizije"
 #: view:preventive.machine.operation:machine_manager_preventive.machine_pre_op_search
 msgid "Next revision date Week"
 msgstr "Datum/teden naslednje revizije"
+
+#. module: machine_manager_preventive
+#: selection:preventive.repair.order,invoice_method:0
+msgid "No Invoice"
+msgstr "Brez računa"
 
 #. module: machine_manager_preventive
 #: field:preventive.list,op_count:0
@@ -665,6 +694,11 @@ msgid "Operations based on time must have a positive time  frequency"
 msgstr "Operacije na osnovi časa morajo imeti pozitivno časovno frekvenco"
 
 #. module: machine_manager_preventive
+#: field:preventive.repair.order,partner:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: machine_manager_preventive
 #: view:preventive.master:machine_manager_preventive.ope_master_form_view
 msgid "Preventive Description"
 msgstr "Opis preventive"
@@ -752,11 +786,6 @@ msgid "Product"
 msgstr "Proizvod"
 
 #. module: machine_manager_preventive
-#: model:ir.model,name:machine_manager_preventive.model_product_template
-msgid "Product Template"
-msgstr "Predloga proizvoda"
-
-#. module: machine_manager_preventive
 #: field:preventive.operation.material,product_uom_qty:0
 msgid "Quantity"
 msgstr "Količina"
@@ -794,13 +823,13 @@ msgid "Second Cycle Margin"
 msgstr "Razlika drugega cikla"
 
 #. module: machine_manager_preventive
-#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:85
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:99
 #, python-format
 msgid "There is no product defined for current machine"
 msgstr "Za trenutno napravo ni določenega proizvoda"
 
 #. module: machine_manager_preventive
-#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:81
+#: code:addons/machine_manager_preventive/wizard/create_repair_order.py:95
 #, python-format
 msgid "There is no product defined for machine: %s"
 msgstr "Za napravo: %s ni določenega proizvoda"

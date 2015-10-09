@@ -1,0 +1,107 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * warning_log
+# 
+# Translators:
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-10-09 03:16+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: warning_log
+#: field:warning.log,create_uid:0
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: warning_log
+#: field:warning.log,create_date:0
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: warning_log
+#: field:warning.log,date:0
+msgid "Date"
+msgstr "Data"
+
+#. module: warning_log
+#: field:warning.log,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: warning_log
+#: model:ir.model,name:warning_log.model_account_invoice
+msgid "Invoice"
+msgstr "Fatura"
+
+#. module: warning_log
+#: field:warning.log,write_uid:0
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: warning_log
+#: field:warning.log,write_date:0
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: warning_log
+#: field:warning.log,msg:0
+msgid "Message"
+msgstr "Mensage"
+
+#. module: warning_log
+#: field:warning.log,type:0
+msgid "Model"
+msgstr "Modelo"
+
+#. module: warning_log
+#: model:ir.model,name:warning_log.model_stock_picking
+msgid "Picking List"
+msgstr "Lista de separação"
+
+#. module: warning_log
+#: model:ir.model,name:warning_log.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: warning_log
+#: model:ir.model,name:warning_log.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Linha pedido de compra"
+
+#. module: warning_log
+#: model:ir.model,name:warning_log.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venda"
+
+#. module: warning_log
+#: model:ir.model,name:warning_log.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Linha pedido de venda"
+
+#. module: warning_log
+#: field:warning.log,user:0
+msgid "User"
+msgstr "Usuário"
+
+#. module: warning_log
+#: model:ir.actions.act_window,name:warning_log.action_warning_log
+#: view:warning.log:warning_log.warning_log_form_view
+#: view:warning.log:warning_log.warning_log_tree_view
+msgid "Warning Log"
+msgstr "Log de avisos"
+
+#. module: warning_log
+#: model:ir.ui.menu,name:warning_log.warning_action_menu
+#: model:ir.ui.menu,name:warning_log.warning_log_top_menu
+msgid "Warnings"
+msgstr "Avisos"

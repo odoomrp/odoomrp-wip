@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * purchase_packaging_info
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-10-09 03:42+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: purchase_packaging_info
+#: view:purchase.order:purchase_packaging_info.purchase_order_form_packaging
+#: view:purchase.order.line:purchase_packaging_info.purchase_order_line_tree_packaging
+#: field:purchase.order.line,pri_pack_qty:0
+msgid "# Pkg 1"
+msgstr ""
+
+#. module: purchase_packaging_info
+#: view:purchase.order:purchase_packaging_info.purchase_order_form_packaging
+#: view:purchase.order.line:purchase_packaging_info.purchase_order_line_tree_packaging
+#: field:purchase.order.line,sec_pack_qty:0
+msgid "# Pkg 2"
+msgstr ""
+
+#. module: purchase_packaging_info
+#: field:purchase.order,product_ul:0
+msgid "Logistic Unit"
+msgstr ""
+
+#. module: purchase_packaging_info
+#: field:purchase.order.line,sec_pack:0
+msgid "Pkg 2"
+msgstr ""
+
+#. module: purchase_packaging_info
+#: model:ir.model,name:purchase_packaging_info.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: purchase_packaging_info
+#: model:ir.model,name:purchase_packaging_info.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Linha pedido de compra"
+
+#. module: purchase_packaging_info
+#: view:purchase.order:purchase_packaging_info.purchase_order_form_packaging
+msgid "{'default_product_ul': product_ul}"
+msgstr ""

@@ -1,24 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* mrp_bom_component_change
-#
+# * mrp_bom_component_change
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-06 09:42+0000\n"
-"PO-Revision-Date: 2015-08-15 12:46+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:43+0000\n"
+"PO-Revision-Date: 2015-09-20 18:56+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: mrp_bom_component_change
-#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:79
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:62
 #, python-format
 msgid "Bill of Material"
 msgstr "Kosovnica"
@@ -55,7 +55,9 @@ msgstr "Spremenil"
 
 #. module: mrp_bom_component_change
 #: help:mrp.bom.change,create_new_version:0
-msgid "Check this field if you want to create a new version of the BOM before modifying the component"
+msgid ""
+"Check this field if you want to create a new version of the BOM before "
+"modifying the component"
 msgstr "Označite to polje, če želite ustvariti novo verzijo kosovnice pred spreminjanjem njenih komponent"
 
 #. module: mrp_bom_component_change
@@ -104,8 +106,7 @@ msgid "New Component"
 msgstr "Nova komponenta"
 
 #. module: mrp_bom_component_change
-#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:62
-#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:64
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:45
 #, python-format
 msgid "Not Components selected!"
 msgstr "Ne izbrane komponente!"
@@ -121,8 +122,7 @@ msgid "Reason"
 msgstr "Vzrok"
 
 #. module: mrp_bom_component_change
-#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:64
-#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:66
+#: code:addons/mrp_bom_component_change/models/mrp_bom_change.py:47
 #, python-format
 msgid "There isn't any BoM for selected component"
 msgstr "Za izbrano komponento ni kosovnice"

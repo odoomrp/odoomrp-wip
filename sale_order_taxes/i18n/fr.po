@@ -1,0 +1,84 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * sale_order_taxes
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-09-10 16:31+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: French (http://www.transifex.com/oca/odoomrp-wip-8-0/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,amount:0
+msgid "Amount"
+msgstr ""
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,base:0
+msgid "Base"
+msgstr ""
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: sale_order_taxes
+#: help:sale.order.tax,sequence:0
+msgid "Gives the sequence order when displaying a list of order tax."
+msgstr ""
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,id:0
+msgid "ID"
+msgstr "Id."
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,write_uid:0
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,write_date:0
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,sale_order:0
+msgid "Sale Order"
+msgstr ""
+
+#. module: sale_order_taxes
+#: model:ir.model,name:sale_order_taxes.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,sequence:0
+msgid "Sequence"
+msgstr ""
+
+#. module: sale_order_taxes
+#: field:sale.order.tax,name:0
+msgid "Tax Description"
+msgstr ""
+
+#. module: sale_order_taxes
+#: view:sale.order:sale_order_taxes.sale-order_form_view
+#: field:sale.order,taxes:0
+msgid "Taxes"
+msgstr ""

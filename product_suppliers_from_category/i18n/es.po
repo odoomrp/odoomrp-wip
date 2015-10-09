@@ -1,0 +1,95 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * product_suppliers_from_category
+# 
+# Translators:
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-10-09 11:16+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: product_suppliers_from_category
+#: model:ir.actions.act_window,name:product_suppliers_from_category.act_add_suppliers
+msgid "Add suppliers"
+msgstr "Añadir proveedores"
+
+#. module: product_suppliers_from_category
+#: view:add.suppliers:product_suppliers_from_category.add_suppliers_form_view
+msgid "Adds suppliers assigned to the category of the product"
+msgstr "Añadir proveedores asignados a la categoría del producto"
+
+#. module: product_suppliers_from_category
+#: view:add.suppliers:product_suppliers_from_category.add_suppliers_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: product_suppliers_from_category
+#: view:add.suppliers:product_suppliers_from_category.add_suppliers_form_view
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: product_suppliers_from_category
+#: view:product.template:product_suppliers_from_category.get_supplier_form_view
+msgid "Get suppliers from category"
+msgstr "Obtener proveedores desde la categoría"
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: product_suppliers_from_category
+#: model:ir.model,name:product_suppliers_from_category.model_product_category
+msgid "Product Category"
+msgstr "Categoria de producto"
+
+#. module: product_suppliers_from_category
+#: field:add.suppliers,remove_others:0
+msgid "Remove providers who are not in the category of the product"
+msgstr "Eliminar proveedores que no están en la categoría del producto"
+
+#. module: product_suppliers_from_category
+#: view:product.category:product_suppliers_from_category.category_supplier_form_view
+#: field:product.category,suppliers:0
+msgid "Suppliers"
+msgstr "Proveedores"
+
+#. module: product_suppliers_from_category
+#: view:add.suppliers:product_suppliers_from_category.add_suppliers_form_view
+msgid "form_string"
+msgstr "form_string"
+
+#. module: product_suppliers_from_category
+#: view:add.suppliers:product_suppliers_from_category.add_suppliers_form_view
+msgid "or"
+msgstr "o"

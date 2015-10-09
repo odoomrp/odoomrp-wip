@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * procurement_orderpoint_no_confirm
+# 
+# Translators:
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-10-09 10:59+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: procurement_orderpoint_no_confirm
+#: model:ir.model,name:procurement_orderpoint_no_confirm.model_procurement_orderpoint_compute
+msgid "Compute Minimum Stock Rules"
+msgstr "Calcular reglas de existencias mínimas"
+
+#. module: procurement_orderpoint_no_confirm
+#: model:ir.model,name:procurement_orderpoint_no_confirm.model_procurement_order
+msgid "Procurement"
+msgstr "Abastecimiento"

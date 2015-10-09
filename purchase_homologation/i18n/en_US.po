@@ -1,0 +1,127 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * purchase_homologation
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-09-10 16:38+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: English (United States) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/en_US/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: purchase_homologation
+#: model:ir.actions.act_window,help:purchase_homologation.purchase_homologation_action
+msgid ""
+"<p class=\"oe_view_nocontent_create\">Click here to set a new supplier homologation for certain product or category.</p>\n"
+"            "
+msgstr ""
+
+#. module: purchase_homologation
+#: field:purchase.homologation,start_date:0
+msgid "Beginning date"
+msgstr ""
+
+#. module: purchase_homologation
+#: model:res.groups,name:purchase_homologation.group_purchase_homologation
+msgid "Bypass purchase homologation"
+msgstr ""
+
+#. module: purchase_homologation
+#: field:purchase.homologation,category_id:0
+msgid "Category"
+msgstr ""
+
+#. module: purchase_homologation
+#: field:purchase.homologation,comments:0
+msgid "Comments"
+msgstr ""
+
+#. module: purchase_homologation
+#: field:purchase.homologation,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: purchase_homologation
+#: field:purchase.homologation,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: purchase_homologation
+#: code:addons/purchase_homologation/models/purchase_homologation.py:44
+#: code:addons/purchase_homologation/models/purchase_homologation.py:48
+#, python-format
+msgid "Error!"
+msgstr "Error!"
+
+#. module: purchase_homologation
+#: field:purchase.homologation,end_date:0
+msgid "Finishing date"
+msgstr ""
+
+#. module: purchase_homologation
+#: model:ir.model,name:purchase_homologation.model_purchase_homologation
+msgid "Homologation for suppliers and categories"
+msgstr ""
+
+#. module: purchase_homologation
+#: field:purchase.homologation,id:0
+msgid "ID"
+msgstr ""
+
+#. module: purchase_homologation
+#: field:purchase.homologation,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: purchase_homologation
+#: field:purchase.homologation,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: purchase_homologation
+#: field:purchase.homologation,product_id:0
+msgid "Product"
+msgstr ""
+
+#. module: purchase_homologation
+#: model:ir.model,name:purchase_homologation.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: purchase_homologation
+#: field:purchase.homologation,partner_id:0
+msgid "Supplier"
+msgstr ""
+
+#. module: purchase_homologation
+#: model:ir.actions.act_window,name:purchase_homologation.purchase_homologation_action
+#: model:ir.ui.menu,name:purchase_homologation.purchase_homologation_menu
+#: view:purchase.homologation:purchase_homologation.purchase_homologation_tree_view
+msgid "Supplier homologation"
+msgstr ""
+
+#. module: purchase_homologation
+#: code:addons/purchase_homologation/models/purchase_order_line.py:65
+#, python-format
+msgid "This product is not homologated for purchasing it."
+msgstr ""
+
+#. module: purchase_homologation
+#: code:addons/purchase_homologation/models/purchase_homologation.py:49
+#, python-format
+msgid "You must only select one of these: category or product."
+msgstr ""
+
+#. module: purchase_homologation
+#: code:addons/purchase_homologation/models/purchase_homologation.py:45
+#, python-format
+msgid "You must select a category or product."
+msgstr ""

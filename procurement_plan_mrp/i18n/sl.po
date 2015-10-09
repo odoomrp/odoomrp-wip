@@ -1,24 +1,25 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* procurement_plan_mrp
-#
+# * procurement_plan_mrp
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-06 13:00+0000\n"
-"PO-Revision-Date: 2015-08-15 12:55+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-10-07 10:24+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:119
+#: code:addons/procurement_plan_mrp/models/procurement.py:153
 #, python-format
 msgid "BoM not found, for product: %s"
 msgstr "Kosovnica za proizvod: %s ni najdena"
@@ -37,6 +38,12 @@ msgstr "Izbris nižjih nivojev"
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
 msgid "Generate procurements"
 msgstr "Ustvari oskrbovanja"
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/models/procurement.py:105
+#, python-format
+msgid "Generated from sale order: "
+msgstr "Ustvarjeno iz prodajnega naloga:"
 
 #. module: procurement_plan_mrp
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
@@ -59,9 +66,11 @@ msgid "Manufacturing Order"
 msgstr "Proizvodni nalog"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:171
+#: code:addons/procurement_plan_mrp/models/procurement.py:206
 #, python-format
-msgid "No product defined for BoM line with template: %s, on the list of materials %s"
+msgid ""
+"No product defined for BoM line with template: %s, on the list of materials "
+"%s"
 msgstr "Za postavko kosovnice s predlogo: %s na seznamu materiala %s ni določenega proizvoda"
 
 #. module: procurement_plan_mrp
@@ -86,12 +95,17 @@ msgid "Procurement Plan"
 msgstr "Oskrbovalni plan"
 
 #. module: procurement_plan_mrp
+#: field:stock.reservation,procurement_from_plan:0
+msgid "Procurement from plan"
+msgstr "Oskrbovanje iz plana"
+
+#. module: procurement_plan_mrp
 #: view:mrp.production:procurement_plan_mrp.view_mrp_production_filter_inh_mrpprocurementplan
 msgid "Product"
 msgstr "Proizvod"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:157
+#: code:addons/procurement_plan_mrp/models/procurement.py:191
 #, python-format
 msgid "Product has not been found on the list of materials %s, Level %s"
 msgstr "Proizvoda ni na seznamu materiala %s, nivo %s"
@@ -107,7 +121,22 @@ msgid "Purchase Orders"
 msgstr "Nabavni nalogi"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:142
+#: model:ir.model,name:procurement_plan_mrp.model_sale_order
+msgid "Sales Order"
+msgstr "Prodajni nalog"
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Postavka prodajnega naloga"
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_stock_reservation
+msgid "Stock Reservation"
+msgstr "Rezervacija zaloge"
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/models/procurement.py:176
 #, python-format
 msgid "THEY HAVE NOT GENERATED ALL PROCUREMENTS"
 msgstr "VSA OSKRBOVANJA NISO BILA USTVARJENA"

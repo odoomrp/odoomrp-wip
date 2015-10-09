@@ -1,35 +1,34 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_promotion_gift
-#
+# * sale_promotion_gift
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-27 08:10+0000\n"
-"PO-Revision-Date: 2015-06-27 10:16+0100\n"
-"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-10-09 10:50+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: sale_promotion_gift
-#: field:sale.final.gift,category:0
-#: field:sale.promotion.gift,category:0
+#: field:sale.final.gift,category:0 field:sale.promotion.gift,category:0
 msgid "Category"
 msgstr "Categoría"
 
 #. module: sale_promotion_gift
-#: field:sale.final.gift,create_uid:0
-#: field:sale.promotion.gift,create_uid:0
+#: field:sale.final.gift,create_uid:0 field:sale.promotion.gift,create_uid:0
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: sale_promotion_gift
-#: field:sale.final.gift,create_date:0
-#: field:sale.promotion.gift,create_date:0
+#: field:sale.final.gift,create_date:0 field:sale.promotion.gift,create_date:0
 msgid "Created on"
 msgstr "Creado el"
 
@@ -39,31 +38,23 @@ msgid "Dump offer"
 msgstr "Volcar oferta"
 
 #. module: sale_promotion_gift
-#: code:addons/sale_promotion_gift/models/sale_order.py:123
+#: code:addons/sale_promotion_gift/models/sale_order.py:161
 #, python-format
 msgid "Error!: This product is not in a allowed category."
 msgstr "Error!: Este producto no está en una categoría permitida."
 
 #. module: sale_promotion_gift
-#: model:ir.model,name:sale_promotion_gift.model_gift_product
-msgid "Gift product"
-msgstr "Producto regalo"
-
-#. module: sale_promotion_gift
-#: field:sale.final.gift,id:0
-#: field:sale.promotion.gift,id:0
+#: field:sale.final.gift,id:0 field:sale.promotion.gift,id:0
 msgid "ID"
 msgstr "ID"
 
 #. module: sale_promotion_gift
-#: field:sale.final.gift,write_uid:0
-#: field:sale.promotion.gift,write_uid:0
+#: field:sale.final.gift,write_uid:0 field:sale.promotion.gift,write_uid:0
 msgid "Last Updated by"
 msgstr "Última actualización por"
 
 #. module: sale_promotion_gift
-#: field:sale.final.gift,write_date:0
-#: field:sale.promotion.gift,write_date:0
+#: field:sale.final.gift,write_date:0 field:sale.promotion.gift,write_date:0
 msgid "Last Updated on"
 msgstr "Última actualización el"
 
@@ -83,19 +74,12 @@ msgid "Pricelist item offer"
 msgstr "Ofertas del elemento de tarifa"
 
 #. module: sale_promotion_gift
-#: field:sale.final.gift,product:0
-#: field:sale.promotion.gift,product:0
+#: field:sale.final.gift,product:0 field:sale.promotion.gift,product:0
 msgid "Product"
 msgstr "Producto"
 
 #. module: sale_promotion_gift
-#: model:ir.model,name:sale_promotion_gift.model_promotion_gift_product
-msgid "Promotion gift product"
-msgstr "Producto regalo de la promoción"
-
-#. module: sale_promotion_gift
-#: field:sale.final.gift,quantity:0
-#: field:sale.promotion.gift,quantity:0
+#: field:sale.final.gift,quantity:0 field:sale.promotion.gift,quantity:0
 msgid "Quantity"
 msgstr "Cantidad"
 
@@ -135,14 +119,14 @@ msgid "Sales Order"
 msgstr "Pedidos de venta"
 
 #. module: sale_promotion_gift
-#: help:sale.final.gift,category:0
-#: help:sale.promotion.gift,category:0
+#: help:sale.final.gift,category:0 help:sale.promotion.gift,category:0
 msgid "Select category for the current product"
 msgstr "Selecciona la categoria del producto actual"
 
 #. module: sale_promotion_gift
-#: code:addons/sale_promotion_gift/models/sale_order.py:122
+#: code:addons/sale_promotion_gift/models/sale_order.py:119
 #, python-format
-msgid "Total Quantity %s, in final gift products with category %s, exceeds in gift products of the same category with amount %s"
+msgid ""
+"Total Quantity %s, in final gift products with category %s, exceeds in gift "
+"products of the same category with amount %s"
 msgstr "Cantidad total %s, en productos regalo finales con categoría %s, exceden en productos regalo de la misma categoría con cantidad %s"
-

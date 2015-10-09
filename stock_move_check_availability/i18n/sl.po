@@ -1,22 +1,30 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#
+# * stock_move_check_availability
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-29 15:45+0000\n"
-"PO-Revision-Date: 2015-08-15 09:14+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-09-20 19:06+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: stock_move_check_availability
 #: view:stock.move:stock_move_check_availability.view_move_form_inherit
+#: view:stock.move:stock_move_check_availability.view_move_picking_form_inherit
 msgid "Check Availability"
 msgstr "Preveri razpoložljivost"
+
+#. module: stock_move_check_availability
+#: view:stock.move:stock_move_check_availability.view_move_form_inherit
+msgid "Do Unreserve"
+msgstr "Odstrani rezervacijo"

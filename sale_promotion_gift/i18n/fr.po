@@ -1,0 +1,132 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * sale_promotion_gift
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-09-10 16:41+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: French (http://www.transifex.com/oca/odoomrp-wip-8-0/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: sale_promotion_gift
+#: field:sale.final.gift,category:0 field:sale.promotion.gift,category:0
+msgid "Category"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: field:sale.final.gift,create_uid:0 field:sale.promotion.gift,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: sale_promotion_gift
+#: field:sale.final.gift,create_date:0 field:sale.promotion.gift,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: sale_promotion_gift
+#: view:sale.order:sale_promotion_gift.view_order_form_inh_promotiongift
+msgid "Dump offer"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: code:addons/sale_promotion_gift/models/sale_order.py:161
+#, python-format
+msgid "Error!: This product is not in a allowed category."
+msgstr ""
+
+#. module: sale_promotion_gift
+#: field:sale.final.gift,id:0 field:sale.promotion.gift,id:0
+msgid "ID"
+msgstr "Id."
+
+#. module: sale_promotion_gift
+#: field:sale.final.gift,write_uid:0 field:sale.promotion.gift,write_uid:0
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: sale_promotion_gift
+#: field:sale.final.gift,write_date:0 field:sale.promotion.gift,write_date:0
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: sale_promotion_gift
+#: field:product.pricelist.item.offer,not_combinable:0
+msgid "Offer not combinable"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: view:sale.order:sale_promotion_gift.view_order_form_inh_promotiongift
+msgid "Other Information"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: field:sale.promotion.gift,product_pricelist_item_offer:0
+msgid "Pricelist item offer"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: field:sale.final.gift,product:0 field:sale.promotion.gift,product:0
+msgid "Product"
+msgstr "Article"
+
+#. module: sale_promotion_gift
+#: field:sale.final.gift,quantity:0 field:sale.promotion.gift,quantity:0
+msgid "Quantity"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: field:sale.final.gift,sale:0
+msgid "Sale Order"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: model:ir.model,name:sale_promotion_gift.model_sale_final_gift
+#: view:sale.final.gift:sale_promotion_gift.sale_final_gift_tree_view
+msgid "Sale final gift"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: view:sale.order:sale_promotion_gift.view_order_form_inh_promotiongift
+#: field:sale.order,sale_final_gifts:0
+msgid "Sale final gifts"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: model:ir.model,name:sale_promotion_gift.model_sale_promotion_gift
+msgid "Sale promotion gift"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: view:product.pricelist.item.offer:sale_promotion_gift.pricelist_item_offer_form_view_inh_promotiongift
+#: field:product.pricelist.item.offer,sale_promotion_gifts:0
+#: view:sale.order:sale_promotion_gift.view_order_form_inh_promotiongift
+#: view:sale.promotion.gift:sale_promotion_gift.sale_promotion_gift_tree_view
+msgid "Sale promotion gifts"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: model:ir.model,name:sale_promotion_gift.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: help:sale.final.gift,category:0 help:sale.promotion.gift,category:0
+msgid "Select category for the current product"
+msgstr ""
+
+#. module: sale_promotion_gift
+#: code:addons/sale_promotion_gift/models/sale_order.py:119
+#, python-format
+msgid ""
+"Total Quantity %s, in final gift products with category %s, exceeds in gift "
+"products of the same category with amount %s"
+msgstr ""

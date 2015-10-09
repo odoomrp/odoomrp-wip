@@ -1,22 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* product_template_reassign
-#
+# * product_template_reassign
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-25 12:11+0000\n"
-"PO-Revision-Date: 2015-03-25 12:11+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-10-09 10:50+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: product_template_reassign
-#: field:reassign.product.lines,attributes:0
+#: field:reassign.product.lines,values:0
 msgid "Attributes"
 msgstr "Atributos"
 
@@ -43,8 +45,7 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: product_template_reassign
-#: field:reassign.product.lines,id:0
-#: field:reassign.products,id:0
+#: field:reassign.product.lines,id:0 field:reassign.products,id:0
 msgid "ID"
 msgstr "ID"
 
@@ -62,6 +63,10 @@ msgstr "Última actualización en"
 
 #. module: product_template_reassign
 #: field:reassign.product.lines,old_product:0
+msgid "Old product"
+msgstr ""
+
+#. module: product_template_reassign
 #: field:reassign.product.lines,product:0
 msgid "Product"
 msgstr "Product"
@@ -95,4 +100,3 @@ msgstr "Reasignar productos"
 #: view:reassign.products:product_template_reassign.reassign_product_form_view
 msgid "or"
 msgstr "o"
-

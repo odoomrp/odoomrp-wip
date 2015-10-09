@@ -1,21 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* purchase_product_variants
-#
+# * purchase_product_variants
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-19 05:57+0000\n"
-"PO-Revision-Date: 2015-08-15 13:10+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-09-20 19:03+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: purchase_product_variants
 #: field:purchase.order.line.attribute,attribute:0
@@ -73,13 +73,25 @@ msgid "Product attributes"
 msgstr "Atributi proizvoda"
 
 #. module: purchase_product_variants
-#: code:addons/purchase_product_variants/models/purchase_order.py:136
+#: model:ir.model,name:purchase_product_variants.model_purchase_order
+msgid "Purchase Order"
+msgstr "Nabavni nalog"
+
+#. module: purchase_product_variants
+#: model:ir.model,name:purchase_product_variants.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Postavka nabavnega naloga"
+
+#. module: purchase_product_variants
+#: code:addons/purchase_product_variants/models/purchase_order.py:143
 #, python-format
-msgid "The selected supplier has a minimal quantity set to %s %s, you should not purchase less."
+msgid ""
+"The selected supplier has a minimal quantity set to %s %s, you should not "
+"purchase less."
 msgstr "Izbrani dobavitelj ima minimalno količino nastavljeno na %s %s, manj ne smete nabavljati."
 
 #. module: purchase_product_variants
-#: code:addons/purchase_product_variants/models/purchase_order.py:121
+#: code:addons/purchase_product_variants/models/purchase_order.py:128
 #, python-format
 msgid "The selected supplier only sells this product by %s"
 msgstr "Izbrani dobavitelj prodaja ta proizvod v %s"
@@ -90,8 +102,8 @@ msgid "Value"
 msgstr "Vrednost"
 
 #. module: purchase_product_variants
-#: code:addons/purchase_product_variants/models/purchase_order.py:120
-#: code:addons/purchase_product_variants/models/purchase_order.py:135
+#: code:addons/purchase_product_variants/models/purchase_order.py:127
+#: code:addons/purchase_product_variants/models/purchase_order.py:142
 #, python-format
 msgid "Warning!"
 msgstr "Opozorilo!"

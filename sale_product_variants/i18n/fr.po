@@ -1,0 +1,110 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * sale_product_variants
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-09-10 16:33+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: French (http://www.transifex.com/oca/odoomrp-wip-8-0/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: sale_product_variants
+#: view:sale.order:sale_product_variants.sale_order_extended_form_view
+msgid "(update)"
+msgstr ""
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,attribute:0
+msgid "Attribute"
+msgstr ""
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: sale_product_variants
+#: view:sale.order:sale_product_variants.sale_order_extended_form_view
+msgid "Duplicate"
+msgstr ""
+
+#. module: sale_product_variants
+#: view:sale.order:sale_product_variants.sale_order_extended_form_view
+msgid "Duplicate line"
+msgstr ""
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,id:0
+msgid "ID"
+msgstr "Id."
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,write_uid:0
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,write_date:0
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,sale_line:0
+msgid "Order line"
+msgstr ""
+
+#. module: sale_product_variants
+#: view:sale.order.line:sale_product_variants.sale_order_line_extended_search_view
+msgid "Product"
+msgstr "Article"
+
+#. module: sale_product_variants
+#: field:sale.order.line,product_template:0
+msgid "Product Template"
+msgstr ""
+
+#. module: sale_product_variants
+#: field:sale.order.line,product_attributes:0
+msgid "Product attributes"
+msgstr ""
+
+#. module: sale_product_variants
+#: model:ir.model,name:sale_product_variants.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: sale_product_variants
+#: view:sale.order.line:sale_product_variants.sale_order_line_extended_search_view
+msgid "Template"
+msgstr ""
+
+#. module: sale_product_variants
+#: model:res.groups,name:sale_product_variants.group_product_variant_extended_description
+#: field:sale.config.settings,group_product_variant_extended_description:0
+msgid "Use extended description when having product attributes"
+msgstr ""
+
+#. module: sale_product_variants
+#: field:sale.order.line.attribute,value:0
+msgid "Value"
+msgstr ""
+
+#. module: sale_product_variants
+#: code:addons/sale_product_variants/models/sale_order.py:180
+#, python-format
+msgid "You can not confirm before configuring all attribute values."
+msgstr ""

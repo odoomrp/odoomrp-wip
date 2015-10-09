@@ -1,0 +1,164 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_quant_packages_moving_wizard
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-09-20 19:06+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,create_uid:0
+#: field:stock.quant.move_items,create_uid:0
+#: field:stock.quant.package.move,create_uid:0
+#: field:stock.quant.package.move_items,create_uid:0
+#: field:stock.quants.move,create_uid:0
+#: field:stock.quants.move_items,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,create_date:0
+#: field:stock.quant.move_items,create_date:0
+#: field:stock.quant.package.move,create_date:0
+#: field:stock.quant.package.move_items,create_date:0
+#: field:stock.quants.move,create_date:0
+#: field:stock.quants.move_items,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move_items,dest_loc:0
+#: field:stock.quant.package.move_items,dest_loc:0
+#: field:stock.quants.move,dest_loc:0
+msgid "Destination Location"
+msgstr "Ciljna lokacija"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,id:0 field:stock.quant.move_items,id:0
+#: field:stock.quant.package.move,id:0
+#: field:stock.quant.package.move_items,id:0 field:stock.quants.move,id:0
+#: field:stock.quants.move_items,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,write_uid:0 field:stock.quant.move_items,write_uid:0
+#: field:stock.quant.package.move,write_uid:0
+#: field:stock.quant.package.move_items,write_uid:0
+#: field:stock.quants.move,write_uid:0
+#: field:stock.quants.move_items,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,write_date:0
+#: field:stock.quant.move_items,write_date:0
+#: field:stock.quant.package.move,write_date:0
+#: field:stock.quant.package.move_items,write_date:0
+#: field:stock.quants.move,write_date:0
+#: field:stock.quants.move_items,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: stock_quant_packages_moving_wizard
+#: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_quants
+msgid "Move Stock Quant"
+msgstr "Premik kvanta zaloge"
+
+#. module: stock_quant_packages_moving_wizard
+#: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_packages
+msgid "Move Stock Quant Packages"
+msgstr "Premik kvantov pakiranj"
+
+#. module: stock_quant_packages_moving_wizard
+#: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_quants_to
+#: model:ir.ui.menu,name:stock_quant_packages_moving_wizard.menu_quant_move_wizard
+msgid "Move Stock Quants To"
+msgstr "Premik kvantov zaloge na"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.package.move_items,move_id:0
+msgid "Package move"
+msgstr "Premik pakiranja"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,pack_move_items:0
+#: field:stock.quant.package.move,pack_move_items:0
+msgid "Packs"
+msgstr "Pakiranja"
+
+#. module: stock_quant_packages_moving_wizard
+#: model:ir.model,name:stock_quant_packages_moving_wizard.model_stock_quant_move_items
+#: model:ir.model,name:stock_quant_packages_moving_wizard.model_stock_quant_package_move_items
+#: model:ir.model,name:stock_quant_packages_moving_wizard.model_stock_quants_move_items
+msgid "Picking wizard items"
+msgstr "Predmeti čarovnika za zbirnike"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move_items,quant:0 field:stock.quants.move_items,quant:0
+msgid "Quant"
+msgstr "Kvant"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move_items,move_id:0
+#: field:stock.quants.move_items,move_id:0
+msgid "Quant move"
+msgstr "Premik kvanta"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.package.move_items,package:0
+msgid "Quant package"
+msgstr "Kvant pakiranja"
+
+#. module: stock_quant_packages_moving_wizard
+#: model:ir.model,name:stock_quant_packages_moving_wizard.model_stock_quant
+#: field:stock.quants.move,pack_move_items:0
+msgid "Quants"
+msgstr "Kvant"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move_items,source_loc:0
+#: field:stock.quant.package.move_items,source_loc:0
+#: field:stock.quants.move_items,source_loc:0
+msgid "Source Location"
+msgstr "Izvorna lokacija"
+
+#. module: stock_quant_packages_moving_wizard
+#: view:stock.quant.move:stock_quant_packages_moving_wizard.stock_quant_move_wizard
+#: view:stock.quant.package.move:stock_quant_packages_moving_wizard.stock_quant_package_move_wizard
+#: view:stock.quants.move:stock_quant_packages_moving_wizard.stock_quants_move_wizard
+msgid "Transfer details"
+msgstr "Podatki o premestitvi"
+
+#. module: stock_quant_packages_moving_wizard
+#: view:stock.quant.move:stock_quant_packages_moving_wizard.stock_quant_move_wizard
+#: view:stock.quant.package.move:stock_quant_packages_moving_wizard.stock_quant_package_move_wizard
+#: view:stock.quants.move:stock_quant_packages_moving_wizard.stock_quants_move_wizard
+msgid "_Apply"
+msgstr "_Uveljavi"
+
+#. module: stock_quant_packages_moving_wizard
+#: view:stock.quant.move:stock_quant_packages_moving_wizard.stock_quant_move_wizard
+#: view:stock.quant.package.move:stock_quant_packages_moving_wizard.stock_quant_package_move_wizard
+#: view:stock.quants.move:stock_quant_packages_moving_wizard.stock_quants_move_wizard
+msgid "_Cancel"
+msgstr "_Preklic"
+
+#. module: stock_quant_packages_moving_wizard
+#: view:stock.quant.move:stock_quant_packages_moving_wizard.stock_quant_move_wizard
+#: view:stock.quant.package.move:stock_quant_packages_moving_wizard.stock_quant_package_move_wizard
+#: view:stock.quants.move:stock_quant_packages_moving_wizard.stock_quants_move_wizard
+msgid "or"
+msgstr "ali"

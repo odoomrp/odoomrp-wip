@@ -1,87 +1,87 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* procurement_purchase_forecast
-#
+# * procurement_purchase_forecast
+# 
+# Translators:
+# Oihane Crucelaegui <oihanecruce@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-15 16:38+0000\n"
-"PO-Revision-Date: 2014-12-15 16:38+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-10-09 10:50+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: procurement_purchase_forecast
-#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_forecast_form_view
-#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_purchase_form_view
+#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_form_view
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,product_categ_id:0
 msgid "Category"
-msgstr ""
+msgstr "Categoría"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,date_from:0
 msgid "Date from"
-msgstr ""
+msgstr "Fecha desde"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,date_to:0
 msgid "Date to"
-msgstr ""
+msgstr "Fecha hasta"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,factor:0
 msgid "Factor"
-msgstr ""
+msgstr "Factor"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,forecast_id:0
 msgid "Forecast"
-msgstr ""
+msgstr "Previsión"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización el"
 
 #. module: procurement_purchase_forecast
-#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_forecast_form_view
-#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_purchase_form_view
+#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_form_view
 msgid "Load"
-msgstr ""
+msgstr "Cargar"
 
 #. module: procurement_purchase_forecast
-#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_forecast_form_view
-#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_purchase_form_view
+#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_form_view
 msgid "Load Purchases"
-msgstr ""
+msgstr "Cargar compras"
 
 #. module: procurement_purchase_forecast
 #: view:procurement.sale.forecast:procurement_purchase_forecast.procurement_purchase_forecast_form_view
@@ -91,36 +91,34 @@ msgstr ""
 #. module: procurement_purchase_forecast
 #: view:purchase.order:procurement_purchase_forecast.purchase_load_forecast_form_view
 msgid "Load to forecast"
-msgstr ""
+msgstr "Cargar a previsión"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Empresa"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,product_id:0
 msgid "Product"
-msgstr ""
+msgstr "Producto"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,purchase_id:0
 msgid "Purchase"
-msgstr ""
-
-#. module: procurement_purchase_forecast
-#: model:ir.model,name:procurement_purchase_forecast.model_purchase_order
-msgid "Purchase Order"
-msgstr ""
+msgstr "Compra"
 
 #. module: procurement_purchase_forecast
 #: field:purchase.forecast.load,product_tmpl_id:0
 msgid "Template"
-msgstr ""
+msgstr "Plantilla"
 
 #. module: procurement_purchase_forecast
-#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_forecast_form_view
-#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_purchase_form_view
+#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_form_view
 msgid "or"
-msgstr ""
+msgstr "o"
 
+#. module: procurement_purchase_forecast
+#: model:ir.actions.act_window,name:procurement_purchase_forecast.action_purchase_forecast_load_view
+msgid "purchase.forecast.load"
+msgstr ""

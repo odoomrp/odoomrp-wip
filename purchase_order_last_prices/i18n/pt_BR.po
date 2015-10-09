@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * purchase_order_last_prices
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-10-09 03:42+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: purchase_order_last_prices
+#: view:purchase.order:purchase_order_last_prices.view_purchase_product_prices
+msgid "Last Prices"
+msgstr ""
+
+#. module: purchase_order_last_prices
+#: view:purchase.order.line:purchase_order_last_prices.last_purchase_product_prices_view
+msgid "Last Product Prices"
+msgstr ""
+
+#. module: purchase_order_last_prices
+#: model:ir.model,name:purchase_order_last_prices.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Linha pedido de compra"

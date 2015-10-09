@@ -1,28 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mrp_subcontracting
-#
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015.
+# * mrp_subcontracting
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-10 15:03+0000\n"
-"PO-Revision-Date: 2015-04-14 07:59+0200\n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-09-20 19:00+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian <translate@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
 "Language: sl\n"
-"X-Generator: Lokalize 1.5\n"
-
-#. module: mrp_subcontracting
-#: code:addons/mrp_subcontracting/models/mrp_subcontrating.py:114
-#, python-format
-msgid "Company warehouse not found"
-msgstr "Skladišče podjetja ni najdeno"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: mrp_subcontracting
 #: model:ir.actions.act_window,name:mrp_subcontracting.action_purchases_per_production
@@ -52,6 +46,7 @@ msgid "Information"
 msgstr "Podrobnosti"
 
 #. module: mrp_subcontracting
+#: help:mrp.production.workcenter.line,external:0
 #: help:mrp.routing.workcenter,external:0
 msgid "Is Subcontract Operation"
 msgstr "Je podizvajalska operacija"
@@ -62,10 +57,19 @@ msgid "MPR Operation"
 msgstr "Operacija upravljanja proizvodnje"
 
 #. module: mrp_subcontracting
-#: field:purchase.order,mrp_production:0
 #: field:stock.picking,mrp_production:0
 msgid "MPR Production"
 msgstr "Proizvodnja upravljanja proizvodnje"
+
+#. module: mrp_subcontracting
+#: field:procurement.order,mrp_operation:0
+msgid "MRP Operation"
+msgstr "MRP operacija"
+
+#. module: mrp_subcontracting
+#: field:purchase.order,mrp_production:0
+msgid "MRP Production"
+msgstr "MRP proizvodnja"
 
 #. module: mrp_subcontracting
 #: model:ir.model,name:mrp_subcontracting.model_mrp_production
@@ -88,9 +92,9 @@ msgid "Picking List"
 msgstr "Prevzemni seznam"
 
 #. module: mrp_subcontracting
-#: field:mrp.routing.workcenter,picking_type_id:0
-msgid "Picking Type"
-msgstr "Tip prevzema"
+#: model:ir.model,name:mrp_subcontracting.model_procurement_order
+msgid "Procurement"
+msgstr "Oskrba"
 
 #. module: mrp_subcontracting
 #: field:mrp.production.workcenter.line,procurement_order:0
@@ -98,23 +102,10 @@ msgid "Procurement Order"
 msgstr "Oskrbovalni nalog"
 
 #. module: mrp_subcontracting
-#: code:addons/mrp_subcontracting/models/mrp_subcontrating.py:113
-#: code:addons/mrp_subcontracting/models/mrp_subcontrating.py:121
-#, python-format
-msgid "Production Confirmation Error"
-msgstr "Napaka pri potrjevanju proizvodnje"
-
-#. module: mrp_subcontracting
 #: model:ir.model,name:mrp_subcontracting.model_purchase_order
 #: field:mrp.production.workcenter.line,purchase_order:0
 msgid "Purchase Order"
 msgstr "Nabavni nalog"
-
-#. module: mrp_subcontracting
-#: code:addons/mrp_subcontracting/models/mrp_subcontrating.py:122
-#, python-format
-msgid "Rule for procurement order not found"
-msgstr "Pravilo oskrbovalnega naloga ni najdeno"
 
 #. module: mrp_subcontracting
 #: field:mrp.routing.workcenter,semifinished_id:0
@@ -128,16 +119,6 @@ msgid "Subcontracting"
 msgstr "Podizvajanje"
 
 #. module: mrp_subcontracting
-#: code:addons/mrp_subcontracting/models/mrp_subcontrating.py:137
-#, python-format
-msgid ""
-"The procurement order does not generate purchaseorder for product: %s, "
-"warehouse: %s, rule: %s"
-msgstr ""
-"Oskrbovalni nalog ne ustvarja nabavnega naloga za proizvod: %s, skladišče: %"
-"s, pravilo: %s"
-
-#. module: mrp_subcontracting
 #: model:ir.model,name:mrp_subcontracting.model_mrp_routing_workcenter
 msgid "Work Center Usage"
 msgstr "Uporaba delovnega centra"
@@ -146,5 +127,3 @@ msgstr "Uporaba delovnega centra"
 #: model:ir.model,name:mrp_subcontracting.model_mrp_production_workcenter_line
 msgid "Work Order"
 msgstr "Delovni nalog"
-
-

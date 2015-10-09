@@ -1,0 +1,84 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_picking_taxes
+# 
+# Translators:
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-10-09 03:23+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,amount:0
+msgid "Amount"
+msgstr "Montante"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,base:0
+msgid "Base"
+msgstr "Base"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,create_uid:0
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,create_date:0
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: stock_picking_taxes
+#: help:stock.picking.tax,sequence:0
+msgid "Gives the sequence order when displaying a list of picking tax."
+msgstr "Dá a ordem quando mostrado a lista de impostos da separação"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,write_uid:0
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,write_date:0
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,picking:0
+msgid "Picking"
+msgstr "Separação"
+
+#. module: stock_picking_taxes
+#: model:ir.model,name:stock_picking_taxes.model_stock_picking
+msgid "Picking List"
+msgstr "Lista de separação"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,sequence:0
+msgid "Sequence"
+msgstr "Sequência"
+
+#. module: stock_picking_taxes
+#: field:stock.picking.tax,name:0
+msgid "Tax Description"
+msgstr "Descrição imposto"
+
+#. module: stock_picking_taxes
+#: view:stock.picking:stock_picking_taxes.view_picking_form
+msgid "Taxes"
+msgstr "Impostos"

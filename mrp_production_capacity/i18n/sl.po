@@ -1,21 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* mrp_production_capacity
-#
+# * mrp_production_capacity
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-25 12:14+0000\n"
-"PO-Revision-Date: 2015-08-15 13:46+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:43+0000\n"
+"PO-Revision-Date: 2015-09-20 18:57+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: mrp_production_capacity
 #: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
@@ -43,6 +44,12 @@ msgstr "Min. kapaciteta na cikel"
 #: help:mrp.workcenter,capacity_per_cycle_min:0
 msgid "Capacity per cycle minimum."
 msgstr "Minimalna kapaciteta na cikel."
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/models/mrp.py:22
+#, python-format
+msgid "Capacity per cycle must be positive."
+msgstr "Kapaciteta cikla mora biti pozitivna."
 
 #. module: mrp_production_capacity
 #: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
@@ -94,23 +101,45 @@ msgid "Manufacturing Order"
 msgstr "Proizvodni nalog"
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:97
+#: code:addons/mrp_production_capacity/models/mrp.py:25
 #, python-format
-msgid "Product QTY < Capacity per cycle minimum, and > Capacity per cycle maximum. You must click the \"Split Quantity\" button"
+msgid "Maximum value must be greater than minimum."
+msgstr "Maksimalna vrednost mora biti višja od minimalne."
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/models/mrp.py:38
+#, python-format
+msgid "Only one line must be defined as limited per routing."
+msgstr "Le ena postavka na progo se lahko določi kot omejena."
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/models/mrp.py:75
+#, python-format
+msgid ""
+"Product QTY < Capacity per cycle minimum, and > Capacity per cycle maximum. "
+"You must click the \"Split Quantity\" button"
 msgstr "Kol. proizvoda < minimalna kapaciteta na cikel > maksimalna kapaciteta na cikel. Pritisnite na gumb \"Razdeli količino\""
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:174
+#: code:addons/mrp_production_capacity/models/mrp.py:147
 #, python-format
-msgid "Product QTY < Capacity per cycle minimum, or > Capacity per cycle maximum"
+msgid ""
+"Product QTY < Capacity per cycle minimum, or > Capacity per cycle maximum"
 msgstr "Kol. proizvoda < minimalna kapaciteta na cikel > maksimalna kapaciteta na cikel"
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:106
-#: code:addons/mrp_production_capacity/models/mrp.py:113
-#: code:addons/mrp_production_capacity/models/mrp.py:149
+#: code:addons/mrp_production_capacity/models/mrp.py:84
 #, python-format
-msgid "Product QTY > Capacity per cycle maximum. You must click the \"Split Quantity\" button"
+msgid "Product QTY < Capacity per cycle minimum."
+msgstr "kol. proizvoda < min. kapaciteta cikla"
+
+#. module: mrp_production_capacity
+#: code:addons/mrp_production_capacity/models/mrp.py:90
+#: code:addons/mrp_production_capacity/models/mrp.py:125
+#, python-format
+msgid ""
+"Product QTY > Capacity per cycle maximum. You must click the \"Split "
+"Quantity\" button"
 msgstr "Kol. proizvoda > maksimalna kapaciteta na cikel. Pritisnite na gumb \"Razdeli količino\""
 
 #. module: mrp_production_capacity
@@ -119,13 +148,13 @@ msgid "Quantity"
 msgstr "Količina"
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/wizard/wiz_split_production.py:46
+#: code:addons/mrp_production_capacity/wizard/wiz_split_production.py:47
 #, python-format
 msgid "Quantity < Capacity per cycle minimum"
 msgstr "Količina < minimalna kapaciteta na cikel"
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/wizard/wiz_split_production.py:49
+#: code:addons/mrp_production_capacity/wizard/wiz_split_production.py:50
 #, python-format
 msgid "Quantity > Capacity per cycle maximum"
 msgstr "Količina > maksimalna kapaciteta na cikel"
@@ -137,7 +166,7 @@ msgid "Quantity to produce"
 msgstr "Količina za izdelavo"
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:135
+#: code:addons/mrp_production_capacity/models/mrp.py:112
 #: view:wiz.split.production:mrp_production_capacity.wiz_split_production_form_view
 #, python-format
 msgid "Split production"
@@ -154,10 +183,10 @@ msgid "Sum quantity"
 msgstr "Vsota količine"
 
 #. module: mrp_production_capacity
-#: code:addons/mrp_production_capacity/models/mrp.py:96
-#: code:addons/mrp_production_capacity/models/mrp.py:105
-#: code:addons/mrp_production_capacity/models/mrp.py:112
-#: code:addons/mrp_production_capacity/models/mrp.py:173
+#: code:addons/mrp_production_capacity/models/mrp.py:74
+#: code:addons/mrp_production_capacity/models/mrp.py:83
+#: code:addons/mrp_production_capacity/models/mrp.py:89
+#: code:addons/mrp_production_capacity/models/mrp.py:146
 #, python-format
 msgid "Warning!"
 msgstr "Opozorilo!"

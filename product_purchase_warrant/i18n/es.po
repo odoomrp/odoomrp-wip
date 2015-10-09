@@ -1,0 +1,54 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * product_purchase_warrant
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-10-09 10:50+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: product_purchase_warrant
+#: model:ir.model,name:product_purchase_warrant.model_product_supplierinfo
+msgid "Information about a product supplier"
+msgstr ""
+
+#. module: product_purchase_warrant
+#: model:ir.model,name:product_purchase_warrant.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "Lote/Nº de serie"
+
+#. module: product_purchase_warrant
+#: model:ir.model,name:product_purchase_warrant.model_stock_pack_operation
+msgid "Packing Operation"
+msgstr "Operación de empaquetado"
+
+#. module: product_purchase_warrant
+#: model:ir.model,name:product_purchase_warrant.model_stock_transfer_details_items
+msgid "Picking wizard items"
+msgstr "Elementos del asistente de albarán"
+
+#. module: product_purchase_warrant
+#: field:stock.production.lot,warrant_limit:0
+msgid "Warranty"
+msgstr ""
+
+#. module: product_purchase_warrant
+#: field:product.supplierinfo,warrant_months:0
+msgid "Warranty (in months)"
+msgstr ""
+
+#. module: product_purchase_warrant
+#: view:product.supplierinfo:product_purchase_warrant.supplier_warrant_form_view
+#: view:stock.production.lot:product_purchase_warrant.lot_warrant_form_view
+msgid "months"
+msgstr ""

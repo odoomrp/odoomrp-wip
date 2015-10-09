@@ -1,19 +1,27 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* purchase_order_last_prices
-#
+# * purchase_order_last_prices
+# 
+# Translators:
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-06 10:07+0000\n"
-"PO-Revision-Date: 2014-11-06 11:09+0100\n"
-"Last-Translator: Daniel <danielcampos@avanzosc.es>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-10-09 10:55+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: purchase_order_last_prices
+#: view:purchase.order:purchase_order_last_prices.view_purchase_product_prices
+msgid "Last Prices"
+msgstr "Últimos precios"
 
 #. module: purchase_order_last_prices
 #: view:purchase.order.line:purchase_order_last_prices.last_purchase_product_prices_view
@@ -21,12 +29,6 @@ msgid "Last Product Prices"
 msgstr "Últimos precios producto"
 
 #. module: purchase_order_last_prices
-#: view:purchase.order:purchase_order_last_prices.view_purchase_product_prices_form
-msgid "Product Prices"
-msgstr "Precios producto"
-
-#. module: purchase_order_last_prices
-#: model:ir.model,name:purchase_order_last_prices.model_purchase_order
-msgid "Purchase Order"
-msgstr "Pedido de compra"
-
+#: model:ir.model,name:purchase_order_last_prices.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea de pedido de compra"

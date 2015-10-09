@@ -1,0 +1,182 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mrp_packaging
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:43+0000\n"
+"PO-Revision-Date: 2015-09-10 16:37+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: French (http://www.transifex.com/oca/odoomrp-wip-8-0/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Cancel Production"
+msgstr ""
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Check Availability"
+msgstr ""
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Confirm Production"
+msgstr ""
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Create Pack Manufacturing Orders"
+msgstr ""
+
+#. module: mrp_packaging
+#: field:packaging.operation,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: mrp_packaging
+#: field:packaging.operation,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+#: field:mrp.production,expected_production:0
+msgid "Expected Production"
+msgstr ""
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Extra Information"
+msgstr ""
+
+#. module: mrp_packaging
+#: field:packaging.operation,fill:0
+msgid "Fill"
+msgstr ""
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Force Reservation"
+msgstr ""
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Get packages"
+msgstr ""
+
+#. module: mrp_packaging
+#: field:packaging.operation,id:0
+msgid "ID"
+msgstr "Id."
+
+#. module: mrp_packaging
+#: field:packaging.operation,write_uid:0
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: mrp_packaging
+#: field:packaging.operation,write_date:0
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: mrp_packaging
+#: model:ir.model,name:mrp_packaging.model_mrp_production
+msgid "Manufacturing Order"
+msgstr ""
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Mark as Started"
+msgstr ""
+
+#. module: mrp_packaging
+#: field:packaging.operation,operation:0
+msgid "Operation"
+msgstr ""
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+#: field:mrp.production,pack:0
+msgid "Pack"
+msgstr ""
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Packaging"
+msgstr ""
+
+#. module: mrp_packaging
+#: field:packaging.operation,packaging_production:0
+msgid "Packing manufacturing order"
+msgstr ""
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Produce"
+msgstr ""
+
+#. module: mrp_packaging
+#: field:packaging.operation,product:0
+msgid "Product"
+msgstr "Article"
+
+#. module: mrp_packaging
+#: help:packaging.operation,qty:0
+msgid ""
+"Product Quantity. It will be the new manufacturing order quantity if dump "
+"uom is equal to product uom"
+msgstr ""
+
+#. module: mrp_packaging
+#: help:packaging.operation,fill:0
+msgid ""
+"Product linked Raw Material value * Product Quantity. It will be the new "
+"manufacturing order quantity if dump UoM is not equal to product UoM"
+msgstr ""
+
+#. module: mrp_packaging
+#: help:packaging.operation,product:0
+msgid "Product that is going to be manufactured"
+msgstr ""
+
+#. module: mrp_packaging
+#: field:mrp.production,production:0
+msgid "Production"
+msgstr ""
+
+#. module: mrp_packaging
+#: field:packaging.operation,qty:0
+msgid "Qty"
+msgstr ""
+
+#. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Total Qty"
+msgstr ""
+
+#. module: mrp_packaging
+#: code:addons/mrp_packaging/models/mrp_production.py:194
+#, python-format
+msgid "Warning"
+msgstr ""
+
+#. module: mrp_packaging
+#: code:addons/mrp_packaging/models/mrp_production.py:171
+#, python-format
+msgid "You can not compute again the list."
+msgstr ""
+
+#. module: mrp_packaging
+#: code:addons/mrp_packaging/models/mrp_production.py:197
+#, python-format
+msgid "You won't be able to pack %f, there is only %f left"
+msgstr ""

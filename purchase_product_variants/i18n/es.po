@@ -1,19 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* purchase_product_variants
-#
+# * purchase_product_variants
+# 
+# Translators:
+# Oihane Crucelaegui <oihanecruce@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-19 05:57+0000\n"
-"PO-Revision-Date: 2015-05-19 05:57+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-10-09 10:50+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: purchase_product_variants
 #: field:purchase.order.line.attribute,attribute:0
@@ -71,13 +74,25 @@ msgid "Product attributes"
 msgstr "Atributos de producto"
 
 #. module: purchase_product_variants
-#: code:addons/purchase_product_variants/models/purchase_order.py:136
+#: model:ir.model,name:purchase_product_variants.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: purchase_product_variants
+#: model:ir.model,name:purchase_product_variants.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea pedido de compra"
+
+#. module: purchase_product_variants
+#: code:addons/purchase_product_variants/models/purchase_order.py:143
 #, python-format
-msgid "The selected supplier has a minimal quantity set to %s %s, you should not purchase less."
+msgid ""
+"The selected supplier has a minimal quantity set to %s %s, you should not "
+"purchase less."
 msgstr "El proveedor seleccionado tiene una cantidad mínima establecida a %s %s, por lo que no debería comprar menos."
 
 #. module: purchase_product_variants
-#: code:addons/purchase_product_variants/models/purchase_order.py:121
+#: code:addons/purchase_product_variants/models/purchase_order.py:128
 #, python-format
 msgid "The selected supplier only sells this product by %s"
 msgstr "El proveedor seleccionado sólo vende este producto por %s"
@@ -88,9 +103,8 @@ msgid "Value"
 msgstr "Valor"
 
 #. module: purchase_product_variants
-#: code:addons/purchase_product_variants/models/purchase_order.py:120
-#: code:addons/purchase_product_variants/models/purchase_order.py:135
+#: code:addons/purchase_product_variants/models/purchase_order.py:127
+#: code:addons/purchase_product_variants/models/purchase_order.py:142
 #, python-format
 msgid "Warning!"
 msgstr "Aviso"
-

@@ -1,21 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* product_purchase_warrant
-#
+# * product_purchase_warrant
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-17 10:14+0000\n"
-"PO-Revision-Date: 2015-08-15 09:10+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-09-20 19:02+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: product_purchase_warrant
 #: model:ir.model,name:product_purchase_warrant.model_product_supplierinfo
@@ -33,25 +34,19 @@ msgid "Packing Operation"
 msgstr "Operacija pakiranja"
 
 #. module: product_purchase_warrant
-#: model:ir.model,name:product_purchase_warrant.model_stock_transfer_details
-msgid "Picking wizard"
-msgstr "Čarovnik za zbirnike"
-
-#. module: product_purchase_warrant
 #: model:ir.model,name:product_purchase_warrant.model_stock_transfer_details_items
 msgid "Picking wizard items"
 msgstr "Predmeti čarovnika za zbirnike"
 
 #. module: product_purchase_warrant
-#: field:stock.transfer_details_items,warrant:0
-msgid "Warrant"
+#: field:stock.production.lot,warrant_limit:0
+msgid "Warranty"
 msgstr "Garancija"
 
 #. module: product_purchase_warrant
 #: field:product.supplierinfo,warrant_months:0
-#: field:stock.production.lot,warrant_limit:0
-msgid "Warranty"
-msgstr "Garancija"
+msgid "Warranty (in months)"
+msgstr "Garancija (v mesecih)"
 
 #. module: product_purchase_warrant
 #: view:product.supplierinfo:product_purchase_warrant.supplier_warrant_form_view

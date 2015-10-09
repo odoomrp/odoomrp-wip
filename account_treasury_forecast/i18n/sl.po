@@ -1,21 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* account_treasury_forecast
-#
+# * account_treasury_forecast
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-09 09:20+0000\n"
-"PO-Revision-Date: 2015-08-15 08:56+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:43+0000\n"
+"PO-Revision-Date: 2015-09-20 18:54+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
@@ -308,7 +308,11 @@ msgstr "Postavka predloge"
 
 #. module: account_treasury_forecast
 #: view:account.treasury.forecast:account_treasury_forecast.account_treasury_forecast_form_view
-msgid "This button will do some actions. First, removes all lines. Next, loads invoices by selected states and dates. If there is not any state checked, the system will not load any invoice. By last, loads template lines by dates or lines without date."
+msgid ""
+"This button will do some actions. First, removes all lines. Next, loads "
+"invoices by selected states and dates. If there is not any state checked, "
+"the system will not load any invoice. By last, loads template lines by dates"
+" or lines without date."
 msgstr "Ta gumb izvede nekaj dejanj. Najprej odstrani vse postavke, nato naloži račune po izbranih stanjih in datumih. Če nobeno stanje ni označeno, sistem ne naloži nobenega računa. Na koncu naloži postavke predloge po datumih ali postavke brez datuma."
 
 #. module: account_treasury_forecast
@@ -419,3 +423,8 @@ msgstr "Spremenljiva plačila"
 #: model:ir.model,name:account_treasury_forecast.model_wiz_create_invoice
 msgid "Wizard to create invoices"
 msgstr "Čarovnik za ustvarjanje računov"
+
+#. module: account_treasury_forecast
+#: view:wiz.create.invoice:account_treasury_forecast.wiz_create_invoice_form_view
+msgid "or"
+msgstr "ali"

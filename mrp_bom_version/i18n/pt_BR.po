@@ -1,0 +1,173 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mrp_bom_version
+# 
+# Translators:
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:43+0000\n"
+"PO-Revision-Date: 2015-10-09 02:51+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_form_view
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_tree_view
+msgid "Activate"
+msgstr "Ativar"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_search_view
+#: selection:mrp.bom,state:0
+msgid "Active"
+msgstr "Ativo"
+
+#. module: mrp_bom_version
+#: field:mrp.config.settings,group_mrp_bom_version:0
+msgid "Allow to re-edit BoMs"
+msgstr "Permitir reedição de BOM"
+
+#. module: mrp_bom_version
+#: model:ir.model,name:mrp_bom_version.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Lista de materiais"
+
+#. module: mrp_bom_version
+#: model:ir.model,name:mrp_bom_version.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: mrp_bom_version
+#: view:mrp.config.settings:mrp_bom_version.mrp_config_settings_versioning
+#: field:mrp.config.settings,company_id:0
+msgid "Company"
+msgstr "Empresa"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_form_view
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_tree_view
+#: selection:mrp.bom,state:0
+msgid "Draft"
+msgstr "Provisório"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_search_view
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: mrp_bom_version
+#: field:mrp.config.settings,has_default_company:0
+msgid "Has default company"
+msgstr "Tem empresa padrão"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_form_view
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_tree_view
+#: selection:mrp.bom,state:0
+msgid "Historical"
+msgstr "Histórico"
+
+#. module: mrp_bom_version
+#: field:mrp.bom,historical_date:0
+msgid "Historical Date"
+msgstr "Data histórico"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_search_view
+msgid "Inactive"
+msgstr "Inativo"
+
+#. module: mrp_bom_version
+#: field:res.company,active_draft:0
+msgid "Keep re-editing BoM active"
+msgstr "Manter reedição de BOM ativo"
+
+#. module: mrp_bom_version
+#: model:mail.message.subtype,description:mrp_bom_version.mt_active
+#: model:mail.message.subtype,name:mrp_bom_version.mt_active
+msgid "MRP BoM Active"
+msgstr "MRP BOM ativo"
+
+#. module: mrp_bom_version
+#: model:res.groups,name:mrp_bom_version.group_mrp_bom_version
+msgid "MRP BoM version"
+msgstr "Versão BOM MRP"
+
+#. module: mrp_bom_version
+#: view:mrp.config.settings:mrp_bom_version.mrp_config_settings_versioning
+msgid "Master Data"
+msgstr "Dados Master"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_form_view
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_tree_view
+msgid "New version"
+msgstr "Nova versão"
+
+#. module: mrp_bom_version
+#: field:mrp.bom,parent_bom:0
+msgid "Parent BoM"
+msgstr "BOM pai"
+
+#. module: mrp_bom_version
+#: view:mrp.config.settings:mrp_bom_version.mrp_config_settings_versioning
+msgid "Select Company"
+msgstr "Selecionar empresa"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_search_view
+#: field:mrp.bom,state:0
+msgid "State"
+msgstr "Estado"
+
+#. module: mrp_bom_version
+#: help:mrp.config.settings,group_mrp_bom_version:0
+msgid "The active state may be passed back to state draft"
+msgstr "O estado ativo será passado para provisório"
+
+#. module: mrp_bom_version
+#: help:res.company,active_draft:0
+msgid ""
+"This will allow you to define if those BoM passed back to draft are still "
+"activated or not"
+msgstr "Isto permite você definir se as BOM's passadas para provisório são ativadas ou não."
+
+#. module: mrp_bom_version
+#: field:mrp.bom,version:0
+msgid "Version"
+msgstr "Versão"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_form_view
+msgid "Versions"
+msgstr "Versões"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_form_view
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_tree_view
+msgid "You are going to create a new version of this BoM. Are you sure?"
+msgstr "Você irá criar uma nova versão desta BOM. Você tem certeza?"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_form_view
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_tree_view
+msgid ""
+"You are going to historize an BoM. Doing, not be able to unlock it unless "
+"you make a copy. Are you sure you want to proceed?"
+msgstr "Você irá criar um histórico da BOM. Fazendo isto, não será possível desbloqueai a menos que você faça uma cópia. Certeza que deseja prosseguir?"
+
+#. module: mrp_bom_version
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_form_view
+#: view:mrp.bom:mrp_bom_version.mrp_bom_version_tree_view
+msgid ""
+"You will activate the BoM. If you haven't set a route yet, then you won't be"
+" able to do it after this. Are you sure you want to proceed?"
+msgstr "Você irá ativar este BOM. Se você não setou uma rota ainda, você não poderá faze-lo depois. Certeza que deseja prosseguir?"

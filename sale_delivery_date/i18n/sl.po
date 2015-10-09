@@ -1,21 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* sale_delivery_date
-#
+# * sale_delivery_date
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-09 09:58+0000\n"
-"PO-Revision-Date: 2015-08-15 13:04+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-09-20 19:04+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: sale_delivery_date
 #: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
@@ -53,11 +53,6 @@ msgid "Order Month"
 msgstr "Mesec naloga"
 
 #. module: sale_delivery_date
-#: field:sale.order.line,price_reduce:0
-msgid "Price Reduce"
-msgstr "Znižanje cene"
-
-#. module: sale_delivery_date
 #: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
 msgid "Requested Day"
 msgstr "Dan zahteve"
@@ -71,13 +66,3 @@ msgstr "Mesec zahteve"
 #: view:sale.order:sale_delivery_date.view_sales_order_filter_inh_delivery_date
 msgid "Requested Week"
 msgstr "Teden zahteve"
-
-#. module: sale_delivery_date
-#: model:ir.model,name:sale_delivery_date.model_sale_order
-msgid "Sales Order"
-msgstr "Prodajni nalog"
-
-#. module: sale_delivery_date
-#: model:ir.model,name:sale_delivery_date.model_sale_order_line
-msgid "Sales Order Line"
-msgstr "Postavka prodajnega naloga"

@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * sale_order_last_prices
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-10-09 03:43+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: sale_order_last_prices
+#: view:sale.order:sale_order_last_prices.view_sale_product_prices_form
+msgid "Last Prices"
+msgstr ""
+
+#. module: sale_order_last_prices
+#: view:sale.order.line:sale_order_last_prices.last_sale_product_prices_view
+msgid "Last Product Prices"
+msgstr ""
+
+#. module: sale_order_last_prices
+#: view:sale.order:sale_order_last_prices.view_sale_product_prices_form
+msgid "Product Prices"
+msgstr ""
+
+#. module: sale_order_last_prices
+#: field:sale.order.line,sale_data:0
+msgid "Sale Date"
+msgstr ""
+
+#. module: sale_order_last_prices
+#: model:ir.model,name:sale_order_last_prices.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Linha pedido de venda"

@@ -1,21 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* mrp_product_variants
-#
+# * mrp_product_variants
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-15 11:28+0000\n"
-"PO-Revision-Date: 2015-08-11 10:37+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:43+0000\n"
+"PO-Revision-Date: 2015-09-20 19:00+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.2\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: mrp_product_variants
 #: field:mrp.production.attribute,attribute:0
@@ -46,7 +47,7 @@ msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: mrp_product_variants
-#: code:addons/mrp_product_variants/models/mrp_production.py:155
+#: code:addons/mrp_product_variants/models/mrp_production.py:181
 #, python-format
 msgid "Error! Cannot find a bill of material for this product."
 msgstr "Napaka! Za ta proizvod ni najdene kosovnice."
@@ -63,15 +64,19 @@ msgid "Inherits from parent"
 msgstr "Deduje od nadrejenega"
 
 #. module: mrp_product_variants
-#: code:addons/mrp_product_variants/models/mrp_bom.py:170
+#: code:addons/mrp_product_variants/models/mrp_bom.py:185
 #, python-format
-msgid "Invalid Action! BoM \"%s\" contains a BoM line with a product recursion: \"%s\"."
+msgid ""
+"Invalid Action! BoM \"%s\" contains a BoM line with a product recursion: "
+"\"%s\"."
 msgstr "Neveljavno dejanje! Kosovnica '%s' vsebuje postavko z rekurzivnim proizvodom: '%s\"."
 
 #. module: mrp_product_variants
-#: code:addons/mrp_product_variants/models/mrp_bom.py:244
+#: code:addons/mrp_product_variants/models/mrp_bom.py:258
 #, python-format
-msgid "Invalid Action! BoM \"%s\" contains a phantom BoM line but the product \"%s\" does not have any BoM defined."
+msgid ""
+"Invalid Action! BoM \"%s\" contains a phantom BoM line but the product "
+"\"%s\" does not have any BoM defined."
 msgstr "Neveljavno dejanje! Kosovnica \"%s\" vsebuje postavko navidezne kosovnice, a proizvod \"%s\" nima določene nobene kosovnice."
 
 #. module: mrp_product_variants
@@ -93,7 +98,13 @@ msgid "Manufacturing Order"
 msgstr "Proizvodni nalog"
 
 #. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_procurement_order
+msgid "Procurement"
+msgstr "Oskrba"
+
+#. module: mrp_product_variants
 #: field:mrp.bom.line,product_template:0
+#: view:mrp.production:mrp_product_variants.mrp_production_variants_search_view
 #: field:mrp.production,product_template:0
 #: field:mrp.production.product.line,product_template:0
 msgid "Product"
@@ -111,6 +122,8 @@ msgstr "Predloga izdelka"
 
 #. module: mrp_product_variants
 #: view:mrp.production:mrp_product_variants.mrp_production_extended_form_view
+#: view:mrp.production:mrp_product_variants.mrp_production_variants_search_view
+#: view:mrp.production:mrp_product_variants.mrp_production_variants_tree_view
 #: view:mrp.production.product.line:mrp_product_variants.mrp_production_product_line_extended_form_view
 #: view:mrp.production.product.line:mrp_product_variants.mrp_production_product_line_extended_tree_view
 msgid "Product Variants"
@@ -140,16 +153,23 @@ msgstr "Vrednost"
 
 #. module: mrp_product_variants
 #: view:mrp.bom:mrp_product_variants.mrp_bom_extended_form_view
+#: view:mrp.bom.line:mrp_product_variants.mrp_bom_line_extended_tree_form
 #: view:mrp.bom.line:mrp_product_variants.mrp_bom_line_form_view
 msgid "Variant"
 msgstr "Varianta"
 
 #. module: mrp_product_variants
-#: code:addons/mrp_product_variants/models/mrp_production.py:190
-#: code:addons/mrp_product_variants/models/mrp_production.py:213
+#: code:addons/mrp_product_variants/models/mrp_production.py:218
+#: code:addons/mrp_product_variants/models/mrp_production.py:240
 #, python-format
 msgid "You can not confirm before configuring all attribute values."
 msgstr "Ne morete potrditi preden nastavite vse vrednosti atributov."
+
+#. module: mrp_product_variants
+#: code:addons/mrp_product_variants/models/mrp_production.py:209
+#, python-format
+msgid "You can not confirm without product or variant defined."
+msgstr "Brez določenega proizvoda ali variante ne morete potrditi."
 
 #. module: mrp_product_variants
 #: view:mrp.bom:mrp_product_variants.mrp_bom_extended_form_view

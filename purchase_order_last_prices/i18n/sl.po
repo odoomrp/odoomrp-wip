@@ -1,21 +1,27 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* purchase_order_last_prices
-#
+# * purchase_order_last_prices
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-06 10:07+0000\n"
-"PO-Revision-Date: 2015-08-15 09:11+0200\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"PO-Revision-Date: 2015-09-20 19:03+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
 "Language: sl\n"
-"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: purchase_order_last_prices
+#: view:purchase.order:purchase_order_last_prices.view_purchase_product_prices
+msgid "Last Prices"
+msgstr "Zadnje cene"
 
 #. module: purchase_order_last_prices
 #: view:purchase.order.line:purchase_order_last_prices.last_purchase_product_prices_view
@@ -23,11 +29,6 @@ msgid "Last Product Prices"
 msgstr "Zadnje cene proizvodov"
 
 #. module: purchase_order_last_prices
-#: view:purchase.order:purchase_order_last_prices.view_purchase_product_prices_form
-msgid "Product Prices"
-msgstr "Cene proizvodov"
-
-#. module: purchase_order_last_prices
-#: model:ir.model,name:purchase_order_last_prices.model_purchase_order
-msgid "Purchase Order"
-msgstr "Nabavni nalog"
+#: model:ir.model,name:purchase_order_last_prices.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Postavka nabavnega naloga"
