@@ -3,24 +3,25 @@
 # * stock_planning
 # 
 # Translators:
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-utils (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-08 08:45+0000\n"
-"PO-Revision-Date: 2015-10-08 08:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-utils-8-0/language/es/)\n"
+"PO-Revision-Date: 2015-10-09 02:20+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-utils-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_planning
 #: view:wiz.stock.planning:stock_planning.wiz_stock_planning_form_view
 msgid "Calculate stock planning"
-msgstr "Calcular planificación stock"
+msgstr "Calcular planejamento de estoque"
 
 #. module: stock_planning
 #: view:wiz.stock.planning:stock_planning.wiz_stock_planning_form_view
@@ -31,84 +32,84 @@ msgstr "Cancelar"
 #: view:stock.planning:stock_planning.stock_planning_search_view
 #: field:wiz.stock.planning,category:0
 msgid "Category"
-msgstr "Categoría"
+msgstr "Categoria"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
 #: field:stock.planning,company:0 field:wiz.stock.planning,company:0
 msgid "Company"
-msgstr "Compañía"
+msgstr "Empresa"
 
 #. module: stock_planning
 #: field:stock.planning,create_uid:0 field:wiz.stock.planning,create_uid:0
 msgid "Created by"
-msgstr "Creado por"
+msgstr "Criado por"
 
 #. module: stock_planning
 #: field:stock.planning,create_date:0 field:wiz.stock.planning,create_date:0
 msgid "Created on"
-msgstr "Creado el"
+msgstr "Criado em"
 
 #. module: stock_planning
 #: help:wiz.stock.planning,from_date:0
 msgid "Date from which the interval starts counting days"
-msgstr "Fecha desde la cuál se empieza a contar el intervalo de días"
+msgstr "Data no qual o intervalo começa a contar os dias"
 
 #. module: stock_planning
 #: field:wiz.stock.planning,days:0
 msgid "Days interval"
-msgstr "Días intervalo"
+msgstr "Intervalo de dias"
 
 #. module: stock_planning
 #: help:wiz.stock.planning,to_date:0
 msgid "Deadline for calculating periods"
-msgstr "Fecha límite para el cálculo de los períodos"
+msgstr "Deadline para calcular os períodos"
 
 #. module: stock_planning
 #: help:wiz.stock.planning,category:0
 msgid "Enter this field if you want to filter by category"
-msgstr "Introduzca este campo si quiere filtrar por categoría"
+msgstr "Use este campo se quiser filtrar por categoria"
 
 #. module: stock_planning
 #: help:wiz.stock.planning,product:0
 msgid "Enter this field if you want to filter by product"
-msgstr "Introduzca este campo si quiere filtrar por producto"
+msgstr "Use este campo se você quiser filtrar por produto"
 
 #. module: stock_planning
 #: help:wiz.stock.planning,template:0
 msgid "Enter this field if you want to filter by template"
-msgstr "Introduzca este campo si quiere filtrar por platilla"
+msgstr "Use este campo se quiser filtrar por modelo de produto"
 
 #. module: stock_planning
 #: code:addons/stock_planning/wizard/wiz_stock_planning.py:51
 #, python-format
 msgid "Error!: Increase number of days must be greater than zero"
-msgstr "Error!: El número de días de incremento debe ser mayor que cero."
+msgstr "Erro! Incremento de dias deve ser maior que zero"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Forecast Quantity"
-msgstr "Cantidad prevista"
+msgstr "Quantidade prevista"
 
 #. module: stock_planning
 #: field:stock.planning,from_date:0
 msgid "From Date"
-msgstr "Desde fecha"
+msgstr "De"
 
 #. module: stock_planning
 #: field:wiz.stock.planning,from_date:0
 msgid "From date"
-msgstr "Desde fecha"
+msgstr "De"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Generate procurement"
-msgstr "Generar abastecimiento"
+msgstr "Gerar aprovisionamento"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
 msgid "Group By"
-msgstr "Agrupar por"
+msgstr "Agrupado por"
 
 #. module: stock_planning
 #: field:stock.planning,id:0 field:wiz.stock.planning,id:0
@@ -118,103 +119,103 @@ msgstr "ID"
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Incoming"
-msgstr "Entrada"
+msgstr "Recebimentos"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Incoming in PO"
-msgstr "Entrante en PC"
+msgstr "Recebimento em ordem de compra"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Incoming up to date from moves"
-msgstr "Entrante hasta la fecha desde movimientos"
+msgstr "Recebimentos até a data das movimentações"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Incoming up to date from procurements"
-msgstr "Entrante hasta la fecha desde abastecimientos"
+msgstr "Recebimentos até a data dos aprovisionamentos"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
 msgid "Increase greater than zero"
-msgstr "Incremento mayor que cero"
+msgstr "Incremento maior que zero"
 
 #. module: stock_planning
 #: help:wiz.stock.planning,days:0
 msgid "Increase number of days starting from the date from"
-msgstr "Número de días a incrementar a partir de la fecha desde"
+msgstr "Incremento do número de dias iniciando da data de"
 
 #. module: stock_planning
 #: field:stock.planning,write_uid:0 field:wiz.stock.planning,write_uid:0
 msgid "Last Updated by"
-msgstr "Última actualización por"
+msgstr "Última atualização por"
 
 #. module: stock_planning
 #: field:stock.planning,write_date:0 field:wiz.stock.planning,write_date:0
 msgid "Last Updated on"
-msgstr "Última actualización el"
+msgstr "Última atualização em"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
 #: field:stock.planning,location:0
 msgid "Location"
-msgstr "Ubicación"
+msgstr "Local"
 
 #. module: stock_planning
 #: view:wiz.stock.planning:stock_planning.wiz_stock_planning_form_view
 #: field:wiz.stock.planning,locations:0
 msgid "Locations"
-msgstr "Ubicaciones"
+msgstr "Locais"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
 msgid "Month"
-msgstr "Mes"
+msgstr "Mês"
 
 #. module: stock_planning
 #: code:addons/stock_planning/models/stock_planning.py:223
 #, python-format
 msgid "Moves"
-msgstr "Moves"
+msgstr "Movimentações"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Outgoing"
-msgstr "Salida"
+msgstr "Saída"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Outgoing to date"
-msgstr "Salida a fecha"
+msgstr "Saídas até a data"
 
 #. module: stock_planning
 #: code:addons/stock_planning/models/stock_planning.py:234
 #, python-format
 msgid "Outgoing to date moves"
-msgstr "Movimientos salida a fecha"
+msgstr "Saídas até a data de movimentações"
 
 #. module: stock_planning
 #: model:ir.model,name:stock_planning.model_procurement_order
 msgid "Procurement"
-msgstr "Abastecimiento"
+msgstr "Aprovisionamento"
 
 #. module: stock_planning
 #: code:addons/stock_planning/models/stock_planning.py:201
 #, python-format
 msgid "Procurement orders"
-msgstr "Órdenes de abastecimientos"
+msgstr "Ordens de aprovisionamento"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
 #: field:stock.planning,product:0 field:wiz.stock.planning,product:0
 msgid "Product"
-msgstr "Producto"
+msgstr "Produto"
 
 #. module: stock_planning
 #: model:ir.model,name:stock_planning.model_purchase_order_line
 msgid "Purchase Order Line"
-msgstr "Línea pedido de compra"
+msgstr "Linha de compra"
 
 #. module: stock_planning
 #: code:addons/stock_planning/models/stock_planning.py:212
@@ -225,73 +226,73 @@ msgstr "Pedidos de compra"
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Quantity On Hand"
-msgstr "Cantidad a mano"
+msgstr "Quantidade em mãos"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Required increase"
-msgstr "Incremento requerido"
+msgstr "Incremento obrigatório"
 
 #. module: stock_planning
 #: field:stock.planning,cost_price_required_increase:0
 msgid "Required increment Cost Price"
-msgstr "Precio coste incremento requerido"
+msgstr "Incremento no preço de custo obrigatório"
 
 #. module: stock_planning
 #: field:stock.planning,required_qty:0
 msgid "Required quantity"
-msgstr "Cantidad requerida"
+msgstr "Quantidade obrigatória"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Rule max. qty"
-msgstr "Regla cantidad max."
+msgstr "Regra quantidade máxima"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Rule min. qty"
-msgstr "Regla cantidad min."
+msgstr "Regra quantidade mínima"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
 #: field:stock.planning,scheduled_date:0
 msgid "Scheduled date"
-msgstr "Fecha planificada"
+msgstr "Data agendada"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Scheduled to date"
-msgstr "Planificado a fecha"
+msgstr "Agendados até a data"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
 msgid "Search Stock Planning"
-msgstr "Buscar planificación stock"
+msgstr "Pesquisar planejamento de estoque"
 
 #. module: stock_planning
 #: help:stock.planning,category:0
 msgid "Select category for the current product"
-msgstr "Seleccione la categoría para el producto actual"
+msgstr "Selecionar a categoria para o produto atual"
 
 #. module: stock_planning
 #: field:stock.config.settings,group_cost_in_stock_planning:0
 msgid "Show costs in stock planning"
-msgstr "Mostrar costes en planificador de stock"
+msgstr "Mostrar custos no planejamento de estoque"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Show moves"
-msgstr "Mostrar movimientos"
+msgstr "Mostrar movimentações"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Show outgoing to date moves"
-msgstr "Mostrar movimientos de salida a fecha"
+msgstr "Mostrar saídas até a data de movimentações"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Show procurements"
-msgstr "Mostrar abastecimientos"
+msgstr "Mostrar aprovisionamentos"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
@@ -301,7 +302,7 @@ msgstr "Mostrar compras"
 #. module: stock_planning
 #: model:ir.model,name:stock_planning.model_stock_move
 msgid "Stock Move"
-msgstr "Movimiento de existencias"
+msgstr "Movimento estoque"
 
 #. module: stock_planning
 #: code:addons/stock_planning/models/stock_planning.py:256
@@ -313,32 +314,32 @@ msgstr "Movimiento de existencias"
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 #, python-format
 msgid "Stock Planning"
-msgstr "Planificación stock"
+msgstr "Planejamento de estoque"
 
 #. module: stock_planning
 #: model:res.groups,name:stock_planning.group_stock_planning_show_costs
 msgid "Stock Planning show costs"
-msgstr "Planificación stock mostrar costes"
+msgstr "Planejamento de estoque mostrar custos"
 
 #. module: stock_planning
 #: view:stock.config.settings:stock_planning.view_stock_config_settings_inh_stockplanning
 msgid "Stock planning"
-msgstr "Planificación stock"
+msgstr "Planejamento de estoque"
 
 #. module: stock_planning
 #: field:wiz.stock.planning,template:0
 msgid "Template"
-msgstr "Plantilla"
+msgstr "Modelo"
 
 #. module: stock_planning
 #: field:wiz.stock.planning,to_date:0
 msgid "To date"
-msgstr "A fecha"
+msgstr "Até a data"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "Variant Cost Price"
-msgstr "Precio coste variante"
+msgstr "Preço de custo da variante"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_search_view
@@ -349,24 +350,24 @@ msgstr "Semana"
 #: model:ir.actions.act_window,name:stock_planning.action_wiz_stock_planning
 #: model:ir.model,name:stock_planning.model_wiz_stock_planning
 msgid "Wiz Stock Planning"
-msgstr "Wiz planificación stock"
+msgstr ""
 
 #. module: stock_planning
 #: model:ir.ui.menu,name:stock_planning.wiz_stock_planning_option_view
 msgid "Wizard Stock Planning"
-msgstr "Wizard planificación stock"
+msgstr "Wizard Planejamento de estoque"
 
 #. module: stock_planning
 #: field:stock.planning,category:0
 msgid "category"
-msgstr "Categoría"
+msgstr "categoria"
 
 #. module: stock_planning
 #: view:wiz.stock.planning:stock_planning.wiz_stock_planning_form_view
 msgid "or"
-msgstr "o"
+msgstr "ou"
 
 #. module: stock_planning
 #: view:stock.planning:stock_planning.stock_planning_tree_view
 msgid "sum_cost_price"
-msgstr ""
+msgstr "sum_cost_price"
