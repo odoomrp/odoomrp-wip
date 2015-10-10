@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_planning_procurement_generated_by_plan
+# 
+# Translators:
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-utils (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-08 08:45+0000\n"
+"PO-Revision-Date: 2015-10-09 01:09+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-utils-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_planning_procurement_generated_by_plan
+#: view:stock.planning:stock_planning_procurement_generated_by_plan.stock_planning_tree_view_inh_proclevel1
+msgid "Incoming up to date from procurements level > 0"
+msgstr ""
+
+#. module: stock_planning_procurement_generated_by_plan
+#: view:stock.planning:stock_planning_procurement_generated_by_plan.stock_planning_tree_view_inh_proclevel1
+msgid "Outgoing to date reserve destination"
+msgstr ""
+
+#. module: stock_planning_procurement_generated_by_plan
+#: model:ir.model,name:stock_planning_procurement_generated_by_plan.model_procurement_order
+msgid "Procurement"
+msgstr "Aprovisionamento"
+
+#. module: stock_planning_procurement_generated_by_plan
+#: model:ir.model,name:stock_planning_procurement_generated_by_plan.model_stock_move
+msgid "Stock Move"
+msgstr "Movimento de estoque"
+
+#. module: stock_planning_procurement_generated_by_plan
+#: model:ir.model,name:stock_planning_procurement_generated_by_plan.model_stock_planning
+msgid "Stock Planning"
+msgstr "Planejamento de estoque"
