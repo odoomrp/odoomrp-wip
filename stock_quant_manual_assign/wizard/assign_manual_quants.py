@@ -10,26 +10,32 @@ import openerp.addons.decimal_precision as dp
 class AssignManualQuants(models.TransientModel):
     _name = 'assign.manual.quants'
 
+    @api.depends('quants_lines')
     def lines_qty(self):
-        return sum(self.quants_lines.mapped('qty'))
+        self.lines_qty = sum(self.quants_lines.mapped('qty'))
 
-    @api.one
+    @api.multi
     @api.constrains('quants_lines')
     def check_qty(self):
-        if self.quants_lines:
-            total_qty = self.lines_qty()
-            move = self.env['stock.move'].browse(self.env.context['active_id'])
-            if total_qty > move.product_uom_qty:
-                raise exceptions.Warning(
-                    _('Error'), _('Quantity is higher than the needed one'))
+        for record in self:
+            if record.quants_lines:
+                move = self.env['stock.move'].browse(
+                    self.env.context['active_id'])
+                if record.lines_qty > move.product_uom_qty:
+                    raise exceptions.Warning(
+                        _('Quantity is higher than the needed one'))
 
     @api.depends('quants_lines')
     def get_move_qty(self):
         move = self.env['stock.move'].browse(self.env.context['active_id'])
-        self.move_qty = move.product_uom_qty - self.lines_qty()
+        self.move_qty = move.product_uom_qty - self.lines_qty
 
     name = fields.Char(string='Name')
-    move_qty = fields.Float(string="Remaining qty", compute="get_move_qty")
+    lines_qty = fields.Float(
+        string='Reserved qty', compute='lines_qty',
+        digits=dp.get_precision('Product Unit of Measure'))
+    move_qty = fields.Float(string='Remaining qty', compute='get_move_qty',
+                            digits=dp.get_precision('Product Unit of Measure'))
     quants_lines = fields.One2many('assign.manual.quants.lines',
                                    'assign_wizard', string='Quants')
 
@@ -49,25 +55,22 @@ class AssignManualQuants(models.TransientModel):
 
     @api.model
     def default_get(self, var_fields):
-        res = super(AssignManualQuants, self).default_get(var_fields)
+        super(AssignManualQuants, self).default_get(var_fields)
         move = self.env['stock.move'].browse(self.env.context['active_id'])
-        available_quants_ids = self.env['stock.quant'].search(
+        available_quants = self.env['stock.quant'].search(
             ['|', ('location_id', '=', move.location_id.id),
              ('location_id', 'in', move.location_id.child_ids.ids),
              ('product_id', '=', move.product_id.id),
              ('qty', '>', 0),
-             ('reservation_id', '=', False)])
-        available_quants = [{
+             '|', ('reservation_id', '=', False),
+             ('reservation_id', '=', move.id)])
+        quants_lines = [{
             'quant': x.id,
+            'selected': x in move.reserved_quant_ids,
+            'qty': x.qty if x in move.reserved_quant_ids else 0,
             'location_id': x.location_id.id,
-        } for x in available_quants_ids]
-        available_quants.extend({
-            'quant': x.id,
-            'selected': True,
-            'qty': x.qty,
-            'location_id': x.location_id.id,
-        } for x in move.reserved_quant_ids)
-        return {'quants_lines': available_quants}
+        } for x in available_quants]
+        return {'quants_lines': quants_lines}
 
 
 class AssignManualQuantsLines(models.TransientModel):
