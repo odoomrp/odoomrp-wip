@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_bom_sale_order,mrp.bom.sale.order,model_mrp_bom_sale_order,base.group_sale_manager,1,1,1,1
+access_mrp_bom_sale_order_salesman,mrp.bom.sale.order.salesman,model_mrp_bom_sale_order,base.group_sale_salesman,1,1,1,1
+access_mrp_bom_sale_order_user,mrp.bom.sale.order.user,model_mrp_bom_sale_order,base.group_user,1,1,1,1
