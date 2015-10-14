@@ -1,49 +1,34 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# (c) 2015 Ainara Galdona - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import fields, models, api
+from openerp import api, fields, models
 
 
 class StockQuant(models.Model):
-
     _inherit = 'stock.quant'
 
     @api.multi
     def _get_variant_inventory_value(self):
         self.ensure_one()
-        if self.product_id.cost_method in ('real'):
+        if self.product_id.cost_method == 'real':
             return self.cost * self.qty
         return self.product_id.cost_price * self.qty
 
-    @api.one
-    @api.depends("product_id", "product_id.cost_price", "qty",
-                 "product_id.cost_method")
-    def _calc_variant_inventory_value(self):
-        self.variant_inventory_value = self.with_context(
-            force_company=self.company_id.id)._get_variant_inventory_value()
+    @api.multi
+    @api.depends("product_id", "product_id.cost_price", "qty")
+    def _compute_variant_inventory_value(self):
+        for record in self:
+            record.variant_inventory_value = record.with_context(
+                force_company=record.company_id.id
+                )._get_variant_inventory_value()
 
     variant_inventory_value = fields.Float(
         string="Inventory Value", store=True,
-        compute="_calc_variant_inventory_value", )
+        compute="_compute_variant_inventory_value", )
 
 
 class StockMove(models.Model):
-
     _inherit = 'stock.move'
 
     @api.model
