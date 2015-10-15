@@ -76,33 +76,6 @@ class MrpProduction(models.Model):
         self.write({'pack': pack_lines})
 
     @api.one
-    def recalculate_bom_qtys(self, bom_qty, product):
-        bom_lines = self.bom_id.bom_line_ids
-        template_lines = bom_lines.filtered(lambda x: not x.product_id)
-        templates = dict((x.product_template.id, x.product_qty)
-                         for x in template_lines)
-        template_ids = templates.keys()
-        product_lines = bom_lines.filtered(lambda x: x.product_id)
-        products = dict((x.product_id.id, x.product_qty)
-                        for x in product_lines)
-        product_ids = products.keys()
-        for line in self.product_lines:
-            if line.product_id.id in product_ids and \
-                    line.product_id != product:
-                self.write(
-                    {'product_lines':
-                        [(1, line.id,
-                          {'product_qty':
-                           products[line.product_id.id] * bom_qty})]})
-            elif line.product_template.id in template_ids and \
-                    line.product_template != product.product_tmpl_id:
-                self.write(
-                    {'product_lines':
-                        [(1, line.id,
-                          {'product_qty':
-                           templates[line.product_template.id] * bom_qty})]})
-
-    @api.one
     def recalculate_product_qty(self, qty, product):
         line = self.product_lines.filtered(
             lambda x: x.product_id == product)
@@ -138,8 +111,6 @@ class MrpProduction(models.Model):
                 'name': name})
             new_op = self.create(data['value'])
             new_op.action_compute()
-            if equal_uom:
-                new_op.recalculate_bom_qtys(final_product_qty, self.product_id)
             new_op.recalculate_product_qty(op.fill, self.product_id)
             new_op.assign_parent_lot(self)
             workorder =\
@@ -222,6 +193,13 @@ class PackagingOperation(models.Model):
             record.processed = (record.packaging_production and
                                 record.packaging_production.state != 'cancel')
 
+    @api.multi
+    @api.depends('product')
+    def _compute_package_product(self):
+        for record in self:
+            record.package_product = record.product.attribute_value_ids.mapped(
+                'raw_product')[:1]
+
     product = fields.Many2one(
         comodel_name='product.product', string='Product', required=True,
         help='Product that is going to be manufactured')
@@ -241,3 +219,6 @@ class PackagingOperation(models.Model):
         string='Processed', compute='_is_processed')
     packing_state = fields.Selection(
         string='Packing MO State', related='packaging_production.state')
+    package_product = fields.Many2one(
+        comodel_name='product.product', string='Package Product',
+        compute='_compute_package_product')
