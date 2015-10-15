@@ -1,19 +1,22 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
+# -*- coding: utf-8 -*-
+# (c) 2015 Mikel Arregi - AvanzOSC
+# (c) 2015 Oihane Crucelaegui - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import api, fields, models, exceptions, _
+from openerp import api, exceptions, fields, models, _
 from openerp.addons import decimal_precision as dp
 
 
 class MrpProduction(models.Model):
-    _inherit = "mrp.production"
+    _inherit = 'mrp.production'
 
-    pack = fields.One2many('packaging.operation', 'operation')
-    expected_production = fields.One2many('mrp.production', 'production',
-                                          string='Expected Production')
-    production = fields.Many2one('mrp.production', string='Production')
+    pack = fields.One2many(
+        comodel_name='packaging.operation', inverse_name='operation')
+    expected_production = fields.One2many(
+        comodel_name='mrp.production', inverse_name='production',
+        string='Expected Production')
+    production = fields.Many2one(
+        comodel_name='mrp.production', string='Production')
     final_product_qty = fields.Float(
         string='Produced product qty', compute='_final_product_qty',
         digits=dp.get_precision('Product Unit of Measure'),
@@ -24,14 +27,15 @@ class MrpProduction(models.Model):
         help='This amount is indicative, it is calculated with packaging'
         ' orders that are not in canceled state.')
 
-    @api.one
+    @api.multi
     @api.depends('move_created_ids2')
     def _final_product_qty(self):
-        final_qty = 0.0
-        for move in self.move_created_ids2:
-            if move.state == 'done':
-                final_qty += move.product_uom_qty
-        self.final_product_qty = final_qty
+        for record in self:
+            final_qty = 0.0
+            for move in record.move_created_ids2:
+                if move.state == 'done':
+                    final_qty += move.product_uom_qty
+            record.final_product_qty = final_qty
 
     @api.one
     @api.depends('final_product_qty', 'expected_production')
@@ -73,8 +77,14 @@ class MrpProduction(models.Model):
 
     @api.one
     def recalculate_bom_qtys(self, bom_qty, product):
+        bom_lines = self.bom_id.bom_line_ids
+        template_lines = bom_lines.filtered(lambda x: not x.product_id)
+        templates = dict((x.product_template.id, x.product_qty)
+                         for x in template_lines)
+        template_ids = templates.keys()
+        product_lines = bom_lines.filtered(lambda x: x.product_id)
         products = dict((x.product_id.id, x.product_qty)
-                        for x in self.bom_id.bom_line_ids)
+                        for x in product_lines)
         product_ids = products.keys()
         for line in self.product_lines:
             if line.product_id.id in product_ids and \
@@ -84,6 +94,13 @@ class MrpProduction(models.Model):
                         [(1, line.id,
                           {'product_qty':
                            products[line.product_id.id] * bom_qty})]})
+            elif line.product_template.id in template_ids and \
+                    line.product_template != product.product_tmpl_id:
+                self.write(
+                    {'product_lines':
+                        [(1, line.id,
+                          {'product_qty':
+                           templates[line.product_template.id] * bom_qty})]})
 
     @api.one
     def recalculate_product_qty(self, qty, product):
@@ -102,11 +119,9 @@ class MrpProduction(models.Model):
 
     @api.one
     def create_mo_from_packaging_operation(self):
-        for op in self.pack:
+        for op in self.pack.filtered(lambda x: x.qty != 0 and not x.processed):
             linked_raw_products = []
             add_product = []
-            if op.processed or op.qty == 0:
-                continue
             equal_uom = op.product.uom_id.id == self.product_id.uom_id.id
             final_product_qty = equal_uom and op.fill or op.qty
             data = self.product_id_change(op.product.id, final_product_qty)
@@ -124,7 +139,7 @@ class MrpProduction(models.Model):
             new_op = self.create(data['value'])
             new_op.action_compute()
             if equal_uom:
-                new_op.recalculate_bom_qtys(op.qty, self.product_id)
+                new_op.recalculate_bom_qtys(final_product_qty, self.product_id)
             new_op.recalculate_product_qty(op.fill, self.product_id)
             new_op.assign_parent_lot(self)
             workorder =\
@@ -168,22 +183,23 @@ class MrpProduction(models.Model):
         if not self.production:
             return super(MrpProduction, self).action_compute(properties)
         else:
-            raise exceptions.Warning(_("You can not compute again the list."))
+            raise exceptions.Warning(_('You can not compute again the list.'))
 
 
 class PackagingOperation(models.Model):
-    _name = "packaging.operation"
+    _name = 'packaging.operation'
     _rec_name = 'product'
 
-    @api.one
+    @api.multi
     @api.onchange('product', 'qty')
     def _calculate_weight(self):
-        raw_qty = 1
-        for value in self.product.attribute_value_ids:
-            if value.raw_product:
-                raw_qty = value.numeric_value
-                break
-        self.fill = raw_qty * self.qty
+        for record in self:
+            raw_qty = 1
+            for value in record.product.attribute_value_ids:
+                if value.raw_product:
+                    raw_qty = value.numeric_value
+                    break
+            record.fill = raw_qty * record.qty
 
     @api.multi
     @api.onchange('fill')
@@ -199,25 +215,26 @@ class PackagingOperation(models.Model):
         else:
             return {}
 
-    @api.one
+    @api.multi
     @api.depends('packaging_production')
     def _is_processed(self):
-        self.processed = (self.packaging_production and
-                          self.packaging_production.state != 'cancel')
+        for record in self:
+            record.processed = (record.packaging_production and
+                                record.packaging_production.state != 'cancel')
 
     product = fields.Many2one(
         comodel_name='product.product', string='Product', required=True,
-        help="Product that is going to be manufactured")
-    operation = fields.Many2one('mrp.production')
+        help='Product that is going to be manufactured')
+    operation = fields.Many2one(comodel_name='mrp.production')
     qty = fields.Integer(
-        string="Qty", digits=dp.get_precision('Product Unit of Measure'),
-        help="Product Quantity. It will be the new manufacturing order"
-        " quantity if dump uom is equal to product uom")
+        string='Qty', digits=dp.get_precision('Product Unit of Measure'),
+        help='Product Quantity. It will be the new manufacturing order'
+        ' quantity if dump uom is equal to product uom')
     fill = fields.Float(
-        string="Fill", digits=dp.get_precision('Product Unit of Measure'),
-        help="Product linked Raw Material value * Product Quantity. It will be"
-        " the new manufacturing order quantity if dump UoM is not equal to"
-        " product UoM")
+        string='Fill', digits=dp.get_precision('Product Unit of Measure'),
+        help='Product linked Raw Material value * Product Quantity. It will be'
+        ' the new manufacturing order quantity if dump UoM is not equal to'
+        ' product UoM')
     packaging_production = fields.Many2one(
         comodel_name='mrp.production', string='Packing manufacturing order')
     processed = fields.Boolean(
