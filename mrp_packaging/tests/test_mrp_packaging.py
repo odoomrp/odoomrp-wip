@@ -65,6 +65,7 @@ class TestMrpPackaging(common.TransactionCase):
             'product_uom': self.bulk_product.uom_id.id,
             'type': 'normal',
             'active': 'True',
+            'state': 'active',
             'bom_line_ids': [(0, 0, {
                 'product_id': self.bulk_component.id,
                 'product_qty': 1.0,
@@ -79,6 +80,8 @@ class TestMrpPackaging(common.TransactionCase):
             'product_qty': 1.0,
             'product_uom': self.packaged_product1.uom_id.id,
             'type': 'normal',
+            'active': 'True',
+            'state': 'active',
             'bom_line_ids': [(0, 0, {
                 'product_id': self.bulk_product.id,
                 'product_qty': 1.0,
@@ -93,6 +96,8 @@ class TestMrpPackaging(common.TransactionCase):
             'product_qty': 1.0,
             'product_uom': self.packaged_product2.uom_id.id,
             'type': 'normal',
+            'active': 'True',
+            'state': 'active',
             'bom_line_ids': [(0, 0, {
                 'product_id': self.bulk_product.id,
                 'product_qty': 1.0,
@@ -116,7 +121,8 @@ class TestMrpPackaging(common.TransactionCase):
         self.fill = 26.0
 
     def test_bulk_production_done(self):
-        self.assertEquals(self.bulk_production.state, 'done')
+        self.assertEquals(
+            self.bulk_production.state, 'in_production' or 'done')
         self.assertNotEquals(self.bulk_production.pack, False)
 
     def test_packaging_same_uom(self):
