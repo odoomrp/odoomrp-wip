@@ -29,27 +29,24 @@ class StockTransferDetails(models.TransientModel):
     picking_ids = fields.Many2many(
         comodel_name='stock.picking', string='Pickings')
 
-    def default_get(self, cr, uid, fields, context=None):
-        if context is None:
-            context = {}
+    @api.model
+    def default_get(self, fields):
         item_ids = []
         packop_ids = []
-        picking_ids = context.get('active_ids', [])
+        picking_ids = self.env.context.get('active_ids', [])
         for picking_id in picking_ids:
-            c = context.copy()
-            c.update({'active_ids': [picking_id]})
-            res = super(StockTransferDetails, self).default_get(
-                cr, uid, fields, context=c)
-            lines = res.get('item_ids')
-            for line in lines:
+            res = super(
+                StockTransferDetails,
+                self.with_context(active_ids=[picking_id])).default_get(fields)
+            for line in res.get('item_ids'):
                 line['picking_id'] = picking_id
                 item_ids.append(line)
-            lines = res.get('packop_ids')
-            for line in lines:
+            for line in res.get('packop_ids'):
                 line['picking_id'] = picking_id
                 packop_ids.append(line)
-        return {'picking_id': False, 'item_ids': item_ids,
-                'packop_ids': packop_ids, 'picking_ids': picking_ids}
+        res.update(picking_id=False, picking_ids=picking_ids,
+                   item_ids=item_ids, packop_ids=packop_ids)
+        return res
 
     @api.one
     def do_detailed_transfer(self):
