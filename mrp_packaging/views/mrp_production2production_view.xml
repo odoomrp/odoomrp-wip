@@ -24,6 +24,7 @@
                                         fonts="bold:processed==False"
                                         colors="blue:packing_state in ('draft','confirmed');gray:packing_state in ('done','cancel')" >
                                         <field name="product" attrs="{'readonly':[('processed','=',True)]}" />
+                                        <field name="package_product" />
                                         <field name="qty" attrs="{'readonly':[('processed','=',True)]}" />
                                         <field name="fill" attrs="{'readonly':[('processed','=',True)]}"
                                                sum="Total Qty" />
@@ -43,21 +44,21 @@
                                     string="Create Pack Manufacturing Orders"
                                     type="object" colspan="2" />
                             </group>
-                            <group string='Expected Production'
+                            <group string="Expected Production"
                                 colspan="4" col="4">
                                 <field name="expected_production"
                                     nolabel="1" colspan="4" domain="[('state','!=','cancel')]">
                                     <tree>
-                                        <field name='name' />
-                                        <field name='date_planned' />
-                                        <field name='product_id' />
-                                        <field name='product_qty' />
-                                        <field name='product_uom' />
-                                        <field name='routing_id' />
-                                        <field name='hour_total' />
-                                        <field name='cycle_total' />
-                                        <field name='origin' />
-                                        <field name='state' />
+                                        <field name="name" />
+                                        <field name="date_planned" />
+                                        <field name="product_id" />
+                                        <field name="product_qty" />
+                                        <field name="product_uom" />
+                                        <field name="routing_id" />
+                                        <field name="hour_total" />
+                                        <field name="cycle_total" />
+                                        <field name="origin" />
+                                        <field name="state" />
                                         <button name="button_confirm"
                                             states="draft" string="Confirm Production"
                                             class="oe_highlight" icon="gtk-apply"/>
