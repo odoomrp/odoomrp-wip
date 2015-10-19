@@ -31,11 +31,9 @@ class MrpProduction(models.Model):
     @api.depends('move_created_ids2')
     def _final_product_qty(self):
         for record in self:
-            final_qty = 0.0
-            for move in record.move_created_ids2:
-                if move.state == 'done':
-                    final_qty += move.product_uom_qty
-            record.final_product_qty = final_qty
+            moves = record.mapped('move_created_ids2').filtered(
+                lambda x: x.state == 'done')
+            record.final_product_qty = sum(moves.mapped('product_uom_qty'))
 
     @api.one
     @api.depends('final_product_qty', 'expected_production')
@@ -165,12 +163,9 @@ class PackagingOperation(models.Model):
     @api.onchange('product', 'qty')
     def _calculate_weight(self):
         for record in self:
-            raw_qty = 1
-            for value in record.product.attribute_value_ids:
-                if value.raw_product:
-                    raw_qty = value.numeric_value
-                    break
-            record.fill = raw_qty * record.qty
+            value = record.mapped('product.attribute_value_ids').filtered(
+                'raw_product')
+            record.fill = (value[:1] or 1) * record.qty
 
     @api.multi
     @api.onchange('fill')
