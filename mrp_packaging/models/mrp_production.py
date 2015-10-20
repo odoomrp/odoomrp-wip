@@ -165,7 +165,7 @@ class PackagingOperation(models.Model):
         for record in self:
             value = record.mapped('product.attribute_value_ids').filtered(
                 'raw_product')
-            record.fill = (value[:1] or 1) * record.qty
+            record.fill = (value[:1].numeric_value or 1) * record.qty
 
     @api.multi
     @api.onchange('fill')
