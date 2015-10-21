@@ -41,9 +41,12 @@ class SaleOrderLine(models.Model):
     @api.one
     def _check_line_confirmability(self):
         for line in self.product_attributes:
-            if not line.value:
-                if self.product_template.attribute_line_ids.filtered(
-                        lambda x: x.attribute_id == line.attribute).required:
-                    raise exceptions.Warning(
-                        _("You cannot confirm before configuring all values "
-                          "of required attributes."))
+            if line.value:
+                continue
+            attribute_line = self.product_template.attribute_line_ids.filtered(
+                lambda x: x.attribute_id == line.attribute)
+            if attribute_line.required:
+                raise exceptions.Warning(
+                    _("You cannot confirm before configuring all values "
+                      "of required attributes. Product: %s Attribute: %s.") %
+                    (self.product_template.name, attribute_line.display_name))
