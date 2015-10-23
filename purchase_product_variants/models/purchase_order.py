@@ -16,6 +16,7 @@
 #
 ##############################################################################
 from openerp import models, fields, api, _
+from openerp.exceptions import Warning as UserError
 from openerp.tools.float_utils import float_compare
 
 
@@ -29,6 +30,7 @@ class PurchaseOrder(models.Model):
             for line in order.order_line:
                 if line.product_id:
                     continue
+                line._check_line_confirmability()
                 product_obj = self.env['product.product']
                 att_values_ids = line.product_attributes.mapped('value.id')
                 domain = [('product_tmpl_id', '=', line.product_template.id)]
@@ -197,7 +199,7 @@ class PurchaseOrderLine(models.Model):
     def action_duplicate(self):
         self.ensure_one()
         self.copy()
-        # Force reload of payment order view as a workaround for lp:1155525
+        # Force reload of view as a workaround for lp:1155525
         return {
             'context': self.env.context,
             'view_type': 'form',
@@ -206,3 +208,12 @@ class PurchaseOrderLine(models.Model):
             'res_id': self.order_id.id,
             'type': 'ir.actions.act_window',
         }
+
+    @api.multi
+    def _check_line_confirmability(self):
+        for line in self:
+            if (any(not bool(attr_line.value) for attr_line
+                    in line.product_attributes)):
+                raise UserError(
+                    _("You can not confirm before configuring all attribute "
+                      "values."))
