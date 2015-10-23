@@ -127,6 +127,7 @@
                 <button name="button_done" position="attributes">
                     <attribute name="icon"></attribute>
                     <attribute name="class">oe_highlight</attribute>
+                    <attribute name="type">object</attribute>
                 </button>
                 <button name="button_pause" position="attributes">
                     <attribute name="icon"></attribute>
@@ -158,6 +159,9 @@
             <field name="inherit_id"
                 ref="mrp_operations.mrp_production_workcenter_form_view_inherit" />
             <field name="arch" type="xml">
+                <button name="button_done" position="attributes">
+                    <attribute name="type">object</attribute>
+                </button>
                 <button name="button_cancel" position="after">
                     <button name="action_assign" states="startworking"
                         string="Check Availability" type="object" class="oe_highlight" />
