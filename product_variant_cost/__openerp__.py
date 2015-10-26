@@ -18,13 +18,13 @@
 
 {
     "name": "Product Variant Cost",
-    "version": "1.0",
+    "version": "8.0.1.0.0",
     "depends": [
         "product",
         "stock_account"
     ],
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "Product",
     "website": "http://www.odoomrp.com",

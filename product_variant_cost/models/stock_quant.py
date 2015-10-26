@@ -16,7 +16,8 @@ class StockQuant(models.Model):
         return self.product_id.cost_price * self.qty
 
     @api.multi
-    @api.depends("product_id", "product_id.cost_price", "qty")
+    @api.depends("product_id", "product_id.cost_price", "qty",
+                 "product_id.product_tmpl_id.cost_method")
     def _compute_variant_inventory_value(self):
         for record in self:
             record.variant_inventory_value = record.with_context(
