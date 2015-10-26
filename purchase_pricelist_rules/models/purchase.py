@@ -75,6 +75,10 @@ class PurchaseOrderLine(models.Model):
         return qty
 
     @api.one
+    @api.depends('taxes_id', 'order_id', 'order_id.partner_id',
+                 'order_id.pricelist_id', 'order_id.pricelist_id.currency_id',
+                 'product_qty', 'offer_id', 'offer_id.free_qty',
+                 'offer_id.paid_qty', 'price_unit', 'discount', 'discount2')
     def _amount_line(self):
         new_price_subtotal = self._calc_price_subtotal()
         qty = self._calc_qty()
@@ -221,6 +225,39 @@ class PurchaseOrder(models.Model):
                     partner_id=line.order_id.partner_id.id)
         return res
 
+    @api.one
+    @api.depends('order_line', 'order_line.product_qty',
+                 'order_line.product_id', 'order_line.price_unit',
+                 'order_line.price_subtotal')
+    def _amount_all(self):
+        tax = 0
+        untaxed = 0
+        for line in self.order_line:
+            untaxed += line.price_subtotal
+            tax += self._amount_line_tax(line)
+        self.amount_tax = tax
+        self.amount_total = tax + untaxed
+        self.amount_untaxed = untaxed
+
     subtotal_ids = fields.One2many(
         comodel_name='purchase.order.line.subtotal',
         inverse_name='purchase_id', string='Subtotals per line by pricelist')
+
+    # We found that it does not do correctly the calculus of the totals of the
+    # order, the problem comes when we try to change an order line that has
+    # been previously added. It only takes into account the change in the
+    # first line. So you must save the order after each line update in order
+    # to update correctly the total values of the order.
+    # In order to avoid this process we rewrite the fields in here.
+    amount_untaxed = fields.Float(compute='_amount_all',
+                                  digits=dp.get_precision('Account'),
+                                  string='Untaxed Amount', store=True,
+                                  help="The amount without tax")
+    amount_tax = fields.Float(compute='_amount_all',
+                              digits=dp.get_precision('Account'), store=True,
+                              string='Taxes',
+                              help="The tax amount")
+    amount_total = fields.Float(compute='_amount_all',
+                                digits=dp.get_precision('Account'), store=True,
+                                string='Total',
+                                help="The total amount")
