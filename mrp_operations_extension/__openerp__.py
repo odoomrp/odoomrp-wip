@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -61,5 +61,6 @@
         "demo/mrp_production_demo.xml",
     ],
     "post_init_hook": "post_init_hook",
-    "installable": True
+    "installable": True,
+    "license": 'AGPL-3'
 }

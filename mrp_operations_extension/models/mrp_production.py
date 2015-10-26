@@ -81,6 +81,18 @@ class MrpProduction(models.Model):
             move.work_order = line.work_order.id
         return move_id
 
+    @api.model
+    def action_produce(self, production_id, production_qty, production_mode,
+                       wiz=False):
+        production = self.browse(production_id)
+        pending_qty = sum(
+            [a.product_uom_qty for a in production.move_created_ids.filtered(
+                lambda x: x.product_id == production.product_id)])
+        if pending_qty < production_qty:
+            production_qty = pending_qty
+        return super(MrpProduction, self).action_produce(
+            production_id, production_qty, production_mode, wiz=wiz)
+
 
 class MrpProductionProductLine(models.Model):
     _inherit = 'mrp.production.product.line'

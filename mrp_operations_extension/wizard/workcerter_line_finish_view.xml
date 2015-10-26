@@ -11,7 +11,7 @@
                         colspan="4" />
                     <footer>
                         <button class="oe_highlight" name="make_them_done"
-                            string="Done all movements" type="object" />
+                            string="Do all movements" type="object" />
                         or
                         <button class="oe_highlight" name="cancel_all"
                             string="Cancel all movements" type="object" />
