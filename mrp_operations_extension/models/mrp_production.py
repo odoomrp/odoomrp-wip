@@ -52,12 +52,21 @@ class MrpProduction(models.Model):
                                                    wc.cycle_nbr)) or 0
             workorder.cycle = cycle
             workorder.hour = wc.hour_nbr * cycle
+        bom_line_checked = []
         for p_line in product_lines:
+            flag_exit_material = 0
             for bom_line in self.bom_id.bom_line_ids:
+                if flag_exit_material == 1:
+                    flag_exit_material = 0
+                    break
                 if bom_line.product_id.id == p_line.product_id.id:
                     for wc_line in workcenter_lines:
-                        if wc_line.routing_wc_line.id == bom_line.operation.id:
+                        if (wc_line.routing_wc_line.id ==
+                            bom_line.operation.id and
+                                bom_line not in bom_line_checked):
                             p_line.work_order = wc_line.id
+                            bom_line_checked.append(bom_line)
+                            flag_exit_material = 1
                             break
                 elif bom_line.type == 'phantom':
                     bom_obj = self.env['mrp.bom']
