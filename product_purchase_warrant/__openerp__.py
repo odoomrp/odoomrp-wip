@@ -33,6 +33,6 @@
     'data': ["views/stock_view.xml", "views/product_view.xml",
              "wizard/stock_transfer_details_view.xml"
              ],
-    "installable": True,
+    'installable': False,
     "auto_install": False,
 }

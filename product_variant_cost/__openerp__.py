@@ -33,6 +33,6 @@
         "views/product_view.xml",
         "views/stock_quant_view.xml"
     ],
-    "installable": True,
+    'installable': False,
     "post_init_hook": "load_cost_price_on_variant",
 }

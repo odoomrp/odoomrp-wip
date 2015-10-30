@@ -33,5 +33,5 @@
         "security/ir.model.access.csv",
         "views/stock_picking_view.xml",
     ],
-    "installable": True,
+    'installable': False,
 }

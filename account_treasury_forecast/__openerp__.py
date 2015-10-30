@@ -40,5 +40,5 @@
         "views/account_treasury_forecast_template_view.xml",
     ],
     'demo': [],
-    'installable': True,
+    'installable': False,
 }

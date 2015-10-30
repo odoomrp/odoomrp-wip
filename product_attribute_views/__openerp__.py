@@ -36,6 +36,6 @@
     "data": [
         "views/product_attribute_line_view.xml",
     ],
-    "installable": True,
+    'installable': False,
     "auto_install": False,
 }

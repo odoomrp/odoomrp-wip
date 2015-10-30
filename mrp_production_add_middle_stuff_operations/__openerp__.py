@@ -30,6 +30,6 @@
     'depends': ["mrp_operations_extension",
                 "mrp_production_add_middle_stuff"],
     'data': ["wizard/addition_wizard_view.xml"],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }

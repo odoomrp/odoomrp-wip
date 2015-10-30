@@ -34,5 +34,5 @@
     "category": "Warehouse Management",
     "summary": "",
     "data": [],
-    "installable": True,
+    'installable': False,
 }

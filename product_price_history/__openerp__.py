@@ -43,5 +43,5 @@
         "views/product_price_history_view.xml",
         "views/product_product_view.xml",
     ],
-    "installable": True,
+    'installable': False,
 }

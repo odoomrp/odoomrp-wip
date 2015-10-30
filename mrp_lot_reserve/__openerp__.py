@@ -29,5 +29,5 @@
     'website': "http://www.odoomrp.com",
     'depends': ["mrp_production_editable_scheduled_products"],
     'data': ["views/mrp_production_view.xml"],
-    'installable': True,
+    'installable': False,
 }

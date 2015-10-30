@@ -39,6 +39,6 @@ defining a custom value when the attribute is of range type.
     "data": [
         "views/mrp_view.xml",
     ],
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

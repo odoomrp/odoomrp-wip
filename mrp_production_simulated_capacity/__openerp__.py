@@ -33,6 +33,6 @@
                 'mrp_production_capacity'
                 ],
     "data": [],
-    "installable": True,
+    'installable': False,
     "auto_install": True
 }

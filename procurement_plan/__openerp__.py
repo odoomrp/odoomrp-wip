@@ -41,5 +41,5 @@
              'views/procurement_view.xml',
              'views/procurement_plan_view.xml',
              ],
-    "installable": True
+    'installable': False
 }

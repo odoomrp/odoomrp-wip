@@ -38,5 +38,5 @@ This module creates a new menu option for viewing sales order lines
     "data": [
         "views/sale_order_line_ext_view.xml",
     ],
-    "installable": True,
+    'installable': False,
 }

@@ -38,6 +38,6 @@
     "data": [
         'security/ir.model.access.csv',
     ],
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

@@ -29,5 +29,5 @@
     "data": [
         "views/mrp_bom_view.xml",
     ],
-    "installable": True
+    'installable': False
 }

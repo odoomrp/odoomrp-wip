@@ -41,5 +41,5 @@ This module creates:
         "views/sale_order_view.xml",
         "views/report_saleorder.xml",
     ],
-    "installable": True,
+    'installable': False,
 }

@@ -36,5 +36,5 @@
              'views/procurement_order_view.xml',
              'views/stock_reservation_view.xml',
              ],
-    "installable": True
+    'installable': False
 }

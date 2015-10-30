@@ -29,5 +29,5 @@
     "data": ['views/delivery_carrier_view.xml',
              'views/sale_order_view.xml',
              ],
-    "installable": True
+    'installable': False
 }

@@ -28,5 +28,5 @@
                 "mrp_product_variants_operations"],
     "data": [],
     "auto_install": True,
-    "installable": True,
+    'installable': False,
 }

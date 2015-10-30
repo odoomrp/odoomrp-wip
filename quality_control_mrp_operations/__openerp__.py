@@ -38,6 +38,6 @@
         "views/mrp_routing_operation_view.xml",
         "views/mrp_production_workcenter_line_view.xml",
     ],
-    "installable": True,
+    'installable': False,
     "auto_install": False,
 }

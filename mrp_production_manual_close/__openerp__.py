@@ -30,6 +30,6 @@
     "data": ['views/mrp_workflow.xml',
              'views/mrp_production_view.xml'
              ],
-    "installable": True,
+    'installable': False,
     "application": True
 }

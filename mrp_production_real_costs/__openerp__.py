@@ -34,6 +34,6 @@
         "data/analytic_journal_data.xml",
         "views/mrp_production_view.xml"
         ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

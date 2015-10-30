@@ -38,5 +38,5 @@
         "security/quality_control_hr_security.xml",
         "views/qc_inspection_view.xml",
     ],
-    "installable": True,
+    'installable': False,
 }

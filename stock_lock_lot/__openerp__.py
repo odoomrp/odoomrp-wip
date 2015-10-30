@@ -46,5 +46,5 @@
         "views/stock_production_lot_view.xml",
         "views/stock_quant_view.xml",
     ],
-    "installable": True,
+    'installable': False,
 }

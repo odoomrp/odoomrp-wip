@@ -39,5 +39,5 @@
         "views/mrp_routing_operation_view.xml",
         "views/project_task_view.xml",
     ],
-    "installable": True,
+    'installable': False,
 }

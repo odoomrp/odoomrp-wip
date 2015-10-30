@@ -34,5 +34,5 @@
     'data': ["views/mrp_production_workcenter_line_view.xml",
              "views/mrp_track_lot_view.xml",
              ],
-    'installable': True,
+    'installable': False,
 }

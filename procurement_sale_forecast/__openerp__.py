@@ -42,6 +42,6 @@
              "wizard/sale_forecast_load_view.xml",
              "views/sale_view.xml",
              ],
-    "installable": True,
+    'installable': False,
     "auto_install": False,
 }

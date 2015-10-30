@@ -44,5 +44,5 @@
              "views/mrp_repair_view.xml",
              "views/crm_claim_view.xml"
              ],
-    'installable': True,
+    'installable': False,
 }

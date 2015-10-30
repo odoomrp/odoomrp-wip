@@ -40,5 +40,5 @@
         'data/crm_claim_corrective_sequence.xml',
         'data/crm_claim_corrective_workflow.xml',
     ],
-    'installable': True,
+    'installable': False,
 }

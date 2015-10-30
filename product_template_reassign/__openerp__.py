@@ -33,5 +33,5 @@
     'data': [
         "wizard/reassign_products_view.xml"
     ],
-    "installable": True,
+    'installable': False,
 }

@@ -38,6 +38,6 @@
              "views/procurement_sale_forecast_view.xml",
              "views/purchase_order_view.xml"],
     'demo': [],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

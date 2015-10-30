@@ -32,5 +32,5 @@
              'views/product_pricelist_item_offer_view.xml',
              'views/sale_order_view.xml',
              ],
-    "installable": True
+    'installable': False
 }

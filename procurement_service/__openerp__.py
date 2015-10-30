@@ -30,5 +30,5 @@
                 ],
     "data": ['views/product_template_view.xml',
              ],
-    "installable": True
+    'installable': False
 }

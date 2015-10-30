@@ -28,6 +28,6 @@
     "website": "www.odoomrp.com",
     'data': ['views/product_view.xml'],
     'demo': [],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

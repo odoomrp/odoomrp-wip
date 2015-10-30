@@ -60,5 +60,5 @@
         "demo/mrp_production_demo.xml",
     ],
     "post_init_hook": "post_init_hook",
-    "installable": True
+    'installable': False
 }

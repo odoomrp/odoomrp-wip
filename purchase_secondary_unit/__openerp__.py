@@ -40,5 +40,5 @@
         "views/purchase_view.xml",
         "views/pricelist_view.xml",
     ],
-    "installable": True,
+    'installable': False,
 }

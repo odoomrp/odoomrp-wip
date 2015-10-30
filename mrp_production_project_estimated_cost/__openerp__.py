@@ -47,5 +47,5 @@
         "views/product_view.xml",
         "views/mrp_bom_view.xml"
     ],
-    "installable": True,
+    'installable': False,
 }

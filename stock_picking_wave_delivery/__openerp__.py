@@ -32,5 +32,5 @@
                 ],
     'data': ["views/stock_picking_wave_view.xml",
              ],
-    'installable': True,
+    'installable': False,
 }

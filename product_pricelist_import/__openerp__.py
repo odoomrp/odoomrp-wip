@@ -40,5 +40,5 @@
              'views/product_pricelist_load_view.xml',
              'security/ir.model.access.csv'
              ],
-    "installable": True
+    'installable': False
 }

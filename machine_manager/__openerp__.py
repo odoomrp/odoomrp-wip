@@ -43,6 +43,6 @@
         "security/machinery_security.xml",
         "security/ir.model.access.csv",
     ],
-    "installable": True,
+    'installable': False,
     "application": True,
 }

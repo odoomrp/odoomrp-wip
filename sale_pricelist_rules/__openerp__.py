@@ -45,6 +45,6 @@
         "views/sale_pricelist_view.xml",
         "views/sale_view.xml",
     ],
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

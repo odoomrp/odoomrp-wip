@@ -39,5 +39,5 @@
         "views/stock_picking_view.xml",
         "reports/label_creator_palet_report.xml"
     ],
-    "installable": True,
+    'installable': False,
 }

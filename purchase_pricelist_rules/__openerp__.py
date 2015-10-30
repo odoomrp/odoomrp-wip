@@ -45,6 +45,6 @@
         "security/ir.model.access.csv",
         "security/purchase_pricelist_rules_security.xml",
     ],
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

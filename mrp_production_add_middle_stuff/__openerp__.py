@@ -30,5 +30,5 @@
     'depends': ["mrp"],
     'data': ["wizard/addition_wizard_view.xml",
              "views/mrp_production_view.xml"],
-    'installable': True,
+    'installable': False,
 }

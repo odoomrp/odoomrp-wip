@@ -30,6 +30,6 @@
     "category": "Generic Modules",
     "data": ['views/machinery_view.xml',
              ],
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

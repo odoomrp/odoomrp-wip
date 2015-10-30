@@ -30,6 +30,6 @@
     Adds price column on backorder lines
     """,
     'data': ['views/stock_picking_line_info.xml'],
-    "installable": True,
+    'installable': False,
     "auto_install": False,
 }

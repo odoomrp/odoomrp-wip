@@ -29,5 +29,5 @@
     "depends": ["base", "purchase", "purchase_requisition"],
     "data": [
             "views/bids_ext_view.xml"],
-    "installable": True
+    'installable': False
 }

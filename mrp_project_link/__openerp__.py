@@ -34,6 +34,6 @@
         "views/project_project_view.xml",
         "views/account_analytic_line_view.xml"
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

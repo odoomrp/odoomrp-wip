@@ -26,7 +26,7 @@
     "category": "MRP",
     'data': ["data/mrp_production_workflow.xml"],
     'demo': [],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'uninstall_hook': 'uninstall_hook',
 }

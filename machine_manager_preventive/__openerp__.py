@@ -37,5 +37,5 @@
              "views/preventive_operation_view.xml",
              "views/preventive_machine_operation_view.xml",
              "views/mrp_repair_view.xml"],
-    "installable": True
+    'installable': False
 }

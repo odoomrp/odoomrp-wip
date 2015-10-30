@@ -28,6 +28,6 @@ This module allows to generate machines through purchase invoices.
     "depends": ['machine_manager', 'stock_account', 'purchase'],
     "category": "Generic Modules",
     "data": [],
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

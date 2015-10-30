@@ -43,5 +43,5 @@
         "views/track_lot_view.xml",
         "views/stock_move_view.xml",
     ],
-    "installable": True,
+    'installable': False,
 }

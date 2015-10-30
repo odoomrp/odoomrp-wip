@@ -32,6 +32,6 @@
             Group by partner according to invoicing type's config.
     """,
     'data': ["wizard/stock_invoice_onshipping_view.xml"],
-    "installable": True,
+    'installable': False,
     "auto_install": False,
 }

@@ -37,6 +37,6 @@
         "views/stock_quant_package_view.xml",
         "reports/label_creator_wave_palet_report.xml"
     ],
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

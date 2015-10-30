@@ -39,6 +39,6 @@
         "views/attribute_value_view.xml",
         "views/mrp_production_view.xml",
     ],
-    "installable": True,
+    'installable': False,
     "auto_install": False,
 }

@@ -28,5 +28,5 @@
                 ],
     "data": ['views/product_category_view.xml',
              ],
-    "installable": True
+    'installable': False
 }

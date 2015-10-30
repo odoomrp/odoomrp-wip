@@ -32,5 +32,5 @@
     "data": ["security/ir.model.access.csv",
              "views/mrp_bom_sale_pack_view.xml",
              "views/sale_order_mrp_view.xml"],
-    "installable": True
+    'installable': False
 }

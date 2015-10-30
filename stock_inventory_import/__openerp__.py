@@ -37,5 +37,5 @@
         "wizard/import_inventory_view.xml",
         "views/inventory_view.xml",
     ],
-    "installable": True,
+    'installable': False,
 }

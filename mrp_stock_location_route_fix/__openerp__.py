@@ -32,6 +32,6 @@
     ],
     "category": "Bug/Fix",
     "summary": "Fix stock location route not found (non english version)",
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

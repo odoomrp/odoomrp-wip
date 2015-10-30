@@ -34,5 +34,5 @@
     "data": [
         'views/qc_test_question_view.xml',
     ],
-    "installable": True,
+    'installable': False,
 }

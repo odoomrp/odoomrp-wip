@@ -40,5 +40,5 @@
     "data": ['views/project_task_work_view.xml',
              'wizard/wizard_filter_mrp_task_view.xml',
              ],
-    "installable": True
+    'installable': False
 }

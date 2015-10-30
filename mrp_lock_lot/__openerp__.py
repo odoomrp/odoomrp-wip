@@ -46,5 +46,5 @@
         "wizard/mrp_product_produce_view.xml",
     ],
     "auto_install": True,
-    "installable": True,
+    'installable': False,
 }

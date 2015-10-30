@@ -28,5 +28,5 @@
         "mrp",
         "product_variant_default_code",
     ],
-    "installable": True
+    'installable': False
 }

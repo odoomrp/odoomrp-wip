@@ -35,6 +35,6 @@
     "category": "Custom Module",
     "summary": "",
     "data": [],
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

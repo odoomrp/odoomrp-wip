@@ -33,6 +33,6 @@
         "Ana Juaristi <anajuaristi@avanzosc.es>",
     ],
     "category": "Custom Module",
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

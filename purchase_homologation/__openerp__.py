@@ -51,5 +51,5 @@ lack of the homologation.
         "security/ir.model.access.csv",
         "views/purchase_homologation_view.xml",
     ],
-    'installable': True,
+    'installable': False,
 }

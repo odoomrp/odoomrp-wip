@@ -35,6 +35,6 @@
         "machine_manager",
     ],
     "data": ["views/mrp_workcenter_view.xml"],
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

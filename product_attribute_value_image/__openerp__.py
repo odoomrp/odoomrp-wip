@@ -33,5 +33,5 @@
                 ],
     'data': ['views/product_attribute_value_view.xml'
              ],
-    'installable': True,
+    'installable': False,
 }

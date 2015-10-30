@@ -33,5 +33,5 @@
     'data': ["wizard/stock_transfer_details_view.xml",
              "views/stock_picking_wave_view.xml",
              ],
-    'installable': True,
+    'installable': False,
 }

@@ -29,6 +29,6 @@
     "category": "Generic Modules",
     "data": ['views/mrp_repair_view.xml',
              ],
-    "installable": True,
+    'installable': False,
     "application": True
 }

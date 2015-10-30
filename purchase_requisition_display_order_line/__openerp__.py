@@ -38,5 +38,5 @@
     "data": [
         "views/purchase_requisition_view.xml",
     ],
-    "installable": True,
+    'installable': False,
 }

@@ -36,6 +36,6 @@
                 'stock_quant_manual_assign',
                 ],
     "data": [],
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

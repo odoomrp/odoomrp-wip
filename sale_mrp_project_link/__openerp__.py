@@ -33,6 +33,6 @@
         "views/sale_order_view.xml",
         "views/project_project_view.xml",
     ],
-    "installable": True,
+    'installable': False,
     "auto_install": True,
 }

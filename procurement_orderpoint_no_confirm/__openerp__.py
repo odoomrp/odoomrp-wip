@@ -29,6 +29,6 @@
         "Ana Juaristi <anajuaristi@avanzosc.es>",
     ],
     "category": "Procurement",
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }
