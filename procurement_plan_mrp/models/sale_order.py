@@ -32,7 +32,7 @@ class SaleOrderLine(models.Model):
                     ('group_id', '=', procurement.group_id.id),
                     ('product_id', '=', procurement.product_id.id),
                     ('product_qty', '=', self.product_uom_qty),
-                    ('production_id', '!=', False),
+#                    ('production_id', '!=', False),
                     ('plan', '=', False),
                     ('level', '=', 0)]
             procurement = proc_obj.search(cond, limit=1)

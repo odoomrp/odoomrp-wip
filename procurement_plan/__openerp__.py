@@ -37,6 +37,7 @@
              'wizard/wiz_import_procurement_from_plan_view.xml',
              'wizard/wiz_load_sale_from_plan_view.xml',
              'wizard/wiz_load_purchase_from_plan_view.xml',
+             'wizard/wiz_change_procurement_date_view.xml',
              'views/procurement_view.xml',
              'views/procurement_view.xml',
              'views/procurement_plan_view.xml',

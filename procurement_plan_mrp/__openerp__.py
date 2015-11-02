@@ -31,7 +31,8 @@
                 'stock_reserve',
                 'sale_mrp_project_link'
                 ],
-    "data": ['views/mrp_production_view.xml',
+    "data": ['wizard/wiz_change_procurement_date_planned_view.xml',
+             'views/mrp_production_view.xml',
              'views/procurement_plan_view.xml',
              'views/procurement_order_view.xml',
              'views/stock_reservation_view.xml',

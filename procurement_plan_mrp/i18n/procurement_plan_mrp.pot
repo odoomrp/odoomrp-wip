@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 09:06+0000\n"
-"PO-Revision-Date: 2015-10-07 09:06+0000\n"
+"POT-Creation-Date: 2015-11-02 15:30+0000\n"
+"PO-Revision-Date: 2015-11-02 15:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,8 +22,34 @@ msgid "BoM not found, for product: %s"
 msgstr ""
 
 #. module: procurement_plan_mrp
+#: view:wiz.change.procurement.date.planned:procurement_plan_mrp.wiz_change_procurement_date_planned_view
+msgid "Cancel"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: model:ir.actions.act_window,name:procurement_plan_mrp.act_change_date_planned
+#: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
+msgid "Change date planned"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: view:wiz.change.procurement.date.planned:procurement_plan_mrp.wiz_change_procurement_date_planned_view
+msgid "Change scheduled date"
+msgstr ""
+
+#. module: procurement_plan_mrp
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
 msgid "Create lower levels"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: field:wiz.change.procurement.date.planned,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: field:wiz.change.procurement.date.planned,create_date:0
+msgid "Created on"
 msgstr ""
 
 #. module: procurement_plan_mrp
@@ -43,13 +69,34 @@ msgid "Generated from sale order: "
 msgstr ""
 
 #. module: procurement_plan_mrp
+#: field:wiz.change.procurement.date.planned,id:0
+msgid "ID"
+msgstr ""
+
+#. module: procurement_plan_mrp
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
 msgid "Import Procurements"
 msgstr ""
 
 #. module: procurement_plan_mrp
+#: field:wiz.change.procurement.date.planned,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: field:wiz.change.procurement.date.planned,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: procurement_plan_mrp
 #: field:procurement.order,level:0
 msgid "Level"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date_planned.py:21
+#, python-format
+msgid "Location of procurement order is not of type INTERNAL"
 msgstr ""
 
 #. module: procurement_plan_mrp
@@ -63,9 +110,19 @@ msgid "Manufacturing Order"
 msgstr ""
 
 #. module: procurement_plan_mrp
+#: field:wiz.change.procurement.date.planned,new_scheduled_date:0
+msgid "New scheduled date"
+msgstr ""
+
+#. module: procurement_plan_mrp
 #: code:addons/procurement_plan_mrp/models/procurement.py:206
 #, python-format
 msgid "No product defined for BoM line with template: %s, on the list of materials %s"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: field:wiz.change.procurement.date.planned,old_scheduled_date:0
+msgid "Old scheduled date"
 msgstr ""
 
 #. module: procurement_plan_mrp
@@ -95,6 +152,18 @@ msgid "Procurement from plan"
 msgstr ""
 
 #. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date_planned.py:24
+#, python-format
+msgid "Procurement order with production order in state: %s"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date_planned.py:29
+#, python-format
+msgid "Procurement order with purchase order in state: %s"
+msgstr ""
+
+#. module: procurement_plan_mrp
 #: view:mrp.production:procurement_plan_mrp.view_mrp_production_filter_inh_mrpprocurementplan
 msgid "Product"
 msgstr ""
@@ -116,6 +185,11 @@ msgid "Purchase Orders"
 msgstr ""
 
 #. module: procurement_plan_mrp
+#: view:wiz.change.procurement.date.planned:procurement_plan_mrp.wiz_change_procurement_date_planned_view
+msgid "Put a new scheduled date in procurement"
+msgstr ""
+
+#. module: procurement_plan_mrp
 #: model:ir.model,name:procurement_plan_mrp.model_sale_order
 msgid "Sales Order"
 msgstr ""
@@ -134,5 +208,29 @@ msgstr ""
 #: code:addons/procurement_plan_mrp/models/procurement.py:176
 #, python-format
 msgid "THEY HAVE NOT GENERATED ALL PROCUREMENTS"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: view:wiz.change.procurement.date.planned:procurement_plan_mrp.wiz_change_procurement_date_planned_view
+msgid "They treated procurements of type INTERNAL, without purchases, or with purchases with state DRAFT."
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date.py:79
+#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date_planned.py:76
+#, python-format
+msgid "You can not change the date planned of procurement order: %s, because the production order: %s, not in draft status"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date.py:66
+#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date_planned.py:64
+#, python-format
+msgid "You can not change the date planned of procurement order: %s, because the purchase order: %s, not in draft status"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: view:wiz.change.procurement.date.planned:procurement_plan_mrp.wiz_change_procurement_date_planned_view
+msgid "or"
 msgstr ""
 
