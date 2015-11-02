@@ -3,6 +3,7 @@
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
 from openerp import models, fields, api
+from dateutil.relativedelta import relativedelta
 
 
 class ProcurementOrder(models.Model):
@@ -140,3 +141,13 @@ class ProcurementOrder(models.Model):
                         'domain': [('id', 'in', plans.ids)],
                         'target': 'new'})
         return res
+
+    @api.multi
+    def _change_date_planned_from_plan_for_po(self, days_to_sum):
+        for proc in self:
+            new_date = (fields.Datetime.from_string(proc.date_planned) +
+                        (relativedelta(days=days_to_sum)))
+            proc.write({'date_planned': new_date})
+            if (proc.purchase_line_id and
+                    proc.purchase_line_id.order_id.state == 'draft'):
+                proc.purchase_line_id.write({'date_planned': new_date})

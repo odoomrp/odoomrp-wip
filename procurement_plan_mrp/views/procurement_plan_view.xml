@@ -24,6 +24,7 @@
                             attrs="{'invisible':[('show_button_delete','=',False)]}" />
                     <button name="button_create_lower_levels" type="object" string="Create lower levels" icon="gtk-convert"
                             attrs="{'invisible':[('show_button_create','=',False)]}" />
+                    <button name="%(act_change_date_planned)d" type="action" string="Change date planned" icon="terp-gtk-jump-to-ltr" />
                 </button>
             </field>
         </record>
