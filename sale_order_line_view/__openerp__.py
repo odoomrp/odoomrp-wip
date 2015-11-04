@@ -18,25 +18,26 @@
 
 {
     "name": "Sale order lines view",
-    "version": "1.0",
-    "depends": [
-        "sale",
-    ],
+    "version": " 8.0.1.1.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "website": "http://www.odoomrp.com",
     "contributors": [
         "Mikel Arregi <mikelarregi@avanzosc.es>"
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Esther Martín <esthermartin@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <anajuaristi@avanzosc.es>",
+    ],
+    "depends": [
+        "sale",
     ],
     "category": "Sales Management",
-    "website": "http://www.odoomrp.com",
-    "summary": "",
-    "description": """
-This module creates a new menu option for viewing sales order lines
-    """,
+    "license": "AGPL-3",
     "data": [
         "views/sale_order_line_ext_view.xml",
+        "views/res_partner.xml"
     ],
     "installable": True,
 }
