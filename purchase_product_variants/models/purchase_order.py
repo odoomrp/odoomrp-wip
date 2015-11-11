@@ -89,11 +89,24 @@ class PurchaseOrderLine(models.Model):
     order_state = fields.Selection(
         related='order_id.state', readonly=True)
 
+    @api.model
+    def _order_attributes(self, template, product_attribute_values):
+        res = template._get_product_attributes_dict()
+        res2 = []
+        for val in res:
+            value = product_attribute_values.filtered(
+                lambda x: x.attribute_id.id == val['attribute'])
+            if value:
+                val['value'] = value
+                res2.append(val)
+        return res2
+
     def _get_product_description(self, template, product, product_attributes):
         name = product and product.name or template.name
         if not product_attributes and product:
             product_attributes = product.attribute_value_ids
-        description = ", ".join(product_attributes.mapped('name'))
+        values = self._order_attributes(template, product_attributes)
+        description = ", ".join([x['value'].name for x in values])
         if not description:
             return name
         return "%s (%s)" % (name, description)

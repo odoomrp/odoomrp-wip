@@ -84,6 +84,19 @@ class SaleOrderLine(models.Model):
     def _get_product_attributes_count(self):
         self.product_attributes_count = len(self.product_attributes)
 
+    @api.model
+    def _order_attributes(self, template, product_attribute_values):
+        res = template._get_product_attributes_dict()
+        res2 = []
+        for val in res:
+            value = product_attribute_values.filtered(
+                lambda x: x.attribute_id.id == val['attribute'])
+            if value:
+                val['value'] = value
+                res2.append(val)
+        return res2
+
+    @api.model
     def _get_product_description(self, template, product, product_attributes):
         name = product and product.name or template.name
         group = self.env.ref(
@@ -91,11 +104,13 @@ class SaleOrderLine(models.Model):
         extended = group in self.env.user.groups_id
         if not product_attributes and product:
             product_attributes = product.attribute_value_ids
+        values = self._order_attributes(template, product_attributes)
         if extended:
-            description = "\n".join(product_attributes.mapped(
-                lambda x: "%s: %s" % (x.attribute_id.name, x.name)))
+            description = "\n".join(
+                "%s: %s" % (x['attribute'].name, x['value'].name)
+                for x in values)
         else:
-            description = ", ".join(product_attributes.mapped('name'))
+            description = ", ".join([x['value'].name for x in values])
         if not description:
             return name
         return ("%s\n%s" if extended else "%s (%s)") % (name, description)
