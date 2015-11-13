@@ -248,6 +248,12 @@ class MrpProduction(models.Model):
             line.product_id = product
         return super(MrpProduction, self)._make_production_consume_line(line)
 
+    @api.model
+    def _prepare_lines(self, production, properties=None):
+        obj = self.with_context(production=production)
+        return super(MrpProduction, obj)._prepare_lines(
+            production, properties=properties)
+
 
 class MrpProductionProductLineAttribute(models.Model):
     _name = 'mrp.production.product.line.attribute'

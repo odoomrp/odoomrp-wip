@@ -18,7 +18,7 @@
 
 {
     "name": "MRP Operations Extension",
-    "version": "1.0",
+    "version": "8.0.1.1.0",
     "category": "Manufacturing",
     "author": "OdooMRP team, "
               "AvanzOSC, "
@@ -32,11 +32,9 @@
         "Ana Juaristi <anajuaristi@avanzosc.es>",
     ],
     "depends": [
-        "base",
         "mrp_operations",
-        "mrp",
+        "mrp_hook",
         "stock",
-        "hr",
         "hr_timesheet",
     ],
     "data": [

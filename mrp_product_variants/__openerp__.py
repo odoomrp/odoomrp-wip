@@ -18,10 +18,10 @@
 
 {
     "name": "MRP - Product variants",
-    "version": "1.0",
+    "version": "8.0.1.0.1",
     "depends": [
         "product",
-        "mrp",
+        "mrp_hook",
         "product_variants_no_automatic_creation",
         "mrp_production_editable_scheduled_products",
     ],
