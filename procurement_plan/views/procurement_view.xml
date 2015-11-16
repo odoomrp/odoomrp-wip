@@ -30,6 +30,9 @@
                             <field name="plan" string="Plan"/>
                         </group>
                     </group>
+                    <field name="date_planned" position="before">
+                        <field name="date_planned_copy" invisible="1" />
+                    </field>
                 </data>
             </field>
         </record>

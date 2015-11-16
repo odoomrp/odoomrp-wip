@@ -83,16 +83,8 @@ class WizLoadPurchaseFromPlan(models.TransientModel):
             for partner in result.keys():
                 for product in result[partner].keys():
                     prod_vals = result[partner][product]
-                    vals = {'name': plan.name,
-                            'origin': plan.sequence,
-                            'product_id': product,
-                            'plan': plan.id,
-                            'main_project_id': plan.project_id.id,
-                            'product_qty': prod_vals['qty'] / month_count,
-                            'warehouse_id': plan.warehouse_id.id,
-                            'location_id':  plan.warehouse_id.lot_stock_id.id,
-                            'date_planned': date
-                            }
+                    vals = self._prepare_vals_for_procurement(
+                        prod_vals, plan, product, date, month_count)
                     vals.update(
                         procurement_obj.onchange_product_id(product)['value'])
                     res = procurement_obj.onchange_product_id(product)
@@ -106,6 +98,21 @@ class WizLoadPurchaseFromPlan(models.TransientModel):
                     proc.write(
                         {'rule_id': procurement_obj._find_suitable_rule(proc)})
         return True
+
+    @api.multi
+    def _prepare_vals_for_procurement(self, prod_vals, plan, product, date,
+                                      month_count):
+        vals = {'name': plan.name,
+                'origin': plan.sequence,
+                'product_id': product,
+                'plan': plan.id,
+                'main_project_id': plan.project_id.id,
+                'product_qty': prod_vals['qty'] / month_count,
+                'warehouse_id': plan.warehouse_id.id,
+                'location_id':  plan.warehouse_id.lot_stock_id.id,
+                'date_planned': date
+                }
+        return vals
 
     @api.multi
     def get_purchase_lines(self):

@@ -2,7 +2,8 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields, api
+from openerp import models, fields, api, _
+from dateutil.relativedelta import relativedelta
 
 
 class ProcurementOrder(models.Model):
@@ -19,13 +20,36 @@ class ProcurementOrder(models.Model):
         ('production', 'Production'),
         ('transit', 'Transit Location')],
         string='Location Type', related="location_id.usage", store=True)
+    date_planned_copy = fields.Datetime(string='Scheduled Date')
 
     @api.model
     def create(self, data):
         if 'plan' in self.env.context and 'plan' not in data:
             data['plan'] = self.env.context.get('plan')
+        if 'date_planned' in data:
+            data['date_planned_copy'] = data.get('date_planned')
         procurement = super(ProcurementOrder, self).create(data)
         return procurement
+
+    @api.multi
+    def write(self, values):
+        if 'date_planned' in values:
+            values['date_planned_copy'] = values.get('date_planned')
+        return super(ProcurementOrder, self).write(values)
+
+    @api.multi
+    @api.onchange('date_planned')
+    def _onchange_date_planned(self):
+        self.ensure_one()
+        result = {}
+        if (self.date_planned_copy and self.date_planned_copy !=
+                self.date_planned):
+            self.date_planned = self.date_planned_copy
+            warning = {'title': _('Warning!')}
+            warning['message'] = _('Use the wizard to change the date planned'
+                                   ' of procurement.')
+            result['warning'] = warning
+        return result
 
     @api.multi
     def button_remove_plan(self):
@@ -140,3 +164,13 @@ class ProcurementOrder(models.Model):
                         'domain': [('id', 'in', plans.ids)],
                         'target': 'new'})
         return res
+
+    @api.multi
+    def _change_date_planned_from_plan_for_po(self, days_to_sum):
+        for proc in self:
+            new_date = (fields.Datetime.from_string(proc.date_planned) +
+                        (relativedelta(days=days_to_sum)))
+            proc.write({'date_planned': new_date})
+            if (proc.purchase_line_id and
+                    proc.purchase_line_id.order_id.state == 'draft'):
+                proc.purchase_line_id.write({'date_planned': new_date})

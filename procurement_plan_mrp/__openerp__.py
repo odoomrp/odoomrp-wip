@@ -1,8 +1,5 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-# Copyright (c)
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -19,19 +16,21 @@
 ##############################################################################
 {
     "name": "Procurement Plan MRP",
-    "version": "1.0",
+    "version": "8.0.1.0.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "category": "Manufacturing",
+    "license": 'AGPL-3',
     "depends": ['sale',
                 'mrp',
                 'procurement_plan',
                 'stock_reserve',
                 'sale_mrp_project_link'
                 ],
-    "data": ['views/mrp_production_view.xml',
+    "data": ['wizard/wiz_change_procurement_date_planned_view.xml',
+             'views/mrp_production_view.xml',
              'views/procurement_plan_view.xml',
              'views/procurement_order_view.xml',
              'views/stock_reservation_view.xml',
