@@ -25,7 +25,7 @@ msgstr ""
 #. module: mrp_repair_analytic
 #: code:addons/mrp_repair_analytic/models/mrp_repair.py:39
 #, python-format
-msgid "Error!: Materials journal not found"
+msgid "Error!: Repair journal not found"
 msgstr ""
 
 #. module: mrp_repair_analytic

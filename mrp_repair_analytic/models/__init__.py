@@ -16,3 +16,4 @@
 #
 ##############################################################################
 from . import mrp_repair
+from . import account_analytic_line

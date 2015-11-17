@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data noupdate="1">
+        <!--Estimated machines analytic journal -->
+        <record id="mrp.analytic_journal_repair" model="account.analytic.journal">
+            <field name="name">Repairs</field>
+            <field name="code">RPR</field>
+            <field name="type">general</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</openerp>
