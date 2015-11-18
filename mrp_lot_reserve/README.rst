@@ -2,13 +2,15 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-===============
-MRP Lot Reserve
-===============
+=====================
+MRP - Lot Reservation
+=====================
 
 This module allows to fix a lot/serial number for the scheduled products
 (raw materials to consume) of a manufacturing order, so that this lot will be
 used (if available) when consuming this product.
+
+* It makes visible the selected lots in products to consume
 
 
 Usage

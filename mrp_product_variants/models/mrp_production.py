@@ -185,10 +185,9 @@ class MrpProduction(models.Model):
                                           production.product_qty,
                                           bom_point.product_uom.id)
             # product_lines, workcenter_lines
-            results, results2 = bom_obj._bom_explode(
-                bom_point, production.product_id,
-                factor / bom_point.product_qty, properties,
-                routing_id=production.routing_id.id)
+            results, results2 = bom_point._bom_explode(
+                production.product_id, factor / bom_point.product_qty,
+                properties, routing_id=production.routing_id.id)
             #  reset product_lines in production order
             for line in results:
                 line['production_id'] = production.id
