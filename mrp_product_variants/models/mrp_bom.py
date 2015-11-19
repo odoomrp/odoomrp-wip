@@ -130,14 +130,14 @@ class MrpBom(models.Model):
             bom_line, quantity, factor=factor)
         if not bom_line.product_id:
             res['name'] = bom_line.product_template.name
-            res['product_template'] = bom_line.product_template
+            res['product_template'] = bom_line.product_template.id
             production = self.env.context['production']
             product_attributes = (
                 bom_line.product_template._get_product_attributes_inherit_dict(
                     production.product_attributes))
             comp_product = self.env['product.product']._product_find(
                 bom_line.product_template, product_attributes)
-            res['product_id'] = comp_product.id
+            res['product_id'] = comp_product and comp_product.id
         else:
             res['product_template'] = bom_line.product_id.product_tmpl_id.id
             product_attributes = (
