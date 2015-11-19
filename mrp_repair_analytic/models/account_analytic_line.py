@@ -5,7 +5,7 @@
 from openerp import models, fields
 
 
-class account_analytic_line(models.Model):
+class AccountAnalyticLine(models.Model):
 
     _inherit = 'account.analytic.line'
 
