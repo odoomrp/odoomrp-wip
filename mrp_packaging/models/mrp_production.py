@@ -37,29 +37,38 @@ class MrpProduction(models.Model):
                 x.product_id == record.product_id)
             record.final_product_qty = sum(moves.mapped('product_uom_qty'))
 
-    @api.one
+    @api.multi
     @api.depends('final_product_qty', 'expected_production')
     def _left_product_qty(self):
-        left_qty = self.final_product_qty
-        for production in self.expected_production:
-            if production.state != 'cancel':
+        for record in self:
+            moves = record.mapped('move_created_ids2').filtered(
+                lambda x: x.state == 'done' and
+                x.location_dest_id.scrap_location and
+                x.product_id == record.product_id)
+            left_qty = (record.final_product_qty - 
+                        sum(moves.mapped('product_uom_qty')))
+            for production in record.expected_production.filtered(
+                    lambda x: x.state != 'cancel'):
                 if production.move_lines2:
                     for move in production.move_lines2:
-                        if production.production.product_id == move.product_id:
+                        if (production.production.product_id ==
+                                move.product_id):
                             left_qty -= move.product_uom_qty
                 elif production.move_lines:
                     for move in production.move_lines:
-                        if production.production.product_id == move.product_id:
+                        if (production.production.product_id == 
+                                move.product_id):
                             left_qty -= move.product_uom_qty
                 else:
                     for product in production.product_lines:
                         if (production.production.product_id ==
                                 product.product_id):
                             left_qty -= product.product_qty
-        self.left_product_qty = left_qty
+            record.left_product_qty = left_qty
 
-    @api.one
+    @api.multi
     def get_dump_packages(self):
+        self.ensure_one()
         pack_lines = []
         lines = self.env['mrp.bom.line'].search(
             ['|', ('product_template', '=', self.product_template.id),
@@ -180,8 +189,7 @@ class PackagingOperation(models.Model):
                                   " %f left" %
                                   (self.fill,
                                    self.operation.left_product_qty))}}
-        else:
-            return {}
+        return {}
 
     @api.multi
     @api.depends('packaging_production')
