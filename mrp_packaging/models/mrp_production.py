@@ -45,26 +45,24 @@ class MrpProduction(models.Model):
                 lambda x: x.state == 'done' and
                 x.location_dest_id.scrap_location and
                 x.product_id == record.product_id)
-            left_qty = (record.final_product_qty - 
-                        sum(moves.mapped('product_uom_qty')))
+            remaining_qty = (record.final_product_qty -
+                             sum(moves.mapped('product_uom_qty')))
             for production in record.expected_production.filtered(
                     lambda x: x.state != 'cancel'):
+                product = production.production.product_id
                 if production.move_lines2:
-                    for move in production.move_lines2:
-                        if (production.production.product_id ==
-                                move.product_id):
-                            left_qty -= move.product_uom_qty
+                    remaining_qty -= sum(production.move_lines2.filtered(
+                        lambda m: m.product_id == product
+                        ).mapped('product_uom_qty'))
                 elif production.move_lines:
-                    for move in production.move_lines:
-                        if (production.production.product_id == 
-                                move.product_id):
-                            left_qty -= move.product_uom_qty
+                    remaining_qty -= sum(production.move_lines.filtered(
+                        lambda m: m.product_id == product
+                        ).mapped('product_uom_qty'))
                 else:
-                    for product in production.product_lines:
-                        if (production.production.product_id ==
-                                product.product_id):
-                            left_qty -= product.product_qty
-            record.left_product_qty = left_qty
+                    remaining_qty -= sum(production.product_lines.filtered(
+                        lambda p: p.product_id == product
+                        ).mapped('product_qty'))
+            record.left_product_qty = remaining_qty
 
     @api.multi
     def get_dump_packages(self):
