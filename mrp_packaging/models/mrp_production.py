@@ -32,7 +32,9 @@ class MrpProduction(models.Model):
     def _final_product_qty(self):
         for record in self:
             moves = record.mapped('move_created_ids2').filtered(
-                lambda x: x.state == 'done')
+                lambda x: x.state == 'done' and
+                not x.location_dest_id.scrap_location and
+                x.product_id == record.product_id)
             record.final_product_qty = sum(moves.mapped('product_uom_qty'))
 
     @api.one
