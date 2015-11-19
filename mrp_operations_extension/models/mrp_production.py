@@ -81,6 +81,18 @@ class MrpProduction(models.Model):
             move.work_order = line.work_order.id
         return move_id
 
+    @api.model
+    def action_produce(self, production_id, production_qty, production_mode,
+                       wiz=False):
+        production = self.browse(production_id)
+        pending_qty = sum(
+            [a.product_uom_qty for a in production.move_created_ids.filtered(
+                lambda x: x.product_id == production.product_id)])
+        if pending_qty < production_qty:
+            production_qty = pending_qty
+        return super(MrpProduction, self).action_produce(
+            production_id, production_qty, production_mode, wiz=wiz)
+
 
 class MrpProductionProductLine(models.Model):
     _inherit = 'mrp.production.product.line'
@@ -172,3 +184,25 @@ class MrpProductionWorkcenterLine(models.Model):
         if self.production_id.state in ('confirmed', 'ready'):
             self.production_id.state = 'in_production'
         return super(MrpProductionWorkcenterLine, self).action_start_working()
+
+    @api.multi
+    def button_done(self):
+        res = {}
+        move_list = self.move_lines.filtered(
+            lambda x: x.state not in('cancel', 'done'))
+        if move_list:
+            idform = self.env.ref(
+                'mrp_operations_extension.finish_wo_form_view')
+            res = {
+                'type': 'ir.actions.act_window',
+                'name': _('Finish WO'),
+                'res_model': 'workcenter.line.finish',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'views': [(idform.id, 'form')],
+                'target': 'new',
+                'context': self.env.context
+                }
+        else:
+            self.signal_workflow('button_done')
+        return res

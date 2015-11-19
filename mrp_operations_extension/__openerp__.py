@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -40,6 +40,7 @@
     "data": [
         "data/mrp_operations_extension_data.xml",
         "wizard/mrp_workorder_produce_view.xml",
+        "wizard/workcerter_line_finish_view.xml",
         "views/mrp_workcenter_view.xml",
         "views/mrp_routing_operation_view.xml",
         "views/mrp_production_view.xml",
@@ -58,5 +59,6 @@
         "demo/mrp_production_demo.xml",
     ],
     "post_init_hook": "post_init_hook",
-    "installable": True
+    "installable": True,
+    "license": 'AGPL-3'
 }
