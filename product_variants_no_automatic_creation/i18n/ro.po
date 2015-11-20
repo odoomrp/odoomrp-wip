@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-20 18:10+0000\n"
-"PO-Revision-Date: 2015-10-20 14:37+0000\n"
-"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
+"PO-Revision-Date: 2015-09-10 16:43+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 #. module: product_variants_no_automatic_creation
 #: code:addons/product_variants_no_automatic_creation/models/pricelist.py:48
@@ -62,7 +62,7 @@ msgstr ""
 #. module: product_variants_no_automatic_creation
 #: model:ir.model,name:product_variants_no_automatic_creation.model_product_product
 msgid "Product"
-msgstr "Produto"
+msgstr "Produs"
 
 #. module: product_variants_no_automatic_creation
 #: model:ir.model,name:product_variants_no_automatic_creation.model_product_category
@@ -72,7 +72,7 @@ msgstr ""
 #. module: product_variants_no_automatic_creation
 #: model:ir.model,name:product_variants_no_automatic_creation.model_product_template
 msgid "Product Template"
-msgstr "Produto Modelo"
+msgstr "Produs șablon"
 
 #. module: product_variants_no_automatic_creation
 #: sql_constraint:product.attribute.line:0
@@ -107,7 +107,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:product_variants_no_automatic_creation.attribute_price_action
 #: view:product.attribute.price:product_variants_no_automatic_creation.attribute_price_tree_view
 msgid "Variant Values"
-msgstr ""
+msgstr "Valori variantă"
 
 #. module: product_variants_no_automatic_creation
 #: field:product.template,no_create_variants:0
