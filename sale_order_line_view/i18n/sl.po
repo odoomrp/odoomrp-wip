@@ -3,12 +3,13 @@
 # * sale_order_line_view
 # 
 # Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:45+0000\n"
-"PO-Revision-Date: 2015-09-20 19:05+0000\n"
+"POT-Creation-Date: 2015-11-20 18:11+0000\n"
+"PO-Revision-Date: 2015-11-05 06:09+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +19,29 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: sale_order_line_view
+#: view:sale.order.line:sale_order_line_view.view_sale_order_line_search_view
+msgid "Customer"
+msgstr "Kupec"
+
+#. module: sale_order_line_view
+#: model:ir.model,name:sale_order_line_view.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: sale_order_line_view
 #: model:ir.actions.act_window,name:sale_order_line_view.action_sale_order_line_newmenu
 #: model:ir.ui.menu,name:sale_order_line_view.sale_order_line_newmenu_menu_view
 msgid "Sale Order Lines"
 msgstr "Postavke prodajnega naloga"
+
+#. module: sale_order_line_view
+#: model:ir.actions.act_window,name:sale_order_line_view.action_sale_order_line_tree
+#: view:res.partner:sale_order_line_view.res_partner_order_line_button_form
+#: field:res.partner,order_lines:0
+msgid "Sale order lines"
+msgstr "Postavke prodajnega naloga"
+
+#. module: sale_order_line_view
+#: view:sale.order.line:sale_order_line_view.view_sale_order_line_search_view
+msgid "Status"
+msgstr "Status"

@@ -3,14 +3,15 @@
 # * product_price_history
 # 
 # Translators:
+# Oihane Crucelaegui <oihanecruce@gmail.com>, 2015
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:44+0000\n"
-"PO-Revision-Date: 2015-10-09 10:59+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-10-27 11:33+0000\n"
+"Last-Translator: Oihane Crucelaegui <oihanecruce@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +58,7 @@ msgstr "Historial de precios por producto"
 #. module: product_price_history
 #: model:ir.actions.act_window,name:product_price_history.action_price_history
 msgid "Prices History"
-msgstr ""
+msgstr "Historial de precios"
 
 #. module: product_price_history
 #: model:ir.model,name:product_price_history.model_product_product

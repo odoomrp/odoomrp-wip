@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:44+0000\n"
-"PO-Revision-Date: 2015-09-20 19:03+0000\n"
+"POT-Creation-Date: 2015-11-20 18:11+0000\n"
+"PO-Revision-Date: 2015-10-23 14:47+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,7 @@ msgid "Purchase Order Line"
 msgstr "Postavka nabavnega naloga"
 
 #. module: purchase_product_variants
-#: code:addons/purchase_product_variants/models/purchase_order.py:143
+#: code:addons/purchase_product_variants/models/purchase_order.py:158
 #, python-format
 msgid ""
 "The selected supplier has a minimal quantity set to %s %s, you should not "
@@ -91,7 +91,7 @@ msgid ""
 msgstr "Izbrani dobavitelj ima minimalno količino nastavljeno na %s %s, manj ne smete nabavljati."
 
 #. module: purchase_product_variants
-#: code:addons/purchase_product_variants/models/purchase_order.py:128
+#: code:addons/purchase_product_variants/models/purchase_order.py:143
 #, python-format
 msgid "The selected supplier only sells this product by %s"
 msgstr "Izbrani dobavitelj prodaja ta proizvod v %s"
@@ -102,8 +102,14 @@ msgid "Value"
 msgstr "Vrednost"
 
 #. module: purchase_product_variants
-#: code:addons/purchase_product_variants/models/purchase_order.py:127
 #: code:addons/purchase_product_variants/models/purchase_order.py:142
+#: code:addons/purchase_product_variants/models/purchase_order.py:157
 #, python-format
 msgid "Warning!"
 msgstr "Opozorilo!"
+
+#. module: purchase_product_variants
+#: code:addons/purchase_product_variants/models/purchase_order.py:231
+#, python-format
+msgid "You can not confirm before configuring all attribute values."
+msgstr "Ne morete potrditi preden nastavite vse vrednosti atributov."

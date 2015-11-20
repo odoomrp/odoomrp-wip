@@ -1,0 +1,103 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * product_template_reassign
+# 
+# Translators:
+# Dorin Hongu <dhongu@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-10-31 04:47+0000\n"
+"Last-Translator: Dorin Hongu <dhongu@gmail.com>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,values:0
+msgid "Attributes"
+msgstr "Atribute"
+
+#. module: product_template_reassign
+#: view:reassign.products:product_template_reassign.reassign_product_form_view
+msgid "Cancel"
+msgstr "Anulare"
+
+#. module: product_template_reassign
+#: view:reassign.products:product_template_reassign.reassign_product_form_view
+msgid "Confirm"
+msgstr "Confirmă"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,create_uid:0
+#: field:reassign.products,create_uid:0
+msgid "Created by"
+msgstr "Creat de"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,create_date:0
+#: field:reassign.products,create_date:0
+msgid "Created on"
+msgstr "Creat în"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,id:0 field:reassign.products,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,write_uid:0
+#: field:reassign.products,write_uid:0
+msgid "Last Updated by"
+msgstr "Ultima actualizare de"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,write_date:0
+#: field:reassign.products,write_date:0
+msgid "Last Updated on"
+msgstr "Ultima actualizare în"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,old_product:0
+msgid "Old product"
+msgstr "Produs vechi"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,product:0
+msgid "Product"
+msgstr "Produs"
+
+#. module: product_template_reassign
+#: field:reassign.products,products:0
+msgid "Products by attributes"
+msgstr ""
+
+#. module: product_template_reassign
+#: view:reassign.products:product_template_reassign.reassign_product_form_view
+msgid "Reassign Products"
+msgstr "Reatribuire produse"
+
+#. module: product_template_reassign
+#: field:reassign.product.lines,wizard:0
+msgid "Reassign Wizard"
+msgstr "Asistent reatibuire"
+
+#. module: product_template_reassign
+#: view:reassign.products:product_template_reassign.reassign_product_form_view
+msgid "Reassign product lines"
+msgstr ""
+
+#. module: product_template_reassign
+#: model:ir.actions.act_window,name:product_template_reassign.reassign_products_action
+msgid "Reassign products"
+msgstr "Reatribuire produse"
+
+#. module: product_template_reassign
+#: view:reassign.products:product_template_reassign.reassign_product_form_view
+msgid "or"
+msgstr "sau"

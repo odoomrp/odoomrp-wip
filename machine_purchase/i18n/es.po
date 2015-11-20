@@ -3,14 +3,15 @@
 # * machine_purchase
 # 
 # Translators:
+# Oihane Crucelaegui <oihanecruce@gmail.com>, 2015
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:43+0000\n"
-"PO-Revision-Date: 2015-10-09 10:50+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"POT-Creation-Date: 2015-11-20 17:16+0000\n"
+"PO-Revision-Date: 2015-10-27 11:16+0000\n"
+"Last-Translator: Oihane Crucelaegui <oihanecruce@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +32,7 @@ msgstr "Factura"
 #. module: machine_purchase
 #: field:machinery,purch_inv_line:0
 msgid "Invoice Line"
-msgstr ""
+msgstr "Línea de factura"
 
 #. module: machine_purchase
 #: field:stock.pack.operation,machine:0

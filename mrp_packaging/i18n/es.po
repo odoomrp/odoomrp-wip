@@ -1,19 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mrp_packaging
-#
+# * mrp_packaging
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-28 09:13+0000\n"
-"PO-Revision-Date: 2015-04-28 09:13+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-11-20 17:16+0000\n"
+"PO-Revision-Date: 2015-10-13 16:12+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mrp_packaging
 #: view:mrp.production:mrp_packaging.mrp_production_packaging_form
@@ -129,12 +131,16 @@ msgstr "Producto"
 
 #. module: mrp_packaging
 #: help:packaging.operation,qty:0
-msgid "Product Quantity. It will be the new manufacturing order quantity if dump uom is equal to product uom"
+msgid ""
+"Product Quantity. It will be the new manufacturing order quantity if dump "
+"uom is equal to product uom"
 msgstr "Cantidad de producto. Será la nueva cantidad de la orden de fabricación si la UdM de volcado es igual a la UdM del producto"
 
 #. module: mrp_packaging
 #: help:packaging.operation,fill:0
-msgid "Product linked Raw Material value * Product Quantity. It will be the new manufacturing order quantity if dump UoM is not equal to product UoM"
+msgid ""
+"Product linked Raw Material value * Product Quantity. It will be the new "
+"manufacturing order quantity if dump UoM is not equal to product UoM"
 msgstr "Valor de la materia prima asociada al producto * Cantidad de producto. Será la nueva cantidad de la orden de fabricación si la UdM de volcado no es igual a la UdM del producto"
 
 #. module: mrp_packaging
@@ -158,20 +164,19 @@ msgid "Total Qty"
 msgstr "Ctdad total"
 
 #. module: mrp_packaging
-#: code:addons/mrp_packaging/models/mrp_production.py:194
+#: code:addons/mrp_packaging/models/mrp_production.py:185
 #, python-format
 msgid "Warning"
 msgstr "Atención"
 
 #. module: mrp_packaging
-#: code:addons/mrp_packaging/models/mrp_production.py:171
+#: code:addons/mrp_packaging/models/mrp_production.py:164
 #, python-format
 msgid "You can not compute again the list."
 msgstr "No puedes recalcular la lista."
 
 #. module: mrp_packaging
-#: code:addons/mrp_packaging/models/mrp_production.py:197
+#: code:addons/mrp_packaging/models/mrp_production.py:188
 #, python-format
 msgid "You won't be able to pack %f, there is only %f left"
 msgstr "No puedes envasar %f, solo quedan %f por envasar"
-

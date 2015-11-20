@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * procurement_purchase_forecast
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-09-10 16:44+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: procurement_purchase_forecast
+#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_form_view
+msgid "Cancel"
+msgstr "Anulare"
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,product_categ_id:0
+msgid "Category"
+msgstr ""
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,create_uid:0
+msgid "Created by"
+msgstr "Creat de"
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,create_date:0
+msgid "Created on"
+msgstr "Creat în"
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,date_from:0
+msgid "Date from"
+msgstr ""
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,date_to:0
+msgid "Date to"
+msgstr ""
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,factor:0
+msgid "Factor"
+msgstr ""
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,forecast_id:0
+msgid "Forecast"
+msgstr ""
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,write_uid:0
+msgid "Last Updated by"
+msgstr "Ultima actualizare de"
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,write_date:0
+msgid "Last Updated on"
+msgstr "Ultima actualizare în"
+
+#. module: procurement_purchase_forecast
+#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_form_view
+msgid "Load"
+msgstr ""
+
+#. module: procurement_purchase_forecast
+#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_form_view
+msgid "Load Purchases"
+msgstr ""
+
+#. module: procurement_purchase_forecast
+#: view:procurement.sale.forecast:procurement_purchase_forecast.procurement_purchase_forecast_form_view
+msgid "Load purchases"
+msgstr ""
+
+#. module: procurement_purchase_forecast
+#: view:purchase.order:procurement_purchase_forecast.purchase_load_forecast_form_view
+msgid "Load to forecast"
+msgstr ""
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,partner_id:0
+msgid "Partner"
+msgstr ""
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,product_id:0
+msgid "Product"
+msgstr "Produs"
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,purchase_id:0
+msgid "Purchase"
+msgstr ""
+
+#. module: procurement_purchase_forecast
+#: field:purchase.forecast.load,product_tmpl_id:0
+msgid "Template"
+msgstr "Șablon"
+
+#. module: procurement_purchase_forecast
+#: view:purchase.forecast.load:procurement_purchase_forecast.purchase_forecast_load_form_view
+msgid "or"
+msgstr "sau"
+
+#. module: procurement_purchase_forecast
+#: model:ir.actions.act_window,name:procurement_purchase_forecast.action_purchase_forecast_load_view
+msgid "purchase.forecast.load"
+msgstr ""

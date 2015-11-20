@@ -1,0 +1,161 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mrp_product_variants
+# 
+# Translators:
+# Dorin Hongu <dhongu@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-11-13 21:26+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,attribute:0
+#: field:mrp.production.product.line.attribute,attribute:0
+msgid "Attribute"
+msgstr "Atribute"
+
+#. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Listă de materiale"
+
+#. module: mrp_product_variants
+#: view:mrp.bom.line:mrp_product_variants.mrp_bom_line_form_view
+msgid "Bill of Material Lines"
+msgstr "Linii listă de materiale"
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,create_uid:0
+#: field:mrp.production.product.line.attribute,create_uid:0
+msgid "Created by"
+msgstr "Creat de"
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,create_date:0
+#: field:mrp.production.product.line.attribute,create_date:0
+msgid "Created on"
+msgstr "Creat în"
+
+#. module: mrp_product_variants
+#: code:addons/mrp_product_variants/models/mrp_production.py:181
+#, python-format
+msgid "Error! Cannot find a bill of material for this product."
+msgstr "Eroare! Nu a fostă găsită lista de materiale pentru acest produs."
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,id:0
+#: field:mrp.production.product.line.attribute,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: mrp_product_variants
+#: field:product.attribute,parent_inherited:0
+msgid "Inherits from parent"
+msgstr "Moștenește de la părinte"
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,write_uid:0
+#: field:mrp.production.product.line.attribute,write_uid:0
+msgid "Last Updated by"
+msgstr "Ultima actualizare de"
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,write_date:0
+#: field:mrp.production.product.line.attribute,write_date:0
+msgid "Last Updated on"
+msgstr "Ultima actualizare în"
+
+#. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_mrp_production
+#: field:mrp.production.attribute,mrp_production:0
+msgid "Manufacturing Order"
+msgstr "Comandă fabricație"
+
+#. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_procurement_order
+msgid "Procurement"
+msgstr "Aprovizionare"
+
+#. module: mrp_product_variants
+#: field:mrp.bom.line,product_template:0
+#: view:mrp.production:mrp_product_variants.mrp_production_variants_search_view
+#: field:mrp.production,product_template:0
+#: field:mrp.production.product.line,product_template:0
+msgid "Product"
+msgstr "Produs"
+
+#. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_product_attribute
+msgid "Product Attribute"
+msgstr "Atribute produs"
+
+#. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_product_template
+msgid "Product Template"
+msgstr "Produs șablon"
+
+#. module: mrp_product_variants
+#: view:mrp.production:mrp_product_variants.mrp_production_extended_form_view
+#: view:mrp.production:mrp_product_variants.mrp_production_variants_search_view
+#: view:mrp.production:mrp_product_variants.mrp_production_variants_tree_view
+#: view:mrp.production.product.line:mrp_product_variants.mrp_production_product_line_extended_form_view
+#: view:mrp.production.product.line:mrp_product_variants.mrp_production_product_line_extended_tree_view
+msgid "Product Variants"
+msgstr "Variante produs"
+
+#. module: mrp_product_variants
+#: field:mrp.production,product_attributes:0
+#: field:mrp.production.product.line,product_attributes:0
+msgid "Product attributes"
+msgstr "Atribute produs"
+
+#. module: mrp_product_variants
+#: field:mrp.production.product.line.attribute,product_line:0
+msgid "Product line"
+msgstr "Linie produs"
+
+#. module: mrp_product_variants
+#: model:ir.model,name:mrp_product_variants.model_mrp_production_product_line
+msgid "Production Scheduled Product"
+msgstr ""
+
+#. module: mrp_product_variants
+#: field:mrp.production.attribute,value:0
+#: field:mrp.production.product.line.attribute,value:0
+msgid "Value"
+msgstr "Valoare"
+
+#. module: mrp_product_variants
+#: view:mrp.bom:mrp_product_variants.mrp_bom_extended_form_view
+#: view:mrp.bom.line:mrp_product_variants.mrp_bom_line_extended_tree_form
+#: view:mrp.bom.line:mrp_product_variants.mrp_bom_line_form_view
+msgid "Variant"
+msgstr "Variantă"
+
+#. module: mrp_product_variants
+#: code:addons/mrp_product_variants/models/mrp_production.py:215
+#: code:addons/mrp_product_variants/models/mrp_production.py:237
+#, python-format
+msgid "You can not confirm before configuring all attribute values."
+msgstr "Nu puteți confirma fără să specificați toate atributele"
+
+#. module: mrp_product_variants
+#: code:addons/mrp_product_variants/models/mrp_production.py:206
+#, python-format
+msgid "You can not confirm without product or variant defined."
+msgstr "Nu puteți confirma fără produs sau variantă defintă"
+
+#. module: mrp_product_variants
+#: view:mrp.bom:mrp_product_variants.mrp_bom_extended_form_view
+msgid "{'no_create': True}"
+msgstr "{'no_create': True}"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:44+0000\n"
-"PO-Revision-Date: 2015-10-09 03:37+0000\n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-10-20 14:47+0000\n"
 "Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -103,7 +103,7 @@ msgstr ""
 #. module: procurement_plan
 #: field:procurement.plan,name:0
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #. module: procurement_plan
 #: selection:procurement.plan,state:0
@@ -404,7 +404,7 @@ msgstr ""
 #: field:wiz.load.purchase.from.plan,product_tmpl_id:0
 #: field:wiz.load.sale.from.plan,product_tmpl_id:0
 msgid "Template"
-msgstr ""
+msgstr "Modelo"
 
 #. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view

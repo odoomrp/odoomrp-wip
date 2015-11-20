@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:44+0000\n"
-"PO-Revision-Date: 2015-10-09 03:36+0000\n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-10-20 14:36+0000\n"
 "Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: product_attribute_types
 #: view:product.attribute.value:product_attribute_types.product_attribute_value_search_view
 msgid "Attribute"
-msgstr ""
+msgstr "Atributo"
 
 #. module: product_attribute_types
 #: view:product.attribute.value:product_attribute_types.product_attribute_value_search_view

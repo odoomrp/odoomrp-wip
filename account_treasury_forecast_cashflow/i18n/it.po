@@ -1,0 +1,181 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_treasury_forecast_cashflow
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 17:15+0000\n"
+"PO-Revision-Date: 2015-09-10 16:33+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,amount:0
+#: field:account.treasury.forecast.cashflow.template,amount:0
+msgid "Amount"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: view:account.treasury.forecast.cashflow.template:account_treasury_forecast_cashflow.account_treasury_forecast_cashflow_template_form_view
+#: view:account.treasury.forecast.cashflow.template:account_treasury_forecast_cashflow.account_treasury_forecast_cashflow_template_tree_view
+msgid "Cash Flow"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: view:account.treasury.forecast:account_treasury_forecast_cashflow.account_treasury_forecast_form_view_inh
+#: field:account.treasury.forecast,cashflow_ids:0
+#: view:account.treasury.forecast.template:account_treasury_forecast_cashflow.account_treasury_forecast_template_form_view_inh
+#: field:account.treasury.forecast.template,cashflow_ids:0
+msgid "Cash-Flow"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: model:ir.model,name:account_treasury_forecast_cashflow.model_account_treasury_forecast_cashflow_template
+msgid "Cash-Flow Record Template"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: model:ir.model,name:account_treasury_forecast_cashflow.model_account_treasury_forecast_cashflow
+msgid "Cash-Flow Records"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,create_uid:0
+#: field:account.treasury.forecast.cashflow.template,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,create_date:0
+#: field:account.treasury.forecast.cashflow.template,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,date:0
+#: field:account.treasury.forecast.cashflow.template,date:0
+msgid "Date"
+msgstr "Data"
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,name:0
+#: field:account.treasury.forecast.cashflow.template,name:0
+msgid "Description"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: code:addons/account_treasury_forecast_cashflow/models/account_treasury_forecast.py:105
+#: code:addons/account_treasury_forecast_cashflow/models/account_treasury_forecast_template.py:60
+#, python-format
+msgid "Error!:: If input cash-flow, amount must be positive"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: code:addons/account_treasury_forecast_cashflow/models/account_treasury_forecast.py:108
+#: code:addons/account_treasury_forecast_cashflow/models/account_treasury_forecast_template.py:63
+#, python-format
+msgid "Error!:: If output cash-flow, amount must be negative"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,id:0
+#: field:account.treasury.forecast.cashflow.template,id:0
+msgid "ID"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: selection:account.treasury.forecast.cashflow,flow_type:0
+#: selection:account.treasury.forecast.cashflow.template,flow_type:0
+msgid "Input"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,journal_id:0
+#: field:account.treasury.forecast.cashflow.template,journal_id:0
+msgid "Journal"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,write_uid:0
+#: field:account.treasury.forecast.cashflow.template,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,write_date:0
+#: field:account.treasury.forecast.cashflow.template,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: selection:account.treasury.forecast.cashflow,flow_type:0
+#: selection:account.treasury.forecast.cashflow.template,flow_type:0
+msgid "Output"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast,receivable_line_ids:0
+#: field:account.treasury.forecast.template,receivable_line_ids:0
+msgid "Receivable Line"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: view:account.treasury.forecast:account_treasury_forecast_cashflow.account_treasury_forecast_form_view_inh
+#: view:account.treasury.forecast.template:account_treasury_forecast_cashflow.account_treasury_forecast_template_form_view_inh
+msgid "Receivable Payments"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: view:account.treasury.forecast.cashflow:account_treasury_forecast_cashflow.account_treasury_forecast_cashflow_form_view
+#: view:account.treasury.forecast.cashflow:account_treasury_forecast_cashflow.account_treasury_forecast_cashflow_tree_view
+msgid "Recurring Payments"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,template_line_id:0
+msgid "Template Line"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,treasury_id:0
+msgid "Treasury"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: model:ir.model,name:account_treasury_forecast_cashflow.model_account_treasury_forecast
+msgid "Treasury Forecast"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: model:ir.model,name:account_treasury_forecast_cashflow.model_account_treasury_forecast_line
+msgid "Treasury Forecast Line"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: model:ir.model,name:account_treasury_forecast_cashflow.model_account_treasury_forecast_line_template
+msgid "Treasury Forecast Line Template"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: model:ir.model,name:account_treasury_forecast_cashflow.model_account_treasury_forecast_template
+msgid "Treasury Forecast Template"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow.template,treasury_template_id:0
+msgid "Treasury Template"
+msgstr ""
+
+#. module: account_treasury_forecast_cashflow
+#: field:account.treasury.forecast.cashflow,flow_type:0
+#: field:account.treasury.forecast.cashflow.template,flow_type:0
+msgid "Type"
+msgstr ""

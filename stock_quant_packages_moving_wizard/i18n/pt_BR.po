@@ -4,12 +4,13 @@
 # 
 # Translators:
 # danimaribeiro <danimaribeiro@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:45+0000\n"
-"PO-Revision-Date: 2015-10-09 03:18+0000\n"
+"POT-Creation-Date: 2015-11-20 18:11+0000\n"
+"PO-Revision-Date: 2015-11-18 18:05+0000\n"
 "Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -75,23 +76,23 @@ msgstr "Última atualização em"
 #. module: stock_quant_packages_moving_wizard
 #: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_quants
 msgid "Move Stock Quant"
-msgstr ""
+msgstr "Mover quants de estoque"
 
 #. module: stock_quant_packages_moving_wizard
 #: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_packages
 msgid "Move Stock Quant Packages"
-msgstr ""
+msgstr "Mover pacotes quant"
 
 #. module: stock_quant_packages_moving_wizard
 #: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_quants_to
 #: model:ir.ui.menu,name:stock_quant_packages_moving_wizard.menu_quant_move_wizard
 msgid "Move Stock Quants To"
-msgstr ""
+msgstr "Mover quants de estoque para"
 
 #. module: stock_quant_packages_moving_wizard
 #: field:stock.quant.package.move_items,move_id:0
 msgid "Package move"
-msgstr ""
+msgstr "Movimentações de pacotes"
 
 #. module: stock_quant_packages_moving_wizard
 #: field:stock.quant.move,pack_move_items:0
