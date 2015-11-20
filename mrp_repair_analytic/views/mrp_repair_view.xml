@@ -16,6 +16,9 @@
             <field name="model">mrp.repair</field>
             <field name="inherit_id" ref="mrp_repair.view_repair_order_form"/>
             <field name="arch" type="xml">
+                <button name="cancel" position="after">
+                    <button name="create_repair_cost" type="object" states="confirmed,2binvoiced,ready,under_repair,invoice_except" string="Reload costs" class="oe_highlight"/>
+                </button>
                 <field name="partner_id" position="after">
                     <field name="analytic_account" />
                 </field>

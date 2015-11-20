@@ -25,8 +25,8 @@ msgstr "Analitični konto"
 #. module: mrp_repair_analytic
 #: code:addons/mrp_repair_analytic/models/mrp_repair.py:39
 #, python-format
-msgid "Error!: Materials journal not found"
-msgstr "Napaka!: Dnevnik materialov ni najden"
+msgid "Error!: Repair journal not found"
+msgstr "Napaka!: Dnevnik servisiranja ni najden"
 
 #. module: mrp_repair_analytic
 #: model:ir.model,name:mrp_repair_analytic.model_mrp_repair_fee
