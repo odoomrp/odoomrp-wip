@@ -40,8 +40,6 @@ class TestMrpRepairAnalytic(common.TransactionCase):
             'product_uom_qty': 10,
             'name': self.fee_product.name,
             'product_uom': self.fee_product.uom_id.id,
-            'location_id': default_location,
-            'location_dest_id': self.op_product.property_stock_production.id,
             'price_unit': 1,
             'to_invoice': True,
             }
