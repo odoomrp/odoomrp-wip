@@ -1,7 +1,5 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    Daniel Campos (danielcampos@avanzosc.es) Date: 12/09/2014
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -18,12 +16,19 @@
 #
 ##############################################################################
 
-from openerp import models, fields
-
-
-class MrpRoutingOperation(models.Model):
-    _inherit = 'mrp.routing.operation'
-
-    project_states = fields.Many2many(
-        'project.task.type', 'mrp_operation_project_rel', 'operation',
-        'state', 'Project States')
+{
+    "name": "MRP Project Link - MTO",
+    "summary": "Link production with projects for MTO",
+    "version": "8.0.1.0.0",
+    "depends": [
+        "mrp_project_link",
+    ],
+    "author": "OdooMRP team,"
+              "AvanzOSC,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "category": "Manufacturing",
+    'data': [
+        "views/procurement_order_view.xml",
+    ],
+    'installable': True,
+}

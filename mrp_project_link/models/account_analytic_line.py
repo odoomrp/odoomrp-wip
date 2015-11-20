@@ -23,7 +23,10 @@ class AccountAnalyticLine(models.Model):
 
     _inherit = 'account.analytic.line'
 
-    mrp_production_id = fields.Many2one('mrp.production',
-                                        string='Manufacturing Order')
-    workorder = fields.Many2one('mrp.production.workcenter.line', 'Work Order')
+    mrp_production_id = fields.Many2one(
+        comodel_name='mrp.production', string='Manufacturing Order',
+        related="task_id.mrp_production_id", store=True)
+    workorder = fields.Many2one(
+        comodel_name='mrp.production.workcenter.line', string='Work Order',
+        related="task_id.workorder", store=True)
     task_id = fields.Many2one('project.task', 'Project Task')

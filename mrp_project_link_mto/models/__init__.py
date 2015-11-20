@@ -16,12 +16,5 @@
 #
 ##############################################################################
 
-from openerp import models, fields
-
-
-class StockMove(models.Model):
-
-    _inherit = 'stock.move'
-
-    main_project_id = fields.Many2one('project.project',
-                                      string="Main Project")
+from . import procurement_order
+from . import stock_move

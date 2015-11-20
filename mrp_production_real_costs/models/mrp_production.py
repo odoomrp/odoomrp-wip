@@ -71,7 +71,7 @@ class MrpProduction(models.Model):
                     journal_id, name, record, record.product_id, qty=qty,
                     amount=mrp_cost)
                 task = task_obj.search([('mrp_production_id', '=', record.id),
-                                        ('wk_order', '=', False)])
+                                        ('workorder', '=', False)])
                 vals['task_id'] = task and task[0].id or False
                 analytic_line_obj.create(vals)
             record.real_cost = mrp_cost

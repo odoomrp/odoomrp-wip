@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -35,13 +35,8 @@ class ProcurementOrder(models.Model):
                 if record.main_project_id:
                     main_project = record.main_project_id.id
                     if record.production_id:
-                        project = record.main_project_id
-                        analytic_account = project.analytic_account_id.id
-                        production = record.production_id
-                        production.project_id = main_project
-                        production.analytic_account_id = analytic_account
-                        moves = production.move_lines
-                        for move in moves:
+                        record.production_id.project_id = main_project
+                        for move in record.production_id.move_lines:
                             if mto_record in move.product_id.route_ids:
                                 move.main_project_id = main_project
                                 procurements = procurement_obj.search(
@@ -66,14 +61,10 @@ class ProcurementOrder(models.Model):
     def run(self, autocommit=False):
         mto_record = self.env.ref('stock.route_warehouse0_mto')
         for record in self:
-            if mto_record in record.product_id.route_ids:
-                main_project = False
-                if record.main_project_id:
-                    main_project = record.main_project_id.id
-                elif record.move_dest_id:
-                    main_project = record.move_dest_id.main_project_id.id
-                if main_project:
-                    record.main_project_id = main_project
+            if mto_record not in record.product_id.route_ids:
+                continue
+            if record.move_dest_id:
+                record.main_project_id = record.move_dest_id.main_project_id.id
         res = super(ProcurementOrder, self).run(autocommit=autocommit)
         self.set_main_project()
         return res

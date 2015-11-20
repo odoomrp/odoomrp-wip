@@ -35,7 +35,6 @@
     "depends": ['mrp',
                 'project',
                 'mrp_project_link',
-                'mrp_operations_project',
                 ],
     "data": ['views/project_task_work_view.xml',
              'wizard/wizard_filter_mrp_task_view.xml',
