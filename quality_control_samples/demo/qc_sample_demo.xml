@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="qc_sample_normal" model="qc.sample">
+            <field name="name">Normal samples</field>
+        </record>
+
+        <record id="qc_sample_line_normal_1" model="qc.sample.line">
+            <field name="sample" ref="qc_sample_normal"/>
+            <field name="min_qty" eval="0"/>
+            <field name="max_qty" eval="10"/>
+            <field name="samples_taken" eval="1"/>
+        </record>
+
+        <record id="qc_sample_line_normal_2" model="qc.sample.line">
+            <field name="sample" ref="qc_sample_normal"/>
+            <field name="min_qty" eval="11"/>
+            <field name="max_qty" eval="20"/>
+            <field name="samples_taken" eval="2"/>
+        </record>
+
+        <record id="qc_sample_line_normal_3" model="qc.sample.line">
+            <field name="sample" ref="qc_sample_normal"/>
+            <field name="min_qty" eval="21"/>
+            <field name="max_qty" eval="30"/>
+            <field name="samples_taken" eval="3"/>
+        </record>
+
+        <record id="qc_sample_line_normal_4" model="qc.sample.line">
+            <field name="sample" ref="qc_sample_normal"/>
+            <field name="min_qty" eval="31"/>
+            <field name="max_qty" eval="9999"/>
+            <field name="samples_taken" eval="4"/>
+        </record>
+
+        <record id="qc_sample_double" model="qc.sample">
+            <field name="name">Double samples</field>
+        </record>
+
+        <record id="qc_sample_line_double_1" model="qc.sample.line">
+            <field name="sample" ref="qc_sample_double"/>
+            <field name="min_qty" eval="0"/>
+            <field name="max_qty" eval="10"/>
+            <field name="samples_taken" eval="2"/>
+        </record>
+
+        <record id="qc_sample_line_double_2" model="qc.sample.line">
+            <field name="sample" ref="qc_sample_double"/>
+            <field name="min_qty" eval="11"/>
+            <field name="max_qty" eval="20"/>
+            <field name="samples_taken" eval="4"/>
+        </record>
+
+        <record id="qc_sample_line_double_3" model="qc.sample.line">
+            <field name="sample" ref="qc_sample_double"/>
+            <field name="min_qty" eval="21"/>
+            <field name="max_qty" eval="30"/>
+            <field name="samples_taken" eval="6"/>
+        </record>
+
+        <record id="qc_sample_line_double_4" model="qc.sample.line">
+            <field name="sample" ref="qc_sample_double"/>
+            <field name="min_qty" eval="31"/>
+            <field name="max_qty" eval="9999"/>
+            <field name="samples_taken" eval="8"/>
+        </record>
+
+    </data>
+</openerp>
