@@ -51,7 +51,7 @@ class WizCreateFictitiousOf(models.TransientModel):
                     product.id, product_qty)['value']
                 vals.update(prod_vals)
             vals['product_attributes'] = [tuple([0, 0, line]) for line in
-                vals.get('product_attributes', [])]
+                                          vals.get('product_attributes', [])]
             new_production = production_obj.create(vals)
             new_production.action_compute()
             new_production.calculate_production_estimated_cost()
