@@ -27,7 +27,6 @@ class MrpProduction(models.Model):
     def _get_min_qty_for_production(self, routing=False):
         qty = super(MrpProduction, self)._get_min_qty_for_production(routing)
         min_capacity = routing and max(routing.workcenter_lines.filtered(
-            'limited_production_capacity').mapped('workcenter_id.'
-                                                  'capacity_per_cycle_min')
-            ) or 0
+            'limited_production_capacity').mapped(
+                'workcenter_id.capacity_per_cycle_min') or [0]) or 0
         return max(qty, min_capacity)
