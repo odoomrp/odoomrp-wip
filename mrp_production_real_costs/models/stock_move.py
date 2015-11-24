@@ -62,9 +62,10 @@ class StockMove(models.Model):
             if move.state == 'done':
                 product_avail -= move.product_qty
                 template_avail -= move.product_qty
-            new_cost_price = ((amount_unit * product_avail + prod_total_cost) /
-                              ((product_avail >= 0.0 and product_avail or 0.0)
-                               + move.product_qty))
+            new_cost_price = (
+                (amount_unit * product_avail + prod_total_cost) /
+                ((product_avail >= 0.0 and product_avail or 0.0) +
+                 move.product_qty))
             new_std_price = ((template_price * template_avail +
                               prod_total_cost) /
                              ((template_avail >= 0.0 and template_avail or
