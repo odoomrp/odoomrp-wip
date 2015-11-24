@@ -107,7 +107,7 @@ class SaleOrderLine(models.Model):
         values = self._order_attributes(template, product_attributes)
         if extended:
             description = "\n".join(
-                "%s: %s" % (x['attribute'].name, x['value'].name)
+                "%s: %s" % (x['value'].attribute_id.name, x['value'].name)
                 for x in values)
         else:
             description = ", ".join([x['value'].name for x in values])
