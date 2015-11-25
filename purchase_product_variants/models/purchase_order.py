@@ -129,7 +129,9 @@ class PurchaseOrderLine(models.Model):
                 self.product_template.id, self.product_qty or 1.0,
                 self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
         self.product_attributes = (
-            self.product_template._get_product_attributes_dict())
+            [(2, x.id) for x in self.product_attributes] +
+            [(0, 0, x) for x in
+             self.product_template._get_product_attributes_dict()])
         # Get planned date and min quantity
         supplierinfo = False
         precision = self.env['decimal.precision'].precision_get(
@@ -162,7 +164,7 @@ class PurchaseOrderLine(models.Model):
                                 supplierinfo.product_uom.name)
                         }
                     self.product_qty = min_qty
-        if not self.date_planned:
+        if not self.date_planned and supplierinfo:
             dt = fields.Datetime.to_string(
                 self._get_date_planned(supplierinfo, self.order_id.date_order))
             self.date_planned = dt

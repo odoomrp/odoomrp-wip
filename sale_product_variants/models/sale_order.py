@@ -154,7 +154,9 @@ class SaleOrderLine(models.Model):
                 self.product_template.id, self.product_uom_qty or 1.0,
                 self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
         self.product_attributes = (
-            self.product_template._get_product_attributes_dict())
+            [(2, x.id) for x in self.product_attributes] +
+            [(0, 0, x) for x in
+             self.product_template._get_product_attributes_dict()])
         # Update taxes
         fpos = self.order_id.fiscal_position
         if not fpos:

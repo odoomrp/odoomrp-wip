@@ -59,7 +59,6 @@
                     <field name="product_template" />
                     <div colspan="4"
                          attrs="{'invisible': [('product_attributes', '=', [])]}">
-                        <label for="product_attributes" />
                         <field name="product_attributes">
                             <tree create="false" delete="false" editable="1">
                                 <field name="possible_values" invisible="1" />
