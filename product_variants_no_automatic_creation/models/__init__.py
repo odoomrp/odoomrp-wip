@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,3 +18,4 @@
 
 from . import pricelist
 from . import product
+from . import product_attribute_configurator
