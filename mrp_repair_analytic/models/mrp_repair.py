@@ -34,11 +34,11 @@ class MrpRepair(models.Model):
             lines = record.analytic_account.line_ids.filtered(
                 lambda x: x.is_repair_cost and x.amount != 0)
             lines.unlink()
-            for line in record.fees_lines:
+            for line in record.fees_lines.filtered('load_cost'):
                 vals = record._catch_repair_line_information_for_analytic(line)
                 if vals:
                     analytic_line_obj.create(vals)
-            for line in record.operations:
+            for line in record.operations.filtered('load_cost'):
                 vals = record._catch_repair_line_information_for_analytic(line)
                 if vals:
                     analytic_line_obj.create(vals)
@@ -98,6 +98,7 @@ class MrpRepairLine(models.Model):
 
     user_id = fields.Many2one('res.users', string='User', required=True,
                               default=lambda self: self.env.user)
+    load_cost = fields.Boolean(string='Load Cost', default=True)
 
 
 class MrpRepairFee(models.Model):
@@ -105,3 +106,4 @@ class MrpRepairFee(models.Model):
 
     user_id = fields.Many2one('res.users', string='User', required=True,
                               default=lambda self: self.env.user)
+    load_cost = fields.Boolean(string='Load Cost', default=True)
