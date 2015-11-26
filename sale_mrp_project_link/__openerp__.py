@@ -21,7 +21,7 @@
     "summary": "Project on sale order for production",
     "version": "1.0",
     "depends": [
-        "mrp_project_link",
+        "mrp_project_link_mto",
         "sale",
     ],
     "author": "OdooMRP team,"

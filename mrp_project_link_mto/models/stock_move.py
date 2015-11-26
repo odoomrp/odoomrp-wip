@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -11,29 +11,17 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
-#    You should have received a copy of the GNU Affero General Public License
+#    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
 
-{
-    "name": "MRP Packaging - Project link",
-    "version": "1.0",
-    "depends": [
-        "mrp_packaging",
-        "mrp_project_link_mto",
-    ],
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    "website": "http://www.odoomrp.com",
-    "contributors": [
-        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
-        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-        "Ana Juaristi <ajuaristio@gmail.com>"
-    ],
-    "category": "Hidden/Dependency",
-    "summary": "Project on packaging manufacturing orders",
-    "installable": True,
-    "auto_install": True,
-}
+from openerp import models, fields
+
+
+class StockMove(models.Model):
+
+    _inherit = 'stock.move'
+
+    main_project_id = fields.Many2one('project.project',
+                                      string="Main Project")

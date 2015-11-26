@@ -16,11 +16,4 @@
 #
 ##############################################################################
 
-from openerp import models, fields
-
-
-class ProjectProject(models.Model):
-
-    _inherit = 'project.project'
-
-    automatic_creation = fields.Boolean('Automatic Creation')
+from . import models

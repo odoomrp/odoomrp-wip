@@ -42,7 +42,7 @@ class StockMove(models.Model):
                 workorder=record.work_order, qty=record.product_qty,
                 amount=(-record.product_id.cost_price * record.product_qty)))
             task = task_obj.search([('mrp_production_id', '=', production.id),
-                                    ('wk_order', '=', False)])
+                                    ('workorder', '=', False)])
             analytic_vals['task_id'] = task and task[0].id or False
             analytic_line_obj.create(analytic_vals)
         return result

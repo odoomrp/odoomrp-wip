@@ -1,78 +1,22 @@
 <openerp>
     <data>
 
-    <record model="ir.ui.view" id="project_mrp_procurement_shortcut_form_view">
-        <field name="name">project.shortcuts.mrp.procurement.form</field>
-        <field name="model">project.project</field>
-        <field name="inherit_id" ref="project.edit_project" />
-        <field name="arch" type="xml">
-            <div name="buttons" position="inside">
-                <button class="oe_inline oe_stat_button"
-                        type="action"
-                        name="%(mrp_project_link.act_project_2_procurement_all)d"
-                        icon="fa-list">
-                        <field string="Procurements" name="procurement_count"
-                            widget="statinfo" />
-                </button>
-                <button class="oe_inline oe_stat_button"
-                        type="action"
-                        name="%(mrp_project_link.act_project_2_production_all)d"
-                        icon="fa-list">
-                        <field string="Manufacturing" name="production_count"
-                            widget="statinfo" />
-                </button>
-            </div>
-        </field>
-    </record>
+        <record model="ir.ui.view" id="project_mrp_procurement_shortcut_form_view">
+            <field name="name">project.shortcuts.mrp.procurement.form</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project" />
+            <field name="arch" type="xml">
+                <div name="buttons" position="inside">
+                    <button class="oe_inline oe_stat_button"
+                            type="action"
+                            name="%(mrp_project_link.act_project_2_production_all)d"
+                            icon="fa-list">
+                            <field string="Manufacturing" name="production_count"
+                                widget="statinfo" />
+                    </button>
+                </div>
+            </field>
+        </record>
 
-        <record model="ir.ui.view" id="project_task_mrp_inh_search_view">
-                <field name="name">project.task.mrp.inh.search</field>
-                <field name="model">project.task</field>
-                <field name="inherit_id" ref="project.view_task_search_form"/>
-                <field name="arch" type="xml">
-                    <field name="name" position="after">
-                        <field name="mrp_production_id"/>
-                        <field name="wk_order"/>
-                    </field>
-                    <filter string="Stage" position="after">
-                        <filter string="Manufacturing" name="Manufacturing" context="{'group_by':'mrp_production_id'}"/>
-                        <filter string="Workorder" name="Workorder" context="{'group_by':'wk_order'}"/>
-                    </filter> 
-                </field>
-        </record>
-        <record model="ir.ui.view" id="project_task_mrp_inh_tree_view">
-                <field name="name">project.task.mrp.inh.tree</field>
-                <field name="model">project.task</field>
-                <field name="inherit_id" ref="project.view_task_tree2"/>
-                <field name="arch" type="xml">
-                    <field name="project_id" position="after">
-                        <field name="mrp_production_id"/>
-                        <field name="wk_order"/>
-                        <field name="final_product" string="Product to Produce"/>
-                    </field>
-                </field>
-        </record>
-        <record model="ir.ui.view" id="project_task_mrp_form_view">
-                <field name="name">project.task.mrp.inh.form</field>
-                <field name="model">project.task</field>
-                <field name="inherit_id" ref="mrp_operations_project.view_task_form2_inherit"/>
-                <field name="arch" type="xml">
-                    <field name="wk_order" position="replace"/>
-                    <notebook position="inside">
-                        <page string="MRP Data">
-                            <group colspan="4" col="4">
-                                <field name="mrp_production_id" colspan="2"/>
-                                <field name="wk_order" colspan="2"/>
-                                <field name="final_product" colspan="2" string="Product to Produce"/>
-                                <separator colspan="4" string="Scheduled Products"/>
-                                <field name="wk_sch_products" colspan="4" nolabel="1"
-                                attrs="{'invisible':[('wk_order', '=', False)]}"/>
-                                <field name="mrp_sch_products" colspan="4" nolabel="1"
-                                attrs="{'invisible':['|', ('wk_order', '!=', False), ('mrp_production_id', '=', False)]}"/>
-                            </group>
-                        </page>
-                    </notebook>
-                </field>
-        </record>
     </data>
 </openerp>
