@@ -201,7 +201,7 @@ class SaleOrderLine(models.Model):
     def button_confirm(self):
         product_obj = self.env['product.product']
         for line in self:
-            if not line.product_id:
+            if not line.product_id and line.product_template:
                 line._check_line_confirmability()
                 attr_values = line.product_attributes.mapped('value')
                 domain = [('product_tmpl_id', '=', line.product_template.id)]

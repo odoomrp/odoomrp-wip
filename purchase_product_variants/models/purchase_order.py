@@ -28,7 +28,7 @@ class PurchaseOrder(models.Model):
         """Create possible product variants not yet created."""
         for order in self:
             for line in order.order_line:
-                if line.product_id:
+                if line.product_id or not line.product_template:
                     continue
                 line._check_line_confirmability()
                 product_obj = self.env['product.product']
