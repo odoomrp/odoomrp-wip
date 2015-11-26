@@ -31,6 +31,7 @@ class TestMrpRepairAnalytic(common.TransactionCase):
             'location_dest_id': self.op_product.property_stock_production.id,
             'price_unit': 1,
             'to_invoice': True,
+            'load_cost': True,
             }
         self.op_amount = (-1 * self.op_product.standard_price * 3)
         # Product: On Site Monitoring -- Standard Price: 20.5
@@ -42,6 +43,7 @@ class TestMrpRepairAnalytic(common.TransactionCase):
             'product_uom': self.fee_product.uom_id.id,
             'price_unit': 1,
             'to_invoice': True,
+            'load_cost': True,
             }
         self.fee_amount = (-1 * self.fee_product.standard_price * 10)
         self.repair_product = self.env.ref('product.product_product_27')
@@ -74,6 +76,24 @@ class TestMrpRepairAnalytic(common.TransactionCase):
              ('amount', '=', self.fee_amount)])
         self.assertNotEqual(len(ope_line), 0, "Operation line cost not found.")
         self.assertNotEqual(len(fee_line), 0, "Fee line cost not found.")
+
+    def test_mrp_repair_no_load_cost(self):
+        self.mrp_repair.operations.write({'load_cost': False})
+        self.mrp_repair.fees_lines.write({'load_cost': False})
+        self.mrp_repair.signal_workflow('repair_confirm')
+        self.mrp_repair.create_repair_cost()
+        ope_line = self.analytic_line_model.search(
+            [('account_id', '=', self.analytic_id.id),
+             ('product_id', '=', self.op_product.id),
+             ('is_repair_cost', '=', True),
+             ('amount', '=', self.op_amount)])
+        fee_line = self.analytic_line_model.search(
+            [('account_id', '=', self.analytic_id.id),
+             ('product_id', '=', self.fee_product.id),
+             ('is_repair_cost', '=', True),
+             ('amount', '=', self.fee_amount)])
+        self.assertEqual(len(ope_line), 0, "Operation line cost found.")
+        self.assertEqual(len(fee_line), 0, "Fee line cost found.")
 
     def test_mrp_repair_end_create_cost(self):
         self.mrp_repair.signal_workflow('repair_confirm')
