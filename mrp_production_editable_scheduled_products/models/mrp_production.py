@@ -1,32 +1,25 @@
+# -*- coding: utf-8 -*-
+# (c) 2014 Daniel Campos - AvanzOSC
+# (c) 2015 Oihane Crucelaegui - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Daniel Campos (danielcampos@avanzosc.es) Date: 15/10/2014
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
-##############################################################################
+import logging
+from openerp import api, models, _
 
-from openerp import models
+_logger = logging.getLogger(__name__)
 
 
 class MrpProductionProductLine(models.Model):
     _inherit = 'mrp.production.product.line'
 
-    def onchange_product(self, cr, uid, ids, product_id, context=None):
-        if product_id:
-            product_obj = self.pool['product.product']
-            product = product_obj.browse(cr, uid, product_id, context)
-            return {'value': {'product_uom': product.uom_id.id}}
+    @api.onchange('product_id')
+    def onchange_product(self):
+        if self.product_id:
+            self.product_uom = self.product_id.uom_id.id
+            self.name = self.product_id.name
+            try:
+                self.product_template = self.product_id.product_tmpl_id
+            except:
+                # This is in case mrp_product_variants module is not installed
+                _logger.warning(
+                    _('Module mrp_product_variants is not installed.'))
