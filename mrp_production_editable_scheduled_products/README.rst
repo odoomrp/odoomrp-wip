@@ -6,8 +6,8 @@
 Editable scheduled products
 ===========================
 
-This module allows to add to edit scheduled product lines, enabling the
-possibility to add more lines when order is in draft state.
+This module allows to edit scheduled product lines, enabling the possibility to
+add more lines when order is in draft state.
 
 Usage
 =====
