@@ -34,8 +34,10 @@
                 'hr_timesheet_invoice',
                 'mrp_repair',
                 ],
-    "data": ['data/analytic_journal_data.xml',
+    "data": ['security/mrp_repair_analytic_security.xml',
+             'data/analytic_journal_data.xml',
              'views/mrp_repair_view.xml',
+             'views/res_config_view.xml'
              ],
     "installable": True
 }
