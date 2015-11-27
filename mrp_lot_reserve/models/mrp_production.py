@@ -24,9 +24,6 @@ class MrpProduction(models.Model):
         @param location_id: Location id to check
         @param quantity: Quantity expected
         """
-        company = self.company_id or self.env.user.company_id
-        if not company.reserve_lot:
-            return True
         aval_quant_lst = self.env['stock.quant'].search([
             ('lot_id', '=', lot_id),
             ('location_id', '=', location_id)
