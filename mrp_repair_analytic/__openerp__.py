@@ -27,14 +27,17 @@
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <ajuaristio@gmail.com>",
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
+        "Ainara Galdona <ainaragaldona@avanzosc.es>",
     ],
     "depends": ['account',
                 'analytic',
                 'hr_timesheet_invoice',
                 'mrp_repair',
-                'mrp_production_project_estimated_cost'
                 ],
-    "data": ['views/mrp_repair_view.xml',
+    "data": ['security/mrp_repair_analytic_security.xml',
+             'data/analytic_journal_data.xml',
+             'views/mrp_repair_view.xml',
+             'views/res_config_view.xml'
              ],
     "installable": True
 }

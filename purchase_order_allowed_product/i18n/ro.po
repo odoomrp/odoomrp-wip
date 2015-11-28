@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * purchase_order_allowed_product
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-09-10 16:41+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: purchase_order_allowed_product
+#: field:purchase.order,allowed_products:0
+msgid "Allowed products"
+msgstr ""
+
+#. module: purchase_order_allowed_product
+#: help:res.partner,purchase_only_allowed:0
+msgid ""
+"If checked, by default you will only be able to select products that can be "
+"supplied by this supplier when creating a purchase order for it. This value "
+"can be changed for each order."
+msgstr ""
+
+#. module: purchase_order_allowed_product
+#: help:purchase.order,only_allowed_products:0
+msgid ""
+"If checked, you will only be able to select products that can be supplied by"
+" this supplier."
+msgstr ""
+
+#. module: purchase_order_allowed_product
+#: model:ir.model,name:purchase_order_allowed_product.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: purchase_order_allowed_product
+#: model:ir.model,name:purchase_order_allowed_product.model_purchase_order
+msgid "Purchase Order"
+msgstr "Comandă achiziție"
+
+#. module: purchase_order_allowed_product
+#: field:res.partner,purchase_only_allowed:0
+msgid "Use in purchases only allowed products"
+msgstr ""
+
+#. module: purchase_order_allowed_product
+#: field:purchase.order,only_allowed_products:0
+msgid "Use only allowed products"
+msgstr ""
+
+#. module: purchase_order_allowed_product
+#: view:purchase.order:purchase_order_allowed_product.purchase_order_form_inh_purchaseallowedproduct
+#: view:purchase.order.line:purchase_order_allowed_product.purchase_order_line_form_inh_purchaseallowedproduct
+msgid "[('id', 'in', parent.allowed_products[0][2])]"
+msgstr ""

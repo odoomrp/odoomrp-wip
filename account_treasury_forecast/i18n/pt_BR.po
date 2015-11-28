@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:43+0000\n"
-"PO-Revision-Date: 2015-10-09 03:41+0000\n"
+"POT-Creation-Date: 2015-11-20 17:15+0000\n"
+"PO-Revision-Date: 2015-10-20 14:47+0000\n"
 "Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,7 @@ msgstr "Data"
 #: field:account.treasury.forecast.template,name:0
 #: field:wiz.create.invoice,description:0
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,check_draft:0
@@ -299,7 +299,7 @@ msgstr ""
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast,template_id:0
 msgid "Template"
-msgstr ""
+msgstr "Modelo"
 
 #. module: account_treasury_forecast
 #: field:account.treasury.forecast.line,template_line_id:0

@@ -13,4 +13,4 @@ class ProjectTaskWork(models.Model):
         related='task_id.mrp_production_id')
     wk_order = fields.Many2one(
         'mrp.production.workcenter.line', string='Work Order', store=True,
-        related='task_id.wk_order')
+        related='task_id.workorder')

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"POT-Creation-Date: 2015-11-20 18:11+0000\n"
 "PO-Revision-Date: 2015-09-20 19:05+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
@@ -104,7 +104,7 @@ msgid "Value"
 msgstr "Vrednost"
 
 #. module: sale_product_variants
-#: code:addons/sale_product_variants/models/sale_order.py:180
+#: code:addons/sale_product_variants/models/sale_order.py:195
 #, python-format
 msgid "You can not confirm before configuring all attribute values."
 msgstr "Ne morete potrjevati pred nastavitvijo vseh vrednosti atributa."

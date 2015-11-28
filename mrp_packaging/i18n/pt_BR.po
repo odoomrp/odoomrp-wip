@@ -4,11 +4,12 @@
 # 
 # Translators:
 # danimaribeiro <danimaribeiro@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:43+0000\n"
+"POT-Creation-Date: 2015-11-20 17:16+0000\n"
 "PO-Revision-Date: 2015-10-09 03:12+0000\n"
 "Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
@@ -165,19 +166,19 @@ msgid "Total Qty"
 msgstr "Qtd Total"
 
 #. module: mrp_packaging
-#: code:addons/mrp_packaging/models/mrp_production.py:194
+#: code:addons/mrp_packaging/models/mrp_production.py:185
 #, python-format
 msgid "Warning"
 msgstr "Atenção"
 
 #. module: mrp_packaging
-#: code:addons/mrp_packaging/models/mrp_production.py:171
+#: code:addons/mrp_packaging/models/mrp_production.py:164
 #, python-format
 msgid "You can not compute again the list."
 msgstr "Você não pode computar de novo a lista"
 
 #. module: mrp_packaging
-#: code:addons/mrp_packaging/models/mrp_production.py:197
+#: code:addons/mrp_packaging/models/mrp_production.py:188
 #, python-format
 msgid "You won't be able to pack %f, there is only %f left"
 msgstr "Você não poderá empacotar %f, tem apenas %f restante"

@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mrp_bom_by_percentage
+# 
+# Translators:
+# Dorin Hongu <dhongu@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 17:16+0000\n"
+"PO-Revision-Date: 2015-10-30 18:20+0000\n"
+"Last-Translator: Dorin Hongu <dhongu@gmail.com>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: mrp_bom_by_percentage
+#: model:ir.model,name:mrp_bom_by_percentage.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Listă de materiale"
+
+#. module: mrp_bom_by_percentage
+#: field:mrp.bom,by_percentage:0
+msgid "Produce by percentage"
+msgstr "Produce după procent"
+
+#. module: mrp_bom_by_percentage
+#: code:addons/mrp_bom_by_percentage/models/mrp_bom.py:46
+#, python-format
+msgid "Quantity to consume <> 100"
+msgstr "Cantitate de consum  <> 100"
+
+#. module: mrp_bom_by_percentage
+#: view:mrp.bom:mrp_bom_by_percentage.mrp_bom_percentage_form_view
+msgid "{'invisible': [('by_percentage','=',True)]}"
+msgstr "{'invisible': [('by_percentage','=',True)]}"

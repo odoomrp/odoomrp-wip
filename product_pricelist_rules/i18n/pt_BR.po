@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:44+0000\n"
-"PO-Revision-Date: 2015-10-09 03:35+0000\n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-10-20 14:37+0000\n"
 "Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -152,7 +152,7 @@ msgstr ""
 #: model:ir.model,name:product_pricelist_rules.model_product_template
 #: view:product.pricelist.item:product_pricelist_rules.pricelist_item_search_view
 msgid "Product Template"
-msgstr ""
+msgstr "Produto Modelo"
 
 #. module: product_pricelist_rules
 #: model:res.groups,name:product_pricelist_rules.group_second_discount

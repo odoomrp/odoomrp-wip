@@ -1,0 +1,163 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_quant_packages_moving_wizard
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 18:11+0000\n"
+"PO-Revision-Date: 2015-09-10 16:32+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,create_uid:0
+#: field:stock.quant.move_items,create_uid:0
+#: field:stock.quant.package.move,create_uid:0
+#: field:stock.quant.package.move_items,create_uid:0
+#: field:stock.quants.move,create_uid:0
+#: field:stock.quants.move_items,create_uid:0
+msgid "Created by"
+msgstr "Creat de"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,create_date:0
+#: field:stock.quant.move_items,create_date:0
+#: field:stock.quant.package.move,create_date:0
+#: field:stock.quant.package.move_items,create_date:0
+#: field:stock.quants.move,create_date:0
+#: field:stock.quants.move_items,create_date:0
+msgid "Created on"
+msgstr "Creat în"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move_items,dest_loc:0
+#: field:stock.quant.package.move_items,dest_loc:0
+#: field:stock.quants.move,dest_loc:0
+msgid "Destination Location"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,id:0 field:stock.quant.move_items,id:0
+#: field:stock.quant.package.move,id:0
+#: field:stock.quant.package.move_items,id:0 field:stock.quants.move,id:0
+#: field:stock.quants.move_items,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,write_uid:0 field:stock.quant.move_items,write_uid:0
+#: field:stock.quant.package.move,write_uid:0
+#: field:stock.quant.package.move_items,write_uid:0
+#: field:stock.quants.move,write_uid:0
+#: field:stock.quants.move_items,write_uid:0
+msgid "Last Updated by"
+msgstr "Ultima actualizare de"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,write_date:0
+#: field:stock.quant.move_items,write_date:0
+#: field:stock.quant.package.move,write_date:0
+#: field:stock.quant.package.move_items,write_date:0
+#: field:stock.quants.move,write_date:0
+#: field:stock.quants.move_items,write_date:0
+msgid "Last Updated on"
+msgstr "Ultima actualizare în"
+
+#. module: stock_quant_packages_moving_wizard
+#: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_quants
+msgid "Move Stock Quant"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_packages
+msgid "Move Stock Quant Packages"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_quants_to
+#: model:ir.ui.menu,name:stock_quant_packages_moving_wizard.menu_quant_move_wizard
+msgid "Move Stock Quants To"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.package.move_items,move_id:0
+msgid "Package move"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,pack_move_items:0
+#: field:stock.quant.package.move,pack_move_items:0
+msgid "Packs"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: model:ir.model,name:stock_quant_packages_moving_wizard.model_stock_quant_move_items
+#: model:ir.model,name:stock_quant_packages_moving_wizard.model_stock_quant_package_move_items
+#: model:ir.model,name:stock_quant_packages_moving_wizard.model_stock_quants_move_items
+msgid "Picking wizard items"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move_items,quant:0 field:stock.quants.move_items,quant:0
+msgid "Quant"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move_items,move_id:0
+#: field:stock.quants.move_items,move_id:0
+msgid "Quant move"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.package.move_items,package:0
+msgid "Quant package"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: model:ir.model,name:stock_quant_packages_moving_wizard.model_stock_quant
+#: field:stock.quants.move,pack_move_items:0
+msgid "Quants"
+msgstr "Poziții de stoc"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move_items,source_loc:0
+#: field:stock.quant.package.move_items,source_loc:0
+#: field:stock.quants.move_items,source_loc:0
+msgid "Source Location"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: view:stock.quant.move:stock_quant_packages_moving_wizard.stock_quant_move_wizard
+#: view:stock.quant.package.move:stock_quant_packages_moving_wizard.stock_quant_package_move_wizard
+#: view:stock.quants.move:stock_quant_packages_moving_wizard.stock_quants_move_wizard
+msgid "Transfer details"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: view:stock.quant.move:stock_quant_packages_moving_wizard.stock_quant_move_wizard
+#: view:stock.quant.package.move:stock_quant_packages_moving_wizard.stock_quant_package_move_wizard
+#: view:stock.quants.move:stock_quant_packages_moving_wizard.stock_quants_move_wizard
+msgid "_Apply"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: view:stock.quant.move:stock_quant_packages_moving_wizard.stock_quant_move_wizard
+#: view:stock.quant.package.move:stock_quant_packages_moving_wizard.stock_quant_package_move_wizard
+#: view:stock.quants.move:stock_quant_packages_moving_wizard.stock_quants_move_wizard
+msgid "_Cancel"
+msgstr ""
+
+#. module: stock_quant_packages_moving_wizard
+#: view:stock.quant.move:stock_quant_packages_moving_wizard.stock_quant_move_wizard
+#: view:stock.quant.package.move:stock_quant_packages_moving_wizard.stock_quant_package_move_wizard
+#: view:stock.quants.move:stock_quant_packages_moving_wizard.stock_quants_move_wizard
+msgid "or"
+msgstr "sau"

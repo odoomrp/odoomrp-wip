@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -16,8 +16,8 @@
 #
 ##############################################################################
 
-from . import stock_move
-from . import procurement_order
 from . import mrp_production
 from . import account_analytic_line
 from . import project_project
+from . import project_task
+from . import project_task_work

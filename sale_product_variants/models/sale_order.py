@@ -107,7 +107,7 @@ class SaleOrderLine(models.Model):
         values = self._order_attributes(template, product_attributes)
         if extended:
             description = "\n".join(
-                "%s: %s" % (x['attribute'].name, x['value'].name)
+                "%s: %s" % (x['value'].attribute_id.name, x['value'].name)
                 for x in values)
         else:
             description = ", ".join([x['value'].name for x in values])
@@ -154,7 +154,9 @@ class SaleOrderLine(models.Model):
                 self.product_template.id, self.product_uom_qty or 1.0,
                 self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
         self.product_attributes = (
-            self.product_template._get_product_attributes_dict())
+            [(2, x.id) for x in self.product_attributes] +
+            [(0, 0, x) for x in
+             self.product_template._get_product_attributes_dict()])
         # Update taxes
         fpos = self.order_id.fiscal_position
         if not fpos:
@@ -199,7 +201,7 @@ class SaleOrderLine(models.Model):
     def button_confirm(self):
         product_obj = self.env['product.product']
         for line in self:
-            if not line.product_id:
+            if not line.product_id and line.product_template:
                 line._check_line_confirmability()
                 attr_values = line.product_attributes.mapped('value')
                 domain = [('product_tmpl_id', '=', line.product_template.id)]

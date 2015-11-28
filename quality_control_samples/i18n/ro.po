@@ -1,0 +1,152 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * quality_control_samples
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 18:11+0000\n"
+"PO-Revision-Date: 2015-11-20 17:23+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: quality_control_samples
+#: field:qc.inspection.line,sample_number:0
+msgid "# sample"
+msgstr ""
+
+#. module: quality_control_samples
+#: field:qc.sample,create_uid:0 field:qc.sample.line,create_uid:0
+msgid "Created by"
+msgstr "Creat de"
+
+#. module: quality_control_samples
+#: field:qc.sample,create_date:0 field:qc.sample.line,create_date:0
+msgid "Created on"
+msgstr "Creat în"
+
+#. module: quality_control_samples
+#: field:qc.sample,name:0
+msgid "Description"
+msgstr ""
+
+#. module: quality_control_samples
+#: model:qc.sample,name:quality_control_samples.qc_sample_double
+msgid "Double samples"
+msgstr ""
+
+#. module: quality_control_samples
+#: field:qc.sample.line,min_qty:0
+msgid "From"
+msgstr ""
+
+#. module: quality_control_samples
+#: field:qc.sample,id:0 field:qc.sample.line,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: quality_control_samples
+#: field:qc.sample,write_uid:0 field:qc.sample.line,write_uid:0
+msgid "Last Updated by"
+msgstr "Ultima actualizare de"
+
+#. module: quality_control_samples
+#: field:qc.sample,write_date:0 field:qc.sample.line,write_date:0
+msgid "Last Updated on"
+msgstr "Ultima actualizare în"
+
+#. module: quality_control_samples
+#: code:addons/quality_control_samples/models/qc_sample.py:44
+#, python-format
+msgid "Min value cannot be bigger than max value."
+msgstr ""
+
+#. module: quality_control_samples
+#: model:qc.sample,name:quality_control_samples.qc_sample_normal
+msgid "Normal samples"
+msgstr ""
+
+#. module: quality_control_samples
+#: model:ir.model,name:quality_control_samples.model_qc_inspection
+msgid "Quality control inspection"
+msgstr ""
+
+#. module: quality_control_samples
+#: model:ir.model,name:quality_control_samples.model_qc_inspection_line
+msgid "Quality control inspection line"
+msgstr ""
+
+#. module: quality_control_samples
+#: model:ir.model,name:quality_control_samples.model_qc_sample_line
+msgid "Quality control inspection sample line"
+msgstr ""
+
+#. module: quality_control_samples
+#: model:ir.model,name:quality_control_samples.model_qc_sample
+msgid "Quality control inspection samples definition"
+msgstr ""
+
+#. module: quality_control_samples
+#: view:qc.sample:quality_control_samples.qc_sample_form_view
+msgid "Quality control sample ranges"
+msgstr ""
+
+#. module: quality_control_samples
+#: view:qc.sample:quality_control_samples.qc_sample_tree_view
+msgid "Quality control samples"
+msgstr ""
+
+#. module: quality_control_samples
+#: model:ir.model,name:quality_control_samples.model_qc_test
+msgid "Quality control test"
+msgstr ""
+
+#. module: quality_control_samples
+#: field:qc.sample.line,sample:0
+msgid "Sample"
+msgstr ""
+
+#. module: quality_control_samples
+#: field:qc.test,sample:0
+msgid "Sample definition"
+msgstr ""
+
+#. module: quality_control_samples
+#: view:qc.sample:quality_control_samples.qc_sample_form_view
+#: field:qc.sample,sample_lines:0
+msgid "Sample lines"
+msgstr ""
+
+#. module: quality_control_samples
+#: model:ir.actions.act_window,name:quality_control_samples.action_qc_sample
+#: model:ir.ui.menu,name:quality_control_samples.qc_sample_menu
+msgid "Sample ranges"
+msgstr ""
+
+#. module: quality_control_samples
+#: field:qc.sample.line,samples_taken:0
+msgid "Samples taken"
+msgstr ""
+
+#. module: quality_control_samples
+#: view:qc.sample:quality_control_samples.qc_sample_search_view
+msgid "Search QC sample definition"
+msgstr ""
+
+#. module: quality_control_samples
+#: field:qc.sample.line,max_qty:0
+msgid "To"
+msgstr ""
+
+#. module: quality_control_samples
+#: code:addons/quality_control_samples/models/qc_sample.py:56
+#, python-format
+msgid "You cannot have 2 lines that overlap ranges!"
+msgstr ""

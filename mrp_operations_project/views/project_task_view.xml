@@ -1,16 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-       <record id="view_task_form2_inherit" model="ir.ui.view">
-            <field name="name">view.task.form2.inherit</field>
+
+        <record model="ir.ui.view" id="project_task_mrp_form_view">
+            <field name="name">project.task.mrp.inh.form</field>
             <field name="model">project.task</field>
-            <field name="inherit_id" ref="project.view_task_form2" />
+            <field name="inherit_id" ref="mrp_project_link.project_task_mrp_form_view"/>
             <field name="arch" type="xml">
-                <field name="reviewer_id" position="after">
-                        <field name="wk_order" options='{"no_open": True}'
-                         context="{'default_groups_ref': ['base.group_user', 'base.group_partner_manager', 'project.group_project_user']}"/>
+                <field name="production_scheduled_products" position="after">
+                    <field name="workorder_scheduled_products"
+                           colspan="4"
+                           nolabel="1"
+                           attrs="{'invisible': [('workorder', '=', False)]}"
+                    />
                 </field>
+                <label for="production_scheduled_products" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </label>
             </field>
         </record>
+
     </data>
 </openerp>

@@ -1,0 +1,16 @@
+<openerp>
+    <data>
+
+    <record model="ir.ui.view" id="procurement_order_main_project_form_view">
+        <field name="name">procurement.order.main.project.form</field>
+        <field name="model">procurement.order</field>
+        <field name="inherit_id" ref="procurement.procurement_form_view"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="main_project_id"/>
+            </field>
+        </field>
+    </record>
+
+    </data>
+</openerp>

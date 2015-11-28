@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -130,6 +130,15 @@ class ProductTemplate(models.Model):
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
+    product_attributes = fields.One2many(
+        comodel_name='product.product.attribute', inverse_name='product',
+        string='Product attributes', copy=False)
+
+    @api.onchange('product_tmpl_id')
+    def _onchange_product_template(self):
+        self.product_attributes = (
+            self.product_tmpl_id._get_product_attributes_dict())
+
     def _get_product_attributes_values_dict(self):
         # Retrieve first the attributes from template to preserve order
         res = self.product_tmpl_id._get_product_attributes_dict()
@@ -163,6 +172,15 @@ class ProductProduct(models.Model):
                 if len(product.attribute_value_ids) == len(attr_values):
                     return product
         return False
+
+    @api.model
+    def create(self, values):
+        if (not values.get('attribute_value_ids') and
+                values.get('product_attributes')):
+            values['attribute_value_ids'] = (
+                (4, x[2]['value'])
+                for x in values.get('product_attributes'))
+        return super(ProductProduct, self).create(values)
 
 
 class ProductAttributeLine(models.Model):

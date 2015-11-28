@@ -28,7 +28,7 @@ class PurchaseOrder(models.Model):
         """Create possible product variants not yet created."""
         for order in self:
             for line in order.order_line:
-                if line.product_id:
+                if line.product_id or not line.product_template:
                     continue
                 line._check_line_confirmability()
                 product_obj = self.env['product.product']
@@ -116,20 +116,22 @@ class PurchaseOrderLine(models.Model):
     def onchange_product_template(self):
         self.ensure_one()
         res = {}
-        product_attributes = []
-        if not self.product_template.attribute_line_ids:
-            self.product_id = (
-                self.product_template.product_variant_ids and
-                self.product_template.product_variant_ids[0])
-        if (self.product_id and self.product_id not in
-                self.product_template.product_variant_ids):
-            self.product_id = False
-        for attribute in self.product_template.attribute_line_ids:
-            product_attributes.append({'attribute':
-                                       attribute.attribute_id})
-        self.product_attributes = product_attributes
         self.name = self.product_template.name
-        self.product_uom = self.product_template.uom_po_id
+        if not self.product_template.attribute_line_ids:
+            self.product_id = self.product_template.product_variant_ids[:1]
+        else:
+            self.product_id = False
+            self.product_uom = self.product_template.uom_po_id
+            self.product_uos = self.product_template.uos_id
+            self.price_unit = self.order_id.pricelist_id.with_context(
+                {'uom': self.product_uom.id,
+                 'date': self.order_id.date_order}).template_price_get(
+                self.product_template.id, self.product_qty or 1.0,
+                self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
+        self.product_attributes = (
+            [(2, x.id) for x in self.product_attributes] +
+            [(0, 0, x) for x in
+             self.product_template._get_product_attributes_dict()])
         # Get planned date and min quantity
         supplierinfo = False
         precision = self.env['decimal.precision'].precision_get(
@@ -162,7 +164,7 @@ class PurchaseOrderLine(models.Model):
                                 supplierinfo.product_uom.name)
                         }
                     self.product_qty = min_qty
-        if not self.date_planned:
+        if not self.date_planned and supplierinfo:
             dt = fields.Datetime.to_string(
                 self._get_date_planned(supplierinfo, self.order_id.date_order))
             self.date_planned = dt

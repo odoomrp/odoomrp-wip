@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:44+0000\n"
+"POT-Creation-Date: 2015-11-20 18:11+0000\n"
 "PO-Revision-Date: 2015-09-20 19:03+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
@@ -86,7 +86,7 @@ msgid "Purchase Order Line"
 msgstr "Postavka nabavnega naloga"
 
 #. module: purchase_pricelist_rules
-#: code:addons/purchase_pricelist_rules/models/purchase.py:121
+#: code:addons/purchase_pricelist_rules/models/purchase.py:125
 #: sql_constraint:purchase.order.line:0
 #, python-format
 msgid "Second discount must be lower than 100%."

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:45+0000\n"
-"PO-Revision-Date: 2015-09-20 19:05+0000\n"
+"POT-Creation-Date: 2015-11-20 18:11+0000\n"
+"PO-Revision-Date: 2015-11-14 04:45+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: stock_inventory_import
-#: code:addons/stock_inventory_import/models/stock_inventory.py:11
+#: code:addons/stock_inventory_import/models/stock_inventory.py:14
 #, python-format
 msgid "By File"
 msgstr "Po datoteki"
@@ -137,7 +137,7 @@ msgid "Load File"
 msgstr "Naloži datoteko"
 
 #. module: stock_inventory_import
-#: code:addons/stock_inventory_import/models/stock_inventory.py:77
+#: code:addons/stock_inventory_import/models/stock_inventory.py:84
 #, python-format
 msgid "Loaded lines must be processed at least one time for inventory : %s"
 msgstr "Naložene postavke morajo biti za inventuro vsaj enkrat procesirane: %s"
@@ -148,14 +148,14 @@ msgid "Location"
 msgstr "Lokacija"
 
 #. module: stock_inventory_import
-#: code:addons/stock_inventory_import/models/stock_inventory.py:20
-#: code:addons/stock_inventory_import/wizard/import_inventory.py:88
+#: code:addons/stock_inventory_import/models/stock_inventory.py:25
+#: code:addons/stock_inventory_import/wizard/import_inventory.py:87
 #, python-format
 msgid "No processed"
 msgstr "Ne procesirano"
 
 #. module: stock_inventory_import
-#: code:addons/stock_inventory_import/models/stock_inventory.py:50
+#: code:addons/stock_inventory_import/models/stock_inventory.py:56
 #, python-format
 msgid "No product code found"
 msgstr "Ni kode proizvoda"
@@ -178,7 +178,7 @@ msgid "Process File Lines"
 msgstr "Procesiranje postavk datoteke"
 
 #. module: stock_inventory_import
-#: code:addons/stock_inventory_import/models/stock_inventory.py:69
+#: code:addons/stock_inventory_import/models/stock_inventory.py:76
 #, python-format
 msgid "Processed"
 msgstr "Procesirano"
@@ -207,11 +207,11 @@ msgstr "Postavka uvoza inventure zaloge"
 #: view:import.inventory:stock_inventory_import.view_import_inventory
 msgid ""
 "The file must have 2 column keys:                 'code' => for product "
-"referente                 'quantity' => for product quantity"
+"reference                 'quantity' => for product quantity"
 msgstr "Datoteka mora imeti 2 ključa stolpcev: 'koda' => za sklic proizvoda, 'količina' => za količino proizvoda"
 
 #. module: stock_inventory_import
-#: code:addons/stock_inventory_import/models/stock_inventory.py:37
+#: code:addons/stock_inventory_import/models/stock_inventory.py:43
 #, python-format
 msgid "There must be one line at least to process"
 msgstr "Vsaj ena postavka mora biti procesirana"

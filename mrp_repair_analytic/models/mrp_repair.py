@@ -22,41 +22,48 @@ class MrpRepair(models.Model):
     _inherit = 'mrp.repair'
 
     analytic_account = fields.Many2one(
-        'account.analytic.account', string='Analytic Account')
+        'account.analytic.account', domain=[('type', '!=', 'view')],
+        string='Analytic Account')
+
+    @api.multi
+    def create_repair_cost(self):
+        analytic_line_obj = self.env['account.analytic.line']
+        for record in self:
+            if not record.analytic_account:
+                continue
+            lines = record.analytic_account.line_ids.filtered(
+                lambda x: x.is_repair_cost and x.amount != 0)
+            lines.unlink()
+            for line in record.fees_lines.filtered('load_cost'):
+                vals = record._catch_repair_line_information_for_analytic(line)
+                if vals:
+                    analytic_line_obj.create(vals)
+            for line in record.operations.filtered('load_cost'):
+                vals = record._catch_repair_line_information_for_analytic(line)
+                if vals:
+                    analytic_line_obj.create(vals)
 
     @api.one
     @api.model
     def action_repair_end(self):
-        analytic_line_obj = self.env['account.analytic.line']
-
         result = super(MrpRepair, self).action_repair_end()
-        if self.analytic_account:
-            journal = self.env.ref(
-                'mrp_production_project_estimated_cost.analytic_journal_'
-                'materials', False)
-            if not journal:
-                raise exceptions.Warning(
-                    _('Error!: Materials journal not found'))
-            for line in self.fees_lines:
-                vals = self._catch_repair_line_information_for_analytic(
-                    line, journal)
-                analytic_line_obj.create(vals)
-            for line in self.operations:
-                vals = self._catch_repair_line_information_for_analytic(
-                    line, journal)
-                analytic_line_obj.create(vals)
+        self.create_repair_cost()
         return result
 
-    def _catch_repair_line_information_for_analytic(self, line, journal):
+    def _catch_repair_line_information_for_analytic(self, line):
         analytic_line_obj = self.env['account.analytic.line']
+        journal = self.env.ref('mrp.analytic_journal_repair', False)
+        if not journal:
+            raise exceptions.Warning(_('Error!: Repair journal not found'))
         name = self.name
         if line.product_id.default_code:
             name += ' - ' + line.product_id.default_code
         categ_id = line.product_id.categ_id
         general_account = (line.product_id.property_account_income or
-                           categ_id.property_account_income_categ or
-                           False)
+                           categ_id.property_account_income_categ or False)
         amount = line.product_id.standard_price * line.product_uom_qty * -1
+        if not amount:
+            return False
         vals = {'name': name,
                 'user_id': line.user_id.id,
                 'date': analytic_line_obj._get_default_date(),
@@ -65,10 +72,10 @@ class MrpRepair(models.Model):
                 'product_uom_id': line.product_uom.id,
                 'amount': amount,
                 'journal_id': journal.id,
-                'account_id': self.analytic_account.id
+                'account_id': self.analytic_account.id,
+                'is_repair_cost': True,
+                'general_account_id': general_account.id
                 }
-        if general_account:
-            vals.update({'general_account_id': general_account.id})
         return vals
 
     @api.one
@@ -91,6 +98,7 @@ class MrpRepairLine(models.Model):
 
     user_id = fields.Many2one('res.users', string='User', required=True,
                               default=lambda self: self.env.user)
+    load_cost = fields.Boolean(string='Load Cost', default=True)
 
 
 class MrpRepairFee(models.Model):
@@ -98,3 +106,4 @@ class MrpRepairFee(models.Model):
 
     user_id = fields.Many2one('res.users', string='User', required=True,
                               default=lambda self: self.env.user)
+    load_cost = fields.Boolean(string='Load Cost', default=True)

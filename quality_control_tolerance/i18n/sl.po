@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:44+0000\n"
-"PO-Revision-Date: 2015-09-20 19:04+0000\n"
+"POT-Creation-Date: 2015-11-20 18:11+0000\n"
+"PO-Revision-Date: 2015-11-14 04:46+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -56,7 +56,7 @@ msgstr "Optimalno"
 
 #. module: quality_control_tolerance
 #: model:ir.model,name:quality_control_tolerance.model_qc_test_question_value
-msgid "Possible values of qualitative questions."
+msgid "Possible values for qualitative questions."
 msgstr "Možne vrednosti kvalitativnih vprašanj"
 
 #. module: quality_control_tolerance

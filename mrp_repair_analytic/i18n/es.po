@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-15 16:13+0000\n"
-"PO-Revision-Date: 2015-01-15 16:13+0000\n"
+"POT-Creation-Date: 2015-11-26 16:32+0000\n"
+"PO-Revision-Date: 2015-11-26 16:32+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,10 +21,41 @@ msgid "Analytic Account"
 msgstr "Cuenta analítica"
 
 #. module: mrp_repair_analytic
-#: code:addons/mrp_repair_analytic/models/mrp_repair.py:39
+#: model:ir.model,name:mrp_repair_analytic.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Línea Analítica"
+
+#. module: mrp_repair_analytic
+#: code:addons/mrp_repair_analytic/models/mrp_repair.py:57
 #, python-format
-msgid "Error!: Materials journal not found"
-msgstr "Error!: Diario de materiales no encontrado"
+msgid "Error!: Repair journal not found"
+msgstr "Error!: Diario de reparaciones no encontrado"
+
+#. module: mrp_repair_analytic
+#: field:account.analytic.line,is_repair_cost:0
+msgid "Is repair cost"
+msgstr "Es coste de reparación"
+
+#. module: mrp_repair_analytic
+#: field:mrp.repair.fee,load_cost:0
+#: field:mrp.repair.line,load_cost:0
+msgid "Load Cost"
+msgstr "Cargar coste"
+
+#. module: mrp_repair_analytic
+#: field:mrp.config.settings,group_mrp_repair_cost_check:0
+msgid "Mrp Repair Load Cost Visible"
+msgstr "Campo 'Cargar coste' visible en reparaciones"
+
+#. module: mrp_repair_analytic
+#: view:mrp.repair:mrp_repair_analytic.view_repair_order_form_inh_repairwithanalityc
+msgid "Reload costs"
+msgstr "Recargar costes"
+
+#. module: mrp_repair_analytic
+#: model:res.groups,name:mrp_repair_analytic.group_mrp_repair_cost_check
+msgid "Repair Cost Check Visible"
+msgstr "Check de coste de reparación visible"
 
 #. module: mrp_repair_analytic
 #: model:ir.model,name:mrp_repair_analytic.model_mrp_repair_fee
@@ -38,6 +69,7 @@ msgstr "Línea reparación"
 
 #. module: mrp_repair_analytic
 #: model:ir.model,name:mrp_repair_analytic.model_mrp_repair
+#: view:mrp.config.settings:mrp_repair_analytic.view_mrp_config
 msgid "Repair Order"
 msgstr "Orden reparación"
 

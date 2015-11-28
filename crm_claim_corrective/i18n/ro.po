@@ -1,0 +1,293 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * crm_claim_corrective
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 17:16+0000\n"
+"PO-Revision-Date: 2015-09-10 16:31+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: crm_claim_corrective
+#: view:crm.claim:crm_claim_corrective.crm_claim_extended_form_view
+msgid "Action"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim:crm_claim_corrective.crm_claim_extended_form_view
+msgid "Analysis of Causes"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim,cause_id:0 field:crm.claim.problem.cause,name:0
+msgid "Cause"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim,desc_cause:0
+msgid "Cause Description"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.problem.cause:crm_claim_corrective.crm_claim_causes_form_view
+msgid "Cause Notes"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.problem.solution,cause_ids:0
+msgid "Causes"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,claim_id:0
+#: field:crm.claim.corrective.action,sol_claim_id:0
+#: model:ir.model,name:crm_claim_corrective.model_crm_claim
+msgid "Claim"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: selection:crm.claim.corrective,state:0
+msgid "Closed"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,sol_ids:0
+#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_form_view
+#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_tree_view
+msgid "Corrective Action"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim,aaccseq:0
+msgid "Corrective Action Info"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_form_view
+#: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_tree_view
+#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_form_view
+#: model:ir.actions.act_window,name:crm_claim_corrective.action_crm_claim_corrective
+#: model:ir.ui.menu,name:crm_claim_corrective.menu_corrective_actions
+msgid "Corrective Actions"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective.action,corrective_action_id:0
+msgid "Corrective action"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,create_uid:0
+#: field:crm.claim.corrective.action,create_uid:0
+#: field:crm.claim.decision,create_uid:0
+#: field:crm.claim.problem.cause,create_uid:0
+#: field:crm.claim.problem.description,create_uid:0
+#: field:crm.claim.problem.solution,create_uid:0
+msgid "Created by"
+msgstr "Creat de"
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,create_date:0
+#: field:crm.claim.corrective.action,create_date:0
+#: field:crm.claim.decision,create_date:0
+#: field:crm.claim.problem.cause,create_date:0
+#: field:crm.claim.problem.description,create_date:0
+#: field:crm.claim.problem.solution,create_date:0
+msgid "Created on"
+msgstr "Creat în"
+
+#. module: crm_claim_corrective
+#: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_search_view
+#: field:crm.claim.corrective,partner_id:0
+msgid "Customer"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective.action,date_done:0
+msgid "Date Done"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim,decision_id:0 field:crm.claim,nfdecision_id:0
+#: field:crm.claim.decision,name:0
+msgid "Decision"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.decision:crm_claim_corrective.crm_claim_decision_form_view
+msgid "Decision Notes"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim,desc_decis:0 field:crm.claim,nfdesc_decis:0
+#: field:crm.claim.problem.description,name:0
+msgid "Description"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.problem.description:crm_claim_corrective.crm_claim_descriptions_form_view
+msgid "Description Notes"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim,moddate:0
+msgid "Fecha"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_search_view
+msgid "Group By..."
+msgstr "Grupează după..."
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,id:0 field:crm.claim.corrective.action,id:0
+#: field:crm.claim.decision,id:0 field:crm.claim.problem.cause,id:0
+#: field:crm.claim.problem.description,id:0
+#: field:crm.claim.problem.solution,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,write_uid:0
+#: field:crm.claim.corrective.action,write_uid:0
+#: field:crm.claim.decision,write_uid:0
+#: field:crm.claim.problem.cause,write_uid:0
+#: field:crm.claim.problem.description,write_uid:0
+#: field:crm.claim.problem.solution,write_uid:0
+msgid "Last Updated by"
+msgstr "Ultima actualizare de"
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,write_date:0
+#: field:crm.claim.corrective.action,write_date:0
+#: field:crm.claim.decision,write_date:0
+#: field:crm.claim.problem.cause,write_date:0
+#: field:crm.claim.problem.description,write_date:0
+#: field:crm.claim.problem.solution,write_date:0
+msgid "Last Updated on"
+msgstr "Ultima actualizare în"
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective.action,name:0
+msgid "Name"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: selection:crm.claim.corrective,state:0
+msgid "New"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim:crm_claim_corrective.crm_claim_extended_form_view
+msgid "Nonconformity Decision"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: selection:crm.claim.corrective,state:0
+msgid "Pending"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective.action,date_planned:0
+msgid "Planned Date"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_form_view
+msgid "Preventive/Corrective Action"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_form_view
+#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_tree_view
+#: model:ir.actions.act_window,name:crm_claim_corrective.action_crm_claim_corrective_action
+#: model:ir.ui.menu,name:crm_claim_corrective.crm_correct_actions_menu_view
+msgid "Preventive/Corrective Actions"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim,description_id:0
+msgid "Problem description"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim:crm_claim_corrective.crm_claim_extended_form_view
+msgid "Resolution Actions"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective.action,responsible_id:0
+msgid "Responsible"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_search_view
+msgid "Search Corrective Actions"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_search_view
+msgid "Search Preventive/Corrective Actions"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: help:crm.claim.corrective.action,sol_claim_id:0
+msgid "Select a CRM Claim"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: help:crm.claim,cause_id:0
+msgid "Select a Cause"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: help:crm.claim.corrective,claim_id:0
+msgid "Select a Claim"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: help:crm.claim,decision_id:0 help:crm.claim,nfdecision_id:0
+msgid "Select a Decision"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: help:crm.claim,description_id:0
+msgid "Select a Problem Description"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: help:crm.claim.corrective.action,responsible_id:0
+msgid "Select a Responsible"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,seq:0
+#: field:crm.claim.corrective.action,sequence:0
+msgid "Sequence"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.problem.solution,name:0
+msgid "Solution"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.problem.cause,solution_ids:0
+#: view:crm.claim.problem.solution:crm_claim_corrective.crm_claim_solutions_form_view
+msgid "Solutions"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_search_view
+#: field:crm.claim.corrective,state:0
+msgid "State"
+msgstr ""

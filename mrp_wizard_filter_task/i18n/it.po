@@ -1,0 +1,157 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mrp_wizard_filter_task
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-09-10 16:34+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mrp_wizard_filter_task
+#: view:wizard.filter.mrp.task:mrp_wizard_filter_task.wizard_filter_mrp_task_view
+msgid "Cancel"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: view:wizard.filter.mrp.task:mrp_wizard_filter_task.wizard_filter_mrp_task_view
+msgid "Create task/impute analytic"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: field:wizard.filter.mrp.task,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: field:wizard.filter.mrp.task,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:96
+#, python-format
+msgid "Error!: You must enter Work summary"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:99
+#, python-format
+msgid "Error!: You must enter the hours to work/impute"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:90
+#, python-format
+msgid "Error!: You must select a task"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: code:addons/mrp_wizard_filter_task/wizard/wizard_filter_mrp_task.py:93
+#, python-format
+msgid "Error!: You must select a user"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: field:wizard.filter.mrp.task,id:0
+msgid "ID"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: model:ir.actions.act_window,name:mrp_wizard_filter_task.action_wizard_filter_mrp_task
+#: model:ir.ui.menu,name:mrp_wizard_filter_task.menu_wizard_filter_mrp_task
+msgid "Impute/Search imputations in tasks"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: field:wizard.filter.mrp.task,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: field:wizard.filter.mrp.task,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: field:project.task.work,mrp_production_id:0
+msgid "Manufacturing Order"
+msgstr "Ordine di produzione"
+
+#. module: mrp_wizard_filter_task
+#: view:wizard.filter.mrp.task:mrp_wizard_filter_task.wizard_filter_mrp_task_view
+msgid "Open Tasks"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: view:wizard.filter.mrp.task:mrp_wizard_filter_task.wizard_filter_mrp_task_view
+msgid "Production"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: field:wizard.filter.mrp.task,mrp_production:0
+msgid "Production Order"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: field:wizard.filter.mrp.task,task:0
+msgid "Project Task"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: model:ir.model,name:mrp_wizard_filter_task.model_project_task_work
+msgid "Project Task Work"
+msgstr "Attività Progetto"
+
+#. module: mrp_wizard_filter_task
+#: view:wizard.filter.mrp.task:mrp_wizard_filter_task.wizard_filter_mrp_task_view
+msgid "Task"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: model:ir.actions.act_window,name:mrp_wizard_filter_task.action_project_task_work_filter_tree2
+msgid "Tasks"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: view:wizard.filter.mrp.task:mrp_wizard_filter_task.wizard_filter_mrp_task_view
+#: field:wizard.filter.mrp.task,hours:0
+msgid "Time Spent"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: view:wizard.filter.mrp.task:mrp_wizard_filter_task.wizard_filter_mrp_task_view
+#: field:wizard.filter.mrp.task,user:0
+msgid "User"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: view:wizard.filter.mrp.task:mrp_wizard_filter_task.wizard_filter_mrp_task_view
+msgid "Wizard filter MRP task"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: model:ir.model,name:mrp_wizard_filter_task.model_wizard_filter_mrp_task
+msgid "Wizard to filter mrp task"
+msgstr ""
+
+#. module: mrp_wizard_filter_task
+#: field:project.task.work,wk_order:0
+#: view:wizard.filter.mrp.task:mrp_wizard_filter_task.wizard_filter_mrp_task_view
+#: field:wizard.filter.mrp.task,wk_order:0
+msgid "Work Order"
+msgstr "Ordine di lavorazione"
+
+#. module: mrp_wizard_filter_task
+#: field:wizard.filter.mrp.task,name:0
+msgid "Work summary"
+msgstr ""

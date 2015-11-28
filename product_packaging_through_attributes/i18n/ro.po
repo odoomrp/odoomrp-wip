@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * product_packaging_through_attributes
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-09-10 16:44+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: product_packaging_through_attributes
+#: field:product.attribute,is_package:0
+msgid "Is package"
+msgstr ""
+
+#. module: product_packaging_through_attributes
+#: field:res.partner,partner_product_ul:0
+msgid "Logistic Unit"
+msgstr ""
+
+#. module: product_packaging_through_attributes
+#: field:product.attribute.value,package_product:0
+#: field:product.packaging,product:0
+msgid "Package Product"
+msgstr ""
+
+#. module: product_packaging_through_attributes
+#: model:ir.model,name:product_packaging_through_attributes.model_product_packaging
+msgid "Packaging"
+msgstr ""
+
+#. module: product_packaging_through_attributes
+#: model:ir.model,name:product_packaging_through_attributes.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: product_packaging_through_attributes
+#: model:ir.model,name:product_packaging_through_attributes.model_product_attribute
+msgid "Product Attribute"
+msgstr "Atribute produs"

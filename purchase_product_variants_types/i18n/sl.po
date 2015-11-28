@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * purchase_product_variants_types
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 18:11+0000\n"
+"PO-Revision-Date: 2015-10-23 14:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: purchase_product_variants_types
+#: field:purchase.order.line.attribute,custom_value:0
+msgid "Custom value"
+msgstr "Prilagojena vrednost"
+
+#. module: purchase_product_variants_types
+#: code:addons/purchase_product_variants_types/models/purchase_order.py:27
+#, python-format
+msgid "Custom value for attribute '%s' must be between %s and %s."
+msgstr "Prilagojena vrednost atributa '%s' mora biti med %s in %s."
+
+#. module: purchase_product_variants_types
+#: model:ir.model,name:purchase_product_variants_types.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Postavka nabavnega naloga"
+
+#. module: purchase_product_variants_types
+#: code:addons/purchase_product_variants_types/models/purchase_order.py:50
+#, python-format
+msgid ""
+"You cannot confirm before configuring all values of required attributes. "
+"Product: %s Attribute: %s."
+msgstr "Ne morete potrditi preden nastavite vse vrednosti zahtevanih atributov. Proizvod: %s Atribut: %s."

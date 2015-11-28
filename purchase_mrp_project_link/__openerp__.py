@@ -22,6 +22,7 @@
     "version": "1.0",
     "depends": [
         "mrp_project_link",
+        "mrp_project_link_mto",
         "purchase",
     ],
     "author": "OdooMRP team,"

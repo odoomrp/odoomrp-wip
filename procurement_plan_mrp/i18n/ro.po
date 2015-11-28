@@ -1,0 +1,141 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * procurement_plan_mrp
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-11-18 00:36+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/models/procurement.py:153
+#, python-format
+msgid "BoM not found, for product: %s"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
+msgid "Create lower levels"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
+msgid "Erase lower levels"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
+msgid "Generate procurements"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/models/procurement.py:105
+#, python-format
+msgid "Generated from sale order: "
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
+msgid "Import Procurements"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: field:procurement.order,level:0
+msgid "Level"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
+msgid "MRP Productions"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Comandă fabricație"
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/models/procurement.py:206
+#, python-format
+msgid ""
+"No product defined for BoM line with template: %s, on the list of materials "
+"%s"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: view:mrp.production:procurement_plan_mrp.view_mrp_production_filter_inh_mrpprocurementplan
+#: field:mrp.production,plan:0
+msgid "Plan"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_procurement_order
+msgid "Procurement"
+msgstr "Aprovizionare"
+
+#. module: procurement_plan_mrp
+#: field:procurement.order,parent_procurement_id:0
+msgid "Procurement Parent"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_procurement_plan
+msgid "Procurement Plan"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: field:stock.reservation,procurement_from_plan:0
+msgid "Procurement from plan"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: view:mrp.production:procurement_plan_mrp.view_mrp_production_filter_inh_mrpprocurementplan
+msgid "Product"
+msgstr "Produs"
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/models/procurement.py:191
+#, python-format
+msgid "Product has not been found on the list of materials %s, Level %s"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: field:procurement.plan,production_ids:0
+msgid "Productions"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
+msgid "Purchase Orders"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_sale_order
+msgid "Sales Order"
+msgstr "Comandă vânzare"
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Linie comandă vânzare"
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_stock_reservation
+msgid "Stock Reservation"
+msgstr ""
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/models/procurement.py:176
+#, python-format
+msgid "THEY HAVE NOT GENERATED ALL PROCUREMENTS"
+msgstr ""

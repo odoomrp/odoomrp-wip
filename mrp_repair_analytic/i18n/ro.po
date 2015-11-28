@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mrp_repair_analytic
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-20 18:10+0000\n"
+"PO-Revision-Date: 2015-11-20 09:08+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: mrp_repair_analytic
+#: field:mrp.repair,analytic_account:0
+msgid "Analytic Account"
+msgstr "Cont analitic"
+
+#. module: mrp_repair_analytic
+#: model:ir.model,name:mrp_repair_analytic.model_account_analytic_line
+msgid "Analytic Line"
+msgstr ""
+
+#. module: mrp_repair_analytic
+#: code:addons/mrp_repair_analytic/models/mrp_repair.py:57
+#, python-format
+msgid "Error!: Repair journal not found"
+msgstr ""
+
+#. module: mrp_repair_analytic
+#: field:account.analytic.line,is_repair_cost:0
+msgid "Is repair cost"
+msgstr ""
+
+#. module: mrp_repair_analytic
+#: view:mrp.repair:mrp_repair_analytic.view_repair_order_form_inh_repairwithanalityc
+msgid "Reload costs"
+msgstr ""
+
+#. module: mrp_repair_analytic
+#: model:ir.model,name:mrp_repair_analytic.model_mrp_repair_fee
+msgid "Repair Fees Line"
+msgstr ""
+
+#. module: mrp_repair_analytic
+#: model:ir.model,name:mrp_repair_analytic.model_mrp_repair_line
+msgid "Repair Line"
+msgstr ""
+
+#. module: mrp_repair_analytic
+#: model:ir.model,name:mrp_repair_analytic.model_mrp_repair
+msgid "Repair Order"
+msgstr ""
+
+#. module: mrp_repair_analytic
+#: field:mrp.repair.fee,user_id:0 field:mrp.repair.line,user_id:0
+msgid "User"
+msgstr ""

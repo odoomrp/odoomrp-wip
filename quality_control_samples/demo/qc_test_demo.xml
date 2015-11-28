@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="qc.test" id="quality_control.qc_test_1">
+            <field name="sample" ref="qc_sample_normal"/>
+        </record>
+
+    </data>
+</openerp>

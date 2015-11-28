@@ -3,13 +3,14 @@
 # * sale_product_variants
 # 
 # Translators:
+# Paulo Ricardo <ti@shoppingescritorio.com.br>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:45+0000\n"
-"PO-Revision-Date: 2015-10-09 03:44+0000\n"
-"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"POT-Creation-Date: 2015-11-20 18:11+0000\n"
+"PO-Revision-Date: 2015-10-20 14:41+0000\n"
+"Last-Translator: Paulo Ricardo <ti@shoppingescritorio.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,12 +21,12 @@ msgstr ""
 #. module: sale_product_variants
 #: view:sale.order:sale_product_variants.sale_order_extended_form_view
 msgid "(update)"
-msgstr ""
+msgstr "(Atualizar)"
 
 #. module: sale_product_variants
 #: field:sale.order.line.attribute,attribute:0
 msgid "Attribute"
-msgstr ""
+msgstr "Atributo"
 
 #. module: sale_product_variants
 #: field:sale.order.line.attribute,create_uid:0
@@ -40,12 +41,12 @@ msgstr "Criado em"
 #. module: sale_product_variants
 #: view:sale.order:sale_product_variants.sale_order_extended_form_view
 msgid "Duplicate"
-msgstr ""
+msgstr "Duplicar"
 
 #. module: sale_product_variants
 #: view:sale.order:sale_product_variants.sale_order_extended_form_view
 msgid "Duplicate line"
-msgstr ""
+msgstr "Duplicar Linha"
 
 #. module: sale_product_variants
 #: field:sale.order.line.attribute,id:0
@@ -65,7 +66,7 @@ msgstr "Última atualização em"
 #. module: sale_product_variants
 #: field:sale.order.line.attribute,sale_line:0
 msgid "Order line"
-msgstr ""
+msgstr "Linha pedido de venda"
 
 #. module: sale_product_variants
 #: view:sale.order.line:sale_product_variants.sale_order_line_extended_search_view
@@ -75,12 +76,12 @@ msgstr "Produto"
 #. module: sale_product_variants
 #: field:sale.order.line,product_template:0
 msgid "Product Template"
-msgstr ""
+msgstr "Produto Modelo"
 
 #. module: sale_product_variants
 #: field:sale.order.line,product_attributes:0
 msgid "Product attributes"
-msgstr ""
+msgstr "Atributos do Produto"
 
 #. module: sale_product_variants
 #: model:ir.model,name:sale_product_variants.model_sale_order_line
@@ -90,21 +91,21 @@ msgstr "Linha pedido de venda"
 #. module: sale_product_variants
 #: view:sale.order.line:sale_product_variants.sale_order_line_extended_search_view
 msgid "Template"
-msgstr ""
+msgstr "Modelo"
 
 #. module: sale_product_variants
 #: model:res.groups,name:sale_product_variants.group_product_variant_extended_description
 #: field:sale.config.settings,group_product_variant_extended_description:0
 msgid "Use extended description when having product attributes"
-msgstr ""
+msgstr "Usar descrição maior quando tem atributos de produto"
 
 #. module: sale_product_variants
 #: field:sale.order.line.attribute,value:0
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #. module: sale_product_variants
-#: code:addons/sale_product_variants/models/sale_order.py:180
+#: code:addons/sale_product_variants/models/sale_order.py:195
 #, python-format
 msgid "You can not confirm before configuring all attribute values."
-msgstr ""
+msgstr "Você não pode confirmar antes de configurar todos os valores de atributos."

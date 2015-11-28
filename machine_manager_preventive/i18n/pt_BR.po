@@ -4,12 +4,13 @@
 # 
 # Translators:
 # danimaribeiro <danimaribeiro@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: odoomrp-wip (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:43+0000\n"
-"PO-Revision-Date: 2015-10-09 03:40+0000\n"
+"POT-Creation-Date: 2015-11-20 17:16+0000\n"
+"PO-Revision-Date: 2015-10-20 14:47+0000\n"
 "Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -259,7 +260,7 @@ msgstr ""
 #: view:preventive.operation.type:machine_manager_preventive.optype_form_view
 #: field:preventive.operation.type,description:0
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #. module: machine_manager_preventive
 #: help:preventive.machine.operation,frequency:0
