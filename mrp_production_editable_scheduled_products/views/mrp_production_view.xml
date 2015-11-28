@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="mrp_production_form_view_inherit" model="ir.ui.view">
-            <field name="name">mrp.production.form.view.inherit</field>
+        <record id="mrp_production_form_view" model="ir.ui.view">
+            <field name="name">mrp.production.form</field>
             <field name="model">mrp.production</field>
             <field name="inherit_id" ref="mrp.mrp_production_form_view" />
             <field name="arch" type="xml">
-                <xpath
-                    expr="//page[@string='Scheduled Products']//field[@name='product_lines']"
-                    position="attributes">
-                    <attribute name="readonly">0</attribute>
+                <field name="product_lines" position="attributes">
+                    <attribute name="readonly" eval="False" />
                     <attribute name="attrs">{'readonly':[('state', '!=', ('draft'))]}</attribute>
-                </xpath>
-            </field>
-        </record>
-        
-        <record id="mrp_production_product_form_view_inherit" model="ir.ui.view">
-            <field name="name">mrp.production.product.form.view.inherit</field>
-            <field name="model">mrp.production.product.line</field>
-            <field name="inherit_id" ref="mrp.mrp_production_product_form_view" />
-            <field name="arch" type="xml">
-                <xpath expr="//form//field[@name='product_id']" position="attributes">
-                    <attribute name="on_change">onchange_product(product_id)</attribute>
-                </xpath>
+                </field>
             </field>
         </record>
     </data>
