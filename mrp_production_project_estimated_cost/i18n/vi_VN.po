@@ -186,12 +186,12 @@ msgstr "Load Estimated Cost on Product"
 #. module: mrp_production_project_estimated_cost
 #: field:wiz.create.fictitious.of,load_on_product:0
 msgid "Load cost on product"
-msgstr "Load cost on product"
+msgstr "Lấy giá vốn từ sản phẩm"
 
 #. module: mrp_production_project_estimated_cost
 #: field:product.template,manual_standard_cost:0
 msgid "Manual Standard Cost"
-msgstr "Manual Standard Cost"
+msgstr "Giá tiêu chuẩn (tính thủ công)"
 
 #. module: mrp_production_project_estimated_cost
 #: model:ir.model,name:mrp_production_project_estimated_cost.model_mrp_production
