@@ -68,9 +68,6 @@ class MrpProduction(models.Model):
 
     @api.multi
     def action_confirm(self):
-        procurement_obj = self.env['procurement.order']
-        project_obj = self.env['project.project']
-        mto_record = self.env.ref('stock.route_warehouse0_mto')
         result = super(MrpProduction, self).action_confirm()
         for record in self:
             if not record.project_id:
@@ -79,18 +76,8 @@ class MrpProduction(models.Model):
                     'use_tasks': True,
                     'automatic_creation': True,
                 }
-                project = project_obj.create(project_vals)
+                project = self.env['project.project'].create(project_vals)
                 record.project_id = project.id
-            # Refresh MTO procurement data
-            main_project = record.project_id.id
-            for move in record.move_lines:
-                if mto_record in move.product_id.route_ids:
-                    move.main_project_id = main_project
-                    procurements = procurement_obj.search(
-                        [('move_dest_id', '=', move.id)])
-                    procurements.write({'main_project_id': main_project})
-                    procurements.refresh()
-                    procurements.set_main_project()
         return result
 
     @api.multi
