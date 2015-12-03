@@ -32,6 +32,7 @@ class SaleOrderTax(models.Model):
     sequence = fields.Integer(
         string='Sequence',
         help="Gives the sequence order when displaying a list of order tax.")
+    tax_id = fields.Many2one('account.tax', string='Tax')
 
 
 class SaleOrder(models.Model):
@@ -79,7 +80,8 @@ class SaleOrder(models.Model):
                     'sale_order': tax['order'],
                     'sequence': tax['sequence'],
                     'name': tax['name'],
-                    'amount': tax['amount']})
+                    'amount': tax['amount'],
+                    'tax_id': tax['tax_id']})
         return True
 
     @api.multi
