@@ -6,8 +6,8 @@
 {
     "name": "Machine Manager",
     "version": "8.0.1.0.0",
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
         "Daniel Campos <danielcampos@avanzosc.es>",
@@ -22,6 +22,11 @@
         "account",
         "product_manufacturer",
         "product",
+    ],
+    "demo": [
+        "demo/machine_model_demo.xml",
+        "demo/machinery_user_demo.xml",
+        "demo/machinery_demo.xml",
     ],
     "category": "Machinery Management",
     "data": [

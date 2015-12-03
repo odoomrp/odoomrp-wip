@@ -9,7 +9,7 @@
 
         <!-- ========================== Machines ========================== -->
 
-        <record id="machines_form" model="ir.ui.view">
+        <record id="machines_view_form" model="ir.ui.view">
             <field name="name">machines.form</field>
             <field name="model">machinery</field>
             <field name="arch" type="xml">
@@ -106,7 +106,7 @@
             </field>
         </record>
 
-        <record id="machine_tree" model="ir.ui.view">
+        <record id="machine_view_tree" model="ir.ui.view">
             <field name="name">machine.tree</field>
             <field name="model">machinery</field>
             <field name="arch" type="xml">
@@ -125,7 +125,7 @@
             </field>
         </record>
 
-        <record id="machine_search_view" model="ir.ui.view">
+        <record id="machine_view_search" model="ir.ui.view">
             <field name="name">machine.search</field>
             <field name="model">machinery</field>
             <field name="arch" type="xml">
@@ -146,7 +146,7 @@
                </search>
             </field>
         </record>
-        <record id="machine_form_act" model="ir.actions.act_window">
+        <record id="machine_form_action" model="ir.actions.act_window">
             <field name="name">Machines</field>
             <field name="res_model">machinery</field>
             <field name="view_type">form</field>
@@ -154,7 +154,7 @@
         </record>
 
         <menuitem id="menu_machines" name="Machines"
-            parent="menu_machinery_config" action="machine_form_act"
+            parent="menu_machinery_config" action="machine_form_action"
             sequence="1" />
 
     </data>
