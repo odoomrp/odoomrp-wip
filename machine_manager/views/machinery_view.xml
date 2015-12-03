@@ -2,17 +2,17 @@
 <openerp>
     <data>
         <!-- Parent Menu on Right Panes -->
-        <menuitem id="menu_machinery_manager" name="Machinery Manager"/>
+        <menuitem id="menu_machinery_manager" name="Machinery Manager"
+                  sequence="85"/>
 
         <menuitem id="menu_machinery_config" name="Configuration"
             parent="menu_machinery_manager" sequence="2" />
 
         <!-- ========================== Machines ========================== -->
 
-        <record id="machines_form" model="ir.ui.view">
+        <record id="machines_view_form" model="ir.ui.view">
             <field name="name">machines.form</field>
             <field name="model">machinery</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Machines">
                     <group colspan="4" col="6">
@@ -107,23 +107,47 @@
             </field>
         </record>
 
-        <record id="machine_tree" model="ir.ui.view">
+        <record id="machine_view_tree" model="ir.ui.view">
             <field name="name">machine.tree</field>
             <field name="model">machinery</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Machines">
+                    <field name="product_categ"/>
+                    <field name="product"/>
+                    <field name="manufacturer"/>
                     <field name="name" />
                     <field name="company"  />
                     <field name="year" />
-                    <field name="model" />
-                    <field name="serial" />
-                    <field name="model_type" />
+                    <field name="model"/>
+                    <field name="model_type"/>
+                    <field name="serial"/>
+                    <field name="year"/>
                 </tree>
             </field>
         </record>
 
-        <record id="machine_form_act" model="ir.actions.act_window">
+        <record id="machine_view_search" model="ir.ui.view">
+            <field name="name">machine.search</field>
+            <field name="model">machinery</field>
+            <field name="arch" type="xml">
+                <search string="Search machinery">
+                   <field name="product"/>
+                   <field name="serial"/>
+                   <field name="manufacturer"/>
+                   <field name="model"/>
+                   <field name="model_type"/>
+                   <field name="serial_char"/>
+                   <group expand="0" string="Group By">
+                       <filter string="Model type" context="{'group_by' : 'model_type'}"/>
+                       <filter string="Model" context="{'group_by' : 'model'}"/>
+                       <filter string="Product" context="{'group_by' : 'product'}"/>
+                       <filter string="Product category" context="{'group_by' : 'product_categ'}"/>
+                       <filter string="Manufacturer" context="{'group_by' : 'manufacturer'}"/>
+                   </group>
+               </search>
+            </field>
+        </record>
+        <record id="machine_form_action" model="ir.actions.act_window">
             <field name="name">Machines</field>
             <field name="res_model">machinery</field>
             <field name="view_type">form</field>
@@ -131,7 +155,7 @@
         </record>
 
         <menuitem id="menu_machines" name="Machines"
-            parent="menu_machinery_config" action="machine_form_act"
+            parent="menu_machinery_config" action="machine_form_action"
             sequence="1" />
 
     </data>

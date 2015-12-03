@@ -1,23 +1,9 @@
+# -*- coding: utf-8 -*-
+# (c) 2015 Daniel Campos - AvanzOSC
+# (c) 2015 Esther Martín - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
-##############################################################################
-
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class ProductTemplate(models.Model):
@@ -25,3 +11,19 @@ class ProductTemplate(models.Model):
 
     machine_ok = fields.Boolean('Can be a Machine', help="Determines if the "
                                 "product is related with a machine.")
+
+
+class ProductProduct(models.Model):
+    _inherit = "product.product"
+
+    machines = fields.One2many(
+        string='Machines', comodel_name='machinery',
+        inverse_name='product')
+    machine_count = fields.Integer(
+        compute='_compute_machine_count', string='Machines')
+
+    @api.multi
+    @api.depends('machines')
+    def _compute_machine_count(self):
+        for product in self:
+            product.machine_count = len(product.machines)
