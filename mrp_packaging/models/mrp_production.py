@@ -97,26 +97,27 @@ class MrpProduction(models.Model):
                     production.move_created_ids2[0].restrict_lot_id.id or
                     False)})
 
+    def _get_packaging_production_data(self, op_line):
+        equal_uom = op_line.product.uom_id.id == self.product_id.uom_id.id
+        final_product_qty = equal_uom and op_line.fill or op_line.qty
+        data = self.product_id_change(op_line.product.id, final_product_qty)
+        if 'product_attributes' in data['value']:
+            product_attributes = map(lambda x: (0, 0, x),
+                                     data['value']['product_attributes'])
+            data['value'].update({'product_attributes': product_attributes})
+        name = self.env['ir.sequence'].get('mrp.production.packaging')
+        data['value'].update({'product_id': op_line.product.id,
+                              'product_qty': final_product_qty,
+                              'name': name})
+        return data['value']
+
     @api.one
     def create_mo_from_packaging_operation(self):
         for op in self.pack.filtered(lambda x: x.qty != 0 and not x.processed):
             linked_raw_products = []
             add_product = []
-            equal_uom = op.product.uom_id.id == self.product_id.uom_id.id
-            final_product_qty = equal_uom and op.fill or op.qty
-            data = self.product_id_change(op.product.id, final_product_qty)
-            if 'product_attributes' in data['value']:
-                product_attributes = map(
-                    lambda x: (0, 0, x),
-                    data['value']['product_attributes'])
-                data['value'].update({
-                    'product_attributes': product_attributes})
-            name = self.env['ir.sequence'].get('mrp.production.packaging')
-            data['value'].update({
-                'product_id': op.product.id,
-                'product_qty': final_product_qty,
-                'name': name})
-            new_op = self.create(data['value'])
+            production_vals = self._get_packaging_production_data(op)
+            new_op = self.create(production_vals)
             new_op.action_compute()
             new_op.recalculate_product_qty(op.fill, self.product_id)
             new_op.assign_parent_lot(self)
