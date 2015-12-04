@@ -1,8 +1,7 @@
-================
 MRP Project Link
 ================
 
-It links project tasks to *manufacturing orders* (MO) and *work orders* (WO)
+Links project tasks to *manufacturing orders* (MO) and *work orders* (WO)
 
 Features
 --------
