@@ -127,12 +127,7 @@ class MrpProduction(models.Model):
                 raw_product = attr_value.raw_product
                 if raw_product:
                     value = self.get_new_components_info(
-                        raw_product.id,
-                        raw_product.property_stock_production.id,
-                        raw_product.property_stock_inventory.id,
-                        raw_product.uom_id.id,
-                        raw_product.uos_id.id,
-                        op.qty, workorder)
+                        raw_product, op.qty, workorder)
                     linked_raw_products.append(value)
             for line in new_op.product_lines:
                 if self.product_id.product_tmpl_id == line.product_template:
