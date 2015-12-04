@@ -1,7 +1,8 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
+# -*- coding: utf-8 -*-
+# © 2015 Mikel Arregi <mikelarregi@avanzosc.es>
+# © 2015 Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
+# © 2015 Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import api, models, fields
 
@@ -9,62 +10,45 @@ from openerp import api, models, fields
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
-    def get_new_components_info(self, product_id, loc_id, loc_dest_id,
-                                uom_id, uos_id, qty, workorder):
+    def get_new_components_info(self, product, qty, workorder):
         move_obj = self.env['stock.move']
         ul_move = move_obj.onchange_product_id(
-            prod_id=product_id,
-            loc_id=loc_id,
-            loc_dest_id=loc_dest_id)
+            prod_id=product.id,
+            loc_id=product.property_stock_production.id,
+            loc_dest_id=product.property_stock_inventory.id)
         ul_move['value'].update({
-            'product_id': product_id,
-            'product_uom': uom_id,
-            'product_uos': uos_id,
+            'product_id': product.id,
+            'product_uom': product.uom_id.id,
+            'product_uos': product.uos_id.id,
             'product_qty': qty,
-            'work_order': workorder,
+            'work_order': workorder.id,
             'product_uos_qty': move_obj.onchange_quantity(
-                product_id, qty, uom_id,
-                uos_id)['value']['product_uos_qty']})
+                product.id, qty, product.uom_id.id,
+                product.uos_id.id)['value']['product_uos_qty']})
         return ul_move['value']
 
     def get_raw_products_data(self):
         res = []
-        workorder =\
-            self.workcenter_lines and self.workcenter_lines[0].id
+        workorder = self.workcenter_lines[:1]
         for attr_value in self.product_id.attribute_value_ids.filtered(
                 'raw_product'):
             raw_product = attr_value.raw_product
-            if raw_product:
-                bom_obj = self.env['mrp.bom']
-                bom_id = bom_obj.with_context(phantom=True)._bom_find(
-                    product_id=raw_product.id)
-                qty = self.product_qty * attr_value.raw_qty
-                if not bom_id:
-                    value = self.get_new_components_info(
-                        raw_product.id,
-                        raw_product.property_stock_production.id,
-                        raw_product.property_stock_inventory.id,
-                        raw_product.uom_id.id,
-                        raw_product.uos_id.id,
-                        qty,
-                        workorder)
-                    res.append(value)
-                else:
-                    result, result1 = bom_obj._bom_explode(
-                        bom_obj.browse(bom_id), raw_product.id,
-                        self.product_qty * attr_value.raw_qty)
-                    for line in result:
-                        product = self.env['product.product'].browse(
-                            line['product_id'])
-                        value = self.get_new_components_info(
-                            line['product_id'],
-                            product.property_stock_production.id,
-                            product.property_stock_inventory.id,
-                            product.uom_id.id,
-                            product.uos_id.id,
-                            line['product_qty'] * qty,
-                            workorder)
-                        res.append(value)
+            bom_obj = self.env['mrp.bom']
+            bom_id = bom_obj.with_context(phantom=True)._bom_find(
+                product_id=raw_product.id)
+            qty = self.product_qty * attr_value.raw_qty
+            if not bom_id:
+                res.append(self.get_new_components_info(
+                    raw_product, qty, workorder))
+            else:
+                result, result1 = bom_obj._bom_explode(
+                    bom_obj.browse(bom_id), raw_product.id,
+                    self.product_qty * attr_value.raw_qty)
+                for line in result:
+                    product = self.env['product.product'].browse(
+                        line['product_id'])
+                    res.append(self.get_new_components_info(
+                        product, line['product_qty'] * qty, workorder))
         return res
 
     @api.one
