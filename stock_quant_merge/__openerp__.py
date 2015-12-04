@@ -22,17 +22,19 @@
     "depends": [
         "stock",
     ],
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza, "
+              "Centrivision",
     "website": "http://www.odoomrp.com",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-        "Ana Juaristi <ajuaristio@gmail.com>"
+        "Ana Juaristi <ajuaristio@gmail.com>",
+        "Mohammad Alhashash <alhashash@alhashash.net>"
     ],
     "category": "Warehouse Management",
-    "summary": "",
+    "summary": "Re-merge previously split quants after canceling reservation",
     "data": [],
     "installable": True,
 }
