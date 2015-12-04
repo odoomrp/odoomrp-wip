@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,12 +18,11 @@
 
 {
     "name": "MRP Project Link",
-    "summary": "Link production with projects",
-    "version": "8.0.1.1.0",
+    "summary": "Project for production",
+    "version": "1.0",
     "depends": [
-        "mrp",
-        "analytic",
-        "mrp_operations_extension",
+        "mrp_operations_project",
+        "analytic"
     ],
     "author": "OdooMRP team,"
               "AvanzOSC,"
@@ -31,9 +30,9 @@
     "category": "Manufacturing",
     'data': [
         "views/mrp_production_view.xml",
+        "views/procurement_order_view.xml",
         "views/project_project_view.xml",
-        "views/account_analytic_line_view.xml",
-        "views/project_task_view.xml"
+        "views/account_analytic_line_view.xml"
     ],
     'installable': True,
     'auto_install': False,

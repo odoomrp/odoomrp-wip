@@ -19,11 +19,9 @@
 from openerp import models, fields
 
 
-class AccountAnalyticLine(models.Model):
+class StockMove(models.Model):
 
-    _inherit = 'account.analytic.line'
+    _inherit = 'stock.move'
 
-    mrp_production_id = fields.Many2one('mrp.production',
-                                        string='Manufacturing Order')
-    workorder = fields.Many2one('mrp.production.workcenter.line', 'Work Order')
-    task_id = fields.Many2one('project.task', 'Project Task')
+    main_project_id = fields.Many2one('project.project',
+                                      string="Main Project")
