@@ -17,6 +17,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
+from openerp.tools import config
 
 
 class ProductCategory(models.Model):
@@ -83,13 +84,15 @@ class ProductTemplate(models.Model):
 
     @api.multi
     def create_variant_ids(self):
+        if (config['test_enable'] and
+                not self.env.context.get('check_variant_creation')):
+            return super(ProductTemplate, self).create_variant_ids()
         for tmpl in self:
             if ((tmpl.no_create_variants == 'empty' and
                     not tmpl.categ_id.no_create_variants) or
-                    (tmpl.no_create_variants == 'no')):
-                return super(ProductTemplate, self).create_variant_ids()
-            else:
-                return True
+                    tmpl.no_create_variants == 'no'):
+                super(ProductTemplate, tmpl).create_variant_ids()
+        return True
 
     @api.multi
     def action_open_attribute_prices(self):
