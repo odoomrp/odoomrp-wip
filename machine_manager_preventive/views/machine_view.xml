@@ -4,7 +4,7 @@
         <record id="view_product_form_preventive" model="ir.ui.view">
             <field name="name">view.product.form.preventive</field>
             <field name="model">machinery</field>
-            <field name="inherit_id" ref="machine_manager.machines_form"/>
+            <field name="inherit_id" ref="machine_manager.machines_view_form"/>
             <field name="arch" type="xml">
                 <data>
                     <field name="bdate" position="after">

@@ -59,7 +59,7 @@
                         <tree create="0" delete="0" editable="1">
                             <field name="attribute" />
                             <field name="possible_values" invisible="1" />
-                            <field name="value" />
+                            <field name="value" context="{'show_attribute': False}" />
                         </tree>
                     </field>
                 </field>

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="machine_user_form_view" model="ir.ui.view">
+        <record id="machine_user_view_form" model="ir.ui.view">
             <field name="name">machine.user.form.view</field>
             <field name="model">machinery.users</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Machine Users">
                     <group col="6">
@@ -15,10 +14,9 @@
                 </form>
             </field>
         </record>
-        <record id="machine_user_tree_view" model="ir.ui.view">
+        <record id="machine_user_view_tree" model="ir.ui.view">
             <field name="name">machine.user.tree.view</field>
             <field name="model">machinery.users</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Machine Users">
                     <field name="m_user"/>

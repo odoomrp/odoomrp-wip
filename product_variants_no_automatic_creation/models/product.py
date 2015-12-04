@@ -179,7 +179,8 @@ class ProductProduct(models.Model):
                 values.get('product_attributes')):
             values['attribute_value_ids'] = (
                 (4, x[2]['value'])
-                for x in values.get('product_attributes'))
+                for x in values.get('product_attributes', [])
+                if x[2].get('value'))
         return super(ProductProduct, self).create(values)
 
 

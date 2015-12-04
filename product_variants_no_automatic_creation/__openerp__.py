@@ -35,6 +35,7 @@
     "summary": "Disable automatic product variant creation",
     "data": [
         "views/product_view.xml",
+        "security/ir.model.access.csv",
     ],
     "installable": True,
 }
