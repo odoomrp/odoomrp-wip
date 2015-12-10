@@ -35,7 +35,19 @@ class SaleOrderLine(models.Model):
                     ('production_id', '!=', False),
                     ('plan', '=', False),
                     ('level', '=', 0)]
-            procurement = proc_obj.search(cond, limit=1)
-            if procurement:
-                procurement._create_procurement_plan_from_procurement(
+            proc = proc_obj.search(cond, limit=1)
+            if proc:
+                proc._create_procurement_plan_from_procurement(
                     self.order_id)
+            else:
+                cond = [('id', '!=', procurement.id),
+                        ('group_id', '=', procurement.group_id.id),
+                        ('product_id', '=', procurement.product_id.id),
+                        ('product_qty', '=', self.product_uom_qty),
+                        ('state', '=', 'exception'),
+                        ('plan', '=', False),
+                        ('level', '=', 0)]
+                procurement = proc_obj.search(cond, limit=1)
+                if procurement:
+                    procurement._create_procurement_plan_from_procurement(
+                        self.order_id)

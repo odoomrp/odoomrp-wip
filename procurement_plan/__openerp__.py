@@ -1,8 +1,5 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-# Copyright (c)
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -19,12 +16,13 @@
 ##############################################################################
 {
     "name": "Procurement Plan",
-    "version": "1.0",
+    "version": "8.0.1.0.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "category": "Procurements",
+    "license": 'AGPL-3',
     "depends": ['procurement',
                 'project',
                 'purchase',
@@ -37,6 +35,7 @@
              'wizard/wiz_import_procurement_from_plan_view.xml',
              'wizard/wiz_load_sale_from_plan_view.xml',
              'wizard/wiz_load_purchase_from_plan_view.xml',
+             'wizard/wiz_change_procurement_date_view.xml',
              'views/procurement_view.xml',
              'views/procurement_view.xml',
              'views/procurement_plan_view.xml',
