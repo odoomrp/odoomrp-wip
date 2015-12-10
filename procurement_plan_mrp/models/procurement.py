@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
+# (c) 2015 Alfredo de la Fuente - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from openerp import models, fields, api, exceptions, _
 from dateutil.relativedelta import relativedelta
 
@@ -34,6 +33,8 @@ class ProcurementOrder(models.Model):
         string='Show button Create', compute='_compute_show_buttons')
     show_button_delete = fields.Boolean(
         string='Show button Delete', compute='_compute_show_buttons')
+    reservation = fields.Many2one(
+        'stock.reservation', string='Stock reservation')
 
     @api.multi
     def make_mo(self):
@@ -113,10 +114,11 @@ class ProcurementOrder(models.Model):
             project = project_obj.create({'name': sale.name})
             vals['project_id'] = project.id
         procurement_plan = plan_obj.create(vals)
-        self._create_procurement_lower_levels(procurement_plan.id)
-        for proc in procurement_plan.procurement_ids:
-            if proc.show_button_create:
-                proc.button_create_lower_levels()
+        if self.state != 'exception':
+            self._create_procurement_lower_levels(procurement_plan.id)
+            for proc in procurement_plan.procurement_ids:
+                if proc.show_button_create:
+                    proc.button_create_lower_levels()
 
     @api.one
     def _create_procurement_lower_levels(self, plan_id):
@@ -127,6 +129,68 @@ class ProcurementOrder(models.Model):
             procurements.button_create_lower_levels()
             plan.refresh()
             procurements = plan.procurement_ids.filtered('show_button_create')
+
+    @api.multi
+    def _change_date_planned_from_plan_for_po(self, days_to_sum):
+        route_id = self.env.ref('mrp.route_warehouse0_manufacture').id,
+        procurements = self.filtered(
+            lambda x: route_id[0] not in x.product_id.route_ids.ids)
+        super(ProcurementOrder,
+              procurements)._change_date_planned_from_plan_for_po(days_to_sum)
+        for proc in procurements:
+            if proc.reservation:
+                proc.reservation.write({'date_planned': proc.date_planned})
+
+    @api.multi
+    def _change_date_planned_from_plan_for_mo(self, days_to_sum):
+        for proc in self:
+            new_date = (fields.Datetime.from_string(proc.date_planned) +
+                        (relativedelta(days=days_to_sum)))
+            proc.write({'date_planned': new_date})
+            if proc.production_id and proc.production_id.state == 'draft':
+                proc.production_id.write({'date_planned': new_date})
+            if (proc.purchase_line_id and proc.purchase_line_id.order_id.state
+                    != 'draft'):
+                proc.purchase_line_id.write({'date_planned': new_date})
+            if proc.reservation:
+                proc.reservation.write({'date_planned': new_date})
+            if proc.plan:
+                proc._treat_procurements_childrens_from_plan(days_to_sum)
+
+    @api.one
+    def _treat_procurements_childrens_from_plan(self, days_to_sum):
+        cond = [('parent_procurement_id', 'child_of', self.id),
+                ('id', '!=', self.id)]
+        procs = self.search(cond)
+        for proc in procs:
+            new_date = (fields.Datetime.from_string(proc.date_planned) +
+                        (relativedelta(days=days_to_sum)))
+            if proc.purchase_line_id:
+                if proc.purchase_line_id.order_id.state != 'draft':
+                    raise exceptions.Warning(
+                        _('You can not change the date planned of'
+                          ' procurement order: %s, because the purchase'
+                          ' order: %s, not in draft status') %
+                        (proc.name, proc.purchase_line_id.order_id.name))
+                else:
+                    new_date = (fields.Datetime.from_string(
+                                proc.purchase_line_id.date_planned) +
+                                (relativedelta(days=days_to_sum)))
+                    proc.purchase_line_id.write({'date_planned': new_date})
+            if proc.production_id:
+                if proc.production_id.state != 'draft':
+                    raise exceptions.Warning(
+                        _('You can not change the date planned of'
+                          ' procurement order: %s, because the production'
+                          ' order: %s, not in draft status') %
+                        (proc.name, proc.production_id.name))
+                else:
+                    new_date = (fields.Datetime.from_string(
+                                proc.production_id.date_planned) +
+                                (relativedelta(days=days_to_sum)))
+                    proc.production_id.write({'date_planned': new_date})
+            if proc.reservation:
+                proc.reservation.write({'date_planned': new_date})
 
 
 class ProcurementPlan(models.Model):
@@ -270,4 +334,6 @@ class ProcurementPlan(models.Model):
                 'origin': self.sequence,
                 'date_expected': procurement.date_planned
                 }
-        reservation_obj.create(vals)
+        reservation = reservation_obj.create(vals)
+        reservation.reserve()
+        procurement.write({'reservation': reservation.id})

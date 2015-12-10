@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
+# (c) 2015 Alfredo de la Fuente - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from openerp import models, api
 
 
@@ -35,7 +34,19 @@ class SaleOrderLine(models.Model):
                     ('production_id', '!=', False),
                     ('plan', '=', False),
                     ('level', '=', 0)]
-            procurement = proc_obj.search(cond, limit=1)
-            if procurement:
-                procurement._create_procurement_plan_from_procurement(
+            proc = proc_obj.search(cond, limit=1)
+            if proc:
+                proc._create_procurement_plan_from_procurement(
                     self.order_id)
+            else:
+                cond = [('id', '!=', procurement.id),
+                        ('group_id', '=', procurement.group_id.id),
+                        ('product_id', '=', procurement.product_id.id),
+                        ('product_qty', '=', self.product_uom_qty),
+                        ('state', 'in', ('exception', 'confirmed')),
+                        ('plan', '=', False),
+                        ('level', '=', 0)]
+                procurement = proc_obj.search(cond, limit=1)
+                if procurement:
+                    procurement._create_procurement_plan_from_procurement(
+                        self.order_id)
