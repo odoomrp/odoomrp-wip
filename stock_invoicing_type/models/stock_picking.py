@@ -8,9 +8,14 @@ from openerp import api, models
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    @api.onchange('partner_id')
-    def _onchange_partner_id(self):
-        self.invoice_type_id = self.partner_id.property_invoice_type
+    @api.multi
+    def onchange_partner_id(self, partner_id=None):
+        res = {}
+        if partner_id:
+            partner = self.env['res.partner'].browse(partner_id)
+            res = {'value':
+                   {'invoice_type_id': partner.property_invoice_type.id}}
+        return res
 
     @api.multi
     def action_invoice_create(
@@ -19,11 +24,11 @@ class StockPicking(models.Model):
         grouped_type = sale_journal_type.search(
             [('invoicing_method', '=', 'grouped')])
         result = []
-        group_lst = self.filtered(lambda p: p.invoice_type in grouped_type)
+        group_lst = self.filtered(lambda p: p.invoice_type_id in grouped_type)
         result += super(StockPicking, group_lst).action_invoice_create(
             journal_id, group=True, type=type)
         nogroup_lst = self.filtered(
-            lambda p: p.invoice_type not in grouped_type)
+            lambda p: p.invoice_type_id not in grouped_type)
         result += super(StockPicking, nogroup_lst).action_invoice_create(
             journal_id, group=False, type=type)
         return result
