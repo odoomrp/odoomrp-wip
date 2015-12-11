@@ -52,8 +52,10 @@ class MrpProductionWorkcenterLine(models.Model):
         return result
 
     def action_done(self):
+        not_paused_records = self.filtered(lambda x: x.state != 'pause')
         result = super(MrpProductionWorkcenterLine, self).action_done()
-        self._write_end_date_operation_line()
+        if not_paused_records:
+            not_paused_records._write_end_date_operation_line()
         return result
 
 

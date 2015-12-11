@@ -30,6 +30,9 @@
                         <field name="operation_time_lines" />
                     </page>
                 </page>
+	            <button name="button_done" position="attributes">
+	                <attribute name="states">startworking,pause</attribute>
+	            </button>
             </field>
         </record>
 
@@ -49,7 +52,7 @@
                     <button name="button_pause" string="Pending"
                         states="startworking" icon="gtk-media-pause" />
                     <button name="button_done" string="Finished"
-                        states="startworking" icon="terp-check" />
+                        states="startworking,pause" icon="terp-check" />
                 </field>
             </field>
         </record>
