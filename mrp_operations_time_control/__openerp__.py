@@ -43,6 +43,7 @@
         "views/operation_time_view.xml",
         "views/mrp_production_view.xml",
         "security/ir.model.access.csv",
+        "data/mrp_production_workcenter_line_workflow.xml"
     ],
     "installable": True,
     "auto_install": False,
