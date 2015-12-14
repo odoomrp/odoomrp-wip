@@ -1,37 +1,30 @@
+# -*- coding: utf-8 -*-
+# (c) 2014-2015 Ainara Galdona - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
-##############################################################################
 {
     "name": "Invoicing type on pickings",
-    "version": "1.0",
-    "depends": ["sale_journal", "stock_account"],
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
+    "version": "8.0.1.0.0",
+    "category": "Warehouse Management",
+    "license": "AGPL-3",
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>",
-                     "Ainara Galdona <ainaragaldona@avanzosc.es>"],
-    "category": "stock_picking",
-    "description": """
-        This propagates invoicing type from sale order to stock picking.
-        Wizard Create invoice from picking:
-            Group by partner according to invoicing type's config.
-    """,
-    'data': ["wizard/stock_invoice_onshipping_view.xml"],
+    "website": "http://www.odoomrp.com",
+    "contributors": [
+        "Mikel Arregi <mikelarregi@avanzosc.es>",
+        "Ainara Galdona <ainaragaldona@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <anajuaristi@avanzosc.es>",
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+    ],
+    "depends": [
+        "sale_journal",
+        "stock_account",
+    ],
+    "data": [
+        "wizard/stock_invoice_onshipping_view.xml",
+        "views/stock_picking_view.xml",
+    ],
     "installable": True,
-    "auto_install": False,
 }
