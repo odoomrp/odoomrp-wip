@@ -2,11 +2,14 @@
 # (c) 2014-2015 Ainara Galdona - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import api, models
+from openerp import api, fields, models
 
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
+
+    invoice_type_id = fields.Many2one(
+        states={'draft': [('readonly', False)]})
 
     @api.multi
     def onchange_partner_id(self, partner_id=None):
