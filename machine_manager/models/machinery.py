@@ -83,7 +83,7 @@ class Machinery(models.Model):
     power = fields.Char('Power (Kw)')
     product_categ = fields.Many2one('product.category', 'Internal category',
                                     related='product.categ_id')
-    sale_cost = fields.Float('Sale Value', digits=(16, 2))
+    salvage_value = fields.Float('Salvage Value', digits=(16, 2))
 
 
 class MachineryUsers(models.Model):
