@@ -30,10 +30,15 @@
                             <field name="plan" string="Plan"/>
                         </group>
                     </group>
+                    <field name="date_planned" position="before">
+                        <field name="protect_date_planned" invisible="1"/>
+                    </field>
+                    <field name="date_planned" position="attributes">
+                        <attribute name="attrs">{'readonly':[('protect_date_planned','=',True)]}</attribute>
+                    </field>
                 </data>
             </field>
         </record>
-
         <record model="ir.ui.view" id="view_procurement_filter_inh_withplan" >
             <field name="name">view.procurement.filter.inh.withplan</field>
             <field name="model">procurement.order</field>

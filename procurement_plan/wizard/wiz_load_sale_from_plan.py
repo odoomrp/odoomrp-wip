@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
+# (c) 2015 Alfredo de la Fuente - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from openerp import models, fields, api, exceptions, _
 from dateutil.relativedelta import relativedelta
 
@@ -87,16 +86,8 @@ class WizLoadSaleFromPlan(models.TransientModel):
             for partner in result.keys():
                 for product in result[partner].keys():
                     prod_vals = result[partner][product]
-                    vals = {'name': plan.name,
-                            'origin': plan.sequence,
-                            'product_id': product,
-                            'plan': plan.id,
-                            'main_project_id': plan.project_id.id,
-                            'product_qty': prod_vals['qty'] / month_count,
-                            'warehouse_id': plan.warehouse_id.id,
-                            'location_id':  plan.warehouse_id.lot_stock_id.id,
-                            'date_planned': date
-                            }
+                    vals = self._prepare_vals_for_procurement(
+                        prod_vals, plan, product, date, month_count)
                     res = procurement_obj.onchange_product_id(product)
                     if 'value' not in res:
                         prod = self.env['product.product'].browse(product)
@@ -108,6 +99,21 @@ class WizLoadSaleFromPlan(models.TransientModel):
                     proc.write(
                         {'rule_id': procurement_obj._find_suitable_rule(proc)})
         return True
+
+    @api.multi
+    def _prepare_vals_for_procurement(self, prod_vals, plan, product, date,
+                                      month_count):
+        vals = {'name': plan.name,
+                'origin': plan.sequence,
+                'product_id': product,
+                'plan': plan.id,
+                'main_project_id': plan.project_id.id,
+                'product_qty': prod_vals['qty'] / month_count,
+                'warehouse_id': plan.warehouse_id.id,
+                'location_id':  plan.warehouse_id.lot_stock_id.id,
+                'date_planned': date
+                }
+        return vals
 
     @api.multi
     def get_sale_lines(self):
