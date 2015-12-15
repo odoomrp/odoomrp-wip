@@ -9,6 +9,9 @@
                 <field name="time_cycle" position="attributes">
                     <attribute name="widget"/>
                 </field>
+                <field name="hour_nbr" position="attributes">
+                    <attribute name="widget"/>
+                </field>
             </field>
         </record>
         <record id="mrp_workcenter_conf_timing_form" model="ir.ui.view">
