@@ -16,7 +16,7 @@ class StockMove(models.Model):
                 ('date', '<=', to_date),
                 ('state', 'not in', ('done', 'cancel'))]
         if from_date:
-            cond.append(('date', '=>', from_date))
+            cond.append(('date', '>=', from_date))
         if product:
             cond.append(('product_id', '=', product.id))
         if location_id:
