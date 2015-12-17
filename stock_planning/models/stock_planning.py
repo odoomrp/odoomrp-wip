@@ -130,8 +130,8 @@ class StockPlanning(models.Model):
         'Variant Cost Price', related='product.cost_price',
         digits_compute=dp.get_precision('Product Price'))
     category = fields.Many2one(
-        'product.category', 'category', related='product.categ_id',
-        store=True, translate=True)
+        'product.category', string='category', related='product.categ_id',
+        store=True)
     qty_available = fields.Float(
         'Quantity On Hand', compute='_get_product_info_location',
         digits_compute=dp.get_precision('Product Unit of Measure'))
