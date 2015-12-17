@@ -28,7 +28,7 @@ class SaleOrderLineSubtotal(models.Model):
     @api.one
     def _calculate_subtotal(self):
         price = (self.line_id.price_unit *
-                 (1 - (self.item_id.discount or 0.0) / 100) *
+                 (1 - (self.item_id.discount1 or 0.0) / 100) *
                  (1 - (self.item_id.discount2 or 0.0) / 100) *
                  (1 - (self.item_id.discount3 or 0.0) / 100))
         qty = self.line_id.product_uom_qty
@@ -57,47 +57,21 @@ class SaleOrderLineSubtotal(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    @api.multi
-    def _calc_price_subtotal(self):
-        self.ensure_one()
-        price = (self.price_unit *
-                 (1 - (self.discount or 0.0) / 100.0) *
-                 (1 - (self.discount2 or 0.0) / 100.0) *
-                 (1 - (self.discount3 or 0.0) / 100.0))
-        return price
-
-    @api.multi
-    def _calc_qty(self):
-        self.ensure_one()
-        qty = self.product_uom_qty
-        if self.offer_id:
-            total = self.offer_id.free_qty + self.offer_id.paid_qty
+    @api.model
+    def _calc_line_quantity(self, line):
+        qty = line.product_uom_qty
+        if line.offer_id:
+            total = line.offer_id.free_qty + line.offer_id.paid_qty
             packs = qty // total
             remaining = qty - packs * total
             if remaining:
-                if remaining < self.offer_id.paid_qty:
-                    qty = packs * self.offer_id.paid_qty + remaining
+                if remaining < line.offer_id.paid_qty:
+                    qty = packs * line.offer_id.paid_qty + remaining
                 else:
-                    qty = (packs + 1) * self.offer_id.paid_qty
+                    qty = (packs + 1) * line.offer_id.paid_qty
             else:
-                qty = packs * self.offer_id.paid_qty
+                qty = packs * line.offer_id.paid_qty
         return qty
-
-    def _amount_line(self, cr, uid, ids, field_name, arg, context=None):
-        res = {}
-        tax_obj = self.pool.get('account.tax')
-        cur_obj = self.pool.get('res.currency')
-        for line in self.browse(cr, uid, ids, context=context):
-            new_price_subtotal = self._calc_price_subtotal(cr, uid, line.id,
-                                                           context=context)
-            qty = self._calc_qty(cr, uid, line.id, context=context)
-            taxes = tax_obj.compute_all(cr, uid, line.tax_id,
-                                        new_price_subtotal, qty,
-                                        line.product_id,
-                                        line.order_id.partner_id)
-            cur = line.order_id.pricelist_id.currency_id
-            res[line.id] = cur_obj.round(cr, uid, cur, taxes['total'])
-        return res
 
     def _get_possible_item_ids(self, pricelist_id, product_id=False, qty=0):
         item_obj = self.env['product.pricelist.item']
@@ -114,6 +88,20 @@ class SaleOrderLine(models.Model):
             qty=self.product_uom_qty)
         self.possible_item_ids = [(6, 0, item_ids)]
 
+    @api.one
+    @api.depends('discount1', 'discount2', 'discount3')
+    def get_discount(self):
+        discount_factor = 1.0
+        for discount in [self.discount1, self.discount2, self.discount3]:
+            discount_factor *= ((100.0 - discount) / 100.0)
+        self.discount = 100.0 - (discount_factor * 100.0)
+
+    discount = fields.Float(
+        compute='get_discount', store=True, readonly=True
+    )
+    discount1 = fields.Float(
+        string='Discount (%)', digits=dp.get_precision('Discount'),
+        readonly=True, states={'draft': [('readonly', False)]}, default=0.0)
     discount2 = fields.Float(
         string='Disc. 2 (%)', digits=dp.get_precision('Discount'),
         readonly=True, states={'draft': [('readonly', False)]}, default=0.0)
@@ -131,13 +119,10 @@ class SaleOrderLine(models.Model):
         comodel_name='sale.order.line.subtotal', inverse_name='line_id',
         string='Subtotals by pricelist')
 
-    _columns = {
-        'price_subtotal': old_fields.function(
-            _amount_line, type="float", string='Subtotal',
-            digits_compute=dp.get_precision('Account'))
-    }
 
     _sql_constraints = [
+        ('discount1_limit', 'CHECK (discount1 <= 100.0)',
+         _('Discount must be lower than 100%.')),
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
          _('Second discount must be lower than 100%.')),
         ('discount3_limit', 'CHECK (discount3 <= 100.0)',
@@ -194,7 +179,7 @@ class SaleOrderLine(models.Model):
     @api.onchange('item_id')
     def onchange_item_id(self):
         if self.item_id:
-            self.discount = self.item_id.discount
+            self.discount1 = self.item_id.discount1
             self.discount2 = self.item_id.discount2
             self.discount3 = self.item_id.discount3
             self.offer_id = self.item_id.offer.id
@@ -229,17 +214,6 @@ class SaleOrder(models.Model):
             _check_rec(eview)
             res['arch'] = etree.tostring(eview)
         return res
-
-    @api.model
-    def _amount_line_tax(self, line):
-        val = 0.0
-        new_price_subtotal = line._calc_price_subtotal()
-        qty = line._calc_qty()
-        for c in line.tax_id.compute_all(new_price_subtotal,
-                                         qty, line.product_id,
-                                         line.order_id.partner_id)['taxes']:
-            val += c.get('amount', 0.0)
-        return val
 
     @api.multi
     def onchange_pricelist_id(self, pricelist_id, order_lines, context=None):
