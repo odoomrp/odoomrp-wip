@@ -21,6 +21,7 @@
     "version": "1.0",
     "depends": [
         "product",
+        "product_supplierinfo_for_customer",
     ],
     "author": "OdooMRP team,"
               "AvanzOSC,"
