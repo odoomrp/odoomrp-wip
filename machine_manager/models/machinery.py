@@ -2,7 +2,7 @@
 # (c) 2015 Daniel Campos - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-
+from openerp.addons import decimal_precision as dp
 from openerp import models, fields, _
 
 
@@ -83,7 +83,8 @@ class Machinery(models.Model):
     power = fields.Char('Power (Kw)')
     product_categ = fields.Many2one('product.category', 'Internal category',
                                     related='product.categ_id')
-    salvage_value = fields.Float('Salvage Value', digits=(16, 2))
+    salvage_value = fields.Float('Salvage Value',
+                                 digits=dp.get_precision('Product Price'))
 
 
 class MachineryUsers(models.Model):
