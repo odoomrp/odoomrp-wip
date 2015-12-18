@@ -67,3 +67,10 @@ class MrpProductionWorkcenterLine(models.Model):
     _inherit = 'mrp.production.workcenter.line'
 
     hour = fields.Float(digits=dp.get_precision('MRP Timing'))
+
+
+class MrpRoutingWorkcenter(models.Model):
+
+    _inherit = 'mrp.routing.workcenter'
+
+    hour_nbr = fields.Float(digits=dp.get_precision('MRP Timing'))
