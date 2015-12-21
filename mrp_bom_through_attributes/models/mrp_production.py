@@ -41,9 +41,9 @@ class MrpProduction(models.Model):
                 res.append(self.get_new_components_info(
                     raw_product, qty, workorder))
             else:
-                result, result1 = bom_obj._bom_explode(
-                    bom_obj.browse(bom_id), raw_product.id,
-                    self.product_qty * attr_value.raw_qty)
+                bom = bom_obj.browse(bom_id).with_context(production=self)
+                result, result1 = bom._bom_explode(
+                    raw_product, self.product_qty * attr_value.raw_qty)
                 for line in result:
                     product = self.env['product.product'].browse(
                         line['product_id'])
