@@ -2,7 +2,7 @@
 <openerp>
     <data>
 
-        <record model="ir.ui.view" id="sale_order_line_extended_form_view">
+        <record model="ir.ui.view" id="purchase_order_line_extended_form_view">
             <field name="name">purchase.order.line.extended.form</field>
             <field name="model">purchase.order.line</field>
             <field name="inherit_id" ref="purchase_product_variants.purchase_order_line_extended_form_view" />
