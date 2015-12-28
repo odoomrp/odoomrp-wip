@@ -40,9 +40,6 @@ coverage.xml
 # Pycharm
 .idea
 
-# Eclipse
-.settings/
-
 # Mr Developer
 .mr.developer.cfg
 .project
@@ -57,3 +54,6 @@ docs/_build/
 # Backup files
 *~
 *.swp
+
+# OSX Files
+*.DS_Store
