@@ -121,8 +121,7 @@ class MrpProduction(models.Model):
             new_op.action_compute()
             new_op.recalculate_product_qty(op.fill, self.product_id)
             new_op.assign_parent_lot(self)
-            workorder =\
-                new_op.workcenter_lines and new_op.workcenter_lines[0].id
+            workorder = new_op.workcenter_lines[:1]
             for attr_value in op.product.attribute_value_ids:
                 raw_product = attr_value.raw_product
                 if raw_product:
