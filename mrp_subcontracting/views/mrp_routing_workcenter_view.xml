@@ -20,8 +20,6 @@
                     <field name="external"/>
                     <field name="semifinished_id"
                            attrs="{'invisible': [('external', '=', False)], 'required': [('external', '=', True)]}"/>
-                    <field name="picking_type_id"
-                           attrs="{'invisible': [('external', '=', False)], 'required': [('external', '=', True)]}"/>
                 </field>
             </field>
         </record>
