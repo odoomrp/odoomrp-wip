@@ -26,11 +26,18 @@ class AssignManualQuants(models.TransientModel):
                                 parent.move_created_ids2.ids)]
                     break
             available_quants_ids = self.env['stock.quant'].search(domain)
-            available_quants = [{'quant': x.id} for x in available_quants_ids]
+            available_quants = [{'quant': x.id,
+                                 'lot_id': x.lot_id.id,
+                                 'package_id': x.package_id.id,
+                                 'location_id': x.location_id.id}
+                                for x in available_quants_ids]
             available_quants.extend({
                 'quant': x.id,
                 'selected': True,
-                'qty': x.qty} for x in move.reserved_quant_ids)
+                'lot_id': x.lot_id.id,
+                'location_id': x.location_id.id,
+                'qty': x.qty} for x in move.reserved_quant_ids
+            )
             return {'quants_lines': available_quants}
         else:
             return super(AssignManualQuants, self).default_get(var_fields)
