@@ -40,6 +40,7 @@
                                     <field name="mac" />
                                     <field name="phone" />
                                     <field name="ambit" />
+                                    <field name="salvage_value" />
                                 </group>
                                 <group>
                                     <separator string="Manufacture Details"
@@ -122,6 +123,7 @@
                     <field name="model_type"/>
                     <field name="serial"/>
                     <field name="year"/>
+                    <field name="salvage_value"/>
                 </tree>
             </field>
         </record>
