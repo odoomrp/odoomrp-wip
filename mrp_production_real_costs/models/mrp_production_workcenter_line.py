@@ -40,7 +40,7 @@ class MrpProductionWorkcenterLine(models.Model):
         task_obj = self.env['project.task']
         if self.workcenter_id.costs_hour > 0.0:
             hour_uom = self.env.ref('product.product_uom_hour', False)
-            operation_line = self.operation_time_lines[-1]
+            operation_line = self.operation_time_lines[-1:]
             production = self.production_id
             workcenter = self.workcenter_id
             product = workcenter.product_id

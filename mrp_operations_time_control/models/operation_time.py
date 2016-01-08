@@ -33,7 +33,8 @@ class MrpProductionWorkcenterLine(models.Model):
             'user': self.env.uid})
 
     def _write_end_date_operation_line(self):
-        self.operation_time_lines[-1].end_date = fields.Datetime.now()
+        if self.operation_time_lines:
+            self.operation_time_lines[-1].end_date = fields.Datetime.now()
 
     def action_start_working(self):
         result = super(MrpProductionWorkcenterLine,
