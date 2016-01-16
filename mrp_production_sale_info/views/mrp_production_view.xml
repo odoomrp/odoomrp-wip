@@ -35,12 +35,12 @@
                     <field name="partner" />
                     <field name="sale_order" />
                 </field>
-                <filter string="Product" position="before">
+                <group position="inside">
                     <filter string="Customer" icon="terp-accessories-archiver"
                         domain="[]" context="{'group_by':'partner'}" />
                     <filter string="Sale Order" icon="terp-accessories-archiver"
                         domain="[]" context="{'group_by':'sale_order'}" />
-                </filter>
+                </group>
             </field>
         </record>
     </data>
