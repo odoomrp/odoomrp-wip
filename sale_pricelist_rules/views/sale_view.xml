@@ -30,8 +30,7 @@
                     <xpath
                         expr="//field[@name='order_line']/form//field[@name='address_allotment_id']"
                         position="after">
-                        <field name="item_id" groups="product.group_sale_pricelist" widget="selection"
-                            domain="[('pricelist.currency_id', '=', parent.currency_id)]" />
+                        <field name="item_id" groups="product.group_sale_pricelist" widget="selection" />
                         <field name="possible_item_ids" invisible="1" />
                         <field name="offer_id"
                             groups="sale.group_discount_per_so_line" />
