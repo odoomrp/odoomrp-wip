@@ -24,7 +24,7 @@ class PurchaseOrderLine(models.Model):
 
     currency = fields.Char(
                            related='order_id.currency_id.name',
-                           string='Devise'
+                           string='Currency'
                 )
 
     @api.multi
