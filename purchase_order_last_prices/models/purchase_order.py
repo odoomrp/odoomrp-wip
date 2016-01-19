@@ -1,5 +1,4 @@
-
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -22,8 +21,11 @@ from openerp import fields, models, api
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
-    
-    currency = fields.Char(related ='order_id.currency_id.name',string='Currency')
+
+    currency = fields.Char(
+                           related='order_id.currency_id.name',
+                           string='Devise'
+                )
 
     @api.multi
     def action_purchase_product_prices(self):
