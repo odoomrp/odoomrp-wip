@@ -24,7 +24,9 @@
                     <field name="product_id"/>
                     <field name="product_qty"/>
                     <field name="price_unit"/>
+                    <field name="currency"/> 
                     <field name="price_subtotal"/>
+                    <field name="partner_id"/>
                 </tree>
            </field>
       </record>
