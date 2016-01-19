@@ -23,7 +23,7 @@ from openerp import fields, models, api
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
     
-    currency = fields.Char(related ='order_id.currency_id.name',string='Devise')
+    currency = fields.Char(related ='order_id.currency_id.name',string='Currency')
 
     @api.multi
     def action_purchase_product_prices(self):
