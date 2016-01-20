@@ -96,7 +96,7 @@ msgstr "Esta selección define si se crearán automáticamente las variantes par
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
 msgid "Use the category value"
-msgstr "Use the category value"
+msgstr "Utilizar el valor de la categoría"
 
 #. module: product_variants_no_automatic_creation
 #: view:product.template:product_variants_no_automatic_creation.product_template_no_variant_form_view
