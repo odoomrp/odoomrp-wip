@@ -16,13 +16,18 @@
                                 <field name="final_product_qty" />
                                 <field name="left_product_qty" />
                                 <button name="get_dump_packages"
-                                    string="Get packages" type="object"
-                                    colspan="2" />
+                                        string="Get packages" type="object" />
+                                <button name="scrap_qty_left" string="Scrap Products"
+                                        type="object" icon="terp-gtk-jump-to-ltr" class="oe_inline"
+                                        attrs="{'invisible': [('left_product_qty','&lt;=',0)]}" />
+                                <button name="produce_qty_left" string="Produce Missing Quantity"
+                                        type="object" class="oe_inline"
+                                        attrs="{'invisible': [('left_product_qty','&gt;=',0)]}" />
                                 <field name="pack" nolabel="1"
-                                    colspan="4" col="4">
+                                       colspan="4" col="4">
                                     <tree string="Pack" editable="top"
-                                        fonts="bold:processed==False"
-                                        colors="blue:packing_state in ('draft','confirmed');gray:packing_state in ('done','cancel')" >
+                                          fonts="bold:processed==False"
+                                            colors="blue:packing_state in ('draft','confirmed');gray:packing_state in ('done','cancel')" >
                                         <field name="product" attrs="{'readonly':[('processed','=',True)]}" />
                                         <field name="package_product" />
                                         <field name="qty" attrs="{'readonly':[('processed','=',True)]}" />
@@ -39,15 +44,14 @@
                                         </group>
                                     </form>
                                 </field>
-                                <button
-                                    name="create_mo_from_packaging_operation"
-                                    string="Create Pack Manufacturing Orders"
-                                    type="object" colspan="2" />
+                                <button name="create_mo_from_packaging_operation"
+                                        string="Create Pack Manufacturing Orders"
+                                        type="object" colspan="2" />
                             </group>
                             <group string="Expected Production"
-                                colspan="4" col="4">
+                                   colspan="4" col="4">
                                 <field name="expected_production"
-                                    nolabel="1" colspan="4" domain="[('state','!=','cancel')]">
+                                       nolabel="1" colspan="4" domain="[('state','!=','cancel')]">
                                     <tree>
                                         <field name="name" />
                                         <field name="date_planned" />
@@ -60,28 +64,27 @@
                                         <field name="origin" />
                                         <field name="state" />
                                         <button name="button_confirm"
-                                            states="draft" string="Confirm Production"
-                                            class="oe_highlight" icon="gtk-apply"/>
-                                        <button
-                                            name="%(mrp.act_mrp_product_produce)d"
-                                            states="ready,in_production"
-                                            string="Produce" type="action"
-                                            class="oe_highlight" icon="gtk-media-play"/>
+                                                states="draft" string="Confirm Production"
+                                                class="oe_highlight" icon="gtk-apply"/>
+                                        <button name="%(mrp.act_mrp_product_produce)d"
+                                                states="ready,in_production"
+                                                string="Produce" type="action"
+                                                class="oe_highlight" icon="gtk-media-play"/>
                                         <button name="action_assign"
-                                            states="confirmed,picking_except"
-                                            string="Check Availability"
-                                            type="object" class="oe_highlight" />
+                                                states="confirmed,picking_except"
+                                                string="Check Availability"
+                                                type="object" class="oe_highlight" />
                                         <button name="force_production"
-                                            states="confirmed" string="Force Reservation"
-                                            type="object" />
+                                                states="confirmed" string="Force Reservation"
+                                                type="object" />
                                         <button name="button_produce"
-                                            states="ready" string="Mark as Started" />
+                                                states="ready" string="Mark as Started" />
                                         <button name="button_cancel"
-                                            states="draft,ready,in_production"
-                                            string="Cancel Production" icon="gtk-cancel"/>
+                                                states="draft,ready,in_production"
+                                                string="Cancel Production" icon="gtk-cancel"/>
                                         <button name="action_cancel"
-                                            type="object" states="confirmed"
-                                            string="Cancel Production" icon="gtk-cancel"/>
+                                                type="object" states="confirmed"
+                                                string="Cancel Production" icon="gtk-cancel"/>
                                     </tree>
                                 </field>
                             </group>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) 2015 Mikel Arregi - AvanzOSC
-# (c) 2015 Oihane Crucelaegui - AvanzOSC
+# © 2015 Mikel Arregi - AvanzOSC
+# © 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from openerp import api, exceptions, fields, models, _
@@ -157,6 +157,63 @@ class MrpProduction(models.Model):
             return super(MrpProduction, self).action_compute(properties)
         else:
             raise exceptions.Warning(_('You can not compute again the list.'))
+
+    @api.multi
+    def scrap_qty_left(self):
+        self.ensure_one()
+        view_id = self.env.ref(
+            'stock.view_stock_move_scrap_wizard')
+        return {
+            'view_type': 'form',
+            'view_mode': 'tree',
+            'res_model': 'stock.move.scrap',
+            'views': [(view_id.id, 'form')],
+            'view_id': False,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'context': self.with_context(
+                active_ids=self.move_created_ids2.ids,
+                active_id=self.move_created_ids2[:1].id,
+                qty_left=self.left_product_qty).env.context,
+        }
+
+    @api.multi
+    def produce_qty_left(self):
+        self.ensure_one()
+        self._make_left_qty_produce_line()
+        self.action_produce(self.id, abs(self.left_product_qty),
+                            'consume_produce')
+
+    @api.multi
+    def _make_left_qty_produce_line(self):
+        self.ensure_one()
+        source_location_id = self.product_id.property_stock_production.id
+        destination_location_id = self.location_dest_id.id
+        procurement = self.env['procurement.order'].search(
+            [('production_id', '=', self.id)])
+        data = {
+            'name': self.name,
+            'date': self.date_planned,
+            'product_id': self.product_id.id,
+            'product_uom': self.product_uom.id,
+            'product_uom_qty': abs(self.left_product_qty),
+            'product_uos_qty': (
+                self.product_uos and self.product_uos_qty or False),
+            'product_uos': self.product_uos and self.product_uos.id or False,
+            'location_id': source_location_id,
+            'location_dest_id': destination_location_id,
+            'move_dest_id': self.move_prod_id.id,
+            'procurement_id': procurement[:1].id,
+            'company_id': self.company_id.id,
+            'production_id': self.id,
+            'origin': self.name,
+            'group_id': procurement[:1].group_id.id,
+            'restrict_lot_id': (
+                self.move_created_ids2[:1].restrict_lot_id.id or
+                self.move_created_ids2[:1].lot_ids[:1].id),
+        }
+        move = self.env['stock.move'].create(data)
+        move.action_confirm()
 
 
 class PackagingOperation(models.Model):
