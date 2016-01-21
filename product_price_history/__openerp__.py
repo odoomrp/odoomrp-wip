@@ -22,23 +22,23 @@
 
 {
     "name": "Product Price History",
-    "version": "1.2.3",
-    "author": "Camptocamp,"
-              "OdooMRP team,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza,"
-              "AvanzOSC",
+    "version": "8.0.1.2.3",
     "category": "Generic Modules/Inventory Control",
-    "depends": [
-        "product",
-        "product_variant_cost"
-    ],
+    "license": "AGPL-3",
+    "author": "Camptocamp, "
+              "OdooMRP team, "
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza, "
+              "AvanzOSC",
     "contributors": [
         "Joël Grand-Guillaume <joel.grand-guillaume@camptocamp.com>",
         "Yannick Vaucher <yannick.vaucher@camptocamp.com>",
         "Pedro M. Baeza <pedro.baeza@serviciobaeza.com> (Migration to v8)",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
-    "summary": "",
+    "depends": [
+        "product",
+        "product_variant_cost_price",
+    ],
     "data": [
         "views/product_price_history_view.xml",
         "views/product_product_view.xml",

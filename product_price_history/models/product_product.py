@@ -41,14 +41,14 @@ class ProductProduct(models.Model):
     @api.model
     def create(self, values):
         product = super(ProductProduct, self).create(values)
-        product._set_cost_price(product.cost_price)
+        product._set_cost_price(product.standard_price)
         return product
 
     @api.multi
     def write(self, values):
-        if 'cost_price' in values:
+        if 'standard_price' in values:
             for product in self:
-                product._set_cost_price(values['cost_price'])
+                product._set_cost_price(values['standard_price'])
         return super(ProductProduct, self).write(values)
 
     @api.multi

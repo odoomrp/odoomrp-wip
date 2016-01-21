@@ -20,7 +20,7 @@ import logging
 from openerp import models, fields, api
 
 # All field name of product that will be historize
-PRODUCT_FIELD_HISTORIZE = ['standard_price', 'cost_price']
+PRODUCT_FIELD_HISTORIZE = ['standard_price']
 
 _logger = logging.getLogger(__name__)
 
@@ -28,20 +28,18 @@ _logger = logging.getLogger(__name__)
 class ProductPriceHistory(models.Model):
     _inherit = 'product.price.history'
 
-    @api.one
+    @api.multi
     @api.depends('product', 'product_template_id')
-    def _get_cost_type(self):
-        if self.product:
-            self.cost_type = 'product'
-        else:
-            self.cost_type = 'template'
+    def _compute_cost_type(self):
+        for record in self:
+            record.cost_type = 'product' if record.product else 'template'
 
     product = fields.Many2one(
         comodel_name='product.product', string='Product',
         ondelete='cascade')
     cost_type = fields.Selection(
         selection=[('template', 'Product'), ('product', 'Product Variant')],
-        string='Cost Type', compute='_get_cost_type')
+        string='Cost Type', compute='_compute_cost_type')
 
     @api.model
     def _get_historic_price(
