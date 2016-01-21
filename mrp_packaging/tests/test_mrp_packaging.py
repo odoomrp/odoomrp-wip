@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) 2015 Oihane Crucelaegui - AvanzOSC
+# © 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 import openerp.tests.common as common
@@ -121,9 +121,13 @@ class TestMrpPackaging(common.TransactionCase):
         self.fill = 26.0
 
     def test_bulk_production_done(self):
-        self.assertEquals(
-            self.bulk_production.state, 'in_production' or 'done')
+        self.assertIn(
+            self.bulk_production.state, ['in_production', 'done'])
         self.assertNotEquals(self.bulk_production.pack, False)
+        self.assertEqual(self.bulk_production.product_qty,
+                         self.bulk_production.final_product_qty)
+        self.assertEqual(self.bulk_production.product_qty,
+                         self.bulk_production.left_product_qty)
 
     def test_packaging_same_uom(self):
         pack = self.bulk_production.pack.filtered(
@@ -142,6 +146,9 @@ class TestMrpPackaging(common.TransactionCase):
                 self.assertEquals(line.product_qty, self.fill)
             elif line.product_id == self.box_product:
                 self.assertEquals(line.product_qty, self.pack_qty)
+        production.signal_workflow('button_confirm')
+        self.assertEqual(self.bulk_production.product_qty - self.fill,
+                         self.bulk_production.left_product_qty)
 
     def test_packaging_different_uom(self):
         pack = self.bulk_production.pack.filtered(

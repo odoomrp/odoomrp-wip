@@ -1,21 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mrp_packaging
-# 
-# Translators:
+# 	* mrp_packaging
+# Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>, 2016.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-20 17:16+0000\n"
-"PO-Revision-Date: 2015-10-13 16:12+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
+"POT-Creation-Date: 2016-01-21 17:03+0000\n"
+"PO-Revision-Date: 2016-01-21 18:05+0100\n"
+"Last-Translator: Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>\n"
+"Language-Team: Español; Castellano <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Language: es\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #. module: mrp_packaging
 #: view:mrp.production:mrp_packaging.mrp_production_packaging_form
@@ -125,6 +125,11 @@ msgid "Produce"
 msgstr "Fabricar"
 
 #. module: mrp_packaging
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Produce Missing Quantity"
+msgstr "Producir cantidad faltante"
+
+#. module: mrp_packaging
 #: field:packaging.operation,product:0
 msgid "Product"
 msgstr "Producto"
@@ -134,14 +139,19 @@ msgstr "Producto"
 msgid ""
 "Product Quantity. It will be the new manufacturing order quantity if dump "
 "uom is equal to product uom"
-msgstr "Cantidad de producto. Será la nueva cantidad de la orden de fabricación si la UdM de volcado es igual a la UdM del producto"
+msgstr ""
+"Cantidad de producto. Será la nueva cantidad de la orden de fabricación si "
+"la UdM de volcado es igual a la UdM del producto"
 
 #. module: mrp_packaging
 #: help:packaging.operation,fill:0
 msgid ""
 "Product linked Raw Material value * Product Quantity. It will be the new "
 "manufacturing order quantity if dump UoM is not equal to product UoM"
-msgstr "Valor de la materia prima asociada al producto * Cantidad de producto. Será la nueva cantidad de la orden de fabricación si la UdM de volcado no es igual a la UdM del producto"
+msgstr ""
+"Valor de la materia prima asociada al producto * Cantidad de producto. Será "
+"la nueva cantidad de la orden de fabricación si la UdM de volcado no es "
+"igual a la UdM del producto"
 
 #. module: mrp_packaging
 #: help:packaging.operation,product:0
@@ -159,24 +169,32 @@ msgid "Qty"
 msgstr "Ctdad"
 
 #. module: mrp_packaging
+#: model:ir.model,name:mrp_packaging.model_stock_move_scrap
+#: view:mrp.production:mrp_packaging.mrp_production_packaging_form
+msgid "Scrap Products"
+msgstr "Desechar productos"
+
+#. module: mrp_packaging
 #: view:mrp.production:mrp_packaging.mrp_production_packaging_form
 msgid "Total Qty"
 msgstr "Ctdad total"
 
 #. module: mrp_packaging
-#: code:addons/mrp_packaging/models/mrp_production.py:185
+#: code:addons/mrp_packaging/models/mrp_production.py:180
+#: code:addons/mrp_packaging/models/mrp_production.py:237
 #, python-format
 msgid "Warning"
 msgstr "Atención"
 
 #. module: mrp_packaging
-#: code:addons/mrp_packaging/models/mrp_production.py:164
+#: code:addons/mrp_packaging/models/mrp_production.py:159
 #, python-format
 msgid "You can not compute again the list."
 msgstr "No puedes recalcular la lista."
 
 #. module: mrp_packaging
-#: code:addons/mrp_packaging/models/mrp_production.py:188
+#: code:addons/mrp_packaging/models/mrp_production.py:183
+#: code:addons/mrp_packaging/models/mrp_production.py:240
 #, python-format
 msgid "You won't be able to pack %f, there is only %f left"
 msgstr "No puedes envasar %f, solo quedan %f por envasar"
