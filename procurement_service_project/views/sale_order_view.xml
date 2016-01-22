@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_order_form_inh_procu_serv_proj" model="ir.ui.view">
+            <field name="name">view.order.form.inh.procu.serv.proj</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="project_id" position="after">
+                    <field name="project" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

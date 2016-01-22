@@ -2,7 +2,7 @@
 odoomrp-utils https://github.com/odoomrp/odoomrp-utils
 # List the OCA project dependencies, one per line
 crm https://github.com/OCA/crm
-account-analytic
+account-analytic https://github.com/OCA/account-analytic
 manufacture https://github.com/OCA/manufacture
 sale-workflow https://github.com/OCA/sale-workflow
 purchase-workflow https://github.com/OCA/purchase-workflow
