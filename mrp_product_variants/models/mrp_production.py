@@ -78,7 +78,7 @@ class MrpProduction(models.Model):
             routing_id = False
             if not bom_id:
                 bom_id = bom_obj._bom_find(
-                    product_id=product.product_tmpl_id.id, properties=[])
+                    product_tmpl_id=product.product_tmpl_id.id, properties=[])
             if bom_id:
                 bom_point = bom_obj.browse(bom_id)
                 routing_id = bom_point.routing_id.id or False
