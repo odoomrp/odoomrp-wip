@@ -34,6 +34,6 @@
     ],
     "category": "Hidden/Dependency",
     "summary": "Project on packaging manufacturing orders",
-    "installable": True,
+    "installable": False,
     "auto_install": True,
 }
