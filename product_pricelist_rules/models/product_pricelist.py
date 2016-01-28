@@ -123,8 +123,10 @@ class PricelistItem(models.Model):
                 tmpl_id = product_tmpl_id
                 if not tmpl_id and product_id:
                     tmpl_id = product_obj.browse(product_id).product_tmpl_id.id
-                if not suppinfo_obj.search([('product_tmpl_id', '=', tmpl_id),
-                                            ('name', '=', partner_id)]):
+                suppinfos = suppinfo_obj.search(
+                    [('product_tmpl_id', '=', tmpl_id),
+                     ('name', '=', partner_id)])
+                if not suppinfos.mapped('pricelist_ids'):
                     item_ids.remove(item.id)
         return item_ids
 
