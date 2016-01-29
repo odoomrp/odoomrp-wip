@@ -38,7 +38,8 @@ class MrpRepair(models.Model):
                 vals = record._catch_repair_line_information_for_analytic(line)
                 if vals:
                     analytic_line_obj.create(vals)
-            for line in record.operations.filtered('load_cost'):
+            for line in record.operations.filtered(
+                    lambda x: x.load_cost and x.type == 'add'):
                 vals = record._catch_repair_line_information_for_analytic(line)
                 if vals:
                     analytic_line_obj.create(vals)
