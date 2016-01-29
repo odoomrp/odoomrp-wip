@@ -109,6 +109,11 @@ class MrpProduction(models.Model):
         data['value'].update({'product_id': op_line.product.id,
                               'product_qty': final_product_qty,
                               'name': name})
+        try:
+            data['value'].update({'project_id': self.project_id.id})
+        except:
+            # This is in case mrp_project module is installed
+            pass
         return data['value']
 
     @api.one
