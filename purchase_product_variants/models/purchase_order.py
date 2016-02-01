@@ -194,7 +194,6 @@ class PurchaseOrderLine(models.Model):
             if self.product_template.description_purchase:
                 self.name += '\n' + self.product_template.description_purchase
 
-
     @api.multi
     def onchange_product_id(
             self, pricelist_id, product_id, qty, uom_id, partner_id,
