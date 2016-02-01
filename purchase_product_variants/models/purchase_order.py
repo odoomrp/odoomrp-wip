@@ -117,6 +117,8 @@ class PurchaseOrderLine(models.Model):
         self.ensure_one()
         res = {}
         self.name = self.product_template.name
+        if self.product_template.description_purchase:
+            self.name += '\n' + self.product_template.description_purchase
         if not self.product_template.attribute_line_ids:
             self.product_id = self.product_template.product_variant_ids[:1]
         else:
@@ -189,6 +191,9 @@ class PurchaseOrderLine(models.Model):
             self.name = self._get_product_description(
                 self.product_template, False,
                 self.product_attributes.mapped('value'))
+            if self.product_template.description_purchase:
+                self.name += '\n' + self.product_template.description_purchase
+
 
     @api.multi
     def onchange_product_id(

@@ -133,6 +133,8 @@ class SaleOrderLine(models.Model):
                 product._get_product_attributes_values_dict())
             res['value']['name'] = self._get_product_description(
                 product.product_tmpl_id, product, product.attribute_value_ids)
+            if product.description_sale:
+                res['value']['name'] += '\n' + product.description_sale
         return res
 
     @api.multi
@@ -140,6 +142,8 @@ class SaleOrderLine(models.Model):
     def onchange_product_template(self):
         self.ensure_one()
         self.name = self.product_template.name
+        if self.product_template.description_sale:
+            self.name += '\n' + self.product_template.description_sale
         if not self.product_template.attribute_line_ids:
             self.product_id = (
                 self.product_template.product_variant_ids and
