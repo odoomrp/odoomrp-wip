@@ -25,6 +25,7 @@
     "category": "Sales Management",
     "depends": ['sale',
                 'product_pricelist_rules',
+                'sale_pricelist_rules',
                 ],
     "data": ['security/ir.model.access.csv',
              'views/sale_promotion_gift_view.xml',
