@@ -22,21 +22,43 @@
                 <field name="partner_id" position="after">
                     <field name="analytic_account" />
                 </field>
-                <xpath expr="//form[@string='Fees']/group/group/field[@name='to_invoice']" position="before">
+                <xpath expr="//field[@name='fees_lines']/form//field[@name='to_invoice']" position="before">
                     <field name="load_cost" groups="mrp_repair_analytic.group_mrp_repair_cost_check"/>
                     <field name="user_id"/>
                 </xpath>
-                <xpath expr="//tree[@string='Fees']/field[@name='product_id']" position="before">
+                <xpath expr="//field[@name='fees_lines']/tree//field[@name='product_id']" position="before">
                     <field name="load_cost" groups="mrp_repair_analytic.group_mrp_repair_cost_check"/>
                     <field name="user_id"/>
                 </xpath>
-                <xpath expr="//page[@string='Repair Line']/group/field[@name='name']" position="before">
+                <xpath expr="//field[@name='operations']/form//field[@name='name']" position="before">
                     <field name="load_cost" groups="mrp_repair_analytic.group_mrp_repair_cost_check"/>
                     <field name="user_id"/>
                 </xpath>
-                <xpath expr="//tree[@string='Operations']/field[@name='type']" position="before">
+                <xpath expr="//field[@name='operations']/tree//field[@name='type']" position="before">
                     <field name="load_cost" groups="mrp_repair_analytic.group_mrp_repair_cost_check"/>
                     <field name="user_id"/>
+                </xpath>
+                <xpath expr="//field[@name='operations']/tree//field[@name='price_unit']" position="before">
+                    <field name="standard_price"/>
+                    <field name="cost_subtotal" sum="Operations cost subtotal"/>
+                </xpath>
+                <xpath expr="//field[@name='operations']/form//field[@name='price_unit']" position="before">
+                    <field name="standard_price"/>
+                    <field name="cost_subtotal"/>
+                </xpath>
+                <xpath expr="//field[@name='fees_lines']/tree//field[@name='price_unit']" position="before">
+                    <field name="standard_price"/>
+                    <field name="cost_subtotal" sum="Fees cost subtotal"/>
+                </xpath>
+                <xpath expr="//field[@name='fees_lines']/form//field[@name='price_unit']" position="before">
+                    <field name="standard_price"/>
+                    <field name="cost_subtotal"/>
+                </xpath>
+                <xpath expr="//field[@name='operations']/tree//field[@name='price_subtotal']" position="attributes">
+                    <attribute name="sum">Operations price subtotal</attribute>
+                </xpath>
+                <xpath expr="//field[@name='fees_lines']/tree//field[@name='price_subtotal']" position="attributes">
+                    <attribute name="sum">Fees price subtotal</attribute>
                 </xpath>
             </field>
         </record>
