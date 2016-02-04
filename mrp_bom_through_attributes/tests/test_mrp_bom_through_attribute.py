@@ -28,7 +28,7 @@ class TestMrpBomThroughAttribute(common.TransactionCase):
         self.final_product = self.final_template.product_variant_ids[0]
         self.bom = self.env['mrp.bom'].create(
             {
-                'product_id': self.final_template.id,
+                'product_id': self.final_product.id,
                 'product_tmpl_id': self.final_template.id,
             })
 
