@@ -6,6 +6,8 @@ from openerp import api, models
 
 
 class ProcurementOrder(models.Model):
+    _inherit = "procurement.order"
+
     @api.model
     def _get_po_line_values_from_proc(self, procurement, partner, company,
                                       schedule_date):
