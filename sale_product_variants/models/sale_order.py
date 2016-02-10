@@ -64,8 +64,9 @@ class SaleOrderLine(models.Model):
 
     product_template = fields.Many2one(
         comodel_name='product.template', string='Product Template',
-        readonly=True, states={'draft': [('readonly', False)],
-                               'sent': [('readonly', False)]})
+        domain="[('sale_ok','=',True)]", readonly=True,
+        states={'draft': [('readonly', False)],
+                'sent': [('readonly', False)]})
     product_attributes = fields.One2many(
         comodel_name='sale.order.line.attribute', inverse_name='sale_line',
         string='Product attributes', copy=True,
