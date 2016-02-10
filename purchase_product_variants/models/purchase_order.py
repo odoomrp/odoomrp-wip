@@ -82,7 +82,8 @@ class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
     product_template = fields.Many2one(
-        comodel_name='product.template', string='Product Template')
+        comodel_name='product.template', string='Product Template',
+        domain="[('purchase_ok','=',True)]")
     product_attributes = fields.One2many(
         comodel_name='purchase.order.line.attribute',
         inverse_name='purchase_line', string='Product attributes', copy=True)
