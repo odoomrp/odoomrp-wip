@@ -73,8 +73,9 @@ class QcTestQuestion(models.Model):
 
     def check_same_tolerance(self, vals):
         vals = vals.copy()
-        if ('tolerance_below' in vals or 'tolerance_percent_below' in vals and
-                vals.get('same_tolerance')):
+        if (('tolerance_below' in vals or
+                'tolerance_percent_below' in vals) and
+                vals.get('same_tolerance', self.same_tolerance)):
             vals['tolerance_above'] = vals.get('tolerance_below')
             vals['tolerance_percent_above'] = (
                 vals.get('tolerance_percent_below'))
