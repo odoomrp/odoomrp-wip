@@ -68,11 +68,11 @@ class StockPlanning(models.Model):
                     self.scheduled_to_date > self.custom_rule_max_qty):
                 self.required_increase = (
                     (self.scheduled_to_date - self.custom_rule_max_qty) *
-                    -1)
+                    (-1))
             else:
                 self.required_increase = (
                     (self.scheduled_to_date - self.custom_rule_min_qty) *
-                    -1)
+                    (-1))
 
     custom_stock_planning_rule = fields.Boolean(
         string='customize min. qty, and max. qty rules',
