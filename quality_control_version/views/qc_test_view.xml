@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="quality_control.qc_test_buttons" model="ir.ui.view">
+            <field name="name">qc.test.buttons</field>
+            <field name="model">qc.test</field>
+            <field name="inherit_id" ref="quality_control.qc_test_form_view" />
+            <field name="arch" type="xml">
+                <h1 position="after">
+                    <div class="oe_right oe_button_box" name="buttons">
+                    </div>
+                </h1>
+            </field>
+        </record>
+    
+        <record id="qc_test_version_view_form" model="ir.ui.view">
+            <field name="name">qc.test.version.form</field>
+            <field name="model">qc.test</field>
+            <field name="inherit_id" ref="quality_control.qc_test_buttons" />
+            <field name="arch" type="xml">
+                <div name="buttons" position="inside">
+                    <button class="oe_stat_button" name="action_open_older_versions"
+                            type="object" icon="fa-archive" string="Old Versions">
+                    </button>
+                </div>
+                <field name="active" position="before">
+                    <field name="version" />
+                </field>
+                <sheet position="before">
+                    <header>
+                        <button name="button_new_version" type="object" 
+                                string="New Version" attrs="{'invisible':[('active','=',False)]}"
+                                class="oe_highlight"/>
+                    </header>
+                </sheet>
+            </field>
+        </record>
+
+        <record id="qc_test_version_view_tree" model="ir.ui.view">
+            <field name="name">qc.test.version.tree</field>
+            <field name="model">qc.test</field>
+            <field name="inherit_id" ref="quality_control.qc_test_tree_view" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="version" />
+                </field>
+            </field>
+        </record>
+
+        <record id="quality_control.action_qc_test" model="ir.actions.act_window">
+            <field name="context">{'active_test': False}</field>
+        </record>
+    </data>
+</openerp>
