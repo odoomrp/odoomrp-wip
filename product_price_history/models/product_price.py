@@ -32,11 +32,8 @@ class ProductPriceHistory(models.Model):
     @api.depends('product', 'product_template_id')
     def _compute_cost_type(self):
         for record in self:
-            record.cost_type = 'product' if record.product else 'template'
+            record.cost_type = 'product' if record.product_id else 'template'
 
-    product = fields.Many2one(
-        comodel_name='product.product', string='Product',
-        ondelete='cascade')
     cost_type = fields.Selection(
         selection=[('template', 'Product'), ('product', 'Product Variant')],
         string='Cost Type', compute='_compute_cost_type')
@@ -65,7 +62,7 @@ class ProductPriceHistory(models.Model):
                       "datetime, product_template_id AS product_id, cost ")
             table = "FROM product_price_history "
             where = ("WHERE product_template_id IN %s "
-                     "AND product IS NULL "
+                     "AND product_id IS NULL "
                      "AND company_id = %s "
                      "AND datetime <= %s ")
             args = [tuple(template_ids),  company_id, datetime]
@@ -75,10 +72,10 @@ class ProductPriceHistory(models.Model):
             for id in template_ids:
                 res[id] = dict.fromkeys(field_names, 0.0)
         elif product_ids:
-            select = ("SELECT DISTINCT ON (product) "
-                      "datetime, product AS product_id, cost ")
+            select = ("SELECT DISTINCT ON (product_id) "
+                      "datetime, product_id AS product_id, cost ")
             table = "FROM product_price_history "
-            where = ("WHERE product IN %s "
+            where = ("WHERE product_id IN %s "
                      "AND company_id = %s "
                      "AND datetime <= %s ")
             args = [tuple(product_ids),  company_id, datetime]

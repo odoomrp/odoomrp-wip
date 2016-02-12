@@ -22,34 +22,7 @@ from .product_price import PRODUCT_FIELD_HISTORIZE
 
 
 class ProductProduct(models.Model):
-    _inherit = "product.product"
-
-    @api.one
-    def _set_cost_price(self, value):
-        ''' Store the cost price change in order to be able to retrieve the
-        cost of a product for a given date'''
-        price_history_obj = self.env['product.price.history']
-        user_company = self.env.user.company_id.id
-        company_id = self.env.context.get('force_company', user_company)
-        price_history_obj.create({
-            'product_template_id': self.product_tmpl_id.id,
-            'product': self.id,
-            'cost': value,
-            'company_id': company_id,
-        })
-
-    @api.model
-    def create(self, values):
-        product = super(ProductProduct, self).create(values)
-        product._set_cost_price(product.standard_price)
-        return product
-
-    @api.multi
-    def write(self, values):
-        if 'standard_price' in values:
-            for product in self:
-                product._set_cost_price(values['standard_price'])
-        return super(ProductProduct, self).write(values)
+    _inherit = 'product.product'
 
     @api.multi
     def open_product_historic_prices(self):
