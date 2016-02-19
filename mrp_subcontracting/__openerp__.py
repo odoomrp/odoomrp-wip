@@ -40,6 +40,7 @@
         'views/mrp_routing_workcenter_view.xml',
         'views/mrp_production_view.xml',
         'views/mrp_production_workcenter_line_view.xml',
+        'views/res_config.xml',
     ],
     "installable": True
 }
