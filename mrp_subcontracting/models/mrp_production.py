@@ -8,36 +8,40 @@ from openerp import models, fields, api
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    @api.one
-    def _created_purchases(self):
-        cond = [('mrp_production', '=', self.id)]
-        self.created_purchases = len(self.env['purchase.order'].search(cond))
-
-    @api.one
-    def _created_outpickings(self):
-        picking_obj = self.env['stock.picking']
-        cond = [('mrp_production', '=', self.id)]
-        self.created_outpickings = len(
-            picking_obj.search(cond).filtered(
-                lambda x: x.picking_type_id.code == 'outgoing'))
-
-    @api.one
-    def _created_inpickings(self):
-        picking_obj = self.env['stock.picking']
-        cond = [('mrp_production', '=', self.id)]
-        self.created_outpickings = len(
-            picking_obj.search(cond).filtered(
-                lambda x: x.picking_type_id.code == 'incoming'))
-
     created_purchases = fields.Integer(
         string='Created Purchases', readonly=True,
-        compute='_created_purchases', track_visibility='always')
+        compute='_compute_created_purchases', track_visibility='always')
     created_outpickings = fields.Integer(
         string='Created Out Pickings', readonly=True,
-        compute='_created_outpickings', track_visibility='always')
+        compute='_compute_created_outpickings', track_visibility='always')
     created_inpickings = fields.Integer(
         string='Created In Pickings', readonly=True,
-        compute='_created_inpickings', track_visibility='always')
+        compute='_compute_created_inpickings', track_visibility='always')
+
+    @api.multi
+    def _compute_created_purchases(self):
+        PurchaseOrder = self.env['purchase.order']
+        for mo in self:
+            cond = [('mrp_production', '=', mo.id)]
+            mo.created_purchases = len(PurchaseOrder.search(cond))
+
+    @api.multi
+    def _compute_created_outpickings(self):
+        picking_obj = self.env['stock.picking']
+        for mo in self:
+            cond = [('mrp_production', '=', self.id)]
+            self.created_outpickings = len(
+                picking_obj.search(cond).filtered(
+                    lambda x: x.picking_type_id.code == 'outgoing'))
+
+    @api.multi
+    def _compute_created_inpickings(self):
+        picking_obj = self.env['stock.picking']
+        for mo in self:
+            cond = [('mrp_production', '=', self.id)]
+            self.created_outpickings = len(
+                picking_obj.search(cond).filtered(
+                    lambda x: x.picking_type_id.code == 'incoming'))
 
     @api.one
     def action_confirm(self):
@@ -52,6 +56,18 @@ class MrpProduction(models.Model):
             if wc_line.external:
                 wc_line.procurement_order = (
                     self._create_external_procurement(wc_line))
+        return res
+
+    @api.multi
+    def action_cancel(self):
+        res = super(MrpProduction, self).action_cancel()
+        propagate_cancel = self.env['mrp.config.settings']._get_parameter(
+            'propagate.cancel')
+        if propagate_cancel and propagate_cancel.value:
+            wc_lines = self.mapped('workcenter_lines')
+            wc_external_lines = wc_lines.filtered('external')
+            procurement_orders = wc_external_lines.mapped('procurement_order')
+            procurement_orders.cancel()
         return res
 
     def _prepare_extenal_procurement(self, wc_line):
