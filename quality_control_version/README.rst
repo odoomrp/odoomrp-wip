@@ -6,6 +6,10 @@
 Quality control version
 =======================
 
+This module is intended for versioning Quality Control Tests.
+
+When a new version is created (with the button for it), the old one is
+deactivated, so that the system won't find them if it is not forced to it.
 
 
 Usage
@@ -31,4 +35,3 @@ Contributors
 * Pedro M. Baeza <pedro.baeza@serviciobaeza.com>
 * Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
 * Ana Juaristi <anajuaristi@avanzosc.es>
-
