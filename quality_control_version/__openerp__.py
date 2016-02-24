@@ -5,7 +5,7 @@
 {
     "name": "Quality control version",
     "summary": "Quality test versioning",
-    "version": "8.0.1.0.0",
+    "version": "8.0.1.1.0",
     "category": "Quality control",
     "license": "AGPL-3",
     "author": "OdooMRP team, "

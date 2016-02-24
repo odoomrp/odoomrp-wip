@@ -6,7 +6,7 @@
             <field name="model">qc.test</field>
             <field name="inherit_id" ref="quality_control.qc_test_form_view" />
             <field name="arch" type="xml">
-                <h1 position="after">
+                <h1 position="before">
                     <div class="oe_right oe_button_box" name="buttons">
                     </div>
                 </h1>
@@ -18,6 +18,11 @@
             <field name="model">qc.test</field>
             <field name="inherit_id" ref="quality_control.qc_test_buttons" />
             <field name="arch" type="xml">
+                <h1 position="after">
+                    <div class="oe_grey" attrs="{'invisible': [('version','=',0)]}">
+                        <p>Changing the name of the test will not update the unrevisioned name, so that new versions will not have the new name in the name root.</p>
+                    </div>
+                </h1>
                 <div name="buttons" position="inside">
                     <button class="oe_stat_button" name="action_open_older_versions"
                             type="object" icon="fa-archive" string="Old Versions">

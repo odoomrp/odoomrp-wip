@@ -9,10 +9,10 @@ class QcTest(models.Model):
     _inherit = 'qc.test'
 
     version = fields.Integer(
-        string='Version Number', default=0, readonly=True)
+        string='Version Number', default=0, readonly=True, copy=False)
     deactivate_date = fields.Date(string='Deactivated date', readonly=True)
     parent_test = fields.Many2one(
-        comodel_name='qc.test', string='Parent Test')
+        comodel_name='qc.test', string='Parent Test', copy=False)
     old_versions = fields.One2many(
         comodel_name='qc.test', string='Old Versions',
         inverse_name='parent_test', context={'active_test': False})
@@ -24,6 +24,13 @@ class QcTest(models.Model):
         if 'unrevisioned_name' not in values:
             values['unrevisioned_name'] = values['name']
         return super(QcTest, self).create(values)
+
+    @api.multi
+    def write(self, values):
+        for test in self:
+            if 'name' in values and not values.get('version', test.version):
+                values['unrevisioned_name'] = values['name']
+            return super(QcTest, test).write(values)
 
     def _copy_test(self):
         new_test = self.copy({
@@ -47,8 +54,6 @@ class QcTest(models.Model):
     @api.multi
     def action_open_older_versions(self):
         result = self.env.ref('quality_control.action_qc_test').read()[0]
-        if self.old_versions:
-            result['domain'] = "[('id', 'in'," +\
-                str(self.old_versions.ids) + ")]"
-            result['context'] = "{'active_test': False}"
+        result['domain'] = "[('id', 'in'," + str(self.old_versions.ids) + ")]"
+        result['context'] = "{'active_test': False}"
         return result
