@@ -54,6 +54,6 @@ class QcTest(models.Model):
     @api.multi
     def action_open_older_versions(self):
         result = self.env.ref('quality_control.action_qc_test').read()[0]
-        result['domain'] = "[('id', 'in'," + str(self.old_versions.ids) + ")]"
-        result['context'] = "{'active_test': False}"
+        result['domain'] = [('id', 'in', self.old_versions.ids)]
+        result['context'] = {'active_test': False}
         return result
