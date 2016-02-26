@@ -27,9 +27,8 @@
     'website': 'http://www.odoomrp.com',
     "depends": ['mrp'],
     "category": "Generic Modules",
-    "data": ['views/mrp_workflow.xml',
-             'views/mrp_production_view.xml'
-             ],
+    "data": ['views/mrp_production_view.xml',
+             'views/mrp_workflow.xml'],
     "installable": True,
     "application": True
 }

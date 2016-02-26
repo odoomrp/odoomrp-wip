@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <data>
                 <button name="button_produce" position="after">
-                     <button name="button_produce_close" string="Close Production" class="oe_highlight" states="in_production"/>
+                     <button name="button_produce_close" string="Close Production" type="object" class="oe_highlight" states="in_production"/>
                 </button>
             </data>
         </field>
