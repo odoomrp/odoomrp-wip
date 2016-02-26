@@ -109,13 +109,6 @@ class PricelistItem(models.Model):
         items = self.search(domain, order='min_quantity desc,sequence asc')
         item_ids = items.ids
         for item in items:
-            if item.base == -1:
-                item_ids.remove(item.id)
-                new_item_ids = self.domain_by_pricelist(
-                    item.base_pricelist_id.id, product_id=product_id,
-                    product_tmpl_id=product_tmpl_id, categ_id=categ_id,
-                    qty=qty, partner_id=partner_id)
-                item_ids += new_item_ids
             if item.base == -2:
                 if item.pricelist.type == 'sale':
                     suppinfo_obj = suppinfo_obj.with_context(

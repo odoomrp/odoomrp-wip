@@ -190,14 +190,23 @@ class SaleOrderLine(models.Model):
                               'message': warning_msgs}
         return res
 
-    @api.one
     @api.onchange('item_id')
     def onchange_item_id(self):
         if self.item_id:
             self.discount = self.item_id.discount
             self.discount2 = self.item_id.discount2
             self.discount3 = self.item_id.discount3
-            self.offer_id = self.item_id.offer.id
+            self.offer_id = self.item_id.offer
+            if not self.offer_id and self.item_id.base == -1:
+                item_obj = self.env['product.pricelist.item']
+                item_ids = item_obj.domain_by_pricelist(
+                    self.item_id.base_pricelist_id.id,
+                    product_id=self.product_id.id, qty=self.product_uom_qty,
+                    partner_id=self.order_id.partner_id.id)
+                for item in item_obj.browse(item_ids):
+                    if item.offer:
+                        self.offer_id = item.offer
+                        break
             if self.product_id:
                 self.price_unit = self.item_id.price_get(
                     self.product_id.id, self.product_uom_qty,
