@@ -106,7 +106,7 @@ class PricelistItem(models.Model):
         domain.extend(['&', ('product_id', '=', False),
                        '&', ('product_tmpl_id', '=', False),
                        ('categ_id', '=', False)])
-        items = self.search(domain, order='min_quantity desc,sequence asc')
+        items = self.search(domain, order='sequence asc,min_quantity desc')
         item_ids = items.ids
         for item in items:
             if item.base == -2:
