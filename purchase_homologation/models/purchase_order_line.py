@@ -64,7 +64,10 @@ class PurchaseOrderLine(models.Model):
             context=context)
         message = _("This product is not homologated for purchasing it.")
         if not homologation_ids:
-            res['warning'] = {'message': _(message)}
+            res['warning'] = {
+                'title': _('Error'),
+                'message': _(message)
+            }
             data_obj = self.pool['ir.model.data']
             xml_id = data_obj._get_id(cr, uid, 'purchase_homologation',
                                       'group_purchase_homologation')
