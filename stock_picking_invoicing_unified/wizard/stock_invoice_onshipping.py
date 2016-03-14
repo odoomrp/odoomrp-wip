@@ -116,19 +116,31 @@ class StockInvoiceOnshipping(models.TransientModel):
         (sale_pickings, sale_refund_pickings, purchase_pickings,
             purchase_refund_pickings) = self.get_split_pickings()
         if sale_pickings:
-            res += sale_pickings.action_invoice_create(
+            res += sale_pickings.with_context(
+                group_by_parent=self.group_by_parent,
+                date_inv=self.invoice_date,
+                inv_type='out_invoice').action_invoice_create(
                 journal_id=self.sale_journal.id,
                 group=self.group, type='out_invoice')
         if sale_refund_pickings:
-            res += sale_refund_pickings.action_invoice_create(
+            res += sale_refund_pickings.with_context(
+                group_by_parent=self.group_by_parent,
+                date_inv=self.invoice_date,
+                inv_type='out_refund').action_invoice_create(
                 journal_id=self.sale_refund_journal.id,
                 group=self.group, type='out_refund')
         if purchase_pickings:
-            res += purchase_pickings.action_invoice_create(
+            res += purchase_pickings.with_context(
+                group_by_parent=self.group_by_parent,
+                date_inv=self.invoice_date,
+                inv_type='in_invoice').action_invoice_create(
                 journal_id=self.purchase_journal.id,
                 group=self.group, type='in_invoice')
         if purchase_refund_pickings:
-            res += purchase_refund_pickings.action_invoice_create(
+            res += purchase_refund_pickings.with_context(
+                group_by_parent=self.group_by_parent,
+                date_inv=self.invoice_date,
+                inv_type='in_refund').action_invoice_create(
                 journal_id=self.purchase_refund_journal.id, group=self.group,
                 type='in_refund')
         return res
