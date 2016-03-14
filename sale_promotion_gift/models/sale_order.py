@@ -77,7 +77,7 @@ class SaleOrder(models.Model):
                 elif item.product_tmpl_id:
                     qty = sum(
                         x.product_uom_qty for line in self.order_line.filtered(
-                            lambda x: x.product_template ==
+                            lambda x: x.product_tmpl_id ==
                             item.product_tmpl_id and
                             not x.offer_id.not_combinable))
                 elif item.categ_id:
