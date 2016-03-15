@@ -284,3 +284,9 @@ class PackagingOperation(models.Model):
     package_product = fields.Many2one(
         comodel_name='product.product', string='Package Product',
         compute='_compute_package_product')
+
+    @api.multi
+    def write(self, values):
+        ''' Do not change data if there is a related packaging order '''
+        super(PackagingOperation,
+              self.filtered(lambda x: not x.processed)).write(values)
