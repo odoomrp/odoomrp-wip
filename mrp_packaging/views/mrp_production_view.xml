@@ -15,13 +15,13 @@
                             <group string="Pack" colspan="4" col="4">
                                 <field name="final_product_qty" />
                                 <field name="left_product_qty" />
-                                <button name="get_dump_packages"
+                                <button name="get_dump_packages" class="oe_read_only"
                                         string="Get packages" type="object" />
                                 <button name="scrap_qty_left" string="Scrap Products"
-                                        type="object" icon="terp-gtk-jump-to-ltr" class="oe_inline"
+                                        type="object" icon="terp-gtk-jump-to-ltr" class="oe_inline oe_read_only"
                                         attrs="{'invisible': [('left_product_qty','&lt;=',0)]}" />
                                 <button name="produce_qty_left" string="Produce Missing Quantity"
-                                        type="object" class="oe_inline"
+                                        type="object" class="oe_inline oe_read_only"
                                         attrs="{'invisible': [('left_product_qty','&gt;=',0)]}" />
                                 <field name="pack" nolabel="1"
                                        colspan="4" col="4">
@@ -46,7 +46,7 @@
                                 </field>
                                 <button name="create_mo_from_packaging_operation"
                                         string="Create Pack Manufacturing Orders"
-                                        type="object" colspan="2" />
+                                        type="object" colspan="2" class="oe_read_only" />
                             </group>
                             <group string="Expected Production"
                                    colspan="4" col="4">
