@@ -80,18 +80,14 @@ class MrpRepair(models.Model):
                 }
         return vals
 
-    @api.one
-    @api.model
+    @api.multi
     def action_invoice_create(self, group=False):
         res = super(MrpRepair, self).action_invoice_create(group=group)
-        for line in self.fees_lines:
-            if line.invoice_line_id and self.analytic_account:
-                line.invoice_line_id.write({'account_analytic_id':
-                                            self.analytic_account.id})
-        for line in self.operations:
-            if line.invoice_line_id and self.analytic_account:
-                line.invoice_line_id.write({'account_analytic_id':
-                                            self.analytic_account.id})
+        for record in self.filtered('analytic_account'):
+            record.mapped('fees_lines.invoice_line_id').write(
+                {'account_analytic_id': record.analytic_account.id})
+            record.mapped('operations.invoice_line_id').write(
+                {'account_analytic_id': record.analytic_account.id})
         return res
 
 
