@@ -14,6 +14,7 @@ class StockTransferDetails(models.TransientModel):
         operation_obj = self.env['stock.pack.operation']
         for picking in self.picking_ids:
             # Create new and update existing pack operations
+            picking.pack_operation_ids.unlink()
             for line in [self.item_ids.filtered(lambda x: x.picking_id.id ==
                                                 picking.id),
                          self.packop_ids.filtered(lambda x: x.picking_id.id ==
