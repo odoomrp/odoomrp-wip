@@ -130,8 +130,9 @@ class SaleOrderLine(models.Model):
             fiscal_position=fiscal_position, flag=flag)
         if product:
             product = product_obj.browse(product)
-            res['value']['product_attributes'] = (
-                product._get_product_attributes_values_dict())
+            attr_values_dict = product._get_product_attributes_values_dict()
+            attr_values = [(0, 0, values) for values in attr_values_dict]
+            res['value']['product_attributes'] = attr_values
             res['value']['name'] = self._get_product_description(
                 product.product_tmpl_id, product, product.attribute_value_ids)
             if product.description_sale:
