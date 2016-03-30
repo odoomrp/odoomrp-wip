@@ -8,8 +8,9 @@
             <field name="context">{'default_ref': 'qc.inspection,'+str(context.get('active_id', False))}</field>
             <field name="domain">[('ref','=','qc.inspection,'+str(context.get('active_id',False)))]</field>
         </record>
-        <record id="qc_inspection_tree_view_inh_qualitycontroclaim" model="ir.ui.view">
-            <field name="name">qc.inspection.tree.view.inh.qualitycontroclaim</field>
+
+        <record id="qc_inspection_claim_tree_view" model="ir.ui.view">
+            <field name="name">qc.inspection.claim.tree</field>
             <field name="model">qc.inspection</field>
             <field name="inherit_id" ref="quality_control.qc_inspection_tree_view"/>
             <field name="arch" type="xml">
@@ -19,8 +20,9 @@
                 </field>
             </field>
         </record>
-        <record id="qc_inspection_form_view_inh_qualitycontroclaim" model="ir.ui.view">
-            <field name="name">qc.inspection.form.view.inh.qualitycontroclaim</field>
+
+        <record id="qc_inspection_claim_form_view" model="ir.ui.view">
+            <field name="name">qc.inspection.claim.form</field>
             <field name="model">qc.inspection</field>
             <field name="inherit_id" ref="quality_control.qc_inspection_form_view"/>
             <field name="arch" type="xml">
@@ -28,15 +30,13 @@
                     <field name="automatic_claims" />
                     <field name="automatic_claims_by_line" />
                 </field>
-                <xpath expr="//h1//field[@name='name']" position="after">
-                    <div class="oe_right oe_button_box" name="buttons">
+                <div name="buttons" position="inside">
                         <button class="oe_inline oe_stat_button"
                             type="action" name="%(action_claims_per_inspection)d"
                             icon="fa-bookmark-o">
                             <field name="claims" widget="statinfo" />
                         </button>
-                    </div>
-                </xpath>
+                </div>
             </field>
         </record>
     </data>
