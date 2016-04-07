@@ -13,7 +13,8 @@ class StockTransferDetails(models.TransientModel):
     def default_get(self, fields):
         picking = self.env['stock.picking'].browse(
             self.env.context.get('active_id'))
-        picking.create_all_move_packages()
+        if picking.pack_operation_ids:
+            picking.create_all_move_packages()
         return super(StockTransferDetails, self).default_get(fields)
 
     @api.multi
