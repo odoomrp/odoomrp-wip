@@ -1,45 +1,29 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * procurement_plan
-# 
-# Translators:
+# 	* procurement_plan
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:44+0000\n"
-"PO-Revision-Date: 2015-10-09 10:50+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
+"POT-Creation-Date: 2016-04-12 07:03+0000\n"
+"PO-Revision-Date: 2016-04-12 09:18+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"                "
 
 #. module: procurement_plan
-#: help:procurement.order,location_type:0
-msgid ""
-"* Supplier Location: Virtual location representing the source location for products coming from your suppliers\n"
-"                       \n"
-"* View: Virtual location used to create a hierarchical structures for your warehouse, aggregating its child locations ; can't directly contain products\n"
-"                       \n"
-"* Internal Location: Physical locations inside your own warehouses,\n"
-"                       \n"
-"* Customer Location: Virtual location representing the destination location for products sent to your customers\n"
-"                       \n"
-"* Inventory: Virtual location serving as counterpart for inventory operations used to correct stock levels (Physical inventories)\n"
-"                       \n"
-"* Procurement: Virtual location serving as temporary counterpart for procurement operations when the source (supplier or production) is not known yet. This location should be empty when the procurement scheduler has finished running.\n"
-"                       \n"
-"* Production: Virtual counterpart location for production operations: this location consumes the raw material and produces finished products\n"
-"                       \n"
-"* Transit Location: Counterpart location that should be used in inter-companies or inter-warehouses operations\n"
-"                      "
-msgstr ""
+#: field:wiz.change.procurement.date,days:0
+msgid "Add or subtract days"
+msgstr "Sume o reste días"
 
 #. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
+#: view:wiz.change.procurement.date:procurement_plan.wiz_change_procurement_date_view
 #: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
 #: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
 #: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
@@ -58,12 +42,19 @@ msgid "Category"
 msgstr "Categoría"
 
 #. module: procurement_plan
+#: model:ir.actions.act_window,name:procurement_plan.action_change_procurement_scheduled_date
+#: view:wiz.change.procurement.date:procurement_plan.wiz_change_procurement_date_view
+msgid "Change scheduled date"
+msgstr "Cambiar fecha prevista"
+
+#. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 msgid "Check Procurements"
 msgstr "Comprobar abastecimientos"
 
 #. module: procurement_plan
 #: field:procurement.plan,create_uid:0
+#: field:wiz.change.procurement.date,create_uid:0
 #: field:wiz.import.procurement.from.plan,create_uid:0
 #: field:wiz.load.purchase.from.plan,create_uid:0
 #: field:wiz.load.sale.from.plan,create_uid:0
@@ -72,6 +63,7 @@ msgstr "Creado por"
 
 #. module: procurement_plan
 #: field:procurement.plan,create_date:0
+#: field:wiz.change.procurement.date,create_date:0
 #: field:wiz.import.procurement.from.plan,create_date:0
 #: field:wiz.load.purchase.from.plan,create_date:0
 #: field:wiz.load.sale.from.plan,create_date:0
@@ -116,21 +108,33 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:86
 #: code:addons/procurement_plan/models/procurement_plan.py:87
+#: code:addons/procurement_plan/models/procurement_plan.py:111
 #: code:addons/procurement_plan/models/procurement_plan.py:112
 #, python-format
 msgid "Error!: End date is lower than start date."
 msgstr "Error!: Fecha fin es menor que fecha comienzo."
 
 #. module: procurement_plan
+#: code:addons/procurement_plan/wizard/wiz_change_procurement_date.py:44
+#, python-format
+msgid "Error!: No procurements found to treat."
+msgstr "Error!: No encontrados abastecimientos a tratar."
+
+#. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:80
 #: code:addons/procurement_plan/models/procurement_plan.py:81
+#: code:addons/procurement_plan/models/procurement_plan.py:105
 #: code:addons/procurement_plan/models/procurement_plan.py:106
 #, python-format
 msgid "Error!: You must enter from date."
 msgstr "Error!: Debe de introduir desde fecha."
 
 #. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:83
 #: code:addons/procurement_plan/models/procurement_plan.py:84
+#: code:addons/procurement_plan/models/procurement_plan.py:108
 #: code:addons/procurement_plan/models/procurement_plan.py:109
 #, python-format
 msgid "Error!: You must enter to date."
@@ -163,10 +167,13 @@ msgstr "Agrupar por"
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr "Resumen del chat (número de mensajes, ...). Este resumen es directamente en formato html para ser insertada en vistas kanban."
+msgstr ""
+"Resumen del chat (número de mensajes, ...). Este resumen es directamente en "
+"formato html para ser insertada en vistas kanban."
 
 #. module: procurement_plan
-#: field:procurement.plan,id:0 field:wiz.import.procurement.from.plan,id:0
+#: field:procurement.plan,id:0 field:wiz.change.procurement.date,id:0
+#: field:wiz.import.procurement.from.plan,id:0
 #: field:wiz.load.purchase.from.plan,id:0 field:wiz.load.sale.from.plan,id:0
 msgid "ID"
 msgstr "ID"
@@ -203,6 +210,7 @@ msgstr "Fecha último mensaje"
 
 #. module: procurement_plan
 #: field:procurement.plan,write_uid:0
+#: field:wiz.change.procurement.date,write_uid:0
 #: field:wiz.import.procurement.from.plan,write_uid:0
 #: field:wiz.load.purchase.from.plan,write_uid:0
 #: field:wiz.load.sale.from.plan,write_uid:0
@@ -211,6 +219,7 @@ msgstr "Última actualización por"
 
 #. module: procurement_plan
 #: field:procurement.plan,write_date:0
+#: field:wiz.change.procurement.date,write_date:0
 #: field:wiz.import.procurement.from.plan,write_date:0
 #: field:wiz.load.purchase.from.plan,write_date:0
 #: field:wiz.load.sale.from.plan,write_date:0
@@ -224,6 +233,7 @@ msgid "Load"
 msgstr "Cargar"
 
 #. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:116
 #: code:addons/procurement_plan/models/procurement_plan.py:117
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 #: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
@@ -232,6 +242,7 @@ msgid "Load Purchases"
 msgstr "Cargar compras"
 
 #. module: procurement_plan
+#: code:addons/procurement_plan/models/procurement_plan.py:91
 #: code:addons/procurement_plan/models/procurement_plan.py:92
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 #: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
@@ -261,6 +272,11 @@ msgid "Messages and communication history"
 msgstr "Mensajes e historia de comunicación"
 
 #. module: procurement_plan
+#: field:wiz.change.procurement.date,old_scheduled_date:0
+msgid "Old scheduled date"
+msgstr "Fecha prevista anterior"
+
+#. module: procurement_plan
 #: view:procurement.order:procurement_plan.view_procurement_filter_inh_withplan
 msgid "Origin"
 msgstr "Origen"
@@ -271,6 +287,11 @@ msgstr "Origen"
 #: field:procurement.order,plan:0
 msgid "Plan"
 msgstr "Plan"
+
+#. module: procurement_plan
+#: help:wiz.change.procurement.date,days:0
+msgid "Positive integer sum days, negative integer subtraction days"
+msgstr "Entero positivo suma días, entero negativo resta días."
 
 #. module: procurement_plan
 #: model:ir.model,name:procurement_plan.model_procurement_order
@@ -310,17 +331,25 @@ msgid "Procurements Plans"
 msgstr "Planes de abastecimientos"
 
 #. module: procurement_plan
+#: view:wiz.change.procurement.date:procurement_plan.wiz_change_procurement_date_view
+#: field:wiz.change.procurement.date,procurements:0
+msgid "Procurements to treat"
+msgstr "Abastecimientos a tratar"
+
+#. module: procurement_plan
 #: field:wiz.load.purchase.from.plan,product_id:0
 #: field:wiz.load.sale.from.plan,product_id:0
 msgid "Product"
 msgstr "Producto"
 
 #. module: procurement_plan
+#: code:addons/procurement_plan/wizard/wiz_load_purchase_from_plan.py:93
 #: code:addons/procurement_plan/wizard/wiz_load_purchase_from_plan.py:102
+#: code:addons/procurement_plan/wizard/wiz_load_sale_from_plan.py:95
 #: code:addons/procurement_plan/wizard/wiz_load_sale_from_plan.py:104
 #, python-format
 msgid "Product UOM or Product UOS not found for product: %s"
-msgstr ""
+msgstr "Producto UOM o Producto UOS no encontrada para el producto: %s"
 
 #. module: procurement_plan
 #: field:procurement.plan,project_id:0
@@ -338,6 +367,11 @@ msgstr "Compra"
 #: field:procurement.plan,purchase_ids:0
 msgid "Purchase Orders"
 msgstr "Pedido de compra"
+
+#. module: procurement_plan
+#: view:wiz.change.procurement.date:procurement_plan.wiz_change_procurement_date_view
+msgid "Put a new scheduled date in procurements"
+msgstr "Poner nueva fecha prevista en abastecimientos"
 
 #. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
@@ -407,6 +441,15 @@ msgid "Template"
 msgstr "Plantilla"
 
 #. module: procurement_plan
+#: view:wiz.change.procurement.date:procurement_plan.wiz_change_procurement_date_view
+msgid ""
+"They treated procurements of type INTERNAL, without purchases, or with "
+"purchases with state DRAFT."
+msgstr ""
+"Se han tratado abastecimientos de tipo INTERNO, sin compras, o con compras "
+"en estado BORRADOR."
+
+#. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
 msgid "Unit of Measure"
 msgstr "Unidad de medida"
@@ -435,7 +478,7 @@ msgstr "Sin plan"
 #. module: procurement_plan
 #: model:ir.actions.act_window,name:procurement_plan.action_import_procurement_plan
 msgid "Wizar import procurements from plan"
-msgstr "Wizar import procurements from plan"
+msgstr "Wizard importar abastecimientos desde plan"
 
 #. module: procurement_plan
 #: view:procurement.plan:procurement_plan.procurement_plan_form_view
@@ -443,6 +486,7 @@ msgid "name"
 msgstr "descripción"
 
 #. module: procurement_plan
+#: view:wiz.change.procurement.date:procurement_plan.wiz_change_procurement_date_view
 #: view:wiz.import.procurement.from.plan:procurement_plan.wiz_import_procurement_from_plan_view
 #: view:wiz.load.purchase.from.plan:procurement_plan.wiz_load_purchase_from_plan_view
 #: view:wiz.load.sale.from.plan:procurement_plan.wiz_load_sale_from_plan_view
@@ -454,3 +498,4 @@ msgstr "o"
 #: field:wiz.import.procurement.from.plan,to_date:0
 msgid "to Date"
 msgstr "Hasta fecha"
+
