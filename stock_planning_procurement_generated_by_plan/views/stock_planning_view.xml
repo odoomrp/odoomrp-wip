@@ -16,5 +16,20 @@
                 </field>
             </field>
         </record>
+        <record model="ir.ui.view" id="stock_planning_mrp_tree_view_inh_procplan">
+            <field name="name">stock.planning.mrp.tree.view.inh.procplan</field>
+            <field name="model">stock.planning</field>
+            <field name="inherit_id" ref="stock_planning_mrp.stock_planning_tree_view_inh_mrp" />
+            <field name="arch" type="xml">
+                <field name="productions" position="after">
+                    <field name="reservations" invisible="1" />
+                </field>
+                <button name="show_productions" position="after">
+                    <button string="Show Reservations" name="show_reservations"
+                            type="object" icon="terp-gtk-jump-to-ltr" 
+                            attrs="{'invisible':[('reservations', '=', [])]}"/>
+                </button>
+            </field>
+        </record>
     </data>
 </openerp>

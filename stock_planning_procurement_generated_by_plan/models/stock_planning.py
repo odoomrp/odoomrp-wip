@@ -2,7 +2,7 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
 
 
@@ -14,6 +14,7 @@ class StockPlanning(models.Model):
         super(StockPlanning, self)._get_to_date()
         proc_obj = self.env['procurement.order']
         move_obj = self.env['stock.move']
+        reservation_obj = self.env['stock.reservation']
         moves = move_obj._find_moves_from_stock_planning(
             self.company, self.scheduled_date, product=self.product,
             location_id=self.location, without_reservation=True)
@@ -46,6 +47,11 @@ class StockPlanning(models.Model):
             self.incoming_in_po + self.incoming_in_mo +
             self.move_incoming_to_date - self.outgoing_to_date -
             self.outgoing_to_date_reserve_destination)
+        reservations = reservation_obj._find_reservations_from_stock_planning(
+            self.company, self.from_date, self.scheduled_date, self.product,
+            self.location,
+            self.env.ref('stock_reserve.stock_location_reservation'))
+        self.reservations = [(6, 0, reservations.ids)]
 
     procurement_plan_incoming_to_date_levelgreater0 = fields.Float(
         'Incoming up to date from procurements plan level greater than 0',
@@ -54,6 +60,11 @@ class StockPlanning(models.Model):
     outgoing_to_date_reserve_destination = fields.Float(
         'Outgoing to date reserve destination', compute='_get_to_date',
         digits_compute=dp.get_precision('Product Unit of Measure'))
+    reservations = fields.Many2many(
+        comodel_name='stock.reservation',
+        relation='rel_stock_planning_stock_reservation',
+        column1='stock_planning_id', column2='stock_reservation_id',
+        string='Reservations', compute='_get_to_date')
 
     @api.multi
     def _preparare_procurement_data_from_planning(self, line):
@@ -61,3 +72,14 @@ class StockPlanning(models.Model):
                      self)._preparare_procurement_data_from_planning(line)
         vals.update({'level': 1000})
         return vals
+
+    @api.multi
+    def show_reservations(self):
+        self.ensure_one()
+        return {'name': _('Resevations'),
+                'view_type': 'form',
+                "view_mode": 'tree,form',
+                'res_model': 'stock.reservation',
+                'type': 'ir.actions.act_window',
+                'domain': [('id', 'in', self.reservations.ids)]
+                }
