@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
+    <data>
 
         <record id="group_product_variant_extended_description" model="res.groups">
             <field name="name">Use extended description when having product attributes</field>
