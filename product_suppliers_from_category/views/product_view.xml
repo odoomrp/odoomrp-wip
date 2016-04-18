@@ -6,11 +6,11 @@
             <field name="model">product.category</field>
             <field name="inherit_id" ref="product.product_category_form_view" />
             <field name="arch" type="xml">
-                <field name="type" position="after">
+                <group name="parent" position="after">
                     <group string="Suppliers" col="4" colspan="4" >
                         <field name="suppliers" nolabel="1" domain="[('supplier','=',True)]" col="4" colspan="4" />
                     </group>
-                </field>
+                </group>
             </field>
         </record>
 
