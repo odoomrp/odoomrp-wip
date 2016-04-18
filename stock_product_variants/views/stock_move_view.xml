@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_move_form" model="ir.ui.view">
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="before">
+                    <field name="product_tmpl_id"/>
+                    <button string="(show attributes)"
+                            name="button_show_attributes"
+                            attrs="{'invisible': [('product_attribute_ids', '!=', [])]}"
+                    />
+                    <field name="product_attribute_ids"
+                           context="{'default_owner_model': 'stock.move', 'default_owner_id': id}"
+                           attrs="{'invisible': [('product_attribute_ids', '=', [])]}"
+                    />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_move_picking_form" model="ir.ui.view">
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_form"/>
+            <field name="arch" type="xml">
+                <field name="product_tmpl_id" position="replace"/>
+                <field name="product_id" position="before">
+                    <field name="product_tmpl_id"/>
+                    <div colspan="2">
+                        <button string="(show attributes)"
+                                name="button_show_attributes"
+                                type="object"
+                                class="oe_link oe_edit_only"
+                                attrs="{'invisible': [('product_attribute_ids', '!=', [])]}"
+                        />
+                    </div>
+                    <field name="product_attribute_ids"
+                           context="{'default_owner_model': 'stock.move', 'default_owner_id': id}"
+                           attrs="{'invisible': [('product_attribute_ids', '=', [])]}"
+                    />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

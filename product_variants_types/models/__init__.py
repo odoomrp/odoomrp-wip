@@ -1,6 +1,6 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
+# -*- coding: utf-8 -*-
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3
 
-from . import product
+from . import product_configurator
+from . import product_product
+from . import product_template

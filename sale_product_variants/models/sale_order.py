@@ -100,9 +100,9 @@ class SaleOrderLine(models.Model):
     @api.model
     def _get_product_description(self, template, product, product_attributes):
         name = product and product.name or template.name
-        group = self.env.ref(
-            'sale_product_variants.group_product_variant_extended_description')
-        extended = group in self.env.user.groups_id
+        extended = self.user_has_groups(
+            'product_variants_no_automatic_creation.'
+            'group_product_variant_extended_description')
         if not product_attributes and product:
             product_attributes = product.attribute_value_ids
         values = self._order_attributes(template, product_attributes)
