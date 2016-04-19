@@ -21,7 +21,7 @@
                 </xpath>
                 <field name="attribute_value_ids" position="after">
                     <field name="product_attribute_ids"
-                           context="{'default_owner_model': 'product.product', 'default_owner_id': id, 'show_price_extra': True}"
+                           context="{'default_owner_model': 'product.product', 'default_owner_id': id, 'show_price_extra': True, 'show_attribute': False}"
                            attrs="{'invisible': ['|', ('id','!=',False), '|', ('product_tmpl_id','=',False), ('product_attribute_ids', '=', [])]}"
                     />
                     <field name="product_id" invisible="1"/>

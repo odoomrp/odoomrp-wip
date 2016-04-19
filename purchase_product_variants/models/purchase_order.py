@@ -56,14 +56,16 @@ class ProductAttributeValuePurchaseLine(models.Model):
 
     purchase_line = fields.Many2one(
         comodel_name='purchase.order.line', string='Order line')
-    attribute = fields.Many2one(
-        comodel_name='product.attribute', string='Attribute')
+    attribute_id = fields.Many2one(
+        comodel_name='product.attribute', string='Attribute',
+        oldname="attribute")
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values', readonly=True)
-    value = fields.Many2one(
+    value_id = fields.Many2one(
         comodel_name='product.attribute.value', string='Value',
-        domain="[('id', 'in', possible_values[0][2])]")
+        domain="[('id', 'in', possible_values[0][2])]",
+        oldname="value")
 
     @api.one
     @api.depends('attribute',

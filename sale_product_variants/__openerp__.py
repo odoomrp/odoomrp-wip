@@ -19,7 +19,7 @@
 
 {
     "name": "Sale - Product variants",
-    "version": "1.0",
+    "version": "8.0.1.1.0",
     "depends": [
         "product",
         "sale",

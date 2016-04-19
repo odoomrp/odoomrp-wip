@@ -44,11 +44,13 @@ class ProductAttributeValueSaleLine(models.Model):
 
     sale_line = fields.Many2one(
         comodel_name='sale.order.line', string='Order line')
-    attribute = fields.Many2one(
-        comodel_name='product.attribute', string='Attribute')
-    value = fields.Many2one(
+    attribute_id = fields.Many2one(
+        comodel_name='product.attribute', string='Attribute',
+        oldname="attribute")
+    value_id = fields.Many2one(
         comodel_name='product.attribute.value', string='Value',
-        domain="[('id', 'in', possible_values[0][2])]")
+        domain="[('id', 'in', possible_values[0][2])]",
+        oldname="value")
     possible_values = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values', readonly=True)
