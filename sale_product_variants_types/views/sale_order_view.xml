@@ -7,12 +7,11 @@
             <field name="inherit_id"
                 ref="sale_product_variants.sale_order_extended_form_view" />
             <field name="arch" type="xml">
-                <xpath
-                    expr="//field[@name='order_line']/form//field[@name='product_attributes']/tree//field[@name='value']"
-                    position="after">
+                <xpath expr="//field[@name='order_line']/form//field[@name='product_attributes']/tree//field[@name='value_id']" position="after">
                     <field name="attr_type" invisible="1" />
                     <field name="custom_value"
-                        attrs="{'readonly':[('attr_type','!=','range')]}" />
+                           attrs="{'readonly':[('attr_type','!=','range')]}"
+                    />
                 </xpath>
             </field>
         </record>
@@ -23,12 +22,11 @@
             <field name="inherit_id"
                 ref="sale_product_variants.sale_order_line_extended_form_view" />
             <field name="arch" type="xml">
-                <xpath
-                    expr="//field[@name='product_attributes']/tree//field[@name='value']"
-                    position="after">
+                <xpath expr="//field[@name='product_attributes']/tree//field[@name='value_id']" position="after">
                     <field name="attr_type" invisible="1" />
                     <field name="custom_value"
-                        attrs="{'readonly':[('attr_type','!=','range')]}" />
+                           attrs="{'readonly':[('attr_type','!=','range')]}"
+                    />
                 </xpath>
             </field>
         </record>
