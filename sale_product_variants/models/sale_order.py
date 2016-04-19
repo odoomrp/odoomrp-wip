@@ -135,11 +135,11 @@ class SaleOrderLine(models.Model):
             product = product_obj.browse(product)
             attr_values_dict = product._get_product_attributes_values_dict()
             attr_values = [(0, 0, values) for values in attr_values_dict]
-            res['value_id']['product_attributes'] = attr_values
-            res['value_id']['name'] = self._get_product_description(
+            res['value']['product_attributes'] = attr_values
+            res['value']['name'] = self._get_product_description(
                 product.product_tmpl_id, product, product.attribute_value_ids)
             if product.description_sale:
-                res['value_id']['name'] += '\n' + product.description_sale
+                res['value']['name'] += '\n' + product.description_sale
         return res
 
     @api.multi
