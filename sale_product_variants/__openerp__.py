@@ -39,7 +39,6 @@
     "summary": "Product variants in sale management",
     "data": [
         "security/ir.model.access.csv",
-        'views/res_config_view.xml',
         "views/sale_view.xml",
     ],
     "installable": True,

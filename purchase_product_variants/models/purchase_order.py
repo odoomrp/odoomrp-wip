@@ -32,7 +32,7 @@ class PurchaseOrder(models.Model):
                     continue
                 line._check_line_confirmability()
                 product_obj = self.env['product.product']
-                att_values_ids = line.product_attributes.mapped('value.id')
+                att_values_ids = line.product_attributes.mapped('value_id.id')
                 domain = [('product_tmpl_id', '=', line.product_template.id)]
                 for value in att_values_ids:
                     domain.append(('attribute_value_ids', '=', value))
@@ -68,14 +68,14 @@ class ProductAttributeValuePurchaseLine(models.Model):
         oldname="value")
 
     @api.one
-    @api.depends('attribute',
+    @api.depends('attribute_id',
                  'purchase_line.product_template',
                  'purchase_line.product_template.attribute_line_ids')
     def _get_possible_attribute_values(self):
         attr_values = self.env['product.attribute.value']
         for attr_line in \
                 self.purchase_line.product_template.attribute_line_ids:
-            if attr_line.attribute_id.id == self.attribute.id:
+            if attr_line.attribute_id.id == self.attribute_id.id:
                 attr_values |= attr_line.value_ids
         self.possible_values = attr_values.sorted()
 
@@ -98,9 +98,9 @@ class PurchaseOrderLine(models.Model):
         res2 = []
         for val in res:
             value = product_attribute_values.filtered(
-                lambda x: x.attribute_id.id == val['attribute'])
+                lambda x: x.attribute_id.id == val['attribute_id'])
             if value:
-                val['value'] = value
+                val['value_id'] = value
                 res2.append(val)
         return res2
 
@@ -109,7 +109,7 @@ class PurchaseOrderLine(models.Model):
         if not product_attributes and product:
             product_attributes = product.attribute_value_ids
         values = self._order_attributes(template, product_attributes)
-        description = ", ".join([x['value'].name for x in values])
+        description = ", ".join([x['value_id'].name for x in values])
         if not description:
             return name
         return "%s (%s)" % (name, description)
@@ -184,7 +184,7 @@ class PurchaseOrderLine(models.Model):
     @api.onchange('product_attributes')
     def onchange_product_attributes(self):
         product_obj = self.env['product.product']
-        att_values_ids = [attr_line.value and attr_line.value.id or False
+        att_values_ids = [attr_line.value_id.id
                           for attr_line in self.product_attributes]
         domain = [('product_tmpl_id', '=', self.product_template.id)]
         for value in att_values_ids:
@@ -193,7 +193,7 @@ class PurchaseOrderLine(models.Model):
         if not self.product_id:
             self.name = self._get_product_description(
                 self.product_template, False,
-                self.product_attributes.mapped('value'))
+                self.product_attributes.mapped('value_id'))
             if self.product_template.description_purchase:
                 self.name += '\n' + self.product_template.description_purchase
 
@@ -212,7 +212,7 @@ class PurchaseOrderLine(models.Model):
             product = product_obj.browse(product_id)
             attributes = [(0, 0, x) for x in
                           product._get_product_attributes_values_dict()]
-            res['value'].update(
+            res['value_id'].update(
                 {'product_attributes': attributes,
                  'product_template': product.product_tmpl_id.id})
         return res
@@ -234,7 +234,7 @@ class PurchaseOrderLine(models.Model):
     @api.multi
     def _check_line_confirmability(self):
         for line in self:
-            if (any(not bool(attr_line.value) for attr_line
+            if (any(not bool(attr_line.value_id) for attr_line
                     in line.product_attributes)):
                 raise UserError(
                     _("You can not confirm before configuring all attribute "
