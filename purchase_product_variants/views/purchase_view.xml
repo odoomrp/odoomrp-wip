@@ -41,8 +41,8 @@
                         <field name="product_attributes">
                             <tree create="false" delete="false" editable="1">
                                 <field name="possible_values" invisible="1" />
-                                <field name="attribute" />
-                                <field name="value" />
+                                <field name="attribute_id" />
+                                <field name="value_id" />
                             </tree>
                         </field>
                     </div>
@@ -62,8 +62,8 @@
                         <field name="product_attributes">
                             <tree create="false" delete="false" editable="1">
                                 <field name="possible_values" invisible="1" />
-                                <field name="attribute" />
-                                <field name="value" />
+                                <field name="attribute_id" />
+                                <field name="value_id" />
                             </tree>
                         </field>
                     </div>
