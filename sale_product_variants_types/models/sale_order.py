@@ -11,7 +11,7 @@ class SaleOrderLineAttribute(models.Model):
 
     custom_value = fields.Float(string='Custom value')
     attr_type = fields.Selection(string='Type', store=False,
-                                 related='attribute.attr_type')
+                                 related='attribute_id.attr_type')
 
     def _is_custom_value_in_range(self):
         if self.attr_type == 'range':
@@ -26,8 +26,8 @@ class SaleOrderLineAttribute(models.Model):
             raise exceptions.Warning(
                 _("Custom value for attribute '%s' must be between %s and"
                   " %s.")
-                % (self.attribute.name, self.value.min_range,
-                   self.value.max_range))
+                % (self.attribute_id.name, self.value_id.min_range,
+                   self.value_id.max_range))
 
     @api.one
     @api.onchange('custom_value', 'value')
@@ -44,7 +44,7 @@ class SaleOrderLine(models.Model):
             if line.value:
                 continue
             attribute_line = self.product_template.attribute_line_ids.filtered(
-                lambda x: x.attribute_id == line.attribute)
+                lambda x: x.attribute_id == line.attribute_id)
             if attribute_line.required:
                 raise exceptions.Warning(
                     _("You cannot confirm before configuring all values "

@@ -38,7 +38,7 @@ class ProductAttributeValueSaleLine(models.Model):
     def _get_possible_attribute_values(self):
         attr_values = self.env['product.attribute.value']
         for attr_line in self.sale_line.product_template.attribute_line_ids:
-            if attr_line.attribute_id.id == self.attribute.id:
+            if attr_line.attribute_id.id == self.attribute_id.id:
                 attr_values |= attr_line.value_ids
         self.possible_values = attr_values.sorted()
 

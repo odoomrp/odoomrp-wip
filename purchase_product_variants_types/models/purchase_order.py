@@ -26,8 +26,8 @@ class PurchaseOrderLineAttribute(models.Model):
             raise UserError(
                 _("Custom value for attribute '%s' must be between %s and"
                   " %s.")
-                % (self.attribute.name, self.value.min_range,
-                   self.value.max_range))
+                % (self.attribute_id.name, self.value_id.min_range,
+                   self.value_id.max_range))
 
     @api.one
     @api.onchange('custom_value', 'value')
@@ -44,7 +44,7 @@ class PurchaseOrderLine(models.Model):
             if line.value:
                 continue
             attribute_line = self.product_template.attribute_line_ids.filtered(
-                lambda x: x.attribute_id == line.attribute)
+                lambda x: x.attribute_id == line.attribute_id)
             if attribute_line.required:
                 raise UserError(
                     _("You cannot confirm before configuring all values "
