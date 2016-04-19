@@ -41,7 +41,7 @@ class PurchaseOrderLine(models.Model):
     @api.one
     def _check_line_confirmability(self):
         for line in self.product_attributes:
-            if line.value:
+            if line.value_id:
                 continue
             attribute_line = self.product_template.attribute_line_ids.filtered(
                 lambda x: x.attribute_id == line.attribute_id)
