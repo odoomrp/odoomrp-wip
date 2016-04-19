@@ -20,7 +20,7 @@ class PurchaseOrderLineAttribute(models.Model):
         return True
 
     @api.one
-    @api.constrains('custom_value', 'attr_type', 'value')
+    @api.constrains('custom_value', 'attr_type', 'value_id')
     def _custom_value_in_range(self):
         if not self._is_custom_value_in_range():
             raise UserError(
@@ -30,7 +30,7 @@ class PurchaseOrderLineAttribute(models.Model):
                    self.value_id.max_range))
 
     @api.one
-    @api.onchange('custom_value', 'value')
+    @api.onchange('custom_value', 'value_id')
     def _onchange_custom_value(self):
         self._custom_value_in_range()
 
