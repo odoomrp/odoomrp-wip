@@ -212,7 +212,7 @@ class PurchaseOrderLine(models.Model):
             product = product_obj.browse(product_id)
             attributes = [(0, 0, x) for x in
                           product._get_product_attributes_values_dict()]
-            res['value_id'].update(
+            res['value'].update(
                 {'product_attributes': attributes,
                  'product_template': product.product_tmpl_id.id})
         return res
