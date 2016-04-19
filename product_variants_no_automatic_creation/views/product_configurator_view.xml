@@ -11,7 +11,7 @@
                     <field name="attribute_id" />
                     <field name="possible_value_ids" invisible="1" />
                     <field name="value_id"
-                           context="{'show_attribute': False}"
+                           context="{'show_attribute': False, 'default_attribute_id': attribute_id}"
                     />
                     <field name="price_extra"
                            invisible="not context.get('show_price_extra', False)"
