@@ -11,7 +11,7 @@ class PurchaseOrderLineAttribute(models.Model):
 
     custom_value = fields.Float(string='Custom value')
     attr_type = fields.Selection(
-        string='Type', store=False, related='attribute.attr_type')
+        string='Type', store=False, related='attribute_id.attr_type')
 
     def _is_custom_value_in_range(self):
         if self.attr_type == 'range':
