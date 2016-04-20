@@ -24,4 +24,4 @@ class SaleOrderLine(models.Model):
 
     @api.one
     def _get_attributes_values(self):
-        self.attributes_values = self.product_attributes.mapped('value')
+        self.attributes_values = self.product_attributes.mapped('value_id')
