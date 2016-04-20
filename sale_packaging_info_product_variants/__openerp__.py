@@ -18,7 +18,7 @@
 
 {
     "name": "Sale - Packaging information (with product variants)",
-    "version": "1.0",
+    "version": "8.0.1.1.0",
     "depends": [
         "sale_packaging_info",
         "sale_product_variants",
