@@ -12,7 +12,7 @@
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']"
                        position="before">
-                    <field name="product_template" />
+                    <field name="product_tmpl_id" />
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
                        position="after">
@@ -27,22 +27,11 @@
                 </xpath>
                 <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"
                        position="before">
-                    <field name="product_template" />
-                    <field name="product_attributes_count" invisible="1"/>
-                    <div colspan="4"
-                         attrs="{'invisible': [('product_attributes_count', '=', 0)]}">
-                        <label for="product_attributes" />
-                        <field name="product_attributes">
-                            <tree create="false" delete="false" editable="1">
-                                <field name="attribute_id" />
-                                <field name="possible_values"
-                                       invisible="1"
-                                       widget="many2many_tags" />
-                                <field name="value_id" />
-                                <field name="price_extra" readonly="True" />
-                            </tree>
-                        </field>
-                    </div>
+                    <field name="product_tmpl_id" />
+                    <field name="product_attribute_ids"
+                           context="{'default_owner_model': 'sale.order.line', 'default_owner_id': id}"
+                           attrs="{'invisible':[('product_attribute_ids','=',[])]}"
+                    />
                 </xpath>
                 <xpath expr="//field[@name='order_line']//form//field[@name='price_unit']"
                        position="after">
@@ -60,19 +49,13 @@
             <field name="inherit_id" ref="sale.view_order_line_form2" />
             <field name="arch" type="xml">
                 <field name="product_id" position="before">
-                    <field name="product_template" />
+                    <field name="product_tmpl_id" />
                 </field>
                 <field name="name" position="after">
-                    <label for="product_attributes" />
-                    <field name="product_attributes"
-                        attrs="{'invisible': [('product_attributes','=',[])]}"
-                        options="{'no_create': True, 'no_delete': True}">
-                        <tree create="0" delete="0" editable="1">
-                            <field name="attribute_id" />
-                            <field name="value_id" />
-                            <field name="price_extra" readonly="True" />
-                        </tree>
-                    </field>
+                    <field name="product_attribute_ids"
+                           context="{'default_owner_model': 'sale.order.line', 'default_owner_id': id}"
+                           attrs="{'invisible': [('product_attribute_ids', '=', [])]}"
+                    />
                 </field>
             </field>
         </record>
@@ -83,7 +66,7 @@
             <field name="inherit_id" ref="sale.view_order_line_tree" />
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                    <field name="product_template" />
+                    <field name="product_tmpl_id" />
                     <field name="product_id" />
                 </field>
             </field>
@@ -95,13 +78,13 @@
             <field name="inherit_id" ref="sale.view_sales_order_line_filter" />
             <field name="arch" type="xml">
                 <field name="product_id" position="after">
-                    <field name="product_template" />
+                    <field name="product_tmpl_id" />
                 </field>
                 <filter string="Product" position="after">
-                    <filter string="Template"
+                    <filter string="Template" name="search_template"
                             icon="terp-accessories-archiver"
                             domain="[]"
-                            context="{'group_by':'product_template'}" />
+                            context="{'group_by':'product_tmpl_id'}" />
                 </filter>
             </field>
         </record>

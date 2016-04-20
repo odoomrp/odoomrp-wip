@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -24,8 +24,7 @@ class SaleOrder(models.Model):
 
     @api.multi
     def recalculate_prices(self):
-        for record in self:
-            for line in record.order_line:
-                if line.product_template and not line.product_id:
-                    line.update_price_unit()
+        for line in self.mapped('order_line').filtered(
+                lambda x: x.product_tmpl_id and not x.product_id):
+            line.update_price_unit()
         super(SaleOrder, self).recalculate_prices()
