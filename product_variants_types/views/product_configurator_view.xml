@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="product_configurator_types_tree_view" model="ir.ui.view">
+            <field name="name">product.configurator.types.tree</field>
+            <field name="model">product.configurator.attribute</field>
+            <field name="inherit_id"
+                   ref="product_variants_no_automatic_creation.view_product_configurator_tree" />
+            <field name="arch" type="xml">
+                <field name="value_id">
+                    <field name="attr_type" invisible="1" />
+                    <field name="custom_value"
+                           invisible="not context.get('show_custom_value', False)"
+                           attrs="{'readonly':[('attr_type','!=','range')]}"
+                    />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

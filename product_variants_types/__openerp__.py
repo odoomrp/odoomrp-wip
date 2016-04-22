@@ -6,12 +6,13 @@
 {
     "name": "Product Variants with Attribute Types",
     "version": "8.0.1.0.1",
+    "license": "AGPL-3",
     "depends": [
         "product_variants_no_automatic_creation",
         "product_attribute_types",
     ],
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
               "Tecnativa",
     "website": "http://www.odoomrp.com",
     "contributors": [
@@ -20,6 +21,9 @@
         "Ana Juaristi <ajuaristio@gmail.com>"
     ],
     "category": "Hidden/Dependency",
+    "data": [
+        "views/product_configurator_view.xml",
+    ],
     "installable": True,
     "auto_install": True,
 }
