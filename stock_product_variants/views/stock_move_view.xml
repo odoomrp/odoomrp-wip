@@ -8,10 +8,14 @@
             <field name="arch" type="xml">
                 <field name="product_id" position="before">
                     <field name="product_tmpl_id"/>
-                    <button string="(show attributes)"
-                            name="button_show_attributes"
-                            attrs="{'invisible': [('product_attribute_ids', '!=', [])]}"
-                    />
+                    <div colspan="2">
+                        <button string="(show attributes)"
+                                name="button_show_attributes"
+                                type="object"
+                                class="oe_link oe_edit_only"
+                                attrs="{'invisible': [('product_attribute_ids', '!=', [])]}"
+                        />
+                    </div>
                     <field name="product_attribute_ids"
                            context="{'default_owner_model': 'stock.move', 'default_owner_id': id}"
                            attrs="{'invisible': [('product_attribute_ids', '=', [])]}"
