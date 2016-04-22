@@ -112,7 +112,7 @@ class ProductConfigurator(models.AbstractModel):
             product = self.env['product.product'].browse(product_id)
             attr_values_dict = product._get_product_attributes_values_dict()
             for val in attr_values_dict:
-                val['product_tmpl_id'] = product.product_tmpl_id
+                val['product_tmpl_id'] = product.product_tmpl_id.id
                 val['owner_model'] = self._name
                 val['owner_id'] = self.id
             attr_values = [(0, 0, values) for values in attr_values_dict]
