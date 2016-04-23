@@ -11,7 +11,7 @@ class ProductProduct(models.Model):
     _name = "product.product"
 
     # This is needed as the AbstractModel removes the delegated related field
-    name = fields.Char(related="product_tmpl_id.name", store=True)
+    name = fields.Char(related="product_tmpl_id.name")
 
     @api.multi
     def _get_product_attributes_values_dict(self):
