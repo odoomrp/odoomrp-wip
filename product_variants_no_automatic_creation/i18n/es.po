@@ -55,6 +55,11 @@ msgid "Don't create variants automatically"
 msgstr "No crear variantes automáticamente"
 
 #. module: product_variants_no_automatic_creation
+#: field:product.product,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: product_variants_no_automatic_creation
 #: model:ir.model,name:product_variants_no_automatic_creation.model_product_pricelist
 msgid "Pricelist"
 msgstr "Tarifa"
