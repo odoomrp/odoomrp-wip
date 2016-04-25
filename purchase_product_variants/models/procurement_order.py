@@ -21,8 +21,9 @@ class ProcurementOrder(models.Model):
             product = self.env['product.product'].with_context(ctx).browse(
                 vals['product_id'])
             vals['product_template'] = product.product_tmpl_id.id
-            vals['product_attributes'] = [(0, 0, x) for x in
-                                product._get_product_attributes_values_dict()]
+            vals['product_attributes'] = \
+                [(0, 0, x) for x in
+                 product._get_product_attributes_values_dict()]
             vals['name'] = self.env[
                 'purchase.order.line']._get_product_description(
                 product.product_tmpl_id, product, product.attribute_value_ids)
