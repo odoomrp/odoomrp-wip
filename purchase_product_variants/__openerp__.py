@@ -33,6 +33,7 @@
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <ajuaristio@gmail.com>",
     ],
+    "license": "AGPL-3",
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
     "summary": "",
