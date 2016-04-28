@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+# © 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# © 2015 AvanzOsc (http://www.avanzosc.es)
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3
 
-from openerp import models, fields, api
-from lxml import etree
+from openerp import api, fields, models
+from openerp.tools import ustr
 
 
 class SaleOrder(models.Model):
@@ -49,28 +51,28 @@ class SaleOrder(models.Model):
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
                         submenu=False):
         """Inject the domain here to avoid conflicts with other modules.
+        product_tmpl_id field will only be present when sale_order_variants
+        is installed.
         """
         res = super(SaleOrder, self).fields_view_get(
             view_id=view_id, view_type=view_type, toolbar=toolbar,
             submenu=submenu)
-        for field in res['fields']:
-            if field == 'order_line' and 'views' in res['fields'][field]:
-                if 'tree' in res['fields'][field]['views']:
-                    for line_field in res['fields'][field]['views']['tree']['fields']:
-                        if line_field == 'product_id':
-                            print res['fields'][field]['views']['tree']['fields'][line_field]['domain']
-                        elif line_field == 'product_tmpl_id':
-                            print res['fields'][field]['views']['tree']['fields'][line_field]['domain']
-                if 'form' in res['fields'][field]['views']:
-                    for line_field in res['fields'][field]['views']['tree']['fields']:
-                        if line_field == 'product_id':
-                            print res['fields'][field]['views']['tree']['fields'][line_field]['domain']
-                        elif line_field == 'product_tmpl_id':
-                            print res['fields'][field]['views']['tree']['fields'][line_field]['domain']
-#             if field == 'product_id' and self.allowed_product_ids:
-#                 res['fields'][field]['domain'] =\
-#                     "[('id', 'in', parent.allowed_product_ids[0][2])]"
-#             elif field == 'product_tmpl_id' and self.allowed_tmpl_ids:
-#                 res['fields'][field]['domain'] =\
-#                     "[('id', 'in', parent.allowed_tmpl_ids[0][2])]"
+        if view_type != 'form':
+            return res  # pragma: no cover
+        domain_dict = {
+            'product_id': "('id', 'in', parent.allowed_product_ids[0][2]), ",
+            'product_tmpl_id': "('id', 'in', parent.allowed_tmpl_ids[0][2]), ",
+        }
+        if 'order_line' not in res['fields']:
+            return res  # pragma: no cover
+        line_field = res['fields']['order_line']
+        for view_type, view in line_field['views'].iteritems():
+            if view_type not in ('tree', 'form'):
+                continue  # pragma: no cover
+            for field_name, domain_field in domain_dict.iteritems():
+                if field_name not in view['fields']:
+                    continue  # pragma: no cover
+                field = view['fields'][field_name]
+                domain = ustr(field.get('domain', "[]"))
+                field['domain'] = domain[:1] + domain_field + domain[1:]
         return res

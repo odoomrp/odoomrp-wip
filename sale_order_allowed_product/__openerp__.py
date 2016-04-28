@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "OdooMRP team, "
               "AvanzOSC, "
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+              "Tecnativa",
     "website": "http://www.odoomrp.com",
     "category": "Sales Management",
     "depends": [
