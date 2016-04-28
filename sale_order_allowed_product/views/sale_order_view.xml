@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="view_order_form_inh_saleallowedproduct">
-            <field name="name">view.order.form.inh.saleallowedproduct</field>
+        <record id="sale_order_allowed_form_view" model="ir.ui.view">
+            <field name="name">sale.order.allowed.form</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
@@ -13,14 +13,9 @@
                     <label for="only_allowed_products"
                            attrs="{'invisible': [('state', 'not in', ('draft', 'send'))]}"
                            class="oe_edit_only" />
-                    <field name="allowed_products" invisible="1"/>
+                    <field name="allowed_tmpl_ids" invisible="1"/>
+                    <field name="allowed_product_ids" invisible="1"/>
                 </field>
-                <xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="attributes">
-                    <attribute name="domain">[('id', 'in', parent.allowed_products[0][2])]</attribute>
-                </xpath>
-                <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']" position="attributes">
-                    <attribute name="domain">[('id', 'in', parent.allowed_products[0][2])]</attribute>
-                </xpath>
             </field>
         </record>
     </data>
