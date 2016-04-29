@@ -78,7 +78,7 @@ class SaleOrderLine(models.Model):
         self.ensure_one()
         if not self.product_id:
             price_extra = 0.0
-            for attr_line in self.product_attributes:
+            for attr_line in self.product_attribute_ids:
                 price_extra += attr_line.price_extra
             self.price_unit = self.order_id.pricelist_id.with_context(
                 {
