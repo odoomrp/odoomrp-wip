@@ -1,7 +1,6 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
+# -*- coding: utf-8 -*-
+# © 2014-2016 Oihane Crucelaegui - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from openerp import models, fields, api
 
@@ -41,7 +40,11 @@ class SaleOrderLine(models.Model):
 
     @api.one
     def _get_attributes_values(self):
-        self.attributes_values = self.product_id.attribute_value_ids
+        try:
+            self.attributes_values =\
+                self.product_attribute_ids.mapped('value_id')
+        except:
+            self.attributes_values = self.product_id.attribute_value_ids
 
     @api.one
     @api.depends('product_id', 'product_uom_qty',
