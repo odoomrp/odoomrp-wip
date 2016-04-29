@@ -1,8 +1,45 @@
 # -*- coding: utf-8 -*-
 # © 2014-2016 Oihane Crucelaegui - AvanzOSC
+# © 2015-2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from openerp import api, fields, models
+from lxml import etree
+
+
+class SaleOrder(models.Model):
+    _inherit = "sale.order"
+
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
+                        submenu=False):
+        """Avoid to have 2 times the field product_tmpl_id, as modules like
+        sale_stock adds this field as invisible, so we can't trust the order
+        of them. We also override the modifiers to avoid a readonly field.
+        """
+        res = super(SaleOrder, self).fields_view_get(
+            view_id=view_id, view_type=view_type, toolbar=toolbar,
+            submenu=submenu)
+        if view_type != 'form':
+            return res  # pragma: no cover
+        if 'order_line' not in res['fields']:
+            return res  # pragma: no cover
+        line_field = res['fields']['order_line']
+        if 'form' not in line_field['views']:
+            return res  # pragma: no cover
+        view = line_field['views']['form']
+        eview = etree.fromstring(view['arch'])
+        fields = eview.xpath("//field[@name='product_tmpl_id']")
+        field_added = False
+        for field in fields:
+            if field.get('invisible') or field_added:
+                field.getparent().remove(field)
+            else:
+                # Remove modifiers that makes the field readonly
+                field.set('modifiers', "")
+                field_added = True
+        view['arch'] = etree.tostring(eview)
+        return res
 
 
 class SaleOrderLine(models.Model):
@@ -88,3 +125,11 @@ class SaleOrderLine(models.Model):
                 }).template_price_get(
                 self.product_tmpl_id.id, self.product_uom_qty or 1.0,
                 self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
+
+    def _auto_init(self, cr, context=None):
+        # Avoid the removal of the DB column due to sale_stock defining
+        # this field as a related non stored one
+        if self._columns.get('product_tmpl_id'):
+            self._columns['product_tmpl_id'].store = True
+            self._columns['product_tmpl_id'].readonly = False
+        super(SaleOrderLine, self)._auto_init(cr, context=context)
