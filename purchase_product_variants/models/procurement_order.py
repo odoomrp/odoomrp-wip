@@ -20,8 +20,8 @@ class ProcurementOrder(models.Model):
                 ctx.update({'lang': partner.lang, 'partner_id': partner.id})
             product = self.env['product.product'].with_context(ctx).browse(
                 vals['product_id'])
-            vals['product_template'] = product.product_tmpl_id.id
-            vals['product_attributes'] = \
+            vals['product_tmpl_id'] = product.product_tmpl_id.id
+            vals['product_attribute_ids'] = \
                 [(0, 0, x) for x in
                  product._get_product_attributes_values_dict()]
             vals['name'] = self.env[

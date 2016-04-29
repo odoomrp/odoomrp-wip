@@ -12,7 +12,7 @@
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']"
                        position="before">
-                    <field name="product_template" />
+                    <field name="product_tmpl_id" />
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
                        position="after">
@@ -34,18 +34,11 @@
             <field name="inherit_id" ref="purchase.purchase_order_line_form" />
             <field name="arch" type="xml">
                 <field name="product_id" position="before">
-                    <field name="product_template" />
-                    <div colspan="4"
-                         attrs="{'invisible': [('product_attributes', '=', [])]}">
-                        <label for="product_attributes"/>
-                        <field name="product_attributes">
-                            <tree create="false" delete="false" editable="1">
-                                <field name="possible_values" invisible="1" />
-                                <field name="attribute_id" />
-                                <field name="value_id" />
-                            </tree>
-                        </field>
-                    </div>
+                    <field name="product_tmpl_id" />
+                    <field name="product_attribute_ids"
+                           context="{'default_owner_model': 'purchase.order.line', 'default_owner_id': id}"
+                           attrs="{'invisible':[('product_attribute_ids','=',[])]}"
+                    />
                 </field>
             </field>
         </record>
@@ -56,17 +49,11 @@
             <field name="inherit_id" ref="purchase.purchase_order_line_form2" />
             <field name="arch" type="xml">
                 <field name="product_id" position="before">
-                    <field name="product_template" />
-                    <div colspan="4"
-                         attrs="{'invisible': [('product_attributes', '=', [])]}">
-                        <field name="product_attributes">
-                            <tree create="false" delete="false" editable="1">
-                                <field name="possible_values" invisible="1" />
-                                <field name="attribute_id" />
-                                <field name="value_id" />
-                            </tree>
-                        </field>
-                    </div>
+                    <field name="product_tmpl_id" />
+                    <field name="product_attribute_ids"
+                           context="{'default_owner_model': 'purchase.order.line', 'default_owner_id': id}"
+                           attrs="{'invisible':[('product_attribute_ids','=',[])]}"
+                    />
                 </field>
                 <field name="product_id" position="attributes">
                     <attribute name="invisible">1</attribute>
@@ -80,7 +67,7 @@
             <field name="inherit_id" ref="purchase.purchase_order_line_tree" />
             <field name="arch" type="xml">
                 <field name="product_id" position="before">
-                    <field name="product_template" />
+                    <field name="product_tmpl_id" />
                 </field>
             </field>
         </record>
