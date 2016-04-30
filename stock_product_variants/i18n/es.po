@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_product_variants
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-30 16:46+0000\n"
+"PO-Revision-Date: 2016-04-30 16:46+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_product_variants
+#: view:stock.move:stock_product_variants.view_move_form
+#: view:stock.move:stock_product_variants.view_move_picking_form
+msgid "(show attributes)"
+msgstr "(mostrar atributos)"
+
+#. module: stock_product_variants
+#: field:stock.move,create_variant:0
+msgid "Create variant"
+msgstr "Crear variante"
+
+#. module: stock_product_variants
+#: help:stock.move,create_variant:0
+msgid "Mark this check if you want to auto-create the variant when saving the stock move. Otherwise, you will need to specify a product variant."
+msgstr "Marque esta casilla si quiere crear automáticamente la variante cuando guarde el movimiento de existencias. En caso contrario, necesitará especificar una variante de producto."
+
+#. module: stock_product_variants
+#: help:stock.move,price_extra:0
+msgid "Price Extra: Extra price for the variant with the currently selected attributes values on sale price. eg. 200 price extra, 1000 + 200 = 1200."
+msgstr "Precio extra: Precio extra de venta para la variante con los valores de atributos seleccionados. Por ejemplo. 200 de precio extra, 1000 + 200 = 1200."
+
+#. module: stock_product_variants
+#: field:stock.move,price_extra:0
+msgid "Price extra"
+msgstr "Precio extra"
+
+#. module: stock_product_variants
+#: field:stock.move,product_attribute_ids:0
+msgid "Product attributes"
+msgstr "Atributos de producto"
+
+#. module: stock_product_variants
+#: model:ir.model,name:stock_product_variants.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: stock_product_variants
+#: view:stock.move:stock_product_variants.view_move_form
+#: view:stock.move:stock_product_variants.view_move_picking_form
+msgid "{'required': [('create_variant', '=', False)]}"
+msgstr "{'required': [('create_variant', '=', False)]}"
+

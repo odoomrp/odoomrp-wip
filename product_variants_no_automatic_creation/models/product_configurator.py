@@ -178,6 +178,49 @@ class ProductConfigurator(models.AbstractModel):
             raise exceptions.ValidationError(
                 _("You have to fill all the attributes values."))
 
+    @api.multi
+    def _create_variant_from_vals(self, vals):
+        """This method creates a product variant extracting the needed values
+        from the values dictionary passed to the ORM methods create/write. It
+        also takes the rest of the values from the associated recordset in self
+        if needed, or raise an ensure_one exception if not provided.
+        :param vals: Dictionary of values for the record creation/update.
+        :return: The same values dictionary with the ID of the created product
+        in it under the key `product_id`.
+        """
+        attribute_obj = self.env['product.configurator.attribute']
+        product_attributes_dict = vals.get('product_attribute_ids')
+        if not vals.get('product_attribute_ids'):
+            self.ensure_one()
+            product_attributes_dict = self._convert_to_write(self._cache)
+        product_tmpl_id = vals.get('product_tmpl_id', self.product_tmpl_id.id)
+        value_ids = []
+        for op in product_attributes_dict:
+            if op[0] == 4:
+                attribute = attribute_obj.browse(op[1])
+                if attribute.value_id:
+                    value_ids.append(attribute.value_id.id)
+            elif op[0] in (0, 1):
+                if 'value_id' in op[2]:
+                    if op[2]['value_id']:
+                        value_ids.append(op[2]['value_id'])
+                else:
+                    attribute = attribute_obj.browse(op[1])
+                    if attribute.value_id:
+                        value_ids.append(attribute.value_id.id)
+            elif op[0] == 6:
+                value_ids = []
+                for attribute_id in op[2]:
+                    attribute = attribute_obj.browse(attribute_id)
+                    if attribute.value_id:
+                        value_ids.append(attribute.value_id.id)
+        product = self.env['product.product'].create({
+            'product_tmpl_id': product_tmpl_id,
+            'attribute_value_ids': [(6, 0, value_ids)],
+        })
+        vals['product_id'] = product.id
+        return vals
+
 
 class ProductConfiguratorAttribute(models.Model):
     _name = 'product.configurator.attribute'

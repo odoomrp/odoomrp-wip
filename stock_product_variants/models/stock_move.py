@@ -2,12 +2,17 @@
 # © 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, models
+from openerp import api, fields, models
 
 
 class StockMove(models.Model):
     _inherit = ["stock.move", "product.configurator"]
     _name = "stock.move"
+
+    create_variant = fields.Boolean(
+        help="Mark this check if you want to auto-create the variant when "
+             "saving the stock move. Otherwise, you will need to specify "
+             "a product variant.")
 
     @api.multi
     @api.onchange('product_tmpl_id')
@@ -39,8 +44,25 @@ class StockMove(models.Model):
 
     @api.multi
     def button_show_attributes(self):
-        if not self.product_id:
-            self.with_context(
-                not_reset_product=True).onchange_product_tmpl_id()
-        else:
-            self.onchange_product_id_product_configurator()
+        for move in self:
+            if not move.product_id:
+                move.with_context(
+                    not_reset_product=True).onchange_product_tmpl_id()
+            else:
+                move.onchange_product_id_product_configurator()
+
+    @api.model
+    def create(self, vals):
+        if vals.get('create_variant') and not vals.get('product_id'):
+            vals = self._create_variant_from_vals(vals)
+        return super(StockMove, self).create(vals)
+
+    @api.multi
+    def write(self, vals):
+        create_variant = vals.get(
+            'create_variant', all(self.mapped('create_variant')))
+        if create_variant:
+            product_id = vals.get('product_id', self.product_id.id)
+            if not product_id:
+                vals = self._create_variant_from_vals(vals)
+        return super(StockMove, self).write(vals)
