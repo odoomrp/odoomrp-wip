@@ -1,23 +1,51 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * product_variants_types
-# 
-# Translators:
+#	* product_variants_types
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:44+0000\n"
-"PO-Revision-Date: 2015-10-09 10:50+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
+"POT-Creation-Date: 2016-04-30 16:42+0000\n"
+"PO-Revision-Date: 2016-04-30 16:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
+
+#. module: product_variants_types
+#: field:product.configurator.attribute,custom_value:0
+msgid "Custom value"
+msgstr "Valor personalizado"
+
+#. module: product_variants_types
+#: code:addons/product_variants_types/models/product_configurator.py:56
+#, python-format
+msgid "Custom value for attribute '%s' must be between %s and %s."
+msgstr "El valor personaliado para el atributo '%s' debe estar entre %s y %s."
+
+#. module: product_variants_types
+#: model:ir.model,name:product_variants_types.model_product_product
+msgid "Product"
+msgstr "Producto"
 
 #. module: product_variants_types
 #: model:ir.model,name:product_variants_types.model_product_template
 msgid "Product Template"
 msgstr "Plantilla de producto"
+
+#. module: product_variants_types
+#: field:product.configurator.attribute,attr_type:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: product_variants_types
+#: code:addons/product_variants_types/models/product_configurator.py:33
+#, python-format
+msgid "You have to fill the following attributes:\n"
+"%s"
+msgstr "Debe rellenar los siguientes atributos:\n"
+"%s"
+
