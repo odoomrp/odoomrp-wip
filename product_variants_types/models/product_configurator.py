@@ -14,14 +14,20 @@ class ProductConfigurator(models.AbstractModel):
         # We override this for checking only required attributes
         attribute_line_model = self.env['product.attribute.line']
         errors = []
+        template = self.env['product.template'].browse(
+            vals['product_tmpl_id'])
+        attribute_lines = template.attribute_line_ids
         for line_vals in vals.get('product_attribute_ids', []):
             line_vals = line_vals[2]
             if not line_vals.get('value_id'):
                 line = attribute_line_model.search(
                     [('attribute_id', '=', line_vals['attribute_id']),
-                     ('product_tmpl_id', '=', line_vals['product_tmpl_id'])])
+                     ('product_tmpl_id', '=', template.id)])
+                attribute_lines -= line
                 if line.required:
                     errors.append(line.attribute_id.name)
+        for line in attribute_lines.filtered('required'):
+            errors.append(line.attribute_id.name)
         if errors:
             raise exceptions.ValidationError(
                 _("You have to fill the following attributes:\n%s") %
