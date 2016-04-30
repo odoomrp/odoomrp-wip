@@ -14,6 +14,9 @@
                        position="before">
                     <field name="product_tmpl_id" />
                 </xpath>
+                <xpath expr="//field[@name='order_line']" position="attributes">
+                    <attribute name="options">{'reload_on_button': true}</attribute>
+                </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
                        position="after">
                     <field name="order_state" invisible="1"/>

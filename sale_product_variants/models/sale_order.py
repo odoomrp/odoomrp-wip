@@ -82,17 +82,8 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def action_duplicate(self):
-        self.ensure_one()
-        self.copy()
-        # Force reload of the view as a workaround for lp:1155525
-        return {
-            'context': self.env.context,
-            'view_type': 'form',
-            'view_mode': 'form,tree',
-            'res_model': 'sale.order',
-            'res_id': self.order_id.id,
-            'type': 'ir.actions.act_window',
-        }
+        for line in self:
+            line.copy()
 
     @api.multi
     def button_confirm(self):
@@ -117,12 +108,11 @@ class SaleOrderLine(models.Model):
             price_extra = 0.0
             for attr_line in self.product_attribute_ids:
                 price_extra += attr_line.price_extra
-            self.price_unit = self.order_id.pricelist_id.with_context(
-                {
-                    'uom': self.product_uom.id,
-                    'date': self.order_id.date_order,
-                    'price_extra': price_extra,
-                }).template_price_get(
+            self.price_unit = self.order_id.pricelist_id.with_context({
+                'uom': self.product_uom.id,
+                'date': self.order_id.date_order,
+                'price_extra': price_extra,
+            }).template_price_get(
                 self.product_tmpl_id.id, self.product_uom_qty or 1.0,
                 self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
 
