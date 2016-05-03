@@ -24,6 +24,10 @@ class ProcurementOrder(models.Model):
             vals['product_attribute_ids'] = \
                 [(0, 0, x) for x in
                  product._get_product_attributes_values_dict()]
+            for val in vals['product_attribute_ids']:
+                val = val[2]
+                val['product_tmpl_id'] = product.product_tmpl_id.id
+                val['owner_model'] = 'purchase.order.line'
             vals['name'] = self.env[
                 'purchase.order.line']._get_product_description(
                 product.product_tmpl_id, product, product.attribute_value_ids)
