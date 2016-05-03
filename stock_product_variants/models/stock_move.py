@@ -59,8 +59,9 @@ class StockMove(models.Model):
 
     @api.multi
     def write(self, vals):
-        create_variant = vals.get(
-            'create_variant', all(self.mapped('create_variant')))
+        create_variant = (vals.get(
+            'create_variant', all(self.mapped('create_variant'))) if self
+            else False)
         if create_variant:
             product_id = vals.get('product_id', self.product_id.id)
             if not product_id:
