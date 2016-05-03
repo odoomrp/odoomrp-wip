@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="purchase_order_form_inh_purchaseallowedproduct">
-            <field name="name">purchase.order.form.inh.purchaseallowedproduct</field>
+        <record id="purchase_order_allowed_form_view" model="ir.ui.view">
+            <field name="name">purchase.order.allowed.form</field>
             <field name="model">purchase.order</field>
             <field name="inherit_id" ref="purchase.purchase_order_form" />
             <field name="arch" type="xml">
@@ -13,22 +13,11 @@
                     <label for="only_allowed_products"
                            attrs="{'invisible': [('state', 'not in', ('draft', 'send'))]}"
                            class="oe_edit_only" />
-                    <field name="allowed_products" invisible="1"/>
-                </field>
-                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
-                    <attribute name="domain">[('id', 'in', parent.allowed_products[0][2])]</attribute>
-                </xpath>
-            </field>
-        </record>
-        <record model="ir.ui.view" id="purchase_order_line_form_inh_purchaseallowedproduct">
-            <field name="name">purchase.order.line.form.inh.purchaseallowedproduct</field>
-            <field name="model">purchase.order.line</field>
-            <field name="inherit_id" ref="purchase.purchase_order_line_form" />
-            <field name="arch" type="xml">
-                <field name="product_id" position="attributes">
-                    <attribute name="domain">[('id', 'in', parent.allowed_products[0][2])]</attribute>
+                    <field name="allowed_tmpl_ids" invisible="1"/>
+                    <field name="allowed_product_ids" invisible="1"/>
                 </field>
             </field>
         </record>
+
     </data>
 </openerp>

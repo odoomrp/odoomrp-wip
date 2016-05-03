@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="view_partner_form_inh_purchaseallowedproduct">
-            <field name="name">view.partner.form.inh.purchaseallowedproduct</field>
+        <record id="res_partner_allow_form_view" model="ir.ui.view">
+            <field name="name">res.partner.purchase_allow.form</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
                 <field name="active" position="after">
-                    <field name="purchase_only_allowed" attrs="{'invisible': ['|', ('supplier', '=', False), ('parent_id', '!=', False)]}"/>
+                    <field name="purchase_only_allowed"
+                           attrs="{'invisible': ['|', ('supplier', '=', False), ('parent_id', '!=', False)]}"/>
                 </field>
             </field>
         </record>
