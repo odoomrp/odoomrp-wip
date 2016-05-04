@@ -6,35 +6,6 @@
 from openerp import api, exceptions, fields, models, _
 
 
-class ProductConfigurator(models.AbstractModel):
-    _inherit = 'product.configurator'
-
-    @api.model
-    def check_configuration_validity(self, vals):
-        # We override this for checking only required attributes
-        attribute_line_model = self.env['product.attribute.line']
-        errors = []
-        if vals.get('product_tmpl_id', False):
-            template = self.env['product.template'].browse(
-                vals['product_tmpl_id'])
-            attribute_lines = template.attribute_line_ids
-            for line_vals in vals.get('product_attribute_ids', []):
-                line_vals = line_vals[2]
-                if not line_vals.get('value_id'):
-                    line = attribute_line_model.search(
-                        [('attribute_id', '=', line_vals['attribute_id']),
-                         ('product_tmpl_id', '=', template.id)])
-                    attribute_lines -= line
-                    if line.required:
-                        errors.append(line.attribute_id.name)
-            for line in attribute_lines.filtered('required'):
-                errors.append(line.attribute_id.name)
-            if errors:
-                raise exceptions.ValidationError(
-                    _("You have to fill the following attributes:\n%s") %
-                    "\n".join(errors))
-
-
 class ProductConfiguratorAttribute(models.Model):
     _inherit = 'product.configurator.attribute'
 
