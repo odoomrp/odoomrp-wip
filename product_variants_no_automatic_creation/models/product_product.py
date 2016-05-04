@@ -58,7 +58,7 @@ class ProductProduct(models.Model):
         return False
 
     @api.constrains('product_tmpl_id', 'attribute_value_ids')
-    def check_duplicity(self):
+    def _check_duplicity(self):
         for product in self:
             domain = [('product_tmpl_id', '=', self.product_tmpl_id.id)]
             for value in product.attribute_value_ids:
@@ -72,9 +72,22 @@ class ProductProduct(models.Model):
                     raise exceptions.ValidationError(
                         _("There's another product with the same attributes."))
 
+    @api.constrains('product_tmpl_id', 'attribute_value_ids')
+    def _check_configuration_validity(self):
+        """This method checks that the current selection values are correct
+        according rules. As default, the validity means that all the attributes
+        values are set. This can be overridden to set another rules.
+
+        :raises: exceptions.ValidationError: If the check is not valid.
+        """
+        for product in self:
+            if bool(product.product_tmpl_id.attribute_line_ids -
+                    product.attribute_line_ids.mapped('attribute_id')):
+                raise exceptions.ValidationError(
+                    _("You have to fill all the attributes values."))
+
     @api.model
     def create(self, vals):
-        self.check_configuration_validity(vals)
         if (not vals.get('attribute_value_ids') and
                 vals.get('product_attribute_ids')):
             vals['attribute_value_ids'] = (
