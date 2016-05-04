@@ -19,13 +19,10 @@ class ProductProduct(models.Model):
             errors = []
             attribute_lines = product.product_tmpl_id.attribute_line_ids
             for value in product.attribute_value_ids:
-                if not value.get('value_id'):
-                    line = attribute_line_model.search(
-                        [('attribute_id', '=', value.attribute_id.id),
-                         ('product_tmpl_id', '=', product.product_tmpl_id.id)])
-                    attribute_lines -= line
-                    if line.required:
-                        errors.append(value.attribute_id.name)
+                line = attribute_line_model.search(
+                    [('attribute_id', '=', value.attribute_id.id),
+                     ('product_tmpl_id', '=', product.product_tmpl_id.id)])
+                attribute_lines -= line
             for line in attribute_lines.filtered('required'):
                 errors.append(line.attribute_id.name)
             if errors:
