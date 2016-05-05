@@ -75,9 +75,19 @@ class ProductConfigurator(models.AbstractModel):
                     self.product_id = product.id
                     break
         if not self.product_id:
+            product_tmpl = self.product_tmpl_id
+            values = self.product_attribute_ids.mapped('value_id')
+            if self._fields.get('partner_id'):
+                # If our model has a partner_id field, language is got from it
+                obj = self.env['product.attribute.value'].with_context(
+                    lang=self.partner_id.lang)
+                values = obj.browse(
+                    self.product_attribute_ids.mapped('value_id').ids)
+                obj = self.env['product.template'].with_context(
+                    lang=self.partner_id.lang)
+                product_tmpl = obj.browse(self.product_tmpl_id.id)
             self.name = self._get_product_description(
-                self.product_tmpl_id, False,
-                self.product_attribute_ids.mapped('value_id'))
+                product_tmpl, False, values)
         return {'domain': {'product_id': domain}}
 
     @api.multi
@@ -93,13 +103,18 @@ class ProductConfigurator(models.AbstractModel):
                 val['product_tmpl_id'] = self.product_id.product_tmpl_id
                 val['owner_model'] = self._name
                 val['owner_id'] = self.id
+            product = self.product_id
+            if self._fields.get('partner_id'):
+                # If our model has a partner_id field, language is got from it
+                product = self.env['product.product'].with_context(
+                    lang=self.partner_id.lang).browse(self.product_id.id)
             self.product_attribute_ids = [(0, 0, x) for x in attribute_list]
             self.name = self._get_product_description(
-                self.product_id.product_tmpl_id, self.product_id,
-                self.product_id.attribute_value_ids)
+                product.product_tmpl_id, product, product.attribute_value_ids)
 
     @api.multi
-    def onchange_product_id_product_configurator_old_api(self, product_id):
+    def onchange_product_id_product_configurator_old_api(self, product_id,
+                                                         partner_id=None):
         """Method to be called in case inherited model use old API on_change.
         The returned result has to be merged with current 'value' key in the
         regular on_change method, not with the complete dictionary.
@@ -109,7 +124,11 @@ class ProductConfigurator(models.AbstractModel):
         """
         res = {}
         if product_id:
-            product = self.env['product.product'].browse(product_id)
+            product_obj = self.env['product.product']
+            if partner_id:
+                partner = self.env['res.partner'].browse(partner_id)
+                product_obj = product_obj.with_context(lang=partner.lang)
+            product = product_obj.browse(product_id)
             attr_values_dict = product._get_product_attributes_values_dict()
             for val in attr_values_dict:
                 val['product_tmpl_id'] = product.product_tmpl_id.id
