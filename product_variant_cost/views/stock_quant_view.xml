@@ -6,8 +6,12 @@
             <field name="model">stock.quant</field>
             <field name="inherit_id" ref="stock.view_stock_quant_tree" />
             <field name="arch" type="xml">
+                <field name="inventory_value" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
                 <field name="inventory_value" position="after">
-                    <field name="variant_inventory_value" />
+                    <field name="standard_value" />
+                    <field name="real_value" />
                 </field>
             </field>
         </record>
@@ -16,8 +20,12 @@
             <field name="model">stock.quant</field>
             <field name="inherit_id" ref="stock.view_stock_quant_form" />
             <field name="arch" type="xml">
+                <field name="inventory_value" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
                 <field name="inventory_value" position="after">
-                    <field name="variant_inventory_value" />
+                    <field name="standard_value" />
+                    <field name="real_value" />
                 </field>
             </field>
         </record>

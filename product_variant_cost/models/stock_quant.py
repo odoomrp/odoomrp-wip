@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -24,22 +24,21 @@ class StockQuant(models.Model):
     _inherit = 'stock.quant'
 
     @api.multi
-    def _get_variant_inventory_value(self):
-        self.ensure_one()
-        if self.product_id.cost_method in ('real'):
-            return self.cost * self.qty
-        return self.product_id.cost_price * self.qty
+    @api.depends('cost', 'qty')
+    def _compute_real_value(self):
+        for record in self:
+            record.real_value = record.cost * record.qty
 
     @api.one
-    @api.depends("product_id", "product_id.cost_price", "qty",
-                 "product_id.cost_method")
-    def _calc_variant_inventory_value(self):
-        self.variant_inventory_value = self.with_context(
-            force_company=self.company_id.id)._get_variant_inventory_value()
+    @api.depends("product_id", "product_id.cost_price", "qty")
+    def _compute_standard_value(self):
+        for record in self:
+            record.standard_value = record.product_id.cost_price * record.qty
 
-    variant_inventory_value = fields.Float(
-        string="Inventory Value", store=True,
-        compute="_calc_variant_inventory_value", )
+    real_value = fields.Float(
+        string="Real Value", store=True, compute="_compute_real_value")
+    standard_value = fields.Float(
+        string="Standard Value", store=True, compute="_compute_standard_value")
 
 
 class StockMove(models.Model):
