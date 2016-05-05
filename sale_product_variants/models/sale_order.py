@@ -47,6 +47,8 @@ class SaleOrderLine(models.Model):
     _name = "sale.order.line"
 
     order_state = fields.Selection(related='order_id.state', readonly=True)
+    # Needed for getting the lang variable for translating descriptions
+    partner_id = fields.Many2one(related='order_id.partner_id', readonly=True)
 
     @api.multi
     def product_id_change(
@@ -60,11 +62,15 @@ class SaleOrderLine(models.Model):
             date_order=date_order, packaging=packaging,
             fiscal_position=fiscal_position, flag=flag)
         new_value = self.onchange_product_id_product_configurator_old_api(
-            product_id=product)
+            product_id=product, partner_id=partner_id)
         value = res.setdefault('value', {})
         value.update(new_value)
         if product:
-            prod = self.env['product.product'].browse(product)
+            product_obj = self.env['product.product']
+            if partner_id:
+                partner = self.env['res.partner'].browse(partner_id)
+                product_obj = product_obj.with_context(lang=partner.lang)
+            prod = product_obj.browse(product)
             if prod.description_sale:
                 value['name'] += '\n' + prod.description_sale
         return res

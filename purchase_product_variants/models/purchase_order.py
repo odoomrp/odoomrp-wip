@@ -32,6 +32,8 @@ class PurchaseOrderLine(models.Model):
 
     order_state = fields.Selection(
         related='order_id.state', readonly=True)
+    # Needed for getting the lang variable for translating descriptions
+    partner_id = fields.Many2one(related='order_id.partner_id', readonly=True)
 
     @api.multi
     def action_duplicate(self):
@@ -46,3 +48,27 @@ class PurchaseOrderLine(models.Model):
             'res_id': self.order_id.id,
             'type': 'ir.actions.act_window',
         }
+
+    @api.multi
+    def onchange_product_id(
+            self, pricelist_id, product_id, qty, uom_id, partner_id,
+            date_order=False, fiscal_position_id=False, date_planned=False,
+            name=False, price_unit=False, state='draft'):
+        res = super(PurchaseOrderLine, self).onchange_product_id(
+            pricelist_id, product_id, qty, uom_id, partner_id,
+            date_order=date_order, fiscal_position_id=fiscal_position_id,
+            date_planned=date_planned, name=name, price_unit=price_unit,
+            state=state)
+        new_value = self.onchange_product_id_product_configurator_old_api(
+            product_id=product_id, partner_id=partner_id)
+        value = res.setdefault('value', {})
+        value.update(new_value)
+        if product_id:
+            product_obj = self.env['product.product']
+            if partner_id:
+                partner = self.env['res.partner'].browse(partner_id)
+                product_obj = product_obj.with_context(lang=partner.lang)
+            prod = product_obj.browse(product_id)
+            if prod.description_purchase:
+                value['name'] += '\n' + prod.description_purchase
+        return res
