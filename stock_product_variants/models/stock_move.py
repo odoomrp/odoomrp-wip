@@ -63,7 +63,8 @@ class StockMove(models.Model):
             'create_variant', all(self.mapped('create_variant'))) if self
             else False)
         if create_variant:
-            product_id = vals.get('product_id', self.product_id.id)
-            if not product_id:
-                vals = self._create_variant_from_vals(vals)
+            for move in self:
+                product_id = vals.get('product_id', move.product_id.id)
+                if not product_id:
+                    vals = self._create_variant_from_vals(vals)
         return super(StockMove, self).write(vals)
