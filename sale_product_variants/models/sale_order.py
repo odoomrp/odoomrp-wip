@@ -79,6 +79,14 @@ class SaleOrderLine(models.Model):
     @api.onchange('product_tmpl_id')
     def onchange_product_tmpl_id(self):
         res = super(SaleOrderLine, self).onchange_product_tmpl_id()
+        if self.product_tmpl_id.attribute_line_ids:
+            self.product_uom = self.product_tmpl_id.uom_id
+            self.product_uos = self.product_tmpl_id.uos_id
+            self.price_unit = self.order_id.pricelist_id.with_context(
+                {'uom': self.product_uom.id,
+                 'date': self.order_id.date_order}).template_price_get(
+                self.product_tmpl_id.id, self.product_uom_qty or 1.0,
+                self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
         # Update taxes
         fpos = self.order_id.fiscal_position
         if not fpos:

@@ -13,6 +13,7 @@
     ],
     "author": "OdooMRP team, "
               "AvanzOSC, "
+              "Tecnativa, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",

@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 # © 2016 Oihane Crucelaegui - AvanzOSC
+# © 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import api, fields, models
+from openerp import api, fields, models, _
+from openerp.tools.float_utils import float_compare
 
 
 class PurchaseOrder(models.Model):
@@ -71,4 +73,59 @@ class PurchaseOrderLine(models.Model):
             prod = product_obj.browse(product_id)
             if prod.description_purchase:
                 value['name'] += '\n' + prod.description_purchase
+        return res
+
+    @api.multi
+    @api.onchange('product_tmpl_id')
+    def onchange_product_tmpl_id(self):
+        res = super(PurchaseOrderLine, self).onchange_product_tmpl_id()
+        if self.product_tmpl_id.description_purchase:
+            self.name += '\n' + self.product_tmpl_id.description_purchase
+        if self.product_tmpl_id.attribute_line_ids:
+            self.product_uom = self.product_tmpl_id.uom_po_id
+            self.product_uos = self.product_tmpl_id.uos_id
+            self.price_unit = self.order_id.pricelist_id.with_context(
+                {'uom': self.product_uom.id,
+                 'date': self.order_id.date_order}).template_price_get(
+                self.product_tmpl_id.id, self.product_qty or 1.0,
+                self.order_id.partner_id.id)[self.order_id.pricelist_id.id]
+        # Get planned date and min quantity
+        supplierinfo = False
+        precision = self.env['decimal.precision'].precision_get(
+            'Product Unit of Measure')
+        for supplier in self.product_tmpl_id.seller_ids:
+            if supplier.name == self.order_id.partner_id:
+                supplierinfo = supplier
+                if supplierinfo.product_uom != self.product_uom:
+                    res['warning'] = {
+                        'title': _('Warning!'),
+                        'message': _('The selected supplier only sells this '
+                                     'product by %s') % (
+                            supplierinfo.product_uom.name)
+                    }
+                min_qty = supplierinfo.product_uom._compute_qty(
+                    supplierinfo.product_uom.id, supplierinfo.min_qty,
+                    to_uom_id=self.product_uom.id)
+                # If the supplier quantity is greater than entered from user,
+                # set minimal.
+                if (float_compare(
+                        min_qty, self.product_qty,
+                        precision_digits=precision) == 1):
+                    if self.product_qty:
+                        res['warning'] = {
+                            'title': _('Warning!'),
+                            'message': _('The selected supplier has a minimal '
+                                         'quantity set to %s %s, you should '
+                                         'not purchase less.') % (
+                                supplierinfo.min_qty,
+                                supplierinfo.product_uom.name)
+                        }
+                    self.product_qty = min_qty
+        if not self.date_planned and supplierinfo:
+            dt = fields.Datetime.to_string(
+                self._get_date_planned(supplierinfo, self.order_id.date_order))
+            self.date_planned = dt
+        # Get taxes
+        taxes = self.product_tmpl_id.supplier_taxes_id
+        self.taxes_id = self.order_id.fiscal_position.map_tax(taxes)
         return res
