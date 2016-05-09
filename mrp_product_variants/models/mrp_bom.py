@@ -1,20 +1,5 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from openerp import models, fields, api
 from itertools import groupby
@@ -25,34 +10,34 @@ class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
 
     product_id = fields.Many2one(required=False)
-    product_template = fields.Many2one(comodel_name='product.template',
-                                       string='Product')
+    product_tmpl_id = fields.Many2one(
+        comodel_name='product.template', string='Product')
     attribute_value_ids = fields.Many2many(
-        domain="[('id', 'in', possible_values[0][2])]")
-    possible_values = fields.Many2many(
+        domain="[('id', 'in', possible_value_ids[0][2])]")
+    possible_value_ids = fields.Many2many(
         comodel_name='product.attribute.value',
-        compute='_get_possible_attribute_values')
-
-    @api.one
-    @api.depends('product_id', 'product_template')
-    def _get_product_category(self):
-        self.product_uom_category = (self.product_id.uom_id.category_id or
-                                     self.product_template.uom_id.category_id)
-
+        compute='_compute_possible_attribute_values')
     product_uom_category = fields.Many2one(
         comodel_name='product.uom.categ', string='UoM category',
-        compute="_get_product_category")
+        compute="_compute_product_category")
     product_uom = fields.Many2one(
         domain="[('category_id', '=', product_uom_category)]")
 
-    @api.one
+    @api.depends('product_id', 'product_tmpl_id')
+    def _compute_product_category(self):
+        for line in self:
+            line.product_uom_category = (
+                line.product_id.uom_id.category_id or
+                line.product_tmpl_id.uom_id.category_id)
+
     @api.depends('bom_id.product_tmpl_id',
                  'bom_id.product_tmpl_id.attribute_line_ids')
-    def _get_possible_attribute_values(self):
-        attr_values = self.env['product.attribute.value']
-        for attr_line in self.bom_id.product_tmpl_id.attribute_line_ids:
-            attr_values |= attr_line.value_ids
-        self.possible_values = attr_values.sorted()
+    def _compute_possible_attribute_values(self):
+        for line in self:
+            attr_values = self.env['product.attribute.value']
+            for attr_line in line.bom_id.product_tmpl_id.attribute_line_ids:
+                attr_values |= attr_line.value_ids
+            line.possible_value_ids = attr_values.sorted()
 
     @api.multi
     def onchange_product_id(self, product_id, product_qty=0):
@@ -60,17 +45,17 @@ class MrpBomLine(models.Model):
             product_id, product_qty=product_qty)
         if product_id:
             product = self.env['product.product'].browse(product_id)
-            res['value']['product_template'] = product.product_tmpl_id.id
+            res['value']['product_tmpl_id'] = product.product_tmpl_id.id
         return res
 
     @api.multi
-    @api.onchange('product_template')
-    def onchange_product_template(self):
-        if self.product_template:
+    @api.onchange('product_tmpl_id')
+    def onchange_product_tmpl_id(self):
+        if self.product_tmpl_id:
             self.product_uom = (self.product_id.uom_id or
-                                self.product_template.uom_id)
+                                self.product_tmpl_id.uom_id)
             return {'domain': {'product_id': [('product_tmpl_id', '=',
-                                               self.product_template.id)]}}
+                                               self.product_tmpl_id.id)]}}
         return {'domain': {'product_id': []}}
 
 
@@ -100,7 +85,7 @@ class MrpBom(models.Model):
             production_attr_values = []
             if not product and self.env.context.get('production'):
                 production = self.env.context['production']
-                for attr_value in production.product_attributes:
+                for attr_value in production.product_attribute_ids:
                     production_attr_values.append(attr_value.value.id)
                 if not self._check_product_suitable(
                         production_attr_values,
@@ -117,7 +102,7 @@ class MrpBom(models.Model):
         if not bom_line.product_id:
             if not bom_line.type != "phantom":
                 return self._bom_find(
-                    product_tmpl_id=bom_line.product_template.id,
+                    product_tmpl_id=bom_line.product_tmpl_id.id,
                     properties=properties)
             else:
                 return False
@@ -129,26 +114,36 @@ class MrpBom(models.Model):
         res = super(MrpBom, self)._prepare_consume_line(
             bom_line, quantity, factor=factor)
         if not bom_line.product_id:
-            res['name'] = bom_line.product_template.name
-            res['product_template'] = bom_line.product_template.id
-            production = self.env.context['production']
-            product_attributes = (
-                bom_line.product_template._get_product_attributes_inherit_dict(
-                    production.product_attributes))
+            tmpl_id = bom_line.product_tmpl_id
+            res['name'] = tmpl_id.name
+            res['product_tmpl_id'] = tmpl_id.id
+            production = self.env.context.get('production')
+            if not production and\
+                    self.env.context.get('active_model') == 'mrp.production':
+                production = self.env['mrp.production'].browse(
+                    self.env.context.get('active_id'))
+            self.env.context.get('active_id')
+            product_attribute_ids = (
+                tmpl_id._get_product_attribute_ids_inherit_dict(
+                    production.product_attribute_ids))
             comp_product = self.env['product.product']._product_find(
-                bom_line.product_template, product_attributes)
+                tmpl_id, product_attribute_ids)
             res['product_id'] = comp_product and comp_product.id
         else:
-            res['product_template'] = bom_line.product_id.product_tmpl_id.id
-            product_attributes = (
+            res['product_tmpl_id'] = bom_line.product_id.product_tmpl_id.id
+            product_attribute_ids = (
                 bom_line.product_id._get_product_attributes_values_dict())
-        res['product_attributes'] = map(
-            lambda x: (0, 0, x), product_attributes)
+        res['product_attribute_ids'] = map(
+            lambda x: (0, 0, x), product_attribute_ids)
+        for val in res['product_attribute_ids']:
+            val = val[2]
+            val['product_tmpl_id'] = res['product_tmpl_id']
+            val['owner_model'] = 'mrp.production.product.line'
         return res
 
     @api.model
     def _get_bom_product_name(self, bom_line):
         if not bom_line.product_id:
-            return bom_line.product_template.name_get()[0][1]
+            return bom_line.product_tmpl_id.name_get()[0][1]
         else:
             return super(MrpBom, self)._get_bom_product_name(bom_line)

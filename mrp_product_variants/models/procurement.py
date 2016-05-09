@@ -13,7 +13,8 @@ class ProcurementOrder(models.Model):
         result = super(ProcurementOrder, self)._prepare_mo_vals(procurement)
         product_id = result.get('product_id')
         product = self.env['product.product'].browse(product_id)
-        result['product_template'] = product.product_tmpl_id.id
-        result['product_attributes'] = (
-            (0, 0, x) for x in product._get_product_attributes_values_dict())
+        result['product_tmpl_id'] = product.product_tmpl_id.id
+        result['product_attribute_ids'] = (
+            (0, 0, x) for x in
+            product._get_product_attribute_ids_values_dict())
         return result

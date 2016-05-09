@@ -69,7 +69,7 @@ class MrpProduction(models.Model):
         self.ensure_one()
         pack_lines = []
         lines = self.env['mrp.bom.line'].search(
-            ['|', ('product_template', '=', self.product_template.id),
+            ['|', ('product_tmpl_id', '=', self.product_tmpl_id.id),
              ('product_id', '=', self.product_id.id)])
         exist_prod = [x.product.id for x in self.pack]
         for line in lines:
@@ -86,14 +86,14 @@ class MrpProduction(models.Model):
     def recalculate_product_qty(self, qty, product):
         line = self.product_lines.filtered(
             lambda x: x.product_id == product or
-            x.product_template == product.product_tmpl_id)
+            x.product_tmpl_id == product.product_tmpl_id)
         line.write({'product_qty': qty})
 
     @api.one
     def assign_parent_lot(self, production):
         line = self.product_lines.filtered(
             lambda x: x.product_id == production.product_id or
-            x.product_template == production.product_id.product_tmpl_id)
+            x.product_tmpl_id == production.product_id.product_tmpl_id)
         line.write({'lot': (
                     production.move_created_ids2 and
                     production.move_created_ids2[0].restrict_lot_id.id or
@@ -103,10 +103,10 @@ class MrpProduction(models.Model):
         equal_uom = op_line.product.uom_id.id == self.product_id.uom_id.id
         final_product_qty = equal_uom and op_line.fill or op_line.qty
         data = self.product_id_change(op_line.product.id, final_product_qty)
-        if 'product_attributes' in data['value']:
+        if 'product_attribute_ids' in data['value']:
             product_attributes = map(lambda x: (0, 0, x),
-                                     data['value']['product_attributes'])
-            data['value'].update({'product_attributes': product_attributes})
+                                     data['value']['product_attribute_ids'])
+            data['value'].update({'product_attribute_ids': product_attributes})
         name = self.env['ir.sequence'].get('mrp.production.packaging')
         data['value'].update({'product_id': op_line.product.id,
                               'product_qty': final_product_qty,
@@ -136,7 +136,7 @@ class MrpProduction(models.Model):
                         raw_product, op.qty, workorder)
                     linked_raw_products.append(value)
             for line in new_op.product_lines:
-                if self.product_id.product_tmpl_id == line.product_template:
+                if self.product_id.product_tmpl_id == line.product_tmpl_id:
                     if new_op.product_id.track_all or\
                             new_op.product_id.track_production:
                         for move in self.move_created_ids2:

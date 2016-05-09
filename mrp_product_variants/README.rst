@@ -1,11 +1,14 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
 ======================
 MRP - Product variants
 ======================
 
-Create custom product from a manufacturing order
+Create custom product from a manufacturing order.
+
+It enables the product configurator in scheduled product lines.
 
 
 Usage
@@ -18,6 +21,13 @@ Usage
 For further information, please visit:
 
 * https://www.odoo.com/forum/help-1
+
+
+Known issues / Roadmap
+======================
+
+* In an already confirmed updating the quantity won't work properly if the BoM has
+  a line with variant defined.
 
 
 Bug Tracker
