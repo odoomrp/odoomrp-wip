@@ -103,10 +103,6 @@ class MrpProduction(models.Model):
         equal_uom = op_line.product.uom_id.id == self.product_id.uom_id.id
         final_product_qty = equal_uom and op_line.fill or op_line.qty
         data = self.product_id_change(op_line.product.id, final_product_qty)
-        if 'product_attribute_ids' in data['value']:
-            product_attributes = map(lambda x: (0, 0, x),
-                                     data['value']['product_attribute_ids'])
-            data['value'].update({'product_attribute_ids': product_attributes})
         name = self.env['ir.sequence'].get('mrp.production.packaging')
         data['value'].update({'product_id': op_line.product.id,
                               'product_qty': final_product_qty,
