@@ -22,6 +22,7 @@ class StockQuant(models.Model):
             'product_uom': self.product_id.uom_id.id,
             'date_expected': fields.Datetime.now(),
             'date': fields.Datetime.now(),
-            'quant_ids': [(4, self.id)]
+            'quant_ids': [(4, self.id)],
+            'restrict_lot_id': self.lot_id.id
         })
         new_move.action_done()

@@ -20,7 +20,7 @@
     "name": "Stock - Quant & Packages moving wizard",
     "summary": "",
     "category": "Warehouse Management",
-    "version": "1.0",
+    "version": "8.0.0.1.0",
     "depends": [
         "stock",
     ],
