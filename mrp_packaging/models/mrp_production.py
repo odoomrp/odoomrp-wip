@@ -105,6 +105,8 @@ class MrpProduction(models.Model):
         data = self.product_id_change(op_line.product.id, final_product_qty)
         name = self.env['ir.sequence'].get('mrp.production.packaging')
         data['value'].update({'product_id': op_line.product.id,
+                              'product_tmpl_id':
+                              op_line.product.product_tmpl_id.id,
                               'product_qty': final_product_qty,
                               'name': name})
         try:
@@ -164,6 +166,8 @@ class MrpProduction(models.Model):
     @api.multi
     def scrap_qty_left(self):
         self.ensure_one()
+        if self.left_product_qty <= 0:
+            raise exceptions.Warning(_('You can not scrap negative quantity.'))
         view_id = self.env.ref(
             'stock.view_stock_move_scrap_wizard')
         return {
@@ -183,6 +187,8 @@ class MrpProduction(models.Model):
     @api.multi
     def produce_qty_left(self):
         self.ensure_one()
+        if self.left_product_qty >= 0:
+            raise exceptions.Warning(_('You have enough quantity to package.'))
         self._make_left_qty_produce_line()
         self.action_produce(self.id, abs(self.left_product_qty),
                             'consume_produce')
