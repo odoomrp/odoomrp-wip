@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+       <record model="ir.ui.view" id="view_stock_quant_manual_cost_tree">
+            <field name="name">stock.quant.variant.manual.cost.tree</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="product_variant_cost.view_stock_quant_variant_inherit_tree" />
+            <field name="arch" type="xml">
+                <field name="real_value" position="after">
+                    <field name="manual_value"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_stock_quant_manual_cost_form">
+            <field name="name">stock.quant.variant.manual.cost.form</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="product_variant_cost.view_stock_quant_variant_inherit_form" />
+            <field name="arch" type="xml">
+                <field name="real_value" position="after">
+                    <field name="manual_value"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

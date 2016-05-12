@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,8 @@
 
 {
     "name": "Estimated costs in manufacturing orders",
-    "version": "1.0",
+    "version": "8.0.0.1.0",
+    "license": "AGPL-3",
     "category": "Manufacturing",
     "author": "OdooMRP team,"
               "AvanzOSC,"
@@ -45,7 +46,8 @@
         "views/account_analytic_line_view.xml",
         "views/mrp_production_view.xml",
         "views/product_view.xml",
-        "views/mrp_bom_view.xml"
+        "views/mrp_bom_view.xml",
+        "views/stock_quant_view.xml"
     ],
     "installable": True,
 }
