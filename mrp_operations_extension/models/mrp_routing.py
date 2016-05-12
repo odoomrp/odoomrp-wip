@@ -108,7 +108,8 @@ class MrpOperationWorkcenter(models.Model):
     workcenter = fields.Many2one(
         'mrp.workcenter', string='Workcenter', required=True)
     routing_workcenter = fields.Many2one(
-        'mrp.routing.workcenter', 'Routing workcenter', required=True)
+        'mrp.routing.workcenter', 'Routing workcenter', required=True,
+        ondelete="CASCADE")
     time_efficiency = fields.Float('Efficiency factor')
     capacity_per_cycle = fields.Float('Capacity per cycle')
     time_cycle = fields.Float('Time for 1 cycle (hours)',
