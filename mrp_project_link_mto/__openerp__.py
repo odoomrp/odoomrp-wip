@@ -21,7 +21,7 @@
     "summary": "Link production with projects for MTO",
     "version": "8.0.1.0.0",
     "depends": [
-        "mrp_project_link",
+        "mrp_project",
     ],
     "author": "OdooMRP team,"
               "AvanzOSC,"
