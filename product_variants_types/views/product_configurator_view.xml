@@ -10,7 +10,7 @@
                 <field name="value_id" position="after">
                     <field name="attr_type" invisible="1" />
                     <field name="custom_value"
-                           attrs="{'readonly':[('attr_type','!=','range')]}"
+                           attrs="{'readonly': ['|', ('attr_type', '!=', 'range'), ('value_id', '=', False)]}"
                     />
                 </field>
             </field>
