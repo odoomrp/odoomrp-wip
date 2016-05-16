@@ -10,13 +10,13 @@ class ProductConfiguratorAttribute(models.Model):
     _inherit = 'product.configurator.attribute'
 
     custom_value = fields.Float(string='Custom value')
-    attr_type = fields.Selection(string='Type', store=False,
-                                 related='attribute_id.attr_type')
+    attr_type = fields.Selection(
+        string='Type', related='attribute_id.attr_type', readonly=True)
 
     def _is_custom_value_in_range(self):
         if self.attr_type == 'range':
-            return (self.value.min_range <= self.custom_value <=
-                    self.value.max_range)
+            return (self.value_id.min_range <= self.custom_value <=
+                    self.value_id.max_range)
         return True
 
     @api.multi
@@ -34,3 +34,9 @@ class ProductConfiguratorAttribute(models.Model):
     @api.onchange('custom_value', 'value_id')
     def _onchange_custom_value(self):
         self._check_value_in_range()
+
+    @api.onchange('attribute_id', 'value_id')
+    def onchange_attribute_id_product_variants_types(self):
+        # HACK: This is needed because ORM is not updating the related field
+        # when populating the one2many attribute list
+        self.attr_type = self.attribute_id.attr_type
