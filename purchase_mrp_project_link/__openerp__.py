@@ -19,9 +19,8 @@
 {
     "name": "Purchase - MRP Project Link",
     "summary": "Project on purchase order for production",
-    "version": "1.0",
+    "version": "8.0.1.1.0",
     "depends": [
-        "mrp_project_link",
         "mrp_project_link_mto",
         "purchase",
     ],
