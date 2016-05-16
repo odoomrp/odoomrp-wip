@@ -16,5 +16,5 @@ class ProcurementOrder(models.Model):
         result['product_tmpl_id'] = product.product_tmpl_id.id
         result['product_attribute_ids'] = (
             (0, 0, x) for x in
-            product._get_product_attribute_ids_values_dict())
+            product._get_product_attributes_values_dict())
         return result
