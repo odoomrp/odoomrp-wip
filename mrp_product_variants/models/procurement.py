@@ -15,8 +15,9 @@ class ProcurementOrder(models.Model):
         product_id = result.get('product_id')
         product = self.env['product.product'].browse(product_id)
         result['product_tmpl_id'] = product.product_tmpl_id.id
-        result['product_attribute_ids'] = (
-            (0, 0, x) for x in product._get_product_attributes_values_dict())
+        product_attribute_ids = product._get_product_attributes_values_dict()
+        result['product_attribute_ids'] = map(
+            lambda x: (0, 0, x), product_attribute_ids)
         for val in result['product_attribute_ids']:
             val = val[2]
             val['product_tmpl_id'] = product.product_tmpl_id.id
