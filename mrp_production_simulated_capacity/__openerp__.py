@@ -18,7 +18,7 @@
 
 {
     "name": "MRP Simulated Production Capacity",
-    "version": "1.0",
+    "version": "8.0.1.1.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
@@ -29,7 +29,7 @@
         ],
     "category": "Manufacturing",
     "website": "http://www.odoomrp.com",
-    "depends": ['mrp_production_project_estimated_cost',
+    "depends": ['mrp_production_estimated_cost',
                 'mrp_production_capacity'
                 ],
     "data": [],
