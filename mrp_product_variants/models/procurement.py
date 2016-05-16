@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) 2015 Oihane Crucelaegui - AvanzOSC
+# © 2015 Oihane Crucelaegui - AvanzOSC
+# © 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from openerp import api, models
@@ -15,6 +16,9 @@ class ProcurementOrder(models.Model):
         product = self.env['product.product'].browse(product_id)
         result['product_tmpl_id'] = product.product_tmpl_id.id
         result['product_attribute_ids'] = (
-            (0, 0, x) for x in
-            product._get_product_attributes_values_dict())
+            (0, 0, x) for x in product._get_product_attributes_values_dict())
+        for val in result['product_attribute_ids']:
+            val = val[2]
+            val['product_tmpl_id'] = product.product_tmpl_id.id
+            val['owner_model'] = 'mrp.production'
         return result

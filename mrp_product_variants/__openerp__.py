@@ -4,7 +4,7 @@
 {
     "name": "MRP - Product variants",
     "summary": "Customized product in manufacturing",
-    "version": "8.0.2.0.0",
+    "version": "8.0.2.0.1",
     "license": "AGPL-3",
     "depends": [
         "product",
@@ -14,6 +14,7 @@
     ],
     "author": "OdooMRP team, "
               "AvanzOSC, "
+              "Tecnativa, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
