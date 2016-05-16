@@ -19,6 +19,6 @@ class ProductTemplate(models.Model):
             if self.env['product.attribute'].browse(
                     attr['attribute_id']).parent_inherited:
                 for attr_line in product_attribute_list:
-                    if attr_line.attribute.id == attr['attribute_id']:
-                        attr.update({'value': attr_line.value.id})
+                    if attr_line.attribute_id.id == attr['attribute_id']:
+                        attr.update({'value': attr_line.value_id.id})
         return product_attribute_ids
