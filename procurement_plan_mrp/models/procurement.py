@@ -322,11 +322,10 @@ class ProcurementPlan(models.Model):
                     days_to_sum = (product.produce_delay or 0)
                     break
                 elif route.name == 'Buy':
-                    suppliers = product.supplier_ids.filtered(
-                        lambda x: x.type == 'supplier')
-                    if suppliers:
-                        sorted_suppliers = sorted(suppliers, reverse=True,
-                                                  key=lambda l: l.sequence)
+                    if product.seller_ids:
+                        sorted_suppliers = sorted(
+                            product.seller_ids, reverse=True,
+                            key=lambda l: l.sequence)
                         days_to_sum = (sorted_suppliers[0].delay or 0)
                     break
             date = (fields.Date.from_string(procurement.date_planned[0:10]) -
