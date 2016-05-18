@@ -15,7 +15,7 @@ class MrpProductionProductLine(models.Model):
             self.product_uom = self.product_id.uom_id.id
             self.name = self.product_id.name
             try:
-                self.product_template = self.product_id.product_tmpl_id
+                self.product_tmpl_id = self.product_id.product_tmpl_id
             except:
                 # This is in case mrp_product_variants module is not installed
                 pass
