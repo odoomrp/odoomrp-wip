@@ -60,7 +60,7 @@ class ProductProduct(models.Model):
     @api.constrains('product_tmpl_id', 'attribute_value_ids')
     def _check_duplicity(self):
         for product in self:
-            domain = [('product_tmpl_id', '=', self.product_tmpl_id.id)]
+            domain = [('product_tmpl_id', '=', product.product_tmpl_id.id)]
             for value in product.attribute_value_ids:
                 domain.append(('attribute_value_ids', '=', value.id))
             other_products = self.search(domain)
