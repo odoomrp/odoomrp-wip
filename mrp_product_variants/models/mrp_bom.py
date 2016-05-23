@@ -86,7 +86,7 @@ class MrpBom(models.Model):
             if not product and self.env.context.get('production'):
                 production = self.env.context['production']
                 for attr_value in production.product_attribute_ids:
-                    production_attr_values.append(attr_value.value.id)
+                    production_attr_values.append(attr_value.value_id.id)
                 if not self._check_product_suitable(
                         production_attr_values,
                         line.attribute_value_ids):
