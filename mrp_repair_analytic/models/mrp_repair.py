@@ -107,7 +107,7 @@ class MrpRepairLine(models.Model):
             else:
                 std_price = line.product_id.standard_price
             line.standard_price = std_price
-            line.cost_subtotal = line.standard_price * line.product_uom_qty
+            line.cost_subtotal = std_price * line.product_uom_qty
 
     standard_price = fields.Float(
         string='Cost Price', digits=dp.get_precision('Account'),
