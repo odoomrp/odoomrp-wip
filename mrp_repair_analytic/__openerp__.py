@@ -15,6 +15,7 @@
         "Ana Juaristi <ajuaristio@gmail.com>",
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
         "Ainara Galdona <ainaragaldona@avanzosc.es>",
+        "Esther Martín <esthermartin@avanzosc.es>",
     ],
     "depends": ['account',
                 'analytic',
