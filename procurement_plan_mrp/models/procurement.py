@@ -286,7 +286,7 @@ class ProcurementPlan(models.Model):
                     raise exceptions.Warning(
                         _('No product defined for BoM line with template: %s,'
                           ' on the list of materials %s') %
-                        (child.product_template.name, line.product_id.name))
+                        (child.product_tmpl_id.name, line.product_id.name))
                 procurement = self._create_procurement_from_bom_line(
                     level+1, child.product_id, child.product_qty * qty,
                     procurement)
