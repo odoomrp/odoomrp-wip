@@ -58,6 +58,7 @@ class StockMove(models.Model):
         average_valuation_price = average_valuation_price / move.product_qty
         product = move.product_id
         product.sudo().write({'cost_price': average_valuation_price})
+        product.sudo().write({'standard_price': average_valuation_price})
         return res
 
     @api.multi
@@ -76,3 +77,4 @@ class StockMove(models.Model):
                                      (move.price_unit * move.product_qty)) /
                                      (product_avail + move.product_qty))
                 product.sudo().write({'cost_price': new_std_price})
+                product.sudo().write({'standard_price': new_std_price})
