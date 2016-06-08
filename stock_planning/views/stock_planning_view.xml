@@ -36,11 +36,13 @@
                         <field name="location" />
                         <field name="scheduled_date" />
                         <field name="product" />
+                        
                         <field name="unit_cost_price" string="Variant Cost Price"
                                groups="stock_planning.group_stock_planning_show_costs" />
                         <field name="cost_price" invisible="1" />
                         <field name="cost_price_required_increase" sum="sum_cost_price" 
                                groups="stock_planning.group_stock_planning_show_costs"/>
+                        
                         <field name="qty_available" string="Quantity On Hand"/>
                         <field name="virtual_available" string="Forecast Quantity"/>
                         <field name="incoming_qty" string="Incoming"/>

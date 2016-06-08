@@ -18,20 +18,18 @@
     'name': 'Stock Planning',
     "version": "8.0.1.0.0",
     "author": "OdooMRP team,"
-              "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+              "AvanzOSC,",
     'website': "http://www.odoomrp.com",
     'category': 'Warehouse Management',
     "license": 'AGPL-3',
     "contributors": [
-        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <anajuaristi@avanzosc.es>",
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
     ],
     'depends': ['sale',
                 'purchase',
                 'stock',
-                'product_variant_cost'
+                'product_variant_cost_price'
                 ],
     'data': ['security/stock_planning.xml',
              'security/ir.model.access.csv',

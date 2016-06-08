@@ -81,8 +81,12 @@ class WizStockPlanning(models.TransientModel):
         for procurement in proc_obj._find_procurements_from_stock_planning(
             self.company, fdate, category=self.category,
                 template=self.template, product=self.product, periods=True):
-            product_datas = self._find_product_in_table(
-                product_datas, procurement.product_id, procurement.location_id)
+            if (not self.locations or
+                (self.locations and procurement.location_id.id in
+                 self.locations.ids)):
+                product_datas = self._find_product_in_table(
+                    product_datas, procurement.product_id,
+                    procurement.location_id)
         self._generate_stock_planning(product_datas)
         return {'name': _('Stock Planning'),
                 'type': 'ir.actions.act_window',
