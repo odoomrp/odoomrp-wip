@@ -33,7 +33,7 @@ class ProductTemplate(models.Model):
         return res
 
     @api.multi
-    def read(self, fields, load='_classic_read'):
+    def read(self, fields=None, load='_classic_read'):
         if fields:
             fields.append('id')
         results = super(ProductTemplate, self).read(fields, load=load)
