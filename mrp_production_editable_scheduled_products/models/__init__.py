@@ -1,5 +1,4 @@
-
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Daniel Campos (danielcampos@avanzosc.es) Date: 15/10/2014

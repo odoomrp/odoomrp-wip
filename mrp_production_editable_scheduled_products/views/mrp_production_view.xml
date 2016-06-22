@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="mrp.mrp_production_form_view" />
             <field name="arch" type="xml">
                 <xpath
-                    expr="//page[@string='Scheduled Products']//field[@name='product_lines']"
+                    expr="//field[@name='product_lines']"
                     position="attributes">
                     <attribute name="readonly">0</attribute>
                     <attribute name="attrs">{'readonly':[('state', '!=', ('draft'))]}</attribute>

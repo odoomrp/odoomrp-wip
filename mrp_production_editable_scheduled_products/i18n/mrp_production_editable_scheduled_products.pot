@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-04 11:48+0000\n"
-"PO-Revision-Date: 2015-05-04 11:48+0000\n"
+"POT-Creation-Date: 2016-06-22 16:18+0000\n"
+"PO-Revision-Date: 2016-06-22 16:18+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,15 +18,5 @@ msgstr ""
 #. module: mrp_production_editable_scheduled_products
 #: model:ir.model,name:mrp_production_editable_scheduled_products.model_mrp_production_product_line
 msgid "Production Scheduled Product"
-msgstr ""
-
-#. module: mrp_production_editable_scheduled_products
-#: view:mrp.production.product.line:mrp_production_editable_scheduled_products.mrp_production_product_form_view_inherit
-msgid "onchange_product(product_id)"
-msgstr ""
-
-#. module: mrp_production_editable_scheduled_products
-#: view:mrp.production:mrp_production_editable_scheduled_products.mrp_production_form_view_inherit
-msgid "{'readonly':[('state', '!=', ('draft'))]}"
 msgstr ""
 

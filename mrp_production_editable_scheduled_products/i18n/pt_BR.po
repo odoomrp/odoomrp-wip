@@ -21,13 +21,3 @@ msgstr ""
 #: model:ir.model,name:mrp_production_editable_scheduled_products.model_mrp_production_product_line
 msgid "Production Scheduled Product"
 msgstr "Produção de produto agendada"
-
-#. module: mrp_production_editable_scheduled_products
-#: view:mrp.production.product.line:mrp_production_editable_scheduled_products.mrp_production_product_form_view_inherit
-msgid "onchange_product(product_id)"
-msgstr ""
-
-#. module: mrp_production_editable_scheduled_products
-#: view:mrp.production:mrp_production_editable_scheduled_products.mrp_production_form_view_inherit
-msgid "{'readonly':[('state', '!=', ('draft'))]}"
-msgstr ""

@@ -1,5 +1,4 @@
-
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Daniel Campos (danielcampos@avanzosc.es) Date: 15/10/2014
@@ -21,7 +20,7 @@
 
 {
     "name": "MRP Editable scheduled products",
-    "version": "1.0",
+    "version": "9.0.1.0.0",
     "description": """
     This module allows to edit production order to add more scheduled products.
     """,
@@ -32,5 +31,5 @@
     "depends": ['mrp'],
     "category": "Manufacturing",
     "data": ['views/mrp_production_view.xml'],
-    'installable': False
+    'installable': True
 }
