@@ -97,3 +97,4 @@ class ProductProduct(models.Model):
                 if x[2].get('value_id'))
         obj = self.with_context(product_name=vals.get('name', ''))
         return super(ProductProduct, obj).create(vals)
+
