@@ -32,16 +32,16 @@
             <field name="model">mrp.production</field>
             <field name="inherit_id" ref="mrp.mrp_production_form_view" />
             <field name="arch" type="xml">
-                <xpath expr="//page//group[@string='Products to Consume']//field[@name='product_id']" position="after">
+                <xpath expr="//field[@name='move_lines']//field[@name='product_id']" position="after">
                     <field name="work_order" groups="mrp.group_mrp_routings" />
                 </xpath>
-                <xpath expr="//page//group[@string='Consumed Products']//field[@name='product_id']" position="after">
+                <xpath expr="//field[@name='move_lines2']//field[@name='product_id']" position="after">
                     <field name="work_order" groups="mrp.group_mrp_routings" />
                 </xpath>
-                <xpath expr="//page//group[@string='Products to Produce']//field[@name='product_id']" position="after">
+                <xpath expr="//field[@name='move_created_ids']//field[@name='product_id']" position="after">
                     <field name="work_order" groups="mrp.group_mrp_routings" />
                 </xpath>
-                <xpath expr="//page//group[@string='Produced Products']//field[@name='product_id']" position="after">
+                <xpath expr="//field[@name='move_created_ids2']//field[@name='product_id']" position="after">
                     <field name="work_order" groups="mrp.group_mrp_routings" />
                 </xpath>
                 <xpath expr="//field[@name='workcenter_lines']/tree//field[@name='sequence']" position="after">
@@ -134,10 +134,10 @@
                 <button name="button_draft" position="attributes">
                     <attribute name="icon"></attribute>
                 </button>
-                <button string="Cancel Order" position="attributes">
+                <button name="button_cancel" position="attributes">
                     <attribute name="icon"></attribute>
                 </button>
-                <button string="Cancel Order" position="after">
+                <button name="button_cancel" position="after">
                     <button name="action_assign" states="startworking"
                         string="Check Availability" type="object" class="oe_highlight" />
                     <button name="force_assign" states="startworking"
@@ -170,7 +170,7 @@
                         type='action' string='Consume'
                         attrs="{'invisible':[('state','in',['draft','cancel','pause','done'])]}"/>
                 </button>
-                <page string="Information" position="inside">
+                <xpath expr="//notebook/page[1]" position="inside">
                     <group string="Product Lines" colspan="4" col="4">
                         <field name="routing_wc_line" colspan="4"
                             col="4" />
@@ -178,12 +178,12 @@
                             colspan="4" col="4" readonly="1"/>
                         <field name="move_lines" />
                     </group>
-                </page>
-                <group string="Product to Produce" position="replace" />
-                <group string="Duration" position="replace" />
-                <group string="Planned Date" position="replace" />
-                <group string="Actual Production Date" position="replace" />
-                <page string="Information" position="after">
+                </xpath>
+                <xpath expr="//notebook/page[1]/group/group[1]" position="replace" />
+                <xpath expr="//notebook/page[1]/group/group[1]" position="replace" />
+                <xpath expr="//notebook/page[1]/group/group[1]" position="replace" />
+                <xpath expr="//notebook/page[1]/group/group[1]" position="replace" />
+                <xpath expr="//notebook/page[1]" position="after">
                     <page string="Extra Information">
                         <group>
                             <group string="Planned Date">
@@ -207,7 +207,7 @@
                             </group>
                         </group>
                     </page>
-                </page>
+                </xpath>
 
                 <field name="sequence" position="after">
                     <field name="do_production" />

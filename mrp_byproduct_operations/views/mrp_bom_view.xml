@@ -6,10 +6,10 @@
             <field name="model">mrp.bom</field>
             <field name="inherit_id" ref="mrp_byproduct.mrp_subproduct_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//tree[@string='Byproducts']/field[@name='product_id']" position="after">
+                <xpath expr="//field[@name='sub_products']/tree/field[@name='product_id']" position="after">
                     <field name="operation" domain="[('routing_id', '=', parent.routing_id)]"/>
                 </xpath>
-                <xpath expr="//form[@string='Byproducts']/field[@name='product_id']" position="after">
+                <xpath expr="//field[@name='sub_products']/form/field[@name='product_id']" position="after">
                     <field name="operation" domain="[('routing_id', '=', parent.routing_id)]" />
                 </xpath>
             </field>
