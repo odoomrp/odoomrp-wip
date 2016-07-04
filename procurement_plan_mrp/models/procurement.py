@@ -353,3 +353,23 @@ class ProcurementPlan(models.Model):
         reservation = reservation_obj.create(vals)
         reservation.reserve()
         procurement.write({'reservation': reservation.id})
+
+    @api.multi
+    def button_cancel(self):
+        for plan in self:
+            procurements = plan.procurement_ids.filtered(
+                lambda x: x.state in ('confirmed', 'exception', 'running'))
+            self._cancel_reservations_from_plan(procurements)
+        super(ProcurementPlan, self).button_cancel()
+        return True
+
+    def _cancel_reservations_from_plan(self, procurements):
+        for procurement in procurements:
+            if procurement.reservation and procurement.reservation.move_id:
+                if procurement.reservation.move_id.state not in (
+                   'draft', 'assigned', 'confirmed'):
+                    raise exceptions.Warning(_("procurement: %s, with"
+                                               " reserve-move made") %
+                                             procurement.name)
+                procurement.reservation.move_id.action_cancel()
+                procurement.reservation.unlink()

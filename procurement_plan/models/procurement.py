@@ -40,6 +40,7 @@ class ProcurementOrder(models.Model):
 
     @api.multi
     def button_remove_plan(self):
+        self.ensure_one()
         template_obj = self.env['product.template']
         result = template_obj._get_act_window_dict(
             'procurement_plan.action_procurement_plan')
