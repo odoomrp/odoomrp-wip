@@ -8,8 +8,7 @@ from openerp.tests.common import TransactionCase
 class TestProductVariant(TransactionCase):
 
     def setUp(self):
-        super(TestProductVariant,
-              self).setUp()
+        super(TestProductVariant, self).setUp()
         self.tmpl_model = self.env['product.template'].with_context(
             check_variant_creation=True)
         self.categ_model = self.env['product.category']
@@ -101,3 +100,18 @@ class TestProductVariant(TransactionCase):
         })
         self.assertTrue(tmpl.no_create_variants == 'empty')
         self.assertEquals(len(tmpl.product_variant_ids), 1)
+
+    def test_category_change(self):
+        self.assertTrue(self.categ1.no_create_variants)
+        tmpl = self.tmpl_model.create({
+            'name': 'Category option template',
+            'categ_id': self.categ1.id,
+            'attribute_line_ids': [
+                (0, 0, {'attribute_id': self.attribute.id,
+                        'value_ids': [(6, 0, [self.value1.id,
+                                              self.value2.id])]})],
+        })
+        self.assertTrue(tmpl.no_create_variants == 'empty')
+        self.assertEquals(len(tmpl.product_variant_ids), 0)
+        self.categ1.no_create_variants = False
+        self.assertEquals(len(tmpl.product_variant_ids), 2)
