@@ -19,6 +19,7 @@ class WizChangeProcurementDate(models.TransientModel):
 
     @api.model
     def default_get(self, var_fields):
+        super(WizChangeProcurementDate, self).default_get(var_fields)
         vals = {}
         procurements = self._take_procurements_to_treat(
             self.env.context['active_ids'])
