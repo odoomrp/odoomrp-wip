@@ -74,8 +74,10 @@ class StockPicking(models.Model):
             date=order.date_order or fields.Date.context_today(order))
         for move in picking.move_lines:
             sale_line = move.procurement_id.sale_line_id
+            price = sale_line.price_unit * (1 - (sale_line.discount or 0.0) /
+                                            100)
             taxes = sale_line.tax_id.compute_all(
-                sale_line.price_unit, move.product_qty, move.product_id,
+                price, move.product_qty, move.product_id,
                 picking.partner_id)['taxes']
             for tax in taxes:
                 val = {
