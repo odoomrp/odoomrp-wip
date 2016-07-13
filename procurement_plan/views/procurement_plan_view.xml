@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
-    
         <record model="ir.ui.view" id="procurement_plan_search_view">
             <field name="name">procurement.plan.search.view</field>
             <field name="model">procurement.plan</field>
@@ -20,7 +19,6 @@
                 </search>
             </field>
         </record>
-
         <record model="ir.ui.view" id="procurement_plan_tree_view" >
             <field name="name">procurement.plan.tree.view</field>
             <field name="model">procurement.plan</field>
@@ -36,7 +34,6 @@
                 </tree>
             </field>
         </record>
-
         <record model="ir.ui.view" id="procurement_plan_form_view" >
             <field name="name">procurement.plan.form.view</field>
             <field name="model">procurement.plan</field>
@@ -103,7 +100,6 @@
                 </form>
             </field>
         </record>
-
         <record model="ir.actions.act_window" id="action_procurement_plan">
             <field name="name">Procurement Plans</field>
             <field name="res_model">procurement.plan</field>
@@ -112,6 +108,5 @@
         </record>
         <menuitem id="procurement_plan_menu_view" name="Procurements Plans"
             parent="stock.menu_stock_sched" action="action_procurement_plan" sequence="90"/>
-
     </data>
 </openerp>
