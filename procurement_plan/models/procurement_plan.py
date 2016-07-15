@@ -136,6 +136,8 @@ class ProcurementPlan(models.Model):
     @api.multi
     def button_cancel(self):
         for plan in self:
+            if plan.project_id:
+                plan.project_id.set_cancel()
             procurements = plan.procurement_ids.filtered(
                 lambda x: x.state in ('confirmed', 'exception', 'running'))
             procurements.with_context(plan=plan.id).cancel()
