@@ -29,13 +29,12 @@ class SaleOrder(models.Model):
     @api.multi
     def recalculate_prices(self):
         for record in self:
-            if record.order_line:
-                for line in record.order_line:
-                    res = line.product_id_change(
-                        record.pricelist_id.id, line.product_id.id,
-                        line.product_uom_qty, False, line.product_uos_qty,
-                        False, line.name, record.partner_id.id, False,
-                        True, record.date_order, False,
-                        record.fiscal_position.id, False)
-                    line.write(res['value'])
+            for line in record.mapped('order_line'):
+                res = line.product_id_change(
+                    record.pricelist_id.id, line.product_id.id,
+                    line.product_uom_qty, False, line.product_uos_qty,
+                    False, line.name, record.partner_id.id, False,
+                    True, record.date_order, False,
+                    record.fiscal_position.id, False)
+                line.write(res['value'])
         return True
