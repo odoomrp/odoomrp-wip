@@ -15,14 +15,17 @@ class StockMove(models.Model):
                  production.move_created_ids2.filtered(lambda x:
                                                        x.state != 'cancel'))
         lots = moves.mapped('lot_ids') | moves.mapped('restrict_lot_id')
-        removal_date = min([x.removal_date for x in
-                            lots.filtered(lambda x: x.removal_date)]) or False
-        life_date = min([x.life_date for x in
-                         lots.filtered(lambda x: x.life_date)]) or False
-        alert_date = min([x.alert_date for x in
-                          lots.filtered(lambda x: x.alert_date)]) or False
-        use_date = min([x.use_date for x in
-                        lots.filtered(lambda x: x.use_date)]) or False
+        removal_lots = lots.filtered(lambda x: x.removal_date)
+        removal_date = removal_lots and min(removal_lots.mapped(
+            'removal_date')) or False
+        life_lots = lots.filtered(lambda x: x.life_date)
+        life_date = (life_lots and min(life_lots.mapped('life_date')) or
+                     False)
+        alert_lots = lots.filtered(lambda x: x.alert_date)
+        alert_date = (alert_lots and min(alert_lots.mapped('alert_date')) or
+                      False)
+        use_lots = lots.filtered(lambda x: x.use_date)
+        use_date = use_lots and min(use_lots.mapped('use_date')) or False
         return removal_date, life_date, alert_date, use_date
 
     @api.multi
