@@ -23,13 +23,13 @@ msgid "Is package"
 msgstr "Es envase"
 
 #. module: product_packaging_through_attributes
-#: field:res.partner,partner_product_ul:0
+#: field:res.partner,partner_product_ul_id:0
 msgid "Logistic Unit"
 msgstr "Unidad logística"
 
 #. module: product_packaging_through_attributes
-#: field:product.attribute.value,package_product:0
-#: field:product.packaging,product:0
+#: field:product.attribute.value,package_product_id:0
+#: field:product.packaging,product_id:0
 msgid "Package Product"
 msgstr "Producto envase"
 

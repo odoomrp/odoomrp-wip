@@ -8,24 +8,24 @@
             <field name="inherit_id" ref="purchase.purchase_order_form" />
             <field name="arch" type="xml">
                 <field name="currency_id" position="after">
-                    <field name="product_ul" groups="product.group_stock_packaging" />
+                    <field name="product_ul_id" groups="product.group_stock_packaging" />
                 </field>
                 <field name="order_line" position="attributes">
-                    <attribute name="context">{'default_product_ul': product_ul}</attribute>
+                    <attribute name="context">{'default_product_ul_id': product_ul_id}</attribute>
                 </field>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='product_uom']" position="after">
                     <field name="pri_pack_qty"
                            groups="product.group_stock_packaging"
                            sum="# Pkg 1"
                             />
-                    <field name="pri_pack"
+                    <field name="pri_pack_id"
                            groups="product.group_stock_packaging"
                             />
                     <field name="sec_pack_qty"
                            groups="product.group_stock_packaging"
                            sum="# Pkg 2"
                             />
-                    <field name="sec_pack"
+                    <field name="sec_pack_id"
                            groups="product.group_stock_packaging"
                             />
                 </xpath>
@@ -43,7 +43,7 @@
                         <field name="pri_pack_qty"
                                class="oe_inline"
                                 />
-                        <field name="pri_pack"
+                        <field name="pri_pack_id"
                                class="oe_inline oe_no_button"
                                groups="product.group_uom"
                                 />
@@ -53,7 +53,7 @@
                         <field name="sec_pack_qty"
                                class="oe_inline"
                                 />
-                        <field name="sec_pack"
+                        <field name="sec_pack_id"
                                class="oe_inline oe_no_button"
                                groups="product.group_uom"
                                 />
@@ -73,7 +73,7 @@
                         <field name="pri_pack_qty"
                                class="oe_inline"
                                 />
-                        <field name="pri_pack"
+                        <field name="pri_pack_id"
                                class="oe_inline oe_no_button"
                                groups="product.group_uom"
                                 />
@@ -83,7 +83,7 @@
                         <field name="sec_pack_qty"
                                class="oe_inline"
                                 />
-                        <field name="sec_pack"
+                        <field name="sec_pack_id"
                                class="oe_inline oe_no_button"
                                groups="product.group_uom"
                                 />
@@ -102,14 +102,14 @@
                            groups="product.group_stock_packaging"
                            sum="# Pkg 1"
                             />
-                    <field name="pri_pack"
+                    <field name="pri_pack_id"
                            groups="product.group_stock_packaging"
                             />
                     <field name="sec_pack_qty"
                            groups="product.group_stock_packaging"
                            sum="# Pkg 2"
                             />
-                    <field name="sec_pack"
+                    <field name="sec_pack_id"
                            groups="product.group_stock_packaging"
                             />
                 </field>

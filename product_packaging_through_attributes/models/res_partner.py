@@ -9,5 +9,5 @@ from openerp import models, fields
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    partner_product_ul = fields.Many2one(
+    partner_product_ul_id = fields.Many2one(
         comodel_name='product.ul', string='Logistic Unit')

@@ -18,7 +18,7 @@
 
 {
     "name": "Purchase - Packaging information",
-    "version": "1.0",
+    "version": "8.0.1.1.0",
     "depends": [
         "purchase",
         "product_packaging_through_attributes",
