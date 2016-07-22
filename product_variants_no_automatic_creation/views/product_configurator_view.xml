@@ -10,9 +10,9 @@
                     <field name="owner_model" invisible="1"/>
                     <field name="attribute_id" />
                     <field name="possible_value_ids" invisible="1" />
-                    <!-- This requires that the parent view of this element contains a product_tmpl_id field -->
+                    <field name="product_tmpl_id" invisible="1" />
                     <field name="value_id"
-                           context="{'show_attribute': False, 'default_attribute_id': attribute_id, 'template_for_attribute_value': parent.product_tmpl_id}"
+                           context="{'show_attribute': False, 'default_attribute_id': attribute_id, 'template_for_attribute_value': product_tmpl_id}"
                     />
                     <field name="price_extra"
                            invisible="not context.get('show_price_extra', False)"
