@@ -5,13 +5,13 @@
 
 {
     "name": "Product Variants",
-    "version": "8.0.2.0.0",
+    "version": "8.0.2.1.0",
     "depends": [
         "product",
     ],
     "author": "OdooMRP team,"
               "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+              "Tecnativa",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",

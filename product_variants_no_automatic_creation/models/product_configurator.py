@@ -269,7 +269,7 @@ class ProductConfiguratorAttribute(models.Model):
     @api.depends('attribute_id')
     def _compute_possible_value_ids(self):
         for record in self:
-            # This should be unique due to the new constrain added
+            # This should be unique due to the new constraint added
             attribute = record.product_tmpl_id.attribute_line_ids.filtered(
                 lambda x: x.attribute_id == record.attribute_id)
             record.possible_value_ids = attribute.value_ids.sorted()
