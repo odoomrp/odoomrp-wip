@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="crm_corrective_demo" model="crm.claim.corrective">
+            <field name="code">/</field>
+            <field name="name">Correctivo</field>
+        </record>
+
+        <record id="crm_claim_decision_demo_data" model="crm.claim.decision">
+            <field name="name">Claim back to supplier</field>
+            <field name="description">Ask again to the supplier to ship the material.</field>
+        </record>
+
+        <record id="crm_claim_problem_cause" model="crm.claim.problem.cause">
+            <field name="name">Carrier fault</field>
+            <field name="description">Carrier has not taken enough measures to avoid material to be broken.</field>
+        </record>
+
+        <record id="crm_claim_problem_solution1" model="crm.claim.problem.solution">
+            <field name="name">Send broken material to supplier</field>
+            <field name="cause_ids"
+                   eval="[(4, ref('crm_claim_corrective.crm_claim_problem_cause'))]" />
+        </record>
+
+        <record id="crm_claim_problem_solution2" model="crm.claim.problem.solution">
+            <field name="name">Reclaim supplier</field>
+            <field name="cause_ids"
+                   eval="[(4, ref('crm_claim_corrective.crm_claim_problem_cause'))]" />
+        </record>
+
+        <record id="crm_claim_problem_description_demo" model="crm.claim.problem.description">
+            <field name="name">Material arrived broken</field>
+            <field name="description">During shipping somehow the material has been broken.</field>
+        </record>
+
+        <record id="crm_claim.crm_claim_1" model="crm.claim">
+            <field name="description_id" ref="crm_claim_problem_description_demo"/>
+        </record>
+
+    </data>
+</openerp>

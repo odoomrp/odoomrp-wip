@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-10 08:21+0000\n"
-"PO-Revision-Date: 2014-10-10 08:21+0000\n"
+"POT-Creation-Date: 2016-07-29 08:15+0000\n"
+"PO-Revision-Date: 2016-07-29 08:15+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,23 +17,22 @@ msgstr ""
 
 #. module: crm_claim_corrective
 #: view:crm.claim:crm_claim_corrective.crm_claim_extended_form_view
-msgid "Action"
-msgstr ""
-
-#. module: crm_claim_corrective
-#: view:crm.claim:crm_claim_corrective.crm_claim_extended_form_view
 msgid "Analysis of Causes"
 msgstr ""
 
 #. module: crm_claim_corrective
 #: field:crm.claim,cause_id:0
-#: field:crm.claim.problem.cause,name:0
 msgid "Cause"
 msgstr ""
 
 #. module: crm_claim_corrective
-#: field:crm.claim,desc_cause:0
+#: field:crm.claim,cause_desc:0
 msgid "Cause Description"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.problem.cause,name:0
+msgid "Cause Name"
 msgstr ""
 
 #. module: crm_claim_corrective
@@ -47,10 +46,29 @@ msgid "Causes"
 msgstr ""
 
 #. module: crm_claim_corrective
+#: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_search_view
 #: field:crm.claim.corrective,claim_id:0
-#: field:crm.claim.corrective.action,sol_claim_id:0
+#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_search_view
+#: field:crm.claim.corrective.action,claim_id:0
 #: model:ir.model,name:crm_claim_corrective.model_crm_claim
 msgid "Claim"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: model:ir.actions.act_window,name:crm_claim_corrective.action_crm_claim_problem_cause
+#: model:ir.ui.menu,name:crm_claim_corrective.menu_crm_claim_problem_cause
+msgid "Claim Causes"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: model:ir.actions.act_window,name:crm_claim_corrective.action_crm_claim_problem_solution
+#: model:ir.ui.menu,name:crm_claim_corrective.menu_crm_claim_problem_solution
+msgid "Claim Solutions"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.problem.cause:crm_claim_corrective.crm_claim_causes_form_view
+msgid "Claims"
 msgstr ""
 
 #. module: crm_claim_corrective
@@ -59,28 +77,31 @@ msgid "Closed"
 msgstr ""
 
 #. module: crm_claim_corrective
-#: field:crm.claim.corrective,sol_ids:0
-#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_form_view
-#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_tree_view
+#: field:crm.claim.corrective,code:0
+msgid "Code"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_search_view
 msgid "Corrective Action"
 msgstr ""
 
 #. module: crm_claim_corrective
-#: field:crm.claim,aaccseq:0
+#: field:crm.claim,corrective_id:0
 msgid "Corrective Action Info"
 msgstr ""
 
 #. module: crm_claim_corrective
 #: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_form_view
 #: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_tree_view
-#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_form_view
+#: field:crm.claim.corrective,sol_ids:0
 #: model:ir.actions.act_window,name:crm_claim_corrective.action_crm_claim_corrective
 #: model:ir.ui.menu,name:crm_claim_corrective.menu_corrective_actions
 msgid "Corrective Actions"
 msgstr ""
 
 #. module: crm_claim_corrective
-#: field:crm.claim.corrective.action,corrective_action_id:0
+#: field:crm.claim.corrective.action,corrective_id:0
 msgid "Corrective action"
 msgstr ""
 
@@ -105,9 +126,8 @@ msgid "Created on"
 msgstr ""
 
 #. module: crm_claim_corrective
-#: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_search_view
-#: field:crm.claim.corrective,partner_id:0
-msgid "Customer"
+#: field:crm.claim,moddate:0
+msgid "Date"
 msgstr ""
 
 #. module: crm_claim_corrective
@@ -116,37 +136,74 @@ msgid "Date Done"
 msgstr ""
 
 #. module: crm_claim_corrective
+#: help:crm.claim.corrective,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: crm_claim_corrective
 #: field:crm.claim,decision_id:0
-#: field:crm.claim,nfdecision_id:0
-#: field:crm.claim.decision,name:0
 msgid "Decision"
 msgstr ""
 
 #. module: crm_claim_corrective
+#: field:crm.claim.decision,name:0
+msgid "Decision Name"
+msgstr ""
+
+#. module: crm_claim_corrective
 #: view:crm.claim.decision:crm_claim_corrective.crm_claim_decision_form_view
+#: model:ir.actions.act_window,name:crm_claim_corrective.action_crm_claim_decision
+#: model:ir.ui.menu,name:crm_claim_corrective.menu_crm_claim_decision
 msgid "Decision Notes"
 msgstr ""
 
 #. module: crm_claim_corrective
-#: field:crm.claim,desc_decis:0
-#: field:crm.claim,nfdesc_decis:0
-#: field:crm.claim.problem.description,name:0
+#: field:crm.claim,decision_desc:0
+#: field:crm.claim.corrective,description:0
+#: field:crm.claim.corrective.action,description:0
+#: field:crm.claim.decision,description:0
+#: field:crm.claim.problem.cause,description:0
+#: field:crm.claim.problem.description,description:0
+#: field:crm.claim.problem.solution,description:0
 msgid "Description"
 msgstr ""
 
 #. module: crm_claim_corrective
+#: field:crm.claim.problem.description,name:0
+msgid "Description Name"
+msgstr ""
+
+#. module: crm_claim_corrective
 #: view:crm.claim.problem.description:crm_claim_corrective.crm_claim_descriptions_form_view
+#: model:ir.actions.act_window,name:crm_claim_corrective.action_crm_claim_problem_description
+#: model:ir.ui.menu,name:crm_claim_corrective.menu_crm_claim_problem_description
 msgid "Description Notes"
 msgstr ""
 
 #. module: crm_claim_corrective
-#: field:crm.claim,moddate:0
-msgid "Fecha"
+#: field:crm.claim.corrective,display_name:0
+#: field:crm.claim.corrective.action,display_name:0
+#: field:crm.claim.decision,display_name:0
+#: field:crm.claim.problem.cause,display_name:0
+#: field:crm.claim.problem.description,display_name:0
+#: field:crm.claim.problem.solution,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,message_follower_ids:0
+msgid "Followers"
 msgstr ""
 
 #. module: crm_claim_corrective
 #: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_search_view
+#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_search_view
 msgid "Group By..."
+msgstr ""
+
+#. module: crm_claim_corrective
+#: help:crm.claim.corrective,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
 msgstr ""
 
 #. module: crm_claim_corrective
@@ -157,6 +214,31 @@ msgstr ""
 #: field:crm.claim.problem.description,id:0
 #: field:crm.claim.problem.solution,id:0
 msgid "ID"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: help:crm.claim.corrective,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,message_last_post:0
+msgid "Last Message Date"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,__last_update:0
+#: field:crm.claim.corrective.action,__last_update:0
+#: field:crm.claim.decision,__last_update:0
+#: field:crm.claim.problem.cause,__last_update:0
+#: field:crm.claim.problem.description,__last_update:0
+#: field:crm.claim.problem.solution,__last_update:0
+msgid "Last Modified on"
 msgstr ""
 
 #. module: crm_claim_corrective
@@ -180,6 +262,19 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: crm_claim_corrective
+#: field:crm.claim.corrective,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: help:crm.claim.corrective,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_form_view
+#: field:crm.claim.corrective,name:0
+#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_form_view
 #: field:crm.claim.corrective.action,name:0
 msgid "Name"
 msgstr ""
@@ -191,7 +286,19 @@ msgstr ""
 
 #. module: crm_claim_corrective
 #: view:crm.claim:crm_claim_corrective.crm_claim_extended_form_view
+#: field:crm.claim,ncdecision_id:0
 msgid "Nonconformity Decision"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim,ncdecision_desc:0
+msgid "Nonconformity Decision Description"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_search_view
+#: field:crm.claim.corrective,partner_id:0
+msgid "Partner"
 msgstr ""
 
 #. module: crm_claim_corrective
@@ -206,10 +313,6 @@ msgstr ""
 
 #. module: crm_claim_corrective
 #: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_form_view
-msgid "Preventive/Corrective Action"
-msgstr ""
-
-#. module: crm_claim_corrective
 #: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_form_view
 #: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_tree_view
 #: model:ir.actions.act_window,name:crm_claim_corrective.action_crm_claim_corrective_action
@@ -219,7 +322,7 @@ msgstr ""
 
 #. module: crm_claim_corrective
 #: field:crm.claim,description_id:0
-msgid "Problem description"
+msgid "Problem Description"
 msgstr ""
 
 #. module: crm_claim_corrective
@@ -228,6 +331,7 @@ msgid "Resolution Actions"
 msgstr ""
 
 #. module: crm_claim_corrective
+#: view:crm.claim.corrective.action:crm_claim_corrective.crm_claim_corrective_action_search_view
 #: field:crm.claim.corrective.action,responsible_id:0
 msgid "Responsible"
 msgstr ""
@@ -243,48 +347,48 @@ msgid "Search Preventive/Corrective Actions"
 msgstr ""
 
 #. module: crm_claim_corrective
-#: help:crm.claim.corrective.action,sol_claim_id:0
-msgid "Select a CRM Claim"
-msgstr ""
-
-#. module: crm_claim_corrective
-#: help:crm.claim,cause_id:0
-msgid "Select a Cause"
-msgstr ""
-
-#. module: crm_claim_corrective
 #: help:crm.claim.corrective,claim_id:0
+#: help:crm.claim.corrective.action,claim_id:0
 msgid "Select a Claim"
 msgstr ""
 
 #. module: crm_claim_corrective
+#: help:crm.claim,cause_id:0
+msgid "Select a cause."
+msgstr ""
+
+#. module: crm_claim_corrective
+#: help:crm.claim,ncdecision_id:0
+msgid "Select a decision for nonconformity. If you change this the description of nonconformity will be updated."
+msgstr ""
+
+#. module: crm_claim_corrective
 #: help:crm.claim,decision_id:0
-#: help:crm.claim,nfdecision_id:0
-msgid "Select a Decision"
+msgid "Select a decision."
 msgstr ""
 
 #. module: crm_claim_corrective
 #: help:crm.claim,description_id:0
-msgid "Select a Problem Description"
+msgid "Select a problem description."
 msgstr ""
 
 #. module: crm_claim_corrective
 #: help:crm.claim.corrective.action,responsible_id:0
-msgid "Select a Responsible"
+msgid "Select a responsible"
 msgstr ""
 
 #. module: crm_claim_corrective
-#: field:crm.claim.corrective,seq:0
 #: field:crm.claim.corrective.action,sequence:0
 msgid "Sequence"
 msgstr ""
 
 #. module: crm_claim_corrective
 #: field:crm.claim.problem.solution,name:0
-msgid "Solution"
+msgid "Solution Name"
 msgstr ""
 
 #. module: crm_claim_corrective
+#: view:crm.claim.problem.cause:crm_claim_corrective.crm_claim_causes_form_view
 #: field:crm.claim.problem.cause,solution_ids:0
 #: view:crm.claim.problem.solution:crm_claim_corrective.crm_claim_solutions_form_view
 msgid "Solutions"
@@ -294,5 +398,15 @@ msgstr ""
 #: view:crm.claim.corrective:crm_claim_corrective.crm_claim_corrective_search_view
 #: field:crm.claim.corrective,state:0
 msgid "State"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: crm_claim_corrective
+#: field:crm.claim.corrective,message_unread:0
+msgid "Unread Messages"
 msgstr ""
 
