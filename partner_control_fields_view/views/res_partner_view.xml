@@ -1,26 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="view_partner_tree_inherit" model="ir.ui.view">
-            <field name="name">res.partner.tree.inherit</field>
+        <record id="res_partner_control_info_tree_view" model="ir.ui.view">
+            <field name="name">res.partner.control_info.tree</field>
             <field name="model">res.partner</field>
-            <field name="type">tree</field>
             <field name="inherit_id" ref="base.view_partner_tree" />
+            <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
             <field name="arch" type="xml">
-                    <field name="display_name" position="after">
-                        <field name="create_uid" />
-                        <field name="write_uid" />
-                    </field>
+                <field name="display_name" position="after">
+                    <field name="create_uid" />
+                    <field name="write_uid" />
+                </field>
             </field>
         </record>
-        <record id="view_partner_form_inherit" model="ir.ui.view">
-            <field name="name">res.partner.form.inherit</field>
+
+        <record id="res_partner_control_info_form_view" model="ir.ui.view">
+            <field name="name">res.partner.control_info.form</field>
             <field name="model">res.partner</field>
-            <field name="type">tree</field>
             <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
             <field name="arch" type="xml">
                 <field name="website" position="after">
-                    <field name="create_uid" readonly="1"/>
-                    <field name="write_uid" readonly="1"/>
+                    <label for="create_uid" />
+                    <div>
+                        <field name="create_uid" class="oe_inline" readonly="1" />
+                        <label string=" on " />
+                        <field name="create_date" class="oe_inline" readonly="1" />
+                    </div>
+                    <label for="write_uid" />
+                    <div>
+                        <field name="write_uid" class="oe_inline" readonly="1" />
+                        <label string="on" />
+                        <field name="write_date" class="oe_inline" readonly="1"/>
+                    </div>
                 </field>
             </field>
         </record>

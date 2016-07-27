@@ -16,18 +16,18 @@
 #
 ##############################################################################
 {
-    'name': 'Partner Control Fields View',
-    'version': '1.0',
-    'description': """
-    This module shows the automatic fields "created by" and "last updated by"
-    in partner views.
-    """,
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
+    "name": "Partner Control Fields View",
+    "version": "8.0.1.0.0",
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    'website': 'http://www.odoomrp.com',
-    "depends": ['base'],
+    "website": "http://www.odoomrp.com",
+    "depends": [
+        "base",
+    ],
     "category": "Generic Modules",
-    "data": ['views/res_partner_view.xml'],
+    "data": [
+        "views/res_partner_view.xml",
+    ],
     "installable": True,
 }
