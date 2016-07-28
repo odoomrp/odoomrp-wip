@@ -21,17 +21,20 @@
 ##############################################################################
 {
     'name': 'Stock Picking Wave Management',
-    'version': "1.0",
+    'version': "8.0.1.0.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     'website': "http://www.odoomrp.com",
     'category': 'Warehouse Management',
-    'depends': ["stock",
-                "stock_picking_wave",
-                ],
-    'data': ["wizard/stock_transfer_details_view.xml",
-             "views/stock_picking_wave_view.xml",
-             ],
+    'depends': [
+        "stock",
+        "stock_picking_wave",
+    ],
+    'data': [
+        "data/stock_picking_wave_management_data.xml",
+        "wizard/stock_transfer_details_view.xml",
+        "views/stock_picking_wave_view.xml",
+    ],
     'installable': True,
 }
