@@ -18,15 +18,15 @@
 
 {
     "name": "Product Packaging through Attributes",
-    "version": "1.0",
+    "version": "8.0.1.1.0",
     "depends": [
         "base",
         "product",
         "product_packaging_views",
         "product_attribute_types",
     ],
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "contributors": [
@@ -35,7 +35,6 @@
         "Ana Juaristi <ajuaristio@gmail.com>"
     ],
     "category": "Custom Module",
-    "summary": "",
     "data": [
         "views/product_view.xml",
         "views/res_partner_view.xml",

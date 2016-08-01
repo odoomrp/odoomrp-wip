@@ -20,7 +20,7 @@
                 ref="product_attribute_types.product_attribute_value_extended_tree_view" />
             <field name="arch" type="xml">
                 <field name="numeric_value" position="after">
-                    <field name="package_product"
+                    <field name="package_product_id"
                         attrs="{'required':[('is_package_attr','=',True)]}" />
                     <field name="is_package_attr" invisible="1" />
                 </field>
@@ -33,7 +33,7 @@
             <field name="inherit_id" ref="product.product_packaging_form_view" />
             <field name="arch" type="xml">
                 <field name="product_tmpl_id" position="after">
-                    <field name="product" />
+                    <field name="product_id" />
                 </field>
             </field>
         </record>
@@ -44,7 +44,7 @@
             <field name="inherit_id" ref="product.product_packaging_tree_view" />
             <field name="arch" type="xml">
                 <field name="product_tmpl_id" position="after">
-                    <field name="product" />
+                    <field name="product_id" />
                 </field>
             </field>
         </record>
@@ -56,7 +56,7 @@
                 ref="product_packaging_views.product_ul_packaging_form_view" />
             <field name="arch" type="xml">
                 <field name="product_tmpl_id" position="after">
-                    <field name="product" />
+                    <field name="product_id" />
                 </field>
             </field>
         </record>

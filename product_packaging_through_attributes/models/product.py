@@ -17,7 +17,7 @@ class ProductAttributeValue(models.Model):
 
     is_package_attr = fields.Boolean(
         string='Package attribute', related='attribute_id.is_package')
-    package_product = fields.Many2one(
+    package_product_id = fields.Many2one(
         comodel_name='product.product', string='Package Product',
         context="{'default_sale_ok': False, 'default_purchase_ok': False}")
 
@@ -25,11 +25,11 @@ class ProductAttributeValue(models.Model):
 class ProductPackaging(models.Model):
     _inherit = 'product.packaging'
 
-    product = fields.Many2one(
+    product_id = fields.Many2one(
         comodel_name='product.product', string='Package Product',
         context="{'default_sale_ok': False, 'default_purchase_ok': False}")
 
-    @api.one
-    @api.onchange('product')
+    @api.multi
+    @api.onchange('product_id')
     def onchange_product(self):
-        self.product_tmpl_id = self.product.product_tmpl_id
+        self.product_tmpl_id = self.product_id.product_tmpl_id
