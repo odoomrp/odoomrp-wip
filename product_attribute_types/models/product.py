@@ -48,9 +48,8 @@ class ProductAttributeValue(models.Model):
 
     @api.onchange('name')
     def name_change(self):
-        for value in self:
-            if value.attr_type == 'numeric' and not value.numeric_value:
-                try:
-                    value.numeric_value = float(value.name)
-                except:
-                    pass
+        if self.attr_type == 'numeric' and not self.numeric_value:
+            try:
+                self.numeric_value = float(self.name)
+            except:
+                pass
