@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import api, fields, models
 
 
 class ProductAttribute(models.Model):
@@ -47,7 +47,7 @@ class ProductAttributeValue(models.Model):
     max_range = fields.Float('Max', digits=(12, 6))
 
     @api.onchange('name')
-    def name_change(self):
+    def onchange_name(self):
         if self.attr_type == 'numeric' and not self.numeric_value:
             try:
                 self.numeric_value = float(self.name)

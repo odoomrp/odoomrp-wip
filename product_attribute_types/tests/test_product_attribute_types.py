@@ -25,7 +25,7 @@ class TestProductAttributeTypes(common.TransactionCase):
 
     def test_onchange_numeric_value_name(self):
         self.attribute_value.name = '3'
-        self.attribute_value.name_change()
+        self.attribute_value.onchange_name()
         self.assertEquals(self.attribute_value.numeric_value,
                           float(self.attribute_value.name),
                           'Numeric value properly assigned')
