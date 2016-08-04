@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class ProductAttribute(models.Model):
@@ -45,3 +45,12 @@ class ProductAttributeValue(models.Model):
     numeric_value = fields.Float('Numeric Value', digits=(12, 6))
     min_range = fields.Float('Min', digits=(12, 6))
     max_range = fields.Float('Max', digits=(12, 6))
+
+    @api.onchange('name')
+    def name_change(self):
+        for value in self:
+            if value.attr_type == 'numeric' and not value.numeric_value:
+                try:
+                    value.numeric_value = float(value.name)
+                except:
+                    pass
