@@ -85,6 +85,7 @@ class ImportInventory(models.TransientModel):
             val['inventory_id'] = inventory.id
             val['fail'] = True
             val['fail_reason'] = _('No processed')
+            val['standard_price'] = values['standard_price']
             inv_imporline_obj.create(val)
 
 
@@ -101,3 +102,4 @@ class StockInventoryImportLine(models.Model):
     lot = fields.Char('Product Lot')
     fail = fields.Boolean('Fail')
     fail_reason = fields.Char('Fail Reason')
+    standard_price = fields.Float(string='Cost Price')

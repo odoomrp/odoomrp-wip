@@ -5,6 +5,21 @@
 from openerp import models, fields, api, exceptions, _
 
 
+class StockInventoryLine(models.Model):
+    _inherit = 'stock.inventory.line'
+
+    standard_price = fields.Float(related='product_id.standard_price')
+
+    @api.model
+    def _resolve_inventory_line(self, inventory_line):
+        move = super(StockInventoryLine,
+                     self)._resolve_inventory_line(inventory_line)
+        if move:
+            move_id = self.env['stock.move'].browse(move)
+            move_id.price_unit = inventory_line.standard_price
+        return move
+
+
 class StockInventory(models.Model):
     _inherit = "stock.inventory"
 
@@ -72,7 +87,8 @@ class StockInventory(models.Model):
                     'product_qty': line.quantity,
                     'inventory_id': line.inventory_id.id,
                     'location_id': line.location_id.id,
-                    'prod_lot_id': lot_id})
+                    'prod_lot_id': lot_id,
+                    'standard_price': line.standard_price})
                 line.write({'fail': False, 'fail_reason': _('Processed')})
         return True
 

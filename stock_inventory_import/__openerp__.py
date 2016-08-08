@@ -27,6 +27,7 @@
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <ajuaristio@gmail.com>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Esther Martín <esthermartin@avanzosc.es>",
     ],
     "website": "http://www.odoomrp.com",
     "depends": [
