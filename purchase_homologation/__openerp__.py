@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #                                                                            #
 #  This program is free software: you can redistribute it and/or modify      #
@@ -18,24 +18,8 @@
 
 {
     'name': 'Purchase homologation',
-    'version': '1.0',
+    'version': '8.0.1.0.0',
     'category': 'Purchase Management',
-    'description': """
-This module restricts making purchase orders if you don't register an
-homologation record. This record can be filled with:
-
-* Supplier and product, so the purchase is allowed for that supplier and the
-  concrete product.
-* Supplier and product category, so the authorization extends to all the
-  products of the category or its child categories for that supplier.
-* Only product or product category, allowing to purchase the product or
-  products within category for any supplier.
-* Start and end date that restrict the homologation to that interval of time.
-
-You can also set the permission "Bypass purchase homologation" to certain users
-to not restrict the creation of the purchase order, but only warn about the
-lack of the homologation.
-    """,
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
