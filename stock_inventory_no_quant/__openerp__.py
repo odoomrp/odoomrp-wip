@@ -17,6 +17,7 @@
         "stock",
     ],
     "data": [
+        "views/inventory_view.xml",
     ],
     "installable": True,
 }

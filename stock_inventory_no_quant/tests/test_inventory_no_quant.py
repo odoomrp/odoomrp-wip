@@ -11,7 +11,8 @@ class TestInventoryNoQuant(common.TransactionCase):
         super(TestInventoryNoQuant, self).setUp()
         self.inventory = self.env['stock.inventory'].create({
             'name': 'Inventory Test',
-            'filter': 'none'})
+            'filter': 'none',
+            'all_products': True})
 
     def test_inventory_none(self):
         self.inventory.prepare_inventory()
