@@ -10,11 +10,11 @@ class ImportInventory(models.TransientModel):
     _description = 'Import inventory'
 
     def _get_default_location(self):
-        ctx = self._context
+        ctx = self.env.context
         if 'active_id' in ctx:
             inventory_obj = self.env['stock.inventory']
             inventory = inventory_obj.browse(ctx['active_id'])
-            return inventory.location_id
+        return inventory.location_id or self.env['stock.location']
 
     data = fields.Binary('File', required=True)
     name = fields.Char('Filename')

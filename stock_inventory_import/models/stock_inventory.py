@@ -14,15 +14,14 @@ class StockInventoryLine(models.Model):
 
     @api.model
     def _resolve_inventory_line(self, inventory_line):
-        product = self.env['product.product'].browse(
-            inventory_line.product_id.id)
-        product.standard_price = inventory_line.standard_price
-        move = super(StockInventoryLine,
-                     self)._resolve_inventory_line(inventory_line)
-        if move:
-            move_id = self.env['stock.move'].browse(move)
-            move_id.price_unit = inventory_line.standard_price
-        return move
+        inventory_line.product_id.standard_price = \
+            inventory_line.standard_price
+        move_id = super(StockInventoryLine,
+                        self)._resolve_inventory_line(inventory_line)
+        if move_id:
+            move = self.env['stock.move'].browse(move_id)
+            move.price_unit = inventory_line.standard_price
+        return move_id
 
 
 class StockInventory(models.Model):
