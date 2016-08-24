@@ -3,6 +3,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from openerp import fields, api, models
+from openerp.addons import decimal_precision as dp
 
 
 class StockQuant(models.Model):
@@ -23,6 +24,8 @@ class StockQuant(models.Model):
             record.real_value = record.cost * record.qty
 
     manual_value = fields.Float(
-        string="Manual Value", store=True, compute="_compute_manual_value")
+        string="Manual Value", store=True, compute="_compute_manual_value",
+        digits=dp.get_precision('Product Price'))
     real_value = fields.Float(
-        string="Real Value", store=True, compute="_compute_real_value")
+        string="Real Value", store=True, compute="_compute_real_value",
+        digits=dp.get_precision('Product Price'))
