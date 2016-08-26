@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# (c) 2015 AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from openerp import fields, models, exceptions, api, _
 import base64
@@ -14,7 +17,7 @@ class ImportInventory(models.TransientModel):
         if 'active_id' in ctx:
             inventory_obj = self.env['stock.inventory']
             inventory = inventory_obj.browse(ctx['active_id'])
-        return inventory.location_id or self.env['stock.location']
+            return inventory.location_id or self.env['stock.location']
 
     data = fields.Binary('File', required=True)
     name = fields.Char('Filename')
@@ -23,7 +26,7 @@ class ImportInventory(models.TransientModel):
     location = fields.Many2one('stock.location', 'Default Location',
                                default=_get_default_location, required=True)
 
-    @api.one
+    @api.multi
     def action_import(self):
         """Load Inventory data from the CSV file."""
         ctx = self._context
@@ -31,6 +34,7 @@ class ImportInventory(models.TransientModel):
         inventory_obj = self.env['stock.inventory']
         inv_imporline_obj = self.env['stock.inventory.import.line']
         product_obj = self.env['product.product']
+        inventory = inventory_obj
         if 'active_id' in ctx:
             inventory = inventory_obj.browse(ctx['active_id'])
         if not self.data:
