@@ -6,6 +6,7 @@
     "name": "Stock Inventory Import from CSV file",
     "version": "8.0.1.0.0",
     "category": "Generic Modules",
+    "license": "AGPL-3",
     "author": "OdooMRP team, "
               "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",

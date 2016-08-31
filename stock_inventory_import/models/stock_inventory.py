@@ -73,6 +73,7 @@ class StockInventory(models.Model):
                     'inventory_id': line.inventory_id.id,
                     'location_id': line.location_id.id,
                     'prod_lot_id': lot_id,
+                    'theoretical_std_price': product.standard_price,
                     'standard_price': line.standard_price,
                     })
                 line.write({'fail': False, 'fail_reason': _('Processed')})
@@ -85,4 +86,5 @@ class StockInventory(models.Model):
                 raise exceptions.Warning(
                     _("Loaded lines must be processed at least one time for "
                       "inventory : %s") % (inventory.name))
-        return super(StockInventory, self).action_done()
+            super(StockInventory, inventory).action_done()
+        return True
