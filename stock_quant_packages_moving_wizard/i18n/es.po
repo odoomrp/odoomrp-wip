@@ -1,22 +1,19 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_quant_packages_moving_wizard
-# 
-# Translators:
-# Oihane Crucelaegui <oihanecruce@gmail.com>, 2015
+#	* stock_quant_packages_moving_wizard
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-20 18:11+0000\n"
-"PO-Revision-Date: 2015-10-27 11:33+0000\n"
-"Last-Translator: Oihane Crucelaegui <oihanecruce@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
+"POT-Creation-Date: 2016-09-05 09:55+0000\n"
+"PO-Revision-Date: 2016-09-05 09:55+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: stock_quant_packages_moving_wizard
 #: field:stock.quant.move,create_uid:0
@@ -43,18 +40,41 @@ msgstr "Creado el"
 #: field:stock.quant.package.move_items,dest_loc:0
 #: field:stock.quants.move,dest_loc:0
 msgid "Destination Location"
-msgstr ""
+msgstr "Ubicación destino"
 
 #. module: stock_quant_packages_moving_wizard
-#: field:stock.quant.move,id:0 field:stock.quant.move_items,id:0
+#: field:stock.quant.move,display_name:0
+#: field:stock.quant.move_items,display_name:0
+#: field:stock.quant.package.move,display_name:0
+#: field:stock.quant.package.move_items,display_name:0
+#: field:stock.quants.move,display_name:0
+#: field:stock.quants.move_items,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,id:0
+#: field:stock.quant.move_items,id:0
 #: field:stock.quant.package.move,id:0
-#: field:stock.quant.package.move_items,id:0 field:stock.quants.move,id:0
+#: field:stock.quant.package.move_items,id:0
+#: field:stock.quants.move,id:0
 #: field:stock.quants.move_items,id:0
 msgid "ID"
 msgstr "ID"
 
 #. module: stock_quant_packages_moving_wizard
-#: field:stock.quant.move,write_uid:0 field:stock.quant.move_items,write_uid:0
+#: field:stock.quant.move,__last_update:0
+#: field:stock.quant.move_items,__last_update:0
+#: field:stock.quant.package.move,__last_update:0
+#: field:stock.quant.package.move_items,__last_update:0
+#: field:stock.quants.move,__last_update:0
+#: field:stock.quants.move_items,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: stock_quant_packages_moving_wizard
+#: field:stock.quant.move,write_uid:0
+#: field:stock.quant.move_items,write_uid:0
 #: field:stock.quant.package.move,write_uid:0
 #: field:stock.quant.package.move_items,write_uid:0
 #: field:stock.quants.move,write_uid:0
@@ -75,23 +95,23 @@ msgstr "Última actualización el"
 #. module: stock_quant_packages_moving_wizard
 #: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_quants
 msgid "Move Stock Quant"
-msgstr ""
+msgstr "Mover quant"
 
 #. module: stock_quant_packages_moving_wizard
 #: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_packages
 msgid "Move Stock Quant Packages"
-msgstr ""
+msgstr "Mover paquete de quant"
 
 #. module: stock_quant_packages_moving_wizard
 #: model:ir.actions.act_window,name:stock_quant_packages_moving_wizard.action_move_quants_to
 #: model:ir.ui.menu,name:stock_quant_packages_moving_wizard.menu_quant_move_wizard
 msgid "Move Stock Quants To"
-msgstr ""
+msgstr "Mover quants a"
 
 #. module: stock_quant_packages_moving_wizard
 #: field:stock.quant.package.move_items,move_id:0
 msgid "Package move"
-msgstr ""
+msgstr "Movimiento de paquete"
 
 #. module: stock_quant_packages_moving_wizard
 #: field:stock.quant.move,pack_move_items:0
@@ -107,7 +127,8 @@ msgid "Picking wizard items"
 msgstr "Elementos del asistente de albarán"
 
 #. module: stock_quant_packages_moving_wizard
-#: field:stock.quant.move_items,quant:0 field:stock.quants.move_items,quant:0
+#: field:stock.quant.move_items,quant:0
+#: field:stock.quants.move_items,quant:0
 msgid "Quant"
 msgstr "Quant"
 
@@ -133,7 +154,7 @@ msgstr "Quants"
 #: field:stock.quant.package.move_items,source_loc:0
 #: field:stock.quants.move_items,source_loc:0
 msgid "Source Location"
-msgstr ""
+msgstr "Ubicación origen"
 
 #. module: stock_quant_packages_moving_wizard
 #: view:stock.quant.move:stock_quant_packages_moving_wizard.stock_quant_move_wizard
@@ -162,3 +183,4 @@ msgstr "_Cancelar"
 #: view:stock.quants.move:stock_quant_packages_moving_wizard.stock_quants_move_wizard
 msgid "or"
 msgstr "o"
+
