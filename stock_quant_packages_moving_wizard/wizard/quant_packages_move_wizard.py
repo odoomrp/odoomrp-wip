@@ -11,14 +11,14 @@ class StockQuantPackageMove(models.TransientModel):
         comodel_name='stock.quant.package.move_items', inverse_name='move_id',
         string='Packs')
 
-    def default_get(self, cr, uid, fields, context=None):
-        res = super(StockQuantPackageMove, self).default_get(
-            cr, uid, fields, context=context)
-        packages_ids = context.get('active_ids', [])
+    @api.model
+    def default_get(self, fields):
+        res = super(StockQuantPackageMove, self).default_get(fields)
+        packages_ids = self.env.context.get('active_ids', [])
         if not packages_ids:
             return res
-        packages_obj = self.pool['stock.quant.package']
-        packages = packages_obj.browse(cr, uid, packages_ids, context=context)
+        packages_obj = self.env['stock.quant.package']
+        packages = packages_obj.browse(packages_ids)
         items = []
         for package in packages:
             if not package.parent_id and package.location_id:

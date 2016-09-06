@@ -14,22 +14,21 @@ class StockQuantsMoveWizard(models.TransientModel):
         comodel_name='stock.location', string='Destination Location',
         required=True)
 
-    def default_get(self, cr, uid, fields, context=None):
-        res = super(StockQuantsMoveWizard, self).default_get(
-            cr, uid, fields, context=context)
-        quants_ids = context.get('active_ids', [])
+    @api.model
+    def default_get(self, fields):
+        res = super(StockQuantsMoveWizard, self).default_get(fields)
+        quants_ids = self.env.context.get('active_ids', [])
         if not quants_ids:
             return res
-        quant_obj = self.pool['stock.quant']
-        quants = quant_obj.browse(cr, uid, quants_ids, context=context)
+        quant_obj = self.env['stock.quant']
+        quants = quant_obj.browse(quants_ids)
         items = []
-        for quant in quants:
-            if not quant.package_id:
-                item = {
-                    'quant': quant.id,
-                    'source_loc': quant.location_id.id,
-                }
-                items.append(item)
+        for quant in quants.filtered(lambda q: not q.package_id):
+            item = {
+                'quant': quant.id,
+                'source_loc': quant.location_id.id,
+            }
+            items.append(item)
         res.update(pack_move_items=items)
         return res
 
