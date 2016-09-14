@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="operation_time_lines_tree_view_inh_rejectedquantity" model="ir.ui.view">
+            <field name="name">operation.time.lines.tree.view.inh.rejectedquantity</field>
+            <field name="model">operation.time.line</field>
+            <field name="inherit_id" ref="mrp_operations_time_control.operation_time_lines_tree_view" />
+            <field name="arch" type="xml">
+                <field name="operation_time" position="after">
+                    <field name="employee_id" />
+                    <field name="accepted_amount" />
+                    <field name="rejected_amount" />
+                    <field name="state" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
