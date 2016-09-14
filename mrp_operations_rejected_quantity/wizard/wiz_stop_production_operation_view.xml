@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="wiz_stop_production_operation_view">
+            <field name="name">wiz.stop.production.operation.view</field>
+            <field name="model">wiz.stop.production.operation</field>
+            <field name="arch" type="xml">
+                <form string="Stop operation">
+                    <group colspan="4" col="8">
+                        <field name="employee_id" colspan="4" required="True"/>
+                        <field name="stop_date" colspan="4" required="True"/>
+                        <field name="accepted_amount" colspan="4"/>
+                        <field name="rejected_amount" colspan="4"/>
+                    </group>
+                    <footer>
+                        <button name="stop_operation" type="object" 
+                                string="Stop operation" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link"
+                                special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <!-- ACCION DEFINIDA PARA LA LLAMADA DESDE EL BOTON -->
+        <record model="ir.actions.act_window" id="action_stop_production_operation">
+            <field name="name">Wizard for stop production operation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wiz.stop.production.operation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="wiz_stop_production_operation_view"/>
+        </record>
+    </data>
+</openerp>
