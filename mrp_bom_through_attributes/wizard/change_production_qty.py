@@ -18,5 +18,5 @@ class ChangeProductionQty(models.TransientModel):
         for product_line in production.product_lines:
             move = production.move_lines.filtered(
                 lambda x: x.product_id.id == product_line.product_id.id)
-            move.product_uom_qty = product_line.product_qty
+            move.write({'product_uom_qty': product_line.product_qty})
         return res
