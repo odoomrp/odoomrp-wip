@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # (c) 2016 Alfredo de la Fuente - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
-from openerp import models, api
+from openerp import models, fields, api
 
 
 class MrpWorkOrderProduce(models.TransientModel):
@@ -43,6 +43,8 @@ class MrpWorkOrderProduce(models.TransientModel):
                       operation.production_id.product_qty)
             line[2]['product_qty'] = ((factor * accepted_amount) +
                                       (factor * rejected_amount))
+            line[2]['accepted_amount'] = accepted_amount
+            line[2]['rejected_amount'] = rejected_amount
         return res
 
     @api.multi
@@ -63,3 +65,12 @@ class MrpWorkOrderProduce(models.TransientModel):
         time_lines = operation.operation_time_lines.filtered(
             lambda r: r.state == 'pending')
         time_lines.write({'state': 'processed'})
+
+
+class MrpProductProduceLine(models.TransientModel):
+    _inherit = "mrp.product.produce.line"
+
+    accepted_amount = fields.Integer(
+        string='Accepted amount', readonly=True)
+    rejected_amount = fields.Integer(
+        string='Rejected amount', readonly=True)

@@ -18,6 +18,7 @@
     ],
     'data': [
         'wizard/wiz_stop_production_operation_view.xml',
+        'wizard/mrp_work_order_produce_view.xml',
         'views/mrp_production_workcenter_line_view.xml',
         'views/operation_time_line_view.xml',
     ],
