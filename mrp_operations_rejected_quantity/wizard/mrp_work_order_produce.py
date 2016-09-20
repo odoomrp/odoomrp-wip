@@ -7,6 +7,9 @@ from openerp import models, fields, api
 class MrpWorkOrderProduce(models.TransientModel):
     _inherit = "mrp.work.order.produce"
 
+    qty_to_produce = fields.Integer(string='Quantity to produce')
+    accepted_amount = fields.Integer(string='Accepted amount')
+
     @api.model
     def default_get(self, var_fields):
         operation_obj = self.env['mrp.production.workcenter.line']
@@ -18,6 +21,8 @@ class MrpWorkOrderProduce(models.TransientModel):
                 lambda r: r.state == 'processed'))
         res['product_qty'] = (operation.production_id.product_qty -
                               accepted_amount)
+        res['qty_to_produce'] = operation.production_id.product_qty
+        res['accepted_amount'] = accepted_amount
         return res
 
     @api.multi
@@ -41,6 +46,9 @@ class MrpWorkOrderProduce(models.TransientModel):
             planned_product = planned_product_obj.search(cond, limit=1)
             factor = (planned_product.product_qty /
                       operation.production_id.product_qty)
+            line[2]['qty_to_produce'] = operation.production_id.product_qty
+            line[2]['planned_qty'] = planned_product.product_qty
+            line[2]['factor'] = factor
             line[2]['product_qty'] = ((factor * accepted_amount) +
                                       (factor * rejected_amount))
             line[2]['accepted_amount'] = accepted_amount
@@ -70,7 +78,8 @@ class MrpWorkOrderProduce(models.TransientModel):
 class MrpProductProduceLine(models.TransientModel):
     _inherit = "mrp.product.produce.line"
 
-    accepted_amount = fields.Integer(
-        string='Accepted amount', readonly=True)
-    rejected_amount = fields.Integer(
-        string='Rejected amount', readonly=True)
+    qty_to_produce = fields.Integer(string='Quantity to produce')
+    planned_qty = fields.Integer(string='Planned quantity to consume')
+    factor = fields.Float(string='Factor')
+    accepted_amount = fields.Integer(string='Accepted amount')
+    rejected_amount = fields.Integer(string='Rejected amount')
