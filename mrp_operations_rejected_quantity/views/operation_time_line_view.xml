@@ -11,20 +11,20 @@
                     <attribute name="create">false</attribute>
                     <attribute name="delete">false</attribute>
                 </tree>
-                <field name="user" position="attributes">
-                    <attribute name="readonly">True</attribute>
-                </field>
-                <field name="start_date" position="attributes">
-                    <attribute name="readonly">True</attribute>
-                </field>
-                <field name="end_date" position="attributes">
-                    <attribute name="readonly">True</attribute>
-                </field>
-                <field name="operation_time" position="attributes">
-                    <attribute name="readonly">True</attribute>
-                </field>
                 <field name="production" position="attributes">
                     <attribute name="readonly">True</attribute>
+                </field>
+                <field name="user" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '!=', 'pending')]}</attribute>
+                </field>
+                <field name="start_date" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '!=', 'pending')]}</attribute>
+                </field>
+                <field name="end_date" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '!=', 'pending')]}</attribute>
+                </field>
+                <field name="operation_time" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '!=', 'pending')]}</attribute>
                 </field>
                 <field name="operation_time" position="after">
                     <field name="employee_id" attrs="{'readonly': [('state','!=', 'pending')]}"/>

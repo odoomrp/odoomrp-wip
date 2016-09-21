@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-12 06:44+0000\n"
-"PO-Revision-Date: 2016-09-12 08:47+0100\n"
+"POT-Creation-Date: 2016-09-20 11:52+0000\n"
+"PO-Revision-Date: 2016-09-20 13:53+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,8 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 #. module: mrp_operations_rejected_quantity
+#: field:mrp.product.produce.line,accepted_amount:0
+#: field:mrp.work.order.produce,accepted_amount:0
 #: field:operation.time.line,accepted_amount:0
 #: field:wiz.stop.production.operation,accepted_amount:0
 msgid "Accepted amount"
@@ -64,6 +66,11 @@ msgid "Employee"
 msgstr "Empleado"
 
 #. module: mrp_operations_rejected_quantity
+#: field:mrp.product.produce.line,factor:0
+msgid "Factor"
+msgstr "Factor"
+
+#. module: mrp_operations_rejected_quantity
 #: field:wiz.stop.production.operation,id:0
 msgid "ID"
 msgstr "ID"
@@ -89,6 +96,11 @@ msgid "Pending"
 msgstr "Pendiente"
 
 #. module: mrp_operations_rejected_quantity
+#: field:mrp.product.produce.line,planned_qty:0
+msgid "Planned quantity to consume"
+msgstr "Cantidad planificada a consumir"
+
+#. module: mrp_operations_rejected_quantity
 #: selection:operation.time.line,state:0
 msgid "Processed"
 msgstr "Procesado"
@@ -99,6 +111,13 @@ msgid "Produce"
 msgstr "Producir"
 
 #. module: mrp_operations_rejected_quantity
+#: field:mrp.product.produce.line,qty_to_produce:0
+#: field:mrp.work.order.produce,qty_to_produce:0
+msgid "Quantity to produce"
+msgstr "Cantidad a producir en OF"
+
+#. module: mrp_operations_rejected_quantity
+#: field:mrp.product.produce.line,rejected_amount:0
 #: field:operation.time.line,rejected_amount:0
 #: field:wiz.stop.production.operation,rejected_amount:0
 msgid "Rejected amount"
@@ -122,9 +141,19 @@ msgid "Stop operation"
 msgstr "Parar operación"
 
 #. module: mrp_operations_rejected_quantity
+#: field:operation.time.line,total_amount:0
+msgid "Total amount"
+msgstr "Total cantidad"
+
+#. module: mrp_operations_rejected_quantity
 #: model:ir.actions.act_window,name:mrp_operations_rejected_quantity.action_stop_production_operation
 msgid "Wizard for stop production operation"
 msgstr "Wizard para parar la operación de producción"
+
+#. module: mrp_operations_rejected_quantity
+#: model:ir.model,name:mrp_operations_rejected_quantity.model_mrp_production_workcenter_line
+msgid "Work Order"
+msgstr "Orden de trabajo"
 
 #. module: mrp_operations_rejected_quantity
 #: view:mrp.production:mrp_operations_rejected_quantity.mrp_production_form_view_inh2_rejectedquantity
@@ -147,18 +176,3 @@ msgstr "o"
 msgid "pause"
 msgstr "pausa"
 
-#. module: mrp_operations_rejected_quantity
-#: view:mrp.production:mrp_operations_rejected_quantity.mrp_production_operation_buttons_form_view_inh_rejectedquantity
-#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.mrp_production_workcenter_line_form_view_inh2_rejectedquantity
-msgid ""
-"{'invisible':['|',('do_production','=',False),('state','not in',"
-"['startworking','pause'])]}"
-msgstr ""
-"{'invisible':['|',('do_production','=',False),('state','not in',"
-"['startworking','pause'])]}"
-
-#. module: mrp_operations_rejected_quantity
-#: view:mrp.production:mrp_operations_rejected_quantity.mrp_production_operation_buttons_form_view_inh_rejectedquantity
-#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.mrp_production_workcenter_line_form_view_inh2_rejectedquantity
-msgid "{'invisible':[('state','not in',['startworking','pause'])]}"
-msgstr "{'invisible':[('state','not in',['startworking','pause'])]}"
