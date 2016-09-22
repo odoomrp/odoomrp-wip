@@ -23,12 +23,9 @@
                 <field name="end_date" position="attributes">
                     <attribute name="attrs">{'readonly':[('state', '!=', 'pending')]}</attribute>
                 </field>
-                <field name="operation_time" position="attributes">
-                    <attribute name="attrs">{'readonly':[('state', '!=', 'pending')]}</attribute>
-                </field>
                 <field name="operation_time" position="after">
                     <field name="employee_id" attrs="{'readonly': [('state','!=', 'pending')]}"/>
-                    <field name="accepted_amount" attrs="{'readonly': [('state','!=', 'pending')]}"/>
+                    <field name="accepted_amount" attrs="{'readonly': [('state','!=', 'pending')]}" />
                     <field name="rejected_amount" attrs="{'readonly': [('state','!=', 'pending')]}"/>
                     <field name="total_amount" />
                     <field name="state" readonly="True"/>
