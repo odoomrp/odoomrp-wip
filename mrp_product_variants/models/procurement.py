@@ -22,4 +22,13 @@ class ProcurementOrder(models.Model):
             val = val[2]
             val['product_tmpl_id'] = product.product_tmpl_id.id
             val['owner_model'] = 'mrp.production'
+            try:
+                sale_line = procurement.move_dest_id.procurement_id.\
+                    sale_line_id
+                attr_lines = sale_line.product_attribute_ids.filtered(
+                    lambda x: x.attribute_id.id == val['attribute_id'])
+                if attr_lines:
+                    val['custom_value'] = attr_lines[:1].custom_value
+            except:
+                pass
         return result

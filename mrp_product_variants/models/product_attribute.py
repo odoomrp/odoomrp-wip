@@ -21,4 +21,9 @@ class ProductTemplate(models.Model):
                 for attr_line in product_attribute_list:
                     if attr_line.attribute_id.id == attr['attribute_id']:
                         attr.update({'value_id': attr_line.value_id.id})
+                        try:
+                            attr.update({'custom_value':
+                                         attr_line.custom_value})
+                        except:
+                            pass
         return product_attribute_ids
