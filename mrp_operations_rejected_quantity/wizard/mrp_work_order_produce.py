@@ -9,6 +9,19 @@ class MrpWorkOrderProduce(models.TransientModel):
 
     qty_to_produce = fields.Integer(string='Quantity to produce')
     accepted_amount = fields.Integer(string='Accepted amount')
+    pending_accepted_amount = fields.Integer(
+        string='Pending accepted amount')
+    pending_rejected_amount = fields.Integer(
+        string='Pending rejected amount')
+    pending_total_amount = fields.Integer(
+        string='Pending total amount')
+    confirmed_accepted_amount = fields.Integer(
+        string='Confirmed accepted amount')
+    confirmed_rejected_amount = fields.Integer(
+        string='Confirmed rejected amount')
+    confirmed_total_amount = fields.Integer(
+        string='Confirmed total amount')
+    total_amount = fields.Integer(string='Total amount')
 
     @api.model
     def default_get(self, var_fields):
@@ -19,10 +32,30 @@ class MrpWorkOrderProduce(models.TransientModel):
             x.accepted_amount for x in
             operation.operation_time_lines.filtered(
                 lambda r: r.state == 'processed'))
-        res['product_qty'] = (operation.production_id.product_qty -
-                              accepted_amount)
-        res['qty_to_produce'] = operation.production_id.product_qty
-        res['accepted_amount'] = accepted_amount
+        pending_accepted_amount = sum(
+            x.accepted_amount for x in operation.operation_time_lines.filtered(
+                lambda r: r.state == 'pending'))
+        pending_rejected_amount = sum(
+            x.rejected_amount for x in operation.operation_time_lines.filtered(
+                lambda r: r.state == 'pending'))
+        confirmed_rejected_amount = sum(
+            x.rejected_amount for x in operation.operation_time_lines.filtered(
+                lambda r: r.state == 'processed'))
+        res.update({'product_qty': (operation.production_id.product_qty -
+                                    accepted_amount),
+                    'qty_to_produce': operation.production_id.product_qty,
+                    'accepted_amount': accepted_amount,
+                    'pending_accepted_amount': pending_accepted_amount,
+                    'pending_rejected_amount': pending_rejected_amount,
+                    'pending_total_amount': (pending_accepted_amount +
+                                             pending_rejected_amount),
+                    'confirmed_accepted_amount': accepted_amount,
+                    'confirmed_rejected_amount': confirmed_rejected_amount,
+                    'confirmed_total_amount': (accepted_amount +
+                                               confirmed_rejected_amount),
+                    'total_amount': (
+                        pending_accepted_amount + pending_rejected_amount +
+                        accepted_amount + confirmed_rejected_amount)})
         return res
 
     @api.multi
