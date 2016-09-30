@@ -29,5 +29,5 @@
         "security/ir.model.access.csv",
         "security/product_configurator_security.xml",
     ],
-    'installable': False,
+    'installable': True,
 }
