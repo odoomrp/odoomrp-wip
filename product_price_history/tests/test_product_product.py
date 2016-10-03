@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # © 2015 Antiun Ingenieria S.L. - Javier Iniesta
 # © 2015 Pedro M. Baeza - Serv. Tecnol. Avanzados
+# © 2016 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-# from openerp.tests.common import TransactionCase
 from openerp.addons.product_variant_cost_price.tests.\
     test_product_product import TestProductProduct
+import time
 
 
 class TestProductPriceHistory(TestProductProduct):
@@ -16,17 +17,18 @@ class TestProductPriceHistory(TestProductProduct):
         self.tmpl_history_model = self.env['product.price.history']
 
     def test_product_single_read_last_cost(self):
+        time.sleep(2)
         self.product_single.standard_price = 100
         history = self.variant_history_model.search(
             [('product_id', '=', self.product_single.id)])
         self.assertEqual(self.product_single.standard_price, 100)
-        self.assertEqual(self.product_single.standard_price, history[:1].cost)
         self.assertEqual(history[:1].cost, 100)
+        self.assertEqual(self.product_single.standard_price, history[:1].cost)
         history = self.tmpl_history_model.search(
             [('product_template_id', '=', self.template_single.id)])
         self.assertEqual(self.template_single.standard_price, 100)
-        self.assertEqual(self.template_single.standard_price, history[:1].cost)
         self.assertEqual(history[:1].cost, 100)
+        self.assertEqual(self.template_single.standard_price, history[:1].cost)
 
     def test_product_multi_read_last_cost(self):
         history = self.variant_history_model.search(
