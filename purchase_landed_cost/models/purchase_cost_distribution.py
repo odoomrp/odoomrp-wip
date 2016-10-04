@@ -245,10 +245,12 @@ class PurchaseCostDistribution(models.Model):
                     ('product_id', 'in',
                      product.product_tmpl_id.product_variant_ids.ids),
                     ('id', 'not in', move.quant_ids.ids)]
-                quants = self.env['stock.quant'].read_group(
-                    domain_quant, ['product_id', 'qty', 'cost'], [])[0]
+                quants = self.env['stock.quant'].search(domain_quant)
+                current_stock_valuation = 0
+                for quant in quants:
+                    current_stock_valuation += quant.cost * quant.qty
                 # Get the standard price
-                new_std_price = ((quants['cost'] * quants['qty'] +
+                new_std_price = ((current_stock_valuation +
                                   new_price * move.product_qty) /
                                  qty_available)
             # Write the standard price, as SUPERUSER_ID, because a
