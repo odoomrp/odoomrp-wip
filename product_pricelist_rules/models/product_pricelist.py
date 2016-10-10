@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -109,6 +109,12 @@ class PricelistItem(models.Model):
         items = self.search(domain, order='sequence asc,min_quantity desc')
         item_ids = items.ids
         for item in items:
+            if item.base == -1:
+                item_ids.remove(item.id)
+                item_ids += self.domain_by_pricelist(
+                    item.base_pricelist_id.id, product_id=product_id,
+                    product_tmpl_id=product_tmpl_id, categ_id=categ_id,
+                    qty=qty, partner_id=partner_id)
             if item.base == -2:
                 if item.pricelist.type == 'sale':
                     suppinfo_obj = suppinfo_obj.with_context(
