@@ -62,9 +62,14 @@ class MrpWorkOrderProduce(models.TransientModel):
     def on_change_qty(self, product_qty, consume_lines):
         operation_obj = self.env['mrp.production.workcenter.line']
         planned_product_obj = self.env['mrp.production.product.line']
-        res = super(MrpWorkOrderProduce, self).on_change_qty(product_qty,
-                                                             consume_lines)
         operation = operation_obj.browse(self.env.context.get('active_id'))
+        accepted_amount = sum(
+            x.accepted_amount for x in
+            operation.operation_time_lines.filtered(
+                lambda r: r.state == 'processed'))
+        res = super(MrpWorkOrderProduce, self).on_change_qty(
+            operation.production_id.product_qty - accepted_amount,
+            consume_lines)
         accepted_amount = sum(
             x.accepted_amount for x in
             operation.operation_time_lines.filtered(
