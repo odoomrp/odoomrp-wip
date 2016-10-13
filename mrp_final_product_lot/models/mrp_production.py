@@ -21,12 +21,12 @@ class MrpProduction(models.Model):
     def action_produce(
             self, production_id, production_qty, production_mode, wiz=False):
         lot_obj = self.env['stock.production.lot']
-        if production_mode == 'consume_produce' and wiz and not wiz.lot_id:
+        lot = wiz.lot_id if wiz else False
+        if production_mode == 'consume_produce' and not lot:
             production = self.browse(production_id)
             if (production.product_id.track_all or
                     production.product_id.track_production or
                     production.product_id.track_incoming):
-                lot = False
                 for line in production.move_created_ids2:
                     if (line.product_id.id == production.product_id.id and
                             line.restrict_lot_id):
@@ -35,7 +35,7 @@ class MrpProduction(models.Model):
                 if not lot:
                     code = (production.manual_production_lot or
                             production.name or '')
-                    if production.concatenate_lots_components:
+                    if production.concatenate_lots_components and wiz:
                         lots = wiz.mapped('consume_lines.lot_id')
                         lots += production.mapped(
                             'move_lines2.restrict_lot_id')
@@ -43,6 +43,7 @@ class MrpProduction(models.Model):
                     vals = {'name': code,
                             'product_id': production.product_id.id}
                     lot = lot_obj.create(vals)
-                wiz.lot_id = lot
+                for produce_product in production.move_created_ids:
+                    produce_product.write({'prodlot_id': lot.id})
         return super(MrpProduction, self).action_produce(
             production_id, production_qty, production_mode, wiz=wiz)
