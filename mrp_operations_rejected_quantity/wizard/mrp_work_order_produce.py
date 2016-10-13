@@ -41,8 +41,7 @@ class MrpWorkOrderProduce(models.TransientModel):
         confirmed_rejected_amount = sum(
             x.rejected_amount for x in operation.operation_time_lines.filtered(
                 lambda r: r.state == 'processed'))
-        res.update({'product_qty': (operation.production_id.product_qty -
-                                    accepted_amount),
+        res.update({'product_qty': pending_accepted_amount,
                     'qty_to_produce': operation.production_id.product_qty,
                     'accepted_amount': accepted_amount,
                     'pending_accepted_amount': pending_accepted_amount,
