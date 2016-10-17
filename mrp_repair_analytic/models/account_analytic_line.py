@@ -9,3 +9,5 @@ class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
 
     is_repair_cost = fields.Boolean('Is repair cost')
+    repair_id = fields.Many2one(
+        comodel_name='mrp.repair', string='Repair order')

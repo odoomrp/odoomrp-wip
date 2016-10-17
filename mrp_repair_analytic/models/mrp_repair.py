@@ -20,7 +20,8 @@ class MrpRepair(models.Model):
             if not record.analytic_account:
                 continue
             lines = record.analytic_account.line_ids.filtered(
-                lambda x: x.is_repair_cost and x.amount != 0)
+                lambda x: x.is_repair_cost and x.amount != 0 and
+                x.repair_id.id == record.id)
             lines.unlink()
             for line in record.fees_lines.filtered('load_cost'):
                 vals = record._catch_repair_line_information_for_analytic(line)
@@ -62,7 +63,8 @@ class MrpRepair(models.Model):
                 'journal_id': journal.id,
                 'account_id': self.analytic_account.id,
                 'is_repair_cost': True,
-                'general_account_id': general_account.id
+                'general_account_id': general_account.id,
+                'repair_id': line.repair_id.id,
                 }
         return vals
 
