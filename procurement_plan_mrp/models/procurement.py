@@ -337,7 +337,7 @@ class ProcurementPlan(models.Model):
 
     def _create_stock_reservation(self, procurement):
         reservation_obj = self.env['stock.reservation']
-        dest_location_id = self.env.ref(
+        location_dest_id = self.env.ref(
             'stock_reserve.stock_location_reservation').id
         vals = {'name': procurement.product_id.name,
                 'product_id': procurement.product_id.id,
@@ -345,7 +345,7 @@ class ProcurementPlan(models.Model):
                 'product_uom': procurement.product_uom.id,
                 'company_id': procurement.company_id.id,
                 'location_id': procurement.location_id.id,
-                'dest_location_id': dest_location_id,
+                'location_dest_id': location_dest_id,
                 'procurement_from_plan': procurement.id,
                 'origin': self.sequence,
                 'date_expected': procurement.date_planned
