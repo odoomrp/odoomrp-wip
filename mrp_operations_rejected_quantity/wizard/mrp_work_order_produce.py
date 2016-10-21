@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # (c) 2016 Alfredo de la Fuente - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class MrpWorkOrderProduce(models.TransientModel):
@@ -41,8 +41,7 @@ class MrpWorkOrderProduce(models.TransientModel):
         confirmed_rejected_amount = sum(
             x.rejected_amount for x in operation.operation_time_lines.filtered(
                 lambda r: r.state == 'processed'))
-        res.update({'product_qty': (operation.production_id.product_qty -
-                                    accepted_amount),
+        res.update({'product_qty': pending_accepted_amount,
                     'qty_to_produce': operation.production_id.product_qty,
                     'accepted_amount': accepted_amount,
                     'pending_accepted_amount': pending_accepted_amount,
@@ -62,9 +61,14 @@ class MrpWorkOrderProduce(models.TransientModel):
     def on_change_qty(self, product_qty, consume_lines):
         operation_obj = self.env['mrp.production.workcenter.line']
         planned_product_obj = self.env['mrp.production.product.line']
-        res = super(MrpWorkOrderProduce, self).on_change_qty(product_qty,
-                                                             consume_lines)
         operation = operation_obj.browse(self.env.context.get('active_id'))
+        processed_accepted_amount = sum(
+            x.accepted_amount for x in
+            operation.operation_time_lines.filtered(
+                lambda r: r.state == 'processed'))
+        res = super(MrpWorkOrderProduce, self).on_change_qty(
+            operation.production_id.product_qty - processed_accepted_amount,
+            consume_lines)
         accepted_amount = sum(
             x.accepted_amount for x in
             operation.operation_time_lines.filtered(
@@ -73,6 +77,11 @@ class MrpWorkOrderProduce(models.TransientModel):
             x.rejected_amount for x in
             operation.operation_time_lines.filtered(
                 lambda r: r.state == 'pending'))
+        if (product_qty + processed_accepted_amount >
+                operation.production_id.product_qty):
+            res['warning'] = {
+                'title': _('Product to produce'),
+                'message': _('Quantity to produce greater than planned')}
         for line in res['value']['consume_lines']:
             cond = [('work_order', '=', operation.id),
                     ('product_id', '=', line[2].get('product_id'))]

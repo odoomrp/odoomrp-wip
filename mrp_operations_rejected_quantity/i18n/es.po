@@ -231,6 +231,18 @@ msgid "pause"
 msgstr "pausa"
 
 #. module: mrp_operations_rejected_quantity
+#: code:addons/mrp_operations_rejected_quantity/wizard/mrp_work_order_produce.py:88
+#, python-format
+msgid "Product to produce"
+msgstr "Producto a producir"
+
+#. module: mrp_operations_rejected_quantity
+#: code:addons/mrp_operations_rejected_quantity/wizard/mrp_work_order_produce.py:89
+#, python-format
+msgid "Quantity to produce greater than planned"
+msgstr "Cantidad a producir mayor que la cantidad a producir planificada en OF"
+
+#. module: mrp_operations_rejected_quantity
 #: view:mrp.work.order.produce:mrp_operations_rejected_quantity.view_mrp_product_consume_wizard_inh_rejectedquantity
 #: view:mrp.work.order.produce:mrp_operations_rejected_quantity.view_mrp_product_produce_wizard_inh_rejectedquantity
 msgid "sum_product_qty"
