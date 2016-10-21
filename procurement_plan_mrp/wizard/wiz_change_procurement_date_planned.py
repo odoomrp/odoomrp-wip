@@ -14,6 +14,7 @@ class WizChangeProcurementDatePlanned(models.TransientModel):
 
     @api.model
     def default_get(self, var_fields):
+        super(WizChangeProcurementDatePlanned, self).default_get(var_fields)
         vals = {}
         proc = self.env['procurement.order'].browse(self._context['active_id'])
         if proc.location_type != 'internal':

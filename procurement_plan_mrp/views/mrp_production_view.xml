@@ -16,6 +16,10 @@
             <field name="model">mrp.production</field>
             <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
             <field name="arch" type="xml">
+                <button name="button_confirm" position="before">
+                    <button name="button_create_plan" type="object" string="Create procurement plan" class="oe_highlight"
+                        attrs="{'invisible': ['|',('state','!=','draft'),'|',('product_id','=',False),('plan','!=', False)]}"/>
+                </button>
                 <field name="company_id" position="after">
                     <field name="plan" />
                 </field>
