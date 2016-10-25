@@ -21,7 +21,6 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    @api.one
     def _find_mrp_procurement_with_level0(self):
         proc_obj = self.env['procurement.order']
         cond = [('sale_line_id', '=', self.id)]
