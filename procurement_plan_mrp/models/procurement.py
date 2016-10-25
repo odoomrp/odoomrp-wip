@@ -25,23 +25,23 @@ class ProcurementOrder(models.Model):
                             p.purchase_line_id.order_id.state != 'draft'):
                         proc.protect_date_planned = True
 
-    @api.one
     def _compute_show_buttons(self):
         bom_obj = self.env['mrp.bom']
-        self.show_button_create = False
-        self.show_button_delete = False
-        if (self.location_id.usage == 'internal' and
-                self.state not in ('cancel', 'done')):
-            cond = [('parent_procurement_id', '=', self.id)]
-            child_procs = self.search(cond, limit=1)
-            cond = ['|', ('product_tmpl_id', '=',
-                    self.product_id.product_tmpl_id.id),
-                    ('product_id', '=', self.product_id.id)]
-            boms = bom_obj.search(cond)
-            if child_procs:
-                self.show_button_delete = bool(boms)
-            else:
-                self.show_button_create = bool(boms)
+        for proc in self:
+            proc.show_button_create = False
+            proc.show_button_delete = False
+            if (proc.location_id.usage == 'internal' and
+                    proc.state not in ('cancel', 'done')):
+                cond = [('parent_procurement_id', '=', proc.id)]
+                child_procs = self.search(cond, limit=1)
+                cond = ['|', ('product_tmpl_id', '=',
+                        proc.product_id.product_tmpl_id.id),
+                        ('product_id', '=', proc.product_id.id)]
+                boms = bom_obj.search(cond)
+                if child_procs:
+                    proc.show_button_delete = bool(boms)
+                else:
+                    proc.show_button_create = bool(boms)
 
     level = fields.Integer(string='Level', default=0)
     parent_procurement_id = fields.Many2one(
@@ -116,7 +116,6 @@ class ProcurementOrder(models.Model):
                 'target': 'current',
                 }
 
-    @api.one
     def _create_procurement_plan_from_procurement(self, sale):
         plan_obj = self.env['procurement.plan']
         project_obj = self.env['project.project']
@@ -137,7 +136,6 @@ class ProcurementOrder(models.Model):
                 if proc.show_button_create:
                     proc.button_create_lower_levels()
 
-    @api.one
     def _create_procurement_lower_levels(self, plan_id):
         plan_obj = self.env['procurement.plan']
         plan = plan_obj.browse(plan_id)
@@ -174,7 +172,6 @@ class ProcurementOrder(models.Model):
             if proc.plan:
                 proc._treat_procurements_childrens_from_plan(days_to_sum)
 
-    @api.one
     def _treat_procurements_childrens_from_plan(self, days_to_sum):
         cond = [('parent_procurement_id', 'child_of', self.id),
                 ('id', '!=', self.id)]
@@ -216,7 +213,6 @@ class ProcurementPlan(models.Model):
     production_ids = fields.One2many(
         'mrp.production', 'plan', string='Productions', readonly=True)
 
-    @api.one
     def button_generate_mrp_procurements(self):
         cond = [('name', '=', 'Manufacture')]
         route = self.env['stock.location.route'].search(cond)

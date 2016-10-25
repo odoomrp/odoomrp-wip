@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-12 07:21+0000\n"
-"PO-Revision-Date: 2016-04-12 09:29+0100\n"
+"POT-Creation-Date: 2016-10-21 08:54+0000\n"
+"PO-Revision-Date: 2016-10-21 10:59+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,6 @@ msgid "Add or subtract days"
 msgstr "Sumar o restar días"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:153
 #: code:addons/procurement_plan_mrp/models/procurement.py:234
 #, python-format
 msgid "BoM not found, for product: %s"
@@ -50,6 +49,11 @@ msgid "Create lower levels"
 msgstr "Crear niveles inferiores"
 
 #. module: procurement_plan_mrp
+#: view:mrp.production:procurement_plan_mrp.mrp_production_form_view_inh_mrpprocurementplan
+msgid "Create procurement plan"
+msgstr "Crear plan de abastecimientos"
+
+#. module: procurement_plan_mrp
 #: field:wiz.change.procurement.date.planned,create_uid:0
 msgid "Created by"
 msgstr "Creado por"
@@ -58,6 +62,11 @@ msgstr "Creado por"
 #: field:wiz.change.procurement.date.planned,create_date:0
 msgid "Created on"
 msgstr "Creado el"
+
+#. module: procurement_plan_mrp
+#: field:wiz.change.procurement.date.planned,display_name:0
+msgid "Display Name"
+msgstr "Mostrar descripción"
 
 #. module: procurement_plan_mrp
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
@@ -70,7 +79,14 @@ msgid "Generate procurements"
 msgstr "Generar abastecimientos"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:105
+#: code:addons/procurement_plan_mrp/models/mrp_production.py:55
+#: code:addons/procurement_plan_mrp/models/mrp_production.py:59
+#: code:addons/procurement_plan_mrp/models/mrp_production.py:69
+#, python-format
+msgid "Generated from MO: "
+msgstr "Generated from MO: "
+
+#. module: procurement_plan_mrp
 #: code:addons/procurement_plan_mrp/models/procurement.py:123
 #, python-format
 msgid "Generated from sale order: "
@@ -85,6 +101,11 @@ msgstr "ID"
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
 msgid "Import Procurements"
 msgstr "Importar abastecimientos"
+
+#. module: procurement_plan_mrp
+#: field:wiz.change.procurement.date.planned,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación el"
 
 #. module: procurement_plan_mrp
 #: field:wiz.change.procurement.date.planned,write_uid:0
@@ -118,7 +139,6 @@ msgid "Manufacturing Order"
 msgstr "Órden de producción"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:206
 #: code:addons/procurement_plan_mrp/models/procurement.py:287
 #, python-format
 msgid ""
@@ -182,7 +202,6 @@ msgid "Product"
 msgstr "Producto"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:191
 #: code:addons/procurement_plan_mrp/models/procurement.py:272
 #, python-format
 msgid "Product has not been found on the list of materials %s, Level %s"
@@ -214,6 +233,16 @@ msgid "Sales Order Line"
 msgstr "Línea pedido de venta"
 
 #. module: procurement_plan_mrp
+#: field:procurement.order,show_button_create:0
+msgid "Show button Create"
+msgstr "Mostrar botón crear"
+
+#. module: procurement_plan_mrp
+#: field:procurement.order,show_button_delete:0
+msgid "Show button Delete"
+msgstr "Mostrar botón borrar"
+
+#. module: procurement_plan_mrp
 #: model:ir.model,name:procurement_plan_mrp.model_stock_reservation
 msgid "Stock Reservation"
 msgstr "Reserva de existencias"
@@ -221,10 +250,9 @@ msgstr "Reserva de existencias"
 #. module: procurement_plan_mrp
 #: field:procurement.order,reservation:0
 msgid "Stock reservation"
-msgstr "Stock reservation"
+msgstr "Reservas stock"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:176
 #: code:addons/procurement_plan_mrp/models/procurement.py:257
 #, python-format
 msgid "THEY HAVE NOT GENERATED ALL PROCUREMENTS"
@@ -263,3 +291,9 @@ msgstr ""
 #: view:wiz.change.procurement.date.planned:procurement_plan_mrp.wiz_change_procurement_date_planned_view
 msgid "or"
 msgstr "o"
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/models/procurement.py:371
+#, python-format
+msgid "procurement: %s, with reserve-move made"
+msgstr "abastecimiento: %s, con reserva de movimiento realizado"
