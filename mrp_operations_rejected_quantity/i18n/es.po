@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-22 09:22+0000\n"
-"PO-Revision-Date: 2016-09-22 11:25+0100\n"
+"POT-Creation-Date: 2016-10-26 08:01+0000\n"
+"PO-Revision-Date: 2016-10-26 10:03+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,11 +28,6 @@ msgstr "Cantidad aceptada"
 #: view:wiz.stop.production.operation:mrp_operations_rejected_quantity.wiz_stop_production_operation_view
 msgid "Cancel"
 msgstr "Cancelar"
-
-#. module: mrp_operations_rejected_quantity
-#: selection:operation.time.line,state:0
-msgid "Canceled"
-msgstr "Cancelado"
 
 #. module: mrp_operations_rejected_quantity
 #: field:mrp.work.order.produce,confirmed_accepted_amount:0
@@ -81,9 +76,31 @@ msgid "Employee"
 msgstr "Empleado"
 
 #. module: mrp_operations_rejected_quantity
+#: selection:mrp.production.workcenter.line,result:0
+msgid "Equal"
+msgstr "Igual"
+
+#. module: mrp_operations_rejected_quantity
+#: view:mrp.production:mrp_operations_rejected_quantity.mrp_production_form_view_inh3_rejectedquantity
+#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.mrp_production_workcenter_tree_view_inh2_rejectedquantity
+#: field:mrp.production.workcenter.line,estimated_hours_recalculated:0
+msgid "Estimated hours recalculated"
+msgstr "Horas estimadas recalculadas"
+
+#. module: mrp_operations_rejected_quantity
 #: field:mrp.product.produce.line,factor:0
 msgid "Factor"
 msgstr "Factor"
+
+#. module: mrp_operations_rejected_quantity
+#: selection:mrp.production.workcenter.line,result:0
+msgid "Higher"
+msgstr "Mayor"
+
+#. module: mrp_operations_rejected_quantity
+#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
+msgid "Hours result"
+msgstr "Resultado horas"
 
 #. module: mrp_operations_rejected_quantity
 #: field:wiz.stop.production.operation,id:0
@@ -106,7 +123,12 @@ msgid "Last Updated on"
 msgstr "Última modificación el"
 
 #. module: mrp_operations_rejected_quantity
-#: selection:operation.time.line,state:0
+#: selection:mrp.production.workcenter.line,result:0
+msgid "Less"
+msgstr "Menor"
+
+#. module: mrp_operations_rejected_quantity
+#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
 msgid "Pending"
 msgstr "Pendiente"
 
@@ -131,21 +153,22 @@ msgid "Planned quantity to consume"
 msgstr "Cantidad planificada a consumir"
 
 #. module: mrp_operations_rejected_quantity
-#: selection:operation.time.line,state:0
-msgid "Processed"
-msgstr "Procesado"
-
-#. module: mrp_operations_rejected_quantity
 #: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.mrp_production_workcenter_line_form_view_inh2_rejectedquantity
 #: view:mrp.work.order.produce:mrp_operations_rejected_quantity.view_mrp_product_consume_wizard_inh_rejectedquantity
 #: view:mrp.work.order.produce:mrp_operations_rejected_quantity.view_mrp_product_produce_wizard_inh_rejectedquantity
 msgid "Produce"
-msgstr "Producir"
+msgstr "Fabricar"
 
 #. module: mrp_operations_rejected_quantity
 #: model:ir.model,name:mrp_operations_rejected_quantity.model_mrp_product_produce_line
 msgid "Product Produce Consume lines"
-msgstr "Product Produce Consume lines"
+msgstr "Líneas de consumo de los producto producidos"
+
+#. module: mrp_operations_rejected_quantity
+#: code:addons/mrp_operations_rejected_quantity/wizard/mrp_work_order_produce.py:83
+#, python-format
+msgid "Product to produce"
+msgstr "Producto a producir"
 
 #. module: mrp_operations_rejected_quantity
 #: view:mrp.work.order.produce:mrp_operations_rejected_quantity.view_mrp_product_consume_wizard_inh_rejectedquantity
@@ -160,6 +183,19 @@ msgid "Quantity to produce"
 msgstr "Cantidad a producir en OF"
 
 #. module: mrp_operations_rejected_quantity
+#: code:addons/mrp_operations_rejected_quantity/wizard/mrp_work_order_produce.py:84
+#, python-format
+msgid "Quantity to produce greater than planned"
+msgstr "Cantidad a producir mayor que la cantidad a producir planificada en OF"
+
+#. module: mrp_operations_rejected_quantity
+#: view:mrp.production:mrp_operations_rejected_quantity.mrp_production_form_view_inh3_rejectedquantity
+#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.mrp_production_workcenter_tree_view_inh2_rejectedquantity
+#: field:mrp.production.workcenter.line,real_hours:0
+msgid "Real hours"
+msgstr "Horas reales"
+
+#. module: mrp_operations_rejected_quantity
 #: field:mrp.product.produce.line,rejected_amount:0
 #: field:operation.time.line,rejected_amount:0
 #: field:wiz.stop.production.operation,rejected_amount:0
@@ -167,9 +203,9 @@ msgid "Rejected amount"
 msgstr "Cantidad rechazada"
 
 #. module: mrp_operations_rejected_quantity
-#: field:operation.time.line,state:0
-msgid "State"
-msgstr "Estado"
+#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
+msgid "Scheduled Month"
+msgstr "Mes planificado"
 
 #. module: mrp_operations_rejected_quantity
 #: view:mrp.production:mrp_operations_rejected_quantity.mrp_production_form_view_inh2_rejectedquantity
@@ -193,6 +229,16 @@ msgstr "Total cantidad"
 #: view:operation.time.line:mrp_operations_rejected_quantity.operation_time_lines_tree_view_inh_rejectedquantity
 msgid "True"
 msgstr "True"
+
+#. module: mrp_operations_rejected_quantity
+#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
+msgid "With higher hours"
+msgstr "Con horas mayor"
+
+#. module: mrp_operations_rejected_quantity
+#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
+msgid "With less hours"
+msgstr "Con horas menor"
 
 #. module: mrp_operations_rejected_quantity
 #: model:ir.actions.act_window,name:mrp_operations_rejected_quantity.action_stop_production_operation
@@ -231,16 +277,9 @@ msgid "pause"
 msgstr "pausa"
 
 #. module: mrp_operations_rejected_quantity
-#: code:addons/mrp_operations_rejected_quantity/wizard/mrp_work_order_produce.py:88
-#, python-format
-msgid "Product to produce"
-msgstr "Producto a producir"
-
-#. module: mrp_operations_rejected_quantity
-#: code:addons/mrp_operations_rejected_quantity/wizard/mrp_work_order_produce.py:89
-#, python-format
-msgid "Quantity to produce greater than planned"
-msgstr "Cantidad a producir mayor que la cantidad a producir planificada en OF"
+#: field:mrp.production.workcenter.line,result:0
+msgid "result"
+msgstr "resultado"
 
 #. module: mrp_operations_rejected_quantity
 #: view:mrp.work.order.produce:mrp_operations_rejected_quantity.view_mrp_product_consume_wizard_inh_rejectedquantity
@@ -264,6 +303,11 @@ msgstr "tot_accepted_amount"
 #: view:mrp.work.order.produce:mrp_operations_rejected_quantity.view_mrp_product_produce_wizard_inh_rejectedquantity
 msgid "tot_rejected_amount"
 msgstr "tot_rejected_amount"
+
+#. module: mrp_operations_rejected_quantity
+#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
+msgid "with equal hours ="
+msgstr "Con horas iguales"
 
 #. module: mrp_operations_rejected_quantity
 #: view:mrp.production:mrp_operations_rejected_quantity.mrp_production_operation_buttons_form_view_inh_rejectedquantity

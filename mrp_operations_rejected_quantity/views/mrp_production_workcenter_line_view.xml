@@ -26,6 +26,44 @@
                 </button>
             </field>
         </record>
+        <record id="mrp_production_form_view_inh3_rejectedquantity" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.inh3.rejectedquantity</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree[@string='Production Work Centers']//field[@name='hour']" position="after">
+                    <field name="estimated_hours_recalculated" widget="float_time" sum="Estimated hours recalculated"/>
+                    <field name="real_hours" sum="Real hours"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="mrp_production_workcenter_tree_view_inh2_rejectedquantity" model="ir.ui.view">
+            <field name="name">mrp.production.tree.view.inh2.rejectedquantity</field>
+            <field name="model">mrp.production.workcenter.line</field>
+            <field name="inherit_id" ref="mrp_operations.mrp_production_workcenter_tree_view_inherit" />
+            <field name="arch" type="xml">
+                <field name="hour" position="after">
+                    <field name="estimated_hours_recalculated" widget="float_time" sum="Estimated hours recalculated"/>
+                    <field name="real_hours" sum="Real hours"/>
+                    <field name="result" />
+                </field>
+            </field>
+        </record>
+        <record id="view_mrp_production_workcenter_filter_inh_rejectedquantity" model="ir.ui.view">
+            <field name="name">view.mrp.production.workcenter.filter.inh.rejectedquantity</field>
+            <field name="model">mrp.production.workcenter.line</field>
+            <field name="inherit_id" ref="mrp_operations.view_mrp_production_workcenter_form_view_filter" />
+            <field name="arch" type="xml">
+                <filter string="Pending" position="after">
+                    <filter string="With higher hours" domain="[('result','=','higher')]"/>
+                    <filter string="With less hours" domain="[('result','=','less')]"/>
+                    <filter string="with equal hours =" domain="[('result','=','equal')]"/>
+                </filter>
+                <filter string="Scheduled Month" position="after">
+                    <filter string="Hours result" icon="terp-go-month" domain="[]" context="{'group_by':'result'}" />
+                </filter>
+            </field>
+        </record>
         <record id="mrp_production_workcenter_form_view_inh_rejectedquantity" model="ir.ui.view">
             <field name="name">mrp.production.workcenter.form.view.inh.rejectedquantity</field>
             <field name="model">mrp.production.workcenter.line</field>
