@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-26 08:01+0000\n"
-"PO-Revision-Date: 2016-10-26 10:03+0100\n"
+"POT-Creation-Date: 2016-10-27 13:25+0000\n"
+"PO-Revision-Date: 2016-10-27 15:26+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -65,6 +65,12 @@ msgid "Date stop"
 msgstr "Fecha parada"
 
 #. module: mrp_operations_rejected_quantity
+#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.mrp_production_workcenter_tree_view_inh2_rejectedquantity
+#: field:mrp.production.workcenter.line,difference_between_hours:0
+msgid "Difference between hours"
+msgstr "Diferencia entre horas"
+
+#. module: mrp_operations_rejected_quantity
 #: field:wiz.stop.production.operation,display_name:0
 msgid "Display Name"
 msgstr "Mostrar nombre"
@@ -74,11 +80,6 @@ msgstr "Mostrar nombre"
 #: field:wiz.stop.production.operation,employee_id:0
 msgid "Employee"
 msgstr "Empleado"
-
-#. module: mrp_operations_rejected_quantity
-#: selection:mrp.production.workcenter.line,result:0
-msgid "Equal"
-msgstr "Igual"
 
 #. module: mrp_operations_rejected_quantity
 #: view:mrp.production:mrp_operations_rejected_quantity.mrp_production_form_view_inh3_rejectedquantity
@@ -91,16 +92,6 @@ msgstr "Horas estimadas recalculadas"
 #: field:mrp.product.produce.line,factor:0
 msgid "Factor"
 msgstr "Factor"
-
-#. module: mrp_operations_rejected_quantity
-#: selection:mrp.production.workcenter.line,result:0
-msgid "Higher"
-msgstr "Mayor"
-
-#. module: mrp_operations_rejected_quantity
-#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
-msgid "Hours result"
-msgstr "Resultado horas"
 
 #. module: mrp_operations_rejected_quantity
 #: field:wiz.stop.production.operation,id:0
@@ -121,11 +112,6 @@ msgstr "Última modificación por"
 #: field:wiz.stop.production.operation,write_date:0
 msgid "Last Updated on"
 msgstr "Última modificación el"
-
-#. module: mrp_operations_rejected_quantity
-#: selection:mrp.production.workcenter.line,result:0
-msgid "Less"
-msgstr "Menor"
 
 #. module: mrp_operations_rejected_quantity
 #: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
@@ -203,11 +189,6 @@ msgid "Rejected amount"
 msgstr "Cantidad rechazada"
 
 #. module: mrp_operations_rejected_quantity
-#: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
-msgid "Scheduled Month"
-msgstr "Mes planificado"
-
-#. module: mrp_operations_rejected_quantity
 #: view:mrp.production:mrp_operations_rejected_quantity.mrp_production_form_view_inh2_rejectedquantity
 #: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.mrp_production_workcenter_form_view_inh_rejectedquantity
 #: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.mrp_production_workcenter_line_tree_view_inh_rejectedquantity
@@ -232,13 +213,13 @@ msgstr "True"
 
 #. module: mrp_operations_rejected_quantity
 #: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
-msgid "With higher hours"
-msgstr "Con horas mayor"
+msgid "With higher difference"
+msgstr "Con diferencia horas mayor"
 
 #. module: mrp_operations_rejected_quantity
 #: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
-msgid "With less hours"
-msgstr "Con horas menor"
+msgid "With less difference"
+msgstr "Con diferencia horas menor"
 
 #. module: mrp_operations_rejected_quantity
 #: model:ir.actions.act_window,name:mrp_operations_rejected_quantity.action_stop_production_operation
@@ -277,11 +258,6 @@ msgid "pause"
 msgstr "pausa"
 
 #. module: mrp_operations_rejected_quantity
-#: field:mrp.production.workcenter.line,result:0
-msgid "result"
-msgstr "resultado"
-
-#. module: mrp_operations_rejected_quantity
 #: view:mrp.work.order.produce:mrp_operations_rejected_quantity.view_mrp_product_consume_wizard_inh_rejectedquantity
 #: view:mrp.work.order.produce:mrp_operations_rejected_quantity.view_mrp_product_produce_wizard_inh_rejectedquantity
 msgid "sum_product_qty"
@@ -306,8 +282,8 @@ msgstr "tot_rejected_amount"
 
 #. module: mrp_operations_rejected_quantity
 #: view:mrp.production.workcenter.line:mrp_operations_rejected_quantity.view_mrp_production_workcenter_filter_inh_rejectedquantity
-msgid "with equal hours ="
-msgstr "Con horas iguales"
+msgid "with equal difference"
+msgstr "Con diferencia horas igual"
 
 #. module: mrp_operations_rejected_quantity
 #: view:mrp.production:mrp_operations_rejected_quantity.mrp_production_operation_buttons_form_view_inh_rejectedquantity
