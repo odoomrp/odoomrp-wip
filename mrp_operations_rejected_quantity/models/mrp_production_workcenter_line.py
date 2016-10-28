@@ -25,13 +25,9 @@ class MrpProductionWorkcenterLine(models.Model):
                 workcenter_line.estimated_hours_recalculated = (
                     ((accepted + rejected) * workcenter_line.hour) /
                     workcenter_line.qty)
-                workcenter_line.result = 'equal'
-                if (workcenter_line.real_hours >
-                        workcenter_line.estimated_hours_recalculated):
-                    workcenter_line.result = 'higher'
-                if (workcenter_line.real_hours <
-                        workcenter_line.estimated_hours_recalculated):
-                    workcenter_line.result = 'less'
+                workcenter_line.difference_between_hours = (
+                    workcenter_line.real_hours -
+                    workcenter_line.estimated_hours_recalculated)
 
     estimated_hours_recalculated = fields.Float(
         string='Estimated hours recalculated', compute='_compute_real_hours',
@@ -39,8 +35,6 @@ class MrpProductionWorkcenterLine(models.Model):
     real_hours = fields.Float(
         string='Real hours', compute='_compute_real_hours', digits=(12, 6),
         store=True)
-    result = fields.Selection(
-        [('higher', 'Higher'),
-         ('less', 'Less'),
-         ('equal', 'Equal')], string='result', compute='_compute_real_hours',
-        store=True)
+    difference_between_hours = fields.Float(
+        string='Difference between hours', compute='_compute_real_hours',
+        digits=(12, 6), store=True)
