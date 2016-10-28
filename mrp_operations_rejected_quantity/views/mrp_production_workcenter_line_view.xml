@@ -45,7 +45,7 @@
                 <field name="hour" position="after">
                     <field name="estimated_hours_recalculated" widget="float_time" sum="Estimated hours recalculated"/>
                     <field name="real_hours" sum="Real hours"/>
-                    <field name="result" />
+                    <field name="difference_between_hours" sum="Difference between hours"/>
                 </field>
             </field>
         </record>
@@ -55,12 +55,9 @@
             <field name="inherit_id" ref="mrp_operations.view_mrp_production_workcenter_form_view_filter" />
             <field name="arch" type="xml">
                 <filter string="Pending" position="after">
-                    <filter string="With higher hours" domain="[('result','=','higher')]"/>
-                    <filter string="With less hours" domain="[('result','=','less')]"/>
-                    <filter string="with equal hours =" domain="[('result','=','equal')]"/>
-                </filter>
-                <filter string="Scheduled Month" position="after">
-                    <filter string="Hours result" icon="terp-go-month" domain="[]" context="{'group_by':'result'}" />
+                    <filter string="With higher difference" domain="[('difference_between_hours','&gt;',0)]"/>
+                    <filter string="With less difference" domain="[('difference_between_hours','&lt;',0)]"/>
+                    <filter string="with equal difference" domain="[('difference_between_hours','=',0)]"/>
                 </filter>
             </field>
         </record>
