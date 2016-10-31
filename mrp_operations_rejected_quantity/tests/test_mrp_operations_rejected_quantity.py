@@ -80,6 +80,7 @@ class TestMrpOperationsRejectedQuantity(common.TransactionCase):
             consume.with_context(active_id=operation.id).do_consume()
         else:
             consume.with_context(active_id=operation.id).do_consume_produce()
+        consume._catch_consume_lines(operation)
         for line in operation.operation_time_lines:
             line._compute_total_amount()
         self.assertEqual(
