@@ -120,7 +120,7 @@ class ProcurementOrder(models.Model):
         plan_obj = self.env['procurement.plan']
         project_obj = self.env['project.project']
         vals = {'name': _('Generated from sale order: ') + sale.name,
-                'warehouse_id': sale.warehouse_id.id,
+                'warehouse_id': self.warehouse_id.id or sale.warehouse_id.id,
                 'from_date': self.date_planned,
                 'to_date': self.date_planned,
                 'procurement_ids': [(4, self.id)]}
