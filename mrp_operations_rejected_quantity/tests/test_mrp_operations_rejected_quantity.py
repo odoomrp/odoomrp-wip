@@ -80,6 +80,8 @@ class TestMrpOperationsRejectedQuantity(common.TransactionCase):
             consume.with_context(active_id=operation.id).do_consume()
         else:
             consume.with_context(active_id=operation.id).do_consume_produce()
+        for line in operation.operation_time_lines:
+            line._compute_total_amount()
         self.assertEqual(
             operation.operation_time_lines.state, 'processed',
             'Operation time line not in processed state')
