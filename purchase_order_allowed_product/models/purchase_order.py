@@ -35,15 +35,15 @@ class PurchaseOrder(models.Model):
                 suppinfo = self.env['product.supplierinfo'].search(
                     [('name', 'in', (order.partner_id.commercial_partner_id.id,
                                      order.partner_id.id))])
-                allowed_tmpl_ids = suppinfo.mapped('product_tmpl_id')
+                order.allowed_tmpl_ids = suppinfo.mapped(
+                    'product_tmpl_id').filtered('purchase_ok')
             else:
-                allowed_tmpl_ids = product_obj.search(
+                order.allowed_tmpl_ids = product_obj.search(
                     [('purchase_ok', '=', True)])
-            order.allowed_tmpl_ids = allowed_tmpl_ids.filtered('purchase_ok')
             order.allowed_product_ids =\
                 order.mapped(
                     'allowed_tmpl_ids.product_variant_ids').filtered(
-                        'purchase_ok')
+                    'purchase_ok')
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
