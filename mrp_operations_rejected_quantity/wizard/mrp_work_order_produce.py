@@ -82,6 +82,12 @@ class MrpWorkOrderProduce(models.TransientModel):
             res['warning'] = {
                 'title': _('Product to produce'),
                 'message': _('Quantity to produce greater than planned')}
+        if (not res.get('value', False) or
+            (res.get('value', False) and not
+             res['value'].get('consume_lines',
+                              False)) or res['value']['consume_lines'] == []):
+            res['value']['consume_lines'] = self._catch_consume_lines(
+                operation)
         for line in res['value']['consume_lines']:
             cond = [('work_order', '=', operation.id),
                     ('product_id', '=', line[2].get('product_id'))]
@@ -96,6 +102,15 @@ class MrpWorkOrderProduce(models.TransientModel):
             line[2]['accepted_amount'] = accepted_amount
             line[2]['rejected_amount'] = rejected_amount
         return res
+
+    def _catch_consume_lines(self, operation):
+        consume_lines = []
+        for line in operation.product_line:
+            consume_lines.append(
+                [0, False, {'lot_id': False,
+                            'product_id': line.product_id.id,
+                            'product_qty': line.product_qty}])
+        return consume_lines
 
     @api.multi
     def do_consume(self):
