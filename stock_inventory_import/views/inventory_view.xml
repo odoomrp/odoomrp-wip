@@ -15,7 +15,7 @@
                         attrs="{'invisible':['|',('state', 'in',('draft','done')),('filter', '!=', 'file')]}"
                         class="oe_highlight" type="object" />
                 </button>
-                <xpath expr="//page[@string='Inventory Adjustments']"
+                <xpath expr="//field[@name='move_ids']"
                     position="after">
                     <page string="Imported Lines"
                         attrs="{'invisible':[('filter', '!=', 'file')]}">
