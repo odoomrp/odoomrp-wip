@@ -44,8 +44,8 @@
             <field name="arch" type="xml">
                 <field name="hour" position="after">
                     <field name="estimated_hours_recalculated" widget="float_time" sum="Estimated hours recalculated"/>
-                    <field name="real_hours" sum="Real hours"/>
-                    <field name="difference_between_hours" sum="Difference between hours"/>
+                    <field name="real_hours" widget="float_time" sum="Real hours"/>
+                    <field name="difference_between_hours" widget="float_time" sum="Difference between hours"/>
                 </field>
             </field>
         </record>
