@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_company_form_inh_mrpprocurementplan" >
+            <field name="name">view.company.form.inh.mrpprocurementplan</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Configuration']//group[@name='account_grp']" position="after">
+                    <group name="proc_plan_grp" string="Procurement plan">
+                        <field name="proc_plan_level"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

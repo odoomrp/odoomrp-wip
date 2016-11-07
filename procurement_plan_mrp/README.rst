@@ -13,6 +13,12 @@ Also, by confirming a sales order, if a procurement order of a product to
 produce is generated, procurement plan is automatically created for that
 procurement order, and also automatically creates lower levels of the same.
 
+Configuration
+=============
+In the form of the company, in the "Configurations" tab, you can define the
+level of procurement order to run, when a procurement plan is created
+confirming a sale.
+
 Credits
 =======
 
