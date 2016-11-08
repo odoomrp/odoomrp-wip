@@ -135,6 +135,12 @@ class ProcurementOrder(models.Model):
             for proc in procurement_plan.procurement_ids:
                 if proc.show_button_create:
                     proc.button_create_lower_levels()
+            if self.company_id.proc_plan_level >= 0:
+                procurements = procurement_plan.procurement_ids.filtered(
+                    lambda x: x.level >= 0 and
+                    x.level <= x.company_id.proc_plan_level and
+                    x.state == 'confirmed')
+                procurements.run()
 
     def _create_procurement_lower_levels(self, plan_id):
         plan_obj = self.env['procurement.plan']
