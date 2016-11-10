@@ -59,11 +59,3 @@ class MrpProduction(models.Model):
                 self.with_context(phantom_op=phantom_op)._set_workorder(
                     bom_obj.browse(bom_id), p_line,  workcenter_lines,
                     properties=properties)
-
-    @api.multi
-    def write(self, vals, update=True, mini=True):
-        if vals.get('date_start', False) and len(self) == 1:
-            if self.date_start and vals.get('date_start') >= self.date_start:
-                vals.pop('date_start')
-        return super(MrpProduction, self).write(
-            vals, update=update, mini=mini)
