@@ -8,27 +8,27 @@ class TestMrpProductionMachineLocation(common.TransactionCase):
 
     def setUp(self):
         super(TestMrpProductionMachineLocation, self).setUp()
-        self.machine = self.env.ref('machine_manager.machinery_1')
-        self.machine.location = self.ref('stock.location_refrigerator_small')
-        self.workcenter = self.env.ref('mrp.mrp_workcenter_0')
+        self.location = self.env['stock.location'].create({
+            'name': 'Test Location',
+        })
+        self.machine = self.env['machinery'].create({
+            'name': 'Test Machine',
+            'location': self.location.id,
+        })
+        self.workcenter = self.browse_ref('mrp.mrp_workcenter_0')
         self.workcenter.machine = self.machine.id
-        self.production = self.env.ref(
+        self.production = self.browse_ref(
             'mrp_operations_extension.mrp_production_opeext')
 
     def test_mrp_production_machine_location(self):
         self.assertEqual(self.production.state, 'draft')
         self.production.signal_workflow('button_confirm')
-        stock_moves = self.production.mapped('move_lines').filtered(
-            lambda l: l.work_order.workcenter_id == self.workcenter)
-        for stock_move in stock_moves:
-            self.assertEqual(
-                stock_move.location_id, self.machine.location,
-                'products to consume without machine location')
-        stock_moves.write(
-            {'location_id':
-             self.ref('stock.stock_location_locations_virtual')})
-        stock_moves.action_confirm()
-        for stock_move in stock_moves:
-            self.assertEqual(
-                stock_move.location_id, self.machine.location,
-                'products to consume without machine location')
+        for consume_line in self.production.mapped('move_lines').filtered(
+                lambda l: l.work_order.workcenter_id.machine.location):
+            self.assertEquals(
+                consume_line.location_id,
+                consume_line.work_order.workcenter_id.machine.location)
+            self.assertEquals(consume_line.location_id,
+                              self.machine.location)
+            self.assertEquals(consume_line.location_id,
+                              self.location)
