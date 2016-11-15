@@ -42,6 +42,9 @@
                                         <label for="basedontime"/>
                                         <field name="hours_qty" widget="float_time"/>
                                     </group>
+                                    <group>
+                                    <field name="update_preventive"/>
+                                    </group>
                                 </div>
                             </div>
                         </div>
@@ -159,13 +162,14 @@
                         <page string="Op. Frecuency">
                             <field name="basedoncy" invisible="1"/>
                             <field name="basedontime" invisible="1"/>
-                            <group attrs="{'invisible':[('basedoncy','=',False)]}">
-                                <separator string="Operation Cycle frequency" colspan="4" />
-                                <field name="cycles" />
-                            </group>
-                            <group colspan="2" col="4" attrs="{'invisible':[('basedontime','=',False)]}">
-                            <separator string="Operation time frequency" colspan="4" />
-                                <group colspan="2" col="4">
+                            <group>
+                                <field name="update_preventive"/>
+                                <group name="byCycle" string="Operation Cycle frequency"
+                                attrs="{'invisible':[('basedoncy','=', False)]}">
+                                    <field name="cycles" />
+                                </group>
+                                <group  name="bytime" string="Operation time frequency"
+                                attrs="{'invisible':[('basedontime','=',False)]}">
                                     <field name="frequency" />
                                     <field name="interval_unit"/>
                                 </group>

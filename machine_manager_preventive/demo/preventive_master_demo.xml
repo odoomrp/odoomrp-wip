@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--
+            preventive operations
+        -->
+        <record id="master_type_1" model="preventive.master.type">
+            <field name="name">PC Hardware Update</field>
+            <field name="master_type">Preventive</field>
+        </record>
+        <record id="preventive_operation_type_1" model="preventive.operation.type">
+            <field name="name">Preventive OP.1</field>
+            <field name="ref">Prev. OP1</field>
+            <field name="update_preventive">before_repair</field>
+            <field name="basedoncy">True</field>
+            <field name="cycles">100</field>
+            <field name="margin_cy1">-20</field>
+            <field name="margin_cy2">20</field>
+            <field name="basedontime">True</field>
+            <field name="frequency">1</field>
+            <field name="interval_unit">year</field>
+            <field name="margin_fre1">-2</field>
+            <field name="interval_unit1">day</field>
+            <field name="margin_fre2">2</field>
+            <field name="interval_unit2">day</field>
+            <field name="description">Description of the work to be done on the operation</field>
+            <field name="hours_qty">2</field>
+        </record>
+        <record id="preventive_master_1" model="preventive.master">
+            <field name="name">Preventive master_1</field>
+            <field name="pmo_type" ref="master_type_1"/>
+            <field name="machinemodel" ref="machine_manager.machine_model_1"/>
+            <field name="machinery_ids" eval="[(6,0,[ref('machine_manager.machinery_1')])]"/>
+        </record>
+        <record id="preventive_operation_matmatch_1" model="preventive.operation.matmach">
+            <field name="name">Preventive OP.1</field>
+            <field name="optype_id" ref="preventive_operation_type_1"/>
+            <field name="opmaster" ref="preventive_master_1"/>
+            <field name="description">Description of the preventive operation material</field>
+        </record>
+        <record id="preventive_operation_material_1" model="preventive.operation.material">
+            <field name="op_machi_mat" ref="preventive_operation_matmatch_1"/>
+            <field name="product_id"  ref="product.product_product_9"/>
+            <field name="product_uom_qty">1</field>
+             <field name="product_uom" ref="product.product_uom_unit"/>
+        </record>
+        <record id="preventive_operation_material_2" model="preventive.operation.material">
+            <field name="op_machi_mat" ref="preventive_operation_matmatch_1"/>
+            <field name="product_id"  ref="product.product_product_17"/>
+            <field name="product_uom_qty">2</field>
+             <field name="product_uom" ref="product.product_uom_unit"/>
+        </record>
+    </data>
+</openerp>
