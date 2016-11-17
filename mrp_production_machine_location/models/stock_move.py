@@ -10,7 +10,6 @@ class StockMove(models.Model):
     @api.multi
     def action_confirm(self):
         moves = self.filtered(lambda r: r.raw_material_production_id and
-                              r.work_order.do_production and
                               r.work_order.workcenter_id.machine.location)
         for move in moves:
             location = move.work_order.workcenter_id.machine.location
