@@ -16,6 +16,37 @@
 #
 ##############################################################################
 
+from openerp.osv import osv
+
+
+class sale_order(osv.osv):
+    _inherit = 'sale.order'
+
+    def _amount_all(self, cr, uid, ids, field_name, arg, context=None):
+        """
+        Compute the total amounts of the SO.
+        """
+        res = {}
+        for order in self.browse(cr, uid, ids, context=context):
+            order._calc_taxes()
+            res[order.id] = {
+                'amount_untaxed': 0.0,
+                'amount_tax': 0.0,
+                'amount_total': 0.0,
+            }
+            amount_untaxed = amount_tax = 0.0
+            for line in order.order_line:
+                amount_untaxed += line.price_subtotal
+
+            for tax in order.taxes:
+                amount_tax += tax.amount
+
+            res[order.id]['amount_untaxed'] = order.pricelist_id.currency_id.round(amount_untaxed)
+            res[order.id]['amount_tax'] = order.pricelist_id.currency_id.round(amount_tax)
+            res[order.id]['amount_total'] = amount_untaxed + amount_tax
+
+        return res
+
 from openerp import models, fields, api
 import openerp.addons.decimal_precision as dp
 
