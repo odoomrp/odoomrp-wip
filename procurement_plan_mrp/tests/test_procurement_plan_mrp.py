@@ -46,9 +46,18 @@ class TestProcurementPlanMrp(common.TransactionCase):
             'MRP production and plan with distinct project')
 
     def test_procurement_plan_mrp_create_from_sale_order(self):
+        self.sale_order.company_id.proc_plan_level = 0
         self.sale_order.with_context(show_sale=True).action_button_confirm()
         cond = [('name', 'ilike', self.sale_order.name)]
         plan = self.plan_model.search(cond)
         self.assertNotEqual(
             len(plan), 0, 'It has not generated the PROCUREMENT PLAN,'
                           ' confirming the sales order')
+        procurements = plan.procurement_ids.filtered(
+            lambda x: x.level >= 0 and
+            x.level <= x.company_id.proc_plan_level and
+            x.state == 'running')
+        self.assertNotEqual(
+            len(procurements), 0,
+            'Procurement orders with level not confirmed, confirming the sales'
+            ' order')

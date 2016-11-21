@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-21 08:54+0000\n"
-"PO-Revision-Date: 2016-10-21 10:59+0100\n"
+"POT-Creation-Date: 2016-11-07 09:14+0000\n"
+"PO-Revision-Date: 2016-11-07 10:18+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,8 @@ msgid "Add or subtract days"
 msgstr "Sumar o restar días"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:234
+#: code:addons/procurement_plan_mrp/models/procurement.py:230
+#: code:addons/procurement_plan_mrp/models/procurement.py:236
 #, python-format
 msgid "BoM not found, for product: %s"
 msgstr "LdM no encontrada, para el producto: %s"
@@ -42,6 +43,11 @@ msgstr "Cambiar fecha planificada"
 #: view:wiz.change.procurement.date.planned:procurement_plan_mrp.wiz_change_procurement_date_planned_view
 msgid "Change scheduled date"
 msgstr "Cambiar fecha planificada"
+
+#. module: procurement_plan_mrp
+#: model:ir.model,name:procurement_plan_mrp.model_res_company
+msgid "Companies"
+msgstr "Compañías"
 
 #. module: procurement_plan_mrp
 #: view:procurement.plan:procurement_plan_mrp.procurement_plan_form_view_inh_mrpprocurementplan
@@ -80,14 +86,14 @@ msgstr "Generar abastecimientos"
 
 #. module: procurement_plan_mrp
 #: code:addons/procurement_plan_mrp/models/mrp_production.py:55
-#: code:addons/procurement_plan_mrp/models/mrp_production.py:59
-#: code:addons/procurement_plan_mrp/models/mrp_production.py:69
+#: code:addons/procurement_plan_mrp/models/mrp_production.py:58
+#: code:addons/procurement_plan_mrp/models/mrp_production.py:68
 #, python-format
 msgid "Generated from MO: "
 msgstr "Generated from MO: "
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:123
+#: code:addons/procurement_plan_mrp/models/procurement.py:122
 #, python-format
 msgid "Generated from sale order: "
 msgstr "Generado desde el pedido de venta: "
@@ -123,7 +129,18 @@ msgid "Level"
 msgstr "Nivel"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date_planned.py:21
+#: help:res.company,proc_plan_level:0
+msgid ""
+"Level of procurement orders to be executed, when creating the procurement "
+"plan from the sale order. If field value < 0, the procurements of "
+"procurement plan were not confirmed."
+msgstr ""
+"Nivel de los abastecimientos que se ejecutarán, cuando se crea un plan de "
+"abastecimientos, desde un pedido de venta. Si valor < 0, los abastecimientos "
+"del plan de abastecimientos, no se ejecutarán."
+
+#. module: procurement_plan_mrp
+#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date_planned.py:22
 #, python-format
 msgid "Location of procurement order is not of type INTERNAL"
 msgstr "La ubicación del abastecimiento no es de tipo INTERNO"
@@ -134,12 +151,18 @@ msgid "MRP Productions"
 msgstr "Órdenes de Producción"
 
 #. module: procurement_plan_mrp
+#: field:stock.reservation,main_project_id:0
+msgid "Main Project"
+msgstr "Main Project"
+
+#. module: procurement_plan_mrp
 #: model:ir.model,name:procurement_plan_mrp.model_mrp_production
 msgid "Manufacturing Order"
 msgstr "Órden de producción"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:287
+#: code:addons/procurement_plan_mrp/models/procurement.py:283
+#: code:addons/procurement_plan_mrp/models/procurement.py:289
 #, python-format
 msgid ""
 "No product defined for BoM line with template: %s, on the list of materials "
@@ -185,16 +208,26 @@ msgid "Procurement from plan"
 msgstr "Abastecimiento desde plan"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date_planned.py:24
+#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date_planned.py:25
 #, python-format
 msgid "Procurement order with production order in state: %s"
 msgstr "Abastecimiento con órden de producción en estado: %s"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date_planned.py:29
+#: code:addons/procurement_plan_mrp/wizard/wiz_change_procurement_date_planned.py:30
 #, python-format
 msgid "Procurement order with purchase order in state: %s"
 msgstr "Abastecimiento con pedido de compra en estado: %s"
+
+#. module: procurement_plan_mrp
+#: view:res.company:procurement_plan_mrp.view_company_form_inh_mrpprocurementplan
+msgid "Procurement plan"
+msgstr "Procurement plan"
+
+#. module: procurement_plan_mrp
+#: field:res.company,proc_plan_level:0
+msgid "Procurement plan confirm level"
+msgstr "Nivel abastecimiento a confirmar"
 
 #. module: procurement_plan_mrp
 #: view:mrp.production:procurement_plan_mrp.view_mrp_production_filter_inh_mrpprocurementplan
@@ -202,7 +235,8 @@ msgid "Product"
 msgstr "Producto"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:272
+#: code:addons/procurement_plan_mrp/models/procurement.py:268
+#: code:addons/procurement_plan_mrp/models/procurement.py:274
 #, python-format
 msgid "Product has not been found on the list of materials %s, Level %s"
 msgstr "Producto no se ha encontrado en la lista de materiales %s, Nivel %s"
@@ -250,10 +284,11 @@ msgstr "Reserva de existencias"
 #. module: procurement_plan_mrp
 #: field:procurement.order,reservation:0
 msgid "Stock reservation"
-msgstr "Reservas stock"
+msgstr "Stock reservation"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:257
+#: code:addons/procurement_plan_mrp/models/procurement.py:253
+#: code:addons/procurement_plan_mrp/models/procurement.py:259
 #, python-format
 msgid "THEY HAVE NOT GENERATED ALL PROCUREMENTS"
 msgstr "NO SE HAN GENERADO TODOS LOS ABASTECIMIENTOS"
@@ -268,7 +303,8 @@ msgstr ""
 "estado BORRADOR."
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:200
+#: code:addons/procurement_plan_mrp/models/procurement.py:197
+#: code:addons/procurement_plan_mrp/models/procurement.py:203
 #, python-format
 msgid ""
 "You can not change the date planned of procurement order: %s, because the "
@@ -278,7 +314,8 @@ msgstr ""
 "órden de producción: %s, no está en estado borrador."
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:188
+#: code:addons/procurement_plan_mrp/models/procurement.py:185
+#: code:addons/procurement_plan_mrp/models/procurement.py:191
 #, python-format
 msgid ""
 "You can not change the date planned of procurement order: %s, because the "
@@ -293,7 +330,8 @@ msgid "or"
 msgstr "o"
 
 #. module: procurement_plan_mrp
-#: code:addons/procurement_plan_mrp/models/procurement.py:371
+#: code:addons/procurement_plan_mrp/models/procurement.py:367
+#: code:addons/procurement_plan_mrp/models/procurement.py:373
 #, python-format
 msgid "procurement: %s, with reserve-move made"
 msgstr "abastecimiento: %s, con reserva de movimiento realizado"
