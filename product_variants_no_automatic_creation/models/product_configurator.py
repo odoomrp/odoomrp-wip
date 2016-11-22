@@ -28,17 +28,11 @@ class ProductConfigurator(models.AbstractModel):
     name = fields.Char()
 
     @api.multi
-    @api.depends('product_attribute_ids', 'product_attribute_ids.value_id')
+    @api.depends('product_attribute_ids', 'product_attribute_ids.price_extra')
     def _compute_price_extra(self):
         for record in self:
-            if record._name == 'product.product':
-                record.price_extra = sum(
-                    record.mapped('attribute_value_ids.price_ids').filtered(
-                        lambda x: (x.product_tmpl_id == record.product_tmpl_id)
-                        ).mapped('price_extra'))
-            else:
-                record.price_extra = sum(
-                    record.mapped('product_attribute_ids.price_extra'))
+            record.price_extra = sum(
+                record.mapped('product_attribute_ids.price_extra'))
 
     @api.multi
     @api.onchange('product_tmpl_id')

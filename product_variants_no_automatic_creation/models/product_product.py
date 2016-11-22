@@ -14,6 +14,18 @@ class ProductProduct(models.Model):
     name = fields.Char(related="product_tmpl_id.name")
 
     @api.multi
+    @api.depends('attribute_value_ids', 'attribute_value_ids.price_ids',
+                 'attribute_value_ids.price_ids.price_extra',
+                 'attribute_value_ids.price_ids.product_tmpl_id',
+                 'product_tmpl_id')
+    def _compute_price_extra(self):
+        for record in self:
+            record.price_extra = sum(
+                record.mapped('attribute_value_ids.price_ids').filtered(
+                    lambda x: (x.product_tmpl_id == record.product_tmpl_id)
+                    ).mapped('price_extra'))
+
+    @api.multi
     def _get_product_attributes_values_dict(self):
         # Retrieve first the attributes from template to preserve order
         res = self.product_tmpl_id._get_product_attributes_dict()
@@ -97,4 +109,3 @@ class ProductProduct(models.Model):
                 if x[2].get('value_id'))
         obj = self.with_context(product_name=vals.get('name', ''))
         return super(ProductProduct, obj).create(vals)
-
