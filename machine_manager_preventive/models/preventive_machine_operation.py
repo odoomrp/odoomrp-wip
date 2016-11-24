@@ -203,12 +203,10 @@ class PreventiveMachineOperation(models.Model):
                 res1 = self._check_alert_by_cycles(ope)
             if ope.frequency > 0:
                 res2 = self._check_alert_by_time(ope)
-            if not ope.alert and (res1 and res1['alert'] or
-                                  res2 and res2['alert']):
-                ope.alert = True
-            if not ope.extra_alert and (res1 and res1['extra_alert'] or
-                                        res2 and res2['extra_alert']):
-                ope.extra_alert = True
+            ope.alert = (res1 and res1['alert'] or
+                         res2 and res2['alert'] or False)
+            ope.extra_alert = (res1 and res1['extra_alert'] or
+                               res2 and res2['extra_alert'] or False)
 
     @api.multi
     def show_attachments(self):
