@@ -137,7 +137,7 @@ msgstr "Definir la empresa a la que se le facturará y entregará la orden."
 #. module: machine_manager_preventive
 #: model:ir.ui.menu,name:machine_manager_preventive.menu_preven_operation_config
 msgid "Configuration"
-msgstr "Condiguración"
+msgstr "Configuración"
 
 #. module: machine_manager_preventive
 #: model:ir.model,name:machine_manager_preventive.model_preventive_create_wizard
@@ -913,7 +913,7 @@ msgstr "Ref."
 #: model:ir.model,name:machine_manager_preventive.model_mrp_repair
 #: field:preventive.machine.operation,repair_order:0
 msgid "Repair Order"
-msgstr "Ordern de reparación"
+msgstr "Orden de reparación"
 
 #. module: machine_manager_preventive
 #: view:machinery:machine_manager_preventive.view_product_form_preventive

@@ -16,9 +16,7 @@ class MrpRepair(models.Model):
     @api.multi
     def action_repair_end(self):
         res = super(MrpRepair, self).action_repair_end()
-        for record in self:
-            if record.preventive:
-                for preventive in record.preventive_operations:
-                    if preventive.update_preventive == 'after_repair':
-                        preventive._next_action_update()
+        self.mapped('preventive_operations').filtered(
+            lambda o: o.update_preventive ==
+            'after_repair')._next_action_update()
         return res

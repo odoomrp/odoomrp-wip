@@ -11,30 +11,28 @@ class PreventiveMachineOperation(models.Model):
     _description = "Preventive operation for machine."
 
     @api.multi
-    @api.depends('cycles')
-    def _next_cycles(self):
-        for record in self:
-            if record and record.cycles:
-                record.nextcycles = record.lastcycles + record.cycles
+    @api.depends('cycles', 'lastcycles')
+    def _compute_next_cycles(self):
+        for record in self.filtered('cycles'):
+            record.nextcycles = record.lastcycles + record.cycles
 
     @api.multi
     @api.depends('lastdate', 'frequency', 'interval_unit')
-    def _next_date(self):
-        for record in self:
-            if record.lastdate and record.frequency and record.interval_unit:
-                record.nextdate = self.get_interval_date(
-                    record.lastdate, record.frequency, record.interval_unit)
+    def _compute_next_date(self):
+        for record in self.filtered(lambda x: x.lastdate and x.frequency and
+                                    x.interval_unit):
+            record.nextdate = self.get_interval_date(
+                record.lastdate, record.frequency, record.interval_unit)
 
     @api.multi
     @api.depends('repair_order_ids', 'repair_order_ids.state')
-    def _check_active_repair(self):
+    def _compute_active_repair_order(self):
         for record in self:
-            for repair_order in record.repair_order_ids:
-                if (repair_order.state in ('draft', 'confirmed', 'ready') and
-                        not record.active_repair_order):
-                    record.active_repair_order = True
-                    return True
-            record.active_repair_order = False
+            if record.repair_order_ids.filtered(
+                    lambda o: o.state in ('draft', 'confirmed', 'ready')):
+                record.active_repair_order = True
+            else:
+                record.active_repair_order = False
 
     name = fields.Char(string='REF', required=True)
     opdescription = fields.Text(string='Description')
@@ -57,9 +55,9 @@ class PreventiveMachineOperation(models.Model):
     last_hours_qty = fields.Float(string='Last Quantity Hours', required=False,
                                   help="Time takes to do the operation. hh:mm")
     nextcycles = fields.Integer(
-        string='Cycles', compute="_next_cycles",
+        string='Cycles', compute="_compute_next_cycles",
         help="Cycles of the machine for next operation.")
-    nextdate = fields.Date(string='Date', compute="_next_date",
+    nextdate = fields.Date(string='Date', compute="_compute_next_date",
                            help="Expected date for next operation.")
     hours_qty = fields.Float(
         string='Quantity Hours', required=False,
@@ -94,8 +92,9 @@ class PreventiveMachineOperation(models.Model):
         related='opname_omm.update_preventive')
     actcycles = fields.Integer(related='machine.actcycles')
     repair_order_ids = fields.Many2many(comodel_name='mrp.repair')
-    active_repair_order = fields.Boolean(string='Active Repair', store=True,
-                                         compute="_check_active_repair")
+    active_repair_order = fields.Boolean(
+        string='Active Repair', store=True,
+        compute="_compute_active_repair_order")
 
     @api.constrains('first_margin', 'second_margin')
     def _check_cycle_margins(self):
@@ -128,7 +127,7 @@ class PreventiveMachineOperation(models.Model):
         self.check_al2 = not self.check_al2
 
     @api.onchange('actcycles')
-    def _check_cycles_alert(self):
+    def _onchange_cycles_alert(self):
         if self.cycles > 0:
             res = self._check_alert_by_cycles(self)
             if not self.alert and res and res['alert']:
@@ -211,11 +210,11 @@ class PreventiveMachineOperation(models.Model):
     @api.multi
     def show_attachments(self):
         document_obj = self.env['ir.attachment']
-        for machine_op in self:
-            attachments = document_obj.search(
-                [('res_model', '=', 'preventive.operation.type'),
-                 ('res_id', '=', machine_op.opname_omm.optype_id.id)])
-            attachmen_lst = attachments.ids
+        self.ensure_one()
+        attachments = document_obj.search(
+            [('res_model', '=', 'preventive.operation.type'),
+             ('res_id', '=', self.opname_omm.optype_id.id)])
+        attachmen_lst = attachments.ids
         search_view = self.env.ref('base.view_attachment_search')
         idform = self.env.ref('base.view_attachment_form')
         idtree = self.env.ref('base.view_attachment_tree')

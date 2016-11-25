@@ -94,7 +94,7 @@ class PreventiveList(models.TransientModel):
     _description = 'Preventive list'
 
     @api.multi
-    def _prev_list(self):
+    def _default_prev_list(self):
         data = []
         machine_operations = self.env['preventive.machine.operation']
         if 'machi_prevs' in self.env.context:
@@ -122,12 +122,12 @@ class PreventiveList(models.TransientModel):
         return data
 
     @api.multi
-    def _op_count(self):
+    def _default_op_count(self):
         return len(self.env.context.get('machi_prevs', 0))
 
     machi_prevs = fields.One2many(
         comodel_name='preventive.machine.operation', inverse_name='machine',
-        string='Machine Preventive Operations', default=_prev_list,
+        string='Machine Preventive Operations', default=_default_prev_list,
         readonly=True)
-    op_count = fields.Integer(string='Number of operations', default=_op_count,
-                              readonly=True)
+    op_count = fields.Integer(string='Number of operations',
+                              default=_default_op_count, readonly=True)

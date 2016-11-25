@@ -12,6 +12,7 @@
                      "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
                      "Ana Juaristi <ajuaristio@gmail.com>"],
     "category": "Machinery Management",
+    "license": 'AGPL-3',
     "data": ["security/preventive_manager_security.xml",
              "security/ir.model.access.csv",
              "wizard/create_preventive_wizard_view.xml",

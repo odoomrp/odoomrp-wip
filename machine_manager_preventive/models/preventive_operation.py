@@ -70,13 +70,13 @@ class PreventiveOperationtype(models.Model):
                       "frequency"))
 
     @api.onchange('interval_unit')
-    def onchange_interval_unit(self):
+    def _onchange_interval_unit(self):
         if self.interval_unit:
             self.interval_unit1 = self.interval_unit
             self.interval_unit2 = self.interval_unit
 
     @api.constrains('margin_cy1', 'margin_cy2')
-    def check_cycle_margins(self):
+    def _check_cycle_margins(self):
         for record in self:
             if record.margin_cy1 and record.margin_cy2 and (
                     record.margin_cy1 > record.margin_cy2):
@@ -112,7 +112,7 @@ class PreventiveOperationMaterial(models.Model):
         comodel_name='product.uom', string='Unit of Measure', required=True)
 
     @api.onchange('product_id')
-    def onchange_product(self):
+    def _onchange_product(self):
         if self.product_id:
             self.product_uom = self.product_id.uom_id.id
 
@@ -139,6 +139,6 @@ class PreventiveOperationMatmach(models.Model):
     description = fields.Text(string='Description')
 
     @api.onchange('optype_id')
-    def onchange_optype_id(self):
+    def _onchange_optype_id(self):
         if self.optype_id:
             self.description = self.optype_id.description
