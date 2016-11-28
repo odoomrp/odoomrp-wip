@@ -28,7 +28,7 @@ class ProductConfigurator(models.AbstractModel):
     name = fields.Char()
 
     @api.multi
-    @api.depends('product_attribute_ids', 'product_attribute_ids.value_id')
+    @api.depends('product_attribute_ids', 'product_attribute_ids.price_extra')
     def _compute_price_extra(self):
         for record in self:
             record.price_extra = sum(
