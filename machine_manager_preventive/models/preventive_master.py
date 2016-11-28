@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) 2015 Daniel Campos <danielcampos@avanzosc.es> - Avanzosc S.L.
-# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+# (c) 2016 Daniel Campos <danielcampos@avanzosc.es> - Avanzosc S.L.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, fields
 
@@ -9,21 +9,23 @@ class PreventiveMaster(models.Model):
     _name = 'preventive.master'
     _description = 'Preventive master data'
 
-    name = fields.Char('Name')
-    pmo_type = fields.Many2one('preventive.master.type', 'Maintenance type',
-                               required=True)
-    machinemodel = fields.Many2one('machine.model', 'Machine Model',
-                                   required=True)
-    machinery_ids = fields.Many2many('machinery', 'machine_maint_rel',
-                                     'preventive_master_id', 'machinery_id')
-    ope_material = fields.One2many('preventive.operation.matmach', 'opmaster',
-                                   'Material')
-    opdescription = fields.Text('Description')
+    name = fields.Char(string='Name')
+    pmo_type = fields.Many2one(comodel_name='preventive.master.type',
+                               string="Preventive master type",
+                               inverse_name='Maintenance type', required=True)
+    machinemodel = fields.Many2one(comodel_name='machine.model',
+                                   string='Machine Model', required=True)
+    machinery_ids = fields.Many2many(
+        comodel_name='machinery', relation='machine_maint_rel',
+        column1='preventive_master_id', column2='machinery_id')
+    ope_material = fields.One2many(comodel_name='preventive.operation.matmach',
+                                   inverse_name='opmaster', string='Material')
+    opdescription = fields.Text(string='Description')
 
 
 class PreventiveMasterType(models.Model):
     _name = 'preventive.master.type'
-    _description = 'Preventive master data'
+    _description = 'Preventive master type'
 
-    name = fields.Char('Name')
-    master_type = fields.Char('Type')
+    name = fields.Char(string='Name')
+    master_type = fields.Char(string='Type')

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_repair_order_form" model="ir.ui.view">
+            <field name="name">mrp.repair.form</field>
+            <field name="model">mrp.repair</field>
+            <field name="inherit_id" ref="mrp_repair.view_repair_order_form" />
+            <field name="arch" type="xml">
+                <data>
+                    <field name="guarantee_limit" position="after">
+                        <button name="show_attachments" type="object" string="View attachments" icon="gtk-open"
+                        attrs="{'invisible':[('preventive','=', False)]}"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>

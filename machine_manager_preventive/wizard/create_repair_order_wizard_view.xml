@@ -20,7 +20,7 @@
                             </group>
                         </group>
                     <footer>
-                        <button class="oe_highlight" name="create_order_from_pmo"
+                        <button class="oe_highlight" name="create_repair_from_pmo"
                             string="Accept" type="object" />
                         or
                         <button class="oe_link" special="cancel"

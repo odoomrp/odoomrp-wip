@@ -26,7 +26,7 @@
                     </field>
                     <xpath expr="//page[@string='Extra Info']"
                         position="after">
-                        <page string="Preventive Operations">
+                        <page string="Preventive Operations" attrs="{'invisible':[('preventive','=', False)]}">
                             <field name="preventive_operations" nolabel="1" />
                         </page>
                     </xpath>

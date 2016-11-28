@@ -25,13 +25,19 @@
             <field name="arch" type="xml">
                 <form string="Preventive Operations">
                 <header>
-                    <button name="%(act_prevmach_repair_order)d" string="Make Repair Order" 
-                    class="oe_highlight" type="action"/>
+                    <field name="active_repair_order" invisible="1"/>
+                    <button name="%(act_prevmach_repair_order)d" string="Create Repair Order"
+                    class="oe_highlight" type="action" attrs="{'invisible':[('active_repair_order','=',True)]}"/>
+                    <button name="create_repair_order" string="Create Repair Order" class="oe_button" type="object"
+                    attrs="{'invisible':[('active_repair_order','=',False)]}"
+                    confirm="An active repair order already exists for this operation, are you sure you want to add this operation data?"/>
                 </header>
                     <group col="6" colspan="6">
                         <group col="4" colspan="4">
                             <field name="name" colspan="4" />
                             <field name="opname_omm" string="Operation - Material"/>
+                            <button name="show_attachments" type="object"
+                            string="View attachments" icon="gtk-open"/>
                         </group>
                         <group col="4" colspan="1">
                             <field name="alert" />
@@ -39,8 +45,8 @@
                         </group>
                     </group>
                     <group col="6" colspan="6">
-                        <newline />
                         <field name="machine" />
+                        <field name="update_preventive"/>
                         <field name="actcycles"/>
                     </group>
                     <notebook colspan="4">
@@ -104,6 +110,10 @@
                             <separator string="Description"
                                 colspan="4" />
                             <field name="opdescription" colspan="4"
+                                nolabel="1" />
+                        </page>
+                        <page string="Repair Orders">
+                            <field name="repair_order_ids" colspan="4"
                                 nolabel="1" />
                         </page>
                     </notebook>
