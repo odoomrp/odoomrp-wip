@@ -1,3 +1,4 @@
+====================================
 No grouping on procurement purchases
 ====================================
 
@@ -21,6 +22,6 @@ Credits
 
 Contributors
 ------------
-* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+* Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Ana Juaristi <ajuaristo@gmail.com>
 * Alfredo de la Fuente <alfredodelafuente@avanzosc.es>
