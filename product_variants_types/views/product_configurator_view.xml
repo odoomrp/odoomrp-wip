@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-        <record id="product_configurator_attribute_types_tree_view" model="ir.ui.view">
-            <field name="name">product.configurator.attribute.types.tree</field>
-            <field name="model">product.configurator.attribute</field>
-            <field name="inherit_id"
-                   ref="product_variants_no_automatic_creation.view_product_configurator_tree" />
-            <field name="arch" type="xml">
-                <field name="value_id" position="after">
-                    <field name="attr_type" invisible="1" />
-                    <field name="custom_value"
-                           attrs="{'readonly': ['|', ('attr_type', '!=', 'range'), ('value_id', '=', False)]}"
-                    />
-                </field>
-            </field>
-        </record>
+<odoo>
 
-    </data>
-</openerp>
+    <record id="product_configurator_attribute_types_tree_view" model="ir.ui.view">
+        <field name="name">product.configurator.attribute.types.tree</field>
+        <field name="model">product.configurator.attribute</field>
+        <field name="inherit_id"
+               ref="product_variant_configurator.view_product_configurator_tree" />
+        <field name="arch" type="xml">
+            <field name="value_id" position="after">
+                <field name="attr_type" invisible="1" />
+                <field name="custom_value"
+                       attrs="{'readonly': ['|', ('attr_type', '!=', 'range'), ('value_id', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>

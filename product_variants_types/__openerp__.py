@@ -5,21 +5,16 @@
 
 {
     "name": "Product Variants with Attribute Types",
-    "version": "8.0.1.1.0",
+    "version": "9.0.1.0.0",
     "license": "AGPL-3",
     "depends": [
-        "product_variants_no_automatic_creation",
+        "product_variant_configurator",
         "product_attribute_types",
     ],
     "author": "OdooMRP team, "
               "AvanzOSC, "
               "Tecnativa",
     "website": "http://www.odoomrp.com",
-    "contributors": [
-        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
-        "Pedro M. Baeza <pedro.baeza@tecnativa.com>",
-        "Ana Juaristi <ajuaristio@gmail.com>"
-    ],
     "category": "Hidden/Dependency",
     "data": [
         "views/product_configurator_view.xml",
