@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
+# Copyright 2014-2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2014-2016 Oihane Crucelaegui - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3
 
 from openerp import models, fields, api
 
@@ -9,7 +9,7 @@ from openerp import models, fields, api
 class ProductAttribute(models.Model):
     _inherit = 'product.attribute'
 
-    is_package = fields.Boolean(string='Is package')
+    is_package = fields.Boolean(string='Is a package')
 
 
 class ProductAttributeValue(models.Model):
@@ -29,7 +29,6 @@ class ProductPackaging(models.Model):
         comodel_name='product.product', string='Package Product',
         context="{'default_sale_ok': False, 'default_purchase_ok': False}")
 
-    @api.one
     @api.onchange('product')
     def onchange_product(self):
         self.product_tmpl_id = self.product.product_tmpl_id
