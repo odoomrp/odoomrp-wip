@@ -1,9 +1,9 @@
+=======================
 Product attribute types
 =======================
 
 This module extends product attributes, adds new type range, also the option of
 defining if it is required and a default value for the attribute.
-
 
 Credits
 =======
