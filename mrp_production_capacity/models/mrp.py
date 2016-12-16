@@ -10,9 +10,11 @@ class MrpWorkcenter(models.Model):
     _inherit = 'mrp.workcenter'
 
     capacity_per_cycle = fields.Float(
-        string='Capacity per Cycle Max.', help='Capacity per cycle maximum.')
+        string='Capacity per Cycle Max.', help='Capacity per cycle maximum.',
+        default=1.0)
     capacity_per_cycle_min = fields.Float(
-        string='Capacity per Cycle Min.', help='Capacity per cycle minimum.')
+        string='Capacity per Cycle Min.', help='Capacity per cycle minimum.',
+        default=1.0)
 
     @api.constrains('capacity_per_cycle', 'capacity_per_cycle_min')
     def _check_max_min(self):
