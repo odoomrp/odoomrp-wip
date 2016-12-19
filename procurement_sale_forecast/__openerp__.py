@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,13 +18,14 @@
 
 {
     "name": "MPS - Sale forecast",
-    "version": "1.0",
+    "version": "8.0.1.0.0",
     "depends": [
         "base",
         "product",
         "sale",
         "stock",
     ],
+    "license": "AGPL-3",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
