@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,8 @@
 
 {
     "name": "Taxes summary in sale orders",
-    "version": "1.0",
+    "version": "8.0.1.0.0",
+    "license": "AGPL-3",
     "depends": [
         "sale",
         "account",

@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -30,6 +30,8 @@ class SaleOrderTax(models.Model):
     name = fields.Char(string='Tax Description', required=True)
     base = fields.Float(string='Base', digits=dp.get_precision('Account'))
     amount = fields.Float(string='Amount', digits=dp.get_precision('Account'))
+    tax_code_id = fields.Many2one(comodel_name='account.tax.code',
+                                  string='Tax Code')
     sequence = fields.Integer(
         string='Sequence',
         help="Gives the sequence order when displaying a list of order tax.")
@@ -82,6 +84,7 @@ class SaleOrder(models.Model):
             order.taxes.unlink()
             for tax in self.compute(order).values():
                 tax_model.create({
+                    'tax_code_id': tax['tax_code_id'],
                     'sale_order': tax['order'],
                     'sequence': tax['sequence'],
                     'name': tax['name'],
