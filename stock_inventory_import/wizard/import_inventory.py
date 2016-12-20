@@ -62,7 +62,7 @@ class ImportInventory(models.TransientModel):
                 _("Not 'code' or 'quantity' keys found"))
         del reader_info[0]
         values = {}
-        inv_name = self.name + ' - ' + fields.Date.today()
+        inv_name = u'{} - {}'.format(self.name, fields.Date.today())
         inventory.write({'name': inv_name,
                          'date': fields.Datetime.now(),
                          'imported': True,

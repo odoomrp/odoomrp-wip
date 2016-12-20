@@ -35,7 +35,7 @@ class TestInventoryLineImport(common.TransactionCase):
         self.importer.action_import()
         self.assertTrue(self.inventory.imported)
         self.assertEqual(self.inventory.state, 'confirm')
-        inv_name = self.importer.name + ' - ' + fields.Date.today()
+        inv_name = u'{} - {}'.format(self.importer.name, fields.Date.today())
         self.assertEqual(self.inventory.name, inv_name)
         self.assertTrue(len(self.inventory.import_lines), 4)
         self.assertTrue(self.inventory.import_lines[0].location_id)
