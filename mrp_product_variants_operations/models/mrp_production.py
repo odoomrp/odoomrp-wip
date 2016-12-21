@@ -23,7 +23,7 @@ class MrpProduction(models.Model):
         for workorder in workcenter_lines:
             wc = workorder.routing_wc_line
             cycle = wc.cycle_nbr and int(math.ceil(self.product_qty /
-                                                   wc.cycle_nbr)) or 0
+                (wc.cycle_nbr * self.bom_id.product_qty))) or 0
             workorder.cycle = cycle
             workorder.hour = wc.hour_nbr * cycle
         for p_line in product_lines:
