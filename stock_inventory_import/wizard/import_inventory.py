@@ -68,7 +68,7 @@ class ImportInventory(models.TransientModel):
             val = {}
             field = reader_info[i]
             values = dict(zip(keys, field))
-            prod_location = location.id
+            prod_location = location
             if 'location' in values and values['location']:
                 locat_lst = stloc_obj.search([('name', '=',
                                                values['location'])])
@@ -82,7 +82,7 @@ class ImportInventory(models.TransientModel):
                 val['lot'] = values['lot']
             val['code'] = values['code']
             val['quantity'] = values['quantity']
-            val['location_id'] = prod_location
+            val['location_id'] = prod_location.id
             val['inventory_id'] = inventory.id
             val['fail'] = True
             val['fail_reason'] = _('No processed')
