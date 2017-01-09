@@ -82,7 +82,7 @@ class ImportInventory(models.TransientModel):
                 val['lot'] = values['lot']
             val['code'] = values['code']
             val['quantity'] = values['quantity']
-            val['location_id'] = prod_location.id
+            val['location_id'] = prod_location
             val['inventory_id'] = inventory.id
             val['fail'] = True
             val['fail_reason'] = _('No processed')
