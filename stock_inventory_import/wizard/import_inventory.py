@@ -68,7 +68,7 @@ class ImportInventory(models.TransientModel):
             val = {}
             field = reader_info[i]
             values = dict(zip(keys, field))
-            prod_location = location.id
+            prod_location = location
             if 'location' in values and values['location']:
                 locat_lst = stloc_obj.search([('name', '=',
                                                values['location'])])
