@@ -84,3 +84,8 @@ class StockInventory(models.Model):
                     _("Loaded lines must be processed at least one time for "
                       "inventory : %s") % (inventory.name))
         return super(StockInventory, self).action_done()
+
+    @api.multi
+    def action_cancel_inventory(self):
+        self.mapped("import_lines").unlink()
+        return super(StockInventory, self).action_cancel_inventory()
