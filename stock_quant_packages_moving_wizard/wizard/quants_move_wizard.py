@@ -7,6 +7,7 @@ from openerp import models, fields, api
 class StockQuantsMoveWizard(models.TransientModel):
     _name = 'stock.quants.move'
 
+    # TODO port v9: rename this field to remove 'pack_', which is confusing
     pack_move_items = fields.One2many(
         comodel_name='stock.quants.move_items', inverse_name='move_id',
         string='Quants')
@@ -15,8 +16,8 @@ class StockQuantsMoveWizard(models.TransientModel):
         required=True)
 
     @api.model
-    def default_get(self, fields):
-        res = super(StockQuantsMoveWizard, self).default_get(fields)
+    def default_get(self, fields_list):
+        res = super(StockQuantsMoveWizard, self).default_get(fields_list)
         quants_ids = self.env.context.get('active_ids', [])
         if not quants_ids:
             return res
@@ -24,19 +25,25 @@ class StockQuantsMoveWizard(models.TransientModel):
         quants = quant_obj.browse(quants_ids)
         items = []
         for quant in quants.filtered(lambda q: not q.package_id):
-            item = {
-                'quant': quant.id,
-                'source_loc': quant.location_id.id,
-            }
-            items.append(item)
+            items.append({'quant': quant.id})
         res.update(pack_move_items=items)
         return res
 
-    @api.one
+    @api.multi
     def do_transfer(self):
+        self.ensure_one()
+        quant_ids = []
         for item in self.pack_move_items:
-            item.quant.move_to(self.dest_loc)
-        return True
+            quant_ids.append(item.quant.id)
+            if item.quant.location_id != self.dest_loc:
+                item.quant.move_to(self.dest_loc)
+        action = self.env['ir.actions.act_window'].for_xml_id(
+            'stock', 'quantsact')
+        action.update({
+            'domain': [('id', 'in', quant_ids)],
+            'context': {},
+            })
+        return action
 
 
 class StockQuantsMoveItems(models.TransientModel):
@@ -46,12 +53,7 @@ class StockQuantsMoveItems(models.TransientModel):
     move_id = fields.Many2one(
         comodel_name='stock.quants.move', string='Quant move')
     quant = fields.Many2one(
-        comodel_name='stock.quant', string='Quant',
+        comodel_name='stock.quant', string='Quant', required=True,
         domain=[('package_id', '=', False)])
     source_loc = fields.Many2one(
-        comodel_name='stock.location', string='Source Location', required=True)
-
-    @api.one
-    @api.onchange('quant')
-    def onchange_quant(self):
-        self.source_loc = self.quant.location_id
+        string='Current Location', related='quant.location_id', readonly=True)

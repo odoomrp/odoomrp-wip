@@ -22,6 +22,7 @@
         "wizard/quant_move_wizard_view.xml",
         "wizard/quants_move_wizard_view.xml",
         "wizard/quant_packages_move_wizard_view.xml",
+        "views/stock_view.xml",
     ],
     "installable": True,
 }

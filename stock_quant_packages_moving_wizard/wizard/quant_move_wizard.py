@@ -7,13 +7,14 @@ from openerp import models, fields, api
 class StockQuantMove(models.TransientModel):
     _name = 'stock.quant.move'
 
+    # TODO port v9: rename this field to remove 'pack_', which is confusing
     pack_move_items = fields.One2many(
         comodel_name='stock.quant.move_items', inverse_name='move_id',
         string='Packs')
 
     @api.model
-    def default_get(self, fields):
-        res = super(StockQuantMove, self).default_get(fields)
+    def default_get(self, fields_list):
+        res = super(StockQuantMove, self).default_get(fields_list)
         quants_ids = self.env.context.get('active_ids', [])
         if not quants_ids:
             return res
@@ -22,11 +23,7 @@ class StockQuantMove(models.TransientModel):
         items = []
         for quant in quants:
             if not quant.package_id:
-                item = {
-                    'quant': quant.id,
-                    'source_loc': quant.location_id.id,
-                }
-                items.append(item)
+                items.append({'quant': quant.id})
         res.update(pack_move_items=items)
         return res
 
@@ -44,15 +41,10 @@ class StockQuantMoveItems(models.TransientModel):
     move_id = fields.Many2one(
         comodel_name='stock.quant.move', string='Quant move')
     quant = fields.Many2one(
-        comodel_name='stock.quant', string='Quant',
+        comodel_name='stock.quant', string='Quant', required=True,
         domain=[('package_id', '=', False)])
     source_loc = fields.Many2one(
-        comodel_name='stock.location', string='Source Location', required=True)
+        string='Current Location', related='quant.location_id', readonly=True)
     dest_loc = fields.Many2one(
         comodel_name='stock.location', string='Destination Location',
         required=True)
-
-    @api.one
-    @api.onchange('quant')
-    def onchange_quant(self):
-        self.source_loc = self.quant.location_id

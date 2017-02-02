@@ -42,6 +42,7 @@ class TestStockQuantPackagesMovingWizard(common.TransactionCase):
             'parent_id': self.package1.id,
             'quant_ids': [(6, 0, self.quant2.ids)],
         })
+        self.assertEquals(self.quant2.package_id, self.package2)
         self.assertEquals(self.quant1.location_id.id, self.location_from_id)
         self.assertEquals(self.quant2.location_id.id, self.location_from_id)
         self.assertEquals(self.package1.location_id.id, self.location_from_id)
@@ -51,11 +52,9 @@ class TestStockQuantPackagesMovingWizard(common.TransactionCase):
         move_wiz = self.quant_move_model.create({
             'pack_move_items': [(0, 0,
                                  {'quant': self.quant1.id,
-                                  'source_loc': self.quant1.location_id.id,
                                   'dest_loc': self.location_to_id})],
         })
         move_wiz.do_transfer()
-        self.assertNotEquals(self.quant1.location_id.id, self.location_from_id)
         self.assertEquals(self.quant1.location_id.id, self.location_to_id)
 
     def test_move_quant_default(self):
@@ -64,23 +63,22 @@ class TestStockQuantPackagesMovingWizard(common.TransactionCase):
         self.assertEquals(
             move_wiz_vals['pack_move_items'][0]['quant'], self.quant1.id)
 
-    def test_move_quant_item_onchange_quant(self):
-        item = self.quant_move_item_model.new({'quant': self.quant1.id})
-        item.onchange_quant()
-        self.assertEquals(item.source_loc, self.quant1.location_id)
-
     def test_move_package_default(self):
         move_wiz_vals = self.package_move_model.with_context(
             active_ids=self.package1.ids).default_get([])
         self.assertEquals(
             move_wiz_vals['pack_move_items'][0]['package'], self.package1.id)
 
-    def test_move_package_item_onchange_quant(self):
-        item = self.package_move_item_model.new({'package': self.package1.id})
-        item.onchange_quant()
-        self.assertEquals(item.source_loc, self.package1.location_id)
-
-    def test_move_quants_item_onchange_quant(self):
-        item = self.quants_move_item_model.new({'quant': self.quant1.id})
-        item.onchange_quant()
-        self.assertEquals(item.source_loc, self.quant1.location_id)
+    def test_move_quant_package(self):
+        move_wiz = self.package_move_model.create({
+            'pack_move_items': [(0, 0,
+                                 {'package': self.package1.id,
+                                  'dest_loc': self.location_to_id})],
+        })
+        move_wiz.do_detailed_transfer()
+        self.assertEquals(self.quant2.location_id.id, self.location_to_id)
+        # It fails here because of a bug in the module
+        # quant2 is not inside the package2
+        self.assertEquals(self.quant2.package_id, self.package2)
+        self.assertEquals(self.package1.location_id.id, self.location_to_id)
+        self.assertEquals(self.package2.location_id.id, self.location_to_id)

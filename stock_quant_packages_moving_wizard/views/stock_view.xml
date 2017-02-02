@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+<record id="view_stock_quant_form" model="ir.ui.view">
+    <field name="name">move_wizard.stock.quant.form</field>
+    <field name="model">stock.quant</field>
+    <field name="inherit_id" ref="stock.view_stock_quant_form"/>
+    <field name="arch" type="xml">
+        <button name="action_view_quant_history" position="before">
+            <button name="%(action_move_quants)d" type="action" string="Move to Another Location"/>
+        </button>
+    </field>
+</record>
+
+<record id="view_quant_package_form" model="ir.ui.view">
+    <field name="name">move_wizard.stock.quant.package.form</field>
+    <field name="model">stock.quant.package</field>
+    <field name="inherit_id" ref="stock.view_quant_package_form"/>
+    <field name="arch" type="xml">
+        <button name="unpack" position="before">
+            <button name="%(action_move_packages)d" type="action" string="Move to Another Location"/>
+        </button>
+    </field>
+</record>
+
+</data>
+</openerp>
