@@ -29,6 +29,12 @@ class StockQuant(models.Model):
 
     @api.one
     def move_to(self, dest_location):
+        # if the quant is reserved for another move,
+        # we should cleanly un-reserve it first, so that
+        # the picking that booked this quant comes back from
+        # available to waiting availability
+        if self.reservation_id:
+            self.reservation_id.do_unreserve()
         vals = self._prepare_move_to(dest_location)
         new_move = self.env['stock.move'].create(vals)
         # No group has write access on stock.quant -> we need sudo()
