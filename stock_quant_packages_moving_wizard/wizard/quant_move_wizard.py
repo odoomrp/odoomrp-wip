@@ -23,7 +23,11 @@ class StockQuantMove(models.TransientModel):
         items = []
         for quant in quants:
             if not quant.package_id:
-                items.append({'quant': quant.id})
+                items.append({
+                    'quant': quant.id,
+                    # source_loc is needed even if it's a related field...
+                    'source_loc': quant.location_id.id,
+                    })
         res.update(pack_move_items=items)
         return res
 

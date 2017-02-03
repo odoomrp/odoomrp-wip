@@ -22,7 +22,11 @@ class StockQuantPackageMove(models.TransientModel):
         items = []
         for package in packages:
             if not package.parent_id and package.location_id:
-                items.append({'package': package.id})
+                items.append({
+                    'package': package.id,
+                    # source_loc is needed even if it's a related field...
+                    'source_loc': package.location_id.id,
+                    })
         res.update(pack_move_items=items)
         return res
 

@@ -22,7 +22,6 @@ class StockQuant(models.Model):
             'product_uom': self.product_id.uom_id.id,
             'date_expected': fields.Datetime.now(),
             'date': fields.Datetime.now(),
-            'reserved_quant_ids': [(4, self.id)],
             'restrict_lot_id': self.lot_id.id,
             'origin': _('Quant Move'),
         }
@@ -32,6 +31,8 @@ class StockQuant(models.Model):
     def move_to(self, dest_location):
         vals = self._prepare_move_to(dest_location)
         new_move = self.env['stock.move'].create(vals)
+        # No group has write access on stock.quant -> we need sudo()
+        self.sudo().reservation_id = new_move
         new_move.with_context(quant_moving=True).action_done()
 
     @api.model
