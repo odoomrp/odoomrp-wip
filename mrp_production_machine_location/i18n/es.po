@@ -25,3 +25,13 @@ msgstr "Orden de fabricación"
 msgid "Stock Move"
 msgstr "Movimiento de stock"
 
+#. module: mrp_production_machine_location
+#: code:addons/mrp_production_machine_location/models/mrp_production.py:18
+#, python-format
+msgid ""
+"Not work order found with 'Produce here', you should surely enter the "
+"'Routing' in the production order."
+msgstr ""
+"Órden de trabajo con 'Producir aquí' no encontrada, seguramente deba de "
+"introducir la 'Ruta' en la órden de producción."
+

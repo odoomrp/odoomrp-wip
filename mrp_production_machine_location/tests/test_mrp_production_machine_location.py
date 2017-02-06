@@ -2,6 +2,7 @@
 # (c) 2015 Alfredo de la Fuente - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 import openerp.tests.common as common
+from openerp import exceptions
 
 
 class TestMrpProductionMachineLocation(common.TransactionCase):
@@ -17,6 +18,11 @@ class TestMrpProductionMachineLocation(common.TransactionCase):
 
     def test_mrp_production_machine_location(self):
         self.assertEqual(self.production.state, 'draft')
+        old_routing_id = self.production.routing_id.id
+        self.production.routing_id = False
+        with self.assertRaises(exceptions.Warning):
+            self.production.signal_workflow('button_confirm')
+        self.production.routing_id = old_routing_id
         self.production.signal_workflow('button_confirm')
         stock_moves = self.production.mapped('move_lines').filtered(
             lambda l: l.work_order.workcenter_id == self.workcenter)

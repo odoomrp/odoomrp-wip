@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # (c) 2016 Alfredo de la Fuente - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
-from openerp import models, api
+from openerp import models, api, exceptions, _
 
 
 class MrpProduction(models.Model):
@@ -13,6 +13,10 @@ class MrpProduction(models.Model):
         for prod in self:
             workcenter_lines = prod.workcenter_lines.filtered(
                 lambda r: r.do_production)
+            if not workcenter_lines:
+                raise exceptions.Warning(
+                    _("Not work order found with 'Produce here', you should"
+                      " surely enter the 'Routing' in the production order."))
             workcenter_line = max(
                 workcenter_lines, key=lambda x: x.sequence)
             location = workcenter_line.workcenter_id.machine.location
