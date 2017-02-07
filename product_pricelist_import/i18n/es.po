@@ -1,22 +1,20 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * product_pricelist_import
-# 
-# Translators:
-# Oihane Crucelaegui <oihanecruce@gmail.com>, 2015
+# 	* product_pricelist_import
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-20 18:10+0000\n"
-"PO-Revision-Date: 2015-10-27 11:19+0000\n"
-"Last-Translator: Oihane Crucelaegui <oihanecruce@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
+"POT-Creation-Date: 2017-02-06 15:43+0000\n"
+"PO-Revision-Date: 2017-02-06 16:52+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. module: product_pricelist_import
 #: selection:import.price.file,file_type:0
@@ -29,10 +27,11 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: product_pricelist_import
-#: code:addons/product_pricelist_import/models/product_pricelist_load.py:68
+#: code:addons/product_pricelist_import/models/product_pricelist_load.py:71
+#: code:addons/product_pricelist_import/models/product_pricelist_load.py:80
 #, python-format
 msgid "Correctly Processed"
-msgstr ""
+msgstr "Procesado correctamente"
 
 #. module: product_pricelist_import
 #: field:import.price.file,create_uid:0
@@ -64,6 +63,13 @@ msgid "Delimeter"
 msgstr "Delimitador"
 
 #. module: product_pricelist_import
+#: field:import.price.file,display_name:0
+#: field:product.pricelist.load,display_name:0
+#: field:product.pricelist.load.line,display_name:0
+msgid "Display Name"
+msgstr "Mostrar descripción"
+
+#. module: product_pricelist_import
 #: field:product.pricelist.load.line,fail:0
 msgid "Fail"
 msgstr "Fallo"
@@ -71,12 +77,12 @@ msgstr "Fallo"
 #. module: product_pricelist_import
 #: model:ir.actions.act_window,name:product_pricelist_import.act_fail_lines
 msgid "Fail Lines"
-msgstr ""
+msgstr "Líneas fallidas"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load,fails:0
 msgid "Fail Lines:"
-msgstr ""
+msgstr "Líneas fallidas:"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load.line,fail_reason:0
@@ -91,28 +97,28 @@ msgstr "Archivo"
 #. module: product_pricelist_import
 #: view:product.pricelist.load.line:product_pricelist_import.product_pricelist_load_line_tree_view
 msgid "File Lines"
-msgstr ""
+msgstr "Líneas de archivo"
 
 #. module: product_pricelist_import
 #: view:product.pricelist.load:product_pricelist_import.product_pricelist_load_form_view
 #: view:product.pricelist.load.line:product_pricelist_import.product_pricelist_load_line_form_view
 msgid "File Load"
-msgstr ""
+msgstr "Carga de archivo"
 
 #. module: product_pricelist_import
 #: view:product.pricelist.load:product_pricelist_import.product_pricelist_load_tree_view
 msgid "File Loads"
-msgstr ""
+msgstr "Cargas de archivos"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load,file_name:0
 msgid "File Name"
-msgstr ""
+msgstr "Nombre fichero"
 
 #. module: product_pricelist_import
 #: field:import.price.file,file_type:0
 msgid "File Type"
-msgstr ""
+msgstr "Tipo fichero"
 
 #. module: product_pricelist_import
 #: field:import.price.file,name:0
@@ -134,17 +140,24 @@ msgstr "Importar"
 #: view:import.price.file:product_pricelist_import.view_import_file
 #: model:ir.actions.act_window,name:product_pricelist_import.action_import_file
 msgid "Import File"
-msgstr ""
+msgstr "Importar fichero"
 
 #. module: product_pricelist_import
 #: view:product.pricelist.load:product_pricelist_import.product_pricelist_load_form_view
 msgid "Import Lines"
-msgstr ""
+msgstr "Importar líneas"
 
 #. module: product_pricelist_import
 #: model:ir.model,name:product_pricelist_import.model_import_price_file
 msgid "Import Price List File"
-msgstr ""
+msgstr "Importar archivo lista de precios"
+
+#. module: product_pricelist_import
+#: field:import.price.file,__last_update:0
+#: field:product.pricelist.load,__last_update:0
+#: field:product.pricelist.load.line,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación el"
 
 #. module: product_pricelist_import
 #: field:import.price.file,write_uid:0
@@ -163,7 +176,7 @@ msgstr "Última actualización el"
 #. module: product_pricelist_import
 #: field:product.pricelist.load,process:0
 msgid "Lines to Process:"
-msgstr ""
+msgstr "Líneas a procesar"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load,name:0
@@ -178,17 +191,23 @@ msgid "Load File"
 msgstr "Cargar archivo"
 
 #. module: product_pricelist_import
+#: code:addons/product_pricelist_import/models/product_pricelist_load.py:68
+#, python-format
+msgid "New price: %s, has created for supplier: %s"
+msgstr "El nuevo precio: %s, se ha reado para el proveedor: %s"
+
+#. module: product_pricelist_import
 #: code:addons/product_pricelist_import/wizard/import_price_files.py:76
 #: code:addons/product_pricelist_import/wizard/import_price_files.py:117
 #, python-format
 msgid "No Processed"
-msgstr ""
+msgstr "No procesado"
 
 #. module: product_pricelist_import
 #: code:addons/product_pricelist_import/wizard/import_price_files.py:143
 #, python-format
 msgid "Not a .csv/.xls file found"
-msgstr ""
+msgstr "No se ha encontrado un fichero .csv/.xls"
 
 #. module: product_pricelist_import
 #: code:addons/product_pricelist_import/wizard/import_price_files.py:57
@@ -198,19 +217,26 @@ msgid "Not a valid file!"
 msgstr "¡No es un archivo válido!"
 
 #. module: product_pricelist_import
+#: code:addons/product_pricelist_import/models/product_pricelist_load.py:72
+#, python-format
+msgid "Old price: %s, new price: %s, has modified for supplier: %s"
+msgstr ""
+"Precio viejo: %s, nuevo precio: %s, se ha modificado para el proveedor: %s"
+
+#. module: product_pricelist_import
 #: field:product.pricelist.load.line,pdv1:0
 msgid "PDV1"
-msgstr ""
+msgstr "PDV1"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load.line,pdv2:0
 msgid "PDV2"
-msgstr ""
+msgstr "PDV2"
 
 #. module: product_pricelist_import
 #: view:product.pricelist.load:product_pricelist_import.product_pricelist_load_form_view
 msgid "Proccess"
-msgstr ""
+msgstr "Proccess"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load.line,code:0
@@ -220,53 +246,54 @@ msgstr "Código de producto"
 #. module: product_pricelist_import
 #: field:product.pricelist.load.line,info:0
 msgid "Product Description"
-msgstr ""
+msgstr "Descripción producto"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load.line,discount_1:0
 msgid "Product Discount 1"
-msgstr ""
+msgstr "Producto descuento 1"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load.line,discount_2:0
 msgid "Product Discount 2"
-msgstr ""
+msgstr "Producto descuento 2"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load.line,price:0
 msgid "Product Price"
-msgstr ""
+msgstr "Precio producto"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load,file_lines:0
 msgid "Product Price List Lines"
-msgstr ""
+msgstr "Líneas de lista de precios de productos"
 
 #. module: product_pricelist_import
 #: model:ir.model,name:product_pricelist_import.model_product_pricelist_load
 msgid "Product Price List Load"
-msgstr ""
+msgstr "Carga de lista de precios de productos"
 
 #. module: product_pricelist_import
 #: model:ir.model,name:product_pricelist_import.model_product_pricelist_load_line
 msgid "Product Price List Load Line"
-msgstr ""
+msgstr "Carga de línea de precios de productos"
 
 #. module: product_pricelist_import
-#: code:addons/product_pricelist_import/models/product_pricelist_load.py:70
+#: code:addons/product_pricelist_import/models/product_pricelist_load.py:73
+#: code:addons/product_pricelist_import/models/product_pricelist_load.py:89
 #, python-format
 msgid "Product not found"
-msgstr ""
+msgstr "Producto no encontrado"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load.line,retail:0
 msgid "Retail Price"
-msgstr ""
+msgstr "Precio al por menor"
 
 #. module: product_pricelist_import
 #: view:product.pricelist.load:product_pricelist_import.file_price_load_search_view
 msgid "Search File load"
-msgstr ""
+msgstr "Buscar fichero de carga"
 
 #. module: product_pricelist_import
 #: field:product.pricelist.load,supplier:0
@@ -282,13 +309,13 @@ msgstr "Debe haber al menos una línea a procesar"
 #. module: product_pricelist_import
 #: selection:import.price.file,file_type:0
 msgid "XLS"
-msgstr ""
+msgstr "XLS"
 
 #. module: product_pricelist_import
 #: code:addons/product_pricelist_import/models/product_pricelist_load.py:42
 #, python-format
 msgid "You must select a Supplier"
-msgstr ""
+msgstr "Debe de seleccionar un proveedor"
 
 #. module: product_pricelist_import
 #: code:addons/product_pricelist_import/wizard/import_price_files.py:134
@@ -299,7 +326,7 @@ msgstr "¡Es necesario seleccionar un archivo!"
 #. module: product_pricelist_import
 #: model:ir.actions.act_window,name:product_pricelist_import.action_file_price_load
 msgid "action_file_price_load"
-msgstr ""
+msgstr "action_file_price_load"
 
 #. module: product_pricelist_import
 #: view:import.price.file:product_pricelist_import.view_import_file
@@ -310,4 +337,4 @@ msgstr "o"
 #: code:addons/product_pricelist_import/wizard/import_price_files.py:91
 #, python-format
 msgid "xlrd python lib  not installed"
-msgstr ""
+msgstr "xlrd python lib  no instalado"

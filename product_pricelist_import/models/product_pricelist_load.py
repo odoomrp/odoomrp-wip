@@ -1,24 +1,7 @@
-
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Daniel Campos (danielcampos@avanzosc.es) Date: 15/09/2014
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
-##############################################################################
-
+# -*- coding: utf-8 -*-
+# (c) 2014 Daniel Campos - AvanzOSC
+# (c) 2017 Alfredo de la Fuente - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from openerp import models, fields, exceptions, api, _
 
 
@@ -46,28 +29,48 @@ class ProductPricelistLoad(models.Model):
             if not file_load.file_lines:
                 raise exceptions.Warning(_("There must be one line at least to"
                                            " process"))
-            for line in file_load.file_lines:
-                # process fail lines
-                if line.fail:
-                    # search product code
-                    if line.code:
-                        product_lst = product_obj.search([('default_code', '=',
-                                                           line.code)])
-                        if product_lst:
-                            psupplinfo = psupplinfo_obj.create(
-                                {'name': file_load.supplier.id,
-                                 'product_tmpl_id':
-                                 product_lst[0].product_tmpl_id.id})
-                            pricepinfo_obj.create(
-                                {'suppinfo_id': psupplinfo.id,
-                                 'min_quantity': psupplinfo.min_qty,
-                                 'price': line.price})
-                            file_load.fails -= 1
-                            line.write(
-                                {'fail': False,
-                                 'fail_reason': _('Correctly Processed')})
-                        else:
-                            line.fail_reason = _('Product not found')
+            for line in file_load.mapped('file_lines').filtered(
+                    lambda x: x.fail and (x.code or x.info)):
+                cond = ([('default_code', '=', line.code)] if line.code else
+                        [('name', '=', line.info)])
+                product_lst = product_obj.search(cond, limit=1)
+                if product_lst:
+                    psupplinfo = product_lst.mapped('supplier_ids').filtered(
+                        lambda x: x.name.id == file_load.supplier.id)
+                    if not psupplinfo:
+                        psupplinfo = psupplinfo_obj.create(
+                            {'name': file_load.supplier.id,
+                             'min_qty': 1,
+                             'product_tmpl_id':
+                             product_lst[0].product_tmpl_id.id})
+                    if not psupplinfo.pricelist_ids:
+                        pricepinfo_obj.create(
+                            {'suppinfo_id': psupplinfo.id,
+                             'min_quantity': psupplinfo.min_qty,
+                             'price': line.price})
+                        m = ("<p> " + str(fields.Datetime.now()) + ': ' +
+                             _('New price: %s, has created for supplier: %s') %
+                             (str(line.price), file_load.supplier.name))
+                    else:
+                        m = ("<p> " + str(fields.Datetime.now()) + ': ' +
+                             _('Old price: %s, new price: %s, has modified for'
+                               ' supplier: %s') %
+                             (str(psupplinfo.pricelist_ids[0].price),
+                              str(line.price), file_load.supplier.name))
+                        psupplinfo.pricelist_ids[0].price = line.price
+                    file_load.fails -= 1
+                    line.write(
+                        {'fail': False,
+                         'fail_reason': _('Correctly Processed')})
+                    m += "<br> <br>"
+                    vals = {'type': 'comment',
+                            'model': 'product.product',
+                            'record_name': product_lst.name,
+                            'res_id': product_lst.id,
+                            'body': m}
+                    self.env['mail.message'].create(vals)
+                else:
+                    line.fail_reason = _('Product not found')
         return True
 
 
@@ -75,7 +78,7 @@ class ProductPricelistLoadLine(models.Model):
     _name = 'product.pricelist.load.line'
     _description = 'Product Price List Load Line'
 
-    code = fields.Char('Product Code', required=True)
+    code = fields.Char('Product Code')
     info = fields.Char('Product Description')
     price = fields.Float('Product Price', required=True)
     discount_1 = fields.Float('Product Discount 1')
