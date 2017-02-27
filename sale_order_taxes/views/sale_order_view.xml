@@ -12,7 +12,6 @@
                         <field name="taxes" nolabel="1" >
                             <tree>
                                 <field name="name" />
-                                <field name="base" />
                                 <field name="amount" />
                             </tree>
                         </field>
