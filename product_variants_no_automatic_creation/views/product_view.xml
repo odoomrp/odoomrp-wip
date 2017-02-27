@@ -17,18 +17,54 @@
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_only_form_view" />
             <field name="arch" type="xml">
-                <button string="Variant Prices" position="attributes">
+            <xpath expr="//button[@name='103']" position="attributes">
+               
                     <attribute name="invisible">1</attribute>
-                </button>
-                <button string="Variant Prices" position="after">
+               </xpath>
+            <xpath expr="//button[@name='103']" position="after">   
+               
                     <button class="oe_inline oe_stat_button" name="action_open_attribute_prices"
                         icon="fa-strikethrough" type="object" string="Variant Prices">
                     </button>
-                </button>
-                <field name="attribute_line_ids" position="before">
+                </xpath>
+                <xpath expr="//field[@name='attribute_line_ids']" position="before">   
+               
                     <group>
                         <field name="no_create_variants" />
                     </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_variants_view">
+            <field name="name">product.product.variants.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="attrs">{'invisible':['|',('id','!=',False),('product_tmpl_id','!=',False)],'readonly':[('product_tmpl_id','!=',False)]}</attribute>
+                </field>
+                <field name="product_tmpl_id" position="attributes">
+                    <attribute name="readonly" />
+                    <attribute name="attrs">{'readonly':[('id','!=',False)],'required':[('id','!=',False)]}</attribute>
+                </field>
+                <xpath expr="//field[@name='product_tmpl_id']/.." position="after">
+                    <p class="oe_grey" attrs="{'invisible':[('id','!=',False)]}">
+                        Select a template for a variant. Keep empty for a new full product.
+                    </p>
+                </xpath>
+                <field name="attribute_value_ids" position="after">
+                    <label for="product_attributes"
+                           attrs="{'invisible':['|',('id','!=',False),'|',('product_tmpl_id','=',False),('product_attributes','=',[])]}" />
+                    <field name="product_attributes"
+                           attrs="{'invisible':['|',('id','!=',False),'|',('product_tmpl_id','=',False),('product_attributes','=',[])]}"
+                           options="{'no_create': True, 'no_delete': True}">
+                        <tree create="0" delete="0" editable="1">
+                            <field name="attribute" />
+                            <field name="possible_values" invisible="1" />
+                            <field name="value" context="{'show_attribute': False}" />
+                        </tree>
+                    </field>
                 </field>
             </field>
         </record>
