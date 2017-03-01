@@ -24,3 +24,4 @@ Contributors
 * Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 * Ana Juaristi <ajuaristo@gmail.com>
 * Alfredo de la Fuente <alfredodelafuente@avanzosc.es>
+* Daniel Rodriguez Lijo <drl.9319@gmail.com>
