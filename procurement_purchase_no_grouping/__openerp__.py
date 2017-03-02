@@ -17,7 +17,7 @@
 ##############################################################################
 {
     "name": "Procurement Purchase No Grouping",
-    "version": "8.0.1.0",
+    "version": "8.0.1.0.0",
     "author": "Odoo Community Association (OCA),"
               "OdooMRP team,"
               "AvanzOSC,"
