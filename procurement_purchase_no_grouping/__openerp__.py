@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -17,10 +17,12 @@
 ##############################################################################
 {
     "name": "Procurement Purchase No Grouping",
-    "version": "1.0",
-    "author": "OdooMRP team,"
+    "version": "8.0.1.0",
+    "author": "Odoo Community Association (OCA),"
+              "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "license": "AGPL-3",
     "website": "http://www.odoomrp.com",
     "category": "Procurements",
     "depends": ['purchase',
