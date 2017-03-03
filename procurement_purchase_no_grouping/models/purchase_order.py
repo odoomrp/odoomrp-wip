@@ -24,9 +24,7 @@ class PurchaseOrder(models.Model):
 
             # Add new condition to domain, becouse I need find only one
             # purchase order with de same suplier and origin to add new line
-            aux = args
-            aux.append(('origin', '=', context.get('origin', False)))
-            arg = aux
+            args.append(('origin', '=', context.get('origin', False)))
         return super(PurchaseOrder, self).search(
             cr, uid, args, offset=offset, limit=limit, order=order,
             context=context, count=count)
