@@ -4,3 +4,5 @@
 ##############################################################################
 
 from . import bids
+from . import purchase_config_setting
+from . import res_company
