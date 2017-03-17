@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import api, fields, models
+from openerp import api, fields, models, _
 from openerp.tools.float_utils import float_compare
 
 
 class StockQuant(models.Model):
     _inherit = 'stock.quant'
 
-    @api.one
-    def move_to(self, dest_location):
-        move_obj = self.with_context(quant_moving=True).env['stock.move']
-        new_move = move_obj.create({
-            'name': 'Move %s to %s' % (self.product_id.name,
-                                       dest_location.name),
+    @api.multi
+    def _prepare_move_to(self, dest_location):
+        self.ensure_one()
+        vals = {
+            'name': '%s: Move to %s' % (
+                self.product_id.name_get()[0][1],
+                dest_location.complete_name),
             'product_id': self.product_id.id,
             'location_id': self.location_id.id,
             'location_dest_id': dest_location.id,
@@ -21,18 +22,30 @@ class StockQuant(models.Model):
             'product_uom': self.product_id.uom_id.id,
             'date_expected': fields.Datetime.now(),
             'date': fields.Datetime.now(),
-            'quant_ids': [(4, self.id)],
-            'restrict_lot_id': self.lot_id.id
-        })
-        new_move.action_done()
+            'restrict_lot_id': self.lot_id.id,
+            'origin': _('Quant Move'),
+        }
+        return vals
+
+    @api.one
+    def move_to(self, dest_location):
+        # if the quant is reserved for another move,
+        # we should cleanly un-reserve it first, so that
+        # the picking that booked this quant comes back from
+        # available to waiting availability
+        if self.reservation_id:
+            self.reservation_id.do_unreserve()
+        vals = self._prepare_move_to(dest_location)
+        new_move = self.env['stock.move'].create(vals)
+        # No group has write access on stock.quant -> we need sudo()
+        self.sudo().reservation_id = new_move
+        new_move.with_context(quant_moving=True).action_done()
 
     @api.model
     def quants_get_prefered_domain(
             self, location, product, qty, domain=None,
-            prefered_domain_list=None, restrict_lot_id=False,
+            prefered_domain_list=[], restrict_lot_id=False,
             restrict_partner_id=False):
-        if prefered_domain_list is None:
-            prefered_domain_list = []
         quants = super(StockQuant, self).quants_get_prefered_domain(
             location, product, qty, domain=domain,
             prefered_domain_list=prefered_domain_list,
@@ -40,7 +53,7 @@ class StockQuant(models.Model):
             restrict_partner_id=restrict_partner_id)
         if location.usage not in ['inventory', 'production', 'supplier']:
             return quants
-        if self.env.context.get('quant_moving', False):
+        if self.env.context.get('quant_moving'):
             if domain is None:
                 domain = []
             res_qty = qty

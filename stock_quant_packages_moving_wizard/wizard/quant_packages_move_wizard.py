@@ -12,8 +12,8 @@ class StockQuantPackageMove(models.TransientModel):
         string='Packs')
 
     @api.model
-    def default_get(self, fields):
-        res = super(StockQuantPackageMove, self).default_get(fields)
+    def default_get(self, fields_list):
+        res = super(StockQuantPackageMove, self).default_get(fields_list)
         packages_ids = self.env.context.get('active_ids', [])
         if not packages_ids:
             return res
@@ -22,16 +22,17 @@ class StockQuantPackageMove(models.TransientModel):
         items = []
         for package in packages:
             if not package.parent_id and package.location_id:
-                item = {
+                items.append({
                     'package': package.id,
+                    # source_loc is needed even if it's a related field...
                     'source_loc': package.location_id.id,
-                }
-                items.append(item)
+                    })
         res.update(pack_move_items=items)
         return res
 
-    @api.one
+    @api.multi
     def do_detailed_transfer(self):
+        self.ensure_one()
         for item in self.pack_move_items:
             if item.dest_loc is not item.source_loc:
                 for quant in item.package.quant_ids:
@@ -50,14 +51,11 @@ class StockQuantPackageMoveItems(models.TransientModel):
         comodel_name='stock.quant.package.move', string='Package move')
     package = fields.Many2one(
         comodel_name='stock.quant.package', string='Quant package',
+        required=True,
         domain=[('parent_id', '=', False), ('location_id', '!=', False)])
     source_loc = fields.Many2one(
-        comodel_name='stock.location', string='Source Location', required=True)
+        string='Current Location', related='package.location_id',
+        readonly=True)
     dest_loc = fields.Many2one(
         comodel_name='stock.location', string='Destination Location',
         required=True)
-
-    @api.one
-    @api.onchange('package')
-    def onchange_quant(self):
-        self.source_loc = self.package.location_id
