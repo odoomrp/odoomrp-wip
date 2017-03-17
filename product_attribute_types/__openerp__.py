@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,13 +18,16 @@
 
 {
     "name": "Product attribute types",
-    "version": "1.0",
+    "version": "8.0.1.1.0",
+    "license": "AGPL-3",
     "depends": [
         "product",
     ],
     "author": "OdooMRP team,"
               "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+              "Tecnativa,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza,"
+              "Odoo Community Association (OCA)",
     "contributors": [
         "Mikel Arregi <mikelarregi@avanzosc.es>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
