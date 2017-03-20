@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="product_template_no_variant_form_view">
+            <field name="name">product.template.no.variant.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(product.product_attribute_value_action)d']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(product.product_attribute_value_action)d']" position="after">
+                    <button name="action_open_attribute_prices" type="object" string="Variant Prices"/>
+                </xpath>
+                <field name="attribute_line_ids" position="before">
+                    <group>
+                        <field name="no_create_variants" />
+                    </group>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

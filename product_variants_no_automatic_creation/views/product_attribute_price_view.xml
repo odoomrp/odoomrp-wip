@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="attribute_price_tree_view">
+            <field name="name">product.attribute.price.tree</field>
+            <field name="model">product.attribute.price</field>
+            <field name="arch" type="xml">
+                <tree string="Variant Values" editable="bottom" nodelete="1" nocreate="1">
+                    <field name="attribute_id" readonly="1" />
+                    <field name="value_id" readonly="1" />
+                    <field name="price_extra" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="attribute_price_action" model="ir.actions.act_window">
+            <field name="name">Variant Values</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.attribute.price</field>
+            <field name="view_mode">tree</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="attribute_price_tree_view"/> 
+            <field name="domain">[('product_tmpl_id', '=', active_id)]</field>
+            <field name="context">{'default_product_tmpl_id': active_id}</field>
+        </record>
+    </data>
+</openerp>

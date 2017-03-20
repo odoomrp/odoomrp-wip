@@ -1,48 +1,68 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * product_variants_no_automatic_creation
-# 
-# Translators:
+#	* product_variants_no_automatic_creation
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:44+0000\n"
-"PO-Revision-Date: 2015-10-09 10:50+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
+"POT-Creation-Date: 2016-04-30 16:51+0000\n"
+"PO-Revision-Date: 2016-04-30 16:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: product_variants_no_automatic_creation
 #: code:addons/product_variants_no_automatic_creation/models/pricelist.py:48
 #, python-format
-msgid ""
-"At least one pricelist has no active version !\n"
+msgid "At least one pricelist has no active version !\n"
 "Please create or activate one."
-msgstr "¡Al menos una lista de precios no tiene una versión activa!\nPor favor, cree o active una."
+msgstr "¡Al menos una lista de precios no tiene una versión activa!\n"
+"Por favor, cree o active una."
 
 #. module: product_variants_no_automatic_creation
-#: code:addons/product_variants_no_automatic_creation/models/product.py:36
-#: code:addons/product_variants_no_automatic_creation/models/product.py:69
+#: field:product.attribute.price,attribute_id:0
+#: field:product.configurator.attribute,attribute_id:0
+msgid "Attribute"
+msgstr "Atributo"
+
+#. module: product_variants_no_automatic_creation
+#: code:addons/product_variants_no_automatic_creation/models/product_category.py:24
+#: code:addons/product_variants_no_automatic_creation/models/product_template.py:28
 #, python-format
 msgid "Change warning!"
-msgstr "Atención cambio!"
+msgstr "Aviso de cambio"
 
 #. module: product_variants_no_automatic_creation
-#: code:addons/product_variants_no_automatic_creation/models/product.py:37
-#: code:addons/product_variants_no_automatic_creation/models/product.py:70
+#: code:addons/product_variants_no_automatic_creation/models/product_category.py:25
+#: code:addons/product_variants_no_automatic_creation/models/product_template.py:29
 #, python-format
 msgid "Changing this parameter may cause automatic variants creation"
-msgstr "Cambiar este parametro puede causar que se creen variantes automáticamente"
+msgstr "Cambiando este parámetro puede causar la creación de variantes"
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
 msgid "Create them automatically"
 msgstr "Crearlas automáticamente"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator.attribute,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator.attribute,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator,display_name:0
+#: field:product.configurator.attribute,display_name:0
+msgid "Display Name"
+msgstr "Nombre mostrado"
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
@@ -55,12 +75,72 @@ msgid "Don't create variants automatically"
 msgstr "No crear variantes automáticamente"
 
 #. module: product_variants_no_automatic_creation
+#: field:product.configurator,id:0
+#: field:product.configurator.attribute,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator,__last_update:0
+#: field:product.configurator.attribute,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator.attribute,write_uid:0
+msgid "Last Updated by"
+msgstr "Última modificación por"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator.attribute,write_date:0
+msgid "Last Updated on"
+msgstr "Última modificación el"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator.attribute,owner_id:0
+msgid "Owner"
+msgstr "Propietario"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator.attribute,owner_model:0
+msgid "Owner model"
+msgstr "Modelo propietario"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator.attribute,possible_value_ids:0
+msgid "Possible value ids"
+msgstr "Posibles valores"
+
+#. module: product_variants_no_automatic_creation
+#: help:product.configurator,price_extra:0
+msgid "Price Extra: Extra price for the variant with the currently selected attributes values on sale price. eg. 200 price extra, 1000 + 200 = 1200."
+msgstr "Precio extra: Precio extra de venta para la variante con los valores de atributos seleccionados. Por ejemplo. 200 de precio extra, 1000 + 200 = 1200."
+
+#. module: product_variants_no_automatic_creation
+#: help:product.configurator.attribute,price_extra:0
+msgid "Price Extra: Extra price for the variant with this attribute value on sale price. eg. 200 price extra, 1000 + 200 = 1200."
+msgstr "Precio extra: Precio extra de venta para la variante con los valores de atributos seleccionados. Por ejemplo. 200 de precio extra, 1000 + 200 = 1200."
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator,price_extra:0
+#: field:product.configurator.attribute,price_extra:0
+msgid "Price extra"
+msgstr "Precio extra"
+
+#. module: product_variants_no_automatic_creation
 #: model:ir.model,name:product_variants_no_automatic_creation.model_product_pricelist
 msgid "Pricelist"
 msgstr "Tarifa"
 
 #. module: product_variants_no_automatic_creation
 #: model:ir.model,name:product_variants_no_automatic_creation.model_product_product
+#: field:product.configurator,product_id:0
+#: field:product.product,product_id:0
 msgid "Product"
 msgstr "Producto"
 
@@ -71,8 +151,21 @@ msgstr "Categoría de producto"
 
 #. module: product_variants_no_automatic_creation
 #: model:ir.model,name:product_variants_no_automatic_creation.model_product_template
+#: field:product.configurator,product_tmpl_id:0
+#: field:product.configurator.attribute,product_tmpl_id:0
 msgid "Product Template"
 msgstr "Plantilla de producto"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator,product_attribute_ids:0
+#: field:product.product,product_attribute_ids:0
+msgid "Product attributes"
+msgstr "Atributos de producto"
+
+#. module: product_variants_no_automatic_creation
+#: view:product.product:product_variants_no_automatic_creation.product_variants_view
+msgid "Select a template for a variant. Keep empty for a new full product."
+msgstr "Seleccione una plantilla para la variante. Mantener vacío para un producto completamente nuevo."
 
 #. module: product_variants_no_automatic_creation
 #: sql_constraint:product.attribute.line:0
@@ -80,23 +173,40 @@ msgid "The attribute already exists for this product"
 msgstr "El atributo ya existe para este producto"
 
 #. module: product_variants_no_automatic_creation
+#: code:addons/product_variants_no_automatic_creation/models/product_product.py:73
+#, python-format
+msgid "There's another product with the same attributes."
+msgstr "Existe otro producto con los mismos atributos."
+
+#. module: product_variants_no_automatic_creation
 #: help:product.category,no_create_variants:0
-msgid ""
-"This check disables the automatic creation of product variants for all the "
-"products of this category."
+msgid "This check disables the automatic creation of product variants for all the products of this category."
 msgstr "Esta casilla deshabilita la creación automática de las variantes de producto para todos los productos de esta categoría."
 
 #. module: product_variants_no_automatic_creation
+#: view:product.product:product_variants_no_automatic_creation.product_variants_view
+msgid "This product already exists."
+msgstr "Este producto ya existe."
+
+#. module: product_variants_no_automatic_creation
 #: help:product.template,no_create_variants:0
-msgid ""
-"This selection defines if variants for all attribute combinations are going "
-"to be created automatically at saving time."
+msgid "This selection defines if variants for all attribute combinations are going to be created automatically at saving time."
 msgstr "Esta selección define si se crearán automáticamente las variantes para todas las combincaciones de attributos a la hora de guardar."
+
+#. module: product_variants_no_automatic_creation
+#: model:res.groups,name:product_variants_no_automatic_creation.group_product_variant_extended_description
+msgid "Use extended description when having product attributes"
+msgstr "Usar descripción extendida cuando se tienen atributos de producto"
 
 #. module: product_variants_no_automatic_creation
 #: selection:product.template,no_create_variants:0
 msgid "Use the category value"
-msgstr "Use the category value"
+msgstr "Utilizar el valor de la categoría"
+
+#. module: product_variants_no_automatic_creation
+#: field:product.configurator.attribute,value_id:0
+msgid "Value"
+msgstr "Valor"
 
 #. module: product_variants_no_automatic_creation
 #: view:product.template:product_variants_no_automatic_creation.product_template_no_variant_form_view
@@ -113,3 +223,20 @@ msgstr "Valores de las variantes"
 #: field:product.template,no_create_variants:0
 msgid "Variant creation"
 msgstr "Creación de variantes"
+
+#. module: product_variants_no_automatic_creation
+#: code:addons/product_variants_no_automatic_creation/models/product_configurator.py:179
+#, python-format
+msgid "You have to fill all the attributes values."
+msgstr "Tiene que rellenar todos los valores de atributos."
+
+#. module: product_variants_no_automatic_creation
+#: view:product.product:product_variants_no_automatic_creation.product_variants_view
+msgid "{'invisible': ['|', ('id', '!=', False), ('product_tmpl_id', '!=', False)], 'readonly': [('product_tmpl_id', '!=', False)]}"
+msgstr "{'invisible': ['|', ('id', '!=', False), ('product_tmpl_id', '!=', False)], 'readonly': [('product_tmpl_id', '!=', False)]}"
+
+#. module: product_variants_no_automatic_creation
+#: view:product.product:product_variants_no_automatic_creation.product_variants_view
+msgid "{'readonly': [('id', '!=', False)], 'required': [('id', '!=', False)]}"
+msgstr "{'readonly': [('id', '!=', False)], 'required': [('id', '!=', False)]}"
+

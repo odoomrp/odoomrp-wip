@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="product_variants_view">
+            <field name="name">product.product.variants.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', ('id', '!=', False), ('product_tmpl_id', '!=', False)], 'readonly': [('product_tmpl_id', '!=', False)]}</attribute>
+                </field>
+                <field name="product_tmpl_id" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                    <attribute name="attrs">{'readonly': [('id', '!=', False)], 'required': [('id', '!=', False)]}</attribute>
+                </field>
+                <xpath expr="//field[@name='product_tmpl_id']/.." position="after">
+                    <p class="oe_grey" attrs="{'invisible':[('id','!=',False)]}">
+                        Select a template for a variant. Keep empty for a new full product.
+                    </p>
+                </xpath>
+                <field name="attribute_value_ids" position="after">
+                    <field name="product_attribute_ids"
+                           context="{'default_owner_model': 'product.product', 'default_owner_id': id, 'show_price_extra': True, 'show_attribute': False}"
+                           attrs="{'invisible': ['|', ('id','!=',False), '|', ('product_tmpl_id','=',False), ('product_attribute_ids', '=', [])]}"
+                    />
+                    <field name="product_id" invisible="0"/>
+                    <label string="This product already exists."
+                           style="color: red;"
+                           attrs="{'invisible': [('product_id', '=', False)]}"
+                    />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
