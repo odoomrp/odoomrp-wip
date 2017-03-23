@@ -24,6 +24,8 @@ class StockQuant(models.Model):
             'quant_ids': [(4, self.id)],
             'restrict_lot_id': self.lot_id.id
         })
+        new_move.action_confirm()
+        self.quants_reserve([[self, self.qty]], new_move)
         new_move.action_done()
 
     @api.model
