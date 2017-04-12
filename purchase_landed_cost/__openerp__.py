@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2013 Joaquín Gutierrez
-# © 2014-2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2013 Joaquín Gutierrez
+# Copyright 2014-2017 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3
 
 
 {
     'name': 'Purchase landed costs - Alternative option',
-    'version': '8.0.2.4.0',
+    'version': '8.0.2.5.0',
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Tecnativa,"
@@ -24,6 +24,7 @@
         'wizard/import_landed_cost_pickings_wizard_view.xml',
         'views/account_invoice_view.xml',
         'views/purchase_cost_distribution_view.xml',
+        'views/purchase_cost_distribution_line_expense_view.xml',
         'views/purchase_expense_type_view.xml',
         'views/purchase_order_view.xml',
         'views/stock_picking_view.xml',
