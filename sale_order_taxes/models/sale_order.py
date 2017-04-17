@@ -28,11 +28,11 @@ class SaleOrderTax(models.Model):
     sale_order = fields.Many2one(comodel_name='sale.order',
                                  string='Sale Order', ondelete='cascade')
     name = fields.Char(string='Tax Description', required=True)
-    base = fields.Float(string='Base', digits=dp.get_precision('Account'))
     amount = fields.Float(string='Amount', digits=dp.get_precision('Account'))
     sequence = fields.Integer(
         string='Sequence',
         help="Gives the sequence order when displaying a list of order tax.")
+    tax_id = fields.Many2one('account.tax', string='Tax')
 
 
 class SaleOrder(models.Model):
@@ -49,29 +49,24 @@ class SaleOrder(models.Model):
         for line in order.order_line:
             taxes = line.tax_id.compute_all(
                 (line.price_unit * (1 - (line.discount or 0.0) / 100.0)),
-                line.product_uom_qty, line.product_id,
-                order.partner_id)['taxes']
+                currency=currency,
+                quantity=line.product_uom_qty,
+                product=line.product_id,
+                partner=order.partner_id)['taxes']
             for tax in taxes:
                 val = {
                     'order': order.id,
                     'name': tax['name'],
                     'amount': tax['amount'],
-                    'base': currency.round(tax['price_unit'] *
-                                           line.product_uom_qty),
                     'sequence': tax['sequence'],
-                    'base_code_id': tax['base_code_id'],
-                    'tax_code_id': tax['tax_code_id'],
+                    'tax_id': tax['id'],
                 }
-                key = (val['tax_code_id'], val['base_code_id'])
+                key = val['tax_id']
                 if key not in tax_grouped:
                     tax_grouped[key] = val
                 else:
-                    tax_grouped[key]['base'] += val['base']
                     tax_grouped[key]['amount'] += val['amount']
-                    # tax_grouped[key]['base_amount'] += val['base_amount']
-                    # tax_grouped[key]['tax_amount'] += val['tax_amount']
         for t in tax_grouped.values():
-            t['base'] = currency.round(t['base'])
             t['amount'] = currency.round(t['amount'])
         return tax_grouped
 
@@ -85,8 +80,8 @@ class SaleOrder(models.Model):
                     'sale_order': tax['order'],
                     'sequence': tax['sequence'],
                     'name': tax['name'],
-                    'base': tax['base'],
-                    'amount': tax['amount']})
+                    'amount': tax['amount'],
+                    'tax_id': tax['tax_id']})
         return True
 
     @api.multi
