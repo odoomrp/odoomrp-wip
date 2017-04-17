@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -15,17 +15,18 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-
 {
     "name": "Account Treasury Forecast",
-    "version": "1.0",
+    "version": "9.0.1.0.0",
+    "license": 'AGPL-3',
+    "author": 'Odoo Community Association (OCA),'
+              'OdooMRP team,'
+              'AvanzOSC,'
+              'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     "depends": [
         "account",
         "purchase",
     ],
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "category": "Accounting",
     "description": """
@@ -40,5 +41,5 @@
         "views/account_treasury_forecast_template_view.xml",
     ],
     'demo': [],
-    'installable': False,
+    'installable': True,
 }
