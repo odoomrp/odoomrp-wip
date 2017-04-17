@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -15,16 +15,17 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
-
 {
     "name": "Partner Reference Codes",
-    "version": "1.0",
+    "version": "9.0.1.0.0",
+    "license": 'AGPL-3',
+    "author": 'Odoo Community Association (OCA),'
+              'OdooMRP team,'
+              'AvanzOSC,'
+              'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     "depends": [
         "base"
     ],
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
@@ -41,6 +42,6 @@
     "data": [
         "views/res_partner_view.xml",
     ],
-    'installable': False,
+    'installable': True,
     "auto_install": False,
 }
