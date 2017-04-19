@@ -12,5 +12,31 @@
                 </field>
             </field>
         </record>
+
+        <!-- Replace base form view -->
+        <record id="mrp.mrp_production_product_form_view" model="ir.ui.view">
+            <field name="name">mrp.production.product.line.form</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="arch" type="xml">
+                <form string="Scheduled Products">
+                    <group col="4">
+                        <field name="name" />
+                        <field name="product_id" />
+                        <label for="product_qty" />
+                        <div>
+                            <field name="product_qty" class="oe_inline" />
+                            <field name="product_uom"
+                                   groups="product.group_uom"
+                                   class="oe_inline" />
+                        </div>
+                        <label for="product_uos_qty" groups="product.group_uos" />
+                        <div groups="product.group_uos">
+                            <field name="product_uos_qty" class="oe_inline" />
+                            <field name="product_uos" class="oe_inline" />
+                        </div>
+                    </group>
+                </form>
+            </field>
+        </record>
     </data>
 </openerp>
