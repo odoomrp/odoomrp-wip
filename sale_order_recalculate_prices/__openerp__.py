@@ -20,9 +20,11 @@
 #                                                                            #
 ##############################################################################
 
+
 {
     "name": "Sale Order Recalculate Prices",
-    "version": "1.0",
+    "version": "8.0.1.0.0",
+    "license": "AGPL-3",
     "depends": [
         "sale",
     ],
@@ -37,7 +39,6 @@
     ],
     "category": "Sales Management",
     "website": "http://www.odoomrp.com",
-    "summary": "",
     "data": [
         "views/sale_order_view.xml",
     ],
