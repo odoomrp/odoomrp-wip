@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@ class MrpBom(models.Model):
     @api.one
     @api.depends('bom_line_ids', 'bom_line_ids.product_qty')
     def _compute_qtytoconsume(self):
-        self.qty_to_consume = sum(x.product_qty for x in self.bom_line_ids)
+        self.qty_to_consume = sum(self.mapped('bom_line_ids.product_qty'))
 
     by_percentage = fields.Boolean(string='Produce by percentage')
     qty_to_consume = fields.Float(
@@ -35,7 +35,7 @@ class MrpBom(models.Model):
     @api.one
     @api.onchange('by_percentage', 'bom_line_ids')
     def onchange_by_percentage(self):
-        self.qty_to_consume = sum(x.product_qty for x in self.bom_line_ids)
+        self.qty_to_consume = sum(self.mapped('bom_line_ids.product_qty'))
         if self.by_percentage:
             self.product_qty = 100
 
