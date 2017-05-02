@@ -101,11 +101,10 @@ class MrpBom(models.Model):
     def _bom_find_prepare(self, bom_line, properties=None):
         if not bom_line.product_id:
             tmpl_id = bom_line.product_tmpl_id
+            active_model = self.env.context.get('active_model')
             if not bom_line.type != "phantom":
                 production = self.env.context.get('production')
-                if not production and \
-                                self.env.context.get(
-                                    'active_model') == 'mrp.production':
+                if not production and active_model == 'mrp.production':
                     production = self.env['mrp.production'].browse(
                         self.env.context.get('active_id'))
                 product_attribute_ids = (
