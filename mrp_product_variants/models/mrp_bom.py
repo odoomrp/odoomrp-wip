@@ -100,9 +100,22 @@ class MrpBom(models.Model):
     @api.model
     def _bom_find_prepare(self, bom_line, properties=None):
         if not bom_line.product_id:
+            tmpl_id = bom_line.product_tmpl_id
             if not bom_line.type != "phantom":
+                production = self.env.context.get('production')
+                if not production and \
+                                self.env.context.get(
+                                    'active_model') == 'mrp.production':
+                    production = self.env['mrp.production'].browse(
+                        self.env.context.get('active_id'))
+                product_attribute_ids = (
+                    tmpl_id._get_product_attribute_ids_inherit_dict(
+                        production.product_attribute_ids))
+                comp_product = self.env['product.product']._product_find(
+                    tmpl_id, product_attribute_ids)
                 return self._bom_find(
                     product_tmpl_id=bom_line.product_tmpl_id.id,
+                    product_id=comp_product.id,
                     properties=properties)
             else:
                 return False
