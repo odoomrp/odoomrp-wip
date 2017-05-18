@@ -38,9 +38,9 @@ class TestMrpProductionAddMiddleStuff(common.TransactionCase):
         })
         self.middle_model = self.env['wiz.production.product.line']
         self.production.action_compute()
-        self.production.action_confirm()
 
     def test_add_middle_stuff(self):
+        self.production.action_confirm()
         self.assertTrue(self.production.product_lines)
         self.assertEquals(len(self.production.move_lines), 1)
         self.assertFalse(self.production.product_lines.filtered('addition'))
@@ -51,10 +51,12 @@ class TestMrpProductionAddMiddleStuff(common.TransactionCase):
         }
         with self.assertRaises(exceptions.ValidationError):
             self.middle_model.with_context(
-                active_id=self.production.id).create(wiz_values)
+                active_id=self.production.id,
+                active_model=self.production._model._name).create(wiz_values)
         wiz_values.update({'product_uom_id': self.product1.uom_id.id})
         add_stuff = self.middle_model.with_context(
-            active_id=self.production.id).create(wiz_values)
+            active_id=self.production.id,
+            active_model=self.production._model._name).create(wiz_values)
         with self.assertRaises(exceptions.Warning):
             add_stuff.add_product()
         add_stuff.write({

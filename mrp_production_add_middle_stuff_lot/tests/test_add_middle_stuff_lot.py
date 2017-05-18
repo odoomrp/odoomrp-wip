@@ -18,6 +18,7 @@ class TestMrpProductionAddMiddleStuffLot(TestMrpProductionAddMiddleStuff):
         })
 
     def test_add_middle_stuff_lot(self):
+        self.production.action_confirm()
         self.assertTrue(self.production.product_lines)
         self.assertEquals(len(self.production.move_lines), 1)
         self.assertFalse(self.production.product_lines.filtered('addition'))
@@ -28,7 +29,8 @@ class TestMrpProductionAddMiddleStuffLot(TestMrpProductionAddMiddleStuff):
             'lot': self.lot.id,
         }
         add_stuff = self.middle_model.with_context(
-            active_id=self.production.id).create(wiz_values)
+            active_id=self.production.id,
+            active_model=self.production._model._name).create(wiz_values)
         with self.assertRaises(exceptions.Warning):
             add_stuff.add_product()
         self.env['stock.quant'].sudo().create({
@@ -40,6 +42,9 @@ class TestMrpProductionAddMiddleStuffLot(TestMrpProductionAddMiddleStuff):
         add_stuff.add_product()
         self.assertTrue(self.production.product_lines.filtered('addition'))
         self.assertEquals(len(self.production.move_lines), 2)
+
+    def test_add_middle_stuff(self):
+        """ pass """
 
     def test_add_middle_stuff_onchange(self):
         """ pass """
