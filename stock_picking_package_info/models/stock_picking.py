@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
-
+# (c) 2016 Alfredo de la Fuente - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from openerp import models, fields, api
 from openerp.addons import decimal_precision as dp
 from openerp.tools.float_utils import float_compare
@@ -39,7 +37,7 @@ class StockPicking(models.Model):
 
     @api.multi
     @api.depends('pack_operation_ids', 'pack_operation_ids.result_package_id')
-    def _calc_picking_packages(self):
+    def _compute_picking_packages(self):
         for record in self:
             record.packages = (record.pack_operation_ids.mapped(
                 'result_package_id') | record.pack_operation_ids.mapped(
@@ -48,7 +46,7 @@ class StockPicking(models.Model):
     @api.multi
     @api.depends('pack_operation_ids', 'pack_operation_ids.result_package_id',
                  'pack_operation_ids.result_package_id.ul_id')
-    def _calc_picking_packages_info(self):
+    def _compute_picking_packages_info(self):
         pack_weight_obj = self.env['stock.picking.package.weight.lot']
         pack_total_obj = self.env['stock.picking.package.total']
         for record in self:
@@ -87,17 +85,18 @@ class StockPicking(models.Model):
 
     packages = fields.Many2many(
         comodel_name='stock.quant.package', string='Packages',
-        compute='_calc_picking_packages')
+        compute='_compute_picking_packages')
     packages_info = fields.Many2many(
         comodel_name='stock.picking.package.weight.lot',
         relation='stock_picking_packages_info', string='Packages Info',
-        compute='_calc_picking_packages_info')
+        compute='_compute_picking_packages_info')
     package_totals = fields.Many2many(
         comodel_name='stock.picking.package.total',
         relation='stock_picking_packages_total',
-        string='Total UL Packages Info', compute='_calc_picking_packages_info')
+        string='Total UL Packages Info',
+        compute='_compute_picking_packages_info')
     num_packages = fields.Integer(
-        string='# Packages', compute='_calc_picking_packages_info')
+        string='# Packages', compute='_compute_picking_packages_info')
 
     @api.multi
     def create_all_move_packages(self):
