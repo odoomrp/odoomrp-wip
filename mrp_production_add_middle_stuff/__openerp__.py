@@ -1,5 +1,4 @@
-
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -17,18 +16,22 @@
 #
 ##############################################################################
 {
-    'name': 'MRP Production add middle stuff',
-    'version': "1.0",
+    "name": "MRP Production add middle stuff",
+    "version": "8.0.1.0.0",
     "category": "Manufacturing",
+    "license": "AGPL-3",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    'contributors': ["Daniel Campos <danielcampos@avanzosc.es>",
-                     "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-                     "Ana Juaristi <ajuaristio@gmail.com>"],
-    'website': "http://www.odoomrp.com",
-    'depends': ["mrp"],
-    'data': ["wizard/addition_wizard_view.xml",
+    "contributors": [
+        "Daniel Campos <danielcampos@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Ana Juaristi <anajuaristi@avanzosc.es>",
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+    ],
+    "website": "http://www.odoomrp.com",
+    "depends": ["mrp"],
+    "data": ["wizard/addition_wizard_view.xml",
              "views/mrp_production_view.xml"],
-    'installable': True,
+    "installable": True,
 }

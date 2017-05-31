@@ -26,7 +26,8 @@
 		<menuitem id="menu_purchase_expense_type"
                   action="action_purchase_expense_type"
                   parent="menu_purchase_cost_control"
-                  sequence="11" />
+                  sequence="30"
+		/>
 
 		<record id="purchase_expense_type_tree" model="ir.ui.view">
 			<field name="name">purchase.expense.type.tree</field>

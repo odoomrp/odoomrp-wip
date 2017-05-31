@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="mrp_routing_workcenter_form_view_inh_quality" model="ir.ui.view">
+            <field name="name">mrp.routing.workcenter.form.view.inh.quality</field>
+            <field name="model">mrp.routing.workcenter</field>
+            <field name="inherit_id" ref="mrp_operations_extension.mrp_routing_workcenter_form_view_inh"/>
+            <field name="arch" type="xml">
+                <group string="Work centers" position="after">
+                    <group string="Quality test">
+                        <field name="qtemplate_ids" nolabel="1" />
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</openerp>

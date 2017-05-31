@@ -79,6 +79,7 @@ class MrpProduction(models.Model):
                     line.bom_id.product_tmpl_id.product_variant_ids.ids)
                 pack_line = map(
                     lambda x: (0, 0, {'product': x}), packs)
+                exist_prod += packs
                 pack_lines.extend(pack_line)
         self.write({'pack': pack_lines})
 

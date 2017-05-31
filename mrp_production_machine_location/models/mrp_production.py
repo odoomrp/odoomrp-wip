@@ -13,8 +13,8 @@ class MrpProduction(models.Model):
         for prod in self:
             workcenter_lines = prod.workcenter_lines.filtered(
                 lambda r: r.do_production)
-            workcenter_line = max(
-                workcenter_lines, key=lambda x: x.sequence)
+            workcenter_line =\
+                workcenter_lines.sorted(key=lambda x: x.sequence)[-1:]
             location = workcenter_line.workcenter_id.machine.location
             if location:
                 prod.move_created_ids.write({'location_dest_id': location.id})

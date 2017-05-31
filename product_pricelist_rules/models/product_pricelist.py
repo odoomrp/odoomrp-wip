@@ -31,11 +31,14 @@ class PricelistOffer(models.Model):
 class PricelistItem(models.Model):
     _inherit = 'product.pricelist.item'
 
-    pricelist = fields.Many2one(comodel_name='product.pricelist',
-                                related='price_version_id.pricelist_id',
-                                string='Pricelist', store=True)
+    pricelist = fields.Many2one(
+        comodel_name='product.pricelist', string='Pricelist', store=True,
+        related='price_version_id.pricelist_id', readonly=True,
+    )
     pricelist_type = fields.Selection(
-        string='Pricelist Type', related='pricelist.type', store=True)
+        string='Pricelist Type', related='pricelist.type', store=True,
+        readonly=True,
+    )
     offer = fields.Many2one(
         comodel_name='product.pricelist.item.offer', string='Offer')
     discount = fields.Float('Discount %',
