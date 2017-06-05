@@ -21,20 +21,22 @@
 ##############################################################################
 {
     "name": "Stock Quant Manual Assign Without Lock Lot",
-    "version": "1.0",
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
+    "version": "8.0.2.0.0",
+    "license": "AGPL-3",
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "contributors": [
-        "Ana Juaristi <ajuaristio@gmail.com>",
+        "Ana Juaristi <anajuarist@avanzosc.es>",
         "Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>",
         "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
-        ],
-    "category": "quant",
-    "depends": ['mrp_lock_lot',
-                'stock_quant_manual_assign',
-                ],
+    ],
+    "category": "Warehouse Management",
+    "depends": [
+        "stock_lock_lot",
+        "stock_quant_manual_assign",
+    ],
     "data": [],
     "installable": True,
     "auto_install": True,
