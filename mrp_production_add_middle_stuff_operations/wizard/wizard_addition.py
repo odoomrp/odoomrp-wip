@@ -1,5 +1,4 @@
-
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -43,17 +42,16 @@ class WizProductionProductLine(models.TransientModel):
             return self.env.context.get('active_id', False)
         return False
 
-    work_order = fields.Many2one('mrp.production.workcenter.line',
-                                 'Work Order',
-                                 default=_def_work_order_id)
-    production_id = fields.Many2one(
-        'mrp.production', 'Production Order', select=True,
-        default=_def_production_id)
+    work_order = fields.Many2one(
+        comodel_name='mrp.production.workcenter.line',
+        string='Work Order', default=_def_work_order_id)
+    production_id = fields.Many2one(default=_def_production_id)
 
-    def _prepare_product_addition(self, product, product_qty, production):
+    def _prepare_product_addition(
+            self, product, product_qty, product_uom, production):
         addition_vals = super(
             WizProductionProductLine, self)._prepare_product_addition(
-            product, product_qty, production)
+            product, product_qty, product_uom, production)
         if self.work_order:
             addition_vals['work_order'] = self.work_order.id
         return addition_vals

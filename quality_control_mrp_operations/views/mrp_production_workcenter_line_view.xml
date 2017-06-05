@@ -50,8 +50,11 @@
                         </button>
                     </div>
                     <group colspan="4" col="10" >
-                        <field name="required_test" colspan="2"/>
-                        <field name="qtemplate_id" colspan="4" attrs="{'invisible': [('required_test','=',False)]}"/>
+                        <separator string="Quality tests from routing" colspan="10" />
+                        <field name="routing_workcenter_qtemplate_ids" colspan="10" nolabel="1" />
+                        <separator string="Quality tests from operation" colspan="10" />
+                        <field name="required_test" colspan="4"/>
+                        <field name="qtemplate_id" colspan="6" attrs="{'invisible': [('required_test','=',False)]}"/>
                     </group>
                 </xpath>
                 <xpath expr="//field[@name='workcenter_lines']/tree/field[@name='workcenter_id']" position="before">
@@ -83,6 +86,9 @@
                 </button>
                  <field name="name" position="after">
                     <group colspan="4" col="10" >
+                        <separator string="Quality tests from routing" colspan="10" />
+                        <field name="routing_workcenter_qtemplate_ids" colspan="10" nolabel="1" />
+                        <separator string="Quality tests from operation" colspan="10" />
                         <field name="required_test" colspan="2"/>
                         <field name="qtemplate_id" colspan="4" attrs="{'invisible': [('required_test','=',False)]}"/>
                     </group>
