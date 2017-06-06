@@ -1,8 +1,6 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
-
+# -*- coding: utf-8 -*-
+# (c) 2016 Alfredo de la Fuente - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from openerp import models, fields, api
 
 
@@ -67,6 +65,12 @@ class StockQuantPackage(models.Model):
             record.pickings = self.env['stock.pack.operation'].search(
                 [('result_package_id', '=', record.id)]).mapped('picking_id')
 
+    @api.multi
+    def _compute_lots(self):
+        for record in self:
+            lots = record.mapped('quant_ids.lot_id')
+            record.lots = ' '.join(lots.mapped('name'))
+
     height = fields.Float(string='Height', help='The height of the package')
     width = fields.Float(string='Width', help='The width of the package')
     length = fields.Float(string='Length', help='The length of the package')
@@ -89,6 +93,7 @@ class StockQuantPackage(models.Model):
     pickings = fields.Many2many(
         comodel_name='stock.picking', string='Pickings',
         compute='_compute_pickings')
+    lots = fields.Char(string='Lots', compute='_compute_lots')
 
     @api.multi
     @api.onchange('ul_id')
