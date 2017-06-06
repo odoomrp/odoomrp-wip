@@ -40,3 +40,6 @@ class TestMrpProductVariants(TestProductVariant):
         res = self.production.product_id_change(self.variant.id, 50)
         self.assertTrue(res['value'].get('product_attribute_ids', False),
                         'Not attributes loaded')
+        res2 = self.production.onchange_product_qty(self.variant.id, 50)
+        self.assertFalse(res2['value'].get('product_attribute_ids', False),
+                         'Attributes loaded')
