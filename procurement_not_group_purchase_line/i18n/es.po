@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* procurement_not_group_purchase_line
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-13 10:21+0000\n"
+"PO-Revision-Date: 2015-07-13 12:23+0100\n"
+"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: procurement_not_group_purchase_line
+#: field:product.category,group_in_purchase:0
+msgid "Group in purchase"
+msgstr "Agrupar en compra"
+
+#. module: procurement_not_group_purchase_line
+#: help:product.category,group_in_purchase:0
+msgid "If the check is marked, running the procurement acts in a standard, adding the amount on line purchase order, but if it is not checked, a new line will be created in the purchase order."
+msgstr "Si el check está marcado, al ejecutar el abastecimiento actúa de forma estandar, sumando la cantidad en la línea del pedido de compra, pero si no está marcado, se creará una nueva línea en el pedido de compra."
+
+#. module: procurement_not_group_purchase_line
+#: model:ir.model,name:procurement_not_group_purchase_line.model_procurement_order
+msgid "Procurement"
+msgstr "Abastecimiento"
+
+#. module: procurement_not_group_purchase_line
+#: model:ir.model,name:procurement_not_group_purchase_line.model_product_category
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: procurement_not_group_purchase_line
+#: model:ir.model,name:procurement_not_group_purchase_line.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea pedido de compra"
+
