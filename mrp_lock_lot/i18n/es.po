@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mrp_lock_lot
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-11 14:02+0000\n"
+"PO-Revision-Date: 2014-12-11 15:03+0100\n"
+"Last-Translator: Alfredo <alfredodelafuente@avanzosc.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: mrp_lock_lot
+#: view:stock.production.lot:mrp_lock_lot.search_product_lot_filter_inh_locklot
+#: field:stock.production.lot,active:0
+msgid "Active"
+msgstr "Activo"
+
+#. module: mrp_lock_lot
+#: model:ir.model,name:mrp_lock_lot.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "Lote/Nº de serie"
+
+#. module: mrp_lock_lot
+#: view:stock.production.lot:mrp_lock_lot.search_product_lot_filter_inh_locklot
+msgid "Product"
+msgstr "Producto"
+
