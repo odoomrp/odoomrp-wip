@@ -11,7 +11,7 @@ class MrpRepair(models.Model):
 
     analytic_account = fields.Many2one(
         'account.analytic.account', domain=[('type', '!=', 'view')],
-        string='Analytic Account')
+        string='Analytic Account', copy=False)
 
     @api.multi
     def create_repair_cost(self):
