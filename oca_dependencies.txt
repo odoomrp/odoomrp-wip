@@ -5,6 +5,7 @@ crm https://github.com/OCA/crm
 account-analytic https://github.com/OCA/account-analytic
 manufacture https://github.com/OCA/manufacture
 sale-workflow https://github.com/OCA/sale-workflow
+stock-logistics-workflow https://github.com/OCA/stock-logistics-workflow
 purchase-workflow https://github.com/OCA/purchase-workflow
 product-attribute https://github.com/OCA/product-attribute
 bank-payment https://github.com/OCA/bank-payment
