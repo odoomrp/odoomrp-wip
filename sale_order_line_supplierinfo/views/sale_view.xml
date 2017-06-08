@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="sale_line_customerinfo_button">
+            <field name="name">sale_line_customerinfo_button</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="after">
+                    <button name="button_customerinfo" string="Product-Customer" type="object" icon="terp-stock_format-default" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
