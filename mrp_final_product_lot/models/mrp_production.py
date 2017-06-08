@@ -36,9 +36,9 @@ class MrpProduction(models.Model):
                     code = (production.manual_production_lot or
                             production.name or '')
                     if production.concatenate_lots_components:
-                        lots = wiz.mapped('consume_lines.lot_id')
-                        lots += production.mapped(
+                        lots = production.mapped(
                             'move_lines2.restrict_lot_id')
+                        lots += wiz.mapped('consume_lines.lot_id')
                         code = '-'.join(lots.mapped('name'))
                     vals = {'name': code,
                             'product_id': production.product_id.id}
