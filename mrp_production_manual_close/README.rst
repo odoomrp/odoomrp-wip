@@ -9,8 +9,9 @@ manually adding a new close button.
 Known issues / Roadmap
 ======================
 
-Warning, this button will complete the production for all defined product
-quantity and behaviors such operations if mrp_operations module is installed.
+When there are pending movements to finish production order, it will cancel all
+movements (including pending procurement orders) and will mark the production
+as done.
 
 Credits
 =======
