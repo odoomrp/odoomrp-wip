@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="account_invoice_additional_duedate_form_view">
+            <field name="name">account.invoice.additional.duedate.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="date_due" position="after">
+                    <field name="additional_date_due"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="account_invoice_sup_additional_duedate_form_view">
+            <field name="name">account.invoice.sup.additional.duedate.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <field name="date_due" position="after">
+                    <field name="additional_date_due"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="account_invoice_sup_additional_duedate_tree_view">
+            <field name="name">account.invoice.sup.additional.duedate.tree</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="date_due" position="after">
+                    <field name="additional_date_due"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
