@@ -1,22 +1,6 @@
-
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    Daniel Campos (danielcampos@avanzosc.es) Date: 15/09/2014
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
+# For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
 
 from openerp import models, fields, exceptions, api, _
@@ -29,60 +13,107 @@ class ProductPricelistLoad(models.Model):
     name = fields.Char('Load')
     date = fields.Date('Date:', readonly=True)
     file_name = fields.Char('File Name', readonly=True)
-    file_lines = fields.One2many('product.pricelist.load.line', 'file_load',
+    file_lines = fields.One2many('product.supplierinfo.load.line', 'file_load',
                                  'Product Price List Lines')
     fails = fields.Integer('Fail Lines:', readonly=True)
     process = fields.Integer('Lines to Process:', readonly=True)
-    supplier = fields.Many2one('res.partner')
+    supplier = fields.Many2one('res.partner', help="If there is no supplier "
+                               "defined in line this will be used")
+
+    def _get_supplierinfo_data(self, supplier_id, product_tmpl_id):
+        """ returns supplierinfo data
+        @param supplier: supplier
+        @param product_tmp: product template
+        @return: supplierinfo_id and pricelist_id in a dictionary
+        """
+        res = {}
+        if supplier_id and product_tmpl_id:
+            psupplinfo_obj = self.env['product.supplierinfo']
+            pricepinfo_obj = self.env['pricelist.partnerinfo']
+            psupplinfos = psupplinfo_obj.search(
+                [('name', '=', supplier_id),
+                 ('product_tmpl_id', '=', product_tmpl_id)])
+            if psupplinfos:
+                res = {'supplierinfo_id': psupplinfos[0].id}
+                priceinfo = pricepinfo_obj.search(
+                    ['suppinfo_id', '=', psupplinfos[0].id])
+                if priceinfo[0]:
+                    res['pricelist_id'] = priceinfo[0]
+        return res
 
     @api.multi
     def process_lines(self):
         for file_load in self:
             if not file_load.supplier:
                 raise exceptions.Warning(_("You must select a Supplier"))
+            partner_obj = self.env['res.partner']
             product_obj = self.env['product.product']
             psupplinfo_obj = self.env['product.supplierinfo']
             pricepinfo_obj = self.env['pricelist.partnerinfo']
             if not file_load.file_lines:
-                raise exceptions.Warning(_("There must be one line at least to"
-                                           " process"))
-            for line in file_load.file_lines:
-                # process fail lines
-                if line.fail:
-                    # search product code
-                    if line.code:
-                        product_lst = product_obj.search([('default_code', '=',
-                                                           line.code)])
-                        if product_lst:
-                            psupplinfo = psupplinfo_obj.create(
-                                {'name': file_load.supplier.id,
-                                 'product_tmpl_id':
-                                 product_lst[0].product_tmpl_id.id})
-                            pricepinfo_obj.create(
-                                {'suppinfo_id': psupplinfo.id,
-                                 'min_quantity': psupplinfo.min_qty,
-                                 'price': line.price})
-                            file_load.fails -= 1
-                            line.write(
-                                {'fail': False,
-                                 'fail_reason': _('Correctly Processed')})
-                        else:
-                            line.fail_reason = _('Product not found')
+                raise exceptions.Warning(
+                    _("There must be one line at least to process"))
+            for line in [x for x in file_load.file_lines if x.fail and x.code]:
+                # process fail lines and search product code
+                products = product_obj.search(
+                    [('default_code', '=', line.code)])
+                supplier = file_load.supplier
+                if line.supplier:
+                    supplier_lst = partner_obj.search(
+                        ['|', ('ref', '=', line.supplier),
+                         ('name', "=", line.supplier)])
+                    if supplier_lst:
+                        supplier = supplier_lst[0]
+                if products:
+                    supinfo_data = self._get_supplierinfo_data(
+                        supplier.id, products[0].product_tmpl_id.id)
+                    if 'suppinfo_id' in supinfo_data:  # update
+                        suppinfo = psupplinfo_obj.browse(
+                            supinfo_data['suppinfo_id'])
+                        suppinfo.sequence = line.sequence or None
+                        suppinfo.product_code = line.supplier_code or None
+                        suppinfo.product_name = line.info or None
+                        suppinfo.min_qty = line.min_qty or 1
+                        suppinfo.delay = line.delay or 1
+                        if 'pricelist_id' in supinfo_data:
+                            pricelist = pricepinfo_obj.browse(
+                                supinfo_data['pricelist_id'])
+                            pricelist.price = line.price
+                            pricelist.min_quantity = line.min_qty
+                    else:
+                        psupplinfo = psupplinfo_obj.create(
+                            {'name': supplier.id,
+                             'product_tmpl_id': products[0].product_tmpl_id.id,
+                             'sequence': line.sequence or None,
+                             'product_code': line.supplier_code or None,
+                             'product_name': line.info or None,
+                             'min_qty': line.min_qty,
+                             'delay': line.delay or None
+                             })
+                        pricepinfo_obj.create(
+                            {'suppinfo_id': psupplinfo.id,
+                             'min_quantity': psupplinfo.min_qty,
+                             'price': line.price})
+                    file_load.fails -= 1
+                    line.write({'fail': False,
+                                'fail_reason': _('Correctly Processed')})
+                else:
+                    line.fail_reason = _('Product not found')
         return True
 
 
-class ProductPricelistLoadLine(models.Model):
-    _name = 'product.pricelist.load.line'
+class ProductSupplierinfoLoadLine(models.Model):
+    _name = 'product.supplierinfo.load.line'
     _description = 'Product Price List Load Line'
 
+    supplier = fields.Char('Supplier')
     code = fields.Char('Product Code', required=True)
+    sequence = fields.Integer('Sequence')
+    supplier_code = fields.Char('Supplier Code')
     info = fields.Char('Product Description')
+    delay = fields.Integer('Delivery Lead Time')
     price = fields.Float('Product Price', required=True)
-    discount_1 = fields.Float('Product Discount 1')
-    discount_2 = fields.Float('Product Discount 2')
-    retail = fields.Float('Retail Price', required=True)
-    pdv1 = fields.Float('PDV1')
-    pdv2 = fields.Float('PDV2')
+    min_qty = fields.Float('Minimal Quantity')
     fail = fields.Boolean('Fail')
     fail_reason = fields.Char('Fail Reason')
     file_load = fields.Many2one('product.pricelist.load', 'Load',
