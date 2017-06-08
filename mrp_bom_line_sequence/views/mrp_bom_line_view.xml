@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="mrp_bom_tree_view_inh_bomlinesequence">
+            <field name="name">mrp.bom.tree.view.inh.bomlinesequence</field>
+            <field name="model">mrp.bom.line</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_tree_view" />
+            <field name="arch" type="xml">
+                <field name="sequence" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="mrp_bom_form_view_inh_bomlinesequence">
+            <field name="name">mrp.bom.form.view.inh.bomlinesequence</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree[@string='Components']/field[@name='sequence']" position="attributes">
+                    <attribute name="widget"></attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
