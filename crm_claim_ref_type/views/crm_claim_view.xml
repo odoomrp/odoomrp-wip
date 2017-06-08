@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_crm_case_claims_filter_inh_reftype" model="ir.ui.view">
+            <field name="name">view.crm.case.claims.filter.inh.reftype</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.view_crm_case_claims_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <separator/>
+                    <field name="ref" />
+                </field>
+                <filter string="Partner" position="after">
+                    <filter string="Reference" domain="[]" help="Reference" context="{'group_by':'ref'}"/>
+                </filter>
+            </field>
+        </record>
+    </data>
+</openerp>
+
