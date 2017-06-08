@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="load_purchases_on_budget_purchase_form_view">
+            <field name="name">load.purchases.on.budget.purchase.form</field>
+            <field name="model">load.purchases.on.budget</field>
+            <field name="arch" type="xml">
+                <form string="Load Purchases">
+                    <group colspan="4" col="4">
+                        <field name="partner_id" select="1" colspan="4"
+                        context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}"
+                        domain="[('supplier','=',True)]"
+                        required="1" readonly="1"/>
+                        <field name="purchase_id" readonly="1"/>
+                        <field name="budget_id" required="1"/>
+                        <field name="date_from" select="1" required="1"
+                        readonly="1"/>
+                        <field name="date_to" select="1" required="1"
+                        readonly="1"/>
+                        <field name="product_categ_id" select="1"/>
+                        <field name="product_tmpl_id" select="1"/>
+                        <field name="product_id" select="1" colspan="4"/>
+                    </group>
+                    <footer>
+                        <button name="load_purchases" type="object" 
+                        string="Load" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link"
+                        special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="load_purchases_on_budget_budget_form_view">
+            <field name="name">load.purchases.on.budget.budget.form</field>
+            <field name="model">load.purchases.on.budget</field>
+            <field name="arch" type="xml">
+                <form string="Load Purchases">
+                    <group colspan="4" col="4">
+                        <field name="partner_id" select="1" colspan="4"
+                        context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}"
+                        domain="[('supplier','=',True)]"
+                        required="1"/>
+                        <field name="purchase_id"/>
+                        <field name="budget_id" required="1" readonly="1"/>
+                        <field name="date_from" select="1" required="1"/>
+                        <field name="date_to" select="1" required="1"/>
+                        <field name="product_categ_id" select="1"/>
+                        <field name="product_tmpl_id" select="1"/>
+                        <field name="product_id" select="1" colspan="4"/>
+                    </group>
+                    <footer>
+                        <button name="load_purchases" type="object" 
+                        string="Load" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link"
+                        special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>
