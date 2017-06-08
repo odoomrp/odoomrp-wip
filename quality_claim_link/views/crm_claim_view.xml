@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="crm_case_claims_tree_view_inh_claimlink" model="ir.ui.view">
+            <field name="name">crm.case.claims.tree.view.inh.claimlink</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="categ_id" position="after">
+                    <field name="inspection_id" />
+                </field>
+            </field>
+        </record>
+        <record id="crm_case_claims_form_view_inh_claimlink" model="ir.ui.view">
+            <field name="name">crm.case.claims.form.view.inh.claimlink</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view"/>
+            <field name="arch" type="xml">
+                <field name="date_deadline" position="after">
+                    <field name="inspection_id" />
+                </field>
+            </field>
+        </record>
+        <record id="view_crm_case_claims_filter_inh_claimlink" model="ir.ui.view">
+            <field name="name">view.crm.case.claims.filter.inh.claimlink</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.view_crm_case_claims_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <separator/>
+                    <field name="inspection_id" />
+                </field>
+                <filter string="Partner" position="after">
+                    <filter string="Inspection" domain="[]" help="Inspection" context="{'group_by':'inspection_id'}"/>
+                </filter>
+            </field>
+        </record>
+    </data>
+</openerp>
+

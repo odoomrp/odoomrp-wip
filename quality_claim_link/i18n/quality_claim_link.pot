@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* quality_claim_link
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-12 12:10+0000\n"
+"PO-Revision-Date: 2015-01-12 12:10+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: quality_claim_link
+#: field:qc.inspection,automatic_claims:0
+#: field:qc.test,automatic_claims:0
+msgid "Automatic Claims"
+msgstr ""
+
+#. module: quality_claim_link
+#: model:ir.model,name:quality_claim_link.model_crm_claim
+msgid "Claim"
+msgstr ""
+
+#. module: quality_claim_link
+#: view:qc.inspection:quality_claim_link.qc_inspection_form_view_inh_claimlink
+#: field:qc.inspection,claims:0
+msgid "Claims"
+msgstr ""
+
+#. module: quality_claim_link
+#: model:ir.model,name:quality_claim_link.model_qc_inspection
+msgid "Email Thread"
+msgstr ""
+
+#. module: quality_claim_link
+#: view:crm.claim:quality_claim_link.view_crm_case_claims_filter_inh_claimlink
+#: field:crm.claim,inspection_id:0
+msgid "Inspection"
+msgstr ""
+
+#. module: quality_claim_link
+#: view:qc.inspection:quality_claim_link.qc_inspection_form_view_inh_claimlink
+msgid "Notes"
+msgstr ""
+
+#. module: quality_claim_link
+#: view:crm.claim:quality_claim_link.view_crm_case_claims_filter_inh_claimlink
+msgid "Partner"
+msgstr ""
+
+#. module: quality_claim_link
+#: model:ir.model,name:quality_claim_link.model_qc_test
+msgid "Quality control test"
+msgstr ""
+
+#. module: quality_claim_link
+#: code:addons/quality_claim_link/models/qc_inspection.py:32
+#, python-format
+msgid "Quality test %s for product %s unsurpassed"
+msgstr ""
+
