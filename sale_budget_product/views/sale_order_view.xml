@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    		 <record model="ir.ui.view" id="sale_load_budget_form_view">
+                <field name="name">sale.order.load.budget.form</field>
+                <field name="model">sale.order</field>
+                <field name="type">form</field>
+                <field name="inherit_id" ref="sale.view_order_form"/>
+                <field name="arch" type="xml">
+                    <button name="invoice_cancel" position="after">
+                        <button name="load_lines_on_budget" string="Load on budget"
+                        type="object"/>
+                    </button>
+                </field>
+            </record>
+    </data>
+</openerp>

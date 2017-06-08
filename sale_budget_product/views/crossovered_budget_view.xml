@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="crossovered_budget_load_sales_view">
+            <field name="name">crossovered.budget.load.sales.form</field>
+            <field name="model">crossovered.budget</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_budget.crossovered_budget_view_form"/>
+            <field name="arch" type="xml">
+                <button name="cancel" position="after">
+                    <button name="load_sales_on_budget"
+                    type="object" string="Load Sales"/>
+                </button>
+            </field>
+        </record>
+    </data>
+</openerp>
