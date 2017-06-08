@@ -1,0 +1,236 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_budget_product
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-10 08:33+0000\n"
+"PO-Revision-Date: 2014-11-10 09:33+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: account_budget_product
+#: field:account.budget.product,account_id:0
+msgid "Account"
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,analytic_account:0
+msgid "Analytic Account"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_search_view
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_search_view
+msgid "Analytic account"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_search_view
+#: field:account.budget.product,crossovered_budget_id:0
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_search_view
+msgid "Budget"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_search_view
+#: field:account.budget.product,budget_line_id:0
+#: model:ir.model,name:account_budget_product.model_crossovered_budget_lines
+msgid "Budget Line"
+msgstr ""
+
+#. module: account_budget_product
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_search_view
+msgid "Budget Lines"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_search_view
+#: field:account.budget.product,product_categ_id:0
+msgid "Category"
+msgstr ""
+
+#. module: account_budget_product
+#: help:account.budget.product,prod_type:0
+msgid ""
+"Consumable: Will not imply stock management for this product. \n"
+"Stockable product: Will imply stock management for this product."
+msgstr ""
+
+#. module: account_budget_product
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_ava_view
+msgid "Copy"
+msgstr ""
+
+#. module: account_budget_product
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_ava_view
+msgid "Create all procurements"
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: account_budget_product
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_ava_view
+msgid "Crossovered Budget Line"
+msgstr ""
+
+#. module: account_budget_product
+#: model:ir.actions.act_window,name:account_budget_product.action_crossovered_budget_line_ava
+#: model:ir.ui.menu,name:account_budget_product.budget_line_menu
+msgid "Crossovered Budget Lines"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_search_view
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_search_view
+msgid "Date"
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,date_start:0
+msgid "Date Start"
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,date_end:0
+msgid "Date end"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_form_view
+msgid "Expected Data"
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,expected_qty:0
+msgid "Expected Qty"
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,expected_subtotal:0
+msgid "Expected subtotal"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_search_view
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_search_view
+msgid "Group By..."
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,id:0
+msgid "ID"
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_budget_product
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_ava_view
+msgid "Load Accounts"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_search_view
+#: field:account.budget.product,partner_id:0
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_search_view
+#: field:crossovered.budget.lines,partner_id:0
+msgid "Partner"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_search_view
+#: field:account.budget.product,period_id:0
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_search_view
+msgid "Period"
+msgstr ""
+
+#. module: account_budget_product
+#: field:crossovered.budget.lines,period_id:0
+msgid "Periodo"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_search_view
+#: field:account.budget.product,product_id:0
+msgid "Product"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_form_view
+#: view:account.budget.product:account_budget_product.product_budget_line_search_view
+#: view:account.budget.product:account_budget_product.product_budget_line_tree_view
+#: view:account.budget.product:account_budget_product.product_budget_line_tree_view_ext
+#: model:ir.actions.act_window,name:account_budget_product.act_product_budget_line
+#: model:ir.ui.menu,name:account_budget_product.prod_budget_line_menu
+msgid "Product Budget Line"
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,categ_id:0
+msgid "Product Category"
+msgstr ""
+
+#. module: account_budget_product
+#: field:crossovered.budget.lines,product_budget_ids:0
+msgid "Product budget lines"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_search_view
+#: field:account.budget.product,prod_type:0
+msgid "Product type"
+msgstr ""
+
+#. module: account_budget_product
+#: help:account.budget.product,categ_id:0
+msgid "Select category for the current product"
+msgstr ""
+
+#. module: account_budget_product
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_ava_view
+msgid "Split"
+msgstr ""
+
+#. module: account_budget_product
+#: view:crossovered.budget.lines:account_budget_product.crossovered_budget_lines_ava_view
+msgid "The date range is greater than one month"
+msgstr ""
+
+#. module: account_budget_product
+#: field:account.budget.product,expected_price:0
+msgid "Unit price"
+msgstr ""
+
+#. module: account_budget_product
+#: field:crossovered.budget.lines,warehouse_id:0
+msgid "Warehouse"
+msgstr ""
+
+#. module: account_budget_product
+#: view:account.budget.product:account_budget_product.product_budget_line_tree_view
+#: view:account.budget.product:account_budget_product.product_budget_line_tree_view_ext
+msgid "⇒ Request Procurement"
+msgstr ""
+
