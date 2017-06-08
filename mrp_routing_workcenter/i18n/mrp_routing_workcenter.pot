@@ -1,0 +1,60 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mrp_routing_workcenter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-13 08:30+0000\n"
+"PO-Revision-Date: 2014-11-13 08:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_routing_workcenter
+#: field:mrp.workcenter,capacity_per_cycle_min:0
+msgid "Capacity per Cycle Min."
+msgstr ""
+
+#. module: mrp_routing_workcenter
+#: help:mrp.workcenter,capacity_per_cycle_min:0
+msgid "Capacity per cycle minimum."
+msgstr ""
+
+#. module: mrp_routing_workcenter
+#: model:ir.model,name:mrp_routing_workcenter.model_mrp_production
+msgid "Manufacturing Order"
+msgstr ""
+
+#. module: mrp_routing_workcenter
+#: code:addons/mrp_routing_workcenter/models/mrp.py:37
+#, python-format
+msgid "Product QTY < Capacity per cycle minimun, or > Capacity per cycle maximun"
+msgstr ""
+
+#. module: mrp_routing_workcenter
+#: model:ir.model,name:mrp_routing_workcenter.model_mrp_routing
+msgid "Routing"
+msgstr ""
+
+#. module: mrp_routing_workcenter
+#: code:addons/mrp_routing_workcenter/models/mrp.py:36
+#, python-format
+msgid "Warning!"
+msgstr ""
+
+#. module: mrp_routing_workcenter
+#: model:ir.model,name:mrp_routing_workcenter.model_mrp_workcenter
+#: field:mrp.routing,workcenter:0
+msgid "Work Center"
+msgstr ""
+
+#. module: mrp_routing_workcenter
+#: view:mrp.production:mrp_routing_workcenter.mrp_production_form_view_inh_mrproutingworkcenter
+msgid "product_qty_change_mrp_production(product_qty, routing_id)"
+msgstr ""
+
