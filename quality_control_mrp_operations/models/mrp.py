@@ -109,7 +109,6 @@ class MrpProductionWorkcenterLine(models.Model):
     def create_quality_test(self, qtemplate):
         vals = {
             'workcenter_line_id': self.id,
-            'production_id': self.production_id.id,
             'test': qtemplate.id,
         }
         if qtemplate.object_id:
