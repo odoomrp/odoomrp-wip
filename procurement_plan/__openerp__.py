@@ -21,6 +21,7 @@
                 ],
     "data": ['data/sequence.xml',
              'security/procurement_plan.xml',
+             'security/ir.model.access.csv',
              'wizard/wiz_import_procurement_from_plan_view.xml',
              'wizard/wiz_load_sale_from_plan_view.xml',
              'wizard/wiz_load_purchase_from_plan_view.xml',
