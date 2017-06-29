@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="stock_planning_tree_view_inh_mrp" >
+            <field name="name">stock.planning.tree.view.inh.mrp</field>
+            <field name="model">stock.planning</field>
+            <field name="inherit_id" ref="stock_planning.stock_planning_tree_view" />
+            <field name="arch" type="xml">
+                <field name="incoming_in_po" position="after">
+                    <field name="incoming_in_mo" string="Incoming in MO"/>
+                </field>
+                <field name="purchases" position="after">
+                    <field name="productions" invisible="1"/>
+                </field>
+                <button name="show_purchases" position="after">
+	                <button string="Show MRP productions" name="show_productions"
+	                        type="object" icon="terp-sale" 
+	                        attrs="{'invisible':[('productions', '=', [])]}"/>
+                </button>
+            </field>
+        </record>
+    </data>
+</openerp>
