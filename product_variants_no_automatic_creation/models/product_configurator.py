@@ -40,7 +40,7 @@ class ProductConfigurator(models.AbstractModel):
         # First, empty current list
         self.product_attribute_ids = [
             (2, x.id) for x in self.product_attribute_ids]
-                if not self.env.context.get('not_reset_product'):
+        if not self.env.context.get('not_reset_product'):
             self.product_id = False
         attribute_list = []
         for attribute_line in self.product_tmpl_id.attribute_line_ids:
