@@ -40,20 +40,17 @@ class ProductConfigurator(models.AbstractModel):
         # First, empty current list
         self.product_attribute_ids = [
             (2, x.id) for x in self.product_attribute_ids]
-        if not self.product_tmpl_id.attribute_line_ids:
-            self.product_id = self.product_tmpl_id.product_variant_ids
-        else:
-            if not self.env.context.get('not_reset_product'):
-                self.product_id = False
-            attribute_list = []
-            for attribute_line in self.product_tmpl_id.attribute_line_ids:
-                attribute_list.append({
-                    'attribute_id': attribute_line.attribute_id.id,
-                    'product_tmpl_id': self.product_tmpl_id.id,
-                    'owner_model': self._name,
-                    'owner_id': self.id,
-                })
-            self.product_attribute_ids = [(0, 0, x) for x in attribute_list]
+                if not self.env.context.get('not_reset_product'):
+            self.product_id = False
+        attribute_list = []
+        for attribute_line in self.product_tmpl_id.attribute_line_ids:
+            attribute_list.append({
+                'attribute_id': attribute_line.attribute_id.id,
+                'product_tmpl_id': self.product_tmpl_id.id,
+                'owner_model': self._name,
+                'owner_id': self.id,
+            })
+        self.product_attribute_ids = [(0, 0, x) for x in attribute_list]
         # Needed because the compute method is not triggered
         self.product_attribute_ids._compute_possible_value_ids()
         # Restrict product possible values to current selection
