@@ -27,6 +27,8 @@ class MrpProduction(models.Model):
         res = self.product_id_change(product_id, product_qty=product_qty)
         if res['value'].get('product_attribute_ids'):
             del res['value']['product_attribute_ids']
+        if 'product_uom' in res['value']:
+            del res['value']['product_uom']
         return res
 
     @api.multi
