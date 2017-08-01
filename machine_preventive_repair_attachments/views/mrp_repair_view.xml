@@ -9,7 +9,7 @@
                 <data>
                     <field name="guarantee_limit" position="after">
                         <button name="show_attachments" type="object" string="View attachments" icon="gtk-open"
-                        attrs="{'invisible':[('preventive','=', False)]}"/>
+                        attrs="{'invisible':[('preventive','=', False)]}" colspan="4"/>
                     </field>
                 </data>
             </field>
