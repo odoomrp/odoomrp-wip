@@ -22,7 +22,7 @@
                         <field name="name" />
                         <field name="company" invisible="1"/>
                         <field name="location" />
-                        <field name="product" domain="[('machine_ok','=',True)]" />
+                        <field name="product" domain="[('machine_ok','=',True), ('machines', '=', False)]" />
                         <field name="serial_char" attrs="{'invisible':[('product','!=', False)]}"/>
                         <field name="serial" attrs="{'invisible':[('product','=', False)]}"/>
                     </group>
