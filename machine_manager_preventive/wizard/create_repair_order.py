@@ -51,7 +51,8 @@ class PreventiveRepairOrder(models.TransientModel):
                       'internal_notes': description,
                       'invoice_method': invoice_method,
                       'partner_id': partner_id,
-                      'partner_invoice_id': inv_address_id
+                      'partner_invoice_id': inv_address_id,
+                      'lot_id': machine.serial.id,
                       }
         return order_vals
 
@@ -60,7 +61,7 @@ class PreventiveRepairOrder(models.TransientModel):
         prev_op_obj = self.env['preventive.machine.operation']
         rep_line_obj = self.env['mrp.repair.line']
         move_obj = self.env['stock.move']
-        repair_obj = self.env['mrp.repair']
+        repairs = repair_obj = self.env['mrp.repair']
         multiple = False
         if len(self.env.context['active_ids']) > 1:
             multiple = True
@@ -83,9 +84,11 @@ class PreventiveRepairOrder(models.TransientModel):
                     raise exceptions.Warning(
                         _('There is no product defined for current machine'))
             product = machine.product
-            repair_lst = repair_obj.search(
-                [('product_id', '=', machine.product.id),
-                 ('state', 'in', ('draft', 'confirmed', 'ready'))])
+            condition = [('idmachine', '=', machine.id),
+                         ('state', 'in', ('draft', 'confirmed', 'ready'))]
+            if machine.serial:
+                condition += [('lot_id', '=', machine.serial.id)]
+            repair_lst = repair_obj.search(condition)
             if not repair_lst:
                 location_from = self.location_id
                 location_to = self.location_dest_id
@@ -101,8 +104,10 @@ class PreventiveRepairOrder(models.TransientModel):
                     self.invoice_address.id, self.invoice_method, machine,
                     [op_pmo.id], op_pmo.opdescription)
                 repair = repair_obj.create(repair_values)
+                repairs += repair
             else:
                 repair = repair_lst[0]
+                repairs += repair
                 if not repair.preventive:
                     repair.preventive = True
                 repair.preventive_operations = [op_pmo.id]
@@ -131,6 +136,5 @@ class PreventiveRepairOrder(models.TransientModel):
             value['res_id'] = int(repair.id)
             value['view_mode'] = 'form,tree'
         else:
-            value['domain'] = (u'{}{}{}'.format(
-                "[('id','in',[", ','.join(map(str, [repair.id])), "])]"))
+            value['domain'] = [('id', 'in', repairs.ids)]
         return value
