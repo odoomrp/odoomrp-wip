@@ -58,7 +58,8 @@ class PreventiveMachineOperation(models.Model):
         string='Cycles', compute="_compute_next_cycles",
         help="Cycles of the machine for next operation.")
     nextdate = fields.Date(string='Date', compute="_compute_next_date",
-                           help="Expected date for next operation.")
+                           help="Expected date for next operation.",
+                           store=True)
     hours_qty = fields.Float(
         string='Quantity Hours', required=False,
         help="Expected time for execution the operation. hh:mm")
