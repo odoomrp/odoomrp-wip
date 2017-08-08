@@ -38,6 +38,7 @@
                     </group>
                     <notebook colspan="4">
                         <page string="Preventive Info">
+                            <separator string="Preventive Operation list and material" colspan="4" />
                             <field name="ope_material" editable="bottom"
                                 nolabel="1" colspan="4" />
                             <separator

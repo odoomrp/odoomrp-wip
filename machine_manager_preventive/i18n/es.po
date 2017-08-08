@@ -540,6 +540,11 @@ msgstr "Operación preventiva de máquina"
 
 #. module: machine_manager_preventive
 #: view:preventive.master:machine_manager_preventive.ope_master_form_view
+msgid "Preventive Operation list and material"
+msgstr "Listas de operaciones preventivas y su material"
+
+#. module: machine_manager_preventive
+#: view:preventive.master:machine_manager_preventive.ope_master_form_view
 msgid "Machine list for the preventive operations"
 msgstr "Lista de máquinas para operaciones preventivas"
 

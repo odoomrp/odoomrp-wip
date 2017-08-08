@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) 2015 Daniel Campos <danielcampos@avanzosc.es> - Avanzosc S.L.
+# Copyright 2015 Daniel Campos - Avanzosc S.L.
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 {
@@ -25,7 +25,9 @@
              "views/preventive_machine_operation_view.xml",
              "views/mrp_repair_view.xml"],
     "demo": [
+        "demo/machinery_demo.xml",
         "demo/preventive_master_demo.xml",
+        "demo/preventive_machine_operation.xml",
     ],
     "installable": True
 }
