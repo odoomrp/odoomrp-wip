@@ -2,16 +2,36 @@
 <openerp>
     <data>
         <!--
-            preventive operations
+            preventive operations types
         -->
         <record id="master_type_1" model="preventive.master.type">
             <field name="name">PC Hardware Update</field>
+            <field name="master_type">Improvement</field>
+        </record>
+        <record id="master_type_2" model="preventive.master.type">
+            <field name="name">HDD Data testing</field>
             <field name="master_type">Preventive</field>
         </record>
+        <record id="master_type_3" model="preventive.master.type">
+            <field name="name">Cleanig</field>
+            <field name="master_type">Preventive</field>
+        </record>
+         <!--
+            preventive master operation
+        -->
+        <record id="preventive_master_1" model="preventive.master">
+            <field name="name">PC preventive op. master</field>
+            <field name="pmo_type" ref="master_type_1"/>
+            <field name="machinemodel" ref="machine_manager.machine_model_1"/>
+            <field name="machinery_ids" eval="[(6,0,[ref('machine_manager.machinery_1'), ref('machinery_2')])]"/>
+        </record>
+         <!--
+            preventive operations
+        -->
         <record id="preventive_operation_type_1" model="preventive.operation.type">
-            <field name="name">Preventive OP.1</field>
-            <field name="ref">Prev. OP1</field>
-            <field name="update_preventive">before_repair</field>
+            <field name="name">Hardware Update</field>
+            <field name="ref">HW-UP</field>
+            <field name="update_preventive">after_repair</field>
             <field name="basedoncy">True</field>
             <field name="cycles">100</field>
             <field name="margin_cy1">-20</field>
@@ -23,17 +43,12 @@
             <field name="interval_unit1">day</field>
             <field name="margin_fre2">2</field>
             <field name="interval_unit2">day</field>
-            <field name="description">Description of the work to be done on the operation</field>
+            <field name="description">Description of the hardware update</field>
             <field name="hours_qty">2</field>
         </record>
-        <record id="preventive_master_1" model="preventive.master">
-            <field name="name">Preventive master_1</field>
-            <field name="pmo_type" ref="master_type_1"/>
-            <field name="machinemodel" ref="machine_manager.machine_model_1"/>
-            <field name="machinery_ids" eval="[(6,0,[ref('machine_manager.machinery_1')])]"/>
-        </record>
+
         <record id="preventive_operation_matmatch_1" model="preventive.operation.matmach">
-            <field name="name">Preventive OP.1</field>
+            <field name="name">Hardware Update</field>
             <field name="optype_id" ref="preventive_operation_type_1"/>
             <field name="opmaster" ref="preventive_master_1"/>
             <field name="description">Description of the preventive operation material</field>
@@ -48,6 +63,43 @@
             <field name="op_machi_mat" ref="preventive_operation_matmatch_1"/>
             <field name="product_id"  ref="product.product_product_17"/>
             <field name="product_uom_qty">2</field>
+             <field name="product_uom" ref="product.product_uom_unit"/>
+        </record>
+        <record id="preventive_operation_material_3" model="preventive.operation.material">
+            <field name="op_machi_mat" ref="preventive_operation_matmatch_1"/>
+            <field name="product_id"  ref="product.product_product_42"/>
+            <field name="product_uom_qty">1</field>
+             <field name="product_uom" ref="product.product_uom_unit"/>
+        </record>
+
+        <record id="preventive_operation_type_2" model="preventive.operation.type">
+            <field name="name">Hardware cleaning</field>
+            <field name="ref">HW-CL</field>
+            <field name="update_preventive">before_repair</field>
+            <field name="basedontime">True</field>
+            <field name="frequency">6</field>
+            <field name="interval_unit">mon</field>
+            <field name="margin_fre1">-2</field>
+            <field name="interval_unit1">day</field>
+            <field name="description">Description of cleaning</field>
+            <field name="hours_qty">1</field>
+        </record>
+        <record id="preventive_operation_matmatch_2" model="preventive.operation.matmach">
+            <field name="name">Hardware cleaning</field>
+            <field name="optype_id" ref="preventive_operation_type_2"/>
+            <field name="opmaster" ref="preventive_master_1"/>
+            <field name="description">Description of the preventive operation material</field>
+        </record>
+        <record id="preventive_operation_material_4" model="preventive.operation.material">
+            <field name="op_machi_mat" ref="preventive_operation_matmatch_2"/>
+            <field name="product_id"  ref="product.product_product_38"/>
+            <field name="product_uom_qty">1</field>
+             <field name="product_uom" ref="product.product_uom_unit"/>
+        </record>
+        <record id="preventive_operation_material_5" model="preventive.operation.material">
+            <field name="op_machi_mat" ref="preventive_operation_matmatch_2"/>
+            <field name="product_id"  ref="product_product_clean_spray"/>
+            <field name="product_uom_qty">1</field>
              <field name="product_uom" ref="product.product_uom_unit"/>
         </record>
     </data>

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-# (c) 2016 Daniel Campos <danielcampos@avanzosc.es> - Avanzosc S.L.
+# Copyright 2016 Daniel Campos - Avanzosc S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api, _
+from openerp.exceptions import ValidationError, Warning as UserError
 from dateutil.relativedelta import relativedelta
 
 
@@ -58,7 +59,8 @@ class PreventiveMachineOperation(models.Model):
         string='Cycles', compute="_compute_next_cycles",
         help="Cycles of the machine for next operation.")
     nextdate = fields.Date(string='Date', compute="_compute_next_date",
-                           help="Expected date for next operation.")
+                           help="Expected date for next operation.",
+                           store=True)
     hours_qty = fields.Float(
         string='Quantity Hours', required=False,
         help="Expected time for execution the operation. hh:mm")
@@ -101,7 +103,7 @@ class PreventiveMachineOperation(models.Model):
         for record in self:
             if record.first_margin and record.second_margin and(
                     record.first_margin > record.second_margin):
-                raise exceptions.ValidationError(
+                raise ValidationError(
                     _("First margin must be before second"))
 
     @api.constrains('margin_fre1', 'interval_unit1', 'margin_fre2',
@@ -115,7 +117,7 @@ class PreventiveMachineOperation(models.Model):
                 margin2 = self.get_interval_date(date, record.margin_fre2,
                                                  record.interval_unit2)
                 if margin1 > margin2:
-                    raise exceptions.ValidationError(
+                    raise ValidationError(
                         _("First margin must be before second"))
 
     @api.one
@@ -214,7 +216,6 @@ class PreventiveMachineOperation(models.Model):
         attachments = document_obj.search(
             [('res_model', '=', 'preventive.operation.type'),
              ('res_id', '=', self.opname_omm.optype_id.id)])
-        attachmen_lst = attachments.ids
         search_view = self.env.ref('base.view_attachment_search')
         idform = self.env.ref('base.view_attachment_form')
         idtree = self.env.ref('base.view_attachment_tree')
@@ -229,8 +230,7 @@ class PreventiveMachineOperation(models.Model):
             'view_id': kanban.id,
             'type': 'ir.actions.act_window',
             'target': 'current',
-            'domain': "[('id','in',[" +
-            ','.join(map(str, attachmen_lst)) + "])]",
+            'domain': [('id', 'in', attachments.ids)],
             'context': self.env.context,
             }
 
@@ -247,7 +247,7 @@ class PreventiveMachineOperation(models.Model):
     def create_repair_order(self):
         self.ensure_one()
         if self.active_repair_order is False:
-            raise exceptions.Warning(
+            raise UserError(
                 _('Repair order done, please refresh view'))
         preventive_repair_obj = self.env['preventive.repair.order']
         preventive_repair_obj.with_context(
