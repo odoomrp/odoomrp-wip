@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) 2016 Daniel Campos <danielcampos@avanzosc.es> - Avanzosc S.L.
+# Copyright 2016 Daniel Campos - Avanzosc S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, fields, api
@@ -95,37 +95,15 @@ class PreventiveList(models.TransientModel):
 
     @api.multi
     def _default_prev_list(self):
-        data = []
-        machine_operations = self.env['preventive.machine.operation']
-        if 'machi_prevs' in self.env.context:
-            for prev_id in self.env.context['machi_prevs']:
-                machi_pre = machine_operations.browse(prev_id)
-                res = {
-                    'name': machi_pre.name,
-                    'opdescription': machi_pre.opdescription,
-                    'machine': machi_pre.machine.id,
-                    'cycles': machi_pre.cycles,
-                    'first_margin': machi_pre.first_margin,
-                    'second_margin': machi_pre.second_margin,
-                    'frequency': machi_pre.frequency,
-                    'interval_unit': machi_pre.interval_unit,
-                    'margin_fre1': machi_pre.margin_fre1,
-                    'interval_unit1': machi_pre.interval_unit1,
-                    'margin_fre2': machi_pre.margin_fre2,
-                    'interval_unit2': machi_pre.interval_unit2,
-                    'nextdate': machi_pre.nextdate,
-                    'nextcycles': machi_pre.nextcycles,
-                    'last_hours_qty': machi_pre.last_hours_qty,
-                    'hours_qty': machi_pre.hours_qty
-                    }
-                data.append(res)
-        return data
+        prev_op_ids = 'machi_prevs' in self.env.context and \
+            self.env.context['machi_prevs'] or []
+        return [(6, 0, prev_op_ids)]
 
     @api.multi
     def _default_op_count(self):
         return len(self.env.context.get('machi_prevs', 0))
 
-    machi_prevs = fields.One2many(
+    machi_prevs = fields.Many2many(
         comodel_name='preventive.machine.operation', inverse_name='machine',
         string='Machine Preventive Operations', default=_default_prev_list,
         readonly=True)

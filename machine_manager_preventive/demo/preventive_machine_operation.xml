@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="preventive_machine_operation_1" model="preventive.machine.operation">
+            <field name="name">PC Hardware Update-Hardware Update-Personal Computer-Personal PC</field>
+            <field name="opdescription">Description of the preventive operation material</field>
+            <field name="machine" ref="machine_manager.machinery_1"/>
+            <field name="opname_omm" ref="preventive_operation_matmatch_1"/>
+            <field name="frequency">1</field>
+            <field name="interval_unit">year</field>
+            <field name="first_margin">-20</field>
+            <field name="second_margin">20</field>
+            <field name="margin_fre1">-2</field>
+            <field name="interval_unit1">day</field>
+            <field name="margin_fre2">2</field>
+            <field name="interval_unit2">day</field>
+            <field name="hours_qty">2</field>
+            <field name="last_hours_qty">2</field>
+            <field name="cycles">100</field>
+            <field name="lastcycles">90</field>
+            <field name="lastdate">01/01/2017</field>
+            <field name="check_al1">True</field>
+            <field name="check_al2">True</field>
+        </record>
+        <record id="preventive_machine_operation_2" model="preventive.machine.operation">
+            <field name="name">PC Hardware Update-Hardware cleaning-Personal Computer-Personal PC</field>
+            <field name="opdescription">Description of the preventive operation material</field>
+            <field name="machine" ref="machine_manager.machinery_1"/>
+            <field name="opname_omm" ref="preventive_operation_matmatch_2"/>
+            <field name="frequency">6</field>
+            <field name="interval_unit">mon</field>
+            <field name="margin_fre1">-1</field>
+            <field name="interval_unit1">day</field>
+            <field name="hours_qty">1</field>
+            <field name="last_hours_qty">1</field>
+            <field name="lastdate">01/01/2017</field>
+            <field name="check_al1">True</field>
+            <field name="alert">True</field>
+        </record>
+        <record id="preventive_machine_operation_3" model="preventive.machine.operation">
+            <field name="name">PC Hardware Update-Hardware cleaning-Personal Computer-Work Station</field>
+            <field name="opdescription">Description of the preventive operation material</field>
+            <field name="machine" ref="machinery_2"/>
+            <field name="opname_omm" ref="preventive_operation_matmatch_2"/>
+            <field name="frequency">6</field>
+            <field name="interval_unit">mon</field>
+            <field name="margin_fre1">-2</field>
+            <field name="interval_unit1">day</field>
+            <field name="hours_qty">1</field>
+            <field name="last_hours_qty">1</field>
+            <field name="lastdate">01/01/2017</field>
+            <field name="check_al1">True</field>
+            <field name="alert">True</field>
+        </record>
+    </data>
+</openerp>

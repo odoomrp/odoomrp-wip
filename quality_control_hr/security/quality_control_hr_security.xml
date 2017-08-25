@@ -35,7 +35,7 @@
         <record id="qc_rule_department_inspection" model="ir.rule">
             <field name="name">Department Inspections</field>
             <field ref="quality_control.model_qc_inspection" name="model_id"/>
-            <field name="domain_force">['|',('department','=',user.employee_ids[0].department_id.id),('department','=',False)]</field>
+            <field name="domain_force">['|',('department','=',user.employee_ids[:1].department_id.id),('department','=',False)]</field>
             <field name="groups" eval="[(4, ref('group_quality_control_department'))]"/>
         </record>
         <record id="qc_rule_all_inspection" model="ir.rule">
@@ -54,7 +54,7 @@
         <record id="qc_rule_department_inspection_line" model="ir.rule">
             <field name="name">Department Inspection Lines</field>
             <field ref="quality_control.model_qc_inspection_line" name="model_id"/>
-            <field name="domain_force">['|',('department','=',user.employee_ids[0].department_id.id),('department','=',False)]</field>
+            <field name="domain_force">['|',('department','=',user.employee_ids[:1].department_id.id),('department','=',False)]</field>
             <field name="groups" eval="[(4, ref('group_quality_control_department'))]"/>
         </record>
         <record id="qc_rule_all_inspection_line" model="ir.rule">

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="stock_planning_tree_view_inh_stockplanning_rule" >
+            <field name="name">stock.planning.tree.view.inh.stockplanning.rule</field>
+            <field name="model">stock.planning</field>
+            <field name="inherit_id" ref="stock_planning.stock_planning_tree_view" />
+            <field name="arch" type="xml">
+                <field name="rule_max_qty" position="after">
+                    <field name="custom_stock_planning_rule" invisible="1"/>
+                    <field name="custom_rule_min_qty" string="Customized rule min. qty"
+                        attrs="{'invisible':[('custom_stock_planning_rule', '=', False)]}"/>
+                    <field name="custom_rule_max_qty" string="Customized rule max. qty"
+                        attrs="{'invisible':[('custom_stock_planning_rule', '=', False)]}"/>
+                </field>
+                <field name="rule_max_qty" position="attributes">
+                    <attribute name="attrs">{'invisible':[('custom_stock_planning_rule','!=',False)]}</attribute>
+                </field>
+                <field name="rule_min_qty" position="attributes">
+                    <attribute name="attrs">{'invisible':[('custom_stock_planning_rule','!=',False)]}</attribute>
+                </field>
+             </field>
+        </record>
+    </data>
+</openerp>

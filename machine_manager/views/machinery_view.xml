@@ -24,7 +24,8 @@
                         <field name="location" />
                         <field name="product" domain="[('machine_ok','=',True)]" />
                         <field name="serial_char" attrs="{'invisible':[('product','!=', False)]}"/>
-                        <field name="serial" attrs="{'invisible':[('product','=', False)]}"/>
+                        <field name="serial" context="{'default_product_id': product}"
+                        attrs="{'invisible':[('product','=', False)]}" />
                     </group>
                     <separator string="Analysis Information"
                         colspan="4" />

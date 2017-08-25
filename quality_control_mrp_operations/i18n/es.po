@@ -1,21 +1,20 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * quality_control_mrp_operations
-# 
-# Translators:
+# 	* quality_control_mrp_operations
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:44+0000\n"
-"PO-Revision-Date: 2015-10-09 10:50+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-wip-8-0/language/es/)\n"
+"POT-Creation-Date: 2017-05-03 10:07+0000\n"
+"PO-Revision-Date: 2017-05-03 12:11+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. module: quality_control_mrp_operations
 #: view:mrp.production:quality_control_mrp_operations.mrp_production_quality_form_view
@@ -24,22 +23,43 @@ msgid "Create Test"
 msgstr "Crear Test"
 
 #. module: quality_control_mrp_operations
+#: field:mrp.production.workcenter.line,ope_tests:0
+msgid "Created inspections"
+msgstr "Inspecciones creadas"
+
+#. module: quality_control_mrp_operations
 #: code:addons/quality_control_mrp_operations/models/mrp.py:87
 #: code:addons/quality_control_mrp_operations/models/mrp.py:92
 #, python-format
 msgid "Error!"
-msgstr "Error!"
+msgstr "¡Error!"
+
+#. module: quality_control_mrp_operations
+#: code:addons/quality_control_mrp_operations/models/mrp.py:82
+#, python-format
+msgid "Error!, You must define the test template"
+msgstr "¡Error!, debe de definir la plantilla del test"
 
 #. module: quality_control_mrp_operations
 #: code:addons/quality_control_mrp_operations/models/mrp.py:160
 #, python-format
 msgid "Finalization Operation Error!"
+msgstr "¡Error de finalización de operación!"
+
+#. module: quality_control_mrp_operations
+#: code:addons/quality_control_mrp_operations/models/mrp.py:142
+#, python-format
+msgid ""
+"Finalization Operation Error!, There are quality tests in draft or approval "
+"pending state for this operation. Please finish or cancel them."
 msgstr ""
+"¡Error al finalizar la operación!, hay test de calidad en estado borrador o "
+"pendientes de aprobar para esta operación. Por favor termine o cancelelos."
 
 #. module: quality_control_mrp_operations
 #: model:ir.model,name:quality_control_mrp_operations.model_mrp_routing_operation
 msgid "MRP Routing Operation"
-msgstr "MRP Routing Operation"
+msgstr "MRP ruta operación"
 
 #. module: quality_control_mrp_operations
 #: view:qc.inspection:quality_control_mrp_operations.qc_inspection_search_view_operation
@@ -54,7 +74,19 @@ msgstr "Operación"
 #: code:addons/quality_control_mrp_operations/models/mrp.py:40
 #, python-format
 msgid "Operation Creation Error!"
-msgstr "Error Creación Operación!"
+msgstr "¡Error Creación Operación!"
+
+#. module: quality_control_mrp_operations
+#: code:addons/quality_control_mrp_operations/models/mrp.py:27
+#, python-format
+msgid "Operation Creation Error!, You must define template test"
+msgstr "¡Error creación operación!, debe de definir la plantilla del test."
+
+#. module: quality_control_mrp_operations
+#: code:addons/quality_control_mrp_operations/models/mrp.py:21
+#, python-format
+msgid "Operation Creation Error!, You must define the test template"
+msgstr "¡Error creación operación!, debe de definir la plantilla del test."
 
 #. module: quality_control_mrp_operations
 #: code:addons/quality_control_mrp_operations/models/mrp.py:52
@@ -63,7 +95,20 @@ msgstr "Error Creación Operación!"
 #: code:addons/quality_control_mrp_operations/models/mrp.py:121
 #, python-format
 msgid "Operation Modification Error!"
-msgstr "Error Modificación Operación!"
+msgstr "¡Error Modificación Operación!"
+
+#. module: quality_control_mrp_operations
+#: code:addons/quality_control_mrp_operations/models/mrp.py:46
+#, python-format
+msgid "Operation Modification Error! You must define template test"
+msgstr "¡Error modificación operación!, debe definir la plantilla del test."
+
+#. module: quality_control_mrp_operations
+#: code:addons/quality_control_mrp_operations/models/mrp.py:40
+#: code:addons/quality_control_mrp_operations/models/mrp.py:100
+#, python-format
+msgid "Operation Modification Error!, You must define the test template"
+msgstr "¡Error modificación operación!, debe definir la plantilla del test"
 
 #. module: quality_control_mrp_operations
 #: view:qc.inspection:quality_control_mrp_operations.qc_inspection_search_view_operation
@@ -95,6 +140,29 @@ msgid "Quality control inspection line"
 msgstr "Línea de inspección de control de calidad"
 
 #. module: quality_control_mrp_operations
+#: view:mrp.routing.workcenter:quality_control_mrp_operations.mrp_routing_workcenter_form_view_inh_quality
+msgid "Quality test"
+msgstr "Test calidad"
+
+#. module: quality_control_mrp_operations
+#: field:mrp.routing.workcenter,qtemplate_ids:0
+msgid "Quality tests"
+msgstr "Tests calidad"
+
+#. module: quality_control_mrp_operations
+#: view:mrp.production:quality_control_mrp_operations.mrp_production_quality_form_view
+#: view:mrp.production.workcenter.line:quality_control_mrp_operations.mrp_production_workcenter_line_form_quality_view
+msgid "Quality tests from operation"
+msgstr "Test de calidad desde operación"
+
+#. module: quality_control_mrp_operations
+#: view:mrp.production:quality_control_mrp_operations.mrp_production_quality_form_view
+#: view:mrp.production.workcenter.line:quality_control_mrp_operations.mrp_production_workcenter_line_form_quality_view
+#: field:mrp.production.workcenter.line,routing_workcenter_qtemplate_ids:0
+msgid "Quality tests from routing"
+msgstr "Test de calidad desde ruta"
+
+#. module: quality_control_mrp_operations
 #: view:mrp.production.workcenter.line:quality_control_mrp_operations.mrp_production_workcenter_line_quality_search_view
 #: field:mrp.production.workcenter.line,required_test:0
 msgid "Required Test"
@@ -103,7 +171,7 @@ msgstr "Test Requerido"
 #. module: quality_control_mrp_operations
 #: field:mrp.routing.operation,required_test:0
 msgid "Required test"
-msgstr ""
+msgstr "Test requerido"
 
 #. module: quality_control_mrp_operations
 #: field:mrp.production.workcenter.line,qtemplate_id:0
@@ -123,11 +191,18 @@ msgid ""
 "There are quality tests in draft or approval pending state for this "
 "operation. Please finish or cancel them."
 msgstr ""
+"Existen test de calidad en borrador o estado pendiente de aprobación para "
+"esta operación. Por favor, termine o cancelelos."
 
 #. module: quality_control_mrp_operations
 #: view:mrp.production.workcenter.line:quality_control_mrp_operations.mrp_production_workcenter_line_quality_search_view
 msgid "Work Center"
 msgstr "Centro de producción"
+
+#. module: quality_control_mrp_operations
+#: model:ir.model,name:quality_control_mrp_operations.model_mrp_routing_workcenter
+msgid "Work Center Usage"
+msgstr "Utilización del centro de producción"
 
 #. module: quality_control_mrp_operations
 #: model:ir.model,name:quality_control_mrp_operations.model_mrp_production_workcenter_line
@@ -138,6 +213,11 @@ msgstr "Orden de trabajo"
 #: view:mrp.production.workcenter.line:quality_control_mrp_operations.mrp_production_workcenter_line_quality_search_view
 msgid "Work Orders"
 msgstr "Órdenes de trabajo"
+
+#. module: quality_control_mrp_operations
+#: view:mrp.routing.workcenter:quality_control_mrp_operations.mrp_routing_workcenter_form_view_inh_quality
+msgid "Work centers"
+msgstr "Centros de producción"
 
 #. module: quality_control_mrp_operations
 #: code:addons/quality_control_mrp_operations/models/mrp.py:41

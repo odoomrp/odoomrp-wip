@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_planning_mrp
+# 
+# Translators:
+# Dorin Hongu <dhongu@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-utils (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-16 11:58+0000\n"
+"PO-Revision-Date: 2015-10-30 18:12+0000\n"
+"Last-Translator: Dorin Hongu <dhongu@gmail.com>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/odoomrp-utils-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: stock_planning_mrp
+#: view:stock.planning:stock_planning_mrp.stock_planning_tree_view_inh_mrp
+msgid "Incoming in MO"
+msgstr ""
+
+#. module: stock_planning_mrp
+#: code:addons/stock_planning_mrp/models/stock_planning.py:51
+#, python-format
+msgid "MRP Productions"
+msgstr ""
+
+#. module: stock_planning_mrp
+#: model:ir.model,name:stock_planning_mrp.model_mrp_production
+msgid "Manufacturing Order"
+msgstr ""
+
+#. module: stock_planning_mrp
+#: model:ir.model,name:stock_planning_mrp.model_procurement_order
+msgid "Procurement"
+msgstr "Aprovizionare"
+
+#. module: stock_planning_mrp
+#: view:stock.planning:stock_planning_mrp.stock_planning_tree_view_inh_mrp
+msgid "Show MRP productions"
+msgstr ""
+
+#. module: stock_planning_mrp
+#: model:ir.model,name:stock_planning_mrp.model_stock_planning
+msgid "Stock Planning"
+msgstr ""

@@ -13,10 +13,11 @@ class AssignManualQuants(models.TransientModel):
         quant_obj = self.env['stock.quant']
         res = super(AssignManualQuants, self).default_get(
             var_fields=var_fields)
+        move = self.env['stock.move'].browse(self.env.context['active_id'])
         quants_lines = []
         for line in res['quants_lines']:
             quant = quant_obj.browse(line['quant'])
-            if not quant.locked:
+            if not quant.locked or move.location_dest_id.allow_locked:
                 quants_lines.append(line)
         res['quants_lines'] = quants_lines
         return res

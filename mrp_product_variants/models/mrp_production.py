@@ -23,6 +23,13 @@ class MrpProduction(models.Model):
         return res
 
     @api.multi
+    def onchange_product_qty(self, product_id, product_qty):
+        res = self.product_id_change(product_id, product_qty=product_qty)
+        if res['value'].get('product_attribute_ids'):
+            del res['value']['product_attribute_ids']
+        return res
+
+    @api.multi
     def product_id_change(self, product_id, product_qty=0):
         res = super(MrpProduction, self).product_id_change(
             product_id, product_qty=product_qty)

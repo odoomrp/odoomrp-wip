@@ -57,7 +57,12 @@ class MrpBomChange(models.Model):
                 self.boms = [(4, new_bom.id)]
                 bom_lines = new_bom.bom_line_ids.filtered(
                     lambda x: x.product_id.id == self.old_component.id)
-            bom_lines.write({'product_id': self.new_component.id})
+            values = {'product_id': self.new_component.id}
+            # add product_tmpl_id in case of mrp_product_variants are installed
+            if hasattr(bom_lines, 'product_tmpl_id'):
+                values['product_tmpl_id'] = (
+                    self.new_component.product_tmpl_id.id)
+            bom_lines.write(values)
         self.write({'date': dt.now(), 'user': self.env.uid})
         return {'name': _('Bill of Material'),
                 'view_type': 'form',

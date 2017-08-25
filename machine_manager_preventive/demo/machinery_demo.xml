@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--
+           product
+        -->
+         <record id="product_product_clean_spray" model="product.product">
+                <field name="name">Clean Spray</field>
+                <field name="default_code">CLS</field>
+                <field name="list_price">450.0</field>
+                <field name="standard_price">300.0</field>
+                <field name="type">consu</field>
+                <field name="uom_id" ref="product.product_uom_litre"/>
+                <field name="uom_po_id" ref="product.product_uom_litre"/>
+                <field name="description_sale">Spray for best PC cleaning</field>
+        </record>
+        <!--
+            Stock production lot for product
+        -->
+       <record id="production_lot_2" model="stock.production.lot">
+            <field name="name">L0008</field>
+            <field name="product_id" ref="product.product_product_3"/>
+        </record>
+        <!--
+            machinery resources
+        -->
+        <record id="machinery_2" model="machinery">
+            <field name="name">Work Station</field>
+            <field name="purch_cost">2100.0</field>
+            <field name="year">2014</field>
+            <field name="model">SC345</field>
+            <field name="model_type" ref="machine_manager.machine_model_1"/>
+            <field name="product" ref="product.product_product_3"/>
+            <field name="serial" ref="production_lot_2"/>
+        </record>
+    </data>
+</openerp>

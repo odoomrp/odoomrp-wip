@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-# (c) 2016 Daniel Campos <danielcampos@avanzosc.es> - Avanzosc S.L.
+# Copyright 2016 Daniel Campos - Avanzosc S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api, _
+from openerp.exceptions import ValidationError
 
 
 class PreventiveOperationtype(models.Model):
@@ -56,7 +57,7 @@ class PreventiveOperationtype(models.Model):
     def _check_basedoncy(self):
         for record in self:
             if record.basedoncy and record.cycles <= 0:
-                raise exceptions.ValidationError(
+                raise ValidationError(
                     _("Operations based on cycles must have a positive cycle "
                       "frequency"))
 
@@ -65,7 +66,7 @@ class PreventiveOperationtype(models.Model):
         for record in self:
             if record.basedontime and (
                     record.frequency <= 0 or not record.interval_unit):
-                raise exceptions.Warning(
+                raise ValidationError(
                     _("Operations based on time must have a positive time "
                       "frequency"))
 
@@ -80,8 +81,7 @@ class PreventiveOperationtype(models.Model):
         for record in self:
             if record.margin_cy1 and record.margin_cy2 and (
                     record.margin_cy1 > record.margin_cy2):
-                raise exceptions.ValidationError(
-                    _('First margin must be before second'))
+                raise ValidationError(_('First margin must be before second'))
 
     @api.constrains('margin_fre1', 'interval_unit1', 'margin_fre2',
                     'interval_unit2')
@@ -95,7 +95,7 @@ class PreventiveOperationtype(models.Model):
                 margin2 = machine_operations.get_interval_date(
                     date, record.margin_fre2, record.interval_unit2)
                 if margin1 > margin2:
-                    raise exceptions.ValidationError(
+                    raise ValidationError(
                         _("First margin must be before second"))
 
 

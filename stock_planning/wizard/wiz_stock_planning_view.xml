@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="wiz_stock_planning_form_view" >
+            <field name="name">wiz.stock.planning.form.view</field>
+            <field name="model">wiz.stock.planning</field>
+            <field name="arch" type="xml">
+                <form string="Calculate stock planning">
+                    <group colspan="4" col="6" >
+                        <field name="company" colspan="6" />
+                        <field name="from_date" colspan="2" invisible="1"/>
+                        <field name="days" colspan="2" />
+                        <field name="to_date" colspan="2" />
+                        <field name="category" colspan="2" />
+                        <field name="template" colspan="2" />
+                        <field name="product" colspan="2" />
+                        <separator string="Locations" colspan="6"/>
+                        <field name="locations" colspan="6" nolabel="1"
+                               domain="[('company_id', '=', company), ('usage', '=', 'internal')]"/>
+                    </group>
+                    <footer>
+                        <button name="calculate_stock_planning" type="object" 
+                                string="Calculate stock planning" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link"
+                                special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_wiz_stock_planning">
+            <field name="name">Wiz Stock Planning</field>
+            <field name="res_model">wiz.stock.planning</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="wiz_stock_planning_option_view" name="Wizard Stock Planning"
+            parent="stock.menu_stock_sched" action="action_wiz_stock_planning" sequence="92"/>
+
+    </data>
+</openerp>

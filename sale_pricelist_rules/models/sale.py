@@ -44,8 +44,9 @@ class SaleOrderLineSubtotal(models.Model):
     line_id = fields.Many2one(
         comodel_name='sale.order.line', string='Line', ondelete='cascade')
     sale_id = fields.Many2one(
-        comodel_name='sale.order', string='Sale Order',
-        related='line_id.order_id', store=True)
+        comodel_name='sale.order', string='Sale Order', readonly=True,
+        related='line_id.order_id', store=True,
+    )
     item_id = fields.Many2one(
         comodel_name='product.pricelist.item', string='Pricelist Item',
         ondelete='cascade')
