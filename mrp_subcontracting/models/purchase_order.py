@@ -25,6 +25,8 @@ class PurchaseOrder(models.Model):
                 if move.work_order.id == self.mrp_operation.id:
                     if not picking:
                         wc_line = self.mrp_operation.routing_wc_line
+                        if not wc_line.picking_type_id:
+                            continue
                         vals = {'origin': self.mrp_operation.name,
                                 'picking_type_id': wc_line.picking_type_id.id,
                                 'invoice_state': 'none',
