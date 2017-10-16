@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
                 <field name="date" position="after">
-                    <field name="partner_product_ul" />
+                    <field name="partner_product_ul_id" />
                 </field>
             </field>
         </record>

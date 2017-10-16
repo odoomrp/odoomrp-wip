@@ -1,14 +1,15 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
-from openerp import models, fields, api
+# -*- coding: utf-8 -*-
+# © 2014-2016 Oihane Crucelaegui - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+
+from openerp import api, fields, models
+from openerp.addons import decimal_precision as dp
 
 
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
-    product_ul = fields.Many2one(
+    product_ul_id = fields.Many2one(
         comodel_name='product.ul', string='Logistic Unit', readonly=True,
         states={'draft': [('readonly', False)]})
 
@@ -19,46 +20,46 @@ class PurchaseOrder(models.Model):
             partner = self.env['res.partner'].browse(partner_id)
             if not res.get('value'):
                 res['value'] = {}
-            res['value']['product_ul'] = (
-                partner.partner_product_ul.id or
-                partner.commercial_partner_id.partner_product_ul.id)
+            res['value']['product_ul_id'] = (
+                partner.partner_product_ul_id.id or
+                partner.commercial_partner_id.partner_product_ul_id.id)
         return res
 
-    @api.one
-    @api.onchange('product_ul')
-    def onchange_product_ul(self):
-        for line in self.order_line:
-            line.sec_pack = line.sec_pack or self.product_ul
+    @api.onchange('product_ul_id')
+    def onchange_product_ul_id(self):
+        for record in self:
+            for line in record.order_line:
+                line.sec_pack_id = line.sec_pack_id or record.product_ul_id
 
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
     @api.one
-    @api.depends('order_id.product_ul', 'product_id', 'product_qty',
-                 'pri_pack', 'sec_pack')
+    @api.depends('order_id.product_ul_id', 'product_id', 'product_qty',
+                 'pri_pack_id', 'sec_pack_id')
     def _calculate_packages(self):
         package_attr = self.product_id.attribute_value_ids.filtered(
             lambda x: x.attribute_id.is_package)
         if package_attr:
             self.pri_pack_qty = (
                 self.product_qty / (package_attr.numeric_value or 1.0))
-            if package_attr.package_product:
-                self.pri_pack = package_attr.package_product
-                for packaging in self.sec_pack.packagings:
+            if package_attr.package_product_id:
+                self.pri_pack_id = package_attr.package_product_id
+                for packaging in self.sec_pack_id.packagings:
                     if packaging.product == package_attr.package_product:
                         self.sec_pack_qty = (
                             self.pri_pack_qty / (
                                 (packaging.ul_qty * packaging.rows) or 1.0))
 
     pri_pack_qty = fields.Float(
-        string='# Pkg 1', compute='_calculate_packages', digits=(12, 2),
-        store=True)
-    pri_pack = fields.Many2one(
+        string='# Pkg 1', compute='_calculate_packages',
+        digits=dp.get_precision('Product Unit of Measure'), store=True)
+    pri_pack_id = fields.Many2one(
         comodel_name='product.product', string='Pkg 1',
         compute='_calculate_packages', readonly=True)
     sec_pack_qty = fields.Float(
-        string='# Pkg 2', compute='_calculate_packages', digits=(12, 2),
-        store=True)
-    sec_pack = fields.Many2one(
+        string='# Pkg 2', compute='_calculate_packages',
+        digits=dp.get_precision('Product Unit of Measure'), store=True)
+    sec_pack_id = fields.Many2one(
         comodel_name='product.ul', string='Pkg 2')
