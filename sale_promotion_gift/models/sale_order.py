@@ -8,23 +8,25 @@ from openerp import models, fields, api, exceptions, _
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    @api.one
+    @api.multi
     @api.depends('order_line', 'order_line.offer_id')
-    def _calc_sale_promotion_gifts(self):
-        self.sale_promotion_gifts.unlink()
-        lines_with_price = self.order_line.filtered(lambda x: x.price_unit > 0)
-        self.sale_promotion_gifts = [(6, 0, lines_with_price.mapped(
-            'offer_id.sale_promotion_gifts.id'))]
+    def _compute_sale_promotion_gifts(self):
+        for record in self:
+            record.sale_promotion_gifts.unlink()
+            lines_with_price = record.order_line.filtered(lambda x:
+                                                          x.price_unit > 0)
+            record.sale_promotion_gifts = [(6, 0, lines_with_price.mapped(
+                'offer_id.sale_promotion_gifts.id'))]
 
     sale_promotion_gifts = fields.Many2many(
         comodel_name='sale.promotion.gift',
         string='Sale promotion gifts',
-        compute='_calc_sale_promotion_gifts')
+        compute='_compute_sale_promotion_gifts')
     sale_final_gifts = fields.One2many(
         'sale.final.gift', 'sale', string='Sale final gifts',
         copy=False)
 
-    @api.one
+    @api.multi
     def action_button_confirm(self):
         sale_line_obj = self.env['sale.order.line']
         for line in self.sale_final_gifts:
@@ -97,29 +99,30 @@ class SaleOrder(models.Model):
                 }
         return vals
 
-    @api.one
+    @api.multi
     @api.constrains('sale_final_gifts')
     def check_sale_final_gifts(self):
         categorys = {}
-        for line in self.sale_final_gifts:
-            if line.category not in categorys:
-                categorys[line.category] = {'quantity': line.quantity}
-            else:
-                category = categorys[line.category]
-                sum_quantity = category.get('quantity') + line.quantity
-                categorys[line.category] = {'quantity': sum_quantity}
-        for category in categorys:
-            datos_array = categorys[category]
-            allowed = sum(
-                x.quantity for x in self.sale_promotion_gifts.filtered(
-                    lambda x: x.category == category))
-            if datos_array['quantity'] > allowed:
-                name = category.name
-                raise exceptions.Warning(
-                    _('Total Quantity %s, in final gift products with'
-                      ' category %s, exceeds in gift products of the same'
-                      ' category with amount %s') % (
-                        str(datos_array['quantity']), name, str(allowed)))
+        for order in self:
+            for line in order.sale_final_gifts:
+                if line.category not in categorys:
+                    categorys[line.category] = {'quantity': line.quantity}
+                else:
+                    category = categorys[line.category]
+                    sum_quantity = category.get('quantity') + line.quantity
+                    categorys[line.category] = {'quantity': sum_quantity}
+            for category in categorys:
+                datos_array = categorys[category]
+                allowed = sum(
+                    x.quantity for x in order.sale_promotion_gifts.filtered(
+                        lambda x: x.category == category))
+                if datos_array['quantity'] > allowed:
+                    name = category.name
+                    raise exceptions.Warning(
+                        _('Total Quantity %s, in final gift products with'
+                          ' category %s, exceeds in gift products of the same'
+                          ' category with amount %s') % (
+                            str(datos_array['quantity']), name, str(allowed)))
 
 
 class SalePromotionGift(models.Model):
@@ -150,9 +153,10 @@ class SaleFinalGift(models.Model):
         store=True, readonly=True)
     quantity = fields.Integer(string='Quantity', required=True)
 
-    @api.one
+    @api.multi
     @api.onchange('product')
     def onchange_product(self):
+        self.ensure_one()
         if self.product:
             exist = bool(self.sale.sale_promotion_gifts.filtered(
                 lambda x: x.category == self.product.categ_id))

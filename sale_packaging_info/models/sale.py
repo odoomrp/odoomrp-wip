@@ -43,7 +43,7 @@ class SaleOrderLine(models.Model):
         try:
             self.attributes_values =\
                 self.product_attribute_ids.mapped('value_id')
-        except:
+        except Exception:
             self.attributes_values = self.product_id.attribute_value_ids
 
     @api.one

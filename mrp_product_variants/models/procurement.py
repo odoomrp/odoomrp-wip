@@ -29,6 +29,6 @@ class ProcurementOrder(models.Model):
                     lambda x: x.attribute_id.id == val['attribute_id'])
                 if attr_lines:
                     val['custom_value'] = attr_lines[:1].custom_value
-            except:
+            except Exception:
                 pass
         return result

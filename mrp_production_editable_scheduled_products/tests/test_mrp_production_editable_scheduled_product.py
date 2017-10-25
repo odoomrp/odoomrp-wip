@@ -25,5 +25,5 @@ class EditableScheduledProductTest(TransactionCase):
                 self.product.product_tmpl_id, line.product_template,
                 'If mrp_product_variants installed product template should be'
                 ' product\'s template.')
-        except:
+        except Exception:
             pass

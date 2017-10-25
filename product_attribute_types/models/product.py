@@ -51,5 +51,5 @@ class ProductAttributeValue(models.Model):
         if self.attr_type == 'numeric' and not self.numeric_value:
             try:
                 self.numeric_value = float(self.name)
-            except:
+            except Exception:
                 pass

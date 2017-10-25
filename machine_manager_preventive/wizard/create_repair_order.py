@@ -14,7 +14,7 @@ class PreventiveRepairOrder(models.TransientModel):
         try:
             warehouse = self.env['stock.warehouse'].search([], limit=1)
             return warehouse.lot_stock_id.id
-        except:
+        except Exception:
             return False
 
     location_id = fields.Many2one(
