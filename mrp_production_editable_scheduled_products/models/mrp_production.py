@@ -16,6 +16,6 @@ class MrpProductionProductLine(models.Model):
             self.name = self.product_id.name
             try:
                 self.product_tmpl_id = self.product_id.product_tmpl_id
-            except:
+            except Exception:
                 # This is in case mrp_product_variants module is not installed
                 pass

@@ -24,6 +24,6 @@ class ProductTemplate(models.Model):
                         try:
                             attr.update({'custom_value':
                                          attr_line.custom_value})
-                        except:
+                        except Exception:
                             pass
         return product_attribute_ids

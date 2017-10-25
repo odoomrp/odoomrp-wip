@@ -112,7 +112,7 @@ class MrpProduction(models.Model):
                               'name': name})
         try:
             data['value'].update({'project_id': self.project_id.id})
-        except:
+        except Exception:
             # This is in case mrp_project module is installed
             pass
         return data['value']
