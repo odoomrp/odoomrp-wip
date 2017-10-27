@@ -3,4 +3,5 @@
 
 from . import quant_move_wizard
 from . import quants_move_wizard
+from . import quants_massive_move_wizard
 from . import quant_packages_move_wizard

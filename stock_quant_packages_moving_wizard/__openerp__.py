@@ -4,7 +4,7 @@
 {
     "name": "Stock - Quant & Packages moving wizard",
     "category": "Warehouse Management",
-    "version": "8.0.0.1.0",
+    "version": "8.0.0.1.1",
     "license": "AGPL-3",
     "depends": [
         "stock",
@@ -21,6 +21,7 @@
     "data": [
         "wizard/quant_move_wizard_view.xml",
         "wizard/quants_move_wizard_view.xml",
+        "wizard/quants_massive_move_wizard_view.xml",
         "wizard/quant_packages_move_wizard_view.xml",
     ],
     "installable": True,

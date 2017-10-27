@@ -6,8 +6,9 @@
             <field name="model">stock.quants.move</field>
             <field name="arch" type="xml">
                 <form string="Transfer details" version="7">
-                    <group groups="stock.group_tracking_lot">
+                    <group groups="stock.group_locations">
                         <field name="dest_loc" />
+                        <field name="orig_loc"/>
                         <field name="pack_move_items"
                             nolabel="1" colspan="2">
                             <tree editable="bottom">
@@ -37,7 +38,7 @@
         </record>
 
         <menuitem action="action_move_quants_to" id="menu_quant_move_wizard"
-            parent="stock.menu_traceability" groups="stock.group_tracking_lot"
+            parent="stock.menu_traceability" groups="stock.group_locations"
             sequence="100"/>
     </data>
 </openerp>

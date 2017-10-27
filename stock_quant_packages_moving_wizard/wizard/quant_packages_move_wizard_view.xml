@@ -6,7 +6,7 @@
             <field name="model">stock.quant.package.move</field>
             <field name="arch" type="xml">
                 <form string="Transfer details" version="7">
-                    <group groups="stock.group_tracking_lot">
+                    <group groups="stock.group_locations">
                         <field name="pack_move_items"
                             nolabel="1">
                             <tree editable="bottom">
@@ -27,7 +27,7 @@
             </field>
         </record>
 
-        <act_window name="Move Stock Quant Packages" groups="stock.group_tracking_lot"
+        <act_window name="Move Stock Quant Packages" groups="stock.group_locations"
             res_model="stock.quant.package.move" src_model="stock.quant.package"
             view_mode="form" target="new" key2="client_action_multi" id="action_move_packages" />
     </data>

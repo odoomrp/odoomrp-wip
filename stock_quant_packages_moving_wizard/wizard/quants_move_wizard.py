@@ -13,6 +13,9 @@ class StockQuantsMoveWizard(models.TransientModel):
     dest_loc = fields.Many2one(
         comodel_name='stock.location', string='Destination Location',
         required=True)
+    orig_loc = fields.Many2one(
+        comodel_name='stock.location', string='Origin Location',
+        required=False)
 
     @api.model
     def default_get(self, fields):
@@ -37,6 +40,20 @@ class StockQuantsMoveWizard(models.TransientModel):
         for item in self.pack_move_items:
             item.quant.move_to(self.dest_loc)
         return True
+
+    @api.one
+    @api.onchange('orig_loc')
+    def onchange_orig_loc(self):
+        quants = self.env['stock.quant'].search([
+            ('location_id', '=', self.orig_loc.id),
+        ])
+        lines = []
+        for q in quants:
+            lines.append((0, 0, {
+                'quant': q.id,
+                'source_loc': self.orig_loc.id,
+            }))
+        self.pack_move_items = lines
 
 
 class StockQuantsMoveItems(models.TransientModel):
