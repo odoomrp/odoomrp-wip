@@ -65,6 +65,19 @@ class MrpProduction(models.Model):
             record.left_product_qty = remaining_qty
 
     @api.multi
+    def get_same_attribute_value_variants(self, variants):
+        filtered_variants = self.env['product.product'].browse(variants.ids)
+        attr_val_dict = {x.attribute_id:x.value_id for x in
+                         self.product_attribute_ids}
+        for variant in variants:
+            for line in variant.attribute_value_ids:
+                if attr_val_dict.get(line.attribute_id) != line:
+                    filtered_variants -= variant
+                    break
+        return filtered_variants
+
+
+    @api.multi
     def get_dump_packages(self):
         self.ensure_one()
         pack_lines = []
@@ -76,7 +89,9 @@ class MrpProduction(models.Model):
             if line not in exist_prod:
                 packs = filter(
                     lambda x: x not in exist_prod,
-                    line.bom_id.product_tmpl_id.product_variant_ids.ids)
+                    self.get_same_attribute_value_variants(
+                        line.bom_id.product_tmpl_id.product_variant_ids
+                    ).ids)
                 pack_line = map(
                     lambda x: (0, 0, {'product': x}), packs)
                 exist_prod += packs
