@@ -70,8 +70,9 @@ class MrpProduction(models.Model):
         attr_val_dict = {x.attribute_id:x.value_id for x in
                          self.product_attribute_ids}
         for variant in variants:
-            for line in variant.attribute_value_ids:
-                if attr_val_dict.get(line.attribute_id) != line:
+            for variant_value in variant.attribute_value_ids:
+                attr_val = attr_val_dict.get(variant_value.attribute_id)
+                if attr_val and attr_val != variant_value:
                     filtered_variants -= variant
                     break
         return filtered_variants
@@ -86,16 +87,15 @@ class MrpProduction(models.Model):
              ('product_id', '=', self.product_id.id)])
         exist_prod = [x.product.id for x in self.pack]
         for line in lines:
-            if line not in exist_prod:
-                packs = filter(
-                    lambda x: x not in exist_prod,
-                    self.get_same_attribute_value_variants(
-                        line.bom_id.product_tmpl_id.product_variant_ids
-                    ).ids)
-                pack_line = map(
-                    lambda x: (0, 0, {'product': x}), packs)
-                exist_prod += packs
-                pack_lines.extend(pack_line)
+            packs = filter(
+                lambda x: x not in exist_prod,
+                self.get_same_attribute_value_variants(
+                    line.bom_id.product_tmpl_id.product_variant_ids
+                ).ids)
+            pack_line = map(
+                lambda x: (0, 0, {'product': x}), packs)
+            exist_prod += packs
+            pack_lines.extend(pack_line)
         self.write({'pack': pack_lines})
 
     @api.one
