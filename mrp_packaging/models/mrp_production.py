@@ -67,7 +67,7 @@ class MrpProduction(models.Model):
     @api.multi
     def get_same_attribute_value_variants(self, variants):
         filtered_variants = self.env['product.product'].browse(variants.ids)
-        attr_val_dict = {x.attribute_id:x.value_id for x in
+        attr_val_dict = {x.attribute_id: x.value_id for x in
                          self.product_attribute_ids}
         for variant in variants:
             for variant_value in variant.attribute_value_ids:
@@ -76,7 +76,6 @@ class MrpProduction(models.Model):
                     filtered_variants -= variant
                     break
         return filtered_variants
-
 
     @api.multi
     def get_dump_packages(self):
