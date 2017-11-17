@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-# (c) 2015 Daniel Campos <danielcampos@avanzosc.es> - Avanzosc S.L.
-# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+# Copyright 2016 Daniel Campos - Avanzosc S.L.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api, _
+from openerp.exceptions import ValidationError, Warning as UserError
 from dateutil.relativedelta import relativedelta
 
 
@@ -10,72 +11,99 @@ class PreventiveMachineOperation(models.Model):
     _name = "preventive.machine.operation"
     _description = "Preventive operation for machine."
 
-    @api.one
-    def _next_cycles(self):
-        if self and self.cycles:
-            self.nextcycles = self.lastcycles + self.cycles
+    @api.multi
+    @api.depends('cycles', 'lastcycles')
+    def _compute_next_cycles(self):
+        for record in self.filtered('cycles'):
+            record.nextcycles = record.lastcycles + record.cycles
 
-    name = fields.Char('REF', required=True)
-    opdescription = fields.Text('Description')
-    machine = fields.Many2one('machinery', 'Machine', required=True,
-                              readonly=True)
-    opname_omm = fields.Many2one('preventive.operation.matmach',
-                                 'Operation Material Machine', required=True,
-                                 readonly=True)
-    frequency = fields.Integer('Frequency',
+    @api.multi
+    @api.depends('lastdate', 'frequency', 'interval_unit')
+    def _compute_next_date(self):
+        for record in self.filtered(lambda x: x.lastdate and x.frequency and
+                                    x.interval_unit):
+            record.nextdate = self.get_interval_date(
+                record.lastdate, record.frequency, record.interval_unit)
+
+    @api.multi
+    @api.depends('repair_order_ids', 'repair_order_ids.state')
+    def _compute_active_repair_order(self):
+        for record in self:
+            if record.repair_order_ids.filtered(
+                    lambda o: o.state in ('draft', 'confirmed', 'ready')):
+                record.active_repair_order = True
+            else:
+                record.active_repair_order = False
+
+    name = fields.Char(string='REF', required=True)
+    opdescription = fields.Text(string='Description')
+    machine = fields.Many2one(comodel_name='machinery', string='Machine',
+                              required=True, readonly=True)
+    opname_omm = fields.Many2one(comodel_name='preventive.operation.matmach',
+                                 string='Operation Material Machine',
+                                 required=True, readonly=True)
+    frequency = fields.Integer(string='Frequency',
                                help="Estimated time for the next operation.")
-    interval_unit = fields.Selection([('day', 'Days'), ('week', 'Weeks'),
-                                      ('mon', 'Months'), ('year', 'Years')],
-                                     'Interval unit')
-    cycles = fields.Integer('Op. Cycles Increment',
+    interval_unit = fields.Selection(
+        selection=[('day', 'Days'), ('week', 'Weeks'), ('mon', 'Months'),
+                   ('year', 'Years')], string='Interval unit')
+    cycles = fields.Integer(string='Op. Cycles Increment',
                             help="Cycles increment for the next operation.")
-    lastdate = fields.Date('Date',
+    lastdate = fields.Date(string='Date',
                            help="Last date on which the operation was done.")
     lastcycles = fields.Integer(
-        'Cycles', help="Cycles of the machine on last operation.")
-    last_hours_qty = fields.Float('Last Quantity Hours', required=False,
+        string='Cycles', help="Cycles of the machine on last operation.")
+    last_hours_qty = fields.Float(string='Last Quantity Hours', required=False,
                                   help="Time takes to do the operation. hh:mm")
-    nextcycles = fields.Integer('Cycles', compute="_next_cycles",
-                                help="Cycles of the machine for next "
-                                "operation.")
-    nextdate = fields.Date('Date', help="Expected date for next operation.")
-    hours_qty = fields.Float('Quantity Hours', required=False, help="Expected "
-                             "time for execution the operation. hh:mm")
-    alert = fields.Boolean('1st alert')
-    extra_alert = fields.Boolean('2nd alert')
+    nextcycles = fields.Integer(
+        string='Cycles', compute="_compute_next_cycles",
+        help="Cycles of the machine for next operation.")
+    nextdate = fields.Date(string='Date', compute="_compute_next_date",
+                           help="Expected date for next operation.",
+                           store=True)
+    hours_qty = fields.Float(
+        string='Quantity Hours', required=False,
+        help="Expected time for execution the operation. hh:mm")
+    alert = fields.Boolean(string='1st alert')
+    extra_alert = fields.Boolean(string='2nd alert')
     check_al1 = fields.Boolean(
-        '1st alert check', help="If checked the alarm will be test at the "
-        "specified parameters.")
+        string='1st alert check', help="If checked the alarm will be test at"
+        " the specified parameters.")
     check_al2 = fields.Boolean(
-        '2nd alert check', help="If checked the alarm will be test at the "
-        "specified parameters.")
+        string='2nd alert check', help="If checked the alarm will be test at"
+        " the specified parameters.")
     first_margin = fields.Integer(
-        'First Cycle Margin', help="A negative number means that the alarm "
-        "will be activated before the condition is met")
+        string='First Cycle Margin', help="A negative number means that the"
+        " alarm will be activated before the condition is met")
     second_margin = fields.Integer(
-        'Second Cycle Margin', help="A negative number means that the alarm"
-        " will be activated before the condition is met")
+        string='Second Cycle Margin', help="A negative number means that the"
+        " alarm will be activated before the condition is met")
     margin_fre1 = fields.Integer(
-        'Frequency Margin', help="A negative number means that the alarm will"
-        " be activated before the compliance date")
-    interval_unit1 = fields.Selection([('day', 'Days'), ('week', 'Weeks'),
-                                       ('mon', 'Months'), ('year', 'Years')],
-                                      'Interval Unit')
+        string='Frequency Margin', help="A negative number means that the"
+        " alarm will be activated before the compliance date")
+    interval_unit1 = fields.Selection(
+        selection=[('day', 'Days'), ('week', 'Weeks'), ('mon', 'Months'),
+                   ('year', 'Years')], string='Interval Unit')
     margin_fre2 = fields.Integer(
-        'Frequency Margin', help="A negative number means that the alarm will "
-        "be activated before the compliance date")
-    interval_unit2 = fields.Selection([('day', 'Days'), ('week', 'Weeks'),
-                                       ('mon', 'Months'), ('year', 'Years')],
-                                      'Interval Unit')
+        string='Frequency Margin', help="A negative number means that the"
+        " alarm will be activated before the compliance date")
+    interval_unit2 = fields.Selection(
+        selection=[('day', 'Days'), ('week', 'Weeks'), ('mon', 'Months'),
+                   ('year', 'Years')], string='Interval Unit')
+    update_preventive = fields.Selection(
+        related='opname_omm.update_preventive')
     actcycles = fields.Integer(related='machine.actcycles')
-    repair_order = fields.Many2one('mrp.repair', 'Repair Order', readonly=True)
+    repair_order_ids = fields.Many2many(comodel_name='mrp.repair')
+    active_repair_order = fields.Boolean(
+        string='Active Repair', store=True,
+        compute="_compute_active_repair_order")
 
     @api.constrains('first_margin', 'second_margin')
     def _check_cycle_margins(self):
         for record in self:
             if record.first_margin and record.second_margin and(
                     record.first_margin > record.second_margin):
-                raise exceptions.ValidationError(
+                raise ValidationError(
                     _("First margin must be before second"))
 
     @api.constrains('margin_fre1', 'interval_unit1', 'margin_fre2',
@@ -89,7 +117,7 @@ class PreventiveMachineOperation(models.Model):
                 margin2 = self.get_interval_date(date, record.margin_fre2,
                                                  record.interval_unit2)
                 if margin1 > margin2:
-                    raise exceptions.ValidationError(
+                    raise ValidationError(
                         _("First margin must be before second"))
 
     @api.one
@@ -100,9 +128,8 @@ class PreventiveMachineOperation(models.Model):
     def set_alarm2(self):
         self.check_al2 = not self.check_al2
 
-    @api.one
     @api.onchange('actcycles')
-    def _check_cycles_alert(self):
+    def _onchange_cycles_alert(self):
         if self.cycles > 0:
             res = self._check_alert_by_cycles(self)
             if not self.alert and res and res['alert']:
@@ -177,9 +204,51 @@ class PreventiveMachineOperation(models.Model):
                 res1 = self._check_alert_by_cycles(ope)
             if ope.frequency > 0:
                 res2 = self._check_alert_by_time(ope)
-            if not ope.alert and (res1 and res1['alert'] or
-                                  res2 and res2['alert']):
-                ope.alert = True
-            if not ope.extra_alert and (res1 and res1['extra_alert'] or
-                                        res2 and res2['extra_alert']):
-                ope.extra_alert = True
+            ope.alert = (res1 and res1['alert'] or
+                         res2 and res2['alert'] or False)
+            ope.extra_alert = (res1 and res1['extra_alert'] or
+                               res2 and res2['extra_alert'] or False)
+
+    @api.multi
+    def show_attachments(self):
+        document_obj = self.env['ir.attachment']
+        self.ensure_one()
+        attachments = document_obj.search(
+            [('res_model', '=', 'preventive.operation.type'),
+             ('res_id', '=', self.opname_omm.optype_id.id)])
+        search_view = self.env.ref('base.view_attachment_search')
+        idform = self.env.ref('base.view_attachment_form')
+        idtree = self.env.ref('base.view_attachment_tree')
+        kanban = self.env.ref('mail.view_document_file_kanban')
+        return {
+            'view_type': 'form',
+            'view_mode': 'kanban, tree, form',
+            'res_model': 'ir.attachment',
+            'views': [(kanban.id, 'kanban'), (idtree.id, 'tree'),
+                      (idform.id, 'form')],
+            'search_view_id': search_view.id,
+            'view_id': kanban.id,
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+            'domain': [('id', 'in', attachments.ids)],
+            'context': self.env.context,
+            }
+
+    @api.multi
+    def _next_action_update(self):
+        for op_pmo in self:
+            if op_pmo.cycles:
+                op_pmo.lastcycles = op_pmo.actcycles
+            if op_pmo.interval_unit:
+                op_pmo.lastdate = fields.Date.today()
+        self.check_alerts()
+
+    @api.multi
+    def create_repair_order(self):
+        self.ensure_one()
+        if self.active_repair_order is False:
+            raise UserError(
+                _('Repair order done, please refresh view'))
+        preventive_repair_obj = self.env['preventive.repair.order']
+        preventive_repair_obj.with_context(
+            active_ids=[self.id]).create_repair_from_pmo()

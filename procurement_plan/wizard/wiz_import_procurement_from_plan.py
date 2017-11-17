@@ -19,6 +19,7 @@ class WizImportProcurementFromPlan(models.TransientModel):
 
     @api.model
     def default_get(self, var_fields):
+        super(WizImportProcurementFromPlan, self).default_get(var_fields)
         plan = self.env['procurement.plan'].browse(
             self.env.context['active_id'])
         return {'from_date': plan.from_date,

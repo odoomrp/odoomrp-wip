@@ -37,6 +37,8 @@ class MrpProduction(models.Model):
             bom_id = bom_obj.with_context(phantom=True)._bom_find(
                 product_id=raw_product.id)
             qty = self.product_qty * attr_value.raw_qty
+            if not qty:
+                continue
             if not bom_id:
                 res.append(self.get_new_components_info(
                     raw_product, qty, workorder))

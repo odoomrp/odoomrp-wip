@@ -25,23 +25,23 @@ class ProcurementOrder(models.Model):
                             p.purchase_line_id.order_id.state != 'draft'):
                         proc.protect_date_planned = True
 
-    @api.one
     def _compute_show_buttons(self):
         bom_obj = self.env['mrp.bom']
-        self.show_button_create = False
-        self.show_button_delete = False
-        if (self.location_id.usage == 'internal' and
-                self.state not in ('cancel', 'done')):
-            cond = [('parent_procurement_id', '=', self.id)]
-            child_procs = self.search(cond, limit=1)
-            cond = ['|', ('product_tmpl_id', '=',
-                    self.product_id.product_tmpl_id.id),
-                    ('product_id', '=', self.product_id.id)]
-            boms = bom_obj.search(cond)
-            if child_procs:
-                self.show_button_delete = bool(boms)
-            else:
-                self.show_button_create = bool(boms)
+        for proc in self:
+            proc.show_button_create = False
+            proc.show_button_delete = False
+            if (proc.location_id.usage == 'internal' and
+                    proc.state not in ('cancel', 'done')):
+                cond = [('parent_procurement_id', '=', proc.id)]
+                child_procs = self.search(cond, limit=1)
+                cond = ['|', ('product_tmpl_id', '=',
+                        proc.product_id.product_tmpl_id.id),
+                        ('product_id', '=', proc.product_id.id)]
+                boms = bom_obj.search(cond)
+                if child_procs:
+                    proc.show_button_delete = bool(boms)
+                else:
+                    proc.show_button_create = bool(boms)
 
     level = fields.Integer(string='Level', default=0)
     parent_procurement_id = fields.Many2one(
@@ -116,12 +116,11 @@ class ProcurementOrder(models.Model):
                 'target': 'current',
                 }
 
-    @api.one
     def _create_procurement_plan_from_procurement(self, sale):
         plan_obj = self.env['procurement.plan']
         project_obj = self.env['project.project']
         vals = {'name': _('Generated from sale order: ') + sale.name,
-                'warehouse_id': self.warehouse_id.id,
+                'warehouse_id': self.warehouse_id.id or sale.warehouse_id.id,
                 'from_date': self.date_planned,
                 'to_date': self.date_planned,
                 'procurement_ids': [(4, self.id)]}
@@ -136,8 +135,13 @@ class ProcurementOrder(models.Model):
             for proc in procurement_plan.procurement_ids:
                 if proc.show_button_create:
                     proc.button_create_lower_levels()
+            if self.company_id.proc_plan_level >= 0:
+                procurements = procurement_plan.procurement_ids.filtered(
+                    lambda x: x.level >= 0 and
+                    x.level <= x.company_id.proc_plan_level and
+                    x.state == 'confirmed')
+                procurements.run()
 
-    @api.one
     def _create_procurement_lower_levels(self, plan_id):
         plan_obj = self.env['procurement.plan']
         plan = plan_obj.browse(plan_id)
@@ -174,7 +178,6 @@ class ProcurementOrder(models.Model):
             if proc.plan:
                 proc._treat_procurements_childrens_from_plan(days_to_sum)
 
-    @api.one
     def _treat_procurements_childrens_from_plan(self, days_to_sum):
         cond = [('parent_procurement_id', 'child_of', self.id),
                 ('id', '!=', self.id)]
@@ -216,7 +219,6 @@ class ProcurementPlan(models.Model):
     production_ids = fields.One2many(
         'mrp.production', 'plan', string='Productions', readonly=True)
 
-    @api.one
     def button_generate_mrp_procurements(self):
         cond = [('name', '=', 'Manufacture')]
         route = self.env['stock.location.route'].search(cond)
@@ -286,7 +288,7 @@ class ProcurementPlan(models.Model):
                     raise exceptions.Warning(
                         _('No product defined for BoM line with template: %s,'
                           ' on the list of materials %s') %
-                        (child.product_template.name, line.product_id.name))
+                        (child.product_tmpl_id.name, line.product_id.name))
                 procurement = self._create_procurement_from_bom_line(
                     level+1, child.product_id, child.product_qty * qty,
                     procurement)
@@ -337,7 +339,7 @@ class ProcurementPlan(models.Model):
 
     def _create_stock_reservation(self, procurement):
         reservation_obj = self.env['stock.reservation']
-        dest_location_id = self.env.ref(
+        location_dest_id = self.env.ref(
             'stock_reserve.stock_location_reservation').id
         vals = {'name': procurement.product_id.name,
                 'product_id': procurement.product_id.id,
@@ -345,7 +347,7 @@ class ProcurementPlan(models.Model):
                 'product_uom': procurement.product_uom.id,
                 'company_id': procurement.company_id.id,
                 'location_id': procurement.location_id.id,
-                'dest_location_id': dest_location_id,
+                'location_dest_id': location_dest_id,
                 'procurement_from_plan': procurement.id,
                 'origin': self.sequence,
                 'date_expected': procurement.date_planned
@@ -353,3 +355,23 @@ class ProcurementPlan(models.Model):
         reservation = reservation_obj.create(vals)
         reservation.reserve()
         procurement.write({'reservation': reservation.id})
+
+    @api.multi
+    def button_cancel(self):
+        for plan in self:
+            procurements = plan.procurement_ids.filtered(
+                lambda x: x.state in ('confirmed', 'exception', 'running'))
+            self._cancel_reservations_from_plan(procurements)
+        super(ProcurementPlan, self).button_cancel()
+        return True
+
+    def _cancel_reservations_from_plan(self, procurements):
+        for procurement in procurements:
+            if procurement.reservation and procurement.reservation.move_id:
+                if procurement.reservation.move_id.state not in (
+                   'draft', 'assigned', 'confirmed'):
+                    raise exceptions.Warning(_("procurement: %s, with"
+                                               " reserve-move made") %
+                                             procurement.name)
+                procurement.reservation.move_id.action_cancel()
+                procurement.reservation.unlink()

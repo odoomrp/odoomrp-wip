@@ -5,7 +5,6 @@ import openerp.tests.common as common
 
 
 class TestProcurementPlan(common.TransactionCase):
-
     def setUp(self):
         super(TestProcurementPlan, self).setUp()
         self.plan_model = self.env['procurement.plan']
@@ -56,6 +55,9 @@ class TestProcurementPlan(common.TransactionCase):
         self.assertEqual(
             len(procurements), self.plan.num_procurements,
             'Not have confirmed all procurements')
+        self.plan.procurement_ids._compute_protect_date_planned()
+        self.plan.procurement_ids.button_check()
+        self.plan.procurement_ids[0].button_remove_plan()
 
     def test_procurement_plan_from_purchases(self):
         self.plan.write(
@@ -128,6 +130,8 @@ class TestProcurementPlan(common.TransactionCase):
                 'days': 5}
         wiz_change_date = self.wiz_date_model.with_context(
             active_ids=[procurements[0].id]).create(vals)
+        fields = ['old_scheduled_date', 'days', 'procurements']
+        wiz_change_date.default_get(fields)
         wiz_change_date.change_scheduled_date()
         self.assertNotEqual(
             procurements[0].date_planned, old_procurement_date,

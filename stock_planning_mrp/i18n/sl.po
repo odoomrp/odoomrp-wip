@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_planning_mrp
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-utils (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-08 08:45+0000\n"
+"PO-Revision-Date: 2015-09-30 11:35+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-utils-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: stock_planning_mrp
+#: view:stock.planning:stock_planning_mrp.stock_planning_tree_view_inh_mrp
+msgid "Incoming in MO"
+msgstr "Dohodno v proizvodnem nalogu"
+
+#. module: stock_planning_mrp
+#: code:addons/stock_planning_mrp/models/stock_planning.py:51
+#, python-format
+msgid "MRP Productions"
+msgstr "MRP proizvodnja"
+
+#. module: stock_planning_mrp
+#: model:ir.model,name:stock_planning_mrp.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Proizvodni nalog"
+
+#. module: stock_planning_mrp
+#: model:ir.model,name:stock_planning_mrp.model_procurement_order
+msgid "Procurement"
+msgstr "Oskrbovanje"
+
+#. module: stock_planning_mrp
+#: view:stock.planning:stock_planning_mrp.stock_planning_tree_view_inh_mrp
+msgid "Show MRP productions"
+msgstr "Prikaz MRP proizvodnje"
+
+#. module: stock_planning_mrp
+#: model:ir.model,name:stock_planning_mrp.model_stock_planning
+msgid "Stock Planning"
+msgstr "Planiranje zalog"

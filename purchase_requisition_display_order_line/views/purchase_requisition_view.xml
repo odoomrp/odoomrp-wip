@@ -28,8 +28,6 @@
                 <field name="product_id" position="after">
                     <field name="date_planned" />
                 </field>
-                <button name="action_draft" position="replace" />
-                <button name="action_confirm" position="replace" />
             </field>
         </record>
         <record id="purchase_order_line_tree_displayorderline" model="ir.ui.view">

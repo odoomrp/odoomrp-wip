@@ -16,7 +16,7 @@ class StockInventory(models.Model):
 
     @api.multi
     @api.depends('import_lines')
-    def _file_lines_processed(self):
+    def _compute_file_lines_processed(self):
         for record in self:
             processed = True
             if record.import_lines:
@@ -33,7 +33,7 @@ class StockInventory(models.Model):
                               string='Selection Filter',
                               required=True)
     processed = fields.Boolean(string='Has been processed at least once?',
-                               compute='_file_lines_processed')
+                               compute='_compute_file_lines_processed')
 
     @api.multi
     def process_import_lines(self):
@@ -59,7 +59,10 @@ class StockInventory(models.Model):
                     product = line.product
                 lot_id = None
                 if line.lot:
-                    lot_lst = stk_lot_obj.search([('name', '=', line.lot)])
+                    lot_lst = stk_lot_obj.search([
+                        ('name', '=', line.lot),
+                        ('product_id', '=', product.id),
+                    ])
                     if lot_lst:
                         lot_id = lot_lst[0].id
                     else:
@@ -72,7 +75,10 @@ class StockInventory(models.Model):
                     'product_qty': line.quantity,
                     'inventory_id': line.inventory_id.id,
                     'location_id': line.location_id.id,
-                    'prod_lot_id': lot_id})
+                    'prod_lot_id': lot_id,
+                    'theoretical_std_price': product.standard_price,
+                    'standard_price': line.standard_price,
+                    })
                 line.write({'fail': False, 'fail_reason': _('Processed')})
         return True
 
@@ -84,3 +90,4 @@ class StockInventory(models.Model):
                     _("Loaded lines must be processed at least one time for "
                       "inventory : %s") % (inventory.name))
             super(StockInventory, inventory).action_done()
+        return True

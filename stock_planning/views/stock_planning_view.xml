@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    
+        <record model="ir.ui.view" id="stock_planning_search_view">
+            <field name="name">stock.planning.search.view</field>
+            <field name="model">stock.planning</field>
+            <field name="arch" type="xml">
+                <search string="Search Stock Planning">
+                    <field name="company" />
+                    <field name="location" />
+                    <field name="scheduled_date" />
+                    <field name="category" />
+                    <field name="product" />
+                    <separator/>
+                    <filter string="Increase greater than zero" domain="[('required_qty','>',0)]" />
+                    <group expand="0" string="Group By">
+                        <filter string="Month" context="{'group_by':'scheduled_date:month'}"/>
+                        <filter string="Week" context="{'group_by':'scheduled_date:week'}"/>
+                        <filter string="Company" domain="[]" context="{'group_by':'company'}" />
+                        <filter string="Location" domain="[]" context="{'group_by':'location'}"/>
+                        <filter string="Scheduled date" domain="[]" context="{'group_by':'scheduled_date'}"/>
+                        <filter string="Category" domain="[]" context="{'group_by':'category'}"/>
+                        <filter string="Product" domain="[]" context="{'group_by':'product'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="stock_planning_tree_view" >
+            <field name="name">stock.planning.tree.view</field>
+            <field name="model">stock.planning</field>
+            <field name="arch" type="xml">
+                <tree colors="orange:required_increase&lt;0;red:required_increase&gt;0;green:required_increase==0" string="Stock Planning">
+                        <field name="company" />
+                        <field name="location" />
+                        <field name="scheduled_date" />
+                        <field name="product" />
+                        
+                        <field name="unit_cost_price" string="Variant Cost Price"
+                               groups="stock_planning.group_stock_planning_show_costs" />
+                        <field name="cost_price" invisible="1" />
+                        <field name="cost_price_required_increase" sum="sum_cost_price" 
+                               groups="stock_planning.group_stock_planning_show_costs"/>
+                        
+                        <field name="qty_available" string="Quantity On Hand"/>
+                        <field name="virtual_available" string="Forecast Quantity"/>
+                        <field name="incoming_qty" string="Incoming"/>
+                        <field name="outgoing_qty" string="Outgoing"/>
+                        <field name="procurement_incoming_to_date" string="Incoming up to date from procurements"/>
+                        <field name="incoming_in_po" string="Incoming in PO"/>
+                        <field name="move_incoming_to_date" string="Incoming up to date from moves"/>
+                        <field name="outgoing_to_date" string="Outgoing to date"/>
+                        <field name="scheduled_to_date" string="Scheduled to date"/>
+                        <field name="rule_min_qty" string="Rule min. qty"/>
+                        <field name="rule_max_qty" string="Rule max. qty"/>
+                        <field name="required_increase" string="Required increase"/>
+                        <field name="purchases" invisible="1"/>
+                        <field name="procurements" invisible="1" />
+                        <field name="moves" invisible="1" />
+                        <field name="outgoing_to_date_moves" invisible="1" />
+                        <button string="Show purchases" name="show_purchases"
+                                type="object" icon="terp-purchase" 
+                                attrs="{'invisible':[('purchases', '=', [])]}"/>
+                        <button string="Show procurements" name="show_procurements"
+                                type="object" icon="gtk-convert" 
+                                attrs="{'invisible':[('procurements', '=', [])]}"/>
+                        <button string="Show moves" name="show_moves"
+                                type="object" icon="gtk-index" 
+                                attrs="{'invisible':[('moves', '=', [])]}"/>
+                        <button string="Show outgoing to date moves" name="show_outgoing_to_date_moves"
+                                type="object" icon="gtk-index" 
+                                attrs="{'invisible':[('outgoing_to_date_moves', '=', [])]}"/>
+                        <button string="Generate procurement" name="generate_procurement"
+                                type="object" icon="gtk-execute"
+                                attrs="{'invisible':[('required_increase', '&lt;=', 0)]}" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_stock_planning">
+            <field name="name">Stock Planning</field>
+            <field name="res_model">stock.planning</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+        <menuitem id="stock_planning_option_view" name="Stock Planning"
+            parent="stock.menu_stock_sched" action="action_stock_planning" sequence="94"/>
+
+    </data>
+</openerp>

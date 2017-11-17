@@ -1,21 +1,6 @@
-
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright 2016 Daniel Campos - Avanzosc S.L.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, fields, api
 
@@ -109,39 +94,18 @@ class PreventiveList(models.TransientModel):
     _description = 'Preventive list'
 
     @api.multi
-    def _prev_list(self):
-        data = []
-        machine_operations = self.env['preventive.machine.operation']
-        if 'machi_prevs' in self.env.context:
-            for prev_id in self.env.context['machi_prevs']:
-                machi_pre = machine_operations.browse(prev_id)
-                res = {
-                    'name': machi_pre.name,
-                    'opdescription': machi_pre.opdescription,
-                    'machine': machi_pre.machine.id,
-                    'cycles': machi_pre.cycles,
-                    'first_margin': machi_pre.first_margin,
-                    'second_margin': machi_pre.second_margin,
-                    'frequency': machi_pre.frequency,
-                    'interval_unit': machi_pre.interval_unit,
-                    'margin_fre1': machi_pre.margin_fre1,
-                    'interval_unit1': machi_pre.interval_unit1,
-                    'margin_fre2': machi_pre.margin_fre2,
-                    'interval_unit2': machi_pre.interval_unit2,
-                    'nextdate': machi_pre.nextdate,
-                    'nextcycles': machi_pre.nextcycles,
-                    'last_hours_qty': machi_pre.last_hours_qty,
-                    'hours_qty': machi_pre.hours_qty
-                    }
-                data.append(res)
-        return data
+    def _default_prev_list(self):
+        prev_op_ids = 'machi_prevs' in self.env.context and \
+            self.env.context['machi_prevs'] or []
+        return [(6, 0, prev_op_ids)]
 
     @api.multi
-    def _op_count(self):
+    def _default_op_count(self):
         return len(self.env.context.get('machi_prevs', 0))
 
-    machi_prevs = fields.One2many('preventive.machine.operation', 'machine',
-                                  'Machine Preventive Operations',
-                                  default=_prev_list, readonly=True)
-    op_count = fields.Integer('Number of operations', default=_op_count,
-                              readonly=True)
+    machi_prevs = fields.Many2many(
+        comodel_name='preventive.machine.operation', inverse_name='machine',
+        string='Machine Preventive Operations', default=_default_prev_list,
+        readonly=True)
+    op_count = fields.Integer(string='Number of operations',
+                              default=_default_op_count, readonly=True)

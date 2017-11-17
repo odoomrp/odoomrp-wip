@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="req_link_wave" model="res.request.link">
+            <field name="name">Picking Wave</field>
+            <field name="object">stock.picking.wave</field>
+        </record>
+
+    </data>
+</openerp>

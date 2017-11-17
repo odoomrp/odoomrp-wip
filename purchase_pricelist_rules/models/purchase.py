@@ -43,7 +43,8 @@ class PurchaseOrderLineSubtotal(models.Model):
         comodel_name='purchase.order.line', string='Line', ondelete='cascade')
     purchase_id = fields.Many2one(
         comodel_name='purchase.order', string='Purchase Order',
-        related='line_id.order_id', store=True)
+        related='line_id.order_id', store=True, readonly=True,
+    )
     item_id = fields.Many2one(
         comodel_name='product.pricelist.item', string='Pricelist Item',
         ondelete='cascade')

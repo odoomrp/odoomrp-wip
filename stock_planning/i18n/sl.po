@@ -1,0 +1,373 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_planning
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-utils (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-08 08:45+0000\n"
+"PO-Revision-Date: 2015-10-10 05:43+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-utils-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: stock_planning
+#: view:wiz.stock.planning:stock_planning.wiz_stock_planning_form_view
+msgid "Calculate stock planning"
+msgstr "Izračun plana zalog"
+
+#. module: stock_planning
+#: view:wiz.stock.planning:stock_planning.wiz_stock_planning_form_view
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_search_view
+#: field:wiz.stock.planning,category:0
+msgid "Category"
+msgstr "Kategorija"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_search_view
+#: field:stock.planning,company:0 field:wiz.stock.planning,company:0
+msgid "Company"
+msgstr "Družba"
+
+#. module: stock_planning
+#: field:stock.planning,create_uid:0 field:wiz.stock.planning,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: stock_planning
+#: field:stock.planning,create_date:0 field:wiz.stock.planning,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: stock_planning
+#: help:wiz.stock.planning,from_date:0
+msgid "Date from which the interval starts counting days"
+msgstr "Datum, od katerega se prične šteti dneve intervala"
+
+#. module: stock_planning
+#: field:wiz.stock.planning,days:0
+msgid "Days interval"
+msgstr "Dni intervala"
+
+#. module: stock_planning
+#: help:wiz.stock.planning,to_date:0
+msgid "Deadline for calculating periods"
+msgstr "Rok za izračun obdobij"
+
+#. module: stock_planning
+#: help:wiz.stock.planning,category:0
+msgid "Enter this field if you want to filter by category"
+msgstr "Izpolnite to polje če želite filtriranje po kategoriji"
+
+#. module: stock_planning
+#: help:wiz.stock.planning,product:0
+msgid "Enter this field if you want to filter by product"
+msgstr "Izpolnite to polje če želite filtriranje po proizvodu"
+
+#. module: stock_planning
+#: help:wiz.stock.planning,template:0
+msgid "Enter this field if you want to filter by template"
+msgstr "Izpolnite to polje če želite filtriranje po predlogi"
+
+#. module: stock_planning
+#: code:addons/stock_planning/wizard/wiz_stock_planning.py:51
+#, python-format
+msgid "Error!: Increase number of days must be greater than zero"
+msgstr "Napaka! Zvišanje števila dni mora biti večje od nič"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Forecast Quantity"
+msgstr "Napovedana količina"
+
+#. module: stock_planning
+#: field:stock.planning,from_date:0
+msgid "From Date"
+msgstr "Od datuma"
+
+#. module: stock_planning
+#: field:wiz.stock.planning,from_date:0
+msgid "From date"
+msgstr "Od datuma"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Generate procurement"
+msgstr "Ustvari oskrbovanje"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_search_view
+msgid "Group By"
+msgstr "Združi po"
+
+#. module: stock_planning
+#: field:stock.planning,id:0 field:wiz.stock.planning,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Incoming"
+msgstr "Dohodno"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Incoming in PO"
+msgstr "Dohodno v nabavnem nalogu"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Incoming up to date from moves"
+msgstr "Dohodno iz premikov do zdaj"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Incoming up to date from procurements"
+msgstr "Dohodno iz oskrbovanj do zdaj"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_search_view
+msgid "Increase greater than zero"
+msgstr "Zvišanje večje od nič"
+
+#. module: stock_planning
+#: help:wiz.stock.planning,days:0
+msgid "Increase number of days starting from the date from"
+msgstr "Zvišanje števila dni od začetnega datuma"
+
+#. module: stock_planning
+#: field:stock.planning,write_uid:0 field:wiz.stock.planning,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnjič posodobil"
+
+#. module: stock_planning
+#: field:stock.planning,write_date:0 field:wiz.stock.planning,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_search_view
+#: field:stock.planning,location:0
+msgid "Location"
+msgstr "Lokacija"
+
+#. module: stock_planning
+#: view:wiz.stock.planning:stock_planning.wiz_stock_planning_form_view
+#: field:wiz.stock.planning,locations:0
+msgid "Locations"
+msgstr "Lokacije"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_search_view
+msgid "Month"
+msgstr "Mesec"
+
+#. module: stock_planning
+#: code:addons/stock_planning/models/stock_planning.py:223
+#, python-format
+msgid "Moves"
+msgstr "Premiki"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Outgoing"
+msgstr "Izhodno"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Outgoing to date"
+msgstr "Izhodno do zdaj"
+
+#. module: stock_planning
+#: code:addons/stock_planning/models/stock_planning.py:234
+#, python-format
+msgid "Outgoing to date moves"
+msgstr "Dozdajšnji izhodni premiki"
+
+#. module: stock_planning
+#: model:ir.model,name:stock_planning.model_procurement_order
+msgid "Procurement"
+msgstr "Oskrbovanje"
+
+#. module: stock_planning
+#: code:addons/stock_planning/models/stock_planning.py:201
+#, python-format
+msgid "Procurement orders"
+msgstr "Oskrbovalni nalogi"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_search_view
+#: field:stock.planning,product:0 field:wiz.stock.planning,product:0
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: stock_planning
+#: model:ir.model,name:stock_planning.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Postavka nabavnega naloga"
+
+#. module: stock_planning
+#: code:addons/stock_planning/models/stock_planning.py:212
+#, python-format
+msgid "Purchase orders"
+msgstr "Nabavni nalogi"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Quantity On Hand"
+msgstr "Količina na voljo"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Required increase"
+msgstr "Zahtevano zvišanje"
+
+#. module: stock_planning
+#: field:stock.planning,cost_price_required_increase:0
+msgid "Required increment Cost Price"
+msgstr "Zahtevano zvišanje cene"
+
+#. module: stock_planning
+#: field:stock.planning,required_qty:0
+msgid "Required quantity"
+msgstr "Zahtevana količina"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Rule max. qty"
+msgstr "Pravilo maks. kol."
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Rule min. qty"
+msgstr "Pravilo min. kol."
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_search_view
+#: field:stock.planning,scheduled_date:0
+msgid "Scheduled date"
+msgstr "Načrtovani datum"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Scheduled to date"
+msgstr "Načrtovano do zdaj"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_search_view
+msgid "Search Stock Planning"
+msgstr "Iskanje plana zalog"
+
+#. module: stock_planning
+#: help:stock.planning,category:0
+msgid "Select category for the current product"
+msgstr "Izbira kategorije za trenutni proizvod"
+
+#. module: stock_planning
+#: field:stock.config.settings,group_cost_in_stock_planning:0
+msgid "Show costs in stock planning"
+msgstr "Prikaz stroškov pri planiranju zaloge"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Show moves"
+msgstr "Prikaz premikov"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Show outgoing to date moves"
+msgstr "Prikaz dozdajšnjih izhodnih premikov"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Show procurements"
+msgstr "Prikaz oskrbovanj"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Show purchases"
+msgstr "Prikaz nabav"
+
+#. module: stock_planning
+#: model:ir.model,name:stock_planning.model_stock_move
+msgid "Stock Move"
+msgstr "Premik zaloge"
+
+#. module: stock_planning
+#: code:addons/stock_planning/models/stock_planning.py:256
+#: code:addons/stock_planning/wizard/wiz_stock_planning.py:87
+#: model:ir.actions.act_window,name:stock_planning.action_stock_planning
+#: model:ir.model,name:stock_planning.model_stock_planning
+#: model:ir.ui.menu,name:stock_planning.stock_planning_option_view
+#: model:res.groups,name:stock_planning.group_stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+#, python-format
+msgid "Stock Planning"
+msgstr "Planiranje zalog"
+
+#. module: stock_planning
+#: model:res.groups,name:stock_planning.group_stock_planning_show_costs
+msgid "Stock Planning show costs"
+msgstr "Prikaz stroškov pri planiranju zaloge"
+
+#. module: stock_planning
+#: view:stock.config.settings:stock_planning.view_stock_config_settings_inh_stockplanning
+msgid "Stock planning"
+msgstr "Planiranje zalog"
+
+#. module: stock_planning
+#: field:wiz.stock.planning,template:0
+msgid "Template"
+msgstr "Predloga"
+
+#. module: stock_planning
+#: field:wiz.stock.planning,to_date:0
+msgid "To date"
+msgstr "Do zdaj"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "Variant Cost Price"
+msgstr "Cena različice"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_search_view
+msgid "Week"
+msgstr "Teden"
+
+#. module: stock_planning
+#: model:ir.actions.act_window,name:stock_planning.action_wiz_stock_planning
+#: model:ir.model,name:stock_planning.model_wiz_stock_planning
+msgid "Wiz Stock Planning"
+msgstr "Čarovnik za planiranje zalog"
+
+#. module: stock_planning
+#: model:ir.ui.menu,name:stock_planning.wiz_stock_planning_option_view
+msgid "Wizard Stock Planning"
+msgstr "Čarovnik za planiranje zalog"
+
+#. module: stock_planning
+#: field:stock.planning,category:0
+msgid "category"
+msgstr "kategorija"
+
+#. module: stock_planning
+#: view:wiz.stock.planning:stock_planning.wiz_stock_planning_form_view
+msgid "or"
+msgstr "ali"
+
+#. module: stock_planning
+#: view:stock.planning:stock_planning.stock_planning_tree_view
+msgid "sum_cost_price"
+msgstr "sum_cost_price"

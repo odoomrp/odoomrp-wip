@@ -11,34 +11,37 @@ class ProcurementPlan(models.Model):
     _inherit = ['mail.thread']
     _rec_name = 'sequence'
 
-    @api.one
+    @api.multi
     @api.depends('procurement_ids', 'procurement_ids.state')
     def _get_state(self):
-        self.state = 'running'
-        if not self.procurement_ids:
-            self.state = 'draft'
-        elif (len(self.procurement_ids.filtered(
-                lambda x: x.state == 'cancel')) > 1):
-            self.state = 'draft'
-        elif all(x.state == 'done' for x in self.procurement_ids):
-            self.state = 'done'
-        elif all(x.state == 'cancel' for x in self.procurement_ids):
-            self.state = 'cancel'
+        for plan in self:
+            plan.state = 'running'
+            if not plan.procurement_ids:
+                plan.state = 'draft'
+            elif all(x.state == 'cancel' for x in plan.procurement_ids):
+                plan.state = 'cancel'
+            elif (len(plan.procurement_ids.filtered(
+                    lambda x: x.state == 'cancel')) > 1):
+                plan.state = 'draft'
+            elif all(x.state == 'done' for x in plan.procurement_ids):
+                plan.state = 'done'
 
     @api.multi
     def _get_plan_sequence(self):
         return self.env['ir.sequence'].next_by_code('procurement.plan')
 
-    @api.one
+    @api.multi
     def _count_num_procurements(self):
-        self.num_procurements = len(self.procurement_ids)
+        for plan in self:
+            plan.num_procurements = len(plan.procurement_ids)
 
-    @api.one
+    @api.multi
     @api.depends('procurement_ids', 'procurement_ids.state')
     def _calc_plan_purchases(self):
-        purchases = set(self.procurement_ids.mapped('purchase_id'))
-        self.purchase_ids = [(6, 0, [purchase.id for purchase in
-                                     purchases])]
+        for plan in self:
+            purchases = set(plan.mapped('procurement_ids.purchase_id'))
+            plan.purchase_ids = [(6, 0, [purchase.id for purchase in
+                                         purchases])]
 
     name = fields.Char(string='Description', required=True, readonly=True,
                        states={'draft': [('readonly', False)]},
@@ -133,9 +136,12 @@ class ProcurementPlan(models.Model):
     @api.multi
     def button_cancel(self):
         for plan in self:
+            if plan.project_id:
+                plan.project_id.set_cancel()
             procurements = plan.procurement_ids.filtered(
                 lambda x: x.state in ('confirmed', 'exception', 'running'))
             procurements.with_context(plan=plan.id).cancel()
+            plan._get_state()
         return True
 
     @api.multi

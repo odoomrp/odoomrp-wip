@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
 #
 ##############################################################################
 
-from openerp import models, api
+from openerp import models, api, fields
 
 
 class ProductTemplate(models.Model):
@@ -32,6 +32,16 @@ class ProductTemplate(models.Model):
                              'default_product_tmpl_id': self.id}
         result['domain'] = [('product_tmpl_id', '=', self.id)]
         return result
+
+    @api.multi
+    def _compute_count_pricelist(self):
+        pricelist_model = self.env['product.pricelist.item']
+        for record in self:
+            domain = [('product_tmpl_id', '=', record.id)]
+            record.count_pricelist = pricelist_model.search_count(domain)
+
+    count_pricelist = fields.Integer(string="Count Pricelist",
+                                     compute="_compute_count_pricelist")
 
 
 class ProductProduct(models.Model):
@@ -49,3 +59,15 @@ class ProductProduct(models.Model):
                                    self.product_tmpl_id.id),
                              ('product_id', '=', False)]
         return res
+
+    @api.multi
+    def _compute_count_pricelist(self):
+        pricelist_model = self.env['product.pricelist.item']
+        for record in self:
+            domain = ['|', ('product_id', '=', record.id),
+                      '&', ('product_tmpl_id', '=', record.product_tmpl_id.id),
+                      ('product_id', '=', False)]
+            record.count_pricelist = len(pricelist_model.search(domain))
+
+    count_pricelist = fields.Integer(string="Count Pricelist",
+                                     compute="_compute_count_pricelist")

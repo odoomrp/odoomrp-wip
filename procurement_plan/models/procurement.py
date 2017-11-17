@@ -34,12 +34,12 @@ class ProcurementOrder(models.Model):
     def create(self, data):
         if 'plan' in self.env.context and 'plan' not in data:
             data['plan'] = self.env.context.get('plan')
-        data['is_new'] = False
         procurement = super(ProcurementOrder, self).create(data)
         return procurement
 
     @api.multi
     def button_remove_plan(self):
+        self.ensure_one()
         template_obj = self.env['product.template']
         result = template_obj._get_act_window_dict(
             'procurement_plan.action_procurement_plan')

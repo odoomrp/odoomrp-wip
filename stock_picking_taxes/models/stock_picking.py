@@ -46,7 +46,8 @@ class StockPicking(models.Model):
             picking.amount_untaxed = 0.0
             picking.amount_total = 0.0
             val2 = val1 = val = 0.0
-            for line in picking.move_lines:
+            for line in picking.move_lines.filtered(
+                    lambda m: m.state != 'cancel'):
                 if line.procurement_id and line.procurement_id.sale_line_id:
                     sale_line = line.procurement_id.sale_line_id
                     cur = sale_line.order_id.pricelist_id.currency_id
@@ -72,10 +73,13 @@ class StockPicking(models.Model):
         order = picking.sale_id
         currency = order.currency_id.with_context(
             date=order.date_order or fields.Date.context_today(order))
-        for move in picking.move_lines:
+        for move in picking.move_lines.filtered(
+                lambda m: m.state != 'cancel'):
             sale_line = move.procurement_id.sale_line_id
+            price = sale_line.price_unit * (1 - (sale_line.discount or 0.0) /
+                                            100)
             taxes = sale_line.tax_id.compute_all(
-                sale_line.price_unit, move.product_qty, move.product_id,
+                price, move.product_qty, move.product_id,
                 picking.partner_id)['taxes']
             for tax in taxes:
                 val = {

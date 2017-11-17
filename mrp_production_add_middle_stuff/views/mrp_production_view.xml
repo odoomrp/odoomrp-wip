@@ -6,34 +6,36 @@
             <field name="model">mrp.production</field>
             <field name="inherit_id" ref="mrp.mrp_production_form_view" />
             <field name="arch" type="xml">
-                <xpath expr="//page[@string='Consumed Products']" position="inside">
-                <group col="2" colspan="2">
-                    <button name="%(action_addition)d"
-                            type="action"
-                            states="confirmed,ready,in_production"
-                            string="Add extra raw material"
-                            class="oe_highlight"/>
-                </group>
-                </xpath>
+                <page string="Consumed Products" position="inside">
+                    <group colspan="4">
+                        <div>
+                            <button name="%(action_addition)d" type="action"
+                                    states="confirmed,ready,in_production"
+                                    string="Add extra raw material"
+                                    class="oe_highlight oe_inline" />
+                        </div>
+                    </group>
+                </page>
             </field>
         </record>
+
         <record id="mrp_production_product_stuff_tree_view" model="ir.ui.view">
             <field name="name">mrp.production.product.stuff.tree.view</field>
             <field name="model">mrp.production.product.line</field>
             <field name="inherit_id" ref="mrp.mrp_production_product_tree_view" />
             <field name="arch" type="xml">
-                <field name="product_qty" position="after">
+                <field name="product_uom" position="after">
                     <field name="addition" />
                 </field>
             </field>
         </record>
+
         <record id="mrp_production_product_stuff_form_view" model="ir.ui.view">
-            <field name="name">mrp.production.product.stuff.form.view.inh
-            </field>
+            <field name="name">mrp.production.product.stuff.form.view</field>
             <field name="model">mrp.production.product.line</field>
             <field name="inherit_id" ref="mrp.mrp_production_product_form_view" />
             <field name="arch" type="xml">
-                <field name="product_qty" position="after">
+                <field name="product_uom" position="after">
                     <field name="addition" />
                 </field>
             </field>

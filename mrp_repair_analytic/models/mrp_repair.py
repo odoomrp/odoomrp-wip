@@ -1,20 +1,7 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# © 2015 Ainara Galdona - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+
 from openerp import models, fields, api, exceptions, _
 from openerp.addons import decimal_precision as dp
 
@@ -33,7 +20,8 @@ class MrpRepair(models.Model):
             if not record.analytic_account:
                 continue
             lines = record.analytic_account.line_ids.filtered(
-                lambda x: x.is_repair_cost and x.amount != 0)
+                lambda x: x.is_repair_cost and x.amount != 0 and
+                x.repair_id.id == record.id)
             lines.unlink()
             for line in record.fees_lines.filtered('load_cost'):
                 vals = record._catch_repair_line_information_for_analytic(line)
@@ -45,7 +33,6 @@ class MrpRepair(models.Model):
                 if vals:
                     analytic_line_obj.create(vals)
 
-    @api.one
     @api.model
     def action_repair_end(self):
         result = super(MrpRepair, self).action_repair_end()
@@ -76,7 +63,8 @@ class MrpRepair(models.Model):
                 'journal_id': journal.id,
                 'account_id': self.analytic_account.id,
                 'is_repair_cost': True,
-                'general_account_id': general_account.id
+                'general_account_id': general_account.id,
+                'repair_id': line.repair_id.id,
                 }
         return vals
 
@@ -107,7 +95,7 @@ class MrpRepairLine(models.Model):
             else:
                 std_price = line.product_id.standard_price
             line.standard_price = std_price
-            line.cost_subtotal = line.standard_price * line.product_uom_qty
+            line.cost_subtotal = std_price * line.product_uom_qty
 
     standard_price = fields.Float(
         string='Cost Price', digits=dp.get_precision('Account'),

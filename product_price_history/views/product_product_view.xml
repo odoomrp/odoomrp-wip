@@ -10,8 +10,8 @@
             <field name="arch" type="xml">
                 <group name="general" position="inside">
                     <button name="open_product_historic_prices"
-                        string="Price history" type="object" class="oe_link"
-                        colspan="2"/>
+                            string="Price history" type="object" class="oe_link"
+                            colspan="2" />
                 </group>
             </field>
         </record>

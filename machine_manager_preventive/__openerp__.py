@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) 2015 Daniel Campos <danielcampos@avanzosc.es> - Avanzosc S.L.
+# Copyright 2015 Daniel Campos - Avanzosc S.L.
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 {
@@ -11,7 +11,8 @@
     "contributors": ["Daniel Campos <danielcampos@avanzosc.es>",
                      "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
                      "Ana Juaristi <ajuaristio@gmail.com>"],
-    "category": "Manufacturing",
+    "category": "Machinery Management",
+    "license": 'AGPL-3',
     "data": ["security/preventive_manager_security.xml",
              "security/ir.model.access.csv",
              "wizard/create_preventive_wizard_view.xml",
@@ -23,5 +24,10 @@
              "views/preventive_operation_view.xml",
              "views/preventive_machine_operation_view.xml",
              "views/mrp_repair_view.xml"],
+    "demo": [
+        "demo/machinery_demo.xml",
+        "demo/preventive_master_demo.xml",
+        "demo/preventive_machine_operation.xml",
+    ],
     "installable": True
 }

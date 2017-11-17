@@ -38,7 +38,7 @@ msgstr "Líneas de pedido de venta"
 #: view:res.partner:sale_order_line_view.res_partner_order_line_button_form
 #: field:res.partner,order_lines:0
 msgid "Sale order lines"
-msgstr ""
+msgstr "Líneas de venta"
 
 #. module: sale_order_line_view
 #: view:sale.order.line:sale_order_line_view.view_sale_order_line_search_view

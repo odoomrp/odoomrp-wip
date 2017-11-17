@@ -11,7 +11,6 @@ class MrpRepair(models.Model):
 
     fees_lines = fields.One2many(readonly=False)
     operations = fields.One2many(readonly=False)
-    invoice_method = fields.Selection(readonly=False)
 
     @api.multi
     @api.onchange('product_id')

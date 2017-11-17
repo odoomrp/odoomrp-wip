@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="mrp_production_form_view_inh_rejectedquantity" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.inh.rejectedquantity</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp_operations.mrp_production_form_inherit_view" />
+            <field name="arch" type="xml">
+                <button name="button_done" position="attributes">
+                    <attribute name="states">pause</attribute>
+                </button>
+            </field>
+        </record>
+        <record id="mrp_production_form_view_inh2_rejectedquantity" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.inh2.rejectedquantity</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp_operations.mrp_production_form_inherit_view2" />
+            <field name="arch" type="xml">
+                <button name="button_done" position="attributes">
+                    <attribute name="states">pause</attribute>
+                </button>
+                <button name="button_pause" position="attributes">
+                    <attribute name="string">Stop</attribute>
+                    <attribute name="name">%(action_stop_production_operation)d</attribute>
+                    <attribute name="type">action</attribute>
+                </button>
+            </field>
+        </record>
+        <record id="mrp_production_form_view_inh3_rejectedquantity" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.inh3.rejectedquantity</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree[@string='Production Work Centers']//field[@name='hour']" position="after">
+                    <field name="estimated_hours_recalculated" widget="float_time" sum="Estimated hours recalculated"/>
+                    <field name="real_hours" sum="Real hours"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="mrp_production_workcenter_tree_view_inh2_rejectedquantity" model="ir.ui.view">
+            <field name="name">mrp.production.tree.view.inh2.rejectedquantity</field>
+            <field name="model">mrp.production.workcenter.line</field>
+            <field name="inherit_id" ref="mrp_operations.mrp_production_workcenter_tree_view_inherit" />
+            <field name="arch" type="xml">
+                <field name="hour" position="after">
+                    <field name="estimated_hours_recalculated" widget="float_time" sum="Estimated hours recalculated"/>
+                    <field name="real_hours" widget="float_time" sum="Real hours"/>
+                    <field name="difference_between_hours" widget="float_time" sum="Difference between hours"/>
+                </field>
+            </field>
+        </record>
+        <record id="view_mrp_production_workcenter_filter_inh_rejectedquantity" model="ir.ui.view">
+            <field name="name">view.mrp.production.workcenter.filter.inh.rejectedquantity</field>
+            <field name="model">mrp.production.workcenter.line</field>
+            <field name="inherit_id" ref="mrp_operations.view_mrp_production_workcenter_form_view_filter" />
+            <field name="arch" type="xml">
+                <filter string="Pending" position="after">
+                    <filter string="With higher difference" domain="[('difference_between_hours','&gt;',0)]"/>
+                    <filter string="With less difference" domain="[('difference_between_hours','&lt;',0)]"/>
+                    <filter string="with equal difference" domain="[('difference_between_hours','=',0)]"/>
+                </filter>
+            </field>
+        </record>
+        <record id="mrp_production_workcenter_form_view_inh_rejectedquantity" model="ir.ui.view">
+            <field name="name">mrp.production.workcenter.form.view.inh.rejectedquantity</field>
+            <field name="model">mrp.production.workcenter.line</field>
+            <field name="inherit_id" ref="mrp_operations.mrp_production_workcenter_form_view_inherit" />
+            <field name="arch" type="xml">
+                <button name="button_done" position="attributes">
+                    <attribute name="states">pause</attribute>
+                </button>
+                <button name="button_pause" position="attributes">
+                    <attribute name="string">Stop</attribute>
+                    <attribute name="name">%(action_stop_production_operation)d</attribute>
+                    <attribute name="type">action</attribute>
+                </button>
+            </field>
+        </record>
+        <record id="mrp_production_workcenter_line_form_view_inh_rejectedquantity" model="ir.ui.view">
+            <field name="name">mrp.production.workcenter.line.form.view.inh2.rejectedquantity</field>
+            <field name="model">mrp.production.workcenter.line</field>
+            <field name="inherit_id" ref="mrp_operations_time_control.operation_time_form_view" />
+            <field name="arch" type="xml">
+                <button name="button_done" position="attributes">
+                    <attribute name="states">pause</attribute>
+                </button>
+            </field>
+        </record>
+        <record id="mrp_production_workcenter_line_tree_view_inh_rejectedquantity" model="ir.ui.view">
+            <field name="name">mrp.production.workcenter.line.tree.view.inh.rejectedquantity</field>
+            <field name="model">mrp.production.workcenter.line</field>
+            <field name="inherit_id" ref="mrp_operations_time_control.operation_time_tree_view" />
+            <field name="arch" type="xml">
+                <button name="button_done" position="attributes">
+                    <attribute name="states">pause</attribute>
+                </button>
+                <button name="button_pause" position="attributes">
+                    <attribute name="string">Stop</attribute>
+                    <attribute name="name">%(action_stop_production_operation)d</attribute>
+                    <attribute name="type">action</attribute>
+                </button>
+            </field>
+        </record>
+        <record id="mrp_production_workcenter_line_form_view_inh2_rejectedquantity" model="ir.ui.view">
+            <field name="name">mrp.production.workcenter.line.form.view.inh2.rejectedquantity</field>
+            <field name="model">mrp.production.workcenter.line</field>
+            <field name="inherit_id" ref="mrp_operations_extension.workcenter_line_inh_form_view" />
+            <field name="arch" type="xml">
+                <button string="Produce" position="attributes">
+                    <attribute name="attrs">{'invisible':['|',('do_production','=',False),('state','not in',['startworking','pause'])]}</attribute>
+                </button>
+                <button string="Consume" position="attributes">
+                    <attribute name="attrs">{'invisible':[('state','not in',['startworking','pause'])]}</attribute>
+                </button>
+            </field>
+        </record>
+        <record id="mrp_production_operation_buttons_form_view_inh_rejectedquantity" model="ir.ui.view">
+            <field name="name">mrp.production.operation.buttons.form.view.inh.rejectedquantity</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp_operations_extension.mrp_production_operation_buttons_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='workcenter_lines']/form//button[@string='Produce']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|',('do_production','=',False),('state','not in',['startworking','pause'])]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='workcenter_lines']/form//button[@string='Consume']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('state','not in',['startworking','pause'])]}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_mrp_product_produce_wizard_inh_rejectedquantity" model="ir.ui.view">
+            <field name="name">view.mrp.product.produce.wizard.inh.rejectedquantity</field>
+            <field name="model">mrp.work.order.produce</field>
+            <field name="inherit_id" ref="mrp_operations_extension.view_mrp_product_produce_wizard"/>
+            <field name="arch" type="xml">
+                <group string="Produce" position="after">
+                    <group string="Quantity information" colspan="4" col="6">
+                        <field name="pending_accepted_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <field name="pending_rejected_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <field name="pending_total_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <field name="confirmed_accepted_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <field name="confirmed_rejected_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <field name="confirmed_total_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <group colspan="4" />
+                        <field name="total_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                    </group>
+                </group>
+                <xpath expr="//group[@string='Produce']//field[@name='product_qty']" position="after">
+                    <field name="qty_to_produce" readonly="1"
+                            attrs="{'invisible':[('final_product','=',False)]}"/>
+                    <field name="accepted_amount" readonly="1"
+                            attrs="{'invisible':[('final_product','=',False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='consume_lines']//field[@name='product_id']" position="before">
+                    <field name="qty_to_produce" />
+                    <field name="planned_qty" />
+                    <field name="factor" />
+                    <field name="accepted_amount" sum="tot_accepted_amount"/>
+                    <field name="rejected_amount" sum="tot_rejected_amount"/>
+                </xpath>
+                <xpath expr="//field[@name='consume_lines']//field[@name='product_qty']" position="attributes">
+                    <attribute name="sum">sum_product_qty</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_mrp_product_consume_wizard_inh_rejectedquantity" model="ir.ui.view">
+            <field name="name">view.mrp.product.consume.wizard.inh.rejectedquantity</field>
+            <field name="model">mrp.work.order.produce</field>
+            <field name="inherit_id" ref="mrp_operations_extension.view_mrp_product_consume_wizard"/>
+            <field name="arch" type="xml">
+                <group string="Produce" position="after">
+                    <group string="Quantity information" colspan="4" col="6">
+                        <field name="pending_accepted_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <field name="pending_rejected_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <field name="pending_total_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <field name="confirmed_accepted_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <field name="confirmed_rejected_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <field name="confirmed_total_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                        <group colspan="4" />
+                        <field name="total_amount" readonly="1"
+                                attrs="{'invisible':[('final_product','=',False)]}" />
+                    </group>
+                </group>
+                <xpath expr="//group[@string='Produce']//field[@name='product_qty']" position="after">
+                    <field name="qty_to_produce" readonly="1"
+                            attrs="{'invisible':[('final_product','=',False)]}"/>
+                    <field name="accepted_amount" readonly="1"
+                            attrs="{'invisible':[('final_product','=',False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='consume_lines']//field[@name='product_id']" position="before">
+                    <field name="qty_to_produce" />
+                    <field name="planned_qty" />
+                    <field name="factor" />
+                    <field name="accepted_amount" sum="tot_accepted_amount"/>
+                    <field name="rejected_amount" sum="tot_rejected_amount"/>
+                </xpath>
+                <xpath expr="//field[@name='consume_lines']//field[@name='product_qty']" position="attributes">
+                    <attribute name="sum">sum_product_qty</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

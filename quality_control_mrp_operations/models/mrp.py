@@ -1,23 +1,8 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see http://www.gnu.org/licenses/.
-#
-##############################################################################
-
-from openerp import models, fields, api, _
-from openerp.exceptions import except_orm
+# -*- coding: utf-8 -*-
+# (c) 2016 Oihane Crucelaegui - AvanzOSC
+# (c) 2017 Alfredo de la Fuente - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+from openerp import models, fields, api, exceptions, _
 
 
 class MrpRoutingOperation(models.Model):
@@ -32,13 +17,15 @@ class MrpRoutingOperation(models.Model):
             required_test = data.get('required_test')
             if required_test:
                 if 'qtemplate_id' not in data:
-                    raise except_orm(_('Operation Creation Error!'),
-                                     _("You must define the test template"))
+                    raise exceptions.Warning(
+                        _('Operation Creation Error!, You must define the test'
+                          ' template'))
                 else:
-                    qtemplate_id = data.get('required_test')
+                    qtemplate_id = data.get('qtemplate_id')
                     if not qtemplate_id:
-                        raise except_orm(_('Operation Creation Error!'),
-                                         _("You must define template test"))
+                        raise exceptions.Warning(
+                            _('Operation Creation Error!, You must define '
+                              'template test'))
             else:
                 data.update({'qtemplate_id': False})
         return super(MrpRoutingOperation, self).create(data)
@@ -49,13 +36,15 @@ class MrpRoutingOperation(models.Model):
             required_test = vals.get('required_test')
             if required_test:
                 if 'qtemplate_id' not in vals:
-                    raise except_orm(_('Operation Modification Error!'),
-                                     _("You must define the test template"))
+                    raise exceptions.Warning(
+                        _('Operation Modification Error!, You must define the '
+                          'test template'))
                 else:
-                    qtemplate_id = vals.get('required_test')
+                    qtemplate_id = vals.get('qtemplate_id')
                     if not qtemplate_id:
-                        raise except_orm(_('Operation Modification Error!'),
-                                         _("You must define template test"))
+                        raise exceptions.Warning(
+                            _('Operation Modification Error! You must define '
+                              'template test'))
             else:
                 vals.update({'qtemplate_id': False})
         return super(MrpRoutingOperation, self).write(vals)
@@ -75,32 +64,27 @@ class MrpProductionWorkcenterLine(models.Model):
                                string='Quality Tests')
     ope_tests = fields.Integer(string="Created inspections",
                                compute='_count_tests')
+    routing_workcenter_qtemplate_ids = fields.Many2many(
+        comodel_name='qc.test', string='Quality tests from routing')
 
     @api.model
     def create(self, data):
         workcenter_obj = self.env['mrp.routing.workcenter']
+        if data.get('routing_wc_line', False):
+            work = workcenter_obj.browse(data.get('routing_wc_line'))
+            if work.qtemplate_ids:
+                data.update({'routing_workcenter_qtemplate_ids':
+                             [(6, 0, work.qtemplate_ids.ids)]})
         find_test = False
-        if 'required_test' in data:
-            required_test = data.get('required_test')
-            if required_test:
-                if 'qtemplate_id' not in data:
-                    raise except_orm(_('Error!'),
-                                     _("You must define the test template"))
-                else:
-                    qtemplate_id = data.get('required_test')
-                    if not qtemplate_id:
-                        raise except_orm(_('Error!'),
-                                         _("You must define template test"))
-            else:
-                find_test = True
-                data.update({'qtemplate_id': False})
+        if data.get('required_test', False):
+            if not data.get('qtemplate_id', False):
+                raise exceptions.Warning(
+                    _('Error!, You must define the test template'))
         else:
             data.update({'qtemplate_id': False})
             find_test = True
         if find_test:
             if 'routing_wc_line' in data:
-                routing_wc_line_id = data.get('routing_wc_line')
-                work = workcenter_obj.browse(routing_wc_line_id)
                 data.update({'required_test': work.operation.required_test})
                 if work.operation.qtemplate_id:
                     data.update({'qtemplate_id':
@@ -110,16 +94,11 @@ class MrpProductionWorkcenterLine(models.Model):
     @api.one
     def write(self, vals, update=False):
         if 'required_test' in vals:
-            required_test = vals.get('required_test')
-            if required_test:
-                if 'qtemplate_id' not in vals:
-                    raise except_orm(_('Operation Modification Error!'),
-                                     _("You must define the test template"))
-                else:
-                    qtemplate_id = vals.get('required_test')
-                    if not qtemplate_id:
-                        raise except_orm(_('Operation Modification Error!'),
-                                         _("You must define template test"))
+            if vals.get('required_test'):
+                if not vals.get('qtemplate_id', False):
+                    raise exceptions.Warning(
+                        _('Operation Modification Error!, You must define the '
+                          'test template'))
             else:
                 vals.update({'qtemplate_id': False})
         return super(MrpProductionWorkcenterLine, self).write(vals,
@@ -127,19 +106,17 @@ class MrpProductionWorkcenterLine(models.Model):
 
     @api.one
     @api.model
-    def create_quality_test(self):
+    def create_quality_test(self, qtemplate):
         vals = {
             'workcenter_line_id': self.id,
-            'production_id': self.production_id.id,
-            'test': self.qtemplate_id.id,
+            'test': qtemplate.id,
         }
-        if self.qtemplate_id.object_id:
+        if qtemplate.object_id:
             vals['object_id'] = "%s,%s" % (
-                self.qtemplate_id.object_id._name,
-                self.qtemplate_id.object_id.id)
+                qtemplate.object_id._name, qtemplate.object_id.id)
         inspection = self.env['qc.inspection'].create(vals)
         inspection.inspection_lines = inspection._prepare_inspection_lines(
-            self.qtemplate_id)
+            qtemplate)
         return True
 
     @api.one
@@ -147,8 +124,11 @@ class MrpProductionWorkcenterLine(models.Model):
     def action_start_working(self):
         result = super(MrpProductionWorkcenterLine,
                        self).action_start_working()
+        if self.routing_workcenter_qtemplate_ids:
+            for qtemplate in self.routing_workcenter_qtemplate_ids:
+                self.create_quality_test(qtemplate)
         if self.required_test:
-            self.create_quality_test()
+            self.create_quality_test(self.qtemplate_id)
         return result
 
     @api.one
@@ -157,9 +137,15 @@ class MrpProductionWorkcenterLine(models.Model):
         if self.test_ids:
             for test in self.test_ids:
                 if test.state not in ('success', 'failed', 'canceled'):
-                    raise except_orm(_('Finalization Operation Error!'),
-                                     _("There are quality tests in draft or"
-                                       " approval pending state for this"
-                                       " operation. Please finish or cancel "
-                                       "them."))
+                    raise exceptions.Warning(
+                        _('Finalization Operation Error!, There are quality '
+                          'tests in draft or approval pending state for this '
+                          'operation. Please finish or cancel them.'))
         return super(MrpProductionWorkcenterLine, self).action_done()
+
+
+class MrpRoutingWorkcenter(models.Model):
+    _inherit = 'mrp.routing.workcenter'
+
+    qtemplate_ids = fields.Many2many(
+        comodel_name='qc.test', string='Quality tests')

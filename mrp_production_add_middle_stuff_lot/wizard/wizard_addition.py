@@ -1,5 +1,4 @@
-
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -25,10 +24,11 @@ class WizProductionProductLine(models.TransientModel):
 
     lot = fields.Many2one('stock.production.lot', 'Reserved Lot')
 
-    def _prepare_product_addition(self, product, product_qty, production):
+    def _prepare_product_addition(
+            self, product, product_qty, product_uom, production):
         addition_vals = super(
             WizProductionProductLine, self)._prepare_product_addition(
-            product, product_qty, production)
+            product, product_qty, product_uom, production)
         if self.lot:
             addition_vals['lot'] = self.lot.id
         return addition_vals

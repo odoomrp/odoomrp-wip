@@ -19,6 +19,7 @@
                 <xpath expr="//field[@name='bom_line_ids']//field[@name='attribute_value_ids']"
                        position="attributes">
                     <attribute name="options">{'no_create': True}</attribute>
+                    <attribute name="domain" />
                 </xpath>
             </field>
         </record>
@@ -82,6 +83,17 @@
             </field>
         </record>
 
+        <record id="mrp_bom_component_extended_tree_view" model="ir.ui.view">
+            <field name="name">mrp.bom.component.tree</field>
+            <field name="model">mrp.bom.line</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_component_tree_view" />
+            <field name="arch" type="xml">
+                <field name="product_id" position="before">
+                    <field name="product_tmpl_id" />
+                </field>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="mrp_production_extended_form_view">
             <field name="name">mrp.production.extended.form</field>
             <field name="model">mrp.production</field>
@@ -96,6 +108,9 @@
                 </field>
                 <field name="product_id" position="attributes">
                     <attribute name="string">Product Variants</attribute>
+                </field>
+                <field name="product_qty" position="attributes">
+                    <attribute name="on_change">onchange_product_qty(product_id, product_qty)</attribute>
                 </field>
             </field>
         </record>

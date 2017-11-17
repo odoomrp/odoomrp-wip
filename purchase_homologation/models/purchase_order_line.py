@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #                                                                            #
 #  This program is free software: you can redistribute it and/or modify      #
@@ -17,6 +17,7 @@
 ##############################################################################
 
 from openerp import models, _
+from openerp.tools import config
 
 
 class PurchaseOrderLine(models.Model):
@@ -32,7 +33,8 @@ class PurchaseOrderLine(models.Model):
             date_order=date_order, fiscal_position_id=fiscal_position_id,
             date_planned=date_planned, name=name, price_unit=price_unit,
             state=state, context=context)
-        if not product_id:
+        if (config['test_enable'] and
+                not context.get('check_homologation')) or not product_id:
             return res
         product_obj = self.pool['product.product']
         product = product_obj.browse(cr, uid, product_id, context=context)

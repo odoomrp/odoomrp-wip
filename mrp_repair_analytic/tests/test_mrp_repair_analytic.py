@@ -38,7 +38,7 @@ class TestMrpRepairAnalytic(common.TransactionCase):
             }
         self.op2_product = self.env.ref('product.product_product_35')
         op_val2 = {
-            'product_id': self.op_product.id,
+            'product_id': self.op2_product.id,
             'product_uom_qty': 3,
             'name': self.op2_product.name,
             'product_uom': self.op2_product.uom_id.id,
@@ -195,6 +195,9 @@ class TestMrpRepairAnalytic(common.TransactionCase):
              'cost': 11,
              'location_id': internal_location.id,
              'qty': 5})
+        line = self.mrp_repair.operations.filtered(
+            lambda x: x.product_id == self.op2_product)
+        line.lot_id = lot_id
         for operation in self.mrp_repair.operations:
             cost = 0
             if operation.product_id.cost_method == 'real' and operation.lot_id:

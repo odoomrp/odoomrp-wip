@@ -43,3 +43,20 @@ class TestMrpBomThroughAttribute(common.TransactionCase):
         production.action_compute()
         self.assertEqual(len(production.product_lines), 1)
         self.assertEqual(production.product_lines[0].product_qty, 6.0)
+
+    def test_change_production_qty(self):
+        production = self.env['mrp.production'].create(
+            {
+                'product_id': self.final_product.id,
+                'product_uom': self.final_product.uom_id.id,
+                'bom_id': self.bom.id,
+                'product_qty': 3.0,
+            })
+        production.action_confirm()
+        move = production.move_lines.filtered(lambda x: x.product_id ==
+                                              self.raw_material)
+        self.assertEqual(move.product_uom_qty, 6)
+        change_production = self.env['change.production.qty'].with_context(
+            active_id=production.id).create({'product_qty': 6})
+        change_production.change_prod_qty()
+        self.assertEqual(move.product_uom_qty, 12)

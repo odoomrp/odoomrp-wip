@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="operation_time_lines_tree_view_inh_rejectedquantity" model="ir.ui.view">
+            <field name="name">operation.time.lines.tree.view.inh.rejectedquantity</field>
+            <field name="model">operation.time.line</field>
+            <field name="inherit_id" ref="mrp_operations_time_control.operation_time_lines_tree_view" />
+            <field name="arch" type="xml">
+                <tree position="attributes">
+                    <attribute name="editable">top</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </tree>
+                <field name="production" position="attributes">
+                    <attribute name="readonly">True</attribute>
+                </field>
+                <field name="user" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '!=', 'pending')]}</attribute>
+                </field>
+                <field name="start_date" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '!=', 'pending')]}</attribute>
+                </field>
+                <field name="end_date" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '!=', 'pending')]}</attribute>
+                </field>
+                <field name="operation_time" position="after">
+                    <field name="employee_id" attrs="{'readonly': [('state','!=', 'pending')]}"/>
+                    <field name="accepted_amount" attrs="{'readonly': [('state','!=', 'pending')]}" />
+                    <field name="rejected_amount" attrs="{'readonly': [('state','!=', 'pending')]}"/>
+                    <field name="total_amount" />
+                    <field name="state" readonly="True"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

@@ -18,7 +18,6 @@
                 </data>
             </field>
         </record>
-
         <record model="ir.ui.view" id="procurement_form_view_inh_withplan" >
             <field name="name">procurement.form.view.inh.withplan</field>
             <field name="model">procurement.order</field>
