@@ -1,3 +1,8 @@
+.. image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+   :target: https://www.gnu.org/licenses/agpl
+   :alt: License: AGPL-3
+
+===================
 Sale promotion gift
 ===================
 
@@ -24,7 +29,7 @@ Credits
 
 Contributors
 ------------
-* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
-* Ana Juaristi <ajuaristo@gmail.com>
+* Pedro M. Baeza <pedro.baeza@tecnativa.com>
+* Ana Juaristi <anajuaristi@avanzosc.es>
 * Alfredo de la Fuente <alfredodelafuente@avanzosc.es>
 * Ainara Galdona <ainaragaldona@avanzosc.es>

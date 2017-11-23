@@ -49,11 +49,11 @@ class SaleOrder(models.Model):
     @api.multi
     def button_dump_sale_final_gifts(self):
         self.ensure_one()
-        self.sale_final_gifts.unlink()
+        self.sale_final_gifts.sudo().unlink()
         for line in self.sale_promotion_gifts:
             vals = self._prepare_final_gift_product_data(line)
             if vals['quantity'] > 0:
-                self.env['sale.final.gift'].create(vals)
+                self.env['sale.final.gift'].sudo().create(vals)
         return True
 
     def _prepare_final_gift_product_data(self, gift_product):
@@ -70,7 +70,6 @@ class SaleOrder(models.Model):
             item_list = set([x.item_id for x in sale_lines.filtered(
                 lambda l: not l.offer_id.not_combinable)])
             for item in item_list:
-                qty = 0
                 if item.product_id:
                     qty = sum(
                         x.product_uom_qty for line in self.order_line.filtered(
