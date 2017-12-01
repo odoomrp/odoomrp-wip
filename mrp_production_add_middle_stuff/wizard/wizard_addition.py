@@ -74,7 +74,10 @@ class WizProductionProductLine(models.TransientModel):
         line = mppl_obj.create(values)
         move_id = production_obj._make_production_consume_line(line)
         move = move_obj.browse(move_id)
-        move.action_confirm()
+        # move.action_confirm() / ¿ Odoo Core Bug? Error calling with new api
+        move_obj_old = self.pool['stock.move']
+        move_obj_old.action_confirm(self.env.cr, self.env.uid, [move_id],
+                                    self.env.context)
         if self.production_id.state not in 'confirmed':
             move.action_assign()
         return move
