@@ -17,6 +17,20 @@ class QcInspection(models.Model):
         res['max_value_above'] = line.max_value_above
         return res
 
+    @api.multi
+    def action_approve(self):
+        super(QcInspection, self).action_approve()
+        for inspection in self:
+            if inspection.state != 'failed':
+                continue
+            lines_success_tolerable = inspection.inspection_lines.filtered(
+                lambda l: l.tolerance_status in ("tolerable", "optimal"))
+            all_success_tolerable = len(lines_success_tolerable) == len(
+                inspection.inspection_lines)
+            if not all_success_tolerable:
+                continue
+            inspection.state = 'success'
+
 
 class QcInspectionLine(models.Model):
     _inherit = 'qc.inspection.line'

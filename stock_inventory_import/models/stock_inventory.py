@@ -91,3 +91,8 @@ class StockInventory(models.Model):
                       "inventory : %s") % (inventory.name))
             super(StockInventory, inventory).action_done()
         return True
+
+    @api.multi
+    def action_cancel_inventory(self):
+        self.mapped("import_lines").unlink()
+        return super(StockInventory, self).action_cancel_inventory()

@@ -44,5 +44,4 @@ class PurchaseOrder(models.Model):
             cond = [('origin', '=', self.name)]
             picking = picking_obj.search(cond, limit=1)
             self.mrp_operation.in_picking = picking.id
-            picking.mrp_production = self.mrp_operation.production_id.id
         return result

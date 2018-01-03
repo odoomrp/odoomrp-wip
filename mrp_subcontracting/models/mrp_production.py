@@ -8,36 +8,38 @@ from openerp import models, fields, api
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    @api.one
-    def _created_purchases(self):
-        cond = [('mrp_production', '=', self.id)]
-        self.created_purchases = len(self.env['purchase.order'].search(cond))
-
-    @api.one
-    def _created_outpickings(self):
-        picking_obj = self.env['stock.picking']
-        cond = [('mrp_production', '=', self.id)]
-        self.created_outpickings = len(
-            picking_obj.search(cond).filtered(
-                lambda x: x.picking_type_id.code == 'outgoing'))
-
-    @api.one
-    def _created_inpickings(self):
-        picking_obj = self.env['stock.picking']
-        cond = [('mrp_production', '=', self.id)]
-        self.created_outpickings = len(
-            picking_obj.search(cond).filtered(
-                lambda x: x.picking_type_id.code == 'incoming'))
-
+    purchases = fields.One2many(
+        comodel_name='purchase.order', inverse_name='mrp_production',
+        string='Purchases')
     created_purchases = fields.Integer(
         string='Created Purchases', readonly=True,
-        compute='_created_purchases', track_visibility='always')
+        compute='_compute_subcontracting_relateds', track_visibility='always')
+
+    outpickings = fields.One2many(
+        comodel_name='stock.picking', string='Out pickings', readonly=True,
+        compute='_compute_subcontracting_relateds')
     created_outpickings = fields.Integer(
         string='Created Out Pickings', readonly=True,
-        compute='_created_outpickings', track_visibility='always')
+        compute='_compute_subcontracting_relateds', track_visibility='always')
+
+    inpickings = fields.One2many(
+        comodel_name='stock.picking', string='Out pickings', readonly=True,
+        compute='_compute_subcontracting_relateds')
     created_inpickings = fields.Integer(
         string='Created In Pickings', readonly=True,
-        compute='_created_inpickings', track_visibility='always')
+        compute='_compute_subcontracting_relateds', track_visibility='always')
+
+    @api.multi
+    def _compute_subcontracting_relateds(self):
+        for mo in self:
+            mo.created_purchases = len(mo.purchases)
+            pickings = mo.purchases.mapped('picking_ids')
+            mo.outpickings = pickings.filtered(
+                lambda pick: pick.picking_type_id.code == 'outgoing')
+            mo.created_outpickings = len(mo.outpickings)
+            mo.inpickings = pickings.filtered(
+                lambda pick: pick.picking_type_id.code == 'incoming')
+            mo.created_inpickings = len(mo.inpickings)
 
     @api.one
     def action_confirm(self):
@@ -53,6 +55,48 @@ class MrpProduction(models.Model):
                 wc_line.procurement_order = (
                     self._create_external_procurement(wc_line))
         return res
+
+    @api.multi
+    def action_cancel(self):
+        res = super(MrpProduction, self).action_cancel()
+        wc_lines = self.mapped('workcenter_lines')
+        wc_external_lines = wc_lines.filtered('external')
+        procurement_orders = wc_external_lines.mapped('procurement_order')
+        procurement_orders.cancel()
+        return res
+
+    @api.multi
+    def action_show_purchases(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'domain': [('id', 'in', self.mapped('purchases').ids)],
+            'name': 'Created Purchases',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'purchase.order',
+        }
+
+    @api.multi
+    def action_show_outpicking(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'domain': [('id', 'in', self.mapped('outpickings').ids)],
+            'name': 'Out Pickings',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'stock.picking',
+        }
+
+    @api.multi
+    def action_show_inpicking(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'domain': [('id', 'in', self.mapped('inpickings').ids)],
+            'name': 'In Pickings',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'stock.picking',
+        }
 
     def _prepare_extenal_procurement(self, wc_line):
         wc = wc_line.routing_wc_line
