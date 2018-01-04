@@ -126,3 +126,19 @@ msgstr "Utilización del centro de producción"
 #: model:ir.model,name:mrp_subcontracting.model_mrp_production_workcenter_line
 msgid "Work Order"
 msgstr "Orden de trabajo"
+
+#. module: mrp_subcontracting
+#: field:mrp.production.workcenter.line,purchase_order_state:0
+msgid "Purchase order state"
+msgstr "Estado ped.compra"
+
+#. module: mrp_subcontracting
+#: field:mrp.production.workcenter.line,out_picking_state:0
+msgid "Out picking state"
+msgstr "Estado albarán salida"
+
+#. module: mrp_subcontracting
+#: field:mrp.production.workcenter.line,in_picking_state:0
+msgid "In picking state"
+msgstr "Estado albarán entrada"
+

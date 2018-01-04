@@ -11,6 +11,14 @@
                     <div class="oe_right oe_button_box" name="buttons">
                     </div>
                 </div>
+                <xpath expr="//tree[@string='Production Work Centers']//field[@name='hour']" position="after">
+                    <field name="out_picking" />
+                    <field name="out_picking_state" />
+                    <field name="purchase_order" />
+                    <field name="purchase_order_state" />
+                    <field name="in_picking" />
+                    <field name="in_picking_state" />
+                </xpath>
             </field>
         </record>
 
@@ -65,9 +73,12 @@
                         attrs="{'invisible': [('external', '=', False)]}">
                         <group>
                             <field name="purchase_order" />
+                            <field name="purchase_order_state" />
                             <field name="out_picking" />
+                            <field name="out_picking_state" />
                             <field name="procurement_order" />
                             <field name="in_picking" />
+                            <field name="in_picking_state" />
                         </group>
                     </page>
                 </page>
