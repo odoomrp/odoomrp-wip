@@ -82,7 +82,13 @@ class MrpProductionWorkcenterLine(models.Model):
     external = fields.Boolean(related='routing_wc_line.external', store=True,
                               readonly=True, copy=True)
     purchase_order = fields.Many2one('purchase.order', 'Purchase Order')
+    purchase_order_state = fields.Selection(
+        string='Purchase order state', related="purchase_order.state")
     out_picking = fields.Many2one('stock.picking', 'Out Picking')
+    out_picking_state = fields.Selection(
+        string='Out picking state', related="out_picking.state")
     in_picking = fields.Many2one('stock.picking', 'In Picking')
+    in_picking_state = fields.Selection(
+        string='In picking state', related="in_picking.state")
     procurement_order = fields.Many2one('procurement.order',
                                         'Procurement Order')

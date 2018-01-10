@@ -12,10 +12,13 @@
             <page string="Information" position="after">
                 <page string="Subcontracting" attrs="{'invisible': [('external', '=', False)]}">
                     <group>
-                        <field name="purchase_order"/>
-                        <field name="out_picking"/>
+                        <field name="purchase_order" />
+                        <field name="purchase_order_state" />
+                        <field name="out_picking" />
+                        <field name="out_picking_state" />
                         <field name="procurement_order" />
-                        <field name="in_picking"/>
+                        <field name="in_picking" />
+                        <field name="in_picking_state" />
                     </group>
                 </page>
             </page>
@@ -28,6 +31,26 @@
         <field name="arch" type="xml">
             <field name="production_id" position="after">
                 <field name="external" />
+            </field>
+            <field name="state" position="after">
+                <field name="out_picking" />
+                <field name="out_picking_state" />
+                <field name="purchase_order" />
+                <field name="purchase_order_state" />
+                <field name="in_picking" />
+                <field name="in_picking_state" />
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="mrp_production_workcenter_line_filter_view_inh_subcontracting">
+        <field name="name">mrp.production.workcenter.line.filter.view.inh.subcontracting</field>
+        <field name="model">mrp.production.workcenter.line</field>
+        <field name="inherit_id" ref="mrp_operations.view_mrp_production_workcenter_form_view_filter"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="out_picking" />
+                <field name="purchase_order" />
+                <field name="in_picking" />
             </field>
         </field>
     </record>
