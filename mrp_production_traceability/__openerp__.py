@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c)
@@ -21,12 +21,13 @@
 ##############################################################################
 {
     "name": "MRP Production Traceability",
-    "version": "1.0",
+    "version": "8.0.1.1.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.odoomrp.com",
     "category": "Manufacturing",
+    "license": "AGPL-3",
     "contributors": [
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
         "Ana Juaristi <anajuaristi@avanzosc.es>",

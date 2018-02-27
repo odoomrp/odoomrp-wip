@@ -5,7 +5,7 @@
 from openerp import models, api, _
 
 
-class stock_production_lot(models.Model):
+class StockProductionLot(models.Model):
     _inherit = 'stock.production.lot'
 
     @api.multi

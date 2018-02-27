@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -27,7 +27,10 @@ class MrpProductProduce(models.TransientModel):
                 self.env.context.get('active_model') == 'mrp.production'):
             production_obj = self.env['mrp.production']
             production = production_obj.browse(self.env.context['active_id'])
-            return production.mapped('move_lines2.prod_parent_lot')[:1]
+            default_lot_id = (
+                production.mapped('move_created_ids2.restrict_lot_id')[:1] or
+                production.mapped('move_lines2.prod_parent_lot')[:1])
+            return default_lot_id
 
     lot_id = fields.Many2one(default=default_lot_id)
 
