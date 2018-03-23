@@ -27,7 +27,7 @@ class Machinery(models.Model):
     manufacturer = fields.Many2one(
         comodel_name='res.partner', related='product.manufacturer',
         readonly=True, help="Manufacturer is related to the associated product"
-        " defined for the machine.")
+        " defined for the machine.", store=True)
     serial_char = fields.Char('Product Serial #')
     serial = fields.Many2one('stock.production.lot', string='Product Serial #',
                              domain="[('product_id', '=', product)]")
@@ -82,7 +82,7 @@ class Machinery(models.Model):
     users = fields.One2many('machinery.users', 'machine', 'Machine Users')
     power = fields.Char('Power (Kw)')
     product_categ = fields.Many2one('product.category', 'Internal category',
-                                    related='product.categ_id')
+                                    related='product.categ_id', store=True)
     salvage_value = fields.Float('Salvage Value',
                                  digits=dp.get_precision('Product Price'))
 
