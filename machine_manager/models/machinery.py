@@ -67,8 +67,8 @@ class Machinery(models.Model):
                                help="This association is necessary if you want"
                                " to make repair orders with the machine")
     enrolldate = fields.Date('Enrollment date', required=True,
-                             default=lambda
-                             self: fields.Date.context_today(self))
+                             default=lambda self: fields.Date.context_today(
+                                 self))
     ambit = fields.Selection([('local', 'Local'), ('national', 'National'),
                               ('international', 'International')],
                              'Ambit', default='local')
