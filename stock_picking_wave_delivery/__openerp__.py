@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c)
@@ -20,17 +20,20 @@
 #
 ##############################################################################
 {
-    'name': 'Stock Picking Wave Delivery',
-    'version': "1.0",
+    "name": "Stock Picking Wave Delivery",
+    "version": "8.0.1.1.0",
+    "license": "AGPL-3",
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    'website': "http://www.odoomrp.com",
-    'category': 'Warehouse Management',
-    'depends': ["delivery",
-                "stock_picking_wave_management",
-                ],
-    'data': ["views/stock_picking_wave_view.xml",
-             ],
-    'installable': True,
+    "website": "http://www.odoomrp.com",
+    "category": "Warehouse Management",
+    "depends": [
+        "delivery",
+        "stock_picking_wave_management",
+    ],
+    "data": [
+        "views/stock_picking_wave_view.xml",
+    ],
+    "installable": True,
 }

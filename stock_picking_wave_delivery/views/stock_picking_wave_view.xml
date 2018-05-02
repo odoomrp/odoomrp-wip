@@ -30,7 +30,7 @@
                     <field name="carrier" />
                 </field> 
                 <filter string="Partner" position="after">
-                    <filter string="Partner" domain="[]" context="{'group_by':'partner'}"/>
+                    <filter string="Carrier" domain="[]" context="{'group_by':'carrier'}"/>
                 </filter>
             </field>
         </record>
