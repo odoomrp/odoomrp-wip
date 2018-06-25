@@ -25,7 +25,7 @@ class MrpProduction(models.Model):
         string='Qty left for packaging', compute='_left_product_qty',
         digits=dp.get_precision('Product Unit of Measure'),
         help='This amount is indicative, it is calculated with packaging'
-        ' orders that are not in canceled state.')
+        ' orders that are not in canceled state.', store=True)
 
     @api.multi
     @api.depends('move_created_ids2')
@@ -38,7 +38,13 @@ class MrpProduction(models.Model):
             record.final_product_qty = sum(moves.mapped('product_uom_qty'))
 
     @api.multi
-    @api.depends('final_product_qty', 'expected_production')
+    @api.depends('move_created_ids2', 'move_created_ids2.state',
+                 'move_created_ids2.product_id',
+                 'move_created_ids2.product_uom_qty',
+                 'expected_production', 'expected_production.state',
+                 'expected_production.move_lines2',
+                 'expected_production.move_lines',
+                 'expected_production.product_lines')
     def _left_product_qty(self):
         for record in self:
             moves = record.mapped('move_created_ids2').filtered(
@@ -73,14 +79,13 @@ class MrpProduction(models.Model):
              ('product_id', '=', self.product_id.id)])
         exist_prod = [x.product.id for x in self.pack]
         for line in lines:
-            if line not in exist_prod:
-                packs = filter(
-                    lambda x: x not in exist_prod,
-                    line.bom_id.product_tmpl_id.product_variant_ids.ids)
-                pack_line = map(
-                    lambda x: (0, 0, {'product': x}), packs)
-                exist_prod += packs
-                pack_lines.extend(pack_line)
+            packs = filter(
+                lambda x: x not in exist_prod,
+                line.bom_id.product_tmpl_id.product_variant_ids.ids)
+            pack_line = map(
+                lambda x: (0, 0, {'product': x}), packs)
+            exist_prod += packs
+            pack_lines.extend(pack_line)
         self.write({'pack': pack_lines})
 
     @api.one
