@@ -65,6 +65,8 @@ class MrpRepair(models.Model):
                 'is_repair_cost': True,
                 'general_account_id': general_account.id,
                 'repair_id': line.repair_id.id,
+                'repair_line_id': line._model == 'mrp.repair.line' and
+                line.id or False,
                 }
         return vals
 

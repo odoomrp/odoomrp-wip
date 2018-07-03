@@ -11,3 +11,5 @@ class AccountAnalyticLine(models.Model):
     is_repair_cost = fields.Boolean('Is repair cost')
     repair_id = fields.Many2one(
         comodel_name='mrp.repair', string='Repair order')
+    repair_line_id = fields.Many2one(
+        comodel_name='mrp.repair.line', string='Repair order line')
