@@ -48,12 +48,12 @@ class MrpRepair(models.Model):
         if line.product_id.default_code:
             name += ' - ' + line.product_id.default_code
         categ_id = line.product_id.categ_id
-        general_account = (line.product_id.property_account_income or
-                           categ_id.property_account_income_categ or False)
+        general_account = (line.product_id.property_account_expense or
+                           categ_id.property_account_expense_categ or False)
         amount = line.cost_subtotal * -1
         if not amount:
             return False
-        vals = {'name': name,
+        vals = {'name': line.product_id.name,
                 'user_id': line.user_id.id,
                 'date': analytic_line_obj._get_default_date(),
                 'product_id': line.product_id.id,
@@ -65,8 +65,10 @@ class MrpRepair(models.Model):
                 'is_repair_cost': True,
                 'general_account_id': general_account.id,
                 'repair_id': line.repair_id.id,
-                'repair_line_id': line._model == 'mrp.repair.line' and
+                'repair_line_id': line._name == 'mrp.repair.line' and
                 line.id or False,
+                'invoice_id': line.repair_id.invoice_id.id or False,
+                'ref': self.name,
                 }
         return vals
 
