@@ -68,6 +68,11 @@ class ImportInventory(models.TransientModel):
                          'imported': True,
                          'state': 'confirm',
                          })
+        lines = {
+            ':'.join([
+                l.code, l.lot and str(l.lot.id) or '',
+                l.location_id and str(l.location_id.id) or '']): l
+            for l in inventory.import_lines}
         for i in range(len(reader_info)):
             val = {}
             field = reader_info[i]
@@ -78,8 +83,10 @@ class ImportInventory(models.TransientModel):
                                                values['location'])])
                 if locations:
                     prod_location = locations[:1].id
-            prod_lst = product_obj.search([('default_code', '=',
-                                            values['code'])])
+            prod_lst = product_obj.search([
+                '|',
+                ('default_code', '=', values['code']),
+                ('ean13', '=', values['code'])])
             if prod_lst:
                 val['product'] = prod_lst[0].id
             if 'lot' in values and values['lot']:
@@ -92,7 +99,12 @@ class ImportInventory(models.TransientModel):
             val['fail_reason'] = _('No processed')
             if 'standard_price' in values and values['standard_price']:
                 val['standard_price'] = values['standard_price']
-            inv_imporline_obj.create(val)
+            line_id = ':'.join([
+                values['code'], values.get('lot', ''), str(prod_location)])
+            if line_id in lines:
+                lines[line_id].quantity += float(values['quantity'])
+            else:
+                lines[line_id] = inv_imporline_obj.create(val)
 
 
 class StockInventoryImportLine(models.Model):

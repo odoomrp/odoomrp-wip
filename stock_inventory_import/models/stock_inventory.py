@@ -48,8 +48,10 @@ class StockInventory(models.Model):
         for line in import_lines:
             if line.fail:
                 if not line.product:
-                    prod_lst = product_obj.search([('default_code', '=',
-                                                    line.code)])
+                    prod_lst = product_obj.search([
+                        '|',
+                        ('default_code', '=', line.code),
+                        ('ean13', '=', line.code)])
                     if prod_lst:
                         product = prod_lst[0]
                     else:
