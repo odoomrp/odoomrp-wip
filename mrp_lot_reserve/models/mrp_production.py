@@ -26,7 +26,8 @@ class MrpProduction(models.Model):
         """
         aval_quant_lst = self.env['stock.quant'].search([
             ('lot_id', '=', lot_id),
-            ('location_id', '=', location_id)
+            '|', ('location_id', '=', location_id),
+            ('location_id', 'child_of', location_id)
         ])
         if aval_quant_lst and sum(aval_quant_lst.mapped('qty')) >= quantity:
             return True
