@@ -30,7 +30,7 @@
                     <field name="date" />
                     <field name="line_type" />
                     <field name="name" />
-                    <field name="partner_id" domain="[('supplier', '=', True)]"/>
+                    <field name="partner_id"/>
                     <field name="amount" sum="Total Amount" />
                 </tree>
             </field>

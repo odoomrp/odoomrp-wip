@@ -29,7 +29,7 @@
                     <field name="date" />
                     <field name="line_type" />
                     <field name="name" />
-                    <field name="partner_id" domain="[('supplier', '=', True)]"/>
+                    <field name="partner_id"/>
                     <field name="invoice_id" context="{'type':'in_invoice', 'journal_type': 'purchase'}"/>
                     <field name="journal_id" />
                     <field name="amount" />
