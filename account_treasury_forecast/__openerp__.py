@@ -18,7 +18,7 @@
 
 {
     "name": "Account Treasury Forecast",
-    "version": "1.0",
+    "version": "8.0.1.1.0",
     "depends": [
         "account",
         "purchase",
