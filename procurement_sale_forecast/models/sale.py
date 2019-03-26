@@ -67,6 +67,7 @@ class ProcurementSaleForecast(models.Model):
                         'location_id': record.warehouse_id.lot_stock_id.id,
                         'company_id': record.warehouse_id.company_id.id,
                         'warehouse_id': record.warehouse_id.id,
+                        'origin': record.name
                     })
                     procure_id.signal_workflow('button_confirm')
                     procure_lst.append(procure_id.id)
