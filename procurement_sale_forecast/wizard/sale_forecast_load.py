@@ -86,6 +86,11 @@ class SaleForecastLoad(models.TransientModel):
     product_tmpl_id = fields.Many2one("product.template", string="Template")
     product_id = fields.Many2one("product.product", string="Product")
     factor = fields.Float(string="Factor", default=1)
+    sale_orders = fields.Selection(
+        [('marked', 'Only marked'),
+         ('all', 'All')], string='Sale orders')
+    include_draft_orders = fields.Boolean(
+        string='Include draft orders', default=False)
 
     @api.onchange('sale_id')
     def sale_onchange(self):
@@ -165,6 +170,13 @@ class SaleForecastLoad(models.TransientModel):
                            ('date_order', '<=', self.date_to)]
             if self.partner_id:
                 sale_domain += [('partner_id', '=', self.partner_id.id)]
+            if self.sale_orders == 'marked':
+                sale_domain += [('include_in_forecast', '=', True)]
+            if self.include_draft_orders:
+                sale_domain += [('state', '!=', 'cancel')]
+            else:
+                sale_domain += [('state', 'not in',
+                                 ('cancel', 'draft', 'sent'))]
             sales = sale_obj.search(sale_domain)
         sale_line_domain = [('order_id', 'in', sales.ids)]
         if self.product_id:

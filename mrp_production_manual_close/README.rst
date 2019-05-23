@@ -1,10 +1,12 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
+
+===========================
 MRP Production manual close
 ===========================
 
-This module modifies mrp production workflow to finish the production orders
-manually adding a new close button.
+* This module modifies mrp production workflow to finish the production orders
+  manually adding a new close button.
 
 Known issues / Roadmap
 ======================

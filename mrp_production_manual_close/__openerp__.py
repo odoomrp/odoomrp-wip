@@ -19,7 +19,8 @@
 
 {
     'name': 'MRP production manual close',
-    'version': '1.0',
+    "license": "AGPL-3",
+    "version": "8.0.1.0.0",
     'author': 'OdooMRP team',
     'contributors': ["Daniel Campos <danielcampos@avanzosc.es>",
                      "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",

@@ -209,6 +209,46 @@
                     <button name="%(action_sale_forecast_load_view)d" string="Load to forecast"
                     type="action" groups="base.group_sale_manager"/>
                 </button>
+                <field name="project_id" position="after">
+                    <field name="include_in_forecast" />
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_quotation_tree_inh_load_forecast">
+            <field name="name">view.quotation.tree.inh.load.forecast</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="include_in_forecast" />
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_order_tree_inh_load_forecast">
+            <field name="name">view.order.tree.inh.load.forecast</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="include_in_forecast" />
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_sales_order_filter_inh_load_forecast">
+            <field name="name">view.sales.order.filter.inh.load.forecast</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <filter name="my_sale_orders_filter" position="after">
+                     <filter string="Include in forecast" domain="[('include_in_forecast','=',True)]" name="my_include_in_forecast_filter"/>
+                     <filter string="NO Include in forecast" domain="[('include_in_forecast','=',False)]" name="my_no_include_in_forecast_filter"/>
+                </filter>
+                <filter string="Order Month" position="after">
+                     <filter string="Include in forecast" domain="[]" context="{'group_by':'include_in_forecast'}"/>
+                </filter>
             </field>
         </record>
     </data>

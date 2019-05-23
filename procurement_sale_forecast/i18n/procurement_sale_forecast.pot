@@ -297,3 +297,23 @@ msgstr ""
 msgid "⇒ Request Procurement"
 msgstr ""
 
+#. module: procurement_sale_forecast
+#: field:sale.forecast.load,sale_orders:0
+msgid "Sale orders"
+msgstr ""
+
+#. module: procurement_sale_forecast
+#: selection:sale.forecast.load,sale_orders:0
+msgid "Only marked"
+msgstr ""
+
+#. module: procurement_sale_forecast
+#: selection:sale.forecast.load,sale_orders:0
+msgid "All"
+msgstr ""
+
+#. module: procurement_sale_forecast
+#: field:sale.forecast.load,include_draft_orders:0
+msgid "Include draft orders"
+msgstr ""
+

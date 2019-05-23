@@ -1,10 +1,12 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
+
+============================
 MRP Repair stock picking out
 ============================
 
-This module adds a stock picking out when a delivery address is defined in a
-repair order.
+* This module adds a stock picking out when a delivery address is defined in a
+  repair order.
 
 Credits
 =======

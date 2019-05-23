@@ -9,7 +9,7 @@ Manufacturing Operations Extension Manual Close
 This module adds:
 
 * Launches a wizard to select if undone moves must be done or canceled
-when closed the manufacturing order manually.
+  when closed the manufacturing order manually.
 
 Installation
 ============

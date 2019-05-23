@@ -4,6 +4,7 @@
 
 {
     "name": "Web Widget Float Time Second",
+    "license": "AGPL-3",
     "version": "8.0.0.1.0",
     "depends": ["web",
                 "base_setup"],

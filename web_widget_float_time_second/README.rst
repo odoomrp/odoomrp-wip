@@ -6,11 +6,11 @@ Widget Float Time Second
 ========================
 
 * This module creates a new widget for float fields (float_time_second)
-that converts those fields into HH:MM:SS format.
+  that converts those fields into HH:MM:SS format.
 
 * New configuration parameter in General Settings. When checked the
-system will automaticaly load float_time fields with float_time_second
-format.
+  system will automaticaly load float_time fields with float_time_second
+  format.
 
 Known issues / Roadmap
 ======================

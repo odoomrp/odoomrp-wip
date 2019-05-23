@@ -14,6 +14,8 @@
                         <field name="forecast_id" required="1"/>
                         <field name="date_from" select="1" required="1"/>
                         <field name="date_to" select="1" required="1"/>
+                        <field name="sale_orders" required="1" />
+                        <field name="include_draft_orders" />
                         <field name="factor"/>
                         <newline/>
                         <field name="product_categ_id" select="1"/>
