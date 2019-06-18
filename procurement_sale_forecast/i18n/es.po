@@ -288,3 +288,35 @@ msgstr "Carga de ventas en prevision"
 #: view:procurement.sale.forecast.line:procurement_sale_forecast.procurement_sale_forecast_line_tree_editable_view
 msgid "⇒ Request Procurement"
 msgstr "⇒ Solicitar abastecimiento"
+
+#. module: procurement_sale_forecast
+#: field:sale.forecast.load,sale_orders:0
+msgid "Sale orders"
+msgstr "Pedidos de venta"
+
+#. module: procurement_sale_forecast
+#: selection:sale.forecast.load,sale_orders:0
+msgid "Only marked"
+msgstr "Solo marcados"
+
+#. module: procurement_sale_forecast
+#: selection:sale.forecast.load,sale_orders:0
+msgid "All"
+msgstr "Todos"
+
+#. module: procurement_sale_forecast
+#: field:sale.forecast.load,include_draft_orders:0
+msgid "Include draft orders"
+msgstr "Incluir pedidos borrador"
+
+#. module: procurement_sale_forecast
+#: view:sale.order:procurement_sale_forecast.view_sales_order_filter_inh_load_forecast
+#: field:sale.order,include_in_forecast:0
+msgid "Include in forecast"
+msgstr "Incluir en previsiones"
+
+#. module: procurement_sale_forecast
+#: view:sale.order:procurement_sale_forecast.view_sales_order_filter_inh_load_forecast
+msgid "NO Include in forecast"
+msgstr "NO Incluir en previsiones"
+
