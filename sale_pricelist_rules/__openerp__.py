@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,11 +18,13 @@
 
 {
     "name": "Pricelist Rules - Sale extension",
-    "version": "1.0",
+    "version": "8.0.2.0.0",
+    "license": "AGPL-3",
     "depends": [
         "sale",
         "account",
         "product",
+        "stock_account",
         "product_pricelist_rules",
     ],
     "author": "OdooMRP team,"
@@ -42,6 +44,7 @@
         "security/ir.model.access.csv",
         "security/sale_pricelist_rules_security.xml",
         "views/res_config_view.xml",
+        "views/account_invoice_view.xml",
         "views/sale_pricelist_view.xml",
         "views/sale_view.xml",
     ],

@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -212,6 +212,47 @@ class SaleOrderLine(models.Model):
                 self.price_unit = self.item_id.price_get(
                     self.product_id.id, self.product_uom_qty,
                     self.order_id.partner_id.id, self.product_id.uom_id.id)[0]
+
+    @api.model
+    def _prepare_order_line_invoice_line(self, line, account_id=False):
+        """Prepare the dict of values to create the new invoice line for a
+           sales order line. This method may be overridden to implement custom
+           invoice generation (making sure to call super() to establish
+           a clean extension chain).
+
+           :param browse_record line: sale.order.line record to invoice
+           :param int account_id: optional ID of a G/L account to force
+               (this is used for returning products including service)
+           :return: dict of values to create() the invoice line
+        """
+        res = super(SaleOrderLine, self)._prepare_order_line_invoice_line(
+            line, account_id=account_id)
+        res.update({
+            'quantity': line._calc_qty(),
+            'discount2': line.discount2,
+            'discount3': line.discount3,
+        })
+        return res
+
+    @api.multi
+    def button_confirm(self):
+        lines = self
+        for line in self.filtered('offer_id'):
+            paid_qty = line._calc_qty()
+            lines |= line.copy(default={
+                'name': '[{}]\n{}'.format(line.offer_id.name, line.name),
+                'product_uom_qty': line.product_uom_qty - paid_qty,
+                'price_unit': 0.0,
+                'discount': 0.0,
+                'discount2': 0.0,
+                'discount3': 0.0,
+                'offer_id': False,
+            })
+            line.write({
+                'product_uom_qty': paid_qty,
+                'offer_id': False,
+            })
+        return super(SaleOrderLine, lines).button_confirm()
 
 
 class SaleOrder(models.Model):

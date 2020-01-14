@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record id="account_invoice_view_form" model="ir.ui.view">
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line']/tree/field[@name='discount']" position="after">
+                    <field name="discount2" groups="product_pricelist_rules.group_second_discount" />
+                    <field name="discount3" groups="product_pricelist_rules.group_third_discount" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
