@@ -23,7 +23,7 @@ class ProductProduct(models.Model):
         return res
 
     @api.multi
-    def read(self, fields, load='_classic_read'):
+    def read(self, fields=None, load='_classic_read'):
         if fields:
             fields.append('id')
         results = super(ProductProduct, self).read(fields, load=load)
