@@ -22,6 +22,7 @@
                 <tree string="Last Product Prices">
                     <field name="order_id"/>
                     <field name="product_id"/>
+                    <field name="name"/>
                     <field name="product_qty"/>
                     <field name="price_unit"/>
                     <field name="price_subtotal"/>
