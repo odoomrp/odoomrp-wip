@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <field name="price_max_margin" position="after">
                     <newline />
-                    <field name="discount" />
+                    <field name="discount1" />
                     <field name="discount2" groups="product_pricelist_rules.group_second_discount"/>
                     <field name="discount3" groups="product_pricelist_rules.group_third_discount"/>
                     <field name="offer" />
@@ -38,7 +38,7 @@
                     <field name="pricelist_type" invisible="1" />
                 </field>
                 <field name="min_quantity" position="after">
-                    <field name="discount" />
+                    <field name="discount1" />
                     <field name="discount2" groups="product_pricelist_rules.group_second_discount"/>
                     <field name="discount3" groups="product_pricelist_rules.group_third_discount"/>
                     <field name="offer" />

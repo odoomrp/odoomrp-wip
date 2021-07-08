@@ -41,7 +41,7 @@ class PricelistItem(models.Model):
     )
     offer = fields.Many2one(
         comodel_name='product.pricelist.item.offer', string='Offer')
-    discount = fields.Float('Discount %',
+    discount1 = fields.Float('Discount %',
                             digits=dp.get_precision('Product Price'))
     discount2 = fields.Float('Disc. 2 %',
                              digits=dp.get_precision('Product Price'))
@@ -52,7 +52,7 @@ class PricelistItem(models.Model):
     item_formula = fields.Char(compute='_item_formula')
 
     _sql_constraints = [
-        ('discount_limit', 'CHECK (discount <= 100.0)',
+        ('discount1_limit', 'CHECK (discount <= 100.0)',
          'Discount must be lower than 100%.'),
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
          'Second discount must be lower than 100%.'),

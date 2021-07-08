@@ -24,13 +24,19 @@
             <field name="inherit_id"
                 ref="purchase_discount.purchase_discount_order_form" />
             <field name="arch" type="xml">
-                <field name="order_line" position="attributes">
-                    <attribute name="context">{'pricelist_id':pricelist_id}</attribute>
-                </field>
-                <field name="discount" position="after">
-                    <field name="discount2" groups="product_pricelist_rules.group_second_discount"/>
-                    <field name="offer_id" />
-                </field>
+                <data>
+                    <xpath expr="//field[@name='order_line']" position="attributes">
+                        <attribute name="context">{'pricelist_id':pricelist_id}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='discount']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='discount']" position="after">
+                        <field name="discount1"/>
+                        <field name="discount2" groups="product_pricelist_rules.group_second_discount"/>
+                        <field name="offer_id" />
+                    </xpath>
+                </data>
             </field>
         </record>
 
@@ -40,19 +46,29 @@
             <field name="inherit_id"
                 ref="purchase_discount.purchase_discount_order_line_form" />
             <field name="arch" type="xml">
-                <field name="discount" position="after">
-                    <label for="discount2" />
-                    <div name="discount2">
-                        <field name="discount2" class="oe_inline"
-                        groups="product_pricelist_rules.group_second_discount"/>
-                        %
-                    </div>
-                </field>
-                <field name="company_id" position="after">
-                    <field name="item_id" widget="selection" />
-                    <field name="possible_item_ids" invisible="1" />
-                    <field name="offer_id" />
-                </field>
+                <data>
+                    <xpath expr="//field[@name='discount']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='discount']" position="after">
+                        <label for="discount1" />
+                        <div name="discount1">
+                            <field name="discount1" class="oe_inline"/>
+                            %
+                        </div>
+                        <label for="discount2" />
+                        <div name="discount2">
+                            <field name="discount2" class="oe_inline"
+                            groups="product_pricelist_rules.group_second_discount"/>
+                            %
+                        </div>
+                    </xpath>
+                    <xpath expr="//field[@name='company_id']" position="after">
+                        <field name="item_id" widget="selection" />
+                        <field name="possible_item_ids" invisible="1" />
+                        <field name="offer_id" />
+                    </xpath>
+                </data>
             </field>
         </record>
 

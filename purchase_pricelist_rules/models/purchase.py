@@ -27,7 +27,7 @@ class PurchaseOrderLineSubtotal(models.Model):
     @api.one
     def _calculate_subtotal(self):
         price = (self.line_id.price_unit *
-                 (1 - (self.item_id.discount or 0.0) / 100) *
+                 (1 - (self.item_id.discount1 or 0.0) / 100) *
                  (1 - (self.item_id.discount2 or 0.0) / 100))
         qty = self.line_id.product_qty
         if self.item_id.offer_id:
@@ -56,33 +56,30 @@ class PurchaseOrderLineSubtotal(models.Model):
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
-    def _calc_price_subtotal(self):
-        price = self.price_unit * (1 - (self.discount or 0.0) / 100.0)
-        return price * (1 - (self.discount2 or 0.0) / 100.0)
-
-    def _calc_qty(self):
-        qty = self.product_qty
-        if self.offer_id:
-            total = self.offer_id.free_qty + self.offer_id.paid_qty
+    @api.model
+    def _calc_line_quantity(self, line):
+        qty = line.product_qty
+        if line.offer_id:
+            total = line.offer_id.free_qty + line.offer_id.paid_qty
             packs = qty // total
             remaining = qty - packs * total
             if remaining:
-                if remaining < self.offer_id.paid_qty:
-                    qty = packs * self.offer_id.paid_qty + remaining
+                if remaining < line.offer_id.paid_qty:
+                    qty = packs * line.offer_id.paid_qty + remaining
                 else:
-                    qty = (packs + 1) * self.offer_id.paid_qty
+                    qty = (packs + 1) * line.offer_id.paid_qty
             else:
-                qty = packs * self.offer_id.paid_qty
+                qty = packs * line.offer_id.paid_qty
         return qty
 
     @api.one
     @api.depends('taxes_id', 'order_id', 'order_id.partner_id',
                  'order_id.pricelist_id', 'order_id.pricelist_id.currency_id',
                  'product_qty', 'offer_id', 'offer_id.free_qty',
-                 'offer_id.paid_qty', 'price_unit', 'discount', 'discount2')
+                 'offer_id.paid_qty', 'price_unit', 'discount')
     def _amount_line(self):
-        new_price_subtotal = self._calc_price_subtotal()
-        qty = self._calc_qty()
+        new_price_subtotal = self._calc_line_base_price(self)
+        qty = self._calc_line_quantity(self)
         taxes = self.taxes_id.compute_all(
             new_price_subtotal, qty, self.product_id,
             self.order_id.partner_id)
@@ -104,6 +101,20 @@ class PurchaseOrderLine(models.Model):
             qty=self.product_qty)
         self.possible_item_ids = [(6, 0, item_ids)]
 
+    @api.one
+    @api.depends('discount1', 'discount2')
+    def get_discount(self):
+        discount_factor = 1.0
+        for discount in [self.discount1, self.discount2]:
+            discount_factor *= ((100.0 - discount) / 100.0)
+        self.discount = 100.0 - (discount_factor * 100.0)
+
+    discount = fields.Float(
+        compute='get_discount', store=True, readonly=True
+    )
+    discount1 = fields.Float(
+        string='Discount (%)', digits=dp.get_precision('Discount'),
+        default=0.0)
     discount2 = fields.Float(
         string='Discount 2 (%)', digits=dp.get_precision('Discount'),
         default=0.0)
@@ -122,6 +133,8 @@ class PurchaseOrderLine(models.Model):
         compute='_amount_line')
 
     _sql_constraints = [
+        ('discount1_limit', 'CHECK (discount1 <= 100.0)',
+         _('Discount must be lower than 100%.')),
         ('discount2_limit', 'CHECK (discount2 <= 100.0)',
          _('Second discount must be lower than 100%.')),
     ]
@@ -167,7 +180,7 @@ class PurchaseOrderLine(models.Model):
     @api.onchange('item_id')
     def onchange_item_id(self):
         if self.item_id:
-            self.discount = self.item_id.discount
+            self.discount1 = self.item_id.discount1
             self.discount2 = self.item_id.discount2
             self.offer_id = self.item_id.offer.id
             if self.product_id:
@@ -205,8 +218,8 @@ class PurchaseOrder(models.Model):
     @api.model
     def _amount_line_tax(self, line):
         val = 0.0
-        new_price_subtotal = line._calc_price_subtotal()
-        qty = line._calc_qty()
+        new_price_subtotal = line._calc_line_base_price(line)
+        qty = line._calc_line_quantity(line)
         for c in line.taxes_id.compute_all(new_price_subtotal,
                                            qty, line.product_id,
                                            line.order_id.partner_id)['taxes']:
