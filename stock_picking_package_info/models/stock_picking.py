@@ -136,5 +136,4 @@ class StockPicking(models.Model):
                         vals.update({'product_qty': new_qty})
                     else:
                         continue
-                ops |= pack_op_obj.create(vals)
         return ops
