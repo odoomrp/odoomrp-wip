@@ -33,14 +33,14 @@ class WizProductionProductLine(models.TransientModel):
                 if active_id:
                     mpwl = mpwl_obj.browse(active_id)
                     return mpwl.production_id.id
-        return False
+        return self.env['wiz.production.product.line']
 
     def _def_work_order_id(self):
         if 'active_model' in self.env.context and (
                 self.env.context['active_model'] ==
                 'mrp.production.workcenter.line'):
             return self.env.context.get('active_id', False)
-        return False
+        return self.env['wiz.production.product.line']
 
     work_order = fields.Many2one(
         comodel_name='mrp.production.workcenter.line',
