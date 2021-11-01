@@ -17,6 +17,14 @@ class PurchaseOrder(models.Model):
         if (context and context.get('grouping', 'standard') == 'order' and
                 make_po_conditions.issubset(set(x[0] for x in args))):
             return []
+        # If grouping is one purchase order from same sale order
+        if (context and
+                context.get('grouping', 'standard') == 'one_sale_one_purchase'
+                and make_po_conditions.issubset(set(x[0] for x in args))):
+
+            # Add new condition to domain, becouse I need find only one
+            # purchase order with de same suplier and origin to add new line
+            args.append(('origin', '=', context.get('origin', False)))
         return super(PurchaseOrder, self).search(
             cr, uid, args, offset=offset, limit=limit, order=order,
             context=context, count=count)
