@@ -55,7 +55,6 @@ class StockPicking(models.Model):
                         1 - (sale_line.discount or 0.0) / 100.0)
                     taxes = sale_line.tax_id.compute_all(
                         price, line.product_qty,
-                        sale_line.order_id.partner_invoice_id.id,
                         line.product_id, sale_line.order_id.partner_id)
                     val1 += cur.round(taxes['total'])
                     val += cur.round(taxes['total_included'])
