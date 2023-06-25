@@ -28,6 +28,7 @@
                      "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>"],
     "depends": ["base", "purchase", "purchase_requisition"],
     "data": [
-            "views/bids_ext_view.xml"],
+            "views/bids_ext_view.xml",
+            "views/purchase_config_setting_view.xml",],
     "installable": True
 }

@@ -8,7 +8,7 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <button string="Request a Quotation" position="after">
-                    <button name="create_purchase_order" type="object" string="Request a quotation to suppliers of all products"
+                    <button name="create_purchase_order" type="object" string="Request Quotations"
                      attrs="{'invisible': ['|', ('line_ids','=',[]),('state', 'in', ('draft' ,'open','done'))]}"/>
                 </button>
             </field>
