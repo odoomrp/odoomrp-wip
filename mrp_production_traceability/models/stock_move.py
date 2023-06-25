@@ -12,4 +12,4 @@ class StockMove(models.Model):
                                       'Parent production lot')
     final_product = fields.Many2one(
         'product.product', string='Final Product', store=True,
-        related='production_id.product_id', help='Production Final Product')
+        related='raw_material_production_id.product_id', help='Production Final Product')
